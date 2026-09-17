@@ -14,49 +14,37 @@
 <header class="topbar">
 
     <div>
-        <h1 id="appName">🍸 Bar Lulishtja</h1>
-        <p id="userInfo">Management System</p>
+        <div class="logo">🍸 <span id="appName">Bar Lulishtja</span></div>
+        <div id="userInfo" class="user-info"></div>
     </div>
 
     <div class="top-right">
-        <span id="clock">00:00</span>
-        <button onclick="logout()" class="logout-btn">
-            Dil
-        </button>
+        <div id="clock" class="clock">00:00:00</div>
+        <button class="logout-btn" onclick="logout()">Dil</button>
     </div>
 
 </header>
 
 
-<nav class="navigation">
+<nav class="nav">
 
-    <button onclick="showPage('dashboard')" class="nav-btn active">
-        🏠 Dashboard
-    </button>
+    <button onclick="showPage('dashboard')">🏠 Dashboard</button>
 
-    <button onclick="showPage('tables')" class="nav-btn">
-        🪑 Tavolina
-    </button>
+    <button onclick="showPage('tables')">🪑 Tavolina</button>
 
-    <button onclick="showPage('menu')" class="nav-btn">
-        🍹 Menu
-    </button>
+    <button onclick="showPage('menu')">🍔 Menu</button>
 
-    <button onclick="showPage('orders')" class="nav-btn">
-        🧾 Porosi
-    </button>
+    <button onclick="showPage('orders')">🧾 Porosi</button>
 
-    <button onclick="showPage('cash')" class="nav-btn admin-only">
-        💰 Arka
-    </button>
+    <button onclick="showPage('cash')" class="admin-only">💰 Arka</button>
 
-    <button onclick="showPage('history')" class="nav-btn admin-only">
-        📋 Historiku
-    </button>
+    <button onclick="showPage('history')" class="admin-only">📜 Historik</button>
 
-    <button onclick="showPage('admin')" class="nav-btn admin-only">
-        ⚙️ ADMIN
-    </button>
+    <button onclick="showPage('stock')" class="admin-only">📦 Stok</button>
+
+    <button onclick="showPage('reports')" class="admin-only">📊 Raporte</button>
+
+    <button onclick="showPage('admin')" class="admin-only">⚙️ ADMIN</button>
 
 </nav>
 
@@ -68,64 +56,38 @@
 
 <section id="dashboard" class="page active">
 
-    <div class="page-header">
-
-        <div>
-            <h2>Dashboard</h2>
-            <p>Përmbledhje e lokalit</p>
-        </div>
-
+    <div class="page-title">
+        <h1>Dashboard</h1>
+        <p>Mirë se erdhe në Bar Lulishtja</p>
     </div>
-
 
     <div class="stats-grid">
 
         <div class="stat-card">
-            <span>💰</span>
-            <div>
-                <small>Shitje sot</small>
-                <strong id="salesToday">0 Lek</strong>
-            </div>
+            <span>💰 Shitje sot</span>
+            <strong id="salesToday">0 L</strong>
         </div>
 
         <div class="stat-card">
-            <span>🪑</span>
-            <div>
-                <small>Tavolina aktive</small>
-                <strong id="activeTables">0</strong>
-            </div>
+            <span>🪑 Tavolina aktive</span>
+            <strong id="activeTables">0</strong>
         </div>
 
         <div class="stat-card">
-            <span>🧾</span>
-            <div>
-                <small>Fatura sot</small>
-                <strong id="invoiceToday">0</strong>
-            </div>
+            <span>🧾 Fatura sot</span>
+            <strong id="invoiceToday">0</strong>
         </div>
 
         <div class="stat-card">
-            <span>💳</span>
-            <div>
-                <small>Pagesa me kartë</small>
-                <strong id="cardToday">0 Lek</strong>
-            </div>
+            <span>💳 Kartë sot</span>
+            <strong id="cardToday">0 L</strong>
         </div>
 
     </div>
 
-
     <div class="box">
 
-        <div class="box-header">
-            <h3>Tavolinat</h3>
-
-            <button
-                class="secondary-btn"
-                onclick="showPage('tables')">
-                Shiko të gjitha
-            </button>
-        </div>
+        <h2>Tavolinat</h2>
 
         <div id="dashboardTables" class="table-grid"></div>
 
@@ -139,21 +101,19 @@
 
 <section id="tables" class="page">
 
-    <div class="page-header">
+    <div class="page-title">
 
         <div>
-            <h2>🪑 Tavolinat</h2>
-            <p>Zgjidh një tavolinë</p>
+            <h1>🪑 Tavolinat</h1>
+            <p>Menaxho tavolinat e lokalit.</p>
         </div>
 
-        <button
-            class="primary-btn admin-only"
-            onclick="openTableManager()">
-            ⚙️ Menaxho tavolinat
+        <button class="primary-btn admin-only"
+                onclick="openTableManager()">
+            ⚙️ Menaxho
         </button>
 
     </div>
-
 
     <div id="tableGrid" class="table-grid"></div>
 
@@ -165,21 +125,19 @@
 
 <section id="menu" class="page">
 
-    <div class="page-header">
+    <div class="page-title">
 
         <div>
-            <h2>🍹 Menu</h2>
-            <p>Produktet e lokalit</p>
+            <h1>🍔 Menu</h1>
+            <p>Produktet e lokalit.</p>
         </div>
 
-        <button
-            class="primary-btn admin-only"
-            onclick="openProductModal()">
-            + Shto produkt
+        <button class="primary-btn admin-only"
+                onclick="openProductModal()">
+            + Produkt
         </button>
 
     </div>
-
 
     <div id="categories" class="categories"></div>
 
@@ -193,18 +151,15 @@
 
 <section id="orders" class="page">
 
-    <div class="page-header">
+    <div class="page-title">
 
         <div>
-            <h2>🧾 Porosia</h2>
-            <p id="selectedTableText">
-                Zgjidh tavolinën
-            </p>
+            <h1>🧾 Porosia</h1>
+            <p id="selectedTableText">Zgjidh një tavolinë.</p>
         </div>
 
-        <button
-            class="secondary-btn"
-            onclick="showPage('tables')">
+        <button class="secondary-btn"
+                onclick="showPage('tables')">
             ← Tavolinat
         </button>
 
@@ -213,56 +168,32 @@
 
     <div class="order-layout">
 
-
         <div class="box">
 
-            <h3>Produktet</h3>
+            <h2>Produktet</h2>
 
-            <div
-                id="orderProducts"
-                class="order-products">
-            </div>
+            <div id="orderProducts" class="order-products"></div>
 
         </div>
 
 
         <div class="box">
 
-            <div class="box-header">
+            <h2>Porosia</h2>
 
-                <h3>Porosia</h3>
+            <div id="orderItems"></div>
 
-                <span id="orderStatus">
-                    E hapur
-                </span>
+            <div class="order-total">
 
-            </div>
+                <span>Total</span>
 
-
-            <div id="orderItems">
-
-                <div class="empty">
-                    Nuk ka produkte.
-                </div>
+                <strong id="orderTotal">0 L</strong>
 
             </div>
 
-
-            <div class="total">
-
-                <span>TOTAL</span>
-
-                <strong id="orderTotal">
-                    0 Lek
-                </strong>
-
-            </div>
-
-
-            <button
-                onclick="openPayment()"
-                class="primary-btn full">
-                💳 Mbyll & Prej Faturën
+            <button class="pay-btn"
+                    onclick="openPayment()">
+                💳 Mbyll & Paguaj
             </button>
 
         </div>
@@ -277,12 +208,9 @@
 
 <section id="cash" class="page admin-only">
 
-    <div class="page-header">
+    <div class="page-title">
 
-        <div>
-            <h2>💰 Arka</h2>
-            <p>Shitjet e lokalit</p>
-        </div>
+        <h1>💰 Arka</h1>
 
     </div>
 
@@ -290,35 +218,23 @@
     <div class="stats-grid">
 
         <div class="stat-card">
-            <span>💰</span>
-            <div>
-                <small>Total</small>
-                <strong id="cashTotal">0 Lek</strong>
-            </div>
+            <span>Totali</span>
+            <strong id="cashTotal">0 L</strong>
         </div>
 
         <div class="stat-card">
-            <span>💵</span>
-            <div>
-                <small>Cash</small>
-                <strong id="cashMoney">0 Lek</strong>
-            </div>
+            <span>Cash</span>
+            <strong id="cashMoney">0 L</strong>
         </div>
 
         <div class="stat-card">
-            <span>💳</span>
-            <div>
-                <small>Kartë</small>
-                <strong id="cashCard">0 Lek</strong>
-            </div>
+            <span>Kartë</span>
+            <strong id="cashCard">0 L</strong>
         </div>
 
         <div class="stat-card">
-            <span>🧾</span>
-            <div>
-                <small>Fatura</small>
-                <strong id="cashInvoices">0</strong>
-            </div>
+            <span>Fatura</span>
+            <strong id="cashInvoices">0</strong>
         </div>
 
     </div>
@@ -326,7 +242,7 @@
 
     <div class="box">
 
-        <h3>Pagesat</h3>
+        <h2>Pagesat e fundit</h2>
 
         <div id="paymentsList"></div>
 
@@ -340,21 +256,19 @@
 
 <section id="history" class="page admin-only">
 
-    <div class="page-header">
+    <div class="page-title">
 
         <div>
-            <h2>📋 Historiku</h2>
-            <p>Të gjitha faturat</p>
+            <h1>📜 Historiku</h1>
+            <p>Të gjitha faturat.</p>
         </div>
 
-        <button
-            class="danger-btn"
-            onclick="deleteHistory()">
-            Fshi historikun
+        <button class="danger-btn"
+                onclick="deleteHistory()">
+            🗑 Fshi historikun
         </button>
 
     </div>
-
 
     <div class="box">
 
@@ -366,173 +280,225 @@
 
 
 
-<!-- ADMIN -->
+<!-- STOCK -->
 
-<section id="admin" class="page admin-only">
+<section id="stock" class="page admin-only">
 
-    <div class="page-header">
+    <div class="page-title">
 
         <div>
-            <h2>⚙️ ADMINISTRATORI</h2>
-            <p>Kontrollo të gjithë aplikacionin</p>
+            <h1>📦 Stoku</h1>
+            <p>Kontrollo produktet në magazinë.</p>
         </div>
 
     </div>
 
 
-    <!-- APP SETTINGS -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <span>Produkte</span>
+            <strong id="stockProducts">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>Sasi totale</span>
+            <strong id="stockTotal">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>Stok i ulët</span>
+            <strong id="stockLow">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>Mbaruar</span>
+            <strong id="stockEmpty">0</strong>
+        </div>
+
+    </div>
+
 
     <div class="box">
 
-        <div class="box-header">
+        <h2>📦 Inventari</h2>
 
-            <div>
-                <h3>🏷️ Emri i aplikacionit</h3>
-                <p class="muted">
-                    Ndrysho emrin që shfaqet në sistem.
-                </p>
+        <div id="stockList"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- REPORTS -->
+
+<section id="reports" class="page admin-only">
+
+    <div class="page-title">
+
+        <div>
+            <h1>📊 Raporte</h1>
+            <p>Analizo shitjet e lokalit.</p>
+        </div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <span>📅 Sot</span>
+            <strong id="reportToday">0 L</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>📆 Këtë javë</span>
+            <strong id="reportWeek">0 L</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>🗓 Këtë muaj</span>
+            <strong id="reportMonth">0 L</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>🧾 Fatura</span>
+            <strong id="reportInvoices">0</strong>
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>💳 Pagesat</h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <span>💵 Cash</span>
+                <strong id="reportCash">0 L</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>💳 Kartë</span>
+                <strong id="reportCard">0 L</strong>
             </div>
 
         </div>
 
+    </div>
 
-        <input
-            id="appNameInput"
-            class="input"
-            placeholder="P.sh. Bar Lulishtja"
-        >
 
-        <br><br>
+    <div class="box">
 
-        <button
-            class="primary-btn"
-            onclick="saveAppName()">
-            💾 Ruaj emrin
+        <h2>🔥 Produktet më të shitura</h2>
+
+        <div id="topProducts"></div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>👨‍🍳 Shitjet sipas kamarierit</h2>
+
+        <div id="waiterReports"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ADMIN -->
+
+<section id="admin" class="page admin-only">
+
+    <div class="page-title">
+
+        <h1>⚙️ ADMIN</h1>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>Emri i lokalit</h2>
+
+        <input id="appNameInput"
+               class="input"
+               placeholder="Emri i lokalit">
+
+        <button class="primary-btn"
+                onclick="saveAppName()">
+            Ruaj
         </button>
 
     </div>
 
 
-    <!-- USERS -->
-
     <div class="box">
 
-        <div class="box-header">
+        <h2>👨‍🍳 Kamarierët</h2>
 
-            <div>
-                <h3>👨‍🍳 Kamarierët</h3>
-                <p class="muted">
-                    Krijo dhe menaxho përdoruesit.
-                </p>
-            </div>
-
-            <button
-                class="primary-btn"
+        <button class="primary-btn"
                 onclick="openWaiterModal()">
-                + Kamarier
-            </button>
-
-        </div>
-
+            + Shto kamarier
+        </button>
 
         <div id="usersList"></div>
 
     </div>
 
 
-    <!-- PRODUCTS -->
-
     <div class="box">
 
-        <div class="box-header">
+        <h2>🍔 Produktet</h2>
 
-            <div>
-                <h3>🍹 Menuja</h3>
-                <p class="muted">
-                    Shto, ndrysho ose fshi produkte.
-                </p>
-            </div>
-
-            <button
-                class="primary-btn"
+        <button class="primary-btn"
                 onclick="openProductModal()">
-                + Produkt
-            </button>
-
-        </div>
-
+            + Shto produkt
+        </button>
 
         <div id="adminProducts"></div>
 
     </div>
 
 
-    <!-- TABLE SETTINGS -->
-
     <div class="box">
 
-        <div class="box-header">
+        <h2>🪑 Tavolinat</h2>
 
-            <div>
-                <h3>🪑 Tavolinat</h3>
-                <p class="muted">
-                    Menaxho numrin dhe emrat e tavolinave.
-                </p>
-            </div>
+        <input id="tableCountInput"
+               class="input"
+               type="number"
+               min="1"
+               placeholder="Numri i tavolinave">
 
-        </div>
-
-
-        <div class="admin-table-controls">
-
-            <input
-                id="tableCountInput"
-                class="input"
-                type="number"
-                min="1"
-                max="100"
-                placeholder="Numri i tavolinave"
-            >
-
-            <button
-                class="primary-btn"
+        <button class="primary-btn"
                 onclick="saveTableCount()">
-                💾 Ruaj
-            </button>
-
-        </div>
-
+            Ruaj tavolinat
+        </button>
 
         <div id="adminTables"></div>
 
     </div>
 
 
-    <!-- ADMIN PASSWORD -->
-
     <div class="box">
 
-        <h3>🔐 Password Administratori</h3>
+        <h2>🔐 Ndrysho password-in e adminit</h2>
 
-        <p class="muted">
-            Ndrysho password-in e administratorit.
-        </p>
+        <input id="newAdminPassword"
+               class="input"
+               type="password"
+               placeholder="Password i ri">
 
-        <br>
-
-        <input
-            id="newAdminPassword"
-            class="input"
-            type="password"
-            placeholder="Password i ri"
-        >
-
-        <br><br>
-
-        <button
-            class="primary-btn"
-            onclick="changeAdminPassword()">
-            🔐 Ndrysho password
+        <button class="primary-btn"
+                onclick="changeAdminPassword()">
+            Ndrysho
         </button>
 
     </div>
@@ -549,40 +515,27 @@
 
     <div class="modal-box">
 
-        <button
-            class="close"
-            onclick="closePayment()">
-            ✕
+        <button class="close-btn"
+                onclick="closeModal('paymentModal')">
+            ×
         </button>
 
         <h2>💳 Pagesa</h2>
 
         <div class="payment-total">
-
-            <small>Total</small>
-
-            <strong id="paymentAmount">
-                0 Lek
-            </strong>
-
+            <span>Total</span>
+            <strong id="paymentTotal">0 L</strong>
         </div>
 
-
-        <div class="payment-buttons">
-
-            <button
+        <button class="payment-option"
                 onclick="completePayment('cash')">
-                💵
-                <strong>Cash</strong>
-            </button>
+            💵 CASH
+        </button>
 
-            <button
+        <button class="payment-option"
                 onclick="completePayment('card')">
-                💳
-                <strong>Kartë</strong>
-            </button>
-
-        </div>
+            💳 KARTË
+        </button>
 
     </div>
 
@@ -594,88 +547,19 @@
 
 <div id="invoiceModal" class="modal">
 
-    <div class="invoice">
+    <div class="modal-box invoice-box">
 
-        <div class="invoice-header">
+        <button class="close-btn"
+                onclick="closeModal('invoiceModal')">
+            ×
+        </button>
 
-            <h1 id="invoiceAppName">
-                Bar Lulishtja
-            </h1>
+        <div id="invoiceContent"></div>
 
-            <p>Faturë</p>
-
-        </div>
-
-
-        <div class="invoice-info">
-
-            <div>
-                <small>Nr.</small>
-                <strong id="invoiceNumber">---</strong>
-            </div>
-
-            <div>
-                <small>Tavolina</small>
-                <strong id="invoiceTable">---</strong>
-            </div>
-
-            <div>
-                <small>Kamarieri</small>
-                <strong id="invoiceWaiter">---</strong>
-            </div>
-
-            <div>
-                <small>Data</small>
-                <strong id="invoiceDate">---</strong>
-            </div>
-
-            <div>
-                <small>Pagesa</small>
-                <strong id="invoicePayment">---</strong>
-            </div>
-
-        </div>
-
-
-        <div id="invoiceItems"></div>
-
-
-        <div class="invoice-total">
-
-            <span>TOTAL</span>
-
-            <strong id="invoiceTotal">
-                0 Lek
-            </strong>
-
-        </div>
-
-
-        <div class="invoice-footer">
-
-            Faleminderit që zgjodhët
-            <strong id="invoiceFooterName">
-                Bar Lulishtja
-            </strong>
-
-        </div>
-
-
-        <div class="invoice-actions">
-
-            <button
-                class="primary-btn"
+        <button class="primary-btn"
                 onclick="printInvoice()">
-                🖨️ Printo
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="closeInvoice()">
-                Mbyll
-            </button>
-
-        </div>
+            🖨 Printo faturën
+        </button>
 
     </div>
 
@@ -689,19 +573,12 @@
 
     <div class="modal-box">
 
-        <button
-            class="close"
-            onclick="closeModal()">
-            ✕
+        <button class="close-btn"
+                onclick="closeModal('generalModal')">
+            ×
         </button>
 
-        <h2 id="modalTitle">
-            Formë
-        </h2>
-
-        <br>
-
-        <div id="modalContent"></div>
+        <div id="generalModalContent"></div>
 
     </div>
 
