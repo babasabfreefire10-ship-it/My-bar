@@ -7,36 +7,21 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Bar Lulishtja - Hyrje</title>
+    <title>Login - Bar Lulishtja</title>
 
     <style>
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
         }
 
         body {
 
+            margin: 0;
+
             min-height: 100vh;
-
-            background:
-                radial-gradient(
-                    circle at top,
-                    #303030,
-                    #080808 65%
-                );
-
-            color: white;
 
             display: flex;
 
@@ -45,82 +30,54 @@
             justify-content: center;
 
             padding: 20px;
-        }
 
+            background: #0d1117;
 
-        .container {
+            color: white;
 
-            width: 100%;
+            font-family: Arial, sans-serif;
 
-            max-width: 400px;
-        }
-
-
-        .logo {
-
-            text-align: center;
-
-            font-size: 60px;
-
-            margin-bottom: 8px;
-        }
-
-
-        .title {
-
-            text-align: center;
-
-            margin-bottom: 25px;
-        }
-
-
-        .title h1 {
-
-            font-size: 28px;
-        }
-
-
-        .title p {
-
-            color: #888;
-
-            margin-top: 7px;
-
-            font-size: 14px;
         }
 
 
         .login-box {
 
-            background: #191919;
+            width: 100%;
 
-            border: 1px solid #333;
+            max-width: 400px;
 
-            border-radius: 20px;
+            padding: 30px;
 
-            padding: 25px;
+            background: #151b23;
+
+            border: 1px solid #293341;
+
+            border-radius: 18px;
 
             box-shadow:
                 0 20px 60px
-                rgba(0,0,0,.5);
+                rgba(0,0,0,.4);
+
         }
 
 
-        .form-group {
+        h1 {
 
-            margin-bottom: 18px;
+            margin-top: 0;
+
+            text-align: center;
+
         }
 
 
-        label {
+        .subtitle {
 
-            display: block;
+            text-align: center;
 
-            color: #aaa;
+            color: #8792a0;
 
-            font-size: 13px;
+            margin-bottom: 25px;
 
-            margin-bottom: 7px;
         }
 
 
@@ -130,85 +87,69 @@
 
             padding: 14px;
 
-            border-radius: 10px;
+            margin-bottom: 12px;
 
-            border: 1px solid #333;
+            border-radius: 9px;
 
-            background: #101010;
+            border: 1px solid #303b49;
+
+            background: #0f141b;
 
             color: white;
 
             outline: none;
 
-            font-size: 16px;
         }
 
 
-        input:focus {
-
-            border-color: #777;
-        }
-
-
-        .login-btn {
+        button {
 
             width: 100%;
 
-            border: none;
-
-            border-radius: 10px;
-
             padding: 14px;
 
-            background: white;
+            border: 0;
 
-            color: black;
+            border-radius: 9px;
 
-            font-size: 16px;
+            background: #2f81f7;
+
+            color: white;
 
             font-weight: bold;
 
             cursor: pointer;
-        }
 
-
-        .login-btn:hover {
-
-            background: #ddd;
         }
 
 
         .error {
 
-            display: none;
+            color: #ff6262;
 
-            background: #3b1d1d;
-
-            border: 1px solid #633;
-
-            color: #ffb2b2;
-
-            padding: 11px;
-
-            border-radius: 9px;
+            text-align: center;
 
             margin-top: 15px;
 
-            text-align: center;
+            display: none;
 
-            font-size: 13px;
         }
 
 
-        .footer {
-
-            text-align: center;
-
-            color: #666;
-
-            font-size: 11px;
+        .demo {
 
             margin-top: 20px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: #202936;
+
+            color: #9aa5b4;
+
+            font-size: 13px;
+
         }
 
     </style>
@@ -219,280 +160,201 @@
 <body>
 
 
-<div class="container">
+<div class="login-box">
 
+    <h1>🍸</h1>
 
-    <div class="logo">
-        🍸
+    <h1 id="appName">
+        Bar Lulishtja
+    </h1>
+
+    <div class="subtitle">
+        Paneli i menaxhimit
     </div>
 
 
-    <div class="title">
+    <input
+        id="username"
+        placeholder="Username"
+        autocomplete="username">
 
-        <h1 id="loginAppName">
-            Bar Lulishtja
-        </h1>
 
-        <p>
-            Sistemi i menaxhimit
-        </p>
+    <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password">
 
+
+    <button onclick="login()">
+        Hyr
+    </button>
+
+
+    <div
+        id="error"
+        class="error">
+        Username ose password gabim.
     </div>
 
 
-    <div class="login-box">
+    <div class="demo">
 
-        <form id="loginForm">
+        <strong>Login fillestar:</strong>
 
+        <br><br>
 
-            <div class="form-group">
+        Admin:
+        <b>admin</b> /
+        <b>1234</b>
 
-                <label>
-                    Username
-                </label>
+        <br>
 
-                <input
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                    autocomplete="username"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Password
-                </label>
-
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                    autocomplete="current-password"
-                    required
-                >
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="login-btn">
-                🔐 Hyr në sistem
-            </button>
-
-
-            <div
-                id="error"
-                class="error">
-                Username ose password i gabuar.
-            </div>
-
-
-        </form>
+        Kamarier:
+        <b>kamarier1</b> /
+        <b>1234</b>
 
     </div>
-
-
-    <div class="footer">
-
-        Management System
-
-    </div>
-
 
 </div>
 
 
 <script>
 
+const USERS_KEY = "barUsersV3";
+const APP_NAME_KEY = "barAppNameV3";
+const CURRENT_USER_KEY = "barCurrentUser";
 
-/* =====================================================
-   DEFAULT USERS
-===================================================== */
 
 const defaultUsers = [
 
     {
-        id: "admin",
-
+        id: "u1",
         username: "admin",
-
         password: "1234",
-
         role: "admin",
-
         name: "Administrator"
     },
 
-
     {
-        id: "waiter1",
-
+        id: "u2",
         username: "kamarier1",
-
         password: "1234",
-
         role: "waiter",
-
         name: "Kamarier 1"
     }
 
 ];
 
 
-/* =====================================================
-   USERS
-===================================================== */
-
 function getUsers() {
 
-    const saved =
-        localStorage.getItem(
-            "barUsersV3"
+    let users =
+        JSON.parse(
+            localStorage.getItem(
+                USERS_KEY
+            ) || "null"
         );
 
 
-    if (!saved) {
+    if (
+        !Array.isArray(users) ||
+        users.length === 0
+    ) {
+
+        users =
+            defaultUsers;
 
         localStorage.setItem(
-
-            "barUsersV3",
-
-            JSON.stringify(
-                defaultUsers
-            )
-
+            USERS_KEY,
+            JSON.stringify(users)
         );
 
-
-        return JSON.parse(
-            JSON.stringify(
-                defaultUsers
-            )
-        );
     }
 
 
-    return JSON.parse(
-        saved
-    );
+    return users;
+
 }
 
 
-/* =====================================================
-   APP NAME
-===================================================== */
+function login() {
 
-function getAppName() {
+    const username =
+        document
+            .getElementById("username")
+            .value
+            .trim();
 
-    return (
-        localStorage.getItem(
-            "barAppNameV3"
-        )
-        ||
-        "Bar Lulishtja"
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+
+    const user =
+        getUsers().find(
+            u =>
+                u.username === username &&
+                u.password === password
+        );
+
+
+    if (!user) {
+
+        document
+            .getElementById("error")
+            .style.display = "block";
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        CURRENT_USER_KEY,
+        JSON.stringify(user)
     );
+
+
+    window.location.href =
+        "index.html";
+
 }
 
-
-document.getElementById(
-    "loginAppName"
-).textContent =
-    getAppName();
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
 
 document
-    .getElementById(
-        "loginForm"
-    )
+    .getElementById("password")
     .addEventListener(
-        "submit",
+        "keydown",
         function(event) {
 
-            event.preventDefault();
+            if (
+                event.key === "Enter"
+            ) {
 
+                login();
 
-            const username =
-                document.getElementById(
-                    "username"
-                )
-                .value
-                .trim();
-
-
-            const password =
-                document.getElementById(
-                    "password"
-                )
-                .value;
-
-
-            const users =
-                getUsers();
-
-
-            const user =
-                users.find(
-                    item =>
-
-                        item.username ===
-                        username
-
-                        &&
-
-                        item.password ===
-                        password
-                );
-
-
-            if (!user) {
-
-                document.getElementById(
-                    "error"
-                ).style.display =
-                    "block";
-
-                return;
             }
-
-
-            localStorage.setItem(
-
-                "barCurrentUser",
-
-                JSON.stringify({
-
-                    id:
-                        user.id,
-
-                    username:
-                        user.username,
-
-                    role:
-                        user.role,
-
-                    name:
-                        user.name
-
-                })
-
-            );
-
-
-            window.location.href =
-                "index.html";
 
         }
     );
+
+
+const appName =
+    localStorage.getItem(
+        APP_NAME_KEY
+    );
+
+
+if (appName) {
+
+    document
+        .getElementById("appName")
+        .textContent = appName;
+
+}
 
 </script>
 
