@@ -3,177 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stoku - Bar Lulishtja</title>
+<title>MY BAR — Stoku</title>
 
 <style>
-* {
-    box-sizing: border-box;
+:root{
+    --bg:#050806;
+    --panel:#0d1510;
+    --panel2:#111b14;
+    --green:#20e879;
+    --green-soft:rgba(32,232,121,.10);
+    --border:rgba(255,255,255,.08);
+    --text:#f4f7f5;
+    --muted:#87938c;
+    --red:#ff5368;
+    --yellow:#ffc857;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f1115;
-    color: #fff;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    min-height:100vh;
+    padding:22px;
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    background:
+        radial-gradient(circle at top,rgba(32,232,121,.07),transparent 35%),
+        var(--bg);
 }
 
-header {
-    background: #171a21;
-    padding: 18px;
-    border-bottom: 1px solid #292d36;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+.container{
+    width:min(1200px,100%);
+    margin:auto;
 }
 
-.header-inner {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:22px;
 }
 
-h1 {
-    margin: 0;
-    font-size: 22px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.back {
-    background: #2a2f3a;
-    color: white;
-    border: 0;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
+.logo-icon{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    color:var(--green);
+    font-weight:900;
+    background:#0c1910;
+    border:1px solid rgba(32,232,121,.25);
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
+.logo h1{
+    font-size:22px;
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
+.logo span{
+    color:var(--green);
 }
 
-.card {
-    background: #171a21;
-    border: 1px solid #292d36;
-    border-radius: 15px;
-    padding: 18px;
+.back{
+    padding:10px 14px;
+    border-radius:10px;
+    color:var(--text);
+    background:var(--panel2);
+    border:1px solid var(--border);
+    text-decoration:none;
 }
 
-.card small {
-    color: #9299a8;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:18px;
 }
 
-.card strong {
-    display: block;
-    font-size: 28px;
-    margin-top: 8px;
+.stat{
+    padding:18px;
+    border-radius:15px;
+    background:var(--panel);
+    border:1px solid var(--border);
 }
 
-.search {
-    width: 100%;
-    background: #171a21;
-    color: white;
-    border: 1px solid #303642;
-    padding: 14px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    font-size: 15px;
+.stat small{
+    color:var(--muted);
 }
 
-.product {
-    background: #171a21;
-    border: 1px solid #292d36;
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+.stat strong{
+    display:block;
+    margin-top:7px;
+    font-size:25px;
 }
 
-.product-info {
-    flex: 1;
+.toolbar{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
 }
 
-.product-name {
-    font-size: 17px;
-    font-weight: bold;
+input,select{
+    width:100%;
+    min-height:44px;
+    padding:10px 13px;
+    color:var(--text);
+    background:#09100c;
+    border:1px solid var(--border);
+    border-radius:10px;
+    outline:none;
 }
 
-.product-category {
-    color: #9299a8;
-    font-size: 13px;
-    margin-top: 4px;
+input:focus,select:focus{
+    border-color:rgba(32,232,121,.35);
 }
 
-.stock {
-    font-size: 22px;
-    font-weight: bold;
-    min-width: 70px;
-    text-align: center;
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+    gap:13px;
 }
 
-.low {
-    color: #ffb020;
+.product{
+    overflow:hidden;
+    border-radius:15px;
+    background:var(--panel);
+    border:1px solid var(--border);
 }
 
-.empty {
-    color: #ff5555;
+.product img{
+    width:100%;
+    height:130px;
+    object-fit:cover;
 }
 
-.ok {
-    color: #42d392;
+.info{
+    padding:14px;
 }
 
-.buttons {
-    display: flex;
-    gap: 7px;
+.name{
+    font-weight:850;
+    font-size:15px;
 }
 
-.btn {
-    border: 0;
-    border-radius: 9px;
-    padding: 10px 14px;
-    cursor: pointer;
-    color: white;
-    font-weight: bold;
+.category{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:11px;
 }
 
-.minus {
-    background: #8e3030;
+.stock{
+    margin-top:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.plus {
-    background: #237a4b;
+.stock-number{
+    color:var(--green);
+    font-size:18px;
+    font-weight:900;
 }
 
-.reset {
-    background: #444b59;
+.low .stock-number{
+    color:var(--yellow);
 }
 
-@media(max-width:700px) {
-    .stats {
-        grid-template-columns: 1fr;
+.out .stock-number{
+    color:var(--red);
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+button{
+    flex:1;
+    min-height:38px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    cursor:pointer;
+    color:var(--text);
+    background:var(--panel2);
+    font-weight:800;
+}
+
+button.add{
+    color:#041009;
+    background:var(--green);
+    border-color:var(--green);
+}
+
+button:hover{
+    filter:brightness(1.08);
+}
+
+.empty{
+    padding:40px;
+    text-align:center;
+    color:var(--muted);
+    border:1px dashed var(--border);
+    border-radius:15px;
+}
+
+@media(max-width:650px){
+    body{padding:13px}
+
+    header{
+        align-items:flex-start;
     }
 
-    .product {
-        flex-wrap: wrap;
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
 
-    .product-info {
-        width: 100%;
-        flex-basis: 100%;
+    .products{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
+    }
+
+    .product img{
+        height:105px;
+    }
+
+    .info{
+        padding:10px;
+    }
+
+    .toolbar{
+        flex-direction:column;
     }
 }
 </style>
@@ -181,212 +247,218 @@ h1 {
 
 <body>
 
-<header>
-    <div class="header-inner">
-        <h1>📦 Stoku</h1>
-        <button class="back" onclick="location.href='index.html'">
-            ← Kthehu
-        </button>
-    </div>
-</header>
-
 <div class="container">
 
-    <div class="stats">
-        <div class="card">
-            <small>Produkte</small>
-            <strong id="productCount">0</strong>
-        </div>
-
-        <div class="card">
-            <small>Stok total</small>
-            <strong id="totalStock">0</strong>
-        </div>
-
-        <div class="card">
-            <small>Stok i ulët</small>
-            <strong id="lowStock">0</strong>
-        </div>
+<header>
+    <div class="logo">
+        <div class="logo-icon">S</div>
+        <h1>MY <span>BAR</span></h1>
     </div>
 
+    <a class="back" href="index.html">← Kthehu</a>
+</header>
+
+<div class="stats">
+    <div class="stat">
+        <small>Produkte</small>
+        <strong id="totalProducts">0</strong>
+    </div>
+
+    <div class="stat">
+        <small>Gjendje totale</small>
+        <strong id="totalStock">0</strong>
+    </div>
+
+    <div class="stat">
+        <small>Stok i ulët</small>
+        <strong id="lowStock">0</strong>
+    </div>
+</div>
+
+<div class="toolbar">
     <input
-        class="search"
         id="search"
-        placeholder="🔎 Kërko produkt..."
-        oninput="render()"
+        type="search"
+        placeholder="Kërko produkt..."
     >
 
-    <div id="products"></div>
+    <select id="category">
+        <option value="all">Të gjitha kategoritë</option>
+    </select>
+</div>
+
+<div id="products" class="products"></div>
 
 </div>
 
 <script>
-
-const PRODUCTS_KEY = "barProductsV3";
-const STOCK_KEY = "barInventoryV1";
+const PRODUCTS_KEY = "barProductsV4";
+const STOCK_KEY = "barInventoryV2";
 
 const defaultProducts = [
-    {id: 1, name:"Espresso", price:100, category:"Kafe"},
-    {id: 2, name:"Macchiato", price:120, category:"Kafe"},
-    {id: 3, name:"Cappuccino", price:180, category:"Kafe"},
-    {id: 4, name:"Coca Cola", price:150, category:"Pije"},
-    {id: 5, name:"Fanta", price:150, category:"Pije"},
-    {id: 6, name:"Ujë", price:100, category:"Pije"},
-    {id: 7, name:"Red Bull", price:250, category:"Pije"},
-    {id: 8, name:"Birrë", price:200, category:"Alkool"},
-    {id: 9, name:"Verë", price:300, category:"Alkool"},
-    {id:10, name:"Koktej", price:500, category:"Koktej"}
+    {id:"espresso",name:"Espresso",price:100,category:"Kafe"},
+    {id:"macchiato",name:"Macchiato",price:120,category:"Kafe"},
+    {id:"cappuccino",name:"Cappuccino",price:150,category:"Kafe"},
+    {id:"americano",name:"Americano",price:130,category:"Kafe"},
+    {id:"water",name:"Ujë",price:80,category:"Pije"},
+    {id:"coca",name:"Coca Cola",price:150,category:"Pije"},
+    {id:"fanta",name:"Fanta",price:150,category:"Pije"},
+    {id:"sprite",name:"Sprite",price:150,category:"Pije"},
+    {id:"redbull",name:"Red Bull",price:250,category:"Pije"},
+    {id:"beer",name:"Birrë",price:200,category:"Alkool"},
+    {id:"wine",name:"Verë",price:300,category:"Alkool"},
+    {id:"vodka",name:"Vodka",price:350,category:"Alkool"},
+    {id:"pizza",name:"Pizza",price:500,category:"Ushqim"},
+    {id:"burger",name:"Burger",price:450,category:"Ushqim"},
+    {id:"fries",name:"Patate",price:250,category:"Ushqim"}
 ];
 
-function getProducts() {
-    try {
-        return JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || defaultProducts;
-    } catch {
-        return defaultProducts;
-    }
+function getProducts(){
+    try{
+        const data=JSON.parse(localStorage.getItem(PRODUCTS_KEY));
+        if(Array.isArray(data) && data.length) return data;
+    }catch(e){}
+    localStorage.setItem(PRODUCTS_KEY,JSON.stringify(defaultProducts));
+    return defaultProducts;
 }
 
-function getStock() {
-    try {
-        return JSON.parse(localStorage.getItem(STOCK_KEY)) || {};
-    } catch {
-        return {};
-    }
+function getStock(){
+    try{
+        const data=JSON.parse(localStorage.getItem(STOCK_KEY));
+        if(data && typeof data==="object") return data;
+    }catch(e){}
+    return {};
 }
 
-function saveStock(stock) {
-    localStorage.setItem(STOCK_KEY, JSON.stringify(stock));
+function saveStock(stock){
+    localStorage.setItem(STOCK_KEY,JSON.stringify(stock));
 }
 
-function getStockValue(id) {
-    const stock = getStock();
+let products=getProducts();
+let stock=getStock();
 
-    if (stock[id] === undefined) {
-        stock[id] = 20;
-        saveStock(stock);
-    }
-
-    return Number(stock[id]) || 0;
+function getQty(product){
+    const value=stock[product.id];
+    return Number.isFinite(Number(value)) ? Number(value) : 0;
 }
 
-function changeStock(id, amount) {
-    const stock = getStock();
-
-    if (stock[id] === undefined) {
-        stock[id] = 20;
-    }
-
-    stock[id] += amount;
-
-    if (stock[id] < 0) {
-        stock[id] = 0;
-    }
-
-    saveStock(stock);
-    render();
+function formatPrice(value){
+    return Number(value).toLocaleString("sq-AL")+" L";
 }
 
-function resetStock(id) {
-    const stock = getStock();
-    stock[id] = 20;
-    saveStock(stock);
-    render();
+function renderCategories(){
+    const select=document.getElementById("category");
+
+    const categories=[
+        ...new Set(products.map(p=>p.category).filter(Boolean))
+    ];
+
+    select.innerHTML=
+        `<option value="all">Të gjitha kategoritë</option>`+
+        categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
 }
 
-function render() {
+function render(){
+    const search=document.getElementById("search").value.toLowerCase().trim();
+    const category=document.getElementById("category").value;
 
-    const products = getProducts();
-    const search = document.getElementById("search").value.toLowerCase();
+    const filtered=products.filter(p=>{
+        const matchesSearch=
+            p.name.toLowerCase().includes(search);
 
-    let total = 0;
-    let low = 0;
+        const matchesCategory=
+            category==="all" || p.category===category;
 
-    products.forEach(p => {
-        const s = getStockValue(p.id);
-        total += s;
-
-        if (s <= 5) {
-            low++;
-        }
+        return matchesSearch && matchesCategory;
     });
 
-    document.getElementById("productCount").textContent = products.length;
-    document.getElementById("totalStock").textContent = total;
-    document.getElementById("lowStock").textContent = low;
+    const container=document.getElementById("products");
 
-    const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(search)
+    if(!filtered.length){
+        container.innerHTML=
+            `<div class="empty">Nuk u gjet asnjë produkt.</div>`;
+        return;
+    }
+
+    container.innerHTML=filtered.map(product=>{
+        const qty=getQty(product);
+
+        let cls="";
+        if(qty<=0) cls="out";
+        else if(qty<=5) cls="low";
+
+        const image=product.image ||
+            "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80";
+
+        return `
+        <div class="product ${cls}">
+            <img src="${image}" alt="${escapeHtml(product.name)}">
+
+            <div class="info">
+                <div class="name">${escapeHtml(product.name)}</div>
+
+                <div class="category">
+                    ${escapeHtml(product.category || "Pa kategori")}
+                    • ${formatPrice(product.price)}
+                </div>
+
+                <div class="stock">
+                    <span>Stok</span>
+                    <span class="stock-number">${qty}</span>
+                </div>
+
+                <div class="actions">
+                    <button onclick="changeStock('${product.id}',-1)">−</button>
+                    <button class="add" onclick="changeStock('${product.id}',1)">+ Shto</button>
+                </div>
+            </div>
+        </div>`;
+    }).join("");
+
+    updateStats();
+}
+
+function changeStock(id,amount){
+    const current=getQty({id});
+    stock[id]=Math.max(0,current+amount);
+
+    saveStock(stock);
+    render();
+}
+
+function updateStats(){
+    const totalProducts=products.length;
+
+    const totalStock=products.reduce(
+        (sum,p)=>sum+getQty(p),0
     );
 
-    document.getElementById("products").innerHTML =
-        filtered.map(p => {
+    const lowStock=products.filter(
+        p=>getQty(p)<=5
+    ).length;
 
-            const s = getStockValue(p.id);
-
-            let cls = "ok";
-
-            if (s === 0) {
-                cls = "empty";
-            } else if (s <= 5) {
-                cls = "low";
-            }
-
-            return `
-                <div class="product">
-
-                    <div class="product-info">
-                        <div class="product-name">
-                            ${escapeHtml(p.name)}
-                        </div>
-
-                        <div class="product-category">
-                            ${escapeHtml(p.category || "Produkt")}
-                        </div>
-                    </div>
-
-                    <div class="stock ${cls}">
-                        ${s}
-                    </div>
-
-                    <div class="buttons">
-
-                        <button
-                            class="btn minus"
-                            onclick="changeStock(${p.id}, -1)">
-                            −
-                        </button>
-
-                        <button
-                            class="btn plus"
-                            onclick="changeStock(${p.id}, 1)">
-                            +
-                        </button>
-
-                        <button
-                            class="btn reset"
-                            onclick="resetStock(${p.id})">
-                            20
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
+    document.getElementById("totalProducts").textContent=totalProducts;
+    document.getElementById("totalStock").textContent=totalStock;
+    document.getElementById("lowStock").textContent=lowStock;
 }
 
-function escapeHtml(text) {
-    return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+function escapeHtml(value){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
+document.getElementById("search")
+    .addEventListener("input",render);
+
+document.getElementById("category")
+    .addEventListener("change",render);
+
+renderCategories();
 render();
-
 </script>
 
 </body>
