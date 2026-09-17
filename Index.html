@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Lulishtja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>🍸 Bar Lulishtja</h1>
+        <p>Menaxhimi i Barit</p>
+    </div>
+
+    <div class="time" id="clock"></div>
+</header>
+
+<nav>
+    <button class="nav-btn active" onclick="showPage('dashboard')">
+        🏠 Dashboard
+    </button>
+
+    <button class="nav-btn" onclick="showPage('tables')">
+        🪑 Tavolinat
+    </button>
+
+    <button class="nav-btn" onclick="showPage('menu')">
+        🍹 Menu
+    </button>
+
+    <button class="nav-btn" onclick="showPage('orders')">
+        🧾 Porositë
+    </button>
+
+    <button class="nav-btn" onclick="showPage('cash')">
+        💰 Arka
+    </button>
+</nav>
+
+<main>
+
+<section id="dashboard" class="page active-page">
+
+    <h2>Dashboard</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <span>💰</span>
+            <div>
+                <p>Shitje sot</p>
+                <h3 id="todaySales">0 Lek</h3>
+            </div>
+        </div>
+
+        <div class="card">
+            <span>🪑</span>
+            <div>
+                <p>Tavolina aktive</p>
+                <h3 id="activeTables">0</h3>
+            </div>
+        </div>
+
+        <div class="card">
+            <span>🧾</span>
+            <div>
+                <p>Porosi</p>
+                <h3 id="orderCount">0</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-box">
+        <h2>Tavolinat</h2>
+        <div class="table-grid" id="dashboardTables"></div>
+    </div>
+
+</section>
+
+<section id="tables" class="page">
+
+    <h2>🪑 Tavolinat</h2>
+
+    <div class="table-grid" id="tablesList"></div>
+
+</section>
+
+<section id="menu" class="page">
+
+    <h2>🍹 Menuja</h2>
+
+    <div class="menu-grid">
+
+        <div class="product">
+            <h3>☕ Espresso</h3>
+            <p>100 Lek</p>
+            <button onclick="addProduct('Espresso',100)">
+                + Shto
+            </button>
+        </div>
+
+        <div class="product">
+            <h3>🥤 Coca Cola</h3>
+            <p>150 Lek</p>
+            <button onclick="addProduct('Coca Cola',150)">
+                + Shto
+            </button>
+        </div>
+
+        <div class="product">
+            <h3>🍺 Birrë</h3>
+            <p>200 Lek</p>
+            <button onclick="addProduct('Birrë',200)">
+                + Shto
+            </button>
+        </div>
+
+        <div class="product">
+            <h3>🍸 Koktej</h3>
+            <p>500 Lek</p>
+            <button onclick="addProduct('Koktej',500)">
+                + Shto
+            </button>
+        </div>
+
+        <div class="product">
+            <h3>🧃 Fanta</h3>
+            <p>150 Lek</p>
+            <button onclick="addProduct('Fanta',150)">
+                + Shto
+            </button>
+        </div>
+
+        <div class="product">
+            <h3>💧 Ujë</h3>
+            <p>100 Lek</p>
+            <button onclick="addProduct('Ujë',100)">
+                + Shto
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="orders" class="page">
+
+    <h2>🧾 Porosia aktuale</h2>
+
+    <div class="order-box">
+
+        <div id="orderItems">
+            <p class="empty">Nuk ka produkte.</p>
+        </div>
+
+        <div class="total">
+            <span>Total</span>
+            <strong id="orderTotal">0 Lek</strong>
+        </div>
+
+        <button class="pay-btn" onclick="completeOrder()">
+            💳 Mbyll porosinë
+        </button>
+
+    </div>
+
+</section>
+
+<section id="cash" class="page">
+
+    <h2>💰 Arka</h2>
+
+    <div class="cash-box">
+
+        <p>Shitjet totale sot</p>
+
+        <h1 id="cashTotal">0 Lek</h1>
+
+        <p>Porosi të përfunduara:</p>
+
+        <h3 id="completedOrders">0</h3>
+
+    </div>
+
+</section>
+
+</main>
+
+<script src="app.js"></script>
+
+</body>
+</html>
