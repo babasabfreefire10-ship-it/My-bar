@@ -1,28 +1,31 @@
 /* =========================================================
-   MY BAR - APP.JS
-   Sistem menaxhimi për bar
-   ========================================================= */
+   MY BAR - NEW APP.JS
+   Complete management system
+========================================================= */
 
 "use strict";
 
-/* =========================
-   STORAGE KEYS
-========================= */
 
-const USERS_KEY = "barUsersV3";
-const PRODUCTS_KEY = "barProductsV3";
-const INVOICES_KEY = "barInvoicesV3";
-const TABLES_KEY = "barTablesV4";
-const TABLE_COUNT_KEY = "barTableCountV3";
-const CURRENT_USER_KEY = "barCurrentUser";
-const APP_NAME_KEY = "barAppNameV3";
-const INVENTORY_KEY = "barInventoryV1";
-const SELECTED_TABLE_KEY = "barSelectedTable";
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const KEYS = {
+    users: "barUsersV4",
+    products: "barProductsV4",
+    invoices: "barInvoicesV4",
+    tables: "barTablesV5",
+    tableCount: "barTableCountV4",
+    currentUser: "barCurrentUserV4",
+    appName: "barAppNameV4",
+    inventory: "barInventoryV2",
+    selectedTable: "barSelectedTableV2"
+};
 
 
-/* =========================
-   DEFAULT DATA
-========================= */
+/* =========================================================
+   DEFAULT USERS
+========================================================= */
 
 const DEFAULT_USERS = [
     {
@@ -41,899 +44,1330 @@ const DEFAULT_USERS = [
     }
 ];
 
+
+/* =========================================================
+   DEFAULT PRODUCTS
+   Photos are remote image URLs.
+========================================================= */
+
 const DEFAULT_PRODUCTS = [
-    { id: "p1", name: "Espresso", category: "Kafe", price: 100 },
-    { id: "p2", name: "Macchiato", category: "Kafe", price: 120 },
-    { id: "p3", name: "Cappuccino", category: "Kafe", price: 150 },
-    { id: "p4", name: "Americano", category: "Kafe", price: 130 },
-    { id: "p5", name: "Ujë", category: "Pije", price: 80 },
-    { id: "p6", name: "Coca Cola", category: "Pije", price: 150 },
-    { id: "p7", name: "Fanta", category: "Pije", price: 150 },
-    { id: "p8", name: "Sprite", category: "Pije", price: 150 },
-    { id: "p9", name: "Red Bull", category: "Pije", price: 250 },
-    { id: "p10", name: "Birrë", category: "Alkool", price: 200 },
-    { id: "p11", name: "Verë", category: "Alkool", price: 300 },
-    { id: "p12", name: "Vodka", category: "Alkool", price: 350 },
-    { id: "p13", name: "Pizza", category: "Ushqim", price: 500 },
-    { id: "p14", name: "Burger", category: "Ushqim", price: 450 },
-    { id: "p15", name: "Patate", category: "Ushqim", price: 250 }
+
+    {
+        id: "espresso",
+        name: "Espresso",
+        price: 100,
+        category: "Kafe",
+        image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "macchiato",
+        name: "Macchiato",
+        price: 120,
+        category: "Kafe",
+        image: "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "cappuccino",
+        name: "Cappuccino",
+        price: 150,
+        category: "Kafe",
+        image: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "americano",
+        name: "Americano",
+        price: 130,
+        category: "Kafe",
+        image: "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "water",
+        name: "Ujë",
+        price: 80,
+        category: "Pije",
+        image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "coca-cola",
+        name: "Coca Cola",
+        price: 150,
+        category: "Pije",
+        image: "https://images.unsplash.com/photo-1629203849820-fdd70d49c38e?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "fanta",
+        name: "Fanta",
+        price: 150,
+        category: "Pije",
+        image: "https://images.unsplash.com/photo-1624517452488-04869289c4ca?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "sprite",
+        name: "Sprite",
+        price: 150,
+        category: "Pije",
+        image: "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "redbull",
+        name: "Red Bull",
+        price: 250,
+        category: "Pije",
+        image: "https://images.unsplash.com/photo-1613298593212-4d1f7f4b7c4e?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "beer",
+        name: "Birrë",
+        price: 200,
+        category: "Alkool",
+        image: "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "wine",
+        name: "Verë",
+        price: 300,
+        category: "Alkool",
+        image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "vodka",
+        name: "Vodka",
+        price: 350,
+        category: "Alkool",
+        image: "https://images.unsplash.com/photo-1608885898957-a5599e505f6c?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "pizza",
+        name: "Pizza",
+        price: 500,
+        category: "Ushqim",
+        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "burger",
+        name: "Burger",
+        price: 450,
+        category: "Ushqim",
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"
+    },
+
+    {
+        id: "fries",
+        name: "Patate",
+        price: 250,
+        category: "Ushqim",
+        image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"
+    }
+
 ];
 
-const DEFAULT_TABLE_COUNT = 10;
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let users = [];
+let products = [];
+let invoices = [];
+let tables = [];
+let inventory = {};
+
+let currentUser = null;
+let selectedTableId = null;
+let selectedCategory = "Të gjitha";
+let currentOrder = [];
+
+let editingUserId = null;
+let editingProductId = null;
 
 
-/* =========================
+/* =========================================================
    HELPERS
-========================= */
-
-function $(id) {
-    return document.getElementById(id);
-}
+========================================================= */
 
 function getJSON(key, fallback) {
     try {
         const value = localStorage.getItem(key);
+
         if (!value) return fallback;
+
         return JSON.parse(value);
-    } catch (error) {
-        console.error("Storage error:", key, error);
+
+    } catch {
         return fallback;
     }
 }
 
-function setJSON(key, value) {
+
+function saveJSON(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
-function escapeHTML(value) {
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-function uid(prefix = "id") {
-    return (
-        prefix +
-        "_" +
-        Date.now().toString(36) +
-        "_" +
-        Math.random().toString(36).slice(2, 8)
-    );
-}
 
 function money(value) {
-    return Number(value || 0).toLocaleString("sq-AL") + " L";
-}
-
-function todayKey(date = new Date()) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    const d = String(date.getDate()).padStart(2, "0");
-    return `${y}-${m}-${d}`;
-}
-
-function formatDate(dateValue) {
-    const date = new Date(dateValue);
-
-    if (Number.isNaN(date.getTime())) {
-        return "-";
-    }
-
-    return date.toLocaleString("sq-AL");
-}
-
-function isAdmin() {
-    return currentUser?.role === "admin";
-}
-
-function getCurrentUser() {
-    return getJSON(CURRENT_USER_KEY, null);
-}
-
-let currentUser = getCurrentUser();
-
-function getProducts() {
-    return getJSON(PRODUCTS_KEY, []);
-}
-
-function saveProducts(products) {
-    setJSON(PRODUCTS_KEY, products);
-}
-
-function getUsers() {
-    return getJSON(USERS_KEY, []);
-}
-
-function saveUsers(users) {
-    setJSON(USERS_KEY, users);
-}
-
-function getInvoices() {
-    return getJSON(INVOICES_KEY, []);
-}
-
-function saveInvoices(invoices) {
-    setJSON(INVOICES_KEY, invoices);
-}
-
-function getTables() {
-    return getJSON(TABLES_KEY, []);
-}
-
-function saveTables(tables) {
-    setJSON(TABLES_KEY, tables);
-}
-
-function getTableCount() {
-    return Number(
-        localStorage.getItem(TABLE_COUNT_KEY) || DEFAULT_TABLE_COUNT
-    );
-}
-
-function setTableCountValue(count) {
-    localStorage.setItem(TABLE_COUNT_KEY, String(count));
+    return `${Number(value || 0).toLocaleString("sq-AL")} L`;
 }
 
 
-/* =========================
+function todayKey() {
+    const d = new Date();
+
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+/* =========================================================
    INITIALIZATION
-========================= */
+========================================================= */
 
-function initializeUsers() {
-    let users = getUsers();
+function init() {
 
-    if (!Array.isArray(users) || users.length === 0) {
-        users = DEFAULT_USERS;
-        saveUsers(users);
-    }
-}
+    users = getJSON(KEYS.users, DEFAULT_USERS);
 
-function initializeProducts() {
-    let products = getProducts();
-
-    if (!Array.isArray(products) || products.length === 0) {
-        products = DEFAULT_PRODUCTS;
-        saveProducts(products);
-    }
-}
-
-function initializeTables() {
-    let tables = getTables();
-    const count = getTableCount();
-
-    if (!Array.isArray(tables)) {
-        tables = [];
+    if (!users.length) {
+        users = [...DEFAULT_USERS];
+        saveJSON(KEYS.users, users);
     }
 
-    const result = [];
 
-    for (let i = 1; i <= count; i++) {
-        const existing = tables.find(t => Number(t.number) === i);
+    products = getJSON(KEYS.products, DEFAULT_PRODUCTS);
 
-        result.push(
-            existing || {
-                id: "table_" + i,
+    if (!products.length) {
+        products = [...DEFAULT_PRODUCTS];
+        saveJSON(KEYS.products, products);
+    }
+
+
+    invoices = getJSON(KEYS.invoices, []);
+
+
+    const tableCount = Number(
+        localStorage.getItem(KEYS.tableCount) || 12
+    );
+
+
+    tables = getJSON(KEYS.tables, []);
+
+    if (!tables.length) {
+
+        for (let i = 1; i <= tableCount; i++) {
+
+            tables.push({
+                id: `table-${i}`,
                 number: i,
-                name: "Tavolina " + i,
-                orders: []
-            }
-        );
+                name: `Tavolina ${i}`,
+                items: []
+            });
+
+        }
+
+        saveJSON(KEYS.tables, tables);
     }
 
-    saveTables(result);
-}
 
-function initializeInventory() {
-    const products = getProducts();
-    const inventory = getJSON(INVENTORY_KEY, {});
+    inventory = getJSON(KEYS.inventory, {});
 
     products.forEach(product => {
+
         if (inventory[product.id] === undefined) {
             inventory[product.id] = 20;
         }
+
     });
 
-    setJSON(INVENTORY_KEY, inventory);
-}
-
-function initializeApp() {
-    initializeUsers();
-    initializeProducts();
-    initializeTables();
-    initializeInventory();
-
-    if (!localStorage.getItem(APP_NAME_KEY)) {
-        localStorage.setItem(APP_NAME_KEY, "MY BAR");
-    }
-}
+    saveJSON(KEYS.inventory, inventory);
 
 
-/* =========================
-   INVENTORY
-========================= */
-
-function getInventory() {
-    return getJSON(INVENTORY_KEY, {});
-}
-
-function saveInventory(inventory) {
-    setJSON(INVENTORY_KEY, inventory);
-}
-
-function getStock(productId) {
-    const inventory = getInventory();
-
-    if (inventory[productId] === undefined) {
-        inventory[productId] = 20;
-        saveInventory(inventory);
-    }
-
-    return Number(inventory[productId] || 0);
-}
-
-function setStock(productId, amount) {
-    if (!isAdmin()) {
-        toast("Vetëm ADMIN mund të ndryshojë stokun.");
-        return false;
-    }
-
-    const inventory = getInventory();
-
-    inventory[productId] = Math.max(0, Number(amount) || 0);
-
-    saveInventory(inventory);
-
-    renderMenu();
-    renderAdmin();
-
-    return true;
-}
-
-function changeStock(productId, amount) {
-    if (!isAdmin()) {
-        toast("Vetëm ADMIN mund të ndryshojë stokun.");
-        return;
-    }
-
-    const current = getStock(productId);
-    setStock(productId, current + Number(amount || 0));
-}
-
-function decreaseStock(productId, amount) {
-    const inventory = getInventory();
-    const current = Number(inventory[productId] || 0);
-
-    inventory[productId] = Math.max(
-        0,
-        current - Number(amount || 0)
+    currentUser = getJSON(
+        KEYS.currentUser,
+        null
     );
 
-    saveInventory(inventory);
+
+    if (!currentUser) {
+
+        window.location.href = "login.html";
+        return;
+
+    }
+
+
+    selectedTableId = localStorage.getItem(
+        KEYS.selectedTable
+    ) || null;
+
+
+    applyAppName();
+    updateUserHeader();
+    setupNavigation();
+    setupSearch();
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    renderAll();
+
 }
 
 
-/* =========================
+/* =========================================================
+   APP NAME
+========================================================= */
+
+function applyAppName() {
+
+    const name =
+        localStorage.getItem(KEYS.appName)
+        || "MY BAR";
+
+    const appName = document.getElementById("appName");
+
+    if (appName) {
+        appName.textContent = name;
+    }
+
+    const input =
+        document.getElementById("appNameInput");
+
+    if (input) {
+        input.value = name;
+    }
+}
+
+
+/* =========================================================
+   USER
+========================================================= */
+
+function updateUserHeader() {
+
+    const userInfo =
+        document.getElementById("userInfo");
+
+    if (!userInfo || !currentUser) return;
+
+    userInfo.textContent =
+        currentUser.name || currentUser.username;
+
+}
+
+
+function isAdmin() {
+
+    return currentUser &&
+        currentUser.role === "admin";
+
+}
+
+
+function setupRoleUI() {
+
+    document
+        .querySelectorAll(".admin-only")
+        .forEach(element => {
+
+            if (isAdmin()) {
+
+                element.style.display = "";
+
+            } else {
+
+                element.style.display = "none";
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function setupNavigation() {
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const section =
+                    button.dataset.section;
+
+                showSection(section);
+
+            });
+
+        });
+
+}
+
+
+function showSection(section) {
+
+    if (
+        ["cash", "history", "admin"].includes(section)
+        && !isAdmin()
+    ) {
+
+        toast("Vetëm administratori ka akses.");
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(".page-section")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    const target =
+        document.getElementById(section);
+
+    if (target) {
+        target.classList.add("active");
+    }
+
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.section === section
+            );
+
+        });
+
+
+    if (section === "dashboard") {
+        renderDashboard();
+    }
+
+    if (section === "tables") {
+        renderTables();
+    }
+
+    if (section === "menu") {
+        renderMenu();
+    }
+
+    if (section === "orders") {
+        renderOrder();
+    }
+
+    if (section === "cash") {
+        renderCash();
+    }
+
+    if (section === "history") {
+        renderHistory();
+    }
+
+    if (section === "admin") {
+        renderAdmin();
+    }
+
+}
+
+
+/* =========================================================
    CLOCK
-========================= */
+========================================================= */
 
 function updateClock() {
-    const clock = $("clock");
 
-    if (!clock) return;
+    const now = new Date();
 
-    clock.textContent = new Date().toLocaleString("sq-AL", {
-        weekday: "short",
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    });
-}
+    const clock =
+        document.getElementById("clock");
+
+    const date =
+        document.getElementById("todayDate");
 
 
-/* =========================
-   HEADER
-========================= */
+    if (clock) {
 
-function renderHeader() {
-    const appName = localStorage.getItem(APP_NAME_KEY) || "MY BAR";
+        clock.textContent =
+            now.toLocaleTimeString(
+                "sq-AL",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                }
+            );
 
-    if ($("appName")) {
-        $("appName").textContent = appName;
     }
 
-    if ($("userInfo")) {
-        $("userInfo").textContent =
-            currentUser
-                ? `${currentUser.name} • ${
-                      currentUser.role === "admin"
-                          ? "ADMIN"
-                          : "KAMARIER"
-                  }`
-                : "";
+
+    if (date) {
+
+        date.textContent =
+            now.toLocaleDateString(
+                "sq-AL",
+                {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+
     }
 
-    document.title = appName;
 }
 
 
-/* =========================
-   ROLE VISIBILITY
-========================= */
-
-function applyRoleVisibility() {
-    const adminElements = document.querySelectorAll(".admin-only");
-
-    adminElements.forEach(el => {
-        el.style.display = isAdmin() ? "" : "none";
-    });
-}
-
-
-/* =========================
+/* =========================================================
    TABLES
-========================= */
+========================================================= */
 
-let selectedTableId =
-    localStorage.getItem(SELECTED_TABLE_KEY) || null;
+function getTable(id) {
 
-function getSelectedTable() {
-    const tables = getTables();
+    return tables.find(
+        table => table.id === id
+    );
 
-    return tables.find(t => t.id === selectedTableId) || null;
 }
 
-function selectTable(tableId) {
-    const tables = getTables();
-    const table = tables.find(t => t.id === tableId);
+
+function tableIsBusy(table) {
+
+    return Array.isArray(table.items)
+        && table.items.length > 0;
+
+}
+
+
+function selectTable(id) {
+
+    const table = getTable(id);
 
     if (!table) return;
 
-    selectedTableId = tableId;
-    localStorage.setItem(SELECTED_TABLE_KEY, tableId);
 
-    renderTables();
-    renderOrder();
-    renderDashboardTables();
+    selectedTableId = id;
 
-    if ($("selectedTableText")) {
-        $("selectedTableText").textContent =
-            table.name || `Tavolina ${table.number}`;
-    }
+    localStorage.setItem(
+        KEYS.selectedTable,
+        id
+    );
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+
+    currentOrder =
+        Array.isArray(table.items)
+            ? [...table.items]
+            : [];
+
+
+    renderAll();
+
+    showSection("menu");
+
+    toast(
+        `${table.name} u zgjodh.`
+    );
+
 }
 
+
 function renderTables() {
-    const container = $("tableGrid");
 
-    if (!container) return;
+    const grid =
+        document.getElementById("tableGrid");
 
-    const tables = getTables();
+    if (!grid) return;
 
-    container.innerHTML = tables.map(table => {
 
-        const hasOrders =
-            Array.isArray(table.orders) &&
-            table.orders.length > 0;
+    grid.innerHTML = tables.map(table => {
 
-        const active =
-            selectedTableId === table.id;
+        const busy = tableIsBusy(table);
+
+        const total = table.items.reduce(
+            (sum, item) =>
+                sum +
+                Number(item.price || 0) *
+                Number(item.quantity || 1),
+            0
+        );
+
 
         return `
             <button
+                class="table-card ${busy ? "busy" : "available"}"
                 type="button"
-                class="table-card ${hasOrders ? "occupied" : ""} ${
-                    active ? "selected" : ""
-                }"
-                onclick="selectTable('${table.id}')"
-            >
-                <strong>${escapeHTML(table.name)}</strong>
-                <span>
-                    ${
-                        hasOrders
-                            ? "E zënë"
-                            : "Bosh"
-                    }
-                </span>
+                onclick="selectTable('${table.id}')">
+
+                <div class="table-number">
+                    ${escapeHTML(table.number)}
+                </div>
+
+                <div class="table-info">
+
+                    <strong>
+                        ${escapeHTML(table.name)}
+                    </strong>
+
+                    <span>
+                        ${
+                            busy
+                                ? `${money(total)} • ${table.items.length} artikuj`
+                                : "E lirë"
+                        }
+                    </span>
+
+                </div>
+
+                <div class="table-status">
+                    ${busy ? "ZËNË" : "E LIRË"}
+                </div>
+
             </button>
         `;
+
     }).join("");
+
 }
+
 
 function renderDashboardTables() {
-    const container = $("dashboardTables");
 
-    if (!container) return;
+    const grid =
+        document.getElementById(
+            "dashboardTables"
+        );
 
-    const tables = getTables();
+    if (!grid) return;
 
-    container.innerHTML = tables.map(table => {
 
-        const active =
-            Array.isArray(table.orders) &&
-            table.orders.length > 0;
+    grid.innerHTML = tables.map(table => {
 
-        const total = active
-            ? table.orders.reduce(
-                  (sum, item) =>
-                      sum +
-                      Number(item.price || 0) *
-                          Number(item.quantity || 1),
-                  0
-              )
-            : 0;
+        const busy = tableIsBusy(table);
 
         return `
-            <div class="dashboard-table-card ${
-                active ? "occupied" : ""
-            }"
-            onclick="selectTable('${table.id}')">
+            <button
+                class="mini-table ${busy ? "busy" : ""}"
+                type="button"
+                onclick="selectTable('${table.id}')">
 
-                <strong>${escapeHTML(table.name)}</strong>
+                <strong>${table.number}</strong>
 
                 <span>
-                    ${
-                        active
-                            ? money(total)
-                            : "Bosh"
-                    }
+                    ${busy ? "ZËNË" : "E LIRË"}
                 </span>
 
-            </div>
+            </button>
         `;
+
     }).join("");
+
 }
 
 
-/* =========================
+/* =========================================================
    MENU
-========================= */
+========================================================= */
 
-let selectedCategory = "Të gjitha";
+function getCategories() {
 
-function renderCategories() {
-    const container = $("categories");
-
-    if (!container) return;
-
-    const products = getProducts();
-
-    const categories = [
+    return [
         "Të gjitha",
         ...new Set(
-            products
-                .map(product => product.category)
-                .filter(Boolean)
+            products.map(
+                product => product.category
+            )
         )
     ];
 
-    container.innerHTML = categories.map(category => `
-        <button
-            type="button"
-            class="category-btn ${
-                selectedCategory === category
-                    ? "active"
-                    : ""
-            }"
-            onclick="selectCategory('${escapeHTML(
-                category
-            )}')"
-        >
-            ${escapeHTML(category)}
-        </button>
-    `).join("");
 }
 
-function selectCategory(category) {
-    selectedCategory = category;
-    renderCategories();
-    renderMenu();
-}
 
-function renderMenu() {
-    const container = $("menuGrid");
+function renderCategories() {
+
+    const container =
+        document.getElementById("categories");
 
     if (!container) return;
 
-    const products = getProducts();
 
-    const filtered =
-        selectedCategory === "Të gjitha"
-            ? products
-            : products.filter(
-                  p => p.category === selectedCategory
-              );
+    container.innerHTML =
+        getCategories().map(category => {
 
-    container.innerHTML = filtered.map(product => {
-
-        const stock = getStock(product.id);
-
-        const disabled = stock <= 0;
-
-        return `
-            <button
-                type="button"
-                class="menu-product ${
-                    disabled ? "disabled" : ""
-                }"
-                ${
-                    disabled
-                        ? "disabled"
-                        : `onclick="addProductToOrder('${product.id}')"`
-                }
-            >
-
-                <div class="product-name">
-                    ${escapeHTML(product.name)}
-                </div>
-
-                <div class="product-category">
-                    ${escapeHTML(product.category || "")}
-                </div>
-
-                <div class="product-bottom">
-
-                    <strong>
-                        ${money(product.price)}
-                    </strong>
-
-                    <span class="${
-                        stock <= 5
-                            ? "low-stock"
+            return `
+                <button
+                    type="button"
+                    class="category-btn ${
+                        selectedCategory === category
+                            ? "active"
                             : ""
-                    }">
-                        Stok: ${stock}
-                    </span>
+                    }"
+                    onclick="selectCategory('${escapeHTML(category)}')">
 
-                </div>
+                    ${escapeHTML(category)}
 
-            </button>
-        `;
-    }).join("");
+                </button>
+            `;
+
+        }).join("");
+
 }
 
 
-/* =========================
-   ORDERS
-========================= */
+function selectCategory(category) {
 
-function addProductToOrder(productId) {
+    selectedCategory = category;
 
-    const tables = getTables();
+    renderMenu();
 
-    const tableIndex = tables.findIndex(
-        t => t.id === selectedTableId
-    );
+}
 
-    if (tableIndex === -1) {
-        toast("Zgjidh një tavolinë më parë.");
+
+function renderMenu() {
+
+    renderCategories();
+
+
+    const grid =
+        document.getElementById("menuGrid");
+
+    if (!grid) return;
+
+
+    const search =
+        document
+            .getElementById("menuSearch")
+            ?.value
+            .toLowerCase()
+            .trim() || "";
+
+
+    const filtered =
+        products.filter(product => {
+
+            const categoryMatch =
+                selectedCategory === "Të gjitha"
+                || product.category === selectedCategory;
+
+
+            const searchMatch =
+                !search
+                || product.name
+                    .toLowerCase()
+                    .includes(search);
+
+
+            return categoryMatch && searchMatch;
+
+        });
+
+
+    if (!filtered.length) {
+
+        grid.innerHTML = `
+            <div class="empty-state">
+                <div>⌕</div>
+                <strong>Nuk u gjet produkt</strong>
+                <span>Provo një kërkim tjetër.</span>
+            </div>
+        `;
+
         return;
+
     }
 
-    const product = getProducts().find(
-        p => p.id === productId
+
+    grid.innerHTML =
+        filtered.map(product => {
+
+            const stock =
+                Number(inventory[product.id] ?? 0);
+
+            return `
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="${product.image}"
+                            alt="${escapeHTML(product.name)}"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">
+
+                        <span class="product-category">
+                            ${escapeHTML(product.category)}
+                        </span>
+
+                        ${
+                            stock <= 5
+                                ? `<span class="stock-badge">STOK ${stock}</span>`
+                                : ""
+                        }
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <div>
+                            <h3>
+                                ${escapeHTML(product.name)}
+                            </h3>
+
+                            <strong class="product-price">
+                                ${money(product.price)}
+                            </strong>
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="add-product-btn"
+                            onclick="addToOrder('${product.id}')"
+                            ${stock <= 0 ? "disabled" : ""}>
+
+                            ${
+                                stock <= 0
+                                    ? "PA STOK"
+                                    : "+ SHTO"
+                            }
+
+                        </button>
+
+                    </div>
+
+                </article>
+            `;
+
+        }).join("");
+
+
+    updateSelectedTableDisplay();
+
+}
+
+
+function updateSelectedTableDisplay() {
+
+    const element =
+        document.getElementById(
+            "menuSelectedTable"
+        );
+
+    if (!element) return;
+
+
+    const table =
+        selectedTableId
+            ? getTable(selectedTableId)
+            : null;
+
+
+    element.textContent =
+        table ? table.name : "Asnjë";
+
+}
+
+
+function setupSearch() {
+
+    const input =
+        document.getElementById("menuSearch");
+
+    if (!input) return;
+
+
+    input.addEventListener(
+        "input",
+        renderMenu
     );
+
+}
+
+
+/* =========================================================
+   ORDER
+========================================================= */
+
+function addToOrder(productId) {
+
+    const product =
+        products.find(
+            item => item.id === productId
+        );
 
     if (!product) return;
 
-    const stock = getStock(productId);
 
-    if (stock <= 0) {
-        toast("Ky produkt nuk ka më stok.");
+    if (!selectedTableId) {
+
+        toast(
+            "Zgjidh fillimisht një tavolinë."
+        );
+
+        showSection("tables");
+
         return;
+
     }
 
-    if (!Array.isArray(tables[tableIndex].orders)) {
-        tables[tableIndex].orders = [];
-    }
+
+    const stock =
+        Number(inventory[product.id] ?? 0);
+
 
     const existing =
-        tables[tableIndex].orders.find(
+        currentOrder.find(
             item => item.productId === productId
         );
 
+
+    const currentQuantity =
+        existing
+            ? Number(existing.quantity)
+            : 0;
+
+
+    if (currentQuantity >= stock) {
+
+        toast("Nuk ka më stok.");
+
+        return;
+
+    }
+
+
     if (existing) {
 
-        if (existing.quantity >= stock) {
-            toast("Nuk ka më stok për këtë produkt.");
-            return;
-        }
-
-        existing.quantity += 1;
+        existing.quantity++;
 
     } else {
 
-        tables[tableIndex].orders.push({
-            id: uid("order"),
+        currentOrder.push({
+
             productId: product.id,
             name: product.name,
-            price: Number(product.price || 0),
+            price: product.price,
             quantity: 1
+
         });
+
     }
 
-    saveTables(tables);
 
-    renderTables();
-    renderDashboardTables();
+    saveCurrentOrder();
+
     renderOrder();
 
-    toast("Produkti u shtua.");
+    updateTableUI();
+
+    toast(
+        `${product.name} u shtua.`
+    );
+
 }
 
-function changeOrderQuantity(orderId, amount) {
 
-    const tables = getTables();
+function changeOrderQuantity(productId, amount) {
 
-    const table = tables.find(
-        t => t.id === selectedTableId
-    );
-
-    if (!table || !Array.isArray(table.orders)) return;
-
-    const order = table.orders.find(
-        item => item.id === orderId
-    );
-
-    if (!order) return;
-
-    const newQuantity =
-        Number(order.quantity || 1) +
-        Number(amount || 0);
-
-    if (newQuantity <= 0) {
-
-        table.orders = table.orders.filter(
-            item => item.id !== orderId
+    const item =
+        currentOrder.find(
+            product => product.productId === productId
         );
 
-    } else {
+    if (!item) return;
 
-        const stock = getStock(order.productId);
 
-        if (newQuantity > stock) {
-            toast("Nuk ka mjaftueshëm stok.");
-            return;
-        }
+    const stock =
+        Number(inventory[productId] ?? 0);
 
-        order.quantity = newQuantity;
+
+    item.quantity += amount;
+
+
+    if (item.quantity > stock) {
+
+        item.quantity = stock;
+
+        toast("Nuk ka më stok.");
+
     }
 
-    saveTables(tables);
 
-    renderTables();
-    renderDashboardTables();
+    if (item.quantity <= 0) {
+
+        currentOrder =
+            currentOrder.filter(
+                product =>
+                    product.productId !== productId
+            );
+
+    }
+
+
+    saveCurrentOrder();
     renderOrder();
+
 }
 
-function removeOrderItem(orderId) {
 
-    const tables = getTables();
+function removeFromOrder(productId) {
 
-    const table = tables.find(
-        t => t.id === selectedTableId
-    );
+    currentOrder =
+        currentOrder.filter(
+            item => item.productId !== productId
+        );
+
+    saveCurrentOrder();
+    renderOrder();
+
+}
+
+
+function clearCurrentOrder() {
+
+    if (!currentOrder.length) return;
+
+
+    if (!confirm(
+        "Dëshiron ta pastrosh porosinë?"
+    )) return;
+
+
+    currentOrder = [];
+
+    saveCurrentOrder();
+
+    renderOrder();
+
+}
+
+
+function saveCurrentOrder() {
+
+    const table =
+        getTable(selectedTableId);
 
     if (!table) return;
 
-    table.orders =
-        (table.orders || []).filter(
-            item => item.id !== orderId
+
+    table.items =
+        currentOrder.map(
+            item => ({ ...item })
         );
 
-    saveTables(tables);
 
-    renderTables();
-    renderDashboardTables();
-    renderOrder();
+    saveJSON(
+        KEYS.tables,
+        tables
+    );
+
 }
 
-function calculateOrderTotal(table) {
 
-    if (!table || !Array.isArray(table.orders)) {
-        return 0;
-    }
+function orderTotal() {
 
-    return table.orders.reduce(
+    return currentOrder.reduce(
         (sum, item) =>
             sum +
             Number(item.price || 0) *
-                Number(item.quantity || 1),
+            Number(item.quantity || 1),
         0
     );
+
 }
+
 
 function renderOrder() {
 
-    const table = getSelectedTable();
-
-    if ($("selectedTableText")) {
-        $("selectedTableText").textContent =
-            table
-                ? table.name
-                : "Zgjidh tavolinën";
-    }
-
-    const container = $("orderItems");
+    const container =
+        document.getElementById(
+            "orderItems"
+        );
 
     if (!container) return;
 
-    if (!table || !table.orders.length) {
+
+    const table =
+        getTable(selectedTableId);
+
+
+    const tableText =
+        document.getElementById(
+            "selectedTableText"
+        );
+
+
+    if (tableText) {
+
+        tableText.textContent =
+            table ? table.name : "Asnjë";
+
+    }
+
+
+    if (!currentOrder.length) {
 
         container.innerHTML = `
             <div class="empty-state">
-                Nuk ka produkte në porosi.
+                <div>◉</div>
+                <strong>Porosia është bosh</strong>
+                <span>Zgjidh një tavolinë dhe shto produkte.</span>
+
+                <button
+                    class="primary-btn"
+                    onclick="showSection('tables')">
+                    ZGJIDH TAVOLINË
+                </button>
             </div>
         `;
 
-        if ($("orderTotal")) {
-            $("orderTotal").textContent = money(0);
-        }
+    } else {
 
-        return;
+        container.innerHTML =
+            currentOrder.map(item => {
+
+                const total =
+                    Number(item.price) *
+                    Number(item.quantity);
+
+
+                return `
+                    <div class="order-row">
+
+                        <div class="order-product-info">
+
+                            <strong>
+                                ${escapeHTML(item.name)}
+                            </strong>
+
+                            <span>
+                                ${money(item.price)} / copë
+                            </span>
+
+                        </div>
+
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                onclick="changeOrderQuantity('${item.productId}', -1)">
+                                −
+                            </button>
+
+                            <strong>
+                                ${item.quantity}
+                            </strong>
+
+                            <button
+                                type="button"
+                                onclick="changeOrderQuantity('${item.productId}', 1)">
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <strong class="order-item-total">
+                            ${money(total)}
+                        </strong>
+
+
+                        <button
+                            type="button"
+                            class="remove-order"
+                            onclick="removeFromOrder('${item.productId}')">
+                            ×
+                        </button>
+
+                    </div>
+                `;
+
+            }).join("");
+
     }
 
-    container.innerHTML = table.orders.map(item => {
 
-        const total =
-            Number(item.price || 0) *
-            Number(item.quantity || 1);
+    const total =
+        orderTotal();
 
-        return `
-            <div class="order-item">
 
-                <div class="order-item-info">
+    const productsCount =
+        currentOrder.reduce(
+            (sum, item) =>
+                sum + Number(item.quantity),
+            0
+        );
 
-                    <strong>
-                        ${escapeHTML(item.name)}
-                    </strong>
 
-                    <small>
-                        ${money(item.price)}
-                    </small>
+    const productsElement =
+        document.getElementById(
+            "orderProducts"
+        );
 
-                </div>
+    const subtotal =
+        document.getElementById(
+            "orderSubtotal"
+        );
 
-                <div class="order-controls">
+    const service =
+        document.getElementById(
+            "orderService"
+        );
 
-                    <button
-                        type="button"
-                        onclick="changeOrderQuantity(
-                            '${item.id}',
-                            -1
-                        )"
-                    >
-                        −
-                    </button>
+    const totalElement =
+        document.getElementById(
+            "orderTotal"
+        );
 
-                    <span>
-                        ${item.quantity}
-                    </span>
 
-                    <button
-                        type="button"
-                        onclick="changeOrderQuantity(
-                            '${item.id}',
-                            1
-                        )"
-                    >
-                        +
-                    </button>
-
-                    <strong>
-                        ${money(total)}
-                    </strong>
-
-                    <button
-                        type="button"
-                        class="remove-btn"
-                        onclick="removeOrderItem(
-                            '${item.id}'
-                        )"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-    }).join("");
-
-    if ($("orderTotal")) {
-        $("orderTotal").textContent =
-            money(calculateOrderTotal(table));
+    if (productsElement) {
+        productsElement.textContent =
+            `${productsCount} produkte`;
     }
+
+    if (subtotal) {
+        subtotal.textContent =
+            money(total);
+    }
+
+    if (service) {
+        service.textContent =
+            money(0);
+    }
+
+    if (totalElement) {
+        totalElement.textContent =
+            money(total);
+    }
+
+
+    updateSelectedTableDisplay();
+
 }
 
 
-/* =========================
+/* =========================================================
    PAYMENT
-========================= */
+========================================================= */
 
 function openPayment() {
 
-    const table = getSelectedTable();
+    if (!selectedTableId) {
 
-    if (!table || !table.orders.length) {
+        toast("Zgjidh një tavolinë.");
+
+        showSection("tables");
+
+        return;
+
+    }
+
+
+    if (!currentOrder.length) {
+
         toast("Porosia është bosh.");
+
         return;
+
     }
 
-    const total = calculateOrderTotal(table);
 
-    const modal = $("paymentModal");
+    const amount =
+        document.getElementById(
+            "paymentAmount"
+        );
 
-    if (!modal) {
-        processPayment("cash");
-        return;
+
+    if (amount) {
+        amount.textContent =
+            money(orderTotal());
     }
 
-    modal.style.display = "flex";
 
-    const totalElement =
-        modal.querySelector(".payment-total");
+    openModal("paymentModal");
 
-    if (totalElement) {
-        totalElement.textContent = money(total);
-    }
 }
 
-function closePayment() {
 
-    const modal = $("paymentModal");
+function completePayment(method) {
 
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
+    if (!selectedTableId || !currentOrder.length) {
 
-function processPayment(method) {
+        closeModal("paymentModal");
 
-    const table = getSelectedTable();
-
-    if (!table || !table.orders.length) {
-        toast("Porosia është bosh.");
         return;
+
     }
 
-    const total = calculateOrderTotal(table);
 
-    if (total <= 0) {
-        toast("Totali është 0.");
-        return;
-    }
+    const table =
+        getTable(selectedTableId);
 
-    const invoices = getInvoices();
+
+    if (!table) return;
+
+
+    const total =
+        orderTotal();
+
 
     const invoice = {
-        id: uid("invoice"),
-        invoiceNumber:
-            "INV-" +
-            Date.now().toString().slice(-8),
-        date: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-        timestamp: Date.now(),
 
-        total: total,
-        amount: total,
-        grandTotal: total,
+        id:
+            `INV-${Date.now()}`,
 
-        payment: method,
-        paymentMethod: method,
-        method: method,
+        date:
+            new Date().toISOString(),
 
-        tableId: table.id,
-        tableName: table.name,
+        table:
+            table.name,
+
+        tableNumber:
+            table.number,
+
+        total:
+            total,
+
+        amount:
+            total,
+
+        payment:
+            method,
+
+        paymentMethod:
+            method,
 
         waiterName:
             currentUser?.name || "Pa emër",
@@ -941,685 +1375,582 @@ function processPayment(method) {
         userName:
             currentUser?.name || "Pa emër",
 
-        user:
-            currentUser?.username || "",
+        items:
+            currentOrder.map(
+                item => ({ ...item })
+            )
 
-        waiter:
-            currentUser?.name || "Pa emër",
-
-        items: table.orders.map(item => ({
-            id: item.id,
-            productId: item.productId,
-            name: item.name,
-            productName: item.name,
-            price: Number(item.price || 0),
-            quantity: Number(item.quantity || 1),
-            qty: Number(item.quantity || 1),
-            subtotal:
-                Number(item.price || 0) *
-                Number(item.quantity || 1),
-            total:
-                Number(item.price || 0) *
-                Number(item.quantity || 1)
-        }))
     };
 
-    invoices.push(invoice);
-    saveInvoices(invoices);
 
-    /* Ul stokun */
-    table.orders.forEach(item => {
-        decreaseStock(
-            item.productId,
-            item.quantity
-        );
-    });
+    invoices.unshift(invoice);
 
-    /* Pastro tavolinën */
-    table.orders = [];
-
-    saveTables(
-        getTables().map(t =>
-            t.id === table.id ? table : t
-        )
+    saveJSON(
+        KEYS.invoices,
+        invoices
     );
 
-    closePayment();
 
-    renderTables();
-    renderDashboardTables();
-    renderOrder();
-    renderMenu();
-    renderDashboard();
-    renderHistory();
-    renderPayments();
+    /* Reduce stock */
+
+    currentOrder.forEach(item => {
+
+        const oldStock =
+            Number(
+                inventory[item.productId] || 0
+            );
+
+
+        inventory[item.productId] =
+            Math.max(
+                0,
+                oldStock -
+                Number(item.quantity)
+            );
+
+    });
+
+
+    saveJSON(
+        KEYS.inventory,
+        inventory
+    );
+
+
+    /* Clear table */
+
+    table.items = [];
+
+    saveJSON(
+        KEYS.tables,
+        tables
+    );
+
+
+    currentOrder = [];
+
+    selectedTableId = null;
+
+    localStorage.removeItem(
+        KEYS.selectedTable
+    );
+
+
+    closeModal("paymentModal");
+
+    renderAll();
 
     showInvoice(invoice);
 
-    toast("Pagesa u regjistrua.");
+    toast(
+        "Pagesa u regjistrua me sukses."
+    );
+
 }
 
-
-/* =========================
-   INVOICE
-========================= */
 
 function showInvoice(invoice) {
 
-    const modal = $("invoiceModal");
+    const container =
+        document.getElementById(
+            "invoiceContent"
+        );
 
-    if (!modal) return;
+    if (!container) return;
 
-    modal.style.display = "flex";
 
-    modal.innerHTML = `
-        <div class="modal-content invoice-content">
+    const itemsHTML =
+        invoice.items.map(item => {
 
-            <div class="invoice-header">
+            const total =
+                Number(item.price) *
+                Number(item.quantity);
 
-                <h2>
-                    ${escapeHTML(
-                        localStorage.getItem(APP_NAME_KEY) ||
-                        "MY BAR"
-                    )}
-                </h2>
 
-                <p>Faturë</p>
+            return `
+                <div class="invoice-item">
+                    <span>
+                        ${escapeHTML(item.name)}
+                        × ${item.quantity}
+                    </span>
 
+                    <strong>
+                        ${money(total)}
+                    </strong>
+                </div>
+            `;
+
+        }).join("");
+
+
+    container.innerHTML = `
+
+        <div class="invoice-header">
+
+            <div class="invoice-logo">
+                M
             </div>
 
-            <div class="invoice-info">
+            <h2>MY BAR</h2>
 
-                <div>
-                    <strong>Nr:</strong>
-                    ${escapeHTML(
-                        invoice.invoiceNumber
-                    )}
-                </div>
+            <span>FATURË</span>
 
-                <div>
-                    <strong>Data:</strong>
-                    ${formatDate(invoice.date)}
-                </div>
+        </div>
 
-                <div>
-                    <strong>Tavolina:</strong>
-                    ${escapeHTML(
-                        invoice.tableName
-                    )}
-                </div>
 
-                <div>
-                    <strong>Kamarieri:</strong>
-                    ${escapeHTML(
-                        invoice.waiterName
-                    )}
-                </div>
+        <div class="invoice-meta">
 
-                <div>
-                    <strong>Pagesa:</strong>
-                    ${escapeHTML(
-                        invoice.payment
-                    )}
-                </div>
-
+            <div>
+                <span>Nr.</span>
+                <strong>${invoice.id}</strong>
             </div>
 
-            <div class="invoice-items">
-
-                ${invoice.items.map(item => `
-                    <div class="invoice-row">
-
-                        <span>
-                            ${escapeHTML(item.name)}
-                            × ${item.quantity}
-                        </span>
-
-                        <strong>
-                            ${money(item.total)}
-                        </strong>
-
-                    </div>
-                `).join("")}
-
+            <div>
+                <span>Data</span>
+                <strong>
+                    ${new Date(invoice.date).toLocaleString("sq-AL")}
+                </strong>
             </div>
 
-            <div class="invoice-total">
-                TOTAL:
-                ${money(invoice.total)}
+            <div>
+                <span>Tavolina</span>
+                <strong>${escapeHTML(invoice.table)}</strong>
             </div>
 
-            <div class="invoice-actions">
-
-                <button
-                    type="button"
-                    onclick="printInvoice()"
-                >
-                    PRINT
-                </button>
-
-                <button
-                    type="button"
-                    onclick="closeInvoice()"
-                >
-                    MBYLL
-                </button>
-
+            <div>
+                <span>Kamarieri</span>
+                <strong>${escapeHTML(invoice.waiterName)}</strong>
             </div>
 
         </div>
+
+
+        <div class="invoice-items">
+
+            ${itemsHTML}
+
+        </div>
+
+
+        <div class="invoice-total">
+
+            <span>TOTAL</span>
+
+            <strong>
+                ${money(invoice.total)}
+            </strong>
+
+        </div>
+
+
+        <div class="invoice-payment">
+            Pagesa:
+            ${invoice.payment === "card" ? "CARD" : "CASH"}
+        </div>
+
     `;
 
-    window.currentInvoiceForPrint = invoice;
+
+    openModal("invoiceModal");
+
 }
 
-function closeInvoice() {
-
-    const modal = $("invoiceModal");
-
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
 
 function printInvoice() {
 
-    const invoice = window.currentInvoiceForPrint;
+    window.print();
 
-    if (!invoice) return;
-
-    const appName =
-        localStorage.getItem(APP_NAME_KEY) ||
-        "MY BAR";
-
-    const html = `
-        <!DOCTYPE html>
-        <html lang="sq">
-        <head>
-            <meta charset="UTF-8">
-            <title>${appName}</title>
-
-            <style>
-                body{
-                    font-family:Arial,sans-serif;
-                    width:80mm;
-                    margin:auto;
-                    padding:10px;
-                    color:#000;
-                }
-
-                h2{
-                    text-align:center;
-                }
-
-                .center{
-                    text-align:center;
-                }
-
-                .row{
-                    display:flex;
-                    justify-content:space-between;
-                    padding:4px 0;
-                    border-bottom:1px dashed #aaa;
-                }
-
-                .total{
-                    margin-top:12px;
-                    font-size:18px;
-                    font-weight:bold;
-                    text-align:right;
-                }
-            </style>
-        </head>
-
-        <body>
-
-            <h2>${escapeHTML(appName)}</h2>
-
-            <div class="center">
-                Faturë ${escapeHTML(
-                    invoice.invoiceNumber
-                )}
-            </div>
-
-            <hr>
-
-            ${invoice.items.map(item => `
-                <div class="row">
-                    <span>
-                        ${escapeHTML(item.name)}
-                        ×${item.quantity}
-                    </span>
-
-                    <span>
-                        ${money(item.total)}
-                    </span>
-                </div>
-            `).join("")}
-
-            <div class="total">
-                TOTAL: ${money(invoice.total)}
-            </div>
-
-            <p class="center">
-                ${formatDate(invoice.date)}
-            </p>
-
-        </body>
-        </html>
-    `;
-
-    const win = window.open(
-        "",
-        "_blank",
-        "width=500,height=700"
-    );
-
-    if (!win) {
-        toast("Lejo popup-et për printim.");
-        return;
-    }
-
-    win.document.write(html);
-    win.document.close();
-
-    setTimeout(() => {
-        win.print();
-    }, 300);
 }
 
 
-/* =========================
+/* =========================================================
    DASHBOARD
-========================= */
+========================================================= */
+
+function getTodayInvoices() {
+
+    const today =
+        todayKey();
+
+
+    return invoices.filter(invoice => {
+
+        return todayKeyFromDate(
+            invoice.date
+        ) === today;
+
+    });
+
+}
+
+
+function todayKeyFromDate(value) {
+
+    const date =
+        new Date(value);
+
+
+    return `${date.getFullYear()}-${String(
+        date.getMonth() + 1
+    ).padStart(2, "0")}-${String(
+        date.getDate()
+    ).padStart(2, "0")}`;
+
+}
+
 
 function renderDashboard() {
 
-    const invoices = getInvoices();
-    const today = todayKey();
+    const today =
+        getTodayInvoices();
 
-    const todayInvoices =
-        invoices.filter(invoice => {
 
-            const date =
-                invoice.date ||
-                invoice.createdAt ||
-                invoice.timestamp;
-
-            return todayKey(new Date(date)) === today;
-        });
-
-    const sales = todayInvoices.reduce(
-        (sum, invoice) =>
-            sum +
-            Number(
-                invoice.total ||
-                invoice.amount ||
-                invoice.grandTotal ||
-                0
-            ),
-        0
-    );
-
-    const cash = todayInvoices
-        .filter(invoice =>
-            String(
-                invoice.payment ||
-                invoice.paymentMethod ||
-                invoice.method ||
-                "cash"
-            ).toLowerCase() === "cash"
-        )
-        .reduce(
+    const sales =
+        today.reduce(
             (sum, invoice) =>
                 sum +
-                Number(
-                    invoice.total ||
-                    invoice.amount ||
-                    0
-                ),
+                Number(invoice.total || 0),
             0
         );
 
-    const card = todayInvoices
-        .filter(invoice =>
-            ["card", "kartë", "karte"].includes(
-                String(
-                    invoice.payment ||
-                    invoice.paymentMethod ||
-                    invoice.method ||
-                    ""
-                ).toLowerCase()
+
+    const card =
+        today
+            .filter(
+                invoice =>
+                    invoice.payment === "card"
             )
-        )
-        .reduce(
-            (sum, invoice) =>
-                sum +
-                Number(
-                    invoice.total ||
-                    invoice.amount ||
-                    0
-                ),
-            0
+            .reduce(
+                (sum, invoice) =>
+                    sum +
+                    Number(invoice.total || 0),
+                0
+            );
+
+
+    const active =
+        tables.filter(
+            table => tableIsBusy(table)
+        ).length;
+
+
+    const salesElement =
+        document.getElementById(
+            "salesToday"
         );
 
-    const tables = getTables();
+    const activeElement =
+        document.getElementById(
+            "activeTables"
+        );
 
-    const activeTables = tables.filter(
-        table =>
-            Array.isArray(table.orders) &&
-            table.orders.length > 0
-    ).length;
+    const invoiceElement =
+        document.getElementById(
+            "invoiceToday"
+        );
 
-    if ($("salesToday")) {
-        $("salesToday").textContent = money(sales);
-    }
+    const cardElement =
+        document.getElementById(
+            "cardToday"
+        );
 
-    if ($("activeTables")) {
-        $("activeTables").textContent =
-            activeTables;
-    }
 
-    if ($("invoiceToday")) {
-        $("invoiceToday").textContent =
-            todayInvoices.length;
-    }
+    if (salesElement)
+        salesElement.textContent = money(sales);
 
-    if ($("cardToday")) {
-        $("cardToday").textContent =
-            money(card);
-    }
+    if (activeElement)
+        activeElement.textContent = active;
 
-    if ($("cashTotal")) {
-        $("cashTotal").textContent =
-            money(sales);
-    }
+    if (invoiceElement)
+        invoiceElement.textContent =
+            today.length;
 
-    if ($("cashMoney")) {
-        $("cashMoney").textContent =
-            money(cash);
-    }
+    if (cardElement)
+        cardElement.textContent = money(card);
 
-    if ($("cashCard")) {
-        $("cashCard").textContent =
-            money(card);
-    }
 
-    if ($("cashInvoices")) {
-        $("cashInvoices").textContent =
-            todayInvoices.length;
-    }
+    renderDashboardTables();
+
 }
 
 
-/* =========================
-   PAYMENTS LIST
-========================= */
+/* =========================================================
+   CASH
+========================================================= */
 
-function renderPayments() {
+function renderCash() {
 
-    const container = $("paymentsList");
+    const today =
+        getTodayInvoices();
 
-    if (!container) return;
 
-    const invoices = getInvoices()
-        .slice()
-        .sort(
-            (a, b) =>
-                new Date(
-                    b.date ||
-                    b.createdAt ||
-                    b.timestamp
-                ) -
-                new Date(
-                    a.date ||
-                    a.createdAt ||
-                    a.timestamp
-                )
-        )
-        .slice(0, 30);
+    const total =
+        today.reduce(
+            (sum, invoice) =>
+                sum +
+                Number(invoice.total || 0),
+            0
+        );
 
-    if (!invoices.length) {
 
-        container.innerHTML = `
-            <div class="empty-state">
-                Nuk ka pagesa.
-            </div>
-        `;
+    const cash =
+        today
+            .filter(
+                invoice =>
+                    invoice.payment !== "card"
+            )
+            .reduce(
+                (sum, invoice) =>
+                    sum +
+                    Number(invoice.total || 0),
+                0
+            );
 
-        return;
-    }
 
-    container.innerHTML = invoices.map(invoice => {
+    const card =
+        today
+            .filter(
+                invoice =>
+                    invoice.payment === "card"
+            )
+            .reduce(
+                (sum, invoice) =>
+                    sum +
+                    Number(invoice.total || 0),
+                0
+            );
 
-        const payment =
-            invoice.payment ||
-            invoice.paymentMethod ||
-            invoice.method ||
-            "cash";
 
-        const amount =
-            invoice.total ||
-            invoice.amount ||
-            invoice.grandTotal ||
-            0;
+    document.getElementById("cashTotal")
+        .textContent = money(total);
 
-        return `
-            <div class="payment-row">
+    document.getElementById("cashMoney")
+        .textContent = money(cash);
 
-                <div>
+    document.getElementById("cashCard")
+        .textContent = money(card);
+
+    document.getElementById("cashInvoices")
+        .textContent = today.length;
+
+
+    const list =
+        document.getElementById(
+            "paymentsList"
+        );
+
+
+    if (!list) return;
+
+
+    list.innerHTML =
+        today.length
+            ? today.map(invoice => `
+
+                <div class="payment-row">
+
+                    <div>
+                        <strong>
+                            ${escapeHTML(invoice.table)}
+                        </strong>
+
+                        <span>
+                            ${new Date(invoice.date).toLocaleTimeString("sq-AL")}
+                        </span>
+                    </div>
+
+                    <span class="payment-method-tag">
+                        ${invoice.payment === "card" ? "CARD" : "CASH"}
+                    </span>
+
                     <strong>
-                        ${escapeHTML(
-                            invoice.invoiceNumber ||
-                            invoice.id
-                        )}
+                        ${money(invoice.total)}
                     </strong>
 
-                    <small>
-                        ${formatDate(
-                            invoice.date ||
-                            invoice.createdAt ||
-                            invoice.timestamp
-                        )}
-                    </small>
                 </div>
 
-                <div>
-                    ${escapeHTML(payment)}
+            `).join("")
+            : `
+                <div class="empty-state">
+                    <strong>Nuk ka pagesa sot.</strong>
                 </div>
+            `;
 
-                <strong>
-                    ${money(amount)}
-                </strong>
-
-            </div>
-        `;
-    }).join("");
 }
 
 
-/* =========================
+/* =========================================================
    HISTORY
-========================= */
+========================================================= */
 
 function renderHistory() {
 
-    const container = $("historyList");
-
-    if (!container) return;
-
-    const invoices = getInvoices()
-        .slice()
-        .sort(
-            (a, b) =>
-                new Date(
-                    b.date ||
-                    b.createdAt ||
-                    b.timestamp
-                ) -
-                new Date(
-                    a.date ||
-                    a.createdAt ||
-                    a.timestamp
-                )
+    const list =
+        document.getElementById(
+            "historyList"
         );
+
+    if (!list) return;
+
 
     if (!invoices.length) {
 
-        container.innerHTML = `
+        list.innerHTML = `
             <div class="empty-state">
-                Nuk ka histori.
+                <strong>Historiku është bosh.</strong>
             </div>
         `;
 
         return;
+
     }
 
-    container.innerHTML = invoices.map(invoice => {
 
-        const total =
-            invoice.total ||
-            invoice.amount ||
-            invoice.grandTotal ||
-            0;
+    list.innerHTML =
+        invoices.map(invoice => `
 
-        const payment =
-            invoice.payment ||
-            invoice.paymentMethod ||
-            invoice.method ||
-            "cash";
-
-        const waiter =
-            invoice.waiterName ||
-            invoice.userName ||
-            invoice.user ||
-            invoice.waiter ||
-            "Pa emër";
-
-        return `
             <div class="history-row">
 
                 <div>
                     <strong>
-                        ${escapeHTML(
-                            invoice.invoiceNumber ||
-                            invoice.id
-                        )}
+                        ${escapeHTML(invoice.id)}
                     </strong>
 
-                    <small>
-                        ${formatDate(
-                            invoice.date ||
-                            invoice.createdAt ||
-                            invoice.timestamp
-                        )}
-                    </small>
+                    <span>
+                        ${new Date(invoice.date).toLocaleString("sq-AL")}
+                    </span>
                 </div>
 
-                <div>
-                    ${escapeHTML(waiter)}
-                </div>
 
                 <div>
-                    ${escapeHTML(payment)}
+                    <strong>
+                        ${escapeHTML(invoice.table)}
+                    </strong>
+
+                    <span>
+                        ${escapeHTML(invoice.waiterName)}
+                    </span>
                 </div>
+
+
+                <div class="history-payment">
+                    ${invoice.payment === "card" ? "CARD" : "CASH"}
+                </div>
+
 
                 <strong>
-                    ${money(total)}
+                    ${money(invoice.total)}
                 </strong>
+
 
                 <button
                     type="button"
-                    onclick="deleteHistory(
-                        '${invoice.id}'
-                    )"
-                >
-                    Fshi
+                    class="delete-btn"
+                    onclick="deleteInvoice('${invoice.id}')">
+                    ×
                 </button>
 
             </div>
-        `;
-    }).join("");
+
+        `).join("");
+
 }
 
-function deleteHistory(invoiceId) {
 
-    if (!isAdmin()) {
-        toast("Vetëm ADMIN mund të fshijë historikun.");
-        return;
-    }
+function deleteInvoice(id) {
 
-    if (!confirm("Dëshiron ta fshish këtë faturë?")) {
-        return;
-    }
+    if (!confirm("Fshi këtë faturë?")) return;
 
-    const invoices =
-        getInvoices().filter(
-            invoice => invoice.id !== invoiceId
+
+    invoices =
+        invoices.filter(
+            invoice => invoice.id !== id
         );
 
-    saveInvoices(invoices);
+
+    saveJSON(
+        KEYS.invoices,
+        invoices
+    );
+
 
     renderHistory();
     renderDashboard();
-    renderPayments();
 
     toast("Fatura u fshi.");
+
 }
 
-function deleteAllHistory() {
 
-    if (!isAdmin()) {
-        toast("Vetëm ADMIN mund të fshijë historikun.");
-        return;
-    }
+function deleteHistory() {
+
+    if (!invoices.length) return;
+
 
     if (!confirm(
         "Dëshiron të fshish të gjithë historikun?"
-    )) {
-        return;
-    }
+    )) return;
 
-    saveInvoices([]);
+
+    invoices = [];
+
+    saveJSON(
+        KEYS.invoices,
+        invoices
+    );
+
 
     renderHistory();
     renderDashboard();
-    renderPayments();
 
     toast("Historiku u fshi.");
+
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN
-========================= */
+========================================================= */
 
 function renderAdmin() {
 
     if (!isAdmin()) return;
 
-    renderAdminUsers();
+
+    renderUsers();
     renderAdminProducts();
     renderAdminTables();
-    renderAdminSettings();
+
+    const countInput =
+        document.getElementById(
+            "tableCountInput"
+        );
+
+
+    if (countInput) {
+        countInput.value =
+            tables.length;
+    }
+
+
+    applyAppName();
+
 }
 
 
-/* =========================
-   ADMIN USERS
-========================= */
+function renderUsers() {
 
-function renderAdminUsers() {
+    const list =
+        document.getElementById(
+            "usersList"
+        );
 
-    const container = $("usersList");
+    if (!list) return;
 
-    if (!container || !isAdmin()) return;
 
-    const users = getUsers();
+    list.innerHTML =
+        users.map(user => `
 
-    container.innerHTML = users.map(user => {
-
-        return `
             <div class="admin-row">
 
                 <div>
@@ -1627,36 +1958,26 @@ function renderAdminUsers() {
                         ${escapeHTML(user.name)}
                     </strong>
 
-                    <small>
+                    <span>
                         @${escapeHTML(user.username)}
-                        •
-                        ${user.role === "admin"
-                            ? "ADMIN"
-                            : "KAMARIER"}
-                    </small>
+                        • ${user.role}
+                    </span>
                 </div>
 
                 <div class="admin-actions">
 
-                    <button
-                        type="button"
-                        onclick="editWaiter(
-                            '${user.id}'
-                        )"
-                    >
-                        Ndrysho
-                    </button>
-
                     ${
-                        user.id !== "admin"
+                        user.username !== "admin"
                             ? `
                                 <button
-                                    type="button"
-                                    onclick="deleteWaiter(
-                                        '${user.id}'
-                                    )"
-                                >
-                                    Fshi
+                                    onclick="editUser('${user.id}')">
+                                    EDIT
+                                </button>
+
+                                <button
+                                    class="danger"
+                                    onclick="deleteUser('${user.id}')">
+                                    DELETE
                                 </button>
                             `
                             : ""
@@ -1665,1162 +1986,1108 @@ function renderAdminUsers() {
                 </div>
 
             </div>
-        `;
-    }).join("");
+
+        `).join("");
+
 }
+
 
 function openWaiterModal(userId = null) {
 
-    if (!isAdmin()) return;
+    editingUserId = userId;
+
 
     const user =
-        getUsers().find(
-            u => u.id === userId
-        );
+        userId
+            ? users.find(
+                item => item.id === userId
+            )
+            : null;
 
-    openGeneralModal(`
+
+    const html = `
+
+        <span class="eyebrow">
+            USER MANAGEMENT
+        </span>
+
         <h2>
-            ${
-                user
-                    ? "Ndrysho përdoruesin"
-                    : "Shto kamarier"
-            }
+            ${user ? "Ndrysho kamarierin" : "Shto kamarier"}
         </h2>
 
-        <label>Emri</label>
+        <div class="modal-form">
 
-        <input
-            id="waiterName"
-            type="text"
-            value="${
-                escapeHTML(user?.name || "")
-            }"
-        >
+            <input
+                id="modalUserName"
+                class="form-input"
+                placeholder="Emri"
+                value="${escapeHTML(user?.name || "")}">
 
-        <label>Username</label>
+            <input
+                id="modalUsername"
+                class="form-input"
+                placeholder="Username"
+                value="${escapeHTML(user?.username || "")}">
 
-        <input
-            id="waiterUsername"
-            type="text"
-            value="${
-                escapeHTML(user?.username || "")
-            }"
-        >
-
-        <label>Password</label>
-
-        <input
-            id="waiterPassword"
-            type="text"
-            value="${
-                escapeHTML(user?.password || "")
-            }"
-        >
-
-        <div class="modal-actions">
+            <input
+                id="modalUserPassword"
+                class="form-input"
+                type="password"
+                placeholder="Password"
+                value="${escapeHTML(user?.password || "")}">
 
             <button
-                type="button"
-                onclick="saveWaiter(
-                    ${user ? `'${user.id}'` : "null"}
-                )"
-            >
+                class="primary-btn"
+                onclick="saveUser()">
                 RUAJ
             </button>
 
-            <button
-                type="button"
-                onclick="closeGeneralModal()"
-            >
-                ANULO
-            </button>
-
         </div>
-    `);
+
+    `;
+
+
+    openGeneralModal(html);
+
 }
 
-function saveWaiter(userId = null) {
+
+function saveUser() {
 
     const name =
-        $("waiterName")?.value.trim();
+        document.getElementById(
+            "modalUserName"
+        ).value.trim();
+
 
     const username =
-        $("waiterUsername")?.value.trim();
+        document.getElementById(
+            "modalUsername"
+        ).value.trim();
+
 
     const password =
-        $("waiterPassword")?.value.trim();
+        document.getElementById(
+            "modalUserPassword"
+        ).value.trim();
+
 
     if (!name || !username || !password) {
+
         toast("Plotëso të gjitha fushat.");
+
         return;
+
     }
 
-    const users = getUsers();
 
-    const duplicate = users.find(
-        user =>
-            user.username === username &&
-            user.id !== userId
-    );
+    if (editingUserId) {
 
-    if (duplicate) {
-        toast("Ky username ekziston.");
-        return;
-    }
+        const user =
+            users.find(
+                item => item.id === editingUserId
+            );
 
-    if (userId) {
 
-        const user = users.find(
-            u => u.id === userId
-        );
+        if (user) {
 
-        if (!user) return;
+            user.name = name;
+            user.username = username;
+            user.password = password;
 
-        user.name = name;
-        user.username = username;
-        user.password = password;
+        }
 
     } else {
 
         users.push({
-            id: uid("user"),
+
+            id:
+                `user-${Date.now()}`,
+
             name,
             username,
             password,
             role: "waiter"
+
         });
+
     }
 
-    saveUsers(users);
 
-    closeGeneralModal();
-    renderAdminUsers();
+    saveJSON(
+        KEYS.users,
+        users
+    );
 
-    toast("Përdoruesi u ruajt.");
+
+    closeModal("generalModal");
+
+    renderUsers();
+
+    toast("Kamarieri u ruajt.");
+
 }
 
-function editWaiter(userId) {
-    openWaiterModal(userId);
+
+function editUser(id) {
+
+    openWaiterModal(id);
+
 }
 
-function deleteWaiter(userId) {
 
-    if (!isAdmin()) return;
+function deleteUser(id) {
 
-    if (userId === "admin") {
-        toast("Admin nuk mund të fshihet.");
-        return;
-    }
-
-    if (!confirm("Dëshiron ta fshish këtë përdorues?")) {
-        return;
-    }
-
-    const users =
-        getUsers().filter(
-            user => user.id !== userId
+    const user =
+        users.find(
+            item => item.id === id
         );
 
-    saveUsers(users);
-    renderAdminUsers();
 
-    toast("Përdoruesi u fshi.");
+    if (!user) return;
+
+
+    if (!confirm(
+        `Fshi ${user.name}?`
+    )) return;
+
+
+    users =
+        users.filter(
+            item => item.id !== id
+        );
+
+
+    saveJSON(
+        KEYS.users,
+        users
+    );
+
+
+    renderUsers();
+
+    toast("Kamarieri u fshi.");
+
 }
 
 
-/* =========================
-   ADMIN PRODUCTS
-========================= */
+/* =========================================================
+   PRODUCTS ADMIN
+========================================================= */
 
 function renderAdminProducts() {
 
-    const container = $("adminProducts");
+    const list =
+        document.getElementById(
+            "adminProducts"
+        );
 
-    if (!container || !isAdmin()) return;
+    if (!list) return;
 
-    const products = getProducts();
 
-    container.innerHTML = products.map(product => {
+    list.innerHTML =
+        products.map(product => `
 
-        const stock = getStock(product.id);
-
-        return `
             <div class="admin-row">
 
-                <div>
-                    <strong>
-                        ${escapeHTML(product.name)}
-                    </strong>
+                <div class="admin-product">
 
-                    <small>
-                        ${escapeHTML(
-                            product.category || ""
-                        )}
-                        •
-                        ${money(product.price)}
-                        •
-                        Stok: ${stock}
-                    </small>
+                    <img
+                        src="${product.image}"
+                        alt="">
+
+                    <div>
+                        <strong>
+                            ${escapeHTML(product.name)}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(product.category)}
+                            • ${money(product.price)}
+                            • Stok:
+                            ${inventory[product.id] ?? 0}
+                        </span>
+                    </div>
+
                 </div>
+
 
                 <div class="admin-actions">
 
                     <button
-                        type="button"
-                        onclick="openProductModal(
-                            '${product.id}'
-                        )"
-                    >
-                        Ndrysho
+                        onclick="editProduct('${product.id}')">
+                        EDIT
                     </button>
 
                     <button
-                        type="button"
-                        onclick="changeStock(
-                            '${product.id}',
-                            1
-                        )"
-                    >
-                        + Stok
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="changeStock(
-                            '${product.id}',
-                            -1
-                        )"
-                    >
-                        − Stok
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="deleteProduct(
-                            '${product.id}'
-                        )"
-                    >
-                        Fshi
+                        class="danger"
+                        onclick="deleteProduct('${product.id}')">
+                        DELETE
                     </button>
 
                 </div>
 
             </div>
-        `;
-    }).join("");
+
+        `).join("");
+
 }
+
 
 function openProductModal(productId = null) {
 
-    if (!isAdmin()) return;
+    editingProductId = productId;
+
 
     const product =
-        getProducts().find(
-            p => p.id === productId
-        );
+        productId
+            ? products.find(
+                item => item.id === productId
+            )
+            : null;
 
-    openGeneralModal(`
+
+    const html = `
+
+        <span class="eyebrow">
+            MENU MANAGEMENT
+        </span>
+
         <h2>
-            ${
-                product
-                    ? "Ndrysho produktin"
-                    : "Shto produkt"
-            }
+            ${product ? "Ndrysho produktin" : "Shto produkt"}
         </h2>
 
-        <label>Emri</label>
+        <div class="modal-form">
 
-        <input
-            id="productName"
-            type="text"
-            value="${
-                escapeHTML(product?.name || "")
-            }"
-        >
+            <input
+                id="modalProductName"
+                class="form-input"
+                placeholder="Emri"
+                value="${escapeHTML(product?.name || "")}">
 
-        <label>Kategoria</label>
+            <input
+                id="modalProductPrice"
+                class="form-input"
+                type="number"
+                placeholder="Çmimi"
+                value="${product?.price || ""}">
 
-        <input
-            id="productCategory"
-            type="text"
-            value="${
-                escapeHTML(product?.category || "")
-            }"
-        >
+            <input
+                id="modalProductCategory"
+                class="form-input"
+                placeholder="Kategoria"
+                value="${escapeHTML(product?.category || "")}">
 
-        <label>Çmimi</label>
+            <input
+                id="modalProductImage"
+                class="form-input"
+                placeholder="URL e fotos"
+                value="${escapeHTML(product?.image || "")}">
 
-        <input
-            id="productPrice"
-            type="number"
-            min="0"
-            value="${
-                Number(product?.price || 0)
-            }"
-        >
-
-        <label>Stoku</label>
-
-        <input
-            id="productStock"
-            type="number"
-            min="0"
-            value="${
-                product
-                    ? getStock(product.id)
-                    : 20
-            }"
-        >
-
-        <div class="modal-actions">
+            <input
+                id="modalProductStock"
+                class="form-input"
+                type="number"
+                min="0"
+                placeholder="Stoku"
+                value="${product ? inventory[product.id] ?? 0 : 20}">
 
             <button
-                type="button"
-                onclick="saveProduct(
-                    ${product ? `'${product.id}'` : "null"}
-                )"
-            >
-                RUAJ
-            </button>
-
-            <button
-                type="button"
-                onclick="closeGeneralModal()"
-            >
-                ANULO
+                class="primary-btn"
+                onclick="saveProduct()">
+                RUAJ PRODUKTIN
             </button>
 
         </div>
-    `);
+
+    `;
+
+
+    openGeneralModal(html);
+
 }
 
-function saveProduct(productId = null) {
 
-    if (!isAdmin()) return;
+function saveProduct() {
 
     const name =
-        $("productName")?.value.trim();
+        document.getElementById(
+            "modalProductName"
+        ).value.trim();
 
-    const category =
-        $("productCategory")?.value.trim();
 
     const price =
         Number(
-            $("productPrice")?.value || 0
+            document.getElementById(
+                "modalProductPrice"
+            ).value
         );
+
+
+    const category =
+        document.getElementById(
+            "modalProductCategory"
+        ).value.trim();
+
+
+    const image =
+        document.getElementById(
+            "modalProductImage"
+        ).value.trim();
+
 
     const stock =
-        Number(
-            $("productStock")?.value || 0
+        Math.max(
+            0,
+            Number(
+                document.getElementById(
+                    "modalProductStock"
+                ).value
+            )
         );
 
-    if (!name || !category) {
-        toast("Plotëso emrin dhe kategorinë.");
+
+    if (!name || !price || !category) {
+
+        toast("Plotëso emrin, çmimin dhe kategorinë.");
+
         return;
+
     }
 
-    const products = getProducts();
 
-    if (productId) {
+    if (editingProductId) {
 
-        const product = products.find(
-            p => p.id === productId
-        );
+        const product =
+            products.find(
+                item =>
+                    item.id === editingProductId
+            );
 
-        if (!product) return;
 
-        product.name = name;
-        product.category = category;
-        product.price = price;
+        if (product) {
 
-        saveProducts(products);
-        setStock(productId, stock);
+            product.name = name;
+            product.price = price;
+            product.category = category;
+
+            if (image) {
+                product.image = image;
+            }
+
+            inventory[product.id] =
+                stock;
+
+        }
 
     } else {
 
-        const id = uid("product");
+        const id =
+            `product-${Date.now()}`;
+
 
         products.push({
+
             id,
             name,
+            price,
             category,
-            price
+
+            image:
+                image ||
+                "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85"
+
         });
 
-        saveProducts(products);
 
-        const inventory = getInventory();
-        inventory[id] = Math.max(0, stock);
-        saveInventory(inventory);
+        inventory[id] = stock;
+
     }
 
-    closeGeneralModal();
 
-    renderCategories();
+    saveJSON(
+        KEYS.products,
+        products
+    );
+
+
+    saveJSON(
+        KEYS.inventory,
+        inventory
+    );
+
+
+    closeModal("generalModal");
+
     renderMenu();
     renderAdminProducts();
 
     toast("Produkti u ruajt.");
+
 }
 
-function deleteProduct(productId) {
 
-    if (!isAdmin()) return;
+function editProduct(id) {
+
+    openProductModal(id);
+
+}
+
+
+function deleteProduct(id) {
 
     const product =
-        getProducts().find(
-            p => p.id === productId
+        products.find(
+            item => item.id === id
         );
+
 
     if (!product) return;
 
-    if (!confirm(
-        `Dëshiron të fshish "${product.name}"?`
-    )) {
-        return;
-    }
 
-    const products =
-        getProducts().filter(
-            p => p.id !== productId
+    if (!confirm(
+        `Fshi ${product.name}?`
+    )) return;
+
+
+    products =
+        products.filter(
+            item => item.id !== id
         );
 
-    saveProducts(products);
 
-    const inventory = getInventory();
-    delete inventory[productId];
-    saveInventory(inventory);
+    delete inventory[id];
 
-    renderCategories();
+
+    saveJSON(
+        KEYS.products,
+        products
+    );
+
+
+    saveJSON(
+        KEYS.inventory,
+        inventory
+    );
+
+
     renderMenu();
     renderAdminProducts();
 
     toast("Produkti u fshi.");
+
 }
 
 
-/* =========================
-   ADMIN TABLES
-========================= */
+/* =========================================================
+   TABLE ADMIN
+========================================================= */
 
 function renderAdminTables() {
 
-    const container = $("adminTables");
+    const list =
+        document.getElementById(
+            "adminTables"
+        );
 
-    if (!container || !isAdmin()) return;
+    if (!list) return;
 
-    const tables = getTables();
 
-    container.innerHTML = tables.map(table => {
+    list.innerHTML =
+        tables.map(table => `
 
-        const active =
-            Array.isArray(table.orders) &&
-            table.orders.length > 0;
-
-        return `
             <div class="admin-row">
 
                 <div>
+
                     <strong>
                         ${escapeHTML(table.name)}
                     </strong>
 
-                    <small>
+                    <span>
                         Tavolina ${table.number}
-                        •
-                        ${active ? "E zënë" : "Bosh"}
-                    </small>
+                        • ${tableIsBusy(table) ? "Zënë" : "E lirë"}
+                    </span>
+
                 </div>
+
 
                 <div class="admin-actions">
 
                     <button
-                        type="button"
-                        onclick="renameTable(
-                            '${table.id}'
-                        )"
-                    >
-                        Emër
+                        onclick="renameTable('${table.id}')">
+                        RENAME
                     </button>
 
                     <button
-                        type="button"
-                        onclick="deleteTable(
-                            '${table.id}'
-                        )"
-                    >
-                        Fshi
+                        class="danger"
+                        onclick="deleteTable('${table.id}')">
+                        DELETE
                     </button>
 
                 </div>
 
             </div>
-        `;
-    }).join("");
 
-    if ($("tableCountInput")) {
-        $("tableCountInput").value =
-            getTableCount();
-    }
+        `).join("");
+
 }
 
-function renameTable(tableId) {
 
-    if (!isAdmin()) return;
-
-    const tables = getTables();
+function renameTable(id) {
 
     const table =
-        tables.find(
-            t => t.id === tableId
-        );
+        getTable(id);
 
     if (!table) return;
 
-    const newName = prompt(
-        "Emri i ri i tavolinës:",
-        table.name
+
+    const name =
+        prompt(
+            "Emri i ri:",
+            table.name
+        );
+
+
+    if (!name?.trim()) return;
+
+
+    table.name =
+        name.trim();
+
+
+    saveJSON(
+        KEYS.tables,
+        tables
     );
 
-    if (newName === null) return;
 
-    const name = newName.trim();
-
-    if (!name) return;
-
-    table.name = name;
-
-    saveTables(tables);
-
-    renderTables();
-    renderDashboardTables();
-    renderOrder();
-    renderAdminTables();
+    renderAll();
 
     toast("Tavolina u ndryshua.");
+
 }
 
-function deleteTable(tableId) {
 
-    if (!isAdmin()) return;
+function deleteTable(id) {
 
-    const tables = getTables();
+    if (tables.length <= 1) {
+
+        toast(
+            "Duhet të ketë të paktën një tavolinë."
+        );
+
+        return;
+
+    }
+
 
     const table =
-        tables.find(
-            t => t.id === tableId
-        );
+        getTable(id);
 
     if (!table) return;
 
-    if (table.orders?.length) {
-        toast(
-            "Nuk mund të fshihet një tavolinë me porosi."
-        );
-        return;
-    }
 
     if (!confirm(
         `Fshi ${table.name}?`
-    )) {
-        return;
-    }
+    )) return;
 
-    const newTables =
+
+    tables =
         tables.filter(
-            t => t.id !== tableId
+            item => item.id !== id
         );
 
-    saveTables(newTables);
 
-    if (selectedTableId === tableId) {
+    saveJSON(
+        KEYS.tables,
+        tables
+    );
+
+
+    if (selectedTableId === id) {
+
         selectedTableId = null;
+
+        currentOrder = [];
+
         localStorage.removeItem(
-            SELECTED_TABLE_KEY
+            KEYS.selectedTable
         );
+
     }
 
-    setTableCountValue(newTables.length);
 
-    renderTables();
-    renderDashboardTables();
-    renderOrder();
-    renderAdminTables();
+    renderAll();
 
     toast("Tavolina u fshi.");
+
 }
+
 
 function saveTableCount() {
 
-    if (!isAdmin()) return;
-
-    const input = $("tableCountInput");
-
-    if (!input) return;
-
     let count =
-        Number(input.value || 0);
+        Number(
+            document.getElementById(
+                "tableCountInput"
+            ).value
+        );
 
-    count = Math.max(
-        1,
-        Math.min(100, Math.floor(count))
-    );
 
-    const oldTables = getTables();
+    count =
+        Math.max(
+            1,
+            Math.min(
+                100,
+                count
+            )
+        );
 
-    const newTables = [];
 
-    for (let i = 1; i <= count; i++) {
+    if (count === tables.length) {
 
-        const existing =
-            oldTables.find(
-                t => Number(t.number) === i
+        toast("Numri nuk ndryshoi.");
+
+        return;
+
+    }
+
+
+    if (count > tables.length) {
+
+        const start =
+            tables.length + 1;
+
+
+        for (
+            let i = start;
+            i <= count;
+            i++
+        ) {
+
+            tables.push({
+
+                id:
+                    `table-${Date.now()}-${i}`,
+
+                number: i,
+
+                name:
+                    `Tavolina ${i}`,
+
+                items: []
+
+            });
+
+        }
+
+    } else {
+
+        tables =
+            tables.slice(
+                0,
+                count
             );
 
-        newTables.push(
-            existing || {
-                id: uid("table"),
-                number: i,
-                name: `Tavolina ${i}`,
-                orders: []
-            }
-        );
     }
 
-    setTableCountValue(count);
-    saveTables(newTables);
 
-    if (
-        selectedTableId &&
-        !newTables.some(
-            t => t.id === selectedTableId
-        )
-    ) {
-        selectedTableId = null;
-        localStorage.removeItem(
-            SELECTED_TABLE_KEY
-        );
-    }
+    saveJSON(
+        KEYS.tables,
+        tables
+    );
 
-    renderTables();
-    renderDashboardTables();
-    renderOrder();
-    renderAdminTables();
 
-    toast("Numri i tavolinave u ruajt.");
+    localStorage.setItem(
+        KEYS.tableCount,
+        String(count)
+    );
+
+
+    renderAll();
+
+    toast(
+        `U vendosën ${count} tavolina.`
+    );
+
 }
 
 
-/* =========================
-   ADMIN SETTINGS
-========================= */
-
-function renderAdminSettings() {
-
-    if (!isAdmin()) return;
-
-    if ($("appNameInput")) {
-        $("appNameInput").value =
-            localStorage.getItem(APP_NAME_KEY) ||
-            "MY BAR";
-    }
-
-    if ($("newAdminPassword")) {
-        $("newAdminPassword").value = "";
-    }
-}
+/* =========================================================
+   APP SETTINGS
+========================================================= */
 
 function saveAppName() {
 
-    if (!isAdmin()) return;
+    const input =
+        document.getElementById(
+            "appNameInput"
+        );
 
-    const input = $("appNameInput");
-
-    if (!input) return;
 
     const name =
-        input.value.trim();
+        input.value.trim()
+        || "MY BAR";
 
-    if (!name) {
-        toast("Shkruaj emrin.");
-        return;
-    }
 
     localStorage.setItem(
-        APP_NAME_KEY,
+        KEYS.appName,
         name
     );
 
-    renderHeader();
 
-    toast("Emri i aplikacionit u ruajt.");
+    applyAppName();
+
+    toast("Emri u ruajt.");
+
 }
+
 
 function changeAdminPassword() {
 
-    if (!isAdmin()) return;
-
     const input =
-        $("newAdminPassword");
+        document.getElementById(
+            "newAdminPassword"
+        );
 
-    if (!input) return;
 
     const password =
         input.value.trim();
 
-    if (!password) {
-        toast("Shkruaj password-in e ri.");
+
+    if (password.length < 4) {
+
+        toast(
+            "Password duhet të ketë të paktën 4 karaktere."
+        );
+
         return;
+
     }
 
-    const users = getUsers();
 
     const admin =
         users.find(
-            user => user.role === "admin"
+            user => user.username === "admin"
         );
+
 
     if (!admin) return;
 
-    admin.password = password;
 
-    saveUsers(users);
+    admin.password =
+        password;
+
+
+    saveJSON(
+        KEYS.users,
+        users
+    );
+
 
     input.value = "";
 
-    toast("Password-i i ADMIN u ndryshua.");
+    toast(
+        "Password-i u ndryshua."
+    );
+
 }
 
 
-/* =========================
-   GENERAL MODAL
-========================= */
-
-function openGeneralModal(content) {
-
-    const modal = $("generalModal");
-
-    if (!modal) return;
-
-    modal.innerHTML = `
-        <div class="modal-content general-modal-content">
-            ${content}
-        </div>
-    `;
-
-    modal.style.display = "flex";
-}
-
-function closeGeneralModal() {
-
-    const modal = $("generalModal");
-
-    if (modal) {
-        modal.style.display = "none";
-        modal.innerHTML = "";
-    }
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchProducts(value) {
-
-    const query =
-        String(value || "")
-            .trim()
-            .toLowerCase();
-
-    const container = $("menuGrid");
-
-    if (!container) return;
-
-    const products = getProducts()
-        .filter(product => {
-
-            if (!query) return true;
-
-            return (
-                String(product.name)
-                    .toLowerCase()
-                    .includes(query) ||
-                String(product.category)
-                    .toLowerCase()
-                    .includes(query)
-            );
-        });
-
-    container.innerHTML = products.map(product => {
-
-        const stock = getStock(product.id);
-
-        return `
-            <button
-                type="button"
-                class="menu-product ${
-                    stock <= 0 ? "disabled" : ""
-                }"
-                ${
-                    stock <= 0
-                        ? "disabled"
-                        : `onclick="addProductToOrder(
-                            '${product.id}'
-                        )"`
-                }
-            >
-
-                <div class="product-name">
-                    ${escapeHTML(product.name)}
-                </div>
-
-                <div class="product-category">
-                    ${escapeHTML(product.category)}
-                </div>
-
-                <div class="product-bottom">
-                    <strong>
-                        ${money(product.price)}
-                    </strong>
-
-                    <span>
-                        Stok: ${stock}
-                    </span>
-                </div>
-
-            </button>
-        `;
-    }).join("");
-}
-
-
-/* =========================
-   REPORT SUMMARY
-========================= */
-
-function getReportSummary(period = "today") {
-
-    const invoices = getInvoices();
-
-    const now = new Date();
-
-    let start = new Date(now);
-
-    if (period === "today") {
-
-        start.setHours(0, 0, 0, 0);
-
-    } else if (period === "week") {
-
-        start.setDate(
-            start.getDate() - 7
-        );
-
-    } else if (period === "month") {
-
-        start.setMonth(
-            start.getMonth() - 1
-        );
-
-    } else if (period === "all") {
-
-        start = new Date(0);
-    }
-
-    const filtered =
-        invoices.filter(invoice => {
-
-            const date = new Date(
-                invoice.date ||
-                invoice.createdAt ||
-                invoice.timestamp
-            );
-
-            return date >= start;
-        });
-
-    const sales =
-        filtered.reduce(
-            (sum, invoice) =>
-                sum +
-                Number(
-                    invoice.total ||
-                    invoice.amount ||
-                    invoice.grandTotal ||
-                    0
-                ),
-            0
-        );
-
-    const cash =
-        filtered
-            .filter(invoice =>
-                String(
-                    invoice.payment ||
-                    invoice.paymentMethod ||
-                    invoice.method ||
-                    "cash"
-                ).toLowerCase() === "cash"
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum +
-                    Number(
-                        invoice.total ||
-                        invoice.amount ||
-                        0
-                    ),
-                0
-            );
-
-    const card =
-        filtered
-            .filter(invoice =>
-                ["card", "kartë", "karte"].includes(
-                    String(
-                        invoice.payment ||
-                        invoice.paymentMethod ||
-                        invoice.method ||
-                        ""
-                    ).toLowerCase()
-                )
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum +
-                    Number(
-                        invoice.total ||
-                        invoice.amount ||
-                        0
-                    ),
-                0
-            );
-
-    return {
-        invoices: filtered,
-        sales,
-        cash,
-        card,
-        invoiceCount: filtered.length
-    };
-}
-
-
-/* =========================
+/* =========================================================
    BACKUP
-========================= */
+========================================================= */
 
 function exportBackup() {
 
-    if (!isAdmin()) {
-        toast("Vetëm ADMIN mund të bëjë backup.");
-        return;
-    }
+    const data = {
 
-    const backup = {
-        version: "MY-BAR-BACKUP-1",
-        exportedAt: new Date().toISOString(),
+        exportedAt:
+            new Date().toISOString(),
 
-        users: getUsers(),
-        products: getProducts(),
-        invoices: getInvoices(),
-        tables: getTables(),
-        tableCount: getTableCount(),
-        inventory: getInventory(),
+        users,
+        products,
+        invoices,
+        tables,
+        inventory
 
-        appName:
-            localStorage.getItem(APP_NAME_KEY) ||
-            "MY BAR"
     };
 
-    const blob = new Blob(
-        [JSON.stringify(backup, null, 2)],
-        {
-            type: "application/json"
-        }
-    );
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            ],
+            {
+                type: "application/json"
+            }
+        );
+
 
     const url =
         URL.createObjectURL(blob);
 
+
     const a =
         document.createElement("a");
+
 
     a.href = url;
 
     a.download =
-        `my-bar-backup-${todayKey()}.json`;
+        `MY-BAR-BACKUP-${todayKey()}.json`;
 
-    document.body.appendChild(a);
+
     a.click();
-    a.remove();
+
 
     URL.revokeObjectURL(url);
 
-    toast("Backup u shkarkua.");
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* =========================================================
+   MODALS
+========================================================= */
 
-function logout() {
+function openModal(id) {
 
-    localStorage.removeItem(
-        CURRENT_USER_KEY
-    );
+    const modal =
+        document.getElementById(id);
 
-    currentUser = null;
+    if (!modal) return;
 
-    window.location.href =
-        "login.html";
+
+    modal.classList.add("active");
+
 }
 
 
-/* =========================
+function closeModal(id) {
+
+    const modal =
+        document.getElementById(id);
+
+    if (!modal) return;
+
+
+    modal.classList.remove("active");
+
+}
+
+
+function openGeneralModal(content) {
+
+    const container =
+        document.getElementById(
+            "generalModalContent"
+        );
+
+
+    container.innerHTML =
+        content;
+
+
+    openModal("generalModal");
+
+}
+
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target.classList.contains(
+                "modal"
+            )
+        ) {
+
+            event.target.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key !== "Escape") return;
+
+
+        document
+            .querySelectorAll(".modal.active")
+            .forEach(modal => {
+
+                modal.classList.remove(
+                    "active"
+                );
+
+            });
+
+    }
+);
+
+
+/* =========================================================
    TOAST
-========================= */
+========================================================= */
+
+let toastTimer;
+
 
 function toast(message) {
 
-    let element =
+    const element =
         document.getElementById(
-            "myBarToast"
+            "toast"
         );
 
-    if (!element) {
-
-        element =
-            document.createElement("div");
-
-        element.id =
-            "myBarToast";
-
-        element.style.position = "fixed";
-        element.style.left = "50%";
-        element.style.bottom = "25px";
-        element.style.transform =
-            "translateX(-50%)";
-        element.style.zIndex = "99999";
-        element.style.padding =
-            "13px 20px";
-        element.style.borderRadius =
-            "12px";
-        element.style.background =
-            "#101813";
-        element.style.border =
-            "1px solid #00ff73";
-        element.style.color =
-            "#ffffff";
-        element.style.boxShadow =
-            "0 0 25px rgba(0,255,115,.25)";
-        element.style.fontWeight =
-            "700";
-
-        document.body.appendChild(
-            element
+    const messageElement =
+        document.getElementById(
+            "toastMessage"
         );
-    }
 
-    element.textContent = message;
 
-    element.style.display = "block";
+    if (!element || !messageElement) return;
 
-    clearTimeout(
-        window.myBarToastTimer
+
+    messageElement.textContent =
+        message;
+
+
+    element.classList.add(
+        "show"
     );
 
-    window.myBarToastTimer =
-        setTimeout(() => {
-            element.style.display =
-                "none";
-        }, 2500);
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                element.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
 }
 
 
-/* =========================
-   INITIAL RENDER
-========================= */
+/* =========================================================
+   RENDER ALL
+========================================================= */
 
 function renderAll() {
 
-    renderHeader();
-    applyRoleVisibility();
-
-    renderTables();
-    renderDashboardTables();
-
-    renderCategories();
-    renderMenu();
-
-    renderOrder();
+    setupRoleUI();
 
     renderDashboard();
-    renderPayments();
-    renderHistory();
+    renderTables();
+    renderMenu();
+    renderOrder();
 
     if (isAdmin()) {
+
+        renderCash();
+        renderHistory();
         renderAdmin();
+
     }
+
+    updateTableUI();
+
 }
 
 
-/* =========================
+function updateTableUI() {
+
+    renderDashboardTables();
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout() {
+
+    if (!confirm(
+        "Dëshiron të dalësh nga sistemi?"
+    )) return;
+
+
+    localStorage.removeItem(
+        KEYS.currentUser
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================================
    GLOBAL FUNCTIONS
-========================= */
+========================================================= */
 
+window.showSection = showSection;
 window.selectTable = selectTable;
-window.renderTables = renderTables;
-
 window.selectCategory = selectCategory;
-window.renderMenu = renderMenu;
 
-window.addProductToOrder =
-    addProductToOrder;
-
+window.addToOrder = addToOrder;
 window.changeOrderQuantity =
     changeOrderQuantity;
 
-window.removeOrderItem =
-    removeOrderItem;
+window.removeFromOrder =
+    removeFromOrder;
+
+window.clearCurrentOrder =
+    clearCurrentOrder;
 
 window.openPayment =
     openPayment;
 
-window.closePayment =
-    closePayment;
-
-window.processPayment =
-    processPayment;
-
-window.showInvoice =
-    showInvoice;
-
-window.closeInvoice =
-    closeInvoice;
+window.completePayment =
+    completePayment;
 
 window.printInvoice =
     printInvoice;
 
-window.deleteHistory =
-    deleteHistory;
-
-window.deleteAllHistory =
-    deleteAllHistory;
+window.closeModal =
+    closeModal;
 
 window.openWaiterModal =
     openWaiterModal;
 
-window.saveWaiter =
-    saveWaiter;
+window.saveUser =
+    saveUser;
 
-window.editWaiter =
-    editWaiter;
+window.editUser =
+    editUser;
 
-window.deleteWaiter =
-    deleteWaiter;
+window.deleteUser =
+    deleteUser;
 
 window.openProductModal =
     openProductModal;
@@ -2828,14 +3095,11 @@ window.openProductModal =
 window.saveProduct =
     saveProduct;
 
+window.editProduct =
+    editProduct;
+
 window.deleteProduct =
     deleteProduct;
-
-window.changeStock =
-    changeStock;
-
-window.setStock =
-    setStock;
 
 window.renameTable =
     renameTable;
@@ -2852,119 +3116,24 @@ window.saveAppName =
 window.changeAdminPassword =
     changeAdminPassword;
 
-window.openGeneralModal =
-    openGeneralModal;
-
-window.closeGeneralModal =
-    closeGeneralModal;
-
-window.searchProducts =
-    searchProducts;
-
 window.exportBackup =
     exportBackup;
+
+window.deleteInvoice =
+    deleteInvoice;
+
+window.deleteHistory =
+    deleteHistory;
 
 window.logout =
     logout;
 
-window.renderAdmin =
-    renderAdmin;
 
-window.getReportSummary =
-    getReportSummary;
-
-
-/* =========================
-   DOM READY
-========================= */
+/* =========================================================
+   START
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
-
-        initializeApp();
-
-        currentUser =
-            getCurrentUser();
-
-        if (!currentUser) {
-
-            /*
-              Nëse app.js hapet në index.html
-              pa login, ktheje te login.
-            */
-
-            if (
-                location.pathname.endsWith(
-                    "/index.html"
-                ) ||
-                location.pathname === "/"
-            ) {
-                window.location.href =
-                    "login.html";
-
-                return;
-            }
-        }
-
-        updateClock();
-
-        setInterval(
-            updateClock,
-            1000
-        );
-
-        renderAll();
-
-        /*
-          Mbyll modalet kur klikohet
-          jashtë përmbajtjes.
-        */
-
-        document.addEventListener(
-            "click",
-            event => {
-
-                if (
-                    event.target ===
-                    $("paymentModal")
-                ) {
-                    closePayment();
-                }
-
-                if (
-                    event.target ===
-                    $("invoiceModal")
-                ) {
-                    closeInvoice();
-                }
-
-                if (
-                    event.target ===
-                    $("generalModal")
-                ) {
-                    closeGeneralModal();
-                }
-            }
-        );
-
-        /*
-          ESC mbyll modalet
-        */
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (event.key !== "Escape") {
-                    return;
-                }
-
-                closePayment();
-                closeInvoice();
-                closeGeneralModal();
-            }
-        );
-
-    }
+    init
 );
