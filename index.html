@@ -1,802 +1,449 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#07100b">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <title>MY BAR</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110b">
+  <title>MY BAR</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<div id="toast"></div>
 
 <header class="topbar">
-
-    <div class="brand">
-        <div class="brand-logo">M</div>
-
-        <div>
-            <div class="brand-name" id="appName">MY BAR</div>
-            <div class="brand-sub">MANAGEMENT SYSTEM</div>
-        </div>
+  <div class="brand">
+    <div class="brand-logo">M</div>
+    <div>
+      <strong>MY BAR</strong>
+      <span>SISTEM MENAXHIMI</span>
     </div>
+  </div>
 
-    <div class="top-center">
-        <div class="live-status">
-            <span></span>
-            LIVE
-        </div>
-
-        <div class="clock" id="clock">
-            --:--:--
-        </div>
+  <div class="top-info">
+    <div>
+      <small>STATUS</small>
+      <b class="online">● ONLINE</b>
     </div>
-
-    <div class="user-area">
-
-        <div class="user-info">
-            <strong id="userInfo">Administrator</strong>
-            <small>Online</small>
-        </div>
-
-        <button
-            class="logout-btn"
-            type="button"
-            onclick="logout()">
-            DAL
-        </button>
-
+    <div>
+      <small>ORA</small>
+      <b id="clock">--:--:--</b>
     </div>
-
+    <div>
+      <small>PËRDORUESI</small>
+      <b id="userInfo">---</b>
+    </div>
+    <button id="logoutBtn" class="logout">DIL</button>
+  </div>
 </header>
 
+<div class="app">
 
-<!-- ================= NAVIGATION ================= -->
+  <aside class="sidebar">
 
-<nav class="main-nav">
+    <div class="side-title">MENU</div>
 
     <button class="nav-btn active" data-section="dashboard">
-        <span>▦</span>
-        Dashboard
+      <span>▦</span> Dashboard
     </button>
 
     <button class="nav-btn" data-section="tables">
-        <span>▤</span>
-        Tavolina
+      <span>▤</span> Tavolina
     </button>
 
     <button class="nav-btn" data-section="menu">
-        <span>◈</span>
-        Menu
+      <span>☷</span> Menu
     </button>
 
     <button class="nav-btn" data-section="orders">
-        <span>◉</span>
-        Porosi
+      <span>🛒</span> Porosi
     </button>
 
-    <button
-        class="nav-btn admin-only"
-        data-section="cash">
-        <span>€</span>
-        Arka
+    <button class="nav-btn admin-only" data-section="cash">
+      <span>€</span> Arka
     </button>
 
-    <button
-        class="nav-btn admin-only"
-        data-section="history">
-        <span>↻</span>
-        Historiku
+    <button class="nav-btn admin-only" data-section="history">
+      <span>◷</span> Historiku
     </button>
 
-    <button
-        class="nav-btn admin-only"
-        data-section="admin">
-        <span>⚙</span>
-        Admin
+    <button class="nav-btn admin-only" data-section="admin">
+      <span>⚙</span> Admin
     </button>
 
-</nav>
+    <div class="side-bottom">
+      <div class="system-box">
+        <span>SISTEMI</span>
+        <b>MY BAR V2</b>
+        <small>PC MANAGEMENT</small>
+      </div>
+    </div>
 
+  </aside>
 
-<main class="main-content">
+  <main class="content">
 
-
-<!-- ================================================= -->
-<!-- DASHBOARD -->
-<!-- ================================================= -->
-
-<section id="dashboard" class="page-section active">
-
-    <div class="section-head">
-
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="section active">
+      <div class="page-head">
         <div>
-            <span class="eyebrow">OVERVIEW</span>
-            <h1>Dashboard</h1>
-            <p>Kontrollo aktivitetin e MY BAR në kohë reale.</p>
+          <h1>Dashboard</h1>
+          <p>Pasqyra e aktivitetit të lokalit</p>
+        </div>
+        <div class="date-box" id="todayDate"></div>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <span>SHITJE SOT</span>
+          <strong id="salesToday">0 L</strong>
+          <small>Total shitje</small>
         </div>
 
-        <div class="date-box">
-            <span id="todayDate">--</span>
+        <div class="stat">
+          <span>TAVOLINA AKTIVE</span>
+          <strong id="activeTables">0</strong>
+          <small>Tavolina me porosi</small>
         </div>
 
-    </div>
-
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <div class="stat-icon green">€</div>
-
-            <div>
-                <span>Shitje sot</span>
-                <strong id="salesToday">0 L</strong>
-            </div>
+        <div class="stat">
+          <span>FATURA</span>
+          <strong id="invoiceToday">0</strong>
+          <small>Fatura sot</small>
         </div>
 
-
-        <div class="stat-card">
-            <div class="stat-icon blue">▤</div>
-
-            <div>
-                <span>Tavolina aktive</span>
-                <strong id="activeTables">0</strong>
-            </div>
+        <div class="stat">
+          <span>KARTË</span>
+          <strong id="cardToday">0 L</strong>
+          <small>Pagesa me kartë</small>
         </div>
 
+      </div>
 
-        <div class="stat-card">
-            <div class="stat-icon purple">▣</div>
-
-            <div>
-                <span>Fatura sot</span>
-                <strong id="invoiceToday">0</strong>
-            </div>
-        </div>
-
-
-        <div class="stat-card">
-            <div class="stat-icon orange">●</div>
-
-            <div>
-                <span>Pagesa me kartë</span>
-                <strong id="cardToday">0 L</strong>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="dashboard-grid">
-
-        <div class="panel">
-
-            <div class="panel-head">
-                <div>
-                    <span class="eyebrow">LIVE FLOOR</span>
-                    <h2>Tavolinat</h2>
-                </div>
-
-                <button
-                    class="small-btn"
-                    onclick="showSection('tables')">
-                    SHIKO TË GJITHA →
-                </button>
-            </div>
-
-            <div id="dashboardTables" class="dashboard-table-grid">
-            </div>
-
-        </div>
-
-
-        <div class="panel quick-panel">
-
-            <div class="panel-head">
-                <div>
-                    <span class="eyebrow">QUICK ACTION</span>
-                    <h2>Veprime të shpejta</h2>
-                </div>
-            </div>
-
-            <div class="quick-actions">
-
-                <button onclick="showSection('tables')">
-                    <b>＋</b>
-                    <span>
-                        <strong>Hap tavolinë</strong>
-                        <small>Zgjidh një tavolinë</small>
-                    </span>
-                </button>
-
-                <button onclick="showSection('menu')">
-                    <b>◈</b>
-                    <span>
-                        <strong>Shiko menunë</strong>
-                        <small>Shto produkte</small>
-                    </span>
-                </button>
-
-                <button onclick="showSection('orders')">
-                    <b>◉</b>
-                    <span>
-                        <strong>Porosia</strong>
-                        <small>Kontrollo porosinë</small>
-                    </span>
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- TABLES -->
-<!-- ================================================= -->
-
-<section id="tables" class="page-section">
-
-    <div class="section-head">
-
-        <div>
-            <span class="eyebrow">FLOOR PLAN</span>
-            <h1>Tavolinat</h1>
-            <p>Zgjidh tavolinën për të filluar një porosi.</p>
-        </div>
-
-        <div class="legend">
-
-            <span>
-                <i class="available-dot"></i>
-                E lirë
-            </span>
-
-            <span>
-                <i class="busy-dot"></i>
-                Zënë
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div id="tableGrid" class="table-grid">
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- MENU -->
-<!-- ================================================= -->
-
-<section id="menu" class="page-section">
-
-    <div class="section-head">
-
-        <div>
-            <span class="eyebrow">FOOD & DRINKS</span>
-            <h1>Menu</h1>
-            <p>Zgjidh produktet dhe shtoji direkt në porosi.</p>
-        </div>
-
-        <div class="selected-table-box">
-            <span>TAVOLINA</span>
-            <strong id="menuSelectedTable">Asnjë</strong>
-        </div>
-
-    </div>
-
-
-    <div class="menu-toolbar">
-
-        <div id="categories" class="categories">
-        </div>
-
-        <div class="search-box">
-
-            <span>⌕</span>
-
-            <input
-                id="menuSearch"
-                type="search"
-                placeholder="Kërko produkt..."
-                autocomplete="off">
-
-        </div>
-
-    </div>
-
-
-    <div id="menuGrid" class="menu-grid">
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- ORDERS -->
-<!-- ================================================= -->
-
-<section id="orders" class="page-section">
-
-    <div class="section-head">
-
-        <div>
-            <span class="eyebrow">CURRENT ORDER</span>
-            <h1>Porosia</h1>
-            <p>Kontrollo produktet para pagesës.</p>
-        </div>
-
-        <div class="selected-table-box">
-            <span>TAVOLINA</span>
-            <strong id="selectedTableText">Asnjë</strong>
-        </div>
-
-    </div>
-
-
-    <div class="order-layout">
-
-        <div class="panel">
-
-            <div class="panel-head">
-                <h2>Produktet</h2>
-
-                <button
-                    class="small-btn danger-btn"
-                    onclick="clearCurrentOrder()">
-                    PASTRO
-                </button>
-            </div>
-
-            <div id="orderItems" class="order-items">
-            </div>
-
-        </div>
-
-
-        <aside class="order-summary">
-
-            <div class="summary-top">
-
-                <span>ORDER SUMMARY</span>
-
-                <div id="orderProducts">
-                    0 produkte
-                </div>
-
-            </div>
-
-
-            <div class="summary-line">
-                <span>Nëntotal</span>
-                <strong id="orderSubtotal">0 L</strong>
-            </div>
-
-
-            <div class="summary-line">
-                <span>Shërbim</span>
-                <strong id="orderService">0 L</strong>
-            </div>
-
-
-            <div class="summary-total">
-                <span>TOTAL</span>
-                <strong id="orderTotal">0 L</strong>
-            </div>
-
-
-            <button
-                class="pay-main-btn"
-                onclick="openPayment()">
-                VAZHDO ME PAGESË →
-            </button>
-
-        </aside>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- CASH -->
-<!-- ================================================= -->
-
-<section id="cash" class="page-section admin-only">
-
-    <div class="section-head">
-
-        <div>
-            <span class="eyebrow">FINANCE</span>
-            <h1>Arka</h1>
-            <p>Përmbledhja e pagesave.</p>
-        </div>
-
-    </div>
-
-
-    <div class="cash-stats">
-
-        <div class="cash-card">
-            <span>Totali</span>
-            <strong id="cashTotal">0 L</strong>
-        </div>
-
-        <div class="cash-card">
-            <span>Cash</span>
-            <strong id="cashMoney">0 L</strong>
-        </div>
-
-        <div class="cash-card">
-            <span>Card</span>
-            <strong id="cashCard">0 L</strong>
-        </div>
-
-        <div class="cash-card">
-            <span>Fatura</span>
-            <strong id="cashInvoices">0</strong>
-        </div>
-
-    </div>
-
-
-    <div class="panel">
-
+      <div class="panel">
         <div class="panel-head">
-            <h2>Pagesat e fundit</h2>
+          <h2>Tavolinat</h2>
+          <button class="green-btn" data-section="tables">SHIKO TË GJITHA</button>
         </div>
+        <div id="dashboardTables" class="mini-tables"></div>
+      </div>
 
-        <div id="paymentsList" class="payments-list">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- HISTORY -->
-<!-- ================================================= -->
-
-<section id="history" class="page-section admin-only">
-
-    <div class="section-head">
-
-        <div>
-            <span class="eyebrow">ARCHIVE</span>
-            <h1>Historiku</h1>
-            <p>Të gjitha faturat e regjistruara.</p>
-        </div>
-
-        <button
-            class="small-btn danger-btn"
-            onclick="deleteHistory()">
-            FSHIJI TË GJITHA
+      <div class="quick-grid">
+        <button class="quick" data-section="tables">
+          <b>+</b>
+          <span>Hap Tavolinë</span>
         </button>
 
-    </div>
+        <button class="quick" data-section="menu">
+          <b>☷</b>
+          <span>Shiko Menu</span>
+        </button>
 
+        <button class="quick" data-section="orders">
+          <b>🛒</b>
+          <span>Porositë</span>
+        </button>
 
-    <div class="panel">
+        <button class="quick admin-only" data-section="cash">
+          <b>€</b>
+          <span>Shiko Arkën</span>
+        </button>
+      </div>
+    </section>
 
-        <div id="historyList" class="history-list">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- ADMIN -->
-<!-- ================================================= -->
-
-<section id="admin" class="page-section admin-only">
-
-    <div class="section-head">
-
+    <!-- TABLES -->
+    <section id="tables" class="section">
+      <div class="page-head">
         <div>
-            <span class="eyebrow">CONTROL CENTER</span>
-            <h1>Admin</h1>
-            <p>Menaxho sistemin MY BAR.</p>
+          <h1>Tavolinat</h1>
+          <p>Zgjidh një tavolinë për të hapur porosinë</p>
+        </div>
+        <div class="legend">
+          <span><i class="free-dot"></i> E lirë</span>
+          <span><i class="busy-dot"></i> E zënë</span>
+        </div>
+      </div>
+
+      <div id="tableGrid" class="table-grid"></div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="section">
+
+      <div class="page-head">
+        <div>
+          <h1>Menu</h1>
+          <p>Zgjidh produktet për tavolinën</p>
         </div>
 
-    </div>
+        <div class="selected-table">
+          TAVOLINA:
+          <b id="menuSelectedTable">Asnjë</b>
+        </div>
+      </div>
 
+      <div class="menu-toolbar">
+        <div id="categories" class="categories"></div>
 
-    <div class="admin-grid">
+        <input
+          id="menuSearch"
+          type="search"
+          placeholder="Kërko produkt..."
+        >
+      </div>
 
-        <!-- SETTINGS -->
+      <div id="menuGrid" class="product-grid"></div>
+
+    </section>
+
+    <!-- ORDERS -->
+    <section id="orders" class="section">
+
+      <div class="page-head">
+        <div>
+          <h1>Porosia</h1>
+          <p id="selectedTableText">Zgjidh një tavolinë</p>
+        </div>
+
+        <button id="clearOrderBtn" class="danger-btn">
+          PASTRO POROSINË
+        </button>
+      </div>
+
+      <div class="order-layout">
+
+        <div class="panel order-items-panel">
+          <div class="panel-head">
+            <h2>Produktet</h2>
+          </div>
+
+          <div id="orderItems" class="order-items">
+            <div class="empty">
+              Nuk ka produkte në porosi.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel order-summary">
+          <h2>Totali</h2>
+
+          <div class="summary-row">
+            <span>Nëntotal</span>
+            <b id="orderSubtotal">0 L</b>
+          </div>
+
+          <div class="summary-row">
+            <span>Shërbim</span>
+            <b id="orderService">0 L</b>
+          </div>
+
+          <div class="summary-total">
+            <span>TOTAL</span>
+            <strong id="orderTotal">0 L</strong>
+          </div>
+
+          <button id="paymentBtn" class="pay-btn">
+            PAGESË
+          </button>
+
+          <button id="invoiceBtn" class="invoice-btn">
+            FATURË
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CASH -->
+    <section id="cash" class="section admin-only-section">
+
+      <div class="page-head">
+        <div>
+          <h1>Arka</h1>
+          <p>Gjendja financiare e ditës</p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span>TOTAL</span>
+          <strong id="cashTotal">0 L</strong>
+        </div>
+
+        <div class="stat">
+          <span>CASH</span>
+          <strong id="cashMoney">0 L</strong>
+        </div>
+
+        <div class="stat">
+          <span>KARTË</span>
+          <strong id="cashCard">0 L</strong>
+        </div>
+
+        <div class="stat">
+          <span>FATURA</span>
+          <strong id="cashInvoices">0</strong>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Pagesat</h2>
+        </div>
+
+        <div id="paymentsList"></div>
+      </div>
+
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="section admin-only-section">
+
+      <div class="page-head">
+        <div>
+          <h1>Historiku</h1>
+          <p>Historiku i faturave</p>
+        </div>
+
+        <button id="deleteHistoryBtn" class="danger-btn">
+          FSHI HISTORIKUN
+        </button>
+      </div>
+
+      <div class="panel">
+        <div id="historyList"></div>
+      </div>
+
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin" class="section admin-only-section">
+
+      <div class="page-head">
+        <div>
+          <h1>Administrimi</h1>
+          <p>Menaxho sistemin MY BAR</p>
+        </div>
+      </div>
+
+      <div class="admin-grid">
 
         <div class="panel">
+          <h2>Emri i lokalit</h2>
 
-            <div class="panel-head">
-                <h2>Settings</h2>
-            </div>
+          <input id="appNameInput" class="admin-input" type="text">
 
-            <label>Emri i aplikacionit</label>
-
-            <input
-                id="appNameInput"
-                class="form-input"
-                placeholder="MY BAR">
-
-            <button
-                class="primary-btn"
-                onclick="saveAppName()">
-                RUAJ EMRIN
-            </button>
-
-
-            <label class="admin-label">
-                Numri i tavolinave
-            </label>
-
-            <input
-                id="tableCountInput"
-                class="form-input"
-                type="number"
-                min="1"
-                max="100">
-
-            <button
-                class="primary-btn"
-                onclick="saveTableCount()">
-                RUAJ TAVOLINAT
-            </button>
-
+          <button id="saveAppNameBtn" class="green-btn full">
+            RUAJ
+          </button>
         </div>
-
-
-        <!-- USERS -->
 
         <div class="panel">
+          <h2>Tavolinat</h2>
 
-            <div class="panel-head">
-                <h2>Kamarierët</h2>
+          <input
+            id="tableCountInput"
+            class="admin-input"
+            type="number"
+            min="1"
+            max="100"
+          >
 
-                <button
-                    class="small-btn"
-                    onclick="openWaiterModal()">
-                    + SHTO
-                </button>
-            </div>
-
-            <div id="usersList" class="admin-list">
-            </div>
-
+          <button id="saveTableCountBtn" class="green-btn full">
+            RUAJ TAVOLINAT
+          </button>
         </div>
-
-
-        <!-- PRODUCTS -->
-
-        <div class="panel wide-panel">
-
-            <div class="panel-head">
-
-                <h2>Produktet</h2>
-
-                <button
-                    class="small-btn"
-                    onclick="openProductModal()">
-                    + PRODUKT
-                </button>
-
-            </div>
-
-            <div id="adminProducts" class="admin-list">
-            </div>
-
-        </div>
-
-
-        <!-- TABLE MANAGEMENT -->
-
-        <div class="panel wide-panel">
-
-            <div class="panel-head">
-                <h2>Menaxho tavolinat</h2>
-            </div>
-
-            <div id="adminTables" class="admin-list">
-            </div>
-
-        </div>
-
-
-        <!-- PASSWORD -->
 
         <div class="panel">
+          <h2>Ndrysho fjalëkalimin</h2>
 
-            <div class="panel-head">
-                <h2>Siguria</h2>
-            </div>
+          <input
+            id="newAdminPassword"
+            class="admin-input"
+            type="password"
+            placeholder="Fjalëkalim i ri"
+          >
 
-            <label>Fjalëkalimi i Administratorit</label>
-
-            <input
-                id="newAdminPassword"
-                class="form-input"
-                type="password"
-                placeholder="Fjalëkalim i ri">
-
-            <button
-                class="primary-btn"
-                onclick="changeAdminPassword()">
-                NDRYSHO PASSWORD
-            </button>
-
+          <button id="saveAdminPasswordBtn" class="green-btn full">
+            NDRYSHO
+          </button>
         </div>
-
-
-        <!-- BACKUP -->
 
         <div class="panel">
+          <h2>Backup</h2>
 
-            <div class="panel-head">
-                <h2>Backup</h2>
-            </div>
+          <p class="muted">
+            Ruaj të dhënat e sistemit në kompjuter.
+          </p>
 
-            <p class="muted">
-                Eksporto të dhënat e sistemit.
-            </p>
-
-            <button
-                class="primary-btn"
-                onclick="exportBackup()">
-                DOWNLOAD BACKUP
-            </button>
-
+          <button id="backupBtn" class="green-btn full">
+            DOWNLOAD BACKUP
+          </button>
         </div>
 
-    </div>
+      </div>
 
-</section>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Përdoruesit</h2>
+        </div>
+        <div id="usersList"></div>
+      </div>
 
-</main>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Produktet</h2>
+        </div>
+        <div id="adminProducts"></div>
+      </div>
 
+    </section>
 
-<!-- ================================================= -->
+  </main>
+</div>
+
 <!-- PAYMENT MODAL -->
-<!-- ================================================= -->
-
 <div id="paymentModal" class="modal">
+  <div class="modal-box">
 
-    <div class="modal-card">
+    <button class="modal-close" data-close="paymentModal">×</button>
 
-        <button
-            class="modal-close"
-            onclick="closeModal('paymentModal')">
-            ×
-        </button>
+    <h2>Pagesa</h2>
+    <p>Zgjidh mënyrën e pagesës.</p>
 
-        <span class="eyebrow">PAYMENT</span>
+    <div class="payment-options">
+      <button id="cashPaymentBtn" class="payment-option">
+        <span>💵</span>
+        CASH
+      </button>
 
-        <h2>Pagesa</h2>
-
-        <div class="payment-total">
-            <span>Total për pagesë</span>
-            <strong id="paymentAmount">0 L</strong>
-        </div>
-
-        <div class="payment-methods">
-
-            <button
-                class="payment-method cash"
-                onclick="completePayment('cash')">
-
-                <span>€</span>
-
-                <strong>CASH</strong>
-
-                <small>Pagesë me para</small>
-
-            </button>
-
-
-            <button
-                class="payment-method card"
-                onclick="completePayment('card')">
-
-                <span>▣</span>
-
-                <strong>CARD</strong>
-
-                <small>Pagesë me kartë</small>
-
-            </button>
-
-        </div>
-
+      <button id="cardPaymentBtn" class="payment-option">
+        <span>💳</span>
+        KARTË
+      </button>
     </div>
 
+  </div>
 </div>
 
-
-<!-- ================================================= -->
 <!-- INVOICE MODAL -->
-<!-- ================================================= -->
-
 <div id="invoiceModal" class="modal">
+  <div class="modal-box invoice-box">
 
-    <div class="modal-card invoice-card">
+    <button class="modal-close" data-close="invoiceModal">×</button>
 
-        <button
-            class="modal-close no-print"
-            onclick="closeModal('invoiceModal')">
-            ×
-        </button>
+    <div id="invoiceContent"></div>
 
-        <div id="invoiceContent">
-        </div>
+    <button id="printInvoiceBtn" class="green-btn full">
+      PRINT FATURË
+    </button>
 
-        <div class="invoice-actions no-print">
-
-            <button
-                class="primary-btn"
-                onclick="printInvoice()">
-                PRINT
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="closeModal('invoiceModal')">
-                MBYLL
-            </button>
-
-        </div>
-
-    </div>
-
+  </div>
 </div>
-
-
-<!-- ================================================= -->
-<!-- GENERAL MODAL -->
-<!-- ================================================= -->
-
-<div id="generalModal" class="modal">
-
-    <div class="modal-card">
-
-        <button
-            class="modal-close"
-            onclick="closeModal('generalModal')">
-            ×
-        </button>
-
-        <div id="generalModalContent">
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- TOAST -->
-<!-- ================================================= -->
-
-<div id="toast" class="toast">
-    <span id="toastMessage">OK</span>
-</div>
-
 
 <script src="app.js"></script>
-
 </body>
 </html>
