@@ -6,25 +6,23 @@
 }
 
 body {
-    background: #0f0f0f;
-    color: #ffffff;
+    background: #0d0d0d;
+    color: #fff;
     min-height: 100vh;
 }
 
-
-/* =========================
-   TOP BAR
-========================= */
+/* TOP BAR */
 
 .topbar {
-    min-height: 75px;
-    background: #171717;
+    min-height: 76px;
+    padding: 14px 24px;
+    background: #151515;
     border-bottom: 1px solid #292929;
-    padding: 15px 25px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .topbar h1 {
@@ -33,14 +31,14 @@ body {
 
 .topbar p {
     color: #888;
-    margin-top: 5px;
     font-size: 13px;
+    margin-top: 5px;
 }
 
-.topbar-right {
+.top-right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 #clock {
@@ -49,21 +47,23 @@ body {
 }
 
 .logout-btn {
+    border: none;
     background: #292929;
     color: white;
-    border: none;
-    border-radius: 9px;
     padding: 9px 13px;
+    border-radius: 9px;
     cursor: pointer;
 }
 
+.logout-btn:hover {
+    background: #3a3a3a;
+}
 
-/* =========================
-   NAVIGATION
-========================= */
+
+/* NAVIGATION */
 
 .navigation {
-    background: #171717;
+    background: #151515;
     border-bottom: 1px solid #292929;
 
     padding: 10px 15px;
@@ -76,7 +76,7 @@ body {
 
 .nav-btn {
     border: none;
-    background: #252525;
+    background: #242424;
     color: #ddd;
 
     padding: 11px 15px;
@@ -94,21 +94,17 @@ body {
 }
 
 .nav-btn.active {
-    background: #ffffff;
-    color: #000000;
+    background: white;
+    color: black;
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 main {
     width: 100%;
-    max-width: 1200px;
-
+    max-width: 1250px;
     margin: auto;
-
     padding: 25px;
 }
 
@@ -121,33 +117,28 @@ main {
 }
 
 
-/* =========================
-   PAGE TITLE
-========================= */
+/* HEADERS */
 
-.page-title {
+.page-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-
+    justify-content: space-between;
     gap: 15px;
 
     margin-bottom: 25px;
 }
 
-.page-title h2 {
-    font-size: 27px;
+.page-header h2 {
+    font-size: 28px;
 }
 
-.page-title p {
+.page-header p {
     color: #888;
     margin-top: 6px;
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 
 .primary-btn,
 .secondary-btn,
@@ -176,29 +167,24 @@ main {
 }
 
 .secondary-btn:hover {
-    background: #383838;
+    background: #3a3a3a;
 }
 
 .danger-btn {
-    background: #4a2020;
-    color: #ffbcbc;
+    background: #4b2020;
+    color: #ffbaba;
 }
 
-.full-btn {
+.full {
     width: 100%;
 }
 
 
-/* =========================
-   STATISTICS
-========================= */
+/* STATISTICS */
 
 .stats-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 
     margin-bottom: 25px;
@@ -206,7 +192,6 @@ main {
 
 .stat-card {
     background: #191919;
-
     border: 1px solid #292929;
 
     border-radius: 15px;
@@ -215,44 +200,40 @@ main {
 
     display: flex;
     align-items: center;
-
     gap: 15px;
 }
 
-.stat-icon {
+.stat-card > span {
     width: 50px;
     height: 50px;
 
-    background: #252525;
-
     border-radius: 12px;
+
+    background: #252525;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 25px;
+    font-size: 24px;
 }
 
-.stat-card p {
+.stat-card small {
+    display: block;
     color: #888;
-    font-size: 13px;
-
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
-.stat-card h2 {
+.stat-card strong {
+    display: block;
     font-size: 20px;
 }
 
 
-/* =========================
-   CONTENT BOX
-========================= */
+/* BOX */
 
-.content-box {
+.box {
     background: #191919;
-
     border: 1px solid #292929;
 
     border-radius: 15px;
@@ -262,40 +243,32 @@ main {
     margin-bottom: 20px;
 }
 
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.box h3 {
+    font-size: 18px;
+}
 
+.box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 15px;
 
     margin-bottom: 18px;
 }
 
-.section-title p {
-    color: #888;
-    font-size: 13px;
-
-    margin-top: 4px;
-}
-
 .muted {
     color: #888;
-    font-size: 14px;
-
-    margin-top: 6px;
+    font-size: 13px;
+    margin-top: 5px;
 }
 
 
-/* =========================
-   TABLES
-========================= */
+/* TABLES */
 
 .table-grid {
     display: grid;
 
-    grid-template-columns:
-        repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 15px;
 }
@@ -318,7 +291,7 @@ main {
 
 .table-card:hover {
     transform: translateY(-2px);
-    background: #292929;
+    background: #2b2b2b;
 }
 
 .table-card.free {
@@ -326,36 +299,30 @@ main {
 }
 
 .table-card.busy {
-    border-color: #777;
+    border-color: #888;
 }
 
 .table-number {
-    font-size: 23px;
+    font-size: 21px;
     font-weight: bold;
 }
 
 .table-status {
-    margin-top: 10px;
-
     color: #999;
-
     font-size: 13px;
+    margin-top: 9px;
 }
 
 .table-total {
     margin-top: 8px;
-
     font-weight: bold;
 }
 
 
-/* =========================
-   CATEGORIES
-========================= */
+/* CATEGORIES */
 
 .categories {
     display: flex;
-
     gap: 8px;
 
     overflow-x: auto;
@@ -378,21 +345,22 @@ main {
     white-space: nowrap;
 }
 
+.category-btn:hover {
+    background: #333;
+}
+
 .category-btn.active {
     background: white;
     color: black;
 }
 
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu-grid {
     display: grid;
 
-    grid-template-columns:
-        repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 15px;
 }
@@ -422,18 +390,16 @@ main {
 
 .product-bottom {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
     gap: 10px;
 
-    margin-top: 17px;
+    margin-top: 18px;
 }
 
 .product-price {
     font-weight: bold;
-    font-size: 16px;
 }
 
 .add-product-btn {
@@ -442,39 +408,39 @@ main {
     background: white;
     color: black;
 
-    border-radius: 8px;
-
     padding: 9px 13px;
 
-    cursor: pointer;
+    border-radius: 8px;
 
     font-weight: bold;
+
+    cursor: pointer;
+}
+
+.add-product-btn:hover {
+    background: #ddd;
 }
 
 
-/* =========================
-   ORDER
-========================= */
+/* ORDER */
 
 .order-layout {
     display: grid;
 
-    grid-template-columns:
-        1.5fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
 
     gap: 20px;
 }
 
-.order-menu-grid {
+.order-products {
     display: grid;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 10px;
 }
 
-.order-product-btn {
+.order-product {
     background: #252525;
 
     color: white;
@@ -490,24 +456,20 @@ main {
     text-align: left;
 }
 
-.order-product-btn:hover {
-    background: #303030;
+.order-product:hover {
+    background: #333;
 }
 
-.order-product-btn strong {
+.order-product strong {
     display: block;
 }
 
-.order-product-btn span {
+.order-product span {
     display: block;
 
     color: #aaa;
 
     margin-top: 5px;
-}
-
-.order-summary {
-    min-height: 350px;
 }
 
 #orderStatus {
@@ -522,12 +484,14 @@ main {
     font-size: 12px;
 }
 
+
+/* ORDER ITEMS */
+
 .order-item {
     display: flex;
 
-    justify-content: space-between;
-
     align-items: center;
+    justify-content: space-between;
 
     gap: 10px;
 
@@ -541,9 +505,13 @@ main {
 }
 
 .order-item-info span {
+    display: block;
+
     color: #888;
 
     font-size: 13px;
+
+    margin-top: 4px;
 }
 
 .order-controls {
@@ -554,41 +522,37 @@ main {
     gap: 6px;
 }
 
-.qty-btn {
-    width: 28px;
-    height: 28px;
+.qty-btn,
+.remove-btn {
+    width: 30px;
+    height: 30px;
 
     border: none;
 
     border-radius: 7px;
-
-    background: #303030;
 
     color: white;
 
     cursor: pointer;
 }
 
-.remove-item-btn {
-    width: 28px;
-    height: 28px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #4a2020;
-
-    color: #ffbcbc;
-
-    cursor: pointer;
+.qty-btn {
+    background: #333;
 }
 
-.order-total {
+.qty-btn:hover {
+    background: #444;
+}
+
+.remove-btn {
+    background: #4a2020;
+    color: #ffbaba;
+}
+
+.total {
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
     border-top: 1px solid #333;
@@ -603,11 +567,9 @@ main {
 }
 
 
-/* =========================
-   EMPTY
-========================= */
+/* EMPTY */
 
-.empty-state {
+.empty {
     text-align: center;
 
     color: #777;
@@ -616,14 +578,13 @@ main {
 }
 
 
-/* =========================
-   CASH / HISTORY
-========================= */
+/* LIST ROWS */
 
 .payment-row,
 .history-row,
 .user-row,
-.admin-product-row {
+.admin-product-row,
+.admin-table-row {
     background: #222;
 
     border: 1px solid #333;
@@ -636,9 +597,9 @@ main {
 
     display: flex;
 
-    justify-content: space-between;
-
     align-items: center;
+
+    justify-content: space-between;
 
     gap: 15px;
 }
@@ -646,23 +607,13 @@ main {
 .payment-row small,
 .history-row small,
 .user-row small,
-.admin-product-row small {
+.admin-product-row small,
+.admin-table-row small {
     color: #888;
-}
-
-.payment-method {
-    padding: 6px 9px;
-
-    border-radius: 8px;
-
-    background: #303030;
-
-    font-size: 12px;
 }
 
 .row-actions {
     display: flex;
-
     gap: 7px;
 }
 
@@ -680,29 +631,17 @@ main {
     cursor: pointer;
 }
 
-
-/* =========================
-   FORMS
-========================= */
-
-.form-group {
-    margin-bottom: 16px;
+.small-btn:hover {
+    background: #444;
 }
 
-.form-label {
-    display: block;
 
-    color: #aaa;
+/* INPUTS */
 
-    font-size: 13px;
-
-    margin-bottom: 6px;
-}
-
-.form-input {
+.input {
     width: 100%;
 
-    background: #111;
+    background: #101010;
 
     color: white;
 
@@ -713,16 +652,28 @@ main {
     padding: 12px;
 
     outline: none;
+
+    font-size: 15px;
 }
 
-.form-input:focus {
-    border-color: #666;
+.input:focus {
+    border-color: #777;
+}
+
+.admin-table-controls {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.admin-table-controls .input {
+    max-width: 300px;
 }
 
 
-/* =========================
-   MODAL
-========================= */
+/* MODAL */
 
 .modal {
     display: none;
@@ -733,12 +684,11 @@ main {
 
     z-index: 1000;
 
-    background: rgba(0, 0, 0, .78);
+    background: rgba(0,0,0,.78);
 
     padding: 20px;
 
     align-items: center;
-
     justify-content: center;
 }
 
@@ -749,7 +699,11 @@ main {
 .modal-box {
     width: 100%;
 
-    max-width: 450px;
+    max-width: 460px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
 
     background: #1b1b1b;
 
@@ -758,27 +712,16 @@ main {
     border-radius: 18px;
 
     padding: 22px;
+
+    position: relative;
 }
 
-.modal-header {
-    display: flex;
+.close {
+    position: absolute;
 
-    justify-content: space-between;
+    right: 18px;
+    top: 18px;
 
-    align-items: center;
-
-    margin-bottom: 20px;
-}
-
-.modal-header p {
-    color: #888;
-
-    font-size: 13px;
-
-    margin-top: 5px;
-}
-
-.close-btn {
     width: 35px;
     height: 35px;
 
@@ -793,13 +736,15 @@ main {
     cursor: pointer;
 }
 
+.close:hover {
+    background: #444;
+}
 
-/* =========================
-   PAYMENT
-========================= */
+
+/* PAYMENT */
 
 .payment-total {
-    background: #111;
+    background: #101010;
 
     border-radius: 12px;
 
@@ -807,15 +752,13 @@ main {
 
     text-align: center;
 
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
-.payment-total span {
+.payment-total small {
     display: block;
 
     color: #888;
-
-    font-size: 13px;
 
     margin-bottom: 7px;
 }
@@ -832,7 +775,7 @@ main {
     gap: 12px;
 }
 
-.payment-btn {
+.payment-buttons button {
     border: none;
 
     border-radius: 12px;
@@ -841,29 +784,25 @@ main {
 
     color: white;
 
-    padding: 20px;
+    padding: 22px;
 
     cursor: pointer;
 
-    font-size: 17px;
-
-    font-weight: bold;
+    font-size: 18px;
 }
 
-.payment-btn:hover {
-    background: #383838;
+.payment-buttons button:hover {
+    background: #3a3a3a;
 }
 
-.payment-btn span {
+.payment-buttons strong {
     display: block;
 
     margin-top: 8px;
 }
 
 
-/* =========================
-   INVOICE
-========================= */
+/* INVOICE */
 
 .invoice {
     width: 100%;
@@ -883,7 +822,7 @@ main {
     overflow-y: auto;
 }
 
-.invoice-top {
+.invoice-header {
     text-align: center;
 
     border-bottom: 1px dashed #999;
@@ -893,11 +832,11 @@ main {
     margin-bottom: 18px;
 }
 
-.invoice-top h1 {
+.invoice-header h1 {
     font-size: 23px;
 }
 
-.invoice-top p {
+.invoice-header p {
     color: #666;
 
     margin-top: 5px;
@@ -910,7 +849,7 @@ main {
 
     gap: 12px;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .invoice-info div {
@@ -921,7 +860,7 @@ main {
     gap: 3px;
 }
 
-.invoice-info span {
+.invoice-info small {
     color: #777;
 
     font-size: 11px;
@@ -943,16 +882,6 @@ main {
     border-bottom: 1px solid #eee;
 
     font-size: 13px;
-}
-
-.invoice-head {
-    color: #777;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    text-transform: uppercase;
 }
 
 .invoice-total {
@@ -1008,25 +937,20 @@ main {
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 900px) {
 
     .stats-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .table-grid {
-        grid-template-columns:
-            repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .menu-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .order-layout {
@@ -1038,7 +962,7 @@ main {
 @media (max-width: 600px) {
 
     .topbar {
-        padding: 14px;
+        padding: 13px;
 
         align-items: flex-start;
     }
@@ -1047,20 +971,26 @@ main {
         font-size: 19px;
     }
 
-    .topbar-right {
-        gap: 7px;
-
+    .top-right {
         flex-direction: column;
+
+        gap: 6px;
     }
 
     main {
         padding: 15px;
     }
 
-    .page-title {
+    .page-header {
         align-items: flex-start;
 
         flex-direction: column;
+    }
+
+    .page-header .primary-btn,
+    .page-header .secondary-btn,
+    .page-header .danger-btn {
+        width: 100%;
     }
 
     .stats-grid {
@@ -1068,15 +998,14 @@ main {
     }
 
     .table-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .menu-grid {
         grid-template-columns: 1fr;
     }
 
-    .order-menu-grid {
+    .order-products {
         grid-template-columns: 1fr;
     }
 
@@ -1087,7 +1016,8 @@ main {
     .payment-row,
     .history-row,
     .user-row,
-    .admin-product-row {
+    .admin-product-row,
+    .admin-table-row {
         align-items: flex-start;
 
         flex-direction: column;
@@ -1101,15 +1031,21 @@ main {
         flex: 1;
     }
 
+    .admin-table-controls {
+        flex-direction: column;
+    }
+
+    .admin-table-controls .input {
+        max-width: none;
+    }
+
     .invoice {
         padding: 18px;
     }
 }
 
 
-/* =========================
-   PRINT
-========================= */
+/* PRINT */
 
 @media print {
 
@@ -1123,9 +1059,9 @@ main {
     }
 
     #invoiceModal {
-        position: absolute;
-
         display: block !important;
+
+        position: absolute;
 
         inset: 0;
 
