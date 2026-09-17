@@ -12,7 +12,6 @@
 
     <title>Bar Lulishtja - Hyrje</title>
 
-
     <style>
 
         * {
@@ -26,7 +25,6 @@
                 sans-serif;
         }
 
-
         body {
 
             min-height: 100vh;
@@ -34,8 +32,8 @@
             background:
                 radial-gradient(
                     circle at top,
-                    #292929,
-                    #0b0b0b 60%
+                    #303030,
+                    #080808 65%
                 );
 
             color: white;
@@ -47,16 +45,14 @@
             justify-content: center;
 
             padding: 20px;
-
         }
 
 
-        .login-container {
+        .container {
 
             width: 100%;
 
             max-width: 400px;
-
         }
 
 
@@ -66,8 +62,7 @@
 
             font-size: 60px;
 
-            margin-bottom: 10px;
-
+            margin-bottom: 8px;
         }
 
 
@@ -76,14 +71,12 @@
             text-align: center;
 
             margin-bottom: 25px;
-
         }
 
 
         .title h1 {
 
             font-size: 28px;
-
         }
 
 
@@ -93,17 +86,13 @@
 
             margin-top: 7px;
 
+            font-size: 14px;
         }
 
 
         .login-box {
 
-            background: rgba(
-                25,
-                25,
-                25,
-                .95
-            );
+            background: #191919;
 
             border: 1px solid #333;
 
@@ -113,15 +102,13 @@
 
             box-shadow:
                 0 20px 60px
-                rgba(0,0,0,.45);
-
+                rgba(0,0,0,.5);
         }
 
 
         .form-group {
 
             margin-bottom: 18px;
-
         }
 
 
@@ -134,7 +121,6 @@
             font-size: 13px;
 
             margin-bottom: 7px;
-
         }
 
 
@@ -148,21 +134,19 @@
 
             border: 1px solid #333;
 
-            background: #111;
+            background: #101010;
 
             color: white;
 
             outline: none;
 
             font-size: 16px;
-
         }
 
 
         input:focus {
 
             border-color: #777;
-
         }
 
 
@@ -185,14 +169,12 @@
             font-weight: bold;
 
             cursor: pointer;
-
         }
 
 
         .login-btn:hover {
 
             background: #ddd;
-
         }
 
 
@@ -200,11 +182,11 @@
 
             display: none;
 
-            background: #3a1c1c;
+            background: #3b1d1d;
 
             border: 1px solid #633;
 
-            color: #ffaaaa;
+            color: #ffb2b2;
 
             padding: 11px;
 
@@ -215,7 +197,6 @@
             text-align: center;
 
             font-size: 13px;
-
         }
 
 
@@ -228,7 +209,6 @@
             font-size: 11px;
 
             margin-top: 20px;
-
         }
 
     </style>
@@ -239,7 +219,7 @@
 <body>
 
 
-<div class="login-container">
+<div class="container">
 
 
     <div class="logo">
@@ -249,7 +229,7 @@
 
     <div class="title">
 
-        <h1>
+        <h1 id="loginAppName">
             Bar Lulishtja
         </h1>
 
@@ -262,10 +242,7 @@
 
     <div class="login-box">
 
-
-        <form
-            id="loginForm"
-        >
+        <form id="loginForm">
 
 
             <div class="form-group">
@@ -277,7 +254,7 @@
                 <input
                     id="username"
                     type="text"
-                    placeholder="Shkruaj username"
+                    placeholder="Username"
                     autocomplete="username"
                     required
                 >
@@ -294,7 +271,7 @@
                 <input
                     id="password"
                     type="password"
-                    placeholder="Shkruaj password"
+                    placeholder="Password"
                     autocomplete="current-password"
                     required
                 >
@@ -303,30 +280,27 @@
 
 
             <button
-                class="login-btn"
                 type="submit"
-            >
+                class="login-btn">
                 🔐 Hyr në sistem
             </button>
 
 
             <div
                 id="error"
-                class="error"
-            >
+                class="error">
                 Username ose password i gabuar.
             </div>
 
 
         </form>
 
-
     </div>
 
 
     <div class="footer">
 
-        Bar Lulishtja • Management System
+        Management System
 
     </div>
 
@@ -334,19 +308,16 @@
 </div>
 
 
-
 <script>
 
 
 /* =====================================================
-   USERS
+   DEFAULT USERS
 ===================================================== */
-
 
 const defaultUsers = [
 
     {
-
         id: "admin",
 
         username: "admin",
@@ -356,12 +327,10 @@ const defaultUsers = [
         role: "admin",
 
         name: "Administrator"
-
     },
 
 
     {
-
         id: "waiter1",
 
         username: "kamarier1",
@@ -371,28 +340,28 @@ const defaultUsers = [
         role: "waiter",
 
         name: "Kamarier 1"
-
     }
 
 ];
 
 
+/* =====================================================
+   USERS
+===================================================== */
 
 function getUsers() {
 
-
     const saved =
         localStorage.getItem(
-            "barUsersV2"
+            "barUsersV3"
         );
 
 
     if (!saved) {
 
-
         localStorage.setItem(
 
-            "barUsersV2",
+            "barUsersV3",
 
             JSON.stringify(
                 defaultUsers
@@ -401,25 +370,45 @@ function getUsers() {
         );
 
 
-        return [
-            ...defaultUsers
-        ];
-
+        return JSON.parse(
+            JSON.stringify(
+                defaultUsers
+            )
+        );
     }
 
 
     return JSON.parse(
         saved
     );
-
 }
 
+
+/* =====================================================
+   APP NAME
+===================================================== */
+
+function getAppName() {
+
+    return (
+        localStorage.getItem(
+            "barAppNameV3"
+        )
+        ||
+        "Bar Lulishtja"
+    );
+}
+
+
+document.getElementById(
+    "loginAppName"
+).textContent =
+    getAppName();
 
 
 /* =====================================================
    LOGIN
 ===================================================== */
-
 
 document
     .getElementById(
@@ -428,7 +417,6 @@ document
     .addEventListener(
         "submit",
         function(event) {
-
 
             event.preventDefault();
 
@@ -457,25 +445,23 @@ document
                     item =>
 
                         item.username ===
-                        username &&
+                        username
+
+                        &&
 
                         item.password ===
                         password
-
                 );
 
 
             if (!user) {
-
 
                 document.getElementById(
                     "error"
                 ).style.display =
                     "block";
 
-
                 return;
-
             }
 
 
@@ -505,10 +491,8 @@ document
             window.location.href =
                 "index.html";
 
-
         }
     );
-
 
 </script>
 
