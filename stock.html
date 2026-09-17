@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stoku - Bar Lulishtja</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f1115;
+    color: #fff;
+}
+
+header {
+    background: #171a21;
+    padding: 18px;
+    border-bottom: 1px solid #292d36;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.back {
+    background: #2a2f3a;
+    color: white;
+    border: 0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #171a21;
+    border: 1px solid #292d36;
+    border-radius: 15px;
+    padding: 18px;
+}
+
+.card small {
+    color: #9299a8;
+}
+
+.card strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 8px;
+}
+
+.search {
+    width: 100%;
+    background: #171a21;
+    color: white;
+    border: 1px solid #303642;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.product {
+    background: #171a21;
+    border: 1px solid #292d36;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.product-category {
+    color: #9299a8;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.stock {
+    font-size: 22px;
+    font-weight: bold;
+    min-width: 70px;
+    text-align: center;
+}
+
+.low {
+    color: #ffb020;
+}
+
+.empty {
+    color: #ff5555;
+}
+
+.ok {
+    color: #42d392;
+}
+
+.buttons {
+    display: flex;
+    gap: 7px;
+}
+
+.btn {
+    border: 0;
+    border-radius: 9px;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.minus {
+    background: #8e3030;
+}
+
+.plus {
+    background: #237a4b;
+}
+
+.reset {
+    background: #444b59;
+}
+
+@media(max-width:700px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .product {
+        flex-wrap: wrap;
+    }
+
+    .product-info {
+        width: 100%;
+        flex-basis: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <h1>📦 Stoku</h1>
+        <button class="back" onclick="location.href='index.html'">
+            ← Kthehu
+        </button>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="stats">
+        <div class="card">
+            <small>Produkte</small>
+            <strong id="productCount">0</strong>
+        </div>
+
+        <div class="card">
+            <small>Stok total</small>
+            <strong id="totalStock">0</strong>
+        </div>
+
+        <div class="card">
+            <small>Stok i ulët</small>
+            <strong id="lowStock">0</strong>
+        </div>
+    </div>
+
+    <input
+        class="search"
+        id="search"
+        placeholder="🔎 Kërko produkt..."
+        oninput="render()"
+    >
+
+    <div id="products"></div>
+
+</div>
+
+<script>
+
+const PRODUCTS_KEY = "barProductsV3";
+const STOCK_KEY = "barInventoryV1";
+
+const defaultProducts = [
+    {id: 1, name:"Espresso", price:100, category:"Kafe"},
+    {id: 2, name:"Macchiato", price:120, category:"Kafe"},
+    {id: 3, name:"Cappuccino", price:180, category:"Kafe"},
+    {id: 4, name:"Coca Cola", price:150, category:"Pije"},
+    {id: 5, name:"Fanta", price:150, category:"Pije"},
+    {id: 6, name:"Ujë", price:100, category:"Pije"},
+    {id: 7, name:"Red Bull", price:250, category:"Pije"},
+    {id: 8, name:"Birrë", price:200, category:"Alkool"},
+    {id: 9, name:"Verë", price:300, category:"Alkool"},
+    {id:10, name:"Koktej", price:500, category:"Koktej"}
+];
+
+function getProducts() {
+    try {
+        return JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || defaultProducts;
+    } catch {
+        return defaultProducts;
+    }
+}
+
+function getStock() {
+    try {
+        return JSON.parse(localStorage.getItem(STOCK_KEY)) || {};
+    } catch {
+        return {};
+    }
+}
+
+function saveStock(stock) {
+    localStorage.setItem(STOCK_KEY, JSON.stringify(stock));
+}
+
+function getStockValue(id) {
+    const stock = getStock();
+
+    if (stock[id] === undefined) {
+        stock[id] = 20;
+        saveStock(stock);
+    }
+
+    return Number(stock[id]) || 0;
+}
+
+function changeStock(id, amount) {
+    const stock = getStock();
+
+    if (stock[id] === undefined) {
+        stock[id] = 20;
+    }
+
+    stock[id] += amount;
+
+    if (stock[id] < 0) {
+        stock[id] = 0;
+    }
+
+    saveStock(stock);
+    render();
+}
+
+function resetStock(id) {
+    const stock = getStock();
+    stock[id] = 20;
+    saveStock(stock);
+    render();
+}
+
+function render() {
+
+    const products = getProducts();
+    const search = document.getElementById("search").value.toLowerCase();
+
+    let total = 0;
+    let low = 0;
+
+    products.forEach(p => {
+        const s = getStockValue(p.id);
+        total += s;
+
+        if (s <= 5) {
+            low++;
+        }
+    });
+
+    document.getElementById("productCount").textContent = products.length;
+    document.getElementById("totalStock").textContent = total;
+    document.getElementById("lowStock").textContent = low;
+
+    const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(search)
+    );
+
+    document.getElementById("products").innerHTML =
+        filtered.map(p => {
+
+            const s = getStockValue(p.id);
+
+            let cls = "ok";
+
+            if (s === 0) {
+                cls = "empty";
+            } else if (s <= 5) {
+                cls = "low";
+            }
+
+            return `
+                <div class="product">
+
+                    <div class="product-info">
+                        <div class="product-name">
+                            ${escapeHtml(p.name)}
+                        </div>
+
+                        <div class="product-category">
+                            ${escapeHtml(p.category || "Produkt")}
+                        </div>
+                    </div>
+
+                    <div class="stock ${cls}">
+                        ${s}
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="btn minus"
+                            onclick="changeStock(${p.id}, -1)">
+                            −
+                        </button>
+
+                        <button
+                            class="btn plus"
+                            onclick="changeStock(${p.id}, 1)">
+                            +
+                        </button>
+
+                        <button
+                            class="btn reset"
+                            onclick="resetStock(${p.id})">
+                            20
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+        }).join("");
+}
+
+function escapeHtml(text) {
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+render();
+
+</script>
+
+</body>
+</html>
