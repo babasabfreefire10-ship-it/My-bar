@@ -1,449 +1,1073 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07110b">
-  <title>MY BAR</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MY BAR</title>
+<style>
+*{box-sizing:border-box}
+:root{
+ --bg:#07100c;
+ --panel:#0d1913;
+ --panel2:#111f18;
+ --line:#20352a;
+ --green:#20d47a;
+ --green2:#15995a;
+ --text:#f2f7f4;
+ --muted:#91a59a;
+ --danger:#ef5350;
+}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Inter,Arial,sans-serif;min-height:100vh;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* LOGIN */
+#loginScreen{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+background:
+radial-gradient(circle at 50% 20%,rgba(32,212,122,.12),transparent 35%),
+#050b08;
+padding:20px;
+}
+.loginBox{
+width:400px;max-width:100%;background:rgba(13,25,19,.96);
+border:1px solid var(–line);border-radius:22px;padding:38px;
+box-shadow:0 25px 80px rgba(0,0,0,.55);
+}
+.logo{
+width:68px;height:68px;border-radius:18px;background:var(–green);
+color:#04110a;display:grid;place-items:center;font-size:30px;
+font-weight:900;margin-bottom:20px;
+}
+.loginBox h1{margin:0;font-size:30px}
+.loginBox p{color:var(–muted);margin:8px 0 28px}
+.field{margin-bottom:15px}
+.field label{display:block;color:var(–muted);font-size:13px;margin-bottom:7px}
+.field input,.field select{
+width:100%;background:#08130d;border:1px solid var(–line);
+color:white;padding:13px 14px;border-radius:11px;outline:none;
+}
+.field input:focus{border-color:var(–green)}
+.primary{
+width:100%;border:0;background:var(–green);color:#031109;
+padding:14px;border-radius:11px;font-weight:800;margin-top:8px;
+}
+.loginHint{font-size:12px;color:#6f8177;text-align:center;margin-top:18px}
+
+/* APP */
+#app{min-height:100vh;display:none}
+.topbar{
+height:70px;background:#09140f;border-bottom:1px solid var(–line);
+display:flex;align-items:center;justify-content:space-between;
+padding:0 22px;position:sticky;top:0;z-index:20;
+}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:20px}
+.brandMark{
+width:38px;height:38px;border-radius:10px;background:var(–green);
+color:#04110a;display:grid;place-items:center;font-weight:900;
+}
+.topRight{display:flex;align-items:center;gap:14px}
+.status{font-size:12px;color:var(–green)}
+.userBadge{
+background:var(–panel2);border:1px solid var(–line);
+padding:9px 12px;border-radius:9px;font-size:13px;
+}
+.logout{
+background:transparent;border:1px solid #294238;color:#b8c8c0;
+padding:9px 12px;border-radius:9px;
+}
+.layout{display:flex;min-height:calc(100vh - 70px)}
+.sidebar{
+width:220px;background:#08120d;border-right:1px solid var(–line);
+padding:18px 12px;flex-shrink:0;
+}
+.navTitle{
+color:#53665c;font-size:10px;font-weight:800;
+text-transform:uppercase;letter-spacing:1.5px;
+padding:12px 11px 7px;
+}
+.navBtn{
+width:100%;border:0;background:transparent;color:#9fb0a7;
+padding:12px;border-radius:10px;text-align:left;margin-bottom:4px;
+}
+.navBtn:hover,.navBtn.active{background:#12251a;color:white}
+.navBtn.active{box-shadow:inset 3px 0 var(–green)}
+.main{flex:1;padding:25px;min-width:0}
+.page{display:none}
+.page.active{display:block}
+.pageHead{
+display:flex;align-items:end;justify-content:space-between;
+margin-bottom:22px;gap:15px;
+}
+.pageHead h2{margin:0;font-size:27px}
+.pageHead p{margin:5px 0 0;color:var(–muted);font-size:13px}
+
+/* COMMON */
+.grid4{
+display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;
+}
+.card{
+background:var(–panel);border:1px solid var(–line);
+border-radius:15px;padding:18px;
+}
+.statLabel{color:var(–muted);font-size:12px}
+.statValue{font-size:27px;font-weight:900;margin-top:8px}
+.green{color:var(–green)}
+.toolbar{
+display:flex;gap:10px;flex-wrap:wrap;margin-bottom:17px;
+}
+.search{
+flex:1;min-width:180px;background:#09140f;color:white;
+border:1px solid var(–line);border-radius:10px;padding:12px;
+outline:none;
+}
+.smallBtn{
+border:1px solid var(–line);background:#122219;color:#dce7e1;
+padding:10px 13px;border-radius:9px;
+}
+.smallBtn.greenBtn{background:var(–green);color:#031109;border-color:var(–green);font-weight:800}
+.smallBtn.danger{color:#ff8a87;border-color:#5b2928}
+
+/* TABLES */
+.tableGrid{
+display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.tableCard{
+min-height:145px;background:var(–panel);border:1px solid var(–line);
+border-radius:15px;padding:17px;display:flex;flex-direction:column;
+justify-content:space-between;transition:.15s;
+}
+.tableCard:hover{border-color:#31634a;transform:translateY(-1px)}
+.tableCard.open{border-color:#1d7349}
+.tableTop{display:flex;justify-content:space-between}
+.tableNumber{font-size:20px;font-weight:900}
+.tableState{font-size:11px;color:var(–green)}
+.tableAmount{font-size:22px;font-weight:900;margin:12px 0}
+
+/* MENU */
+.categoryBar{display:flex;gap:8px;overflow:auto;margin-bottom:17px;padding-bottom:3px}
+.catBtn{
+white-space:nowrap;border:1px solid var(–line);background:#0b1711;
+color:#91a59a;padding:9px 13px;border-radius:20px;
+}
+.catBtn.active{background:var(–green);color:#04110a;border-color:var(–green);font-weight:800}
+.productGrid{
+display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.product{
+background:var(–panel);border:1px solid var(–line);
+border-radius:15px;overflow:hidden;
+}
+.productImage{height:125px;background:#13251b;overflow:hidden}
+.productImage img{width:100%;height:100%;object-fit:cover}
+.productBody{padding:14px}
+.productName{font-weight:800}
+.productCat{font-size:11px;color:var(–muted);margin-top:4px}
+.productBottom{
+display:flex;align-items:center;justify-content:space-between;margin-top:13px;
+}
+.price{font-weight:900;color:var(–green)}
+.addBtn{
+border:0;background:var(–green);color:#031109;
+width:35px;height:35px;border-radius:9px;font-size:20px;font-weight:900;
+}
+
+/* ORDER */
+.orderLayout{display:grid;grid-template-columns:1.5fr .8fr;gap:18px}
+.orderTable{
+width:100%;border-collapse:collapse;
+}
+.orderTable th{
+color:#667b70;font-size:11px;text-align:left;padding:11px;
+border-bottom:1px solid var(–line);
+}
+.orderTable td{padding:12px 11px;border-bottom:1px solid #17271f}
+.qty{
+display:flex;align-items:center;gap:8px;
+}
+.qty button{
+width:27px;height:27px;border-radius:7px;border:1px solid var(–line);
+background:#132219;color:white;
+}
+.summary h3{margin-top:0}
+.sumRow{
+display:flex;justify-content:space-between;padding:10px 0;color:#a9b9b1;
+}
+.total{
+border-top:1px solid var(–line);margin-top:8px;padding-top:15px;
+display:flex;justify-content:space-between;font-size:22px;font-weight:900;
+}
+.paymentButtons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
+.paymentButtons button{
+padding:13px;border-radius:10px;border:1px solid var(–line);
+background:#14241b;color:white;font-weight:800;
+}
+.paymentButtons button:first-child{background:var(–green);color:#031109;border-color:var(–green)}
+
+/* HISTORY */
+.list{display:flex;flex-direction:column;gap:9px}
+.listRow{
+background:var(–panel);border:1px solid var(–line);
+border-radius:12px;padding:14px;display:flex;justify-content:space-between;
+align-items:center;gap:12px;
+}
+.muted{color:var(–muted);font-size:12px}
+
+/* ADMIN */
+.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.formCard h3{margin-top:0}
+.formCard input{
+width:100%;background:#08130d;border:1px solid var(–line);
+color:white;padding:12px;border-radius:9px;margin:8px 0 10px;outline:none;
+}
+.usersTable{width:100%;border-collapse:collapse}
+.usersTable td,.usersTable th{
+padding:11px;border-bottom:1px solid var(–line);text-align:left;
+}
+.usersTable th{font-size:11px;color:var(–muted)}
+
+/* MODAL */
+.modal{
+position:fixed;inset:0;background:rgba(0,0,0,.7);
+display:none;align-items:center;justify-content:center;padding:20px;z-index:100;
+}
+.modal.show{display:flex}
+.modalBox{
+width:460px;max-width:100%;background:#0c1912;
+border:1px solid var(–line);border-radius:18px;padding:22px;
+box-shadow:0 25px 80px rgba(0,0,0,.7);
+}
+.modalHead{display:flex;justify-content:space-between;align-items:center}
+.close{
+background:transparent;border:0;color:#91a59a;font-size:25px;
+}
+.invoice{
+background:white;color:#111;padding:20px;border-radius:8px;
+font-family:Arial;
+}
+.invoice h2{text-align:center;margin-top:0}
+.invoiceLine{display:flex;justify-content:space-between;padding:7px 0}
+.invoiceTotal{
+border-top:1px solid #aaa;padding-top:10px;
+font-weight:bold;font-size:18px;
+}
+.toast{
+position:fixed;right:20px;bottom:20px;
+background:#173a28;color:white;border:1px solid #2b704d;
+padding:13px 17px;border-radius:10px;z-index:200;
+opacity:0;transform:translateY(15px);transition:.2s;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:1050px){
+.grid4{grid-template-columns:repeat(2,1fr)}
+.tableGrid,.productGrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:800px){
+.sidebar{width:70px;padding:10px 7px}
+.navBtn{font-size:0;text-align:center}
+.navBtn::first-letter{font-size:18px}
+.navTitle{display:none}
+.main{padding:16px}
+.orderLayout{grid-template-columns:1fr}
+.formGrid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.topbar{height:auto;min-height:65px;padding:10px 12px}
+.status{display:none}
+.userBadge{display:none}
+.layout{min-height:calc(100vh - 65px)}
+.sidebar{
+width:100%;height:58px;position:fixed;bottom:0;left:0;right:0;
+z-index:50;border-right:0;border-top:1px solid var(–line);
+display:flex;overflow-x:auto;background:#08120df2;
+}
+.navBtn{min-width:68px;margin:4px;font-size:9px;text-align:center;padding:8px}
+.main{padding:15px 12px 75px}
+.grid4{grid-template-columns:1fr 1fr;gap:9px}
+.card{padding:14px}
+.statValue{font-size:21px}
+.tableGrid,.productGrid{grid-template-columns:1fr 1fr;gap:9px}
+.tableCard{min-height:125px;padding:13px}
+.productImage{height:100px}
+.pageHead h2{font-size:22px}
+.pageHead{align-items:start}
+.orderTable th:nth-child(3),.orderTable td:nth-child(3){display:none}
+}
+@media(max-width:390px){
+.tableGrid,.productGrid{grid-template-columns:1fr}
+}
 </head>
-
 <body>
+<!-- LOGIN -->
+<div id="loginScreen">
+ <div class="loginBox">
+  <div class="logo">M</div>
+  <h1>MY BAR</h1>
+  <p>Sistemi i menaxhimit të barit</p>
+  <div class="field">
+   <label>Përdoruesi</label>
+   <input id="loginUser" placeholder="admin">
+  </div>
+  <div class="field">
+   <label>Fjalëkalimi</label>
+   <input id="loginPass" type="password" placeholder="••••">
+  </div>
 
-<div id="toast"></div>
+HYR NË SISTEM
 
-<header class="topbar">
+  <div class="loginHint">Admin: admin / 1234</div>
+ </div>
+</div>
+<!-- APP -->
+<div id="app">
+ <header class="topbar">
   <div class="brand">
-    <div class="brand-logo">M</div>
-    <div>
-      <strong>MY BAR</strong>
-      <span>SISTEM MENAXHIMI</span>
-    </div>
+   <div class="brandMark">M</div>
+   <span>MY BAR</span>
   </div>
-
-  <div class="top-info">
-    <div>
-      <small>STATUS</small>
-      <b class="online">● ONLINE</b>
-    </div>
-    <div>
-      <small>ORA</small>
-      <b id="clock">--:--:--</b>
-    </div>
-    <div>
-      <small>PËRDORUESI</small>
-      <b id="userInfo">---</b>
-    </div>
-    <button id="logoutBtn" class="logout">DIL</button>
+  <div class="topRight">
+   <span class="status">● SISTEMI ONLINE</span>
+   <span id="clock">--:--</span>
+   <span class="userBadge" id="currentUser">Admin</span>
+   <button class="logout" id="logoutBtn">Dil</button>
   </div>
-</header>
-
-<div class="app">
-
+ </header>
+ <div class="layout">
   <aside class="sidebar">
-
-    <div class="side-title">MENU</div>
-
-    <button class="nav-btn active" data-section="dashboard">
-      <span>▦</span> Dashboard
-    </button>
-
-    <button class="nav-btn" data-section="tables">
-      <span>▤</span> Tavolina
-    </button>
-
-    <button class="nav-btn" data-section="menu">
-      <span>☷</span> Menu
-    </button>
-
-    <button class="nav-btn" data-section="orders">
-      <span>🛒</span> Porosi
-    </button>
-
-    <button class="nav-btn admin-only" data-section="cash">
-      <span>€</span> Arka
-    </button>
-
-    <button class="nav-btn admin-only" data-section="history">
-      <span>◷</span> Historiku
-    </button>
-
-    <button class="nav-btn admin-only" data-section="admin">
-      <span>⚙</span> Admin
-    </button>
-
-    <div class="side-bottom">
-      <div class="system-box">
-        <span>SISTEMI</span>
-        <b>MY BAR V2</b>
-        <small>PC MANAGEMENT</small>
-      </div>
-    </div>
-
+   <div class="navTitle">Menu</div>
+   <button class="navBtn active" data-page="dashboard">⌂ Dashboard</button>
+   <button class="navBtn" data-page="tables">▦ Tavolinat</button>
+   <button class="navBtn" data-page="menu">☕ Menuja</button>
+   <button class="navBtn" data-page="orders">🛒 Porosia</button>
+   <button class="navBtn" data-page="cash">€ Arka</button>
+   <button class="navBtn" data-page="history">↻ Historiku</button>
+   <button class="navBtn" id="adminNav" data-page="admin">⚙ Admin</button>
   </aside>
-
-  <main class="content">
-
-    <!-- DASHBOARD -->
-    <section id="dashboard" class="section active">
-      <div class="page-head">
-        <div>
-          <h1>Dashboard</h1>
-          <p>Pasqyra e aktivitetit të lokalit</p>
-        </div>
-        <div class="date-box" id="todayDate"></div>
-      </div>
-
-      <div class="stats">
-
-        <div class="stat">
-          <span>SHITJE SOT</span>
-          <strong id="salesToday">0 L</strong>
-          <small>Total shitje</small>
-        </div>
-
-        <div class="stat">
-          <span>TAVOLINA AKTIVE</span>
-          <strong id="activeTables">0</strong>
-          <small>Tavolina me porosi</small>
-        </div>
-
-        <div class="stat">
-          <span>FATURA</span>
-          <strong id="invoiceToday">0</strong>
-          <small>Fatura sot</small>
-        </div>
-
-        <div class="stat">
-          <span>KARTË</span>
-          <strong id="cardToday">0 L</strong>
-          <small>Pagesa me kartë</small>
-        </div>
-
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Tavolinat</h2>
-          <button class="green-btn" data-section="tables">SHIKO TË GJITHA</button>
-        </div>
-        <div id="dashboardTables" class="mini-tables"></div>
-      </div>
-
-      <div class="quick-grid">
-        <button class="quick" data-section="tables">
-          <b>+</b>
-          <span>Hap Tavolinë</span>
-        </button>
-
-        <button class="quick" data-section="menu">
-          <b>☷</b>
-          <span>Shiko Menu</span>
-        </button>
-
-        <button class="quick" data-section="orders">
-          <b>🛒</b>
-          <span>Porositë</span>
-        </button>
-
-        <button class="quick admin-only" data-section="cash">
-          <b>€</b>
-          <span>Shiko Arkën</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- TABLES -->
-    <section id="tables" class="section">
-      <div class="page-head">
-        <div>
-          <h1>Tavolinat</h1>
-          <p>Zgjidh një tavolinë për të hapur porosinë</p>
-        </div>
-        <div class="legend">
-          <span><i class="free-dot"></i> E lirë</span>
-          <span><i class="busy-dot"></i> E zënë</span>
-        </div>
-      </div>
-
-      <div id="tableGrid" class="table-grid"></div>
-    </section>
-
-    <!-- MENU -->
-    <section id="menu" class="section">
-
-      <div class="page-head">
-        <div>
-          <h1>Menu</h1>
-          <p>Zgjidh produktet për tavolinën</p>
-        </div>
-
-        <div class="selected-table">
-          TAVOLINA:
-          <b id="menuSelectedTable">Asnjë</b>
-        </div>
-      </div>
-
-      <div class="menu-toolbar">
-        <div id="categories" class="categories"></div>
-
-        <input
-          id="menuSearch"
-          type="search"
-          placeholder="Kërko produkt..."
-        >
-      </div>
-
-      <div id="menuGrid" class="product-grid"></div>
-
-    </section>
-
-    <!-- ORDERS -->
-    <section id="orders" class="section">
-
-      <div class="page-head">
-        <div>
-          <h1>Porosia</h1>
-          <p id="selectedTableText">Zgjidh një tavolinë</p>
-        </div>
-
-        <button id="clearOrderBtn" class="danger-btn">
-          PASTRO POROSINË
-        </button>
-      </div>
-
-      <div class="order-layout">
-
-        <div class="panel order-items-panel">
-          <div class="panel-head">
-            <h2>Produktet</h2>
-          </div>
-
-          <div id="orderItems" class="order-items">
-            <div class="empty">
-              Nuk ka produkte në porosi.
-            </div>
-          </div>
-        </div>
-
-        <div class="panel order-summary">
-          <h2>Totali</h2>
-
-          <div class="summary-row">
-            <span>Nëntotal</span>
-            <b id="orderSubtotal">0 L</b>
-          </div>
-
-          <div class="summary-row">
-            <span>Shërbim</span>
-            <b id="orderService">0 L</b>
-          </div>
-
-          <div class="summary-total">
-            <span>TOTAL</span>
-            <strong id="orderTotal">0 L</strong>
-          </div>
-
-          <button id="paymentBtn" class="pay-btn">
-            PAGESË
-          </button>
-
-          <button id="invoiceBtn" class="invoice-btn">
-            FATURË
-          </button>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- CASH -->
-    <section id="cash" class="section admin-only-section">
-
-      <div class="page-head">
-        <div>
-          <h1>Arka</h1>
-          <p>Gjendja financiare e ditës</p>
-        </div>
-      </div>
-
-      <div class="stats">
-        <div class="stat">
-          <span>TOTAL</span>
-          <strong id="cashTotal">0 L</strong>
-        </div>
-
-        <div class="stat">
-          <span>CASH</span>
-          <strong id="cashMoney">0 L</strong>
-        </div>
-
-        <div class="stat">
-          <span>KARTË</span>
-          <strong id="cashCard">0 L</strong>
-        </div>
-
-        <div class="stat">
-          <span>FATURA</span>
-          <strong id="cashInvoices">0</strong>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Pagesat</h2>
-        </div>
-
-        <div id="paymentsList"></div>
-      </div>
-
-    </section>
-
-    <!-- HISTORY -->
-    <section id="history" class="section admin-only-section">
-
-      <div class="page-head">
-        <div>
-          <h1>Historiku</h1>
-          <p>Historiku i faturave</p>
-        </div>
-
-        <button id="deleteHistoryBtn" class="danger-btn">
-          FSHI HISTORIKUN
-        </button>
-      </div>
-
-      <div class="panel">
-        <div id="historyList"></div>
-      </div>
-
-    </section>
-
-    <!-- ADMIN -->
-    <section id="admin" class="section admin-only-section">
-
-      <div class="page-head">
-        <div>
-          <h1>Administrimi</h1>
-          <p>Menaxho sistemin MY BAR</p>
-        </div>
-      </div>
-
-      <div class="admin-grid">
-
-        <div class="panel">
-          <h2>Emri i lokalit</h2>
-
-          <input id="appNameInput" class="admin-input" type="text">
-
-          <button id="saveAppNameBtn" class="green-btn full">
-            RUAJ
-          </button>
-        </div>
-
-        <div class="panel">
-          <h2>Tavolinat</h2>
-
-          <input
-            id="tableCountInput"
-            class="admin-input"
-            type="number"
-            min="1"
-            max="100"
-          >
-
-          <button id="saveTableCountBtn" class="green-btn full">
-            RUAJ TAVOLINAT
-          </button>
-        </div>
-
-        <div class="panel">
-          <h2>Ndrysho fjalëkalimin</h2>
-
-          <input
-            id="newAdminPassword"
-            class="admin-input"
-            type="password"
-            placeholder="Fjalëkalim i ri"
-          >
-
-          <button id="saveAdminPasswordBtn" class="green-btn full">
-            NDRYSHO
-          </button>
-        </div>
-
-        <div class="panel">
-          <h2>Backup</h2>
-
-          <p class="muted">
-            Ruaj të dhënat e sistemit në kompjuter.
-          </p>
-
-          <button id="backupBtn" class="green-btn full">
-            DOWNLOAD BACKUP
-          </button>
-        </div>
-
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Përdoruesit</h2>
-        </div>
-        <div id="usersList"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Produktet</h2>
-        </div>
-        <div id="adminProducts"></div>
-      </div>
-
-    </section>
-
-  </main>
-</div>
-
-<!-- PAYMENT MODAL -->
-<div id="paymentModal" class="modal">
-  <div class="modal-box">
-
-    <button class="modal-close" data-close="paymentModal">×</button>
-
-    <h2>Pagesa</h2>
-    <p>Zgjidh mënyrën e pagesës.</p>
-
-    <div class="payment-options">
-      <button id="cashPaymentBtn" class="payment-option">
-        <span>💵</span>
-        CASH
-      </button>
-
-      <button id="cardPaymentBtn" class="payment-option">
-        <span>💳</span>
-        KARTË
-      </button>
+  <main class="main">
+   <!-- DASHBOARD -->
+   <section class="page active" id="dashboard">
+    <div class="pageHead">
+     <div>
+      <h2>Dashboard</h2>
+      <p>Mirë se erdhe në MY BAR.</p>
+     </div>
     </div>
-
-  </div>
+<div class="grid4">
+ <div class="card">
+  <div class="statLabel">SHITJE SOT</div>
+  <div class="statValue green" id="statSales">0 L</div>
+ </div>
+ <div class="card">
+  <div class="statLabel">TAVOLINA AKTIVE</div>
+  <div class="statValue" id="statActive">0</div>
+ </div>
+ <div class="card">
+  <div class="statLabel">FATURA</div>
+  <div class="statValue" id="statInvoices">0</div>
+ </div>
+ <div class="card">
+  <div class="statLabel">KARTË</div>
+  <div class="statValue" id="statCard">0 L</div>
+ </div>
 </div>
-
+<div class="card">
+ <h3>Tavolinat</h3>
+ <div class="tableGrid" id="dashboardTables"></div>
+</div>
+   </section>
+   <!-- TABLES -->
+   <section class="page" id="tables">
+    <div class="pageHead">
+     <div>
+      <h2>Tavolinat</h2>
+      <p>Zgjidh një tavolinë për të hapur porosinë.</p>
+     </div>
+    </div>
+    <div class="tableGrid" id="tableGrid"></div>
+   </section>
+   <!-- MENU -->
+   <section class="page" id="menu">
+    <div class="pageHead">
+     <div>
+      <h2>Menuja</h2>
+      <p>Zgjidh produktet për porosinë.</p>
+     </div>
+    </div>
+<div class="toolbar">
+ <input class="search" id="search" placeholder="Kërko produkt...">
+</div>
+<div class="categoryBar" id="categories"></div>
+<div class="productGrid" id="products"></div>
+   </section>
+   <!-- ORDERS -->
+   <section class="page" id="orders">
+    <div class="pageHead">
+     <div>
+      <h2>Porosia</h2>
+      <p id="selectedTableText">Zgjidh një tavolinë.</p>
+     </div>
+     <button class="smallBtn danger" id="clearOrder">Pastro porosinë</button>
+    </div>
+<div class="orderLayout">
+ <div class="card">
+  <table class="orderTable">
+   <thead>
+    <tr><th>Produkt</th><th>Sasia</th><th>Çmimi</th><th>Total</th></tr>
+   </thead>
+   <tbody id="orderRows"></tbody>
+  </table>
+  <div id="emptyOrder" class="muted" style="padding:25px;text-align:center">
+   Nuk ka produkte në porosi.
+  </div>
+ </div>
+ <div class="card summary">
+  <h3>Përmbledhje</h3>
+  <div class="sumRow"><span>Nëntotal</span><b id="subtotal">0 L</b></div>
+  <div class="sumRow"><span>Shërbim</span><b>0 L</b></div>
+  <div class="total"><span>TOTAL</span><span class="green" id="total">0 L</span></div>
+  <div class="paymentButtons">
+   <button id="cashBtn">💵 CASH</button>
+   <button id="cardBtn">💳 KARTË</button>
+  </div>
+  <button class="smallBtn" style="width:100%;margin-top:10px" id="invoiceBtn">
+   🧾 Shiko faturën
+  </button>
+ </div>
+</div>
+   </section>
+   <!-- CASH -->
+   <section class="page" id="cash">
+    <div class="pageHead">
+     <div>
+      <h2>Arka</h2>
+      <p>Përmbledhja e pagesave të sotme.</p>
+     </div>
+    </div>
+<div class="grid4">
+ <div class="card"><div class="statLabel">TOTAL</div><div class="statValue green" id="cashTotal">0 L</div></div>
+ <div class="card"><div class="statLabel">CASH</div><div class="statValue" id="cashMoney">0 L</div></div>
+ <div class="card"><div class="statLabel">KARTË</div><div class="statValue" id="cashCard">0 L</div></div>
+ <div class="card"><div class="statLabel">FATURA</div><div class="statValue" id="cashInvoices">0</div></div>
+</div>
+<div class="card">
+ <h3>Pagesat</h3>
+ <div class="list" id="payments"></div>
+</div>
+   </section>
+   <!-- HISTORY -->
+   <section class="page" id="history">
+    <div class="pageHead">
+     <div>
+      <h2>Historiku</h2>
+      <p>Faturat e regjistruara.</p>
+     </div>
+     <button class="smallBtn danger" id="clearHistory">Fshi historikun</button>
+    </div>
+    <div class="list" id="historyList"></div>
+   </section>
+   <!-- ADMIN -->
+   <section class="page" id="admin">
+    <div class="pageHead">
+     <div>
+      <h2>Administrimi</h2>
+      <p>Kontrollo konfigurimin e MY BAR.</p>
+     </div>
+    </div>
+<div class="formGrid">
+ <div class="card formCard">
+  <h3>Emri i lokalit</h3>
+  <input id="barName" placeholder="MY BAR">
+  <button class="smallBtn greenBtn" id="saveName">Ruaj emrin</button>
+ </div>
+ <div class="card formCard">
+  <h3>Numri i tavolinave</h3>
+  <input id="tableCount" type="number" min="1" max="50">
+  <button class="smallBtn greenBtn" id="saveTables">Ruaj tavolinat</button>
+ </div>
+ <div class="card formCard">
+  <h3>Ndrysho passwordin</h3>
+  <input id="newPassword" type="password" placeholder="Password i ri">
+  <button class="smallBtn greenBtn" id="savePassword">Ndrysho</button>
+ </div>
+ <div class="card formCard">
+  <h3>Backup</h3>
+  <p class="muted">Shkarko të dhënat e MY BAR.</p>
+  <button class="smallBtn greenBtn" id="backup">⬇ Backup</button>
+ </div>
+</div>
+   </section>
+  </main>
+ </div>
+</div>
+<!-- PAYMENT MODAL -->
+<div class="modal" id="paymentModal">
+ <div class="modalBox">
+  <div class="modalHead">
+   <h3>Konfirmo pagesën</h3>
+   <button class="close" data-close="paymentModal">×</button>
+  </div>
+  <p class="muted">Zgjidh mënyrën e pagesës.</p>
+  <div class="paymentButtons">
+   <button id="modalCash">💵 CASH</button>
+   <button id="modalCard">💳 KARTË</button>
+  </div>
+ </div>
+</div>
 <!-- INVOICE MODAL -->
-<div id="invoiceModal" class="modal">
-  <div class="modal-box invoice-box">
-
-    <button class="modal-close" data-close="invoiceModal">×</button>
-
-    <div id="invoiceContent"></div>
-
-    <button id="printInvoiceBtn" class="green-btn full">
-      PRINT FATURË
-    </button>
-
+<div class="modal" id="invoiceModal">
+ <div class="modalBox">
+  <div class="modalHead">
+   <h3>Faturë</h3>
+   <button class="close" data-close="invoiceModal">×</button>
   </div>
+  <div id="invoiceContent"></div>
+  <button class="smallBtn greenBtn" style="width:100%;margin-top:12px" id="printInvoice">
+   🖨 Printo
+  </button>
+ </div>
 </div>
+<div class="toast" id="toast"></div>
+<script>
+const DBKEY="MY_BAR_V3_DATA";
+let db={
+ users:[{username:"admin",password:"1234",role:"admin"}],
+ products:[
+  ["Espresso",100,"Kafe"],
+  ["Macchiato",120,"Kafe"],
+  ["Cappuccino",150,"Kafe"],
+  ["Americano",130,"Kafe"],
+  ["Ujë",80,"Pije"],
+  ["Coca Cola",150,"Pije"],
+  ["Fanta",150,"Pije"],
+  ["Sprite",150,"Pije"],
+  ["Red Bull",250,"Pije"],
+  ["Birrë",200,"Alkool"],
+  ["Verë",300,"Alkool"],
+  ["Vodka",350,"Alkool"],
+  ["Pizza",500,"Ushqim"],
+  ["Burger",450,"Ushqim"],
+  ["Patate",250,"Ushqim"]
+ ].map((p,i)=>({
+  id:i+1,name:p[0],price:p[1],category:p[2],
+  image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80"
+ })),
+ tables:12,
+ orders:{},
+ invoices:[],
+ barName:"MY BAR"
+};
+let currentUser=null;
+let selectedTable=null;
+let currentCategory="Të gjitha";
+function load(){
+ const saved=localStorage.getItem(DBKEY);
+ if(saved){
+  try{db=Object.assign(db,JSON.parse(saved))}catch(e){}
+ }
+}
+function save(){
+ localStorage.setItem(DBKEY,JSON.stringify(db));
+}
+function money(n){return Number(n||0).toLocaleString("sq-AL")+" L"}
+function today(){
+ return new Date().toISOString().slice(0,10);
+}
+function toast(text){
+ const t=document.getElementById("toast");
+ t.textContent=text;
+ t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),1800);
+}
+/* LOGIN */
+function login(){
+ const u=document.getElementById("loginUser").value.trim();
+ const p=document.getElementById("loginPass").value;
+ const user=db.users.find(x=>x.username===u&&x.password===p);
+ if(!user){
+  toast("Username ose password gabim");
+  return;
+ }
+ currentUser=user;
+ localStorage.setItem("MY_BAR_CURRENT_USER",JSON.stringify(user));
+ document.getElementById("loginScreen").style.display="none";
+ document.getElementById("app").style.display="block";
+ document.getElementById("currentUser").textContent=user.username;
+ if(user.role!=="admin")document.getElementById("adminNav").style.display="none";
+ renderAll();
+}
+function logout(){
+ localStorage.removeItem("MY_BAR_CURRENT_USER");
+ location.reload();
+}
+/* NAV */
+function openPage(id){
+ if(id==="admin" && currentUser?.role!=="admin"){
+  toast("Vetëm administratori");
+  return;
+ }
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".navBtn").forEach(b=>{
+  b.classList.toggle("active",b.dataset.page===id);
+ });
+ if(id==="menu")renderProducts();
+ if(id==="tables")renderTables();
+ if(id==="orders")renderOrder();
+}
+/* TABLES */
+function getTableOrder(n){
+ if(!db.orders[n])db.orders[n]=[];
+ return db.orders[n];
+}
+function tableTotal(n){
+ return getTableOrder(n).reduce((s,x)=>s+x.price*x.qty,0);
+}
+function selectTable(n){
+ selectedTable=n;
+ openPage("orders");
+ renderOrder();
+ toast("Tavolina "+n+" u zgjodh");
+}
+function renderTables(){
+ const box=document.getElementById("tableGrid");
+ box.innerHTML="";
+ for(let i=1;i<=db.tables;i++){
+  const total=tableTotal(i);
+  const el=document.createElement("div");
+  el.className="tableCard "+(total?"open":"");
+  el.innerHTML=`
+   <div class="tableTop">
+    <span class="tableNumber">T${i}</span>
+    <span class="tableState">${total?"AKTIVE":"BOSH"}</span>
+   </div>
+   <div class="tableAmount">${money(total)}</div>
+   <button class="smallBtn ${total?"greenBtn":""}">Hap tavolinën</button>
+  `;
+  el.querySelector("button").onclick=()=>selectTable(i);
+  box.appendChild(el);
+ }
+}
+function renderDashboardTables(){
+ const box=document.getElementById("dashboardTables");
+ box.innerHTML="";
+ for(let i=1;i<=Math.min(db.tables,8);i++){
+  const total=tableTotal(i);
+  const el=document.createElement("div");
+  el.className="tableCard "+(total?"open":"");
+  el.innerHTML=`
+   <div class="tableTop"><span class="tableNumber">T${i}</span>
+   <span class="tableState">${total?"AKTIVE":"BOSH"}</span></div>
+   <div class="tableAmount">${money(total)}</div>
+   <button class="smallBtn">Hap</button>
+  `;
+  el.querySelector("button").onclick=()=>selectTable(i);
+  box.appendChild(el);
+ }
+}
+/* MENU */
+function renderCategories(){
+ const box=document.getElementById("categories");
+ const cats=["Të gjitha",...new Set(db.products.map(p=>p.category))];
+ box.innerHTML="";
+ cats.forEach(c=>{
+  const b=document.createElement("button");
+  b.className="catBtn "+(currentCategory===c?"active":"");
+  b.textContent=c;
+  b.onclick=()=>{
+   currentCategory=c;
+   renderCategories();
+   renderProducts();
+  };
+  box.appendChild(b);
+ });
+}
+function renderProducts(){
+ renderCategories();
+ const box=document.getElementById("products");
+ const q=document.getElementById("search").value.toLowerCase();
+ box.innerHTML="";
+ db.products
+ .filter(p=>currentCategory==="Të gjitha"||p.category===currentCategory)
+ .filter(p=>p.name.toLowerCase().includes(q))
+ .forEach(p=>{
+  const el=document.createElement("div");
+  el.className="product";
+  el.innerHTML=`
+   <div class="productImage"><img src="${p.image}" alt=""></div>
+   <div class="productBody">
+    <div class="productName">${p.name}</div>
+    <div class="productCat">${p.category}</div>
+    <div class="productBottom">
+     <span class="price">${money(p.price)}</span>
+     <button class="addBtn">+</button>
+    </div>
+   </div>
+  `;
+  el.querySelector(".addBtn").onclick=()=>{
+   if(!selectedTable){
+    openPage("tables");
+    toast("Zgjidh fillimisht një tavolinë");
+    return;
+   }
+   addProduct(p.id);
+  };
+  box.appendChild(el);
+ });
+}
+function addProduct(id){
+ const p=db.products.find(x=>x.id===id);
+ if(!selectedTable)return;
+ const order=getTableOrder(selectedTable);
+ const found=order.find(x=>x.id===id);
+ if(found)found.qty++;
+ else order.push({id:p.id,name:p.name,price:p.price,qty:1});
+ save();
+ renderOrder();
+ renderTables();
+ renderDashboardTables();
+ toast(p.name+" u shtua");
+}
+/* ORDER */
+function renderOrder(){
+ const text=document.getElementById("selectedTableText");
+ if(!selectedTable){
+  text.textContent="Zgjidh një tavolinë.";
+ }else{
+  text.textContent="Tavolina T"+selectedTable;
+ }
+ const rows=document.getElementById("orderRows");
+ const empty=document.getElementById("emptyOrder");
+ rows.innerHTML="";
+ if(!selectedTable){
+  empty.style.display="block";
+  document.getElementById("subtotal").textContent="0 L";
+  document.getElementById("total").textContent="0 L";
+  return;
+ }
+ const order=getTableOrder(selectedTable);
+ empty.style.display=order.length?"none":"block";
+ order.forEach((x,index)=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`
+   <td><b>${x.name}</b></td>
+   <td>
+    <div class="qty">
+     <button data-act="minus">−</button>
+     <b>${x.qty}</b>
+     <button data-act="plus">+</button>
+    </div>
+   </td>
+   <td>${money(x.price)}</td>
+   <td><b>${money(x.price*x.qty)}</b></td>
+  `;
+  tr.querySelector('[data-act="minus"]').onclick=()=>changeQty(index,-1);
+  tr.querySelector('[data-act="plus"]').onclick=()=>changeQty(index,1);
+  rows.appendChild(tr);
+ });
+ const total=tableTotal(selectedTable);
+ document.getElementById("subtotal").textContent=money(total);
+ document.getElementById("total").textContent=money(total);
+}
+function changeQty(index,delta){
+ if(!selectedTable)return;
+ const order=getTableOrder(selectedTable);
+ order[index].qty+=delta;
+ if(order[index].qty<=0)order.splice(index,1);
+ save();
+ renderOrder();
+ renderTables();
+ renderDashboardTables();
+}
+function clearOrder(){
+ if(!selectedTable)return;
+ db.orders[selectedTable]=[];
+ save();
+ renderOrder();
+ renderTables();
+ renderDashboardTables();
+ toast("Porosia u pastrua");
+}
+/* PAYMENT */
+function openPayment(){
+ if(!selectedTable||!tableTotal(selectedTable)){
+  toast("Nuk ka porosi për pagesë");
+  return;
+ }
+ document.getElementById("paymentModal").classList.add("show");
+}
+function pay(method){
+ if(!selectedTable)return;
+ const order=getTableOrder(selectedTable);
+ const total=tableTotal(selectedTable);
+ if(!total)return;
+ const invoice={
+  id:Date.now(),
+  date:new Date().toLocaleString("sq-AL"),
+  day:today(),
+  table:selectedTable,
+  method,
+  total,
+  items:JSON.parse(JSON.stringify(order))
+ };
+ db.invoices.unshift(invoice);
+ db.orders[selectedTable]=[];
+ save();
+ document.getElementById("paymentModal").classList.remove("show");
+ showInvoice(invoice);
+ renderAll();
+ toast("Pagesa u regjistrua");
+}
+/* INVOICE */
+function makeInvoice(items,table,total,method="—"){
+ return `
+ <div class="invoice">
+  <h2>${db.barName}</h2>
+  <div style="text-align:center;font-size:12px;margin-bottom:15px">
+   Tavolina T${table||"—"}<br>${new Date().toLocaleString("sq-AL")}
+  </div>
+  ${items.map(x=>`
+   <div class="invoiceLine">
+    <span>${x.name} × ${x.qty}</span>
+    <span>${money(x.price*x.qty)}</span>
+   </div>
+  `).join("")}
+  <div class="invoiceLine invoiceTotal">
+   <span>TOTAL</span><span>${money(total)}</span>
+  </div>
+  <div style="text-align:center;margin-top:15px;font-size:12px">
+   Pagesa: ${method}
+  </div>
+ </div>`;
+}
+function showInvoice(invoice){
+ document.getElementById("invoiceContent").innerHTML=
+  makeInvoice(invoice.items,invoice.table,invoice.total,invoice.method);
+ document.getElementById("invoiceModal").classList.add("show");
+}
+function previewInvoice(){
+ if(!selectedTable||!tableTotal(selectedTable)){
+  toast("Nuk ka porosi");
+  return;
+ }
+ const items=getTableOrder(selectedTable);
+ document.getElementById("invoiceContent").innerHTML=
+  makeInvoice(items,selectedTable,tableTotal(selectedTable));
+ document.getElementById("invoiceModal").classList.add("show");
+}
+function printInvoice(){
+ const content=document.getElementById("invoiceContent").innerHTML;
+ const w=window.open("","_blank","width=500,height=700");
+ if(!w)return;
+ w.document.write(`
+  <html><head><title>Faturë</title>
+  <style>body{font-family:Arial;padding:25px}.invoice{max-width:400px;margin:auto}</style>
+  </head><body>${content}</body></html>`);
+ w.document.close();
+ w.focus();
+ w.print();
+}
 
-<script src="app.js"></script>
+/* CASH */
+function renderCash(){
+const inv=db.invoices.filter(x=>x.day===today());
+const total=inv.reduce((s,x)=>s+x.total,0);
+const cash=inv.filter(x=>x.method===“CASH”).reduce((s,x)=>s+x.total,0);
+const card=inv.filter(x=>x.method===“KARTË”).reduce((s,x)=>s+x.total,0);
+
+document.getElementById(“cashTotal”).textContent=money(total);
+document.getElementById(“cashMoney”).textContent=money(cash);
+document.getElementById(“cashCard”).textContent=money(card);
+document.getElementById(“cashInvoices”).textContent=inv.length;
+
+const list=document.getElementById(“payments”);
+list.innerHTML=inv.length?””:”Nuk ka pagesa sot.”;
+
+inv.forEach(x=>{
+const el=document.createElement(“div”);
+el.className=“listRow”;
+el.innerHTML=`
+
+   <div><b>T${x.table}</b><div class="muted">${x.date} · ${x.method}</div></div>
+   <strong class="green">${money(x.total)}</strong>
+  `;
+  list.appendChild(el);
+ });
+}
+
+/* HISTORY */
+function renderHistory(){
+const box=document.getElementById(“historyList”);
+box.innerHTML=””;
+
+if(!db.invoices.length){
+box.innerHTML=”Nuk ka histori.”;
+return;
+}
+
+db.invoices.forEach(x=>{
+const el=document.createElement(“div”);
+el.className=“listRow”;
+el.innerHTML=`
+
+   <div>
+    <b>Fatura #${String(x.id).slice(-5)}</b>
+    <div class="muted">T${x.table} · ${x.date} · ${x.method}</div>
+   </div>
+   <strong class="green">${money(x.total)}</strong>
+  `;
+  el.onclick=()=>showInvoice(x);
+  box.appendChild(el);
+ });
+}
+
+/* DASHBOARD */
+function renderDashboard(){
+const inv=db.invoices.filter(x=>x.day===today());
+const sales=inv.reduce((s,x)=>s+x.total,0);
+const card=inv.filter(x=>x.method===“KARTË”).reduce((s,x)=>s+x.total,0);
+const active=Array.from({length:db.tables},(_,i)=>i+1).filter(x=>tableTotal(x)>0).length;
+
+document.getElementById(“statSales”).textContent=money(sales);
+document.getElementById(“statActive”).textContent=active;
+document.getElementById(“statInvoices”).textContent=inv.length;
+document.getElementById(“statCard”).textContent=money(card);
+renderDashboardTables();
+}
+
+/* ADMIN */
+function renderAdmin(){
+document.getElementById(“barName”).value=db.barName;
+document.getElementById(“tableCount”).value=db.tables;
+}
+function saveName(){
+const name=document.getElementById(“barName”).value.trim();
+if(!name)return;
+db.barName=name;
+save();
+toast(“Emri u ruajt”);
+}
+function saveTableCount(){
+let n=parseInt(document.getElementById(“tableCount”).value);
+if(!n||n<1||n>50){
+toast(“Vendos 1–50 tavolina”);
+return;
+}
+db.tables=n;
+save();
+renderAll();
+toast(“Tavolinat u ndryshuan”);
+}
+function savePassword(){
+const p=document.getElementById(“newPassword”).value;
+if(!p){
+toast(“Shkruaj passwordin”);
+return;
+}
+const admin=db.users.find(x=>x.username===“admin”);
+admin.password=p;
+save();
+document.getElementById(“newPassword”).value=””;
+toast(“Passwordi u ndryshua”);
+}
+function backup(){
+const blob=new Blob([JSON.stringify(db,null,2)],{type:“application/json”});
+const a=document.createElement(“a”);
+a.href=URL.createObjectURL(blob);
+a.download=“my-bar-backup.json”;
+a.click();
+URL.revokeObjectURL(a.href);
+toast(“Backup u shkarkua”);
+}
+function clearHistory(){
+if(!confirm(“Je i sigurt që do fshish historikun?”))return;
+db.invoices=[];
+save();
+renderAll();
+toast(“Historiku u fshi”);
+}
+
+/* ALL */
+function renderAll(){
+renderDashboard();
+renderTables();
+renderProducts();
+renderOrder();
+renderCash();
+renderHistory();
+renderAdmin();
+}
+
+function clock(){
+document.getElementById(“clock”).textContent=
+new Date().toLocaleTimeString(“sq-AL”,{hour:“2-digit”,minute:“2-digit”});
+}
+
+function init(){
+load();
+
+const savedUser=localStorage.getItem(“MY_BAR_CURRENT_USER”);
+if(savedUser){
+try{
+const u=JSON.parse(savedUser);
+const real=db.users.find(x=>x.username===u.username);
+if(real){
+currentUser=real;
+document.getElementById(“loginScreen”).style.display=“none”;
+document.getElementById(“app”).style.display=“block”;
+document.getElementById(“currentUser”).textContent=real.username;
+if(real.role!==“admin”)document.getElementById(“adminNav”).style.display=“none”;
+renderAll();
+}
+}catch(e){}
+}
+
+document.getElementById(“loginBtn”).onclick=login;
+document.getElementById(“logoutBtn”).onclick=logout;
+
+document.getElementById(“loginPass”).addEventListener(“keydown”,e=>{
+if(e.key===“Enter”)login();
+});
+
+document.querySelectorAll(”.navBtn”).forEach(b=>{
+b.onclick=()=>openPage(b.dataset.page);
+});
+
+document.getElementById(“search”).oninput=renderProducts;
+document.getElementById(“clearOrder”).onclick=clearOrder;
+document.getElementById(“cashBtn”).onclick=openPayment;
+document.getElementById(“cardBtn”).onclick=openPayment;
+document.getElementById(“modalCash”).onclick=()=>pay(“CASH”);
+document.getElementById(“modalCard”).onclick=()=>pay(“KARTË”);
+document.getElementById(“invoiceBtn”).onclick=previewInvoice;
+document.getElementById(“printInvoice”).onclick=printInvoice;
+document.getElementById(“clearHistory”).onclick=clearHistory;
+document.getElementById(“saveName”).onclick=saveName;
+document.getElementById(“saveTables”).onclick=saveTableCount;
+document.getElementById(“savePassword”).onclick=savePassword;
+document.getElementById(“backup”).onclick=backup;
+
+document.querySelectorAll(”[data-close]”).forEach(b=>{
+b.onclick=()=>{
+document.getElementById(b.dataset.close).classList.remove(“show”);
+};
+});
+
+document.querySelectorAll(”.modal”).forEach(m=>{
+m.addEventListener(“click”,e=>{
+if(e.target===m)m.classList.remove(“show”);
+});
+});
+
+clock();
+setInterval(clock,1000);
+}
+
+init();
 </body>
 </html>
