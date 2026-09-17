@@ -3,73 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- VERSION I RI -->
-<meta name="version" content="SABI-2026-V2">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
-<title>SABI • Bar Lulishtja • V2</title>
+<title>MY BAR</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
     width:100%;
     height:100%;
     overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050807;
+    color:white;
 }
 
 body{
-    background:#020504;
-    color:white;
-    font-family:Arial,Helvetica,sans-serif;
     position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-/* BACKGROUND GRID */
-body::before{
-    content:"";
+/* BACKGROUND */
+.bg{
     position:absolute;
     inset:0;
     background:
-        linear-gradient(rgba(0,255,140,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,140,.035) 1px,transparent 1px);
-    background-size:45px 45px;
-    pointer-events:none;
+        radial-gradient(circle at center,rgba(0,255,120,.10),transparent 35%),
+        linear-gradient(135deg,#030504,#08100b 50%,#020403);
 }
 
-/* CENTRAL LIGHT */
-body::after{
-    content:"";
+.grid{
     position:absolute;
-    width:700px;
-    height:700px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(
-        circle,
-        rgba(0,255,140,.09) 0%,
-        rgba(0,255,140,.035) 35%,
-        transparent 70%
-    );
-    pointer-events:none;
+    inset:0;
+    opacity:.13;
+    background-image:
+        linear-gradient(rgba(0,255,120,.15) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,255,120,.15) 1px,transparent 1px);
+    background-size:45px 45px;
 }
 
-/* SIDE LED */
+/* LED BARS */
 .led{
     position:absolute;
     top:0;
     bottom:0;
-    width:3px;
-    background:#00ff88;
-    animation:colorChange 8s linear infinite;
+    width:4px;
+    background:#00ff73;
+    box-shadow:
+        0 0 6px #00ff73,
+        0 0 18px #00ff73,
+        0 0 40px #00ff73;
+    animation:ledColor 7s linear infinite;
     z-index:5;
 }
 
@@ -84,458 +74,315 @@ body::after{
 .led::after{
     content:"";
     position:absolute;
-    width:100%;
+    left:50%;
+    width:22px;
     height:130px;
-    top:-130px;
-    left:0;
+    transform:translateX(-50%);
     background:linear-gradient(
         to bottom,
         transparent,
-        rgba(255,255,255,.95),
+        rgba(0,255,120,.9),
         transparent
     );
-    box-shadow:
-        0 0 12px currentColor,
-        0 0 30px currentColor;
-    animation:travel 3s linear infinite;
+    filter:blur(5px);
+    animation:travel 2.4s linear infinite;
 }
 
 @keyframes travel{
-    0%{
-        top:-130px;
+    0%{top:-140px;}
+    100%{top:100%;}
+}
+
+@keyframes ledColor{
+    0%,100%{
+        background:#00ff73;
+        box-shadow:0 0 8px #00ff73,0 0 25px #00ff73,0 0 50px #00ff73;
     }
-    100%{
-        top:100%;
+    20%{
+        background:#00eaff;
+        box-shadow:0 0 8px #00eaff,0 0 25px #00eaff,0 0 50px #00eaff;
+    }
+    40%{
+        background:#236cff;
+        box-shadow:0 0 8px #236cff,0 0 25px #236cff,0 0 50px #236cff;
+    }
+    60%{
+        background:#b52cff;
+        box-shadow:0 0 8px #b52cff,0 0 25px #b52cff,0 0 50px #b52cff;
+    }
+    80%{
+        background:#ff2c9c;
+        box-shadow:0 0 8px #ff2c9c,0 0 25px #ff2c9c,0 0 50px #ff2c9c;
     }
 }
 
-@keyframes colorChange{
-    0%{background:#00ff88;color:#00ff88;}
-    16%{background:#00ffff;color:#00ffff;}
-    32%{background:#0088ff;color:#0088ff;}
-    48%{background:#8a2be2;color:#8a2be2;}
-    64%{background:#ff00cc;color:#ff00cc;}
-    80%{background:#ff8800;color:#ff8800;}
-    100%{background:#ffff00;color:#ffff00;}
-}
-
-/* CORNER LINES */
+/* CORNERS */
 .corner{
     position:absolute;
-    width:70px;
-    height:70px;
-    border-color:rgba(0,255,140,.5);
-    z-index:2;
+    width:55px;
+    height:55px;
+    border-color:#00ff73;
+    border-style:solid;
+    opacity:.7;
+    animation:pulse 2s infinite alternate;
 }
 
-.corner.tl{
-    top:25px;
-    left:25px;
-    border-top:1px solid;
-    border-left:1px solid;
-}
+.c1{top:25px;left:25px;border-width:2px 0 0 2px;}
+.c2{top:25px;right:25px;border-width:2px 2px 0 0;}
+.c3{bottom:25px;left:25px;border-width:0 0 2px 2px;}
+.c4{bottom:25px;right:25px;border-width:0 2px 2px 0;}
 
-.corner.tr{
-    top:25px;
-    right:25px;
-    border-top:1px solid;
-    border-right:1px solid;
-}
-
-.corner.bl{
-    bottom:25px;
-    left:25px;
-    border-bottom:1px solid;
-    border-left:1px solid;
-}
-
-.corner.br{
-    bottom:25px;
-    right:25px;
-    border-bottom:1px solid;
-    border-right:1px solid;
+@keyframes pulse{
+    from{opacity:.3;}
+    to{opacity:1;}
 }
 
 /* MAIN */
-.container{
+.content{
     position:relative;
     z-index:10;
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width:min(92%,600px);
     text-align:center;
-    padding:25px;
 }
 
-.content{
-    width:min(600px,100%);
-}
-
-/* BADGE */
 .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
+    display:inline-block;
     padding:8px 16px;
-    border:1px solid rgba(0,255,140,.35);
+    border:1px solid rgba(0,255,115,.45);
     border-radius:30px;
-    background:rgba(0,255,140,.04);
-    color:#00ff88;
+    background:rgba(0,255,115,.06);
+    color:#00ff73;
     font-size:11px;
     letter-spacing:3px;
-    margin-bottom:28px;
-    box-shadow:0 0 20px rgba(0,255,140,.08);
+    margin-bottom:25px;
+    box-shadow:0 0 20px rgba(0,255,115,.12);
 }
 
-.badge-dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#00ff88;
-    box-shadow:0 0 10px #00ff88;
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    0%,100%{opacity:1;}
-    50%{opacity:.3;}
-}
-
-/* LOGO */
 .logo{
-    width:92px;
-    height:92px;
-    margin:0 auto 28px;
-    position:relative;
-    transform:rotate(45deg);
-    border:2px solid #00ff88;
-    background:rgba(0,255,140,.025);
-    box-shadow:
-        0 0 20px rgba(0,255,140,.25),
-        inset 0 0 25px rgba(0,255,140,.05);
+    width:105px;
+    height:105px;
+    margin:0 auto 25px;
     display:flex;
     align-items:center;
     justify-content:center;
-    animation:logoGlow 4s ease-in-out infinite;
+    transform:rotate(45deg);
+    border:2px solid #00ff73;
+    box-shadow:
+        0 0 15px #00ff73,
+        0 0 45px rgba(0,255,115,.4);
+    background:rgba(0,255,115,.04);
 }
 
 .logo span{
     transform:rotate(-45deg);
-    font-size:38px;
+    font-size:48px;
     font-weight:900;
-    color:#00ff88;
-    text-shadow:
-        0 0 10px #00ff88,
-        0 0 25px #00ff88;
+    color:#00ff73;
+    text-shadow:0 0 15px #00ff73;
 }
 
-@keyframes logoGlow{
-    0%,100%{
-        box-shadow:
-            0 0 20px rgba(0,255,140,.25),
-            inset 0 0 25px rgba(0,255,140,.05);
-    }
-
-    50%{
-        box-shadow:
-            0 0 40px rgba(0,255,140,.45),
-            inset 0 0 35px rgba(0,255,140,.1);
-    }
-}
-
-/* TITLE */
-.title{
-    font-size:clamp(38px,8vw,72px);
+h1{
+    font-size:clamp(38px,10vw,75px);
+    letter-spacing:8px;
     font-weight:900;
-    letter-spacing:7px;
-    margin-bottom:14px;
-    color:white;
+    margin-bottom:10px;
     text-shadow:
-        0 0 20px rgba(255,255,255,.15);
+        0 0 10px rgba(255,255,255,.2),
+        0 0 35px rgba(0,255,115,.25);
 }
 
 .subtitle{
-    font-size:12px;
+    color:#9ca8a1;
     letter-spacing:5px;
-    color:rgba(255,255,255,.5);
-    margin-bottom:25px;
+    font-size:12px;
+    margin-bottom:28px;
 }
 
-/* DIVIDER */
-.divider{
+.line{
     width:180px;
     height:1px;
-    margin:0 auto 28px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #00ff88,
-        transparent
-    );
-    box-shadow:0 0 10px rgba(0,255,140,.5);
+    margin:0 auto 30px;
+    background:linear-gradient(90deg,transparent,#00ff73,transparent);
+    box-shadow:0 0 12px #00ff73;
 }
 
-/* BUTTON */
-.enter-btn{
-    border:1px solid #00ff88;
-    background:rgba(0,255,140,.05);
-    color:#00ff88;
-    padding:15px 28px;
-    min-width:220px;
-    border-radius:5px;
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:3px;
+/* BUTTONS */
+.buttons{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:13px;
+}
+
+.btn{
+    width:min(100%,330px);
+    min-height:56px;
+    border-radius:12px;
+    border:1px solid #00ff73;
+    background:rgba(0,255,115,.08);
+    color:white;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:2px;
     cursor:pointer;
-    transition:.3s;
-    box-shadow:0 0 15px rgba(0,255,140,.08);
-}
-
-.enter-btn:hover{
-    background:#00ff88;
-    color:#00140b;
+    touch-action:manipulation;
+    user-select:none;
+    transition:.2s ease;
     box-shadow:
-        0 0 20px #00ff88,
-        0 0 50px rgba(0,255,140,.4);
-    transform:translateY(-2px);
+        0 0 10px rgba(0,255,115,.15),
+        inset 0 0 15px rgba(0,255,115,.03);
 }
 
-.enter-btn:active{
-    transform:scale(.97);
+.btn:hover{
+    background:#00ff73;
+    color:#031008;
+    transform:translateY(-2px);
+    box-shadow:
+        0 0 15px #00ff73,
+        0 0 40px rgba(0,255,115,.35);
+}
+
+.btn:active{
+    transform:scale(.96);
+    background:#00ff73;
+    color:#031008;
+}
+
+.btn.main{
+    background:#00ff73;
+    color:#031008;
+    box-shadow:
+        0 0 15px #00ff73,
+        0 0 45px rgba(0,255,115,.3);
+}
+
+.btn.main:hover{
+    background:#66ffad;
+}
+
+.contact-btn{
+    border-color:rgba(255,255,255,.25);
+    color:#b8c0bb;
+    background:rgba(255,255,255,.03);
 }
 
 /* FOOTER */
 .footer{
-    position:absolute;
-    bottom:24px;
-    left:50%;
-    transform:translateX(-50%);
-    color:rgba(255,255,255,.25);
-    font-size:9px;
+    margin-top:35px;
+    color:#56615b;
+    font-size:10px;
     letter-spacing:3px;
-    white-space:nowrap;
-    z-index:20;
 }
 
-/* CONTACT */
-.contact{
-    position:absolute;
-    bottom:22px;
-    left:25px;
-    z-index:30;
-}
-
-.contact button{
-    background:none;
-    border:none;
-    color:rgba(255,255,255,.35);
-    font-size:9px;
-    letter-spacing:2px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.contact button:hover{
-    color:#00ff88;
-}
-
-/* CONTACT SCREEN */
-.contact-screen{
+/* MODAL */
+.modal{
+    display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.92);
-    backdrop-filter:blur(15px);
     z-index:100;
-    display:none;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(8px);
     align-items:center;
     justify-content:center;
-    padding:25px;
+    padding:20px;
 }
 
-.contact-screen.active{
+.modal.show{
     display:flex;
 }
 
-.contact-box{
-    width:min(430px,100%);
-    background:#050908;
-    border:1px solid rgba(0,255,140,.35);
-    border-radius:12px;
-    padding:28px;
-    text-align:center;
+.modal-box{
+    width:min(100%,430px);
+    background:#08100b;
+    border:1px solid #00ff73;
+    border-radius:18px;
+    padding:25px;
     box-shadow:
-        0 0 40px rgba(0,255,140,.12);
+        0 0 20px #00ff73,
+        0 0 80px rgba(0,255,115,.2);
 }
 
-.contact-title{
-    color:#00ff88;
-    font-size:18px;
-    font-weight:bold;
-    letter-spacing:2px;
-    margin-bottom:22px;
+.modal-box h2{
+    color:#00ff73;
+    margin-bottom:10px;
+    font-size:20px;
 }
 
-.contact-option{
+.modal-box p{
+    color:#929c96;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:18px;
+}
+
+.modal-box textarea{
     width:100%;
-    margin-bottom:12px;
-    padding:14px;
-    background:rgba(0,255,140,.04);
-    border:1px solid rgba(0,255,140,.25);
-    color:white;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:11px;
-    letter-spacing:1px;
-    transition:.3s;
-}
-
-.contact-option:hover{
-    background:rgba(0,255,140,.12);
-    border-color:#00ff88;
-}
-
-.waiting{
-    display:none;
-}
-
-.waiting.active{
-    display:block;
-}
-
-.spinner{
-    width:35px;
-    height:35px;
-    border:2px solid rgba(0,255,140,.15);
-    border-top-color:#00ff88;
-    border-radius:50%;
-    margin:0 auto 20px;
-    animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-.count{
-    color:#00ff88;
-    font-size:25px;
-    font-weight:bold;
-    margin:10px;
-}
-
-.report-area{
-    display:none;
-}
-
-.report-area.active{
-    display:block;
-}
-
-textarea{
-    width:100%;
-    height:130px;
+    min-height:120px;
     resize:none;
-    background:#020504;
-    border:1px solid rgba(0,255,140,.25);
+    border-radius:10px;
+    border:1px solid #24352a;
+    background:#030604;
     color:white;
-    border-radius:6px;
-    padding:12px;
+    padding:13px;
     outline:none;
-    font-family:Arial;
     margin-bottom:12px;
 }
 
-textarea:focus{
-    border-color:#00ff88;
-    box-shadow:0 0 15px rgba(0,255,140,.1);
+.modal-box textarea:focus{
+    border-color:#00ff73;
+    box-shadow:0 0 12px rgba(0,255,115,.2);
 }
 
-.send-btn{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:5px;
-    background:#00ff88;
-    color:#00140b;
+.modal-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.modal-buttons button{
+    flex:1;
+    min-height:48px;
+    border-radius:10px;
+    cursor:pointer;
     font-weight:bold;
-    cursor:pointer;
-    letter-spacing:2px;
 }
 
-.close-btn{
-    margin-top:12px;
-    background:none;
-    border:none;
-    color:rgba(255,255,255,.4);
-    cursor:pointer;
-    font-size:10px;
+.send{
+    background:#00ff73;
+    border:0;
+    color:#031008;
 }
 
-/* MOBILE */
-@media(max-width:600px){
+.close{
+    background:transparent;
+    border:1px solid #38443d;
+    color:white;
+}
 
+@media(max-width:500px){
     .corner{
-        width:45px;
-        height:45px;
-    }
-
-    .corner.tl,
-    .corner.tr{
-        top:15px;
-    }
-
-    .corner.bl,
-    .corner.br{
-        bottom:15px;
-    }
-
-    .corner.tl,
-    .corner.bl{
-        left:15px;
-    }
-
-    .corner.tr,
-    .corner.br{
-        right:15px;
+        width:35px;
+        height:35px;
     }
 
     .logo{
-        width:78px;
-        height:78px;
-        margin-bottom:25px;
+        width:82px;
+        height:82px;
     }
 
     .logo span{
-        font-size:32px;
+        font-size:38px;
     }
 
-    .title{
+    h1{
         letter-spacing:5px;
     }
 
     .subtitle{
-        font-size:9px;
         letter-spacing:3px;
     }
 
-    .enter-btn{
-        width:100%;
-        max-width:280px;
-    }
-
-    .contact{
-        left:15px;
-        bottom:15px;
-    }
-
     .footer{
-        bottom:15px;
-        font-size:7px;
-        letter-spacing:2px;
+        margin-top:25px;
     }
 }
 </style>
@@ -543,106 +390,89 @@ textarea:focus{
 
 <body>
 
+<div class="bg"></div>
+<div class="grid"></div>
+
 <div class="led left"></div>
 <div class="led right"></div>
 
-<div class="corner tl"></div>
-<div class="corner tr"></div>
-<div class="corner bl"></div>
-<div class="corner br"></div>
+<div class="corner c1"></div>
+<div class="corner c2"></div>
+<div class="corner c3"></div>
+<div class="corner c4"></div>
 
-<div class="container">
+<main class="content">
 
-    <div class="content">
+    <div class="badge">SISTEM PREMIUM • V2</div>
 
-        <div class="badge">
-            <span class="badge-dot"></span>
-            SISTEM PREMIUM • V2
-        </div>
+    <div class="logo">
+        <span>S</span>
+    </div>
 
-        <div class="logo">
-            <span>S</span>
-        </div>
+    <h1>MY BAR</h1>
 
-        <div class="title">
-            MIRË SE VINI
-        </div>
+    <div class="subtitle">
+        SISTEMI I MENAXHIMIT
+    </div>
 
-        <div class="subtitle">
-            SISTEMI I MENAXHIMIT
-        </div>
+    <div class="line"></div>
 
-        <div class="divider"></div>
+    <div class="buttons">
 
-        <button class="enter-btn" onclick="hyjNeSistem()">
+        <button
+            type="button"
+            class="btn main"
+            id="enterBtn">
             HYR NË SISTEM →
+        </button>
+
+        <button
+            type="button"
+            class="btn contact-btn"
+            id="contactBtn">
+            CONTACT
         </button>
 
     </div>
 
-</div>
+    <div class="footer">
+        MY BAR • SISTEM PREMIUM • 2026
+    </div>
 
-<div class="footer">
-    SABI • SISTEM PREMIUM • 2026 • V2
-</div>
-
-<div class="contact">
-    <button onclick="openContact()">
-        CONTACT
-    </button>
-</div>
+</main>
 
 <!-- CONTACT MODAL -->
-<div class="contact-screen" id="contactScreen">
+<div class="modal" id="contactModal">
 
-    <div class="contact-box">
+    <div class="modal-box">
 
-        <div class="contact-title">
-            SABI SUPPORT
-        </div>
+        <h2>RAPORTO NJË PROBLEM</h2>
 
-        <div id="contactMenu">
+        <p>
+            Na shkruaj problemin që ke hasur në sistemin MY BAR.
+        </p>
 
-            <button class="contact-option" onclick="startReport()">
-                RAPORTO NJË PROBLEM
+        <textarea
+            id="reportText"
+            placeholder="Shkruaj problemin këtu..."></textarea>
+
+        <div class="modal-buttons">
+
+            <button
+                type="button"
+                class="send"
+                id="sendReport">
+                DËRGO
             </button>
 
-            <button class="contact-option" onclick="buyApp()">
-                BLI APLIKACIONIN • 49€
-            </button>
-
-        </div>
-
-        <div class="waiting" id="waiting">
-
-            <div class="spinner"></div>
-
-            <div style="color:rgba(255,255,255,.5);font-size:11px;">
-                Ju lutem prisni...
-            </div>
-
-            <div class="count" id="countdown">
-                5
-            </div>
-
-        </div>
-
-        <div class="report-area" id="reportArea">
-
-            <textarea
-                id="reportText"
-                placeholder="Shkruani problemin këtu..."
-            ></textarea>
-
-            <button class="send-btn" onclick="sendReport()">
-                DËRGO RAPORTIMIN
+            <button
+                type="button"
+                class="close"
+                id="closeModal">
+                MBYLL
             </button>
 
         </div>
-
-        <button class="close-btn" onclick="closeContact()">
-            MBYLL
-        </button>
 
     </div>
 
@@ -650,143 +480,56 @@ textarea:focus{
 
 <script>
 
-/* VERSION */
-const SABI_VERSION = "2026-V2";
+/* HYR NË SISTEM */
+document.getElementById("enterBtn").addEventListener("click", function(){
 
-/* HYRJA */
-function hyjNeSistem(){
     window.location.href = "login.html";
-}
 
-let timer = null;
+});
 
 /* CONTACT */
-function openContact(){
+const modal = document.getElementById("contactModal");
 
-    document
-        .getElementById("contactScreen")
-        .classList.add("active");
+document.getElementById("contactBtn").addEventListener("click", function(){
 
-    document
-        .getElementById("contactMenu")
-        .style.display = "block";
+    modal.classList.add("show");
 
-    document
-        .getElementById("waiting")
-        .classList.remove("active");
+});
 
-    document
-        .getElementById("reportArea")
-        .classList.remove("active");
+/* MBYLL */
+document.getElementById("closeModal").addEventListener("click", function(){
 
-}
+    modal.classList.remove("show");
 
-/* REPORT */
-function startReport(){
+});
 
-    document
-        .getElementById("contactMenu")
-        .style.display = "none";
+/* KLIKO JASHTË MODALIT */
+modal.addEventListener("click", function(e){
 
-    document
-        .getElementById("waiting")
-        .classList.add("active");
+    if(e.target === modal){
+        modal.classList.remove("show");
+    }
 
-    let seconds = 5;
+});
 
-    const countdown =
-        document.getElementById("countdown");
+/* DËRGO RAPORTIM */
+document.getElementById("sendReport").addEventListener("click", function(){
 
-    countdown.textContent = seconds;
+    const text = document.getElementById("reportText").value.trim();
 
-    clearInterval(timer);
+    if(!text){
 
-    timer = setInterval(function(){
-
-        seconds--;
-
-        countdown.textContent = seconds;
-
-        if(seconds <= 0){
-
-            clearInterval(timer);
-
-            document
-                .getElementById("waiting")
-                .classList.remove("active");
-
-            document
-                .getElementById("reportArea")
-                .classList.add("active");
-
-        }
-
-    },1000);
-
-}
-
-/* SEND REPORT */
-function sendReport(){
-
-    const report =
-        document
-        .getElementById("reportText")
-        .value
-        .trim();
-
-    if(!report){
-
-        alert("Ju lutem shkruani raportimin.");
-
+        alert("Shkruaj problemin më parë.");
         return;
 
     }
 
-    const myNumber = "+355XXXXXXXXX";
+    alert("Raportimi u regjistrua. Faleminderit!");
 
-    const message =
-        "RAPORTIM SABI\n\n" +
-        report +
-        "\n\nVersion: " +
-        SABI_VERSION;
+    document.getElementById("reportText").value = "";
+    modal.classList.remove("show");
 
-    const sms =
-        "sms:" +
-        myNumber +
-        "?body=" +
-        encodeURIComponent(message);
-
-    window.location.href = sms;
-}
-
-/* BUY */
-function buyApp(){
-
-    const myNumber = "+355XXXXXXXXX";
-
-    const message =
-        "Përshëndetje, jam i interesuar të blej aplikacionin SABI për 49€.\n\nVersion: " +
-        SABI_VERSION;
-
-    const sms =
-        "sms:" +
-        myNumber +
-        "?body=" +
-        encodeURIComponent(message);
-
-    window.location.href = sms;
-}
-
-/* CLOSE */
-function closeContact(){
-
-    clearInterval(timer);
-
-    document
-        .getElementById("contactScreen")
-        .classList.remove("active");
-
-}
+});
 
 </script>
 
