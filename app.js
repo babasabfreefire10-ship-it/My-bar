@@ -1,3139 +1,1342 @@
-/* =========================================================
-   MY BAR - NEW APP.JS
-   Complete management system
-========================================================= */
-
 "use strict";
 
-
-/* =========================================================
-   STORAGE
-========================================================= */
+/* =========================
+   MY BAR V2
+   PC STYLE / TOUCH SAFE
+========================= */
 
 const KEYS = {
-    users: "barUsersV4",
-    products: "barProductsV4",
-    invoices: "barInvoicesV4",
-    tables: "barTablesV5",
-    tableCount: "barTableCountV4",
-    currentUser: "barCurrentUserV4",
-    appName: "barAppNameV4",
-    inventory: "barInventoryV2",
-    selectedTable: "barSelectedTableV2"
+  users: "barUsersV4",
+  products: "barProductsV4",
+  invoices: "barInvoicesV4",
+  tables: "barTablesV5",
+  tableCount: "barTableCountV4",
+  currentUser: "barCurrentUserV4",
+  appName: "barAppNameV4"
 };
 
-
-/* =========================================================
-   DEFAULT USERS
-========================================================= */
-
-const DEFAULT_USERS = [
-    {
-        id: "admin",
-        username: "admin",
-        password: "1234",
-        role: "admin",
-        name: "Administrator"
-    },
-    {
-        id: "waiter1",
-        username: "kamarier1",
-        password: "1234",
-        role: "waiter",
-        name: "Kamarier 1"
-    }
-];
-
-
-/* =========================================================
-   DEFAULT PRODUCTS
-   Photos are remote image URLs.
-========================================================= */
-
 const DEFAULT_PRODUCTS = [
-
-    {
-        id: "espresso",
-        name: "Espresso",
-        price: 100,
-        category: "Kafe",
-        image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "macchiato",
-        name: "Macchiato",
-        price: 120,
-        category: "Kafe",
-        image: "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "cappuccino",
-        name: "Cappuccino",
-        price: 150,
-        category: "Kafe",
-        image: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "americano",
-        name: "Americano",
-        price: 130,
-        category: "Kafe",
-        image: "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "water",
-        name: "Ujë",
-        price: 80,
-        category: "Pije",
-        image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "coca-cola",
-        name: "Coca Cola",
-        price: 150,
-        category: "Pije",
-        image: "https://images.unsplash.com/photo-1629203849820-fdd70d49c38e?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "fanta",
-        name: "Fanta",
-        price: 150,
-        category: "Pije",
-        image: "https://images.unsplash.com/photo-1624517452488-04869289c4ca?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "sprite",
-        name: "Sprite",
-        price: 150,
-        category: "Pije",
-        image: "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "redbull",
-        name: "Red Bull",
-        price: 250,
-        category: "Pije",
-        image: "https://images.unsplash.com/photo-1613298593212-4d1f7f4b7c4e?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "beer",
-        name: "Birrë",
-        price: 200,
-        category: "Alkool",
-        image: "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "wine",
-        name: "Verë",
-        price: 300,
-        category: "Alkool",
-        image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "vodka",
-        name: "Vodka",
-        price: 350,
-        category: "Alkool",
-        image: "https://images.unsplash.com/photo-1608885898957-a5599e505f6c?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "pizza",
-        name: "Pizza",
-        price: 500,
-        category: "Ushqim",
-        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "burger",
-        name: "Burger",
-        price: 450,
-        category: "Ushqim",
-        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"
-    },
-
-    {
-        id: "fries",
-        name: "Patate",
-        price: 250,
-        category: "Ushqim",
-        image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"
-    }
-
+  ["Espresso","Kafe",100],
+  ["Macchiato","Kafe",120],
+  ["Cappuccino","Kafe",150],
+  ["Americano","Kafe",130],
+  ["Ujë","Pije",80],
+  ["Coca Cola","Pije",150],
+  ["Fanta","Pije",150],
+  ["Sprite","Pije",150],
+  ["Red Bull","Pije",250],
+  ["Birrë","Alkool",200],
+  ["Verë","Alkool",300],
+  ["Vodka","Alkool",350],
+  ["Pizza","Ushqim",500],
+  ["Burger","Ushqim",450],
+  ["Patate","Ushqim",250]
 ];
 
+let state = {
+  currentSection: "dashboard",
+  selectedTable: null,
+  category: "Të gjitha",
+  search: "",
+  order: []
+};
 
-/* =========================================================
-   STATE
-========================================================= */
-
-let users = [];
-let products = [];
-let invoices = [];
-let tables = [];
-let inventory = {};
-
-let currentUser = null;
-let selectedTableId = null;
-let selectedCategory = "Të gjitha";
-let currentOrder = [];
-
-let editingUserId = null;
-let editingProductId = null;
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getJSON(key, fallback) {
-    try {
-        const value = localStorage.getItem(key);
-
-        if (!value) return fallback;
-
-        return JSON.parse(value);
-
-    } catch {
-        return fallback;
-    }
+function get(key, fallback){
+  try{
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  }catch{
+    return fallback;
+  }
 }
 
-
-function saveJSON(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+function set(key, value){
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
-
-function money(value) {
-    return `${Number(value || 0).toLocaleString("sq-AL")} L`;
+function money(value){
+  return Number(value || 0).toLocaleString("sq-AL") + " L";
 }
 
+function toast(message){
+  const el = document.getElementById("toast");
+  if(!el) return;
 
-function todayKey() {
-    const d = new Date();
+  el.textContent = message;
+  el.classList.add("show");
 
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer = setTimeout(()=>{
+    el.classList.remove("show");
+  },2200);
 }
 
+/* =========================
+   DEFAULT DATA
+========================= */
 
-function escapeHTML(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+function ensureData(){
+
+  if(!localStorage.getItem(KEYS.users)){
+    set(KEYS.users,[
+      {
+        username:"admin",
+        password:"1234",
+        role:"admin",
+        name:"Administrator"
+      },
+      {
+        username:"kamarier1",
+        password:"1234",
+        role:"waiter",
+        name:"Kamarier 1"
+      }
+    ]);
+  }
+
+  if(!localStorage.getItem(KEYS.products)){
+
+    const products = DEFAULT_PRODUCTS.map((p,i)=>({
+      id:"p"+(i+1),
+      name:p[0],
+      category:p[1],
+      price:p[2],
+      image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80"
+    }));
+
+    set(KEYS.products,products);
+  }
+
+  if(!localStorage.getItem(KEYS.invoices)){
+    set(KEYS.invoices,[]);
+  }
+
+  if(!localStorage.getItem(KEYS.tableCount)){
+    set(KEYS.tableCount,12);
+  }
+
+  if(!localStorage.getItem(KEYS.tables)){
+    createTables(12);
+  }
+
+  if(!localStorage.getItem(KEYS.appName)){
+    set(KEYS.appName,"MY BAR");
+  }
 }
 
+function createTables(count){
 
-/* =========================================================
-   INITIALIZATION
-========================================================= */
+  const tables = [];
 
-function init() {
-
-    users = getJSON(KEYS.users, DEFAULT_USERS);
-
-    if (!users.length) {
-        users = [...DEFAULT_USERS];
-        saveJSON(KEYS.users, users);
-    }
-
-
-    products = getJSON(KEYS.products, DEFAULT_PRODUCTS);
-
-    if (!products.length) {
-        products = [...DEFAULT_PRODUCTS];
-        saveJSON(KEYS.products, products);
-    }
-
-
-    invoices = getJSON(KEYS.invoices, []);
-
-
-    const tableCount = Number(
-        localStorage.getItem(KEYS.tableCount) || 12
-    );
-
-
-    tables = getJSON(KEYS.tables, []);
-
-    if (!tables.length) {
-
-        for (let i = 1; i <= tableCount; i++) {
-
-            tables.push({
-                id: `table-${i}`,
-                number: i,
-                name: `Tavolina ${i}`,
-                items: []
-            });
-
-        }
-
-        saveJSON(KEYS.tables, tables);
-    }
-
-
-    inventory = getJSON(KEYS.inventory, {});
-
-    products.forEach(product => {
-
-        if (inventory[product.id] === undefined) {
-            inventory[product.id] = 20;
-        }
-
+  for(let i=1;i<=count;i++){
+    tables.push({
+      id:"table-"+i,
+      number:i,
+      items:[],
+      total:0
     });
+  }
 
-    saveJSON(KEYS.inventory, inventory);
-
-
-    currentUser = getJSON(
-        KEYS.currentUser,
-        null
-    );
-
-
-    if (!currentUser) {
-
-        window.location.href = "login.html";
-        return;
-
-    }
-
-
-    selectedTableId = localStorage.getItem(
-        KEYS.selectedTable
-    ) || null;
-
-
-    applyAppName();
-    updateUserHeader();
-    setupNavigation();
-    setupSearch();
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    renderAll();
-
+  set(KEYS.tables,tables);
 }
 
+/* =========================
+   CURRENT USER
+========================= */
 
-/* =========================================================
-   APP NAME
-========================================================= */
-
-function applyAppName() {
-
-    const name =
-        localStorage.getItem(KEYS.appName)
-        || "MY BAR";
-
-    const appName = document.getElementById("appName");
-
-    if (appName) {
-        appName.textContent = name;
-    }
-
-    const input =
-        document.getElementById("appNameInput");
-
-    if (input) {
-        input.value = name;
-    }
+function getCurrentUser(){
+  return get(KEYS.currentUser,null);
 }
 
-
-/* =========================================================
-   USER
-========================================================= */
-
-function updateUserHeader() {
-
-    const userInfo =
-        document.getElementById("userInfo");
-
-    if (!userInfo || !currentUser) return;
-
-    userInfo.textContent =
-        currentUser.name || currentUser.username;
-
+function isAdmin(){
+  const user = getCurrentUser();
+  return user && user.role === "admin";
 }
 
+function checkLogin(){
 
-function isAdmin() {
+  const user = getCurrentUser();
 
-    return currentUser &&
-        currentUser.role === "admin";
+  if(!user){
+    window.location.href="login.html";
+    return false;
+  }
 
+  return true;
 }
 
-
-function setupRoleUI() {
-
-    document
-        .querySelectorAll(".admin-only")
-        .forEach(element => {
-
-            if (isAdmin()) {
-
-                element.style.display = "";
-
-            } else {
-
-                element.style.display = "none";
-
-            }
-
-        });
-
-}
-
-
-/* =========================================================
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
-function setupNavigation() {
+function showSection(section){
 
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(button => {
+  const restricted = ["cash","history","admin"];
 
-            button.addEventListener("click", () => {
+  if(restricted.includes(section) && !isAdmin()){
+    toast("Kjo pjesë është vetëm për administratorin.");
+    return;
+  }
 
-                const section =
-                    button.dataset.section;
+  document.querySelectorAll(".section").forEach(el=>{
+    el.classList.remove("active");
+  });
 
-                showSection(section);
+  const target = document.getElementById(section);
 
-            });
+  if(target){
+    target.classList.add("active");
+  }
 
-        });
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.section === section
+    );
+  });
 
+  state.currentSection = section;
+
+  if(section==="dashboard") renderDashboard();
+  if(section==="tables") renderTables();
+  if(section==="menu") renderMenu();
+  if(section==="orders") renderOrder();
+  if(section==="cash") renderCash();
+  if(section==="history") renderHistory();
+  if(section==="admin") renderAdmin();
 }
 
-
-function showSection(section) {
-
-    if (
-        ["cash", "history", "admin"].includes(section)
-        && !isAdmin()
-    ) {
-
-        toast("Vetëm administratori ka akses.");
-
-        return;
-
-    }
-
-
-    document
-        .querySelectorAll(".page-section")
-        .forEach(page => {
-
-            page.classList.remove("active");
-
-        });
-
-
-    const target =
-        document.getElementById(section);
-
-    if (target) {
-        target.classList.add("active");
-    }
-
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.section === section
-            );
-
-        });
-
-
-    if (section === "dashboard") {
-        renderDashboard();
-    }
-
-    if (section === "tables") {
-        renderTables();
-    }
-
-    if (section === "menu") {
-        renderMenu();
-    }
-
-    if (section === "orders") {
-        renderOrder();
-    }
-
-    if (section === "cash") {
-        renderCash();
-    }
-
-    if (section === "history") {
-        renderHistory();
-    }
-
-    if (section === "admin") {
-        renderAdmin();
-    }
-
-}
-
-
-/* =========================================================
-   CLOCK
-========================================================= */
-
-function updateClock() {
-
-    const now = new Date();
-
-    const clock =
-        document.getElementById("clock");
-
-    const date =
-        document.getElementById("todayDate");
-
-
-    if (clock) {
-
-        clock.textContent =
-            now.toLocaleTimeString(
-                "sq-AL",
-                {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit"
-                }
-            );
-
-    }
-
-
-    if (date) {
-
-        date.textContent =
-            now.toLocaleDateString(
-                "sq-AL",
-                {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                }
-            );
-
-    }
-
-}
-
-
-/* =========================================================
+/* =========================
    TABLES
-========================================================= */
+========================= */
 
-function getTable(id) {
-
-    return tables.find(
-        table => table.id === id
-    );
-
+function getTables(){
+  return get(KEYS.tables,[]);
 }
 
-
-function tableIsBusy(table) {
-
-    return Array.isArray(table.items)
-        && table.items.length > 0;
-
+function saveTables(tables){
+  set(KEYS.tables,tables);
 }
 
-
-function selectTable(id) {
-
-    const table = getTable(id);
-
-    if (!table) return;
-
-
-    selectedTableId = id;
-
-    localStorage.setItem(
-        KEYS.selectedTable,
-        id
-    );
-
-
-    currentOrder =
-        Array.isArray(table.items)
-            ? [...table.items]
-            : [];
-
-
-    renderAll();
-
-    showSection("menu");
-
-    toast(
-        `${table.name} u zgjodh.`
-    );
-
+function getSelectedTable(){
+  return getTables().find(t=>t.id===state.selectedTable) || null;
 }
 
+function selectTable(id){
 
-function renderTables() {
+  state.selectedTable = id;
 
-    const grid =
-        document.getElementById("tableGrid");
+  const table = getTables().find(t=>t.id===id);
 
-    if (!grid) return;
+  if(!table) return;
 
+  saveTables(getTables());
 
-    grid.innerHTML = tables.map(table => {
+  showSection("menu");
 
-        const busy = tableIsBusy(table);
+  updateSelectedTableUI();
 
-        const total = table.items.reduce(
-            (sum, item) =>
-                sum +
-                Number(item.price || 0) *
-                Number(item.quantity || 1),
-            0
-        );
-
-
-        return `
-            <button
-                class="table-card ${busy ? "busy" : "available"}"
-                type="button"
-                onclick="selectTable('${table.id}')">
-
-                <div class="table-number">
-                    ${escapeHTML(table.number)}
-                </div>
-
-                <div class="table-info">
-
-                    <strong>
-                        ${escapeHTML(table.name)}
-                    </strong>
-
-                    <span>
-                        ${
-                            busy
-                                ? `${money(total)} • ${table.items.length} artikuj`
-                                : "E lirë"
-                        }
-                    </span>
-
-                </div>
-
-                <div class="table-status">
-                    ${busy ? "ZËNË" : "E LIRË"}
-                </div>
-
-            </button>
-        `;
-
-    }).join("");
-
+  toast("Tavolina "+table.number+" u zgjodh.");
 }
 
+function updateSelectedTableUI(){
 
-function renderDashboardTables() {
+  const table = getSelectedTable();
 
-    const grid =
-        document.getElementById(
-            "dashboardTables"
-        );
+  const menuText = document.getElementById("menuSelectedTable");
+  const orderText = document.getElementById("selectedTableText");
 
-    if (!grid) return;
-
-
-    grid.innerHTML = tables.map(table => {
-
-        const busy = tableIsBusy(table);
-
-        return `
-            <button
-                class="mini-table ${busy ? "busy" : ""}"
-                type="button"
-                onclick="selectTable('${table.id}')">
-
-                <strong>${table.number}</strong>
-
-                <span>
-                    ${busy ? "ZËNË" : "E LIRË"}
-                </span>
-
-            </button>
-        `;
-
-    }).join("");
-
+  if(table){
+    if(menuText) menuText.textContent = "#"+table.number;
+    if(orderText) orderText.textContent =
+      "Tavolina #"+table.number;
+  }else{
+    if(menuText) menuText.textContent = "Asnjë";
+    if(orderText) orderText.textContent =
+      "Zgjidh një tavolinë";
+  }
 }
 
+function renderTables(){
 
-/* =========================================================
-   MENU
-========================================================= */
+  const grid = document.getElementById("tableGrid");
+  if(!grid) return;
 
-function getCategories() {
+  const tables = getTables();
 
-    return [
-        "Të gjitha",
-        ...new Set(
-            products.map(
-                product => product.category
-            )
-        )
-    ];
+  grid.innerHTML = "";
 
+  tables.forEach(table=>{
+
+    const busy = table.items && table.items.length > 0;
+
+    const card = document.createElement("div");
+    card.className = "table-card"+(busy?" busy":"");
+
+    card.innerHTML = `
+      <div>
+        <div class="table-number">#${table.number}</div>
+        <div class="table-status">
+          ${busy ? "E ZËNË" : "E LIRË"}
+        </div>
+      </div>
+
+      <div class="table-total">
+        ${busy ? money(table.total) : "—"}
+      </div>
+
+      <button class="table-open">
+        ${busy ? "HAP POROSINË" : "HAP TAVOLINË"}
+      </button>
+    `;
+
+    card.querySelector(".table-open")
+      .addEventListener("click",e=>{
+        e.stopPropagation();
+        selectTable(table.id);
+      });
+
+    card.addEventListener("click",()=>{
+      selectTable(table.id);
+    });
+
+    grid.appendChild(card);
+  });
 }
 
+function renderDashboardTables(){
 
-function renderCategories() {
+  const box = document.getElementById("dashboardTables");
+  if(!box) return;
 
-    const container =
-        document.getElementById("categories");
+  box.innerHTML="";
 
-    if (!container) return;
+  getTables().slice(0,6).forEach(table=>{
 
+    const busy = table.items && table.items.length;
 
-    container.innerHTML =
-        getCategories().map(category => {
+    const el = document.createElement("button");
 
-            return `
-                <button
-                    type="button"
-                    class="category-btn ${
-                        selectedCategory === category
-                            ? "active"
-                            : ""
-                    }"
-                    onclick="selectCategory('${escapeHTML(category)}')">
+    el.className="mini-table"+(busy?" busy":"");
 
-                    ${escapeHTML(category)}
+    el.innerHTML=`
+      <b>#${table.number}</b>
+      <small>${busy ? money(table.total) : "E lirë"}</small>
+    `;
 
-                </button>
-            `;
+    el.addEventListener("click",()=>{
+      selectTable(table.id);
+    });
 
-        }).join("");
-
+    box.appendChild(el);
+  });
 }
 
+/* =========================
+   PRODUCTS / MENU
+========================= */
 
-function selectCategory(category) {
-
-    selectedCategory = category;
-
-    renderMenu();
-
+function getProducts(){
+  return get(KEYS.products,[]);
 }
 
+function renderCategories(){
 
-function renderMenu() {
+  const box = document.getElementById("categories");
+  if(!box) return;
 
-    renderCategories();
+  const products = getProducts();
 
+  const cats = [
+    "Të gjitha",
+    ...new Set(products.map(p=>p.category))
+  ];
 
-    const grid =
-        document.getElementById("menuGrid");
+  box.innerHTML="";
 
-    if (!grid) return;
+  cats.forEach(cat=>{
 
+    const btn=document.createElement("button");
 
-    const search =
-        document
-            .getElementById("menuSearch")
-            ?.value
-            .toLowerCase()
-            .trim() || "";
+    btn.className=
+      "category-btn"+
+      (state.category===cat?" active":"");
 
+    btn.textContent=cat;
 
-    const filtered =
-        products.filter(product => {
+    btn.addEventListener("click",()=>{
+      state.category=cat;
+      renderMenu();
+    });
 
-            const categoryMatch =
-                selectedCategory === "Të gjitha"
-                || product.category === selectedCategory;
-
-
-            const searchMatch =
-                !search
-                || product.name
-                    .toLowerCase()
-                    .includes(search);
-
-
-            return categoryMatch && searchMatch;
-
-        });
-
-
-    if (!filtered.length) {
-
-        grid.innerHTML = `
-            <div class="empty-state">
-                <div>⌕</div>
-                <strong>Nuk u gjet produkt</strong>
-                <span>Provo një kërkim tjetër.</span>
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    grid.innerHTML =
-        filtered.map(product => {
-
-            const stock =
-                Number(inventory[product.id] ?? 0);
-
-            return `
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <img
-                            src="${product.image}"
-                            alt="${escapeHTML(product.name)}"
-                            loading="lazy"
-                            onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">
-
-                        <span class="product-category">
-                            ${escapeHTML(product.category)}
-                        </span>
-
-                        ${
-                            stock <= 5
-                                ? `<span class="stock-badge">STOK ${stock}</span>`
-                                : ""
-                        }
-
-                    </div>
-
-
-                    <div class="product-content">
-
-                        <div>
-                            <h3>
-                                ${escapeHTML(product.name)}
-                            </h3>
-
-                            <strong class="product-price">
-                                ${money(product.price)}
-                            </strong>
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="add-product-btn"
-                            onclick="addToOrder('${product.id}')"
-                            ${stock <= 0 ? "disabled" : ""}>
-
-                            ${
-                                stock <= 0
-                                    ? "PA STOK"
-                                    : "+ SHTO"
-                            }
-
-                        </button>
-
-                    </div>
-
-                </article>
-            `;
-
-        }).join("");
-
-
-    updateSelectedTableDisplay();
-
+    box.appendChild(btn);
+  });
 }
 
+function renderMenu(){
 
-function updateSelectedTableDisplay() {
+  renderCategories();
 
-    const element =
-        document.getElementById(
-            "menuSelectedTable"
-        );
+  const grid=document.getElementById("menuGrid");
 
-    if (!element) return;
+  if(!grid) return;
 
+  const products=getProducts();
 
-    const table =
-        selectedTableId
-            ? getTable(selectedTableId)
-            : null;
+  const filtered=products.filter(product=>{
 
+    const categoryOK =
+      state.category==="Të gjitha" ||
+      product.category===state.category;
 
-    element.textContent =
-        table ? table.name : "Asnjë";
+    const searchOK =
+      product.name
+        .toLowerCase()
+        .includes(state.search.toLowerCase());
 
+    return categoryOK && searchOK;
+  });
+
+  grid.innerHTML="";
+
+  filtered.forEach(product=>{
+
+    const card=document.createElement("div");
+    card.className="product-card";
+
+    card.innerHTML=`
+      <img
+        class="product-img"
+        src="${product.image}"
+        alt="${product.name}"
+        onerror="this.style.display='none'"
+      >
+
+      <div class="product-body">
+        <div class="product-category">
+          ${product.category}
+        </div>
+
+        <div class="product-name">
+          ${product.name}
+        </div>
+
+        <div class="product-bottom">
+          <span class="product-price">
+            ${money(product.price)}
+          </span>
+
+          <button class="add-product">
+            +
+          </button>
+        </div>
+      </div>
+    `;
+
+    card.querySelector(".add-product")
+      .addEventListener("click",e=>{
+        e.stopPropagation();
+        addProduct(product.id);
+      });
+
+    grid.appendChild(card);
+  });
+
+  updateSelectedTableUI();
 }
 
+function addProduct(productId){
 
-function setupSearch() {
+  const table=getSelectedTable();
 
-    const input =
-        document.getElementById("menuSearch");
+  if(!table){
+    toast("Zgjidh fillimisht një tavolinë.");
+    showSection("tables");
+    return;
+  }
 
-    if (!input) return;
+  const product=getProducts().find(p=>p.id===productId);
 
+  if(!product) return;
 
-    input.addEventListener(
-        "input",
-        renderMenu
-    );
+  const existing=table.items.find(
+    item=>item.productId===productId
+  );
 
+  if(existing){
+    existing.qty++;
+  }else{
+    table.items.push({
+      productId:product.id,
+      name:product.name,
+      price:product.price,
+      qty:1
+    });
+  }
+
+  table.total=calculateTableTotal(table);
+
+  const tables=getTables();
+  const index=tables.findIndex(t=>t.id===table.id);
+
+  tables[index]=table;
+  saveTables(tables);
+
+  toast(product.name+" u shtua.");
+
+  renderMenu();
+  renderOrder();
+  renderTables();
+  renderDashboardTables();
 }
 
+function calculateTableTotal(table){
 
-/* =========================================================
+  return (table.items||[]).reduce(
+    (sum,item)=>sum+(item.price*item.qty),
+    0
+  );
+}
+
+/* =========================
    ORDER
-========================================================= */
+========================= */
 
-function addToOrder(productId) {
+function renderOrder(){
 
-    const product =
-        products.find(
-            item => item.id === productId
-        );
+  const table=getSelectedTable();
+  const box=document.getElementById("orderItems");
 
-    if (!product) return;
+  if(!box) return;
 
+  updateSelectedTableUI();
 
-    if (!selectedTableId) {
+  if(!table){
 
-        toast(
-            "Zgjidh fillimisht një tavolinë."
-        );
+    box.innerHTML=`
+      <div class="empty">
+        Zgjidh një tavolinë për të parë porosinë.
+      </div>
+    `;
 
-        showSection("tables");
+    updateOrderTotals(0);
+    return;
+  }
 
-        return;
+  if(!table.items.length){
 
-    }
+    box.innerHTML=`
+      <div class="empty">
+        Nuk ka produkte në porosi.
+      </div>
+    `;
 
+    updateOrderTotals(0);
+    return;
+  }
 
-    const stock =
-        Number(inventory[product.id] ?? 0);
+  box.innerHTML="";
 
+  table.items.forEach(item=>{
 
-    const existing =
-        currentOrder.find(
-            item => item.productId === productId
-        );
+    const row=document.createElement("div");
+    row.className="order-row";
 
+    row.innerHTML=`
+      <div>
+        <div class="order-name">${item.name}</div>
+        <small class="muted">
+          ${money(item.price)} / copë
+        </small>
+      </div>
 
-    const currentQuantity =
-        existing
-            ? Number(existing.quantity)
-            : 0;
+      <div class="order-price">
+        ${money(item.price*item.qty)}
+      </div>
 
+      <div class="qty">
+        <button class="minus">−</button>
+        <b>${item.qty}</b>
+        <button class="plus">+</button>
+      </div>
 
-    if (currentQuantity >= stock) {
+      <button class="remove">×</button>
+    `;
 
-        toast("Nuk ka më stok.");
+    row.querySelector(".minus")
+      .addEventListener("click",()=>{
+        changeQty(item.productId,-1);
+      });
 
-        return;
+    row.querySelector(".plus")
+      .addEventListener("click",()=>{
+        changeQty(item.productId,1);
+      });
 
-    }
+    row.querySelector(".remove")
+      .addEventListener("click",()=>{
+        removeItem(item.productId);
+      });
 
+    box.appendChild(row);
+  });
 
-    if (existing) {
+  updateOrderTotals(table.total);
+}
 
-        existing.quantity++;
+function updateOrderTotals(subtotal){
 
-    } else {
+  const service=0;
+  const total=subtotal+service;
 
-        currentOrder.push({
+  const sub=document.getElementById("orderSubtotal");
+  const srv=document.getElementById("orderService");
+  const tot=document.getElementById("orderTotal");
 
-            productId: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1
+  if(sub) sub.textContent=money(subtotal);
+  if(srv) srv.textContent=money(service);
+  if(tot) tot.textContent=money(total);
+}
 
-        });
+function changeQty(productId,amount){
 
-    }
+  const table=getSelectedTable();
 
+  if(!table) return;
 
-    saveCurrentOrder();
+  const item=table.items.find(
+    i=>i.productId===productId
+  );
 
-    renderOrder();
+  if(!item) return;
 
-    updateTableUI();
+  item.qty+=amount;
 
-    toast(
-        `${product.name} u shtua.`
+  if(item.qty<=0){
+    table.items=table.items.filter(
+      i=>i.productId!==productId
     );
+  }
 
+  table.total=calculateTableTotal(table);
+
+  saveTables(getTables());
+
+  renderOrder();
+  renderTables();
+  renderDashboardTables();
 }
 
+function removeItem(productId){
 
-function changeOrderQuantity(productId, amount) {
+  const table=getSelectedTable();
 
-    const item =
-        currentOrder.find(
-            product => product.productId === productId
-        );
+  if(!table) return;
 
-    if (!item) return;
+  table.items=table.items.filter(
+    i=>i.productId!==productId
+  );
 
+  table.total=calculateTableTotal(table);
 
-    const stock =
-        Number(inventory[productId] ?? 0);
+  saveTables(getTables());
 
+  renderOrder();
+  renderTables();
+  renderDashboardTables();
 
-    item.quantity += amount;
-
-
-    if (item.quantity > stock) {
-
-        item.quantity = stock;
-
-        toast("Nuk ka më stok.");
-
-    }
-
-
-    if (item.quantity <= 0) {
-
-        currentOrder =
-            currentOrder.filter(
-                product =>
-                    product.productId !== productId
-            );
-
-    }
-
-
-    saveCurrentOrder();
-    renderOrder();
-
+  toast("Produkti u hoq.");
 }
 
+function clearOrder(){
 
-function removeFromOrder(productId) {
+  const table=getSelectedTable();
 
-    currentOrder =
-        currentOrder.filter(
-            item => item.productId !== productId
-        );
+  if(!table) return;
 
-    saveCurrentOrder();
-    renderOrder();
+  if(!table.items.length){
+    toast("Porosia është bosh.");
+    return;
+  }
 
+  if(!confirm("Dëshiron të fshish të gjithë porosinë?")){
+    return;
+  }
+
+  table.items=[];
+  table.total=0;
+
+  saveTables(getTables());
+
+  renderOrder();
+  renderTables();
+  renderDashboardTables();
+
+  toast("Porosia u pastrua.");
 }
 
-
-function clearCurrentOrder() {
-
-    if (!currentOrder.length) return;
-
-
-    if (!confirm(
-        "Dëshiron ta pastrosh porosinë?"
-    )) return;
-
-
-    currentOrder = [];
-
-    saveCurrentOrder();
-
-    renderOrder();
-
-}
-
-
-function saveCurrentOrder() {
-
-    const table =
-        getTable(selectedTableId);
-
-    if (!table) return;
-
-
-    table.items =
-        currentOrder.map(
-            item => ({ ...item })
-        );
-
-
-    saveJSON(
-        KEYS.tables,
-        tables
-    );
-
-}
-
-
-function orderTotal() {
-
-    return currentOrder.reduce(
-        (sum, item) =>
-            sum +
-            Number(item.price || 0) *
-            Number(item.quantity || 1),
-        0
-    );
-
-}
-
-
-function renderOrder() {
-
-    const container =
-        document.getElementById(
-            "orderItems"
-        );
-
-    if (!container) return;
-
-
-    const table =
-        getTable(selectedTableId);
-
-
-    const tableText =
-        document.getElementById(
-            "selectedTableText"
-        );
-
-
-    if (tableText) {
-
-        tableText.textContent =
-            table ? table.name : "Asnjë";
-
-    }
-
-
-    if (!currentOrder.length) {
-
-        container.innerHTML = `
-            <div class="empty-state">
-                <div>◉</div>
-                <strong>Porosia është bosh</strong>
-                <span>Zgjidh një tavolinë dhe shto produkte.</span>
-
-                <button
-                    class="primary-btn"
-                    onclick="showSection('tables')">
-                    ZGJIDH TAVOLINË
-                </button>
-            </div>
-        `;
-
-    } else {
-
-        container.innerHTML =
-            currentOrder.map(item => {
-
-                const total =
-                    Number(item.price) *
-                    Number(item.quantity);
-
-
-                return `
-                    <div class="order-row">
-
-                        <div class="order-product-info">
-
-                            <strong>
-                                ${escapeHTML(item.name)}
-                            </strong>
-
-                            <span>
-                                ${money(item.price)} / copë
-                            </span>
-
-                        </div>
-
-
-                        <div class="quantity-control">
-
-                            <button
-                                type="button"
-                                onclick="changeOrderQuantity('${item.productId}', -1)">
-                                −
-                            </button>
-
-                            <strong>
-                                ${item.quantity}
-                            </strong>
-
-                            <button
-                                type="button"
-                                onclick="changeOrderQuantity('${item.productId}', 1)">
-                                +
-                            </button>
-
-                        </div>
-
-
-                        <strong class="order-item-total">
-                            ${money(total)}
-                        </strong>
-
-
-                        <button
-                            type="button"
-                            class="remove-order"
-                            onclick="removeFromOrder('${item.productId}')">
-                            ×
-                        </button>
-
-                    </div>
-                `;
-
-            }).join("");
-
-    }
-
-
-    const total =
-        orderTotal();
-
-
-    const productsCount =
-        currentOrder.reduce(
-            (sum, item) =>
-                sum + Number(item.quantity),
-            0
-        );
-
-
-    const productsElement =
-        document.getElementById(
-            "orderProducts"
-        );
-
-    const subtotal =
-        document.getElementById(
-            "orderSubtotal"
-        );
-
-    const service =
-        document.getElementById(
-            "orderService"
-        );
-
-    const totalElement =
-        document.getElementById(
-            "orderTotal"
-        );
-
-
-    if (productsElement) {
-        productsElement.textContent =
-            `${productsCount} produkte`;
-    }
-
-    if (subtotal) {
-        subtotal.textContent =
-            money(total);
-    }
-
-    if (service) {
-        service.textContent =
-            money(0);
-    }
-
-    if (totalElement) {
-        totalElement.textContent =
-            money(total);
-    }
-
-
-    updateSelectedTableDisplay();
-
-}
-
-
-/* =========================================================
+/* =========================
    PAYMENT
-========================================================= */
+========================= */
 
-function openPayment() {
+function openPayment(){
 
-    if (!selectedTableId) {
+  const table=getSelectedTable();
 
-        toast("Zgjidh një tavolinë.");
+  if(!table || !table.items.length){
+    toast("Nuk ka porosi për pagesë.");
+    return;
+  }
 
-        showSection("tables");
-
-        return;
-
-    }
-
-
-    if (!currentOrder.length) {
-
-        toast("Porosia është bosh.");
-
-        return;
-
-    }
-
-
-    const amount =
-        document.getElementById(
-            "paymentAmount"
-        );
-
-
-    if (amount) {
-        amount.textContent =
-            money(orderTotal());
-    }
-
-
-    openModal("paymentModal");
-
+  document
+    .getElementById("paymentModal")
+    .classList.add("show");
 }
 
+function closeModal(id){
+  const modal=document.getElementById(id);
+  if(modal) modal.classList.remove("show");
+}
 
-function completePayment(method) {
+function pay(method){
 
-    if (!selectedTableId || !currentOrder.length) {
+  const table=getSelectedTable();
 
-        closeModal("paymentModal");
-
-        return;
-
-    }
-
-
-    const table =
-        getTable(selectedTableId);
-
-
-    if (!table) return;
-
-
-    const total =
-        orderTotal();
-
-
-    const invoice = {
-
-        id:
-            `INV-${Date.now()}`,
-
-        date:
-            new Date().toISOString(),
-
-        table:
-            table.name,
-
-        tableNumber:
-            table.number,
-
-        total:
-            total,
-
-        amount:
-            total,
-
-        payment:
-            method,
-
-        paymentMethod:
-            method,
-
-        waiterName:
-            currentUser?.name || "Pa emër",
-
-        userName:
-            currentUser?.name || "Pa emër",
-
-        items:
-            currentOrder.map(
-                item => ({ ...item })
-            )
-
-    };
-
-
-    invoices.unshift(invoice);
-
-    saveJSON(
-        KEYS.invoices,
-        invoices
-    );
-
-
-    /* Reduce stock */
-
-    currentOrder.forEach(item => {
-
-        const oldStock =
-            Number(
-                inventory[item.productId] || 0
-            );
-
-
-        inventory[item.productId] =
-            Math.max(
-                0,
-                oldStock -
-                Number(item.quantity)
-            );
-
-    });
-
-
-    saveJSON(
-        KEYS.inventory,
-        inventory
-    );
-
-
-    /* Clear table */
-
-    table.items = [];
-
-    saveJSON(
-        KEYS.tables,
-        tables
-    );
-
-
-    currentOrder = [];
-
-    selectedTableId = null;
-
-    localStorage.removeItem(
-        KEYS.selectedTable
-    );
-
-
+  if(!table || !table.items.length){
+    toast("Porosia është bosh.");
     closeModal("paymentModal");
+    return;
+  }
 
-    renderAll();
+  const invoices=get(KEYS.invoices,[]);
 
-    showInvoice(invoice);
+  const invoice={
+    id:"INV-"+Date.now(),
+    createdAt:new Date().toISOString(),
+    tableId:table.id,
+    tableName:"#"+table.number,
+    items:table.items,
+    total:table.total,
+    amount:table.total,
+    grandTotal:table.total,
+    paymentMethod:method,
+    payment:method,
+    method:method
+  };
 
-    toast(
-        "Pagesa u regjistrua me sukses."
+  invoices.push(invoice);
+  set(KEYS.invoices,invoices);
+
+  const tables=getTables();
+  const index=tables.findIndex(t=>t.id===table.id);
+
+  tables[index]={
+    ...tables[index],
+    items:[],
+    total:0
+  };
+
+  saveTables(tables);
+
+  closeModal("paymentModal");
+
+  renderAll();
+
+  openInvoice(invoice);
+
+  toast("Pagesa u regjistrua.");
+}
+
+/* =========================
+   INVOICE
+========================= */
+
+function openInvoice(invoice){
+
+  const box=document.getElementById("invoiceContent");
+
+  const rows=(invoice.items||[])
+    .map(item=>`
+      <div class="invoice-line">
+        <span>${item.name} × ${item.qty}</span>
+        <b>${money(item.price*item.qty)}</b>
+      </div>
+    `)
+    .join("");
+
+  box.innerHTML=`
+    <div class="invoice-head">
+      <h2>MY BAR</h2>
+      <div>FATURË</div>
+      <small>${invoice.id}</small>
+    </div>
+
+    <div class="invoice-line">
+      <span>Tavolina</span>
+      <b>${invoice.tableName}</b>
+    </div>
+
+    ${rows}
+
+    <div class="invoice-total">
+      <span>TOTAL</span>
+      <strong>${money(invoice.total)}</strong>
+    </div>
+
+    <div class="invoice-line">
+      <span>Pagesa</span>
+      <b>${invoice.paymentMethod}</b>
+    </div>
+  `;
+
+  document
+    .getElementById("invoiceModal")
+    .classList.add("show");
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function todayInvoices(){
+
+  const invoices=get(KEYS.invoices,[]);
+
+  const now=new Date();
+
+  return invoices.filter(invoice=>{
+
+    const date=new Date(invoice.createdAt);
+
+    return date.toDateString()===now.toDateString();
+  });
+}
+
+function renderDashboard(){
+
+  const invoices=todayInvoices();
+
+  const sales=invoices.reduce(
+    (sum,i)=>sum+Number(i.total||0),
+    0
+  );
+
+  const card=invoices
+    .filter(i=>i.paymentMethod==="KARTË")
+    .reduce(
+      (sum,i)=>sum+Number(i.total||0),
+      0
     );
 
+  const active=getTables()
+    .filter(t=>t.items&&t.items.length)
+    .length;
+
+  document.getElementById("salesToday").textContent=money(sales);
+  document.getElementById("activeTables").textContent=active;
+  document.getElementById("invoiceToday").textContent=invoices.length;
+  document.getElementById("cardToday").textContent=money(card);
+
+  renderDashboardTables();
+
+  const date=document.getElementById("todayDate");
+
+  if(date){
+    date.textContent=new Date().toLocaleDateString(
+      "sq-AL",
+      {
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+      }
+    );
+  }
 }
 
+/* =========================
+   CASH
+========================= */
 
-function showInvoice(invoice) {
+function renderCash(){
 
-    const container =
-        document.getElementById(
-            "invoiceContent"
-        );
+  const invoices=todayInvoices();
 
-    if (!container) return;
+  const total=invoices.reduce(
+    (sum,i)=>sum+Number(i.total||0),
+    0
+  );
 
+  const cash=invoices
+    .filter(i=>i.paymentMethod==="CASH")
+    .reduce(
+      (sum,i)=>sum+Number(i.total||0),
+      0
+    );
 
-    const itemsHTML =
-        invoice.items.map(item => {
+  const card=invoices
+    .filter(i=>i.paymentMethod==="KARTË")
+    .reduce(
+      (sum,i)=>sum+Number(i.total||0),
+      0
+    );
 
-            const total =
-                Number(item.price) *
-                Number(item.quantity);
+  document.getElementById("cashTotal").textContent=money(total);
+  document.getElementById("cashMoney").textContent=money(cash);
+  document.getElementById("cashCard").textContent=money(card);
+  document.getElementById("cashInvoices").textContent=invoices.length;
 
+  const list=document.getElementById("paymentsList");
 
-            return `
-                <div class="invoice-item">
-                    <span>
-                        ${escapeHTML(item.name)}
-                        × ${item.quantity}
-                    </span>
+  list.innerHTML="";
 
-                    <strong>
-                        ${money(total)}
-                    </strong>
-                </div>
-            `;
+  invoices.slice().reverse().forEach(invoice=>{
 
-        }).join("");
+    const row=document.createElement("div");
+    row.className="payment-row";
 
+    row.innerHTML=`
+      <div>
+        <b>${invoice.id}</b>
+        <div class="muted">${invoice.tableName}</div>
+      </div>
 
-    container.innerHTML = `
+      <b>${money(invoice.total)}</b>
 
-        <div class="invoice-header">
-
-            <div class="invoice-logo">
-                M
-            </div>
-
-            <h2>MY BAR</h2>
-
-            <span>FATURË</span>
-
-        </div>
-
-
-        <div class="invoice-meta">
-
-            <div>
-                <span>Nr.</span>
-                <strong>${invoice.id}</strong>
-            </div>
-
-            <div>
-                <span>Data</span>
-                <strong>
-                    ${new Date(invoice.date).toLocaleString("sq-AL")}
-                </strong>
-            </div>
-
-            <div>
-                <span>Tavolina</span>
-                <strong>${escapeHTML(invoice.table)}</strong>
-            </div>
-
-            <div>
-                <span>Kamarieri</span>
-                <strong>${escapeHTML(invoice.waiterName)}</strong>
-            </div>
-
-        </div>
-
-
-        <div class="invoice-items">
-
-            ${itemsHTML}
-
-        </div>
-
-
-        <div class="invoice-total">
-
-            <span>TOTAL</span>
-
-            <strong>
-                ${money(invoice.total)}
-            </strong>
-
-        </div>
-
-
-        <div class="invoice-payment">
-            Pagesa:
-            ${invoice.payment === "card" ? "CARD" : "CASH"}
-        </div>
-
+      <span>${invoice.paymentMethod}</span>
     `;
 
+    list.appendChild(row);
+  });
 
-    openModal("invoiceModal");
-
+  if(!invoices.length){
+    list.innerHTML='<div class="empty">Nuk ka pagesa sot.</div>';
+  }
 }
 
+/* =========================
+   HISTORY
+========================= */
 
-function printInvoice() {
+function renderHistory(){
 
-    window.print();
+  const invoices=get(KEYS.invoices,[]);
+  const box=document.getElementById("historyList");
 
+  box.innerHTML="";
+
+  invoices.slice().reverse().forEach(invoice=>{
+
+    const row=document.createElement("div");
+    row.className="history-row";
+
+    row.innerHTML=`
+      <div>
+        <b>${invoice.id}</b>
+        <div class="muted">
+          ${new Date(invoice.createdAt).toLocaleString("sq-AL")}
+        </div>
+      </div>
+
+      <span>${invoice.tableName}</span>
+
+      <span>${invoice.paymentMethod}</span>
+
+      <b>${money(invoice.total)}</b>
+    `;
+
+    box.appendChild(row);
+  });
+
+  if(!invoices.length){
+    box.innerHTML='<div class="empty">Nuk ka histori.</div>';
+  }
 }
 
+function deleteHistory(){
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
+  if(!confirm("Dëshiron të fshish të gjithë historikun?")){
+    return;
+  }
 
-function getTodayInvoices() {
+  set(KEYS.invoices,[]);
 
-    const today =
-        todayKey();
+  renderAll();
 
+  toast("Historiku u fshi.");
+}
 
-    return invoices.filter(invoice => {
+/* =========================
+   ADMIN
+========================= */
 
-        return todayKeyFromDate(
-            invoice.date
-        ) === today;
+function renderAdmin(){
+
+  const name=get(KEYS.appName,"MY BAR");
+
+  document.getElementById("appNameInput").value=name;
+
+  document.getElementById("tableCountInput").value=
+    get(KEYS.tableCount,12);
+
+  renderUsers();
+  renderAdminProducts();
+}
+
+function renderUsers(){
+
+  const box=document.getElementById("usersList");
+  const users=get(KEYS.users,[]);
+
+  box.innerHTML="";
+
+  users.forEach(user=>{
+
+    const row=document.createElement("div");
+    row.className="user-row";
+
+    row.innerHTML=`
+      <div>
+        <b>${user.name}</b>
+        <div class="muted">
+          ${user.username} · ${user.role}
+        </div>
+      </div>
+    `;
+
+    box.appendChild(row);
+  });
+}
+
+function renderAdminProducts(){
+
+  const box=document.getElementById("adminProducts");
+  const products=getProducts();
+
+  box.innerHTML="";
+
+  products.forEach(product=>{
+
+    const row=document.createElement("div");
+    row.className="admin-product-row";
+
+    row.innerHTML=`
+      <div>
+        <b>${product.name}</b>
+        <div class="muted">${product.category}</div>
+      </div>
+
+      <b>${money(product.price)}</b>
+    `;
+
+    box.appendChild(row);
+  });
+}
+
+function saveAppName(){
+
+  const input=document.getElementById("appNameInput");
+  const value=input.value.trim();
+
+  if(!value){
+    toast("Vendos një emër.");
+    return;
+  }
+
+  set(KEYS.appName,value);
+
+  document.title=value;
+
+  toast("Emri u ruajt.");
+}
+
+function saveTableCount(){
+
+  const input=document.getElementById("tableCountInput");
+  let count=Number(input.value);
+
+  if(count<1) count=1;
+  if(count>100) count=100;
+
+  set(KEYS.tableCount,count);
+
+  const old=getTables();
+  const tables=[];
+
+  for(let i=1;i<=count;i++){
+
+    const existing=old.find(
+      t=>t.number===i
+    );
+
+    tables.push(
+      existing || {
+        id:"table-"+i,
+        number:i,
+        items:[],
+        total:0
+      }
+    );
+  }
+
+  saveTables(tables);
+
+  renderAll();
+
+  toast("Tavolinat u përditësuan.");
+}
+
+function saveAdminPassword(){
+
+  const password=
+    document.getElementById("newAdminPassword").value.trim();
+
+  if(password.length<4){
+    toast("Fjalëkalimi duhet të ketë të paktën 4 karaktere.");
+    return;
+  }
+
+  const users=get(KEYS.users,[]);
+  const admin=users.find(u=>u.role==="admin");
+
+  if(admin){
+    admin.password=password;
+  }
+
+  set(KEYS.users,users);
+
+  document.getElementById("newAdminPassword").value="";
+
+  toast("Fjalëkalimi u ndryshua.");
+}
+
+function backup(){
+
+  const data={
+    users:get(KEYS.users,[]),
+    products:get(KEYS.products,[]),
+    invoices:get(KEYS.invoices,[]),
+    tables:get(KEYS.tables,[]),
+    tableCount:get(KEYS.tableCount,12),
+    appName:get(KEYS.appName,"MY BAR")
+  };
+
+  const blob=new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:"application/json"}
+  );
+
+  const url=URL.createObjectURL(blob);
+
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download="my-bar-backup.json";
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+  toast("Backup u shkarkua.");
+}
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock(){
+
+  const clock=document.getElementById("clock");
+
+  if(clock){
+    clock.textContent=new Date().toLocaleTimeString(
+      "sq-AL"
+    );
+  }
+}
+
+/* =========================
+   EVENTS
+========================= */
+
+function setupEvents(){
+
+  /* NAV */
+  document.querySelectorAll("[data-section]")
+    .forEach(btn=>{
+
+      btn.addEventListener("click",()=>{
+        showSection(btn.dataset.section);
+      });
 
     });
 
-}
+  /* LOGOUT */
+  document
+    .getElementById("logoutBtn")
+    .addEventListener("click",()=>{
 
+      if(confirm("Dëshiron të dalësh nga sistemi?")){
 
-function todayKeyFromDate(value) {
+        localStorage.removeItem(KEYS.currentUser);
 
-    const date =
-        new Date(value);
+        window.location.href="login.html";
+      }
 
+    });
 
-    return `${date.getFullYear()}-${String(
-        date.getMonth() + 1
-    ).padStart(2, "0")}-${String(
-        date.getDate()
-    ).padStart(2, "0")}`;
+  /* SEARCH */
+  document
+    .getElementById("menuSearch")
+    .addEventListener("input",e=>{
 
-}
+      state.search=e.target.value;
 
+      renderMenu();
 
-function renderDashboard() {
+    });
 
-    const today =
-        getTodayInvoices();
+  /* ORDER */
+  document
+    .getElementById("clearOrderBtn")
+    .addEventListener("click",clearOrder);
 
+  document
+    .getElementById("paymentBtn")
+    .addEventListener("click",openPayment);
 
-    const sales =
-        today.reduce(
-            (sum, invoice) =>
-                sum +
-                Number(invoice.total || 0),
-            0
-        );
+  /* PAYMENT */
+  document
+    .getElementById("cashPaymentBtn")
+    .addEventListener("click",()=>{
+      pay("CASH");
+    });
 
+  document
+    .getElementById("cardPaymentBtn")
+    .addEventListener("click",()=>{
+      pay("KARTË");
+    });
 
-    const card =
-        today
-            .filter(
-                invoice =>
-                    invoice.payment === "card"
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum +
-                    Number(invoice.total || 0),
-                0
-            );
+  /* MODAL CLOSE */
+  document.querySelectorAll("[data-close]")
+    .forEach(btn=>{
 
+      btn.addEventListener("click",()=>{
+        closeModal(btn.dataset.close);
+      });
 
-    const active =
-        tables.filter(
-            table => tableIsBusy(table)
-        ).length;
+    });
 
+  document.querySelectorAll(".modal")
+    .forEach(modal=>{
 
-    const salesElement =
-        document.getElementById(
-            "salesToday"
-        );
+      modal.addEventListener("click",e=>{
 
-    const activeElement =
-        document.getElementById(
-            "activeTables"
-        );
-
-    const invoiceElement =
-        document.getElementById(
-            "invoiceToday"
-        );
-
-    const cardElement =
-        document.getElementById(
-            "cardToday"
-        );
-
-
-    if (salesElement)
-        salesElement.textContent = money(sales);
-
-    if (activeElement)
-        activeElement.textContent = active;
-
-    if (invoiceElement)
-        invoiceElement.textContent =
-            today.length;
-
-    if (cardElement)
-        cardElement.textContent = money(card);
-
-
-    renderDashboardTables();
-
-}
-
-
-/* =========================================================
-   CASH
-========================================================= */
-
-function renderCash() {
-
-    const today =
-        getTodayInvoices();
-
-
-    const total =
-        today.reduce(
-            (sum, invoice) =>
-                sum +
-                Number(invoice.total || 0),
-            0
-        );
-
-
-    const cash =
-        today
-            .filter(
-                invoice =>
-                    invoice.payment !== "card"
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum +
-                    Number(invoice.total || 0),
-                0
-            );
-
-
-    const card =
-        today
-            .filter(
-                invoice =>
-                    invoice.payment === "card"
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum +
-                    Number(invoice.total || 0),
-                0
-            );
-
-
-    document.getElementById("cashTotal")
-        .textContent = money(total);
-
-    document.getElementById("cashMoney")
-        .textContent = money(cash);
-
-    document.getElementById("cashCard")
-        .textContent = money(card);
-
-    document.getElementById("cashInvoices")
-        .textContent = today.length;
-
-
-    const list =
-        document.getElementById(
-            "paymentsList"
-        );
-
-
-    if (!list) return;
-
-
-    list.innerHTML =
-        today.length
-            ? today.map(invoice => `
-
-                <div class="payment-row">
-
-                    <div>
-                        <strong>
-                            ${escapeHTML(invoice.table)}
-                        </strong>
-
-                        <span>
-                            ${new Date(invoice.date).toLocaleTimeString("sq-AL")}
-                        </span>
-                    </div>
-
-                    <span class="payment-method-tag">
-                        ${invoice.payment === "card" ? "CARD" : "CASH"}
-                    </span>
-
-                    <strong>
-                        ${money(invoice.total)}
-                    </strong>
-
-                </div>
-
-            `).join("")
-            : `
-                <div class="empty-state">
-                    <strong>Nuk ka pagesa sot.</strong>
-                </div>
-            `;
-
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-function renderHistory() {
-
-    const list =
-        document.getElementById(
-            "historyList"
-        );
-
-    if (!list) return;
-
-
-    if (!invoices.length) {
-
-        list.innerHTML = `
-            <div class="empty-state">
-                <strong>Historiku është bosh.</strong>
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    list.innerHTML =
-        invoices.map(invoice => `
-
-            <div class="history-row">
-
-                <div>
-                    <strong>
-                        ${escapeHTML(invoice.id)}
-                    </strong>
-
-                    <span>
-                        ${new Date(invoice.date).toLocaleString("sq-AL")}
-                    </span>
-                </div>
-
-
-                <div>
-                    <strong>
-                        ${escapeHTML(invoice.table)}
-                    </strong>
-
-                    <span>
-                        ${escapeHTML(invoice.waiterName)}
-                    </span>
-                </div>
-
-
-                <div class="history-payment">
-                    ${invoice.payment === "card" ? "CARD" : "CASH"}
-                </div>
-
-
-                <strong>
-                    ${money(invoice.total)}
-                </strong>
-
-
-                <button
-                    type="button"
-                    class="delete-btn"
-                    onclick="deleteInvoice('${invoice.id}')">
-                    ×
-                </button>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function deleteInvoice(id) {
-
-    if (!confirm("Fshi këtë faturë?")) return;
-
-
-    invoices =
-        invoices.filter(
-            invoice => invoice.id !== id
-        );
-
-
-    saveJSON(
-        KEYS.invoices,
-        invoices
-    );
-
-
-    renderHistory();
-    renderDashboard();
-
-    toast("Fatura u fshi.");
-
-}
-
-
-function deleteHistory() {
-
-    if (!invoices.length) return;
-
-
-    if (!confirm(
-        "Dëshiron të fshish të gjithë historikun?"
-    )) return;
-
-
-    invoices = [];
-
-    saveJSON(
-        KEYS.invoices,
-        invoices
-    );
-
-
-    renderHistory();
-    renderDashboard();
-
-    toast("Historiku u fshi.");
-
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-function renderAdmin() {
-
-    if (!isAdmin()) return;
-
-
-    renderUsers();
-    renderAdminProducts();
-    renderAdminTables();
-
-    const countInput =
-        document.getElementById(
-            "tableCountInput"
-        );
-
-
-    if (countInput) {
-        countInput.value =
-            tables.length;
-    }
-
-
-    applyAppName();
-
-}
-
-
-function renderUsers() {
-
-    const list =
-        document.getElementById(
-            "usersList"
-        );
-
-    if (!list) return;
-
-
-    list.innerHTML =
-        users.map(user => `
-
-            <div class="admin-row">
-
-                <div>
-                    <strong>
-                        ${escapeHTML(user.name)}
-                    </strong>
-
-                    <span>
-                        @${escapeHTML(user.username)}
-                        • ${user.role}
-                    </span>
-                </div>
-
-                <div class="admin-actions">
-
-                    ${
-                        user.username !== "admin"
-                            ? `
-                                <button
-                                    onclick="editUser('${user.id}')">
-                                    EDIT
-                                </button>
-
-                                <button
-                                    class="danger"
-                                    onclick="deleteUser('${user.id}')">
-                                    DELETE
-                                </button>
-                            `
-                            : ""
-                    }
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function openWaiterModal(userId = null) {
-
-    editingUserId = userId;
-
-
-    const user =
-        userId
-            ? users.find(
-                item => item.id === userId
-            )
-            : null;
-
-
-    const html = `
-
-        <span class="eyebrow">
-            USER MANAGEMENT
-        </span>
-
-        <h2>
-            ${user ? "Ndrysho kamarierin" : "Shto kamarier"}
-        </h2>
-
-        <div class="modal-form">
-
-            <input
-                id="modalUserName"
-                class="form-input"
-                placeholder="Emri"
-                value="${escapeHTML(user?.name || "")}">
-
-            <input
-                id="modalUsername"
-                class="form-input"
-                placeholder="Username"
-                value="${escapeHTML(user?.username || "")}">
-
-            <input
-                id="modalUserPassword"
-                class="form-input"
-                type="password"
-                placeholder="Password"
-                value="${escapeHTML(user?.password || "")}">
-
-            <button
-                class="primary-btn"
-                onclick="saveUser()">
-                RUAJ
-            </button>
-
-        </div>
-
-    `;
-
-
-    openGeneralModal(html);
-
-}
-
-
-function saveUser() {
-
-    const name =
-        document.getElementById(
-            "modalUserName"
-        ).value.trim();
-
-
-    const username =
-        document.getElementById(
-            "modalUsername"
-        ).value.trim();
-
-
-    const password =
-        document.getElementById(
-            "modalUserPassword"
-        ).value.trim();
-
-
-    if (!name || !username || !password) {
-
-        toast("Plotëso të gjitha fushat.");
-
-        return;
-
-    }
-
-
-    if (editingUserId) {
-
-        const user =
-            users.find(
-                item => item.id === editingUserId
-            );
-
-
-        if (user) {
-
-            user.name = name;
-            user.username = username;
-            user.password = password;
-
+        if(e.target===modal){
+          modal.classList.remove("show");
         }
 
-    } else {
+      });
 
-        users.push({
+    });
 
-            id:
-                `user-${Date.now()}`,
+  /* PRINT */
+  document
+    .getElementById("printInvoiceBtn")
+    .addEventListener("click",()=>{
+      window.print();
+    });
 
-            name,
-            username,
-            password,
-            role: "waiter"
+  /* HISTORY */
+  document
+    .getElementById("deleteHistoryBtn")
+    .addEventListener("click",deleteHistory);
 
-        });
+  /* ADMIN */
+  document
+    .getElementById("saveAppNameBtn")
+    .addEventListener("click",saveAppName);
 
-    }
+  document
+    .getElementById("saveTableCountBtn")
+    .addEventListener("click",saveTableCount);
 
+  document
+    .getElementById("saveAdminPasswordBtn")
+    .addEventListener("click",saveAdminPassword);
 
-    saveJSON(
-        KEYS.users,
-        users
-    );
-
-
-    closeModal("generalModal");
-
-    renderUsers();
-
-    toast("Kamarieri u ruajt.");
-
+  document
+    .getElementById("backupBtn")
+    .addEventListener("click",backup);
 }
 
+/* =========================
+   ROLE UI
+========================= */
 
-function editUser(id) {
+function applyRole(){
 
-    openWaiterModal(id);
+  const user=getCurrentUser();
 
+  document.getElementById("userInfo").textContent=
+    user ? user.name : "---";
+
+  if(!isAdmin()){
+
+    document.querySelectorAll(".admin-only")
+      .forEach(el=>{
+        el.style.display="none";
+      });
+
+    document.querySelectorAll(".admin-only-section")
+      .forEach(el=>{
+        el.style.display="none";
+      });
+
+  }
 }
 
-
-function deleteUser(id) {
-
-    const user =
-        users.find(
-            item => item.id === id
-        );
-
-
-    if (!user) return;
-
-
-    if (!confirm(
-        `Fshi ${user.name}?`
-    )) return;
-
-
-    users =
-        users.filter(
-            item => item.id !== id
-        );
-
-
-    saveJSON(
-        KEYS.users,
-        users
-    );
-
-
-    renderUsers();
-
-    toast("Kamarieri u fshi.");
-
-}
-
-
-/* =========================================================
-   PRODUCTS ADMIN
-========================================================= */
-
-function renderAdminProducts() {
-
-    const list =
-        document.getElementById(
-            "adminProducts"
-        );
-
-    if (!list) return;
-
-
-    list.innerHTML =
-        products.map(product => `
-
-            <div class="admin-row">
-
-                <div class="admin-product">
-
-                    <img
-                        src="${product.image}"
-                        alt="">
-
-                    <div>
-                        <strong>
-                            ${escapeHTML(product.name)}
-                        </strong>
-
-                        <span>
-                            ${escapeHTML(product.category)}
-                            • ${money(product.price)}
-                            • Stok:
-                            ${inventory[product.id] ?? 0}
-                        </span>
-                    </div>
-
-                </div>
-
-
-                <div class="admin-actions">
-
-                    <button
-                        onclick="editProduct('${product.id}')">
-                        EDIT
-                    </button>
-
-                    <button
-                        class="danger"
-                        onclick="deleteProduct('${product.id}')">
-                        DELETE
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function openProductModal(productId = null) {
-
-    editingProductId = productId;
-
-
-    const product =
-        productId
-            ? products.find(
-                item => item.id === productId
-            )
-            : null;
-
-
-    const html = `
-
-        <span class="eyebrow">
-            MENU MANAGEMENT
-        </span>
-
-        <h2>
-            ${product ? "Ndrysho produktin" : "Shto produkt"}
-        </h2>
-
-        <div class="modal-form">
-
-            <input
-                id="modalProductName"
-                class="form-input"
-                placeholder="Emri"
-                value="${escapeHTML(product?.name || "")}">
-
-            <input
-                id="modalProductPrice"
-                class="form-input"
-                type="number"
-                placeholder="Çmimi"
-                value="${product?.price || ""}">
-
-            <input
-                id="modalProductCategory"
-                class="form-input"
-                placeholder="Kategoria"
-                value="${escapeHTML(product?.category || "")}">
-
-            <input
-                id="modalProductImage"
-                class="form-input"
-                placeholder="URL e fotos"
-                value="${escapeHTML(product?.image || "")}">
-
-            <input
-                id="modalProductStock"
-                class="form-input"
-                type="number"
-                min="0"
-                placeholder="Stoku"
-                value="${product ? inventory[product.id] ?? 0 : 20}">
-
-            <button
-                class="primary-btn"
-                onclick="saveProduct()">
-                RUAJ PRODUKTIN
-            </button>
-
-        </div>
-
-    `;
-
-
-    openGeneralModal(html);
-
-}
-
-
-function saveProduct() {
-
-    const name =
-        document.getElementById(
-            "modalProductName"
-        ).value.trim();
-
-
-    const price =
-        Number(
-            document.getElementById(
-                "modalProductPrice"
-            ).value
-        );
-
-
-    const category =
-        document.getElementById(
-            "modalProductCategory"
-        ).value.trim();
-
-
-    const image =
-        document.getElementById(
-            "modalProductImage"
-        ).value.trim();
-
-
-    const stock =
-        Math.max(
-            0,
-            Number(
-                document.getElementById(
-                    "modalProductStock"
-                ).value
-            )
-        );
-
-
-    if (!name || !price || !category) {
-
-        toast("Plotëso emrin, çmimin dhe kategorinë.");
-
-        return;
-
-    }
-
-
-    if (editingProductId) {
-
-        const product =
-            products.find(
-                item =>
-                    item.id === editingProductId
-            );
-
-
-        if (product) {
-
-            product.name = name;
-            product.price = price;
-            product.category = category;
-
-            if (image) {
-                product.image = image;
-            }
-
-            inventory[product.id] =
-                stock;
-
-        }
-
-    } else {
-
-        const id =
-            `product-${Date.now()}`;
-
-
-        products.push({
-
-            id,
-            name,
-            price,
-            category,
-
-            image:
-                image ||
-                "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85"
-
-        });
-
-
-        inventory[id] = stock;
-
-    }
-
-
-    saveJSON(
-        KEYS.products,
-        products
-    );
-
-
-    saveJSON(
-        KEYS.inventory,
-        inventory
-    );
-
-
-    closeModal("generalModal");
-
-    renderMenu();
-    renderAdminProducts();
-
-    toast("Produkti u ruajt.");
-
-}
-
-
-function editProduct(id) {
-
-    openProductModal(id);
-
-}
-
-
-function deleteProduct(id) {
-
-    const product =
-        products.find(
-            item => item.id === id
-        );
-
-
-    if (!product) return;
-
-
-    if (!confirm(
-        `Fshi ${product.name}?`
-    )) return;
-
-
-    products =
-        products.filter(
-            item => item.id !== id
-        );
-
-
-    delete inventory[id];
-
-
-    saveJSON(
-        KEYS.products,
-        products
-    );
-
-
-    saveJSON(
-        KEYS.inventory,
-        inventory
-    );
-
-
-    renderMenu();
-    renderAdminProducts();
-
-    toast("Produkti u fshi.");
-
-}
-
-
-/* =========================================================
-   TABLE ADMIN
-========================================================= */
-
-function renderAdminTables() {
-
-    const list =
-        document.getElementById(
-            "adminTables"
-        );
-
-    if (!list) return;
-
-
-    list.innerHTML =
-        tables.map(table => `
-
-            <div class="admin-row">
-
-                <div>
-
-                    <strong>
-                        ${escapeHTML(table.name)}
-                    </strong>
-
-                    <span>
-                        Tavolina ${table.number}
-                        • ${tableIsBusy(table) ? "Zënë" : "E lirë"}
-                    </span>
-
-                </div>
-
-
-                <div class="admin-actions">
-
-                    <button
-                        onclick="renameTable('${table.id}')">
-                        RENAME
-                    </button>
-
-                    <button
-                        class="danger"
-                        onclick="deleteTable('${table.id}')">
-                        DELETE
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function renameTable(id) {
-
-    const table =
-        getTable(id);
-
-    if (!table) return;
-
-
-    const name =
-        prompt(
-            "Emri i ri:",
-            table.name
-        );
-
-
-    if (!name?.trim()) return;
-
-
-    table.name =
-        name.trim();
-
-
-    saveJSON(
-        KEYS.tables,
-        tables
-    );
-
-
-    renderAll();
-
-    toast("Tavolina u ndryshua.");
-
-}
-
-
-function deleteTable(id) {
-
-    if (tables.length <= 1) {
-
-        toast(
-            "Duhet të ketë të paktën një tavolinë."
-        );
-
-        return;
-
-    }
-
-
-    const table =
-        getTable(id);
-
-    if (!table) return;
-
-
-    if (!confirm(
-        `Fshi ${table.name}?`
-    )) return;
-
-
-    tables =
-        tables.filter(
-            item => item.id !== id
-        );
-
-
-    saveJSON(
-        KEYS.tables,
-        tables
-    );
-
-
-    if (selectedTableId === id) {
-
-        selectedTableId = null;
-
-        currentOrder = [];
-
-        localStorage.removeItem(
-            KEYS.selectedTable
-        );
-
-    }
-
-
-    renderAll();
-
-    toast("Tavolina u fshi.");
-
-}
-
-
-function saveTableCount() {
-
-    let count =
-        Number(
-            document.getElementById(
-                "tableCountInput"
-            ).value
-        );
-
-
-    count =
-        Math.max(
-            1,
-            Math.min(
-                100,
-                count
-            )
-        );
-
-
-    if (count === tables.length) {
-
-        toast("Numri nuk ndryshoi.");
-
-        return;
-
-    }
-
-
-    if (count > tables.length) {
-
-        const start =
-            tables.length + 1;
-
-
-        for (
-            let i = start;
-            i <= count;
-            i++
-        ) {
-
-            tables.push({
-
-                id:
-                    `table-${Date.now()}-${i}`,
-
-                number: i,
-
-                name:
-                    `Tavolina ${i}`,
-
-                items: []
-
-            });
-
-        }
-
-    } else {
-
-        tables =
-            tables.slice(
-                0,
-                count
-            );
-
-    }
-
-
-    saveJSON(
-        KEYS.tables,
-        tables
-    );
-
-
-    localStorage.setItem(
-        KEYS.tableCount,
-        String(count)
-    );
-
-
-    renderAll();
-
-    toast(
-        `U vendosën ${count} tavolina.`
-    );
-
-}
-
-
-/* =========================================================
-   APP SETTINGS
-========================================================= */
-
-function saveAppName() {
-
-    const input =
-        document.getElementById(
-            "appNameInput"
-        );
-
-
-    const name =
-        input.value.trim()
-        || "MY BAR";
-
-
-    localStorage.setItem(
-        KEYS.appName,
-        name
-    );
-
-
-    applyAppName();
-
-    toast("Emri u ruajt.");
-
-}
-
-
-function changeAdminPassword() {
-
-    const input =
-        document.getElementById(
-            "newAdminPassword"
-        );
-
-
-    const password =
-        input.value.trim();
-
-
-    if (password.length < 4) {
-
-        toast(
-            "Password duhet të ketë të paktën 4 karaktere."
-        );
-
-        return;
-
-    }
-
-
-    const admin =
-        users.find(
-            user => user.username === "admin"
-        );
-
-
-    if (!admin) return;
-
-
-    admin.password =
-        password;
-
-
-    saveJSON(
-        KEYS.users,
-        users
-    );
-
-
-    input.value = "";
-
-    toast(
-        "Password-i u ndryshua."
-    );
-
-}
-
-
-/* =========================================================
-   BACKUP
-========================================================= */
-
-function exportBackup() {
-
-    const data = {
-
-        exportedAt:
-            new Date().toISOString(),
-
-        users,
-        products,
-        invoices,
-        tables,
-        inventory
-
-    };
-
-
-    const blob =
-        new Blob(
-            [
-                JSON.stringify(
-                    data,
-                    null,
-                    2
-                )
-            ],
-            {
-                type: "application/json"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const a =
-        document.createElement("a");
-
-
-    a.href = url;
-
-    a.download =
-        `MY-BAR-BACKUP-${todayKey()}.json`;
-
-
-    a.click();
-
-
-    URL.revokeObjectURL(url);
-
-}
-
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-function openModal(id) {
-
-    const modal =
-        document.getElementById(id);
-
-    if (!modal) return;
-
-
-    modal.classList.add("active");
-
-}
-
-
-function closeModal(id) {
-
-    const modal =
-        document.getElementById(id);
-
-    if (!modal) return;
-
-
-    modal.classList.remove("active");
-
-}
-
-
-function openGeneralModal(content) {
-
-    const container =
-        document.getElementById(
-            "generalModalContent"
-        );
-
-
-    container.innerHTML =
-        content;
-
-
-    openModal("generalModal");
-
-}
-
-
-document.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target.classList.contains(
-                "modal"
-            )
-        ) {
-
-            event.target.classList.remove(
-                "active"
-            );
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (event.key !== "Escape") return;
-
-
-        document
-            .querySelectorAll(".modal.active")
-            .forEach(modal => {
-
-                modal.classList.remove(
-                    "active"
-                );
-
-            });
-
-    }
-);
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-
-function toast(message) {
-
-    const element =
-        document.getElementById(
-            "toast"
-        );
-
-    const messageElement =
-        document.getElementById(
-            "toastMessage"
-        );
-
-
-    if (!element || !messageElement) return;
-
-
-    messageElement.textContent =
-        message;
-
-
-    element.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                element.classList.remove(
-                    "show"
-                );
-
-            },
-            2500
-        );
-
-}
-
-
-/* =========================================================
+/* =========================
    RENDER ALL
-========================================================= */
+========================= */
 
-function renderAll() {
+function renderAll(){
 
-    setupRoleUI();
+  renderDashboard();
+  renderTables();
+  renderMenu();
+  renderOrder();
 
-    renderDashboard();
-    renderTables();
-    renderMenu();
-    renderOrder();
-
-    if (isAdmin()) {
-
-        renderCash();
-        renderHistory();
-        renderAdmin();
-
-    }
-
-    updateTableUI();
-
+  if(isAdmin()){
+    renderCash();
+    renderHistory();
+    renderAdmin();
+  }
 }
 
+/* =========================
+   INIT
+========================= */
 
-function updateTableUI() {
+function init(){
 
-    renderDashboardTables();
+  ensureData();
 
+  if(!checkLogin()) return;
+
+  setupEvents();
+  applyRole();
+  renderAll();
+
+  showSection("dashboard");
+
+  updateClock();
+
+  setInterval(updateClock,1000);
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-function logout() {
-
-    if (!confirm(
-        "Dëshiron të dalësh nga sistemi?"
-    )) return;
-
-
-    localStorage.removeItem(
-        KEYS.currentUser
-    );
-
-
-    window.location.href =
-        "login.html";
-
-}
-
-
-/* =========================================================
-   GLOBAL FUNCTIONS
-========================================================= */
-
-window.showSection = showSection;
-window.selectTable = selectTable;
-window.selectCategory = selectCategory;
-
-window.addToOrder = addToOrder;
-window.changeOrderQuantity =
-    changeOrderQuantity;
-
-window.removeFromOrder =
-    removeFromOrder;
-
-window.clearCurrentOrder =
-    clearCurrentOrder;
-
-window.openPayment =
-    openPayment;
-
-window.completePayment =
-    completePayment;
-
-window.printInvoice =
-    printInvoice;
-
-window.closeModal =
-    closeModal;
-
-window.openWaiterModal =
-    openWaiterModal;
-
-window.saveUser =
-    saveUser;
-
-window.editUser =
-    editUser;
-
-window.deleteUser =
-    deleteUser;
-
-window.openProductModal =
-    openProductModal;
-
-window.saveProduct =
-    saveProduct;
-
-window.editProduct =
-    editProduct;
-
-window.deleteProduct =
-    deleteProduct;
-
-window.renameTable =
-    renameTable;
-
-window.deleteTable =
-    deleteTable;
-
-window.saveTableCount =
-    saveTableCount;
-
-window.saveAppName =
-    saveAppName;
-
-window.changeAdminPassword =
-    changeAdminPassword;
-
-window.exportBackup =
-    exportBackup;
-
-window.deleteInvoice =
-    deleteInvoice;
-
-window.deleteHistory =
-    deleteHistory;
-
-window.logout =
-    logout;
-
-
-/* =========================================================
-   START
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    init
-);
+document.addEventListener("DOMContentLoaded",init);
