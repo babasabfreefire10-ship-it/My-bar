@@ -2,10 +2,27 @@
 <html lang="sq">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mirë se vini | Bar Lulishtja</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>MY BAR — Hyrje</title>
 
     <style>
+        :root {
+            --bg: #050806;
+            --panel: #0c130f;
+            --panel2: #101913;
+            --green: #20e879;
+            --green-soft: rgba(32, 232, 121, .10);
+            --green-border: rgba(32, 232, 121, .28);
+            --text: #f4f7f5;
+            --muted: #87938c;
+            --danger: #ff5368;
+            --border: rgba(255,255,255,.08);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,242 +31,249 @@
 
         body {
             min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(34,197,94,.15), transparent 30%),
-                radial-gradient(circle at 80% 80%, rgba(16,185,129,.10), transparent 30%),
-                #070b09;
-            color: #fff;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+
             padding: 20px;
-            overflow: hidden;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(32,232,121,.09),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 100% 100%,
+                    rgba(32,232,121,.04),
+                    transparent 30%
+                ),
+                #050806;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: rgba(34,197,94,.06);
-            filter: blur(80px);
-            top: -220px;
-            left: -180px;
-            pointer-events: none;
-        }
+        .login-box {
+            width: min(420px, 100%);
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            animation: appear .7s ease;
-        }
+            padding: 34px 30px 30px;
 
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16,25,19,.98),
+                    rgba(8,14,10,.98)
+                );
 
-        .welcome {
-            text-align: center;
-            margin-bottom: 28px;
+            border: 1px solid var(--border);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.48);
         }
 
         .logo {
-            width: 86px;
-            height: 86px;
+            width: 58px;
+            height: 58px;
+
+            display: grid;
+            place-items: center;
+
             margin: 0 auto 18px;
-            border-radius: 26px;
-            background: linear-gradient(145deg, #22c55e, #15803d);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 42px;
+
+            border-radius: 16px;
+
+            color: var(--green);
+
+            font-size: 22px;
+            font-weight: 950;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #12251a,
+                    #09120d
+                );
+
+            border: 1px solid var(--green-border);
+
             box-shadow:
-                0 15px 40px rgba(34,197,94,.25),
-                inset 0 1px 0 rgba(255,255,255,.2);
+                inset 0 0 25px rgba(32,232,121,.04);
         }
 
-        .welcome h1 {
-            font-size: 30px;
-            font-weight: 800;
-            letter-spacing: -.7px;
+        .brand {
+            text-align: center;
         }
 
-        .welcome h1 span {
-            color: #4ade80;
+        .brand h1 {
+            color: var(--text);
+
+            font-size: 26px;
+            font-weight: 950;
+
+            letter-spacing: 1px;
         }
 
-        .welcome p {
-            margin-top: 8px;
-            color: #94a39a;
-            font-size: 14px;
+        .brand h1 span {
+            color: var(--green);
         }
 
-        .card {
-            background: rgba(16,23,19,.88);
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 24px;
-            padding: 26px;
-            box-shadow:
-                0 25px 70px rgba(0,0,0,.45),
-                inset 0 1px 0 rgba(255,255,255,.03);
-            backdrop-filter: blur(18px);
+        .brand p {
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 12px;
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
+        .divider {
+            width: 45px;
+            height: 2px;
+
+            margin: 22px auto;
+
+            border-radius: 10px;
+
+            background: var(--green);
         }
 
-        .field {
-            margin-bottom: 16px;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .field label {
+        label {
             display: block;
-            color: #aab7af;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
 
-        .input-wrap {
-            position: relative;
-        }
+            margin-bottom: 7px;
 
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            opacity: .75;
+            color: #b9c4bd;
+
+            font-size: 12px;
+            font-weight: 800;
         }
 
         input {
             width: 100%;
-            height: 52px;
-            border-radius: 14px;
-            border: 1px solid #26342c;
-            background: #0b110e;
-            color: white;
-            padding: 0 46px;
-            font-size: 15px;
+            height: 48px;
+
+            padding: 0 14px;
+
             outline: none;
-            transition: .2s;
+
+            color: var(--text);
+
+            background: #080e0a;
+
+            border: 1px solid var(--border);
+
+            border-radius: 11px;
+
+            font-size: 14px;
+
+            transition:
+                border-color .18s ease,
+                box-shadow .18s ease,
+                background .18s ease;
         }
 
         input::placeholder {
-            color: #647168;
+            color: #5f6a63;
         }
 
         input:focus {
-            border-color: #22c55e;
-            box-shadow: 0 0 0 3px rgba(34,197,94,.10);
+            background: #09110c;
+
+            border-color: var(--green-border);
+
+            box-shadow:
+                0 0 0 3px rgba(32,232,121,.05);
         }
 
-        .password-toggle {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: 0;
-            background: transparent;
-            color: #87958d;
-            cursor: pointer;
-            font-size: 18px;
-            padding: 5px;
-        }
-
-        .login-btn {
+        .login-button {
             width: 100%;
-            height: 54px;
+            height: 49px;
+
+            margin-top: 6px;
+
             border: 0;
-            border-radius: 15px;
-            margin-top: 8px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-size: 16px;
-            font-weight: 800;
+            border-radius: 11px;
+
             cursor: pointer;
-            box-shadow: 0 12px 28px rgba(34,197,94,.18);
-            transition: .2s;
+
+            color: #041009;
+
+            background: var(--green);
+
+            font-size: 14px;
+            font-weight: 950;
+
+            transition:
+                transform .18s ease,
+                background .18s ease,
+                box-shadow .18s ease;
         }
 
-        .login-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 15px 32px rgba(34,197,94,.25);
+        .login-button:hover {
+            background: #3af18a;
+
+            box-shadow:
+                0 10px 28px rgba(32,232,121,.12);
         }
 
-        .login-btn:active {
+        .login-button:active {
             transform: scale(.98);
         }
 
         .error {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 12px;
-            background: rgba(239,68,68,.10);
-            border: 1px solid rgba(239,68,68,.25);
-            color: #fca5a5;
-            font-size: 13px;
+            min-height: 18px;
+
+            margin-top: 12px;
+
+            color: var(--danger);
+
             text-align: center;
+
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .footer {
+            margin-top: 23px;
+
+            color: #59645d;
+
             text-align: center;
-            margin-top: 20px;
-            color: #536058;
-            font-size: 12px;
-        }
 
-        .status {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 7px;
-            margin-top: 12px;
-            color: #728078;
-            font-size: 12px;
-        }
-
-        .dot {
-            width: 7px;
-            height: 7px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(34,197,94,.7);
+            font-size: 10px;
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 16px;
+                padding: 14px;
             }
 
-            .welcome h1 {
-                font-size: 27px;
+            .login-box {
+                padding: 28px 20px 24px;
+
+                border-radius: 18px;
             }
 
             .logo {
-                width: 76px;
-                height: 76px;
-                font-size: 36px;
-                border-radius: 23px;
+                width: 54px;
+                height: 54px;
             }
 
-            .card {
-                padding: 22px 18px;
-                border-radius: 21px;
+            .brand h1 {
+                font-size: 24px;
             }
         }
     </style>
@@ -257,219 +281,219 @@
 
 <body>
 
-<div class="container">
+    <main class="login-box">
 
-    <div class="welcome">
-        <div class="logo">🌿</div>
+        <div class="logo">S</div>
 
-        <h1>
-            Mirë se vini te
-            <span id="appName">Bar Lulishtja</span>
-        </h1>
-
-        <p>Sistemi i menaxhimit të lokalit</p>
-    </div>
-
-    <div class="card">
-
-        <div class="card-title">
-            Hyr në llogarinë tënde
+        <div class="brand">
+            <h1>MY <span>BAR</span></h1>
+            <p>SISTEMI I MENAXHIMIT</p>
         </div>
+
+        <div class="divider"></div>
 
         <form id="loginForm">
 
-            <div class="field">
+            <div class="form-group">
                 <label for="username">Përdoruesi</label>
 
-                <div class="input-wrap">
-                    <span class="input-icon">👤</span>
-
-                    <input
-                        id="username"
-                        type="text"
-                        placeholder="Shkruaj përdoruesin"
-                        autocomplete="username"
-                        required
-                    >
-                </div>
+                <input
+                    id="username"
+                    type="text"
+                    placeholder="Shkruaj përdoruesin"
+                    autocomplete="username"
+                    required
+                >
             </div>
 
-            <div class="field">
+            <div class="form-group">
                 <label for="password">Fjalëkalimi</label>
 
-                <div class="input-wrap">
-                    <span class="input-icon">🔒</span>
-
-                    <input
-                        id="password"
-                        type="password"
-                        placeholder="Shkruaj fjalëkalimin"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="password-toggle"
-                        id="togglePassword"
-                        aria-label="Shfaq fjalëkalimin"
-                    >
-                        👁️
-                    </button>
-                </div>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Shkruaj fjalëkalimin"
+                    autocomplete="current-password"
+                    required
+                >
             </div>
 
-            <button class="login-btn" type="submit">
-                Hyr në sistem
+            <button
+                type="submit"
+                class="login-button"
+            >
+                HYR NË SISTEM →
             </button>
 
-            <div class="error" id="error">
-                Përdoruesi ose fjalëkalimi nuk është i saktë.
-            </div>
+            <div
+                id="error"
+                class="error"
+            ></div>
 
         </form>
-    </div>
 
-    <div class="status">
-        <span class="dot"></span>
-        Sistemi është aktiv
-    </div>
+        <div class="footer">
+            MY BAR • SYSTEM PREMIUM
+        </div>
 
-    <div class="footer">
-        © 2026 Bar Lulishtja
-    </div>
+    </main>
 
-</div>
 
-<script>
-    const USERS_KEY = "barUsersV3";
-    const CURRENT_USER_KEY = "barCurrentUser";
-    const APP_NAME_KEY = "barAppNameV3";
+    <script>
+        const USERS_KEY = "barUsersV4";
+        const CURRENT_USER_KEY = "barCurrentUserV4";
+        const APP_NAME_KEY = "barAppNameV4";
 
-    const defaultUsers = [
-        {
-            username: "admin",
-            password: "1234",
-            role: "admin",
-            name: "Administrator"
-        },
-        {
-            username: "kamarier1",
-            password: "1234",
-            role: "waiter",
-            name: "Kamarier 1"
-        }
-    ];
+        const defaultUsers = [
+            {
+                id: "admin",
+                username: "admin",
+                password: "1234",
+                role: "admin",
+                name: "Administrator"
+            },
+            {
+                id: "kamarier1",
+                username: "kamarier1",
+                password: "1234",
+                role: "waiter",
+                name: "Kamarier 1"
+            }
+        ];
 
-    function getUsers() {
-        try {
-            const saved = localStorage.getItem(USERS_KEY);
+        function getUsers() {
+            try {
+                const saved = localStorage.getItem(USERS_KEY);
 
-            if (!saved) {
-                localStorage.setItem(
-                    USERS_KEY,
-                    JSON.stringify(defaultUsers)
-                );
+                if (!saved) {
+                    localStorage.setItem(
+                        USERS_KEY,
+                        JSON.stringify(defaultUsers)
+                    );
 
+                    return defaultUsers;
+                }
+
+                const users = JSON.parse(saved);
+
+                if (!Array.isArray(users) || users.length === 0) {
+                    localStorage.setItem(
+                        USERS_KEY,
+                        JSON.stringify(defaultUsers)
+                    );
+
+                    return defaultUsers;
+                }
+
+                return users;
+
+            } catch (error) {
                 return defaultUsers;
             }
-
-            return JSON.parse(saved);
-        } catch (error) {
-            return defaultUsers;
         }
-    }
 
-    const savedAppName = localStorage.getItem(APP_NAME_KEY);
 
-    if (savedAppName) {
-        document.getElementById("appName").textContent = savedAppName;
-        document.title = "Mirë se vini | " + savedAppName;
-    }
+        // Nëse përdoruesi është tashmë i loguar
+        const currentUser =
+            localStorage.getItem(CURRENT_USER_KEY);
 
-    document
-        .getElementById("togglePassword")
-        .addEventListener("click", function () {
+        if (currentUser) {
+            window.location.replace("index.html");
+        }
 
-            const password = document.getElementById("password");
 
-            if (password.type === "password") {
-                password.type = "text";
-                this.textContent = "🙈";
-                this.setAttribute(
-                    "aria-label",
-                    "Fshih fjalëkalimin"
-                );
-            } else {
-                password.type = "password";
-                this.textContent = "👁️";
-                this.setAttribute(
-                    "aria-label",
-                    "Shfaq fjalëkalimin"
-                );
+        // Emri i aplikacionit
+        try {
+            const savedAppName =
+                localStorage.getItem(APP_NAME_KEY);
+
+            if (savedAppName) {
+                document.title =
+                    savedAppName + " — Hyrje";
             }
-        });
+        } catch (error) {
+            // Mos blloko login-in
+        }
 
-    document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
+
+        const form =
+            document.getElementById("loginForm");
+
+        const usernameInput =
+            document.getElementById("username");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const errorBox =
+            document.getElementById("error");
+
+
+        form.addEventListener("submit", function(event) {
 
             event.preventDefault();
 
+            errorBox.textContent = "";
+
             const username =
-                document.getElementById("username").value.trim();
+                usernameInput.value.trim();
 
             const password =
-                document.getElementById("password").value;
+                passwordInput.value;
 
-            const error =
-                document.getElementById("error");
-
-            const users = getUsers();
-
-            const user = users.find(function (u) {
-                return (
-                    u.username === username &&
-                    u.password === password
-                );
-            });
-
-            if (!user) {
-                error.style.display = "block";
-
-                document
-                    .getElementById("password")
-                    .value = "";
+            if (!username || !password) {
+                errorBox.textContent =
+                    "Plotëso përdoruesin dhe fjalëkalimin.";
 
                 return;
             }
 
-            error.style.display = "none";
+            const users = getUsers();
+
+            const user = users.find(function(item) {
+
+                return (
+                    String(item.username).toLowerCase() ===
+                    username.toLowerCase()
+                    &&
+                    String(item.password) === password
+                );
+
+            });
+
+
+            if (!user) {
+
+                errorBox.textContent =
+                    "Përdoruesi ose fjalëkalimi është gabim.";
+
+                passwordInput.value = "";
+                passwordInput.focus();
+
+                return;
+            }
+
+
+            const sessionUser = {
+                id: user.id,
+                username: user.username,
+                role: user.role,
+                name: user.name
+            };
+
 
             localStorage.setItem(
                 CURRENT_USER_KEY,
-                JSON.stringify({
-                    username: user.username,
-                    role: user.role,
-                    name: user.name
-                })
+                JSON.stringify(sessionUser)
             );
 
-            window.location.href = "index.html";
+
+            window.location.replace("index.html");
         });
 
-    document
-        .getElementById("username")
-        .addEventListener("input", function () {
-            document.getElementById("error").style.display = "none";
-        });
 
-    document
-        .getElementById("password")
-        .addEventListener("input", function () {
-            document.getElementById("error").style.display = "none";
-        });
-</script>
+        usernameInput.focus();
+    </script>
 
 </body>
 </html>
