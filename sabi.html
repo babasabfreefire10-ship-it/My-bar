@@ -1,444 +1,345 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY BAR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07110b">
+    <title>MY BAR</title>
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#050807;
-    color:white;
-}
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
 
-body{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% 35%, rgba(0,255,115,.08), transparent 32%),
+                linear-gradient(145deg, #030504, #07100a 55%, #030504);
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-/* BACKGROUND */
-.bg{
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle at center,rgba(0,255,120,.10),transparent 35%),
-        linear-gradient(135deg,#030504,#08100b 50%,#020403);
-}
+        /* BACKGROUND */
+        .background {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
-.grid{
-    position:absolute;
-    inset:0;
-    opacity:.13;
-    background-image:
-        linear-gradient(rgba(0,255,120,.15) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,120,.15) 1px,transparent 1px);
-    background-size:45px 45px;
-}
+        .glow {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: rgba(0,255,115,.08);
+            filter: blur(90px);
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-/* LED BARS */
-.led{
-    position:absolute;
-    top:0;
-    bottom:0;
-    width:4px;
-    background:#00ff73;
-    box-shadow:
-        0 0 6px #00ff73,
-        0 0 18px #00ff73,
-        0 0 40px #00ff73;
-    animation:ledColor 7s linear infinite;
-    z-index:5;
-}
+        /* MAIN */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
 
-.led.left{
-    left:0;
-}
+        .container {
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+        }
 
-.led.right{
-    right:0;
-}
+        /* LOGO */
+        .logo {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 28px;
+            border: 1px solid rgba(0,255,115,.45);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(8,20,13,.75);
+            box-shadow:
+                0 0 25px rgba(0,255,115,.12),
+                inset 0 0 25px rgba(0,255,115,.04);
+            position: relative;
+        }
 
-.led::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    width:22px;
-    height:130px;
-    transform:translateX(-50%);
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0,255,120,.9),
-        transparent
-    );
-    filter:blur(5px);
-    animation:travel 2.4s linear infinite;
-}
+        .logo::before {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            border: 1px solid rgba(0,255,115,.16);
+            border-radius: 18px;
+        }
 
-@keyframes travel{
-    0%{top:-140px;}
-    100%{top:100%;}
-}
+        .logo span {
+            font-size: 38px;
+            font-weight: 900;
+            color: #00ff73;
+            text-shadow: 0 0 18px rgba(0,255,115,.35);
+            position: relative;
+        }
 
-@keyframes ledColor{
-    0%,100%{
-        background:#00ff73;
-        box-shadow:0 0 8px #00ff73,0 0 25px #00ff73,0 0 50px #00ff73;
-    }
-    20%{
-        background:#00eaff;
-        box-shadow:0 0 8px #00eaff,0 0 25px #00eaff,0 0 50px #00eaff;
-    }
-    40%{
-        background:#236cff;
-        box-shadow:0 0 8px #236cff,0 0 25px #236cff,0 0 50px #236cff;
-    }
-    60%{
-        background:#b52cff;
-        box-shadow:0 0 8px #b52cff,0 0 25px #b52cff,0 0 50px #b52cff;
-    }
-    80%{
-        background:#ff2c9c;
-        box-shadow:0 0 8px #ff2c9c,0 0 25px #ff2c9c,0 0 50px #ff2c9c;
-    }
-}
+        /* TEXT */
+        .small-title {
+            color: #00ff73;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+        }
 
-/* CORNERS */
-.corner{
-    position:absolute;
-    width:55px;
-    height:55px;
-    border-color:#00ff73;
-    border-style:solid;
-    opacity:.7;
-    animation:pulse 2s infinite alternate;
-}
+        h1 {
+            font-size: clamp(42px, 11vw, 72px);
+            line-height: .95;
+            letter-spacing: 4px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(0,255,115,.12);
+        }
 
-.c1{top:25px;left:25px;border-width:2px 0 0 2px;}
-.c2{top:25px;right:25px;border-width:2px 2px 0 0;}
-.c3{bottom:25px;left:25px;border-width:0 0 2px 2px;}
-.c4{bottom:25px;right:25px;border-width:0 2px 2px 0;}
+        .subtitle {
+            color: #89958d;
+            font-size: 13px;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
 
-@keyframes pulse{
-    from{opacity:.3;}
-    to{opacity:1;}
-}
+        .line {
+            width: 70px;
+            height: 1px;
+            background: #00ff73;
+            opacity: .55;
+            margin: 28px auto;
+            box-shadow: 0 0 10px rgba(0,255,115,.35);
+        }
 
-/* MAIN */
-.content{
-    position:relative;
-    z-index:10;
-    width:min(92%,600px);
-    text-align:center;
-}
+        /* BUTTONS */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 330px;
+            margin: 0 auto;
+        }
 
-.badge{
-    display:inline-block;
-    padding:8px 16px;
-    border:1px solid rgba(0,255,115,.45);
-    border-radius:30px;
-    background:rgba(0,255,115,.06);
-    color:#00ff73;
-    font-size:11px;
-    letter-spacing:3px;
-    margin-bottom:25px;
-    box-shadow:0 0 20px rgba(0,255,115,.12);
-}
+        button {
+            width: 100%;
+            min-height: 56px;
+            border-radius: 14px;
+            border: 1px solid rgba(0,255,115,.35);
+            background: rgba(7,18,11,.85);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: .2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-.logo{
-    width:105px;
-    height:105px;
-    margin:0 auto 25px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transform:rotate(45deg);
-    border:2px solid #00ff73;
-    box-shadow:
-        0 0 15px #00ff73,
-        0 0 45px rgba(0,255,115,.4);
-    background:rgba(0,255,115,.04);
-}
+        button:hover {
+            border-color: #00ff73;
+            background: rgba(0,255,115,.08);
+            box-shadow: 0 0 22px rgba(0,255,115,.12);
+            transform: translateY(-1px);
+        }
 
-.logo span{
-    transform:rotate(-45deg);
-    font-size:48px;
-    font-weight:900;
-    color:#00ff73;
-    text-shadow:0 0 15px #00ff73;
-}
+        button:active {
+            transform: scale(.98);
+        }
 
-h1{
-    font-size:clamp(38px,10vw,75px);
-    letter-spacing:8px;
-    font-weight:900;
-    margin-bottom:10px;
-    text-shadow:
-        0 0 10px rgba(255,255,255,.2),
-        0 0 35px rgba(0,255,115,.25);
-}
+        .enter-btn {
+            background: #00ff73;
+            color: #031008;
+            border-color: #00ff73;
+            box-shadow: 0 0 22px rgba(0,255,115,.18);
+        }
 
-.subtitle{
-    color:#9ca8a1;
-    letter-spacing:5px;
-    font-size:12px;
-    margin-bottom:28px;
-}
+        .enter-btn:hover {
+            background: #16ff82;
+            color: #031008;
+            box-shadow: 0 0 30px rgba(0,255,115,.28);
+        }
 
-.line{
-    width:180px;
-    height:1px;
-    margin:0 auto 30px;
-    background:linear-gradient(90deg,transparent,#00ff73,transparent);
-    box-shadow:0 0 12px #00ff73;
-}
+        .contact-btn {
+            color: #aab4ae;
+            background: rgba(255,255,255,.025);
+        }
 
-/* BUTTONS */
-.buttons{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:13px;
-}
+        /* FOOTER */
+        .footer {
+            margin-top: 35px;
+            color: #526058;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
 
-.btn{
-    width:min(100%,330px);
-    min-height:56px;
-    border-radius:12px;
-    border:1px solid #00ff73;
-    background:rgba(0,255,115,.08);
-    color:white;
-    font-size:14px;
-    font-weight:800;
-    letter-spacing:2px;
-    cursor:pointer;
-    touch-action:manipulation;
-    user-select:none;
-    transition:.2s ease;
-    box-shadow:
-        0 0 10px rgba(0,255,115,.15),
-        inset 0 0 15px rgba(0,255,115,.03);
-}
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            background: rgba(0,0,0,.72);
+            backdrop-filter: blur(7px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-.btn:hover{
-    background:#00ff73;
-    color:#031008;
-    transform:translateY(-2px);
-    box-shadow:
-        0 0 15px #00ff73,
-        0 0 40px rgba(0,255,115,.35);
-}
+        .modal.active {
+            display: flex;
+        }
 
-.btn:active{
-    transform:scale(.96);
-    background:#00ff73;
-    color:#031008;
-}
+        .modal-box {
+            width: 100%;
+            max-width: 420px;
+            background: #09110c;
+            border: 1px solid rgba(0,255,115,.3);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 20px 70px rgba(0,0,0,.55);
+        }
 
-.btn.main{
-    background:#00ff73;
-    color:#031008;
-    box-shadow:
-        0 0 15px #00ff73,
-        0 0 45px rgba(0,255,115,.3);
-}
+        .modal-box h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
 
-.btn.main:hover{
-    background:#66ffad;
-}
+        .modal-box p {
+            color: #89958d;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
 
-.contact-btn{
-    border-color:rgba(255,255,255,.25);
-    color:#b8c0bb;
-    background:rgba(255,255,255,.03);
-}
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            resize: vertical;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,.1);
+            background: #050805;
+            color: #fff;
+            padding: 13px;
+            outline: none;
+            font-family: inherit;
+            margin-bottom: 12px;
+        }
 
-/* FOOTER */
-.footer{
-    margin-top:35px;
-    color:#56615b;
-    font-size:10px;
-    letter-spacing:3px;
-}
+        textarea:focus {
+            border-color: rgba(0,255,115,.5);
+        }
 
-/* MODAL */
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:100;
-    background:rgba(0,0,0,.78);
-    backdrop-filter:blur(8px);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
 
-.modal.show{
-    display:flex;
-}
+        .modal-actions button {
+            flex: 1;
+        }
 
-.modal-box{
-    width:min(100%,430px);
-    background:#08100b;
-    border:1px solid #00ff73;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:
-        0 0 20px #00ff73,
-        0 0 80px rgba(0,255,115,.2);
-}
+        @media (max-width: 480px) {
+            .page {
+                padding: 20px;
+            }
 
-.modal-box h2{
-    color:#00ff73;
-    margin-bottom:10px;
-    font-size:20px;
-}
+            .logo {
+                width: 82px;
+                height: 82px;
+                margin-bottom: 24px;
+            }
 
-.modal-box p{
-    color:#929c96;
-    font-size:13px;
-    line-height:1.6;
-    margin-bottom:18px;
-}
+            .logo span {
+                font-size: 34px;
+            }
 
-.modal-box textarea{
-    width:100%;
-    min-height:120px;
-    resize:none;
-    border-radius:10px;
-    border:1px solid #24352a;
-    background:#030604;
-    color:white;
-    padding:13px;
-    outline:none;
-    margin-bottom:12px;
-}
+            .small-title {
+                font-size: 10px;
+                letter-spacing: 3px;
+            }
 
-.modal-box textarea:focus{
-    border-color:#00ff73;
-    box-shadow:0 0 12px rgba(0,255,115,.2);
-}
+            h1 {
+                letter-spacing: 3px;
+            }
 
-.modal-buttons{
-    display:flex;
-    gap:10px;
-}
+            .subtitle {
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
 
-.modal-buttons button{
-    flex:1;
-    min-height:48px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.send{
-    background:#00ff73;
-    border:0;
-    color:#031008;
-}
-
-.close{
-    background:transparent;
-    border:1px solid #38443d;
-    color:white;
-}
-
-@media(max-width:500px){
-    .corner{
-        width:35px;
-        height:35px;
-    }
-
-    .logo{
-        width:82px;
-        height:82px;
-    }
-
-    .logo span{
-        font-size:38px;
-    }
-
-    h1{
-        letter-spacing:5px;
-    }
-
-    .subtitle{
-        letter-spacing:3px;
-    }
-
-    .footer{
-        margin-top:25px;
-    }
-}
-</style>
+            .buttons {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="grid"></div>
+<div class="background">
+    <div class="glow"></div>
+</div>
 
-<div class="led left"></div>
-<div class="led right"></div>
+<main class="page">
+    <div class="container">
 
-<div class="corner c1"></div>
-<div class="corner c2"></div>
-<div class="corner c3"></div>
-<div class="corner c4"></div>
+        <div class="logo">
+            <span>S</span>
+        </div>
 
-<main class="content">
+        <div class="small-title">SISTEM PREMIUM</div>
 
-    <div class="badge">SISTEM PREMIUM • V2</div>
+        <h1>MY BAR</h1>
 
-    <div class="logo">
-        <span>S</span>
+        <div class="subtitle">
+            SISTEMI I MENAXHIMIT
+        </div>
+
+        <div class="line"></div>
+
+        <div class="buttons">
+
+            <button
+                class="enter-btn"
+                id="enterBtn"
+                type="button">
+                HYR NË SISTEM →
+            </button>
+
+            <button
+                class="contact-btn"
+                id="contactBtn"
+                type="button">
+                CONTACT
+            </button>
+
+        </div>
+
+        <div class="footer">
+            MY BAR • MANAGEMENT SYSTEM
+        </div>
+
     </div>
-
-    <h1>MY BAR</h1>
-
-    <div class="subtitle">
-        SISTEMI I MENAXHIMIT
-    </div>
-
-    <div class="line"></div>
-
-    <div class="buttons">
-
-        <button
-            type="button"
-            class="btn main"
-            id="enterBtn">
-            HYR NË SISTEM →
-        </button>
-
-        <button
-            type="button"
-            class="btn contact-btn"
-            id="contactBtn">
-            CONTACT
-        </button>
-
-    </div>
-
-    <div class="footer">
-        MY BAR • SISTEM PREMIUM • 2026
-    </div>
-
 </main>
 
 <!-- CONTACT MODAL -->
@@ -446,29 +347,27 @@ h1{
 
     <div class="modal-box">
 
-        <h2>RAPORTO NJË PROBLEM</h2>
+        <h2>Contact</h2>
 
         <p>
-            Na shkruaj problemin që ke hasur në sistemin MY BAR.
+            Dërgo një mesazh për administratorin.
         </p>
 
         <textarea
-            id="reportText"
-            placeholder="Shkruaj problemin këtu..."></textarea>
+            id="contactMessage"
+            placeholder="Shkruaj mesazhin..."></textarea>
 
-        <div class="modal-buttons">
+        <div class="modal-actions">
 
             <button
                 type="button"
-                class="send"
-                id="sendReport">
+                id="sendContact">
                 DËRGO
             </button>
 
             <button
                 type="button"
-                class="close"
-                id="closeModal">
+                id="closeContact">
                 MBYLL
             </button>
 
@@ -479,58 +378,58 @@ h1{
 </div>
 
 <script>
+    const enterBtn = document.getElementById("enterBtn");
+    const contactBtn = document.getElementById("contactBtn");
+    const contactModal = document.getElementById("contactModal");
+    const closeContact = document.getElementById("closeContact");
+    const sendContact = document.getElementById("sendContact");
+    const contactMessage = document.getElementById("contactMessage");
 
-/* HYR NË SISTEM */
-document.getElementById("enterBtn").addEventListener("click", function(){
+    // Hyr në sistem
+    enterBtn.addEventListener("click", function () {
+        window.location.href = "login.html";
+    });
 
-    window.location.href = "login.html";
+    // Hap Contact
+    contactBtn.addEventListener("click", function () {
+        contactModal.classList.add("active");
+        contactMessage.focus();
+    });
 
-});
+    // Mbyll Contact
+    closeContact.addEventListener("click", function () {
+        contactModal.classList.remove("active");
+    });
 
-/* CONTACT */
-const modal = document.getElementById("contactModal");
+    // Klik jashtë modalit
+    contactModal.addEventListener("click", function (e) {
+        if (e.target === contactModal) {
+            contactModal.classList.remove("active");
+        }
+    });
 
-document.getElementById("contactBtn").addEventListener("click", function(){
+    // ESC
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            contactModal.classList.remove("active");
+        }
+    });
 
-    modal.classList.add("show");
+    // Dërgo mesazhin
+    sendContact.addEventListener("click", function () {
 
-});
+        const message = contactMessage.value.trim();
 
-/* MBYLL */
-document.getElementById("closeModal").addEventListener("click", function(){
+        if (!message) {
+            alert("Shkruaj një mesazh.");
+            return;
+        }
 
-    modal.classList.remove("show");
+        alert("Mesazhi u dërgua.");
 
-});
-
-/* KLIKO JASHTË MODALIT */
-modal.addEventListener("click", function(e){
-
-    if(e.target === modal){
-        modal.classList.remove("show");
-    }
-
-});
-
-/* DËRGO RAPORTIM */
-document.getElementById("sendReport").addEventListener("click", function(){
-
-    const text = document.getElementById("reportText").value.trim();
-
-    if(!text){
-
-        alert("Shkruaj problemin më parë.");
-        return;
-
-    }
-
-    alert("Raportimi u regjistrua. Faleminderit!");
-
-    document.getElementById("reportText").value = "";
-    modal.classList.remove("show");
-
-});
-
+        contactMessage.value = "";
+        contactModal.classList.remove("active");
+    });
 </script>
 
 </body>
