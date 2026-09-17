@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Raporte - Bar Lulishtja</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #0f1115;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #171a21;
+    border-bottom: 1px solid #292d36;
+    padding: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.back {
+    background: #2a2f3a;
+    color: white;
+    border: 0;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.periods {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.period {
+    background: #20242d;
+    color: white;
+    border: 1px solid #303642;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.period.active {
+    background: #fff;
+    color: #111;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #171a21;
+    border: 1px solid #292d36;
+    border-radius: 15px;
+    padding: 18px;
+}
+
+.card small {
+    color: #9299a8;
+}
+
+.card strong {
+    display: block;
+    font-size: 25px;
+    margin-top: 8px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.box {
+    background: #171a21;
+    border: 1px solid #292d36;
+    border-radius: 15px;
+    padding: 18px;
+}
+
+.box h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #292d36;
+}
+
+.row:last-child {
+    border-bottom: 0;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.muted {
+    color: #9299a8;
+    font-size: 13px;
+}
+
+@media(max-width:800px) {
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:500px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <h1>📊 Raporte</h1>
+
+        <button
+            class="back"
+            onclick="location.href='index.html'">
+            ← Kthehu
+        </button>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="periods">
+
+        <button
+            class="period active"
+            onclick="setPeriod('today', this)">
+            Sot
+        </button>
+
+        <button
+            class="period"
+            onclick="setPeriod('week', this)">
+            Kjo javë
+        </button>
+
+        <button
+            class="period"
+            onclick="setPeriod('month', this)">
+            Ky muaj
+        </button>
+
+        <button
+            class="period"
+            onclick="setPeriod('all', this)">
+            Gjithsej
+        </button>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="card">
+            <small>Shitje</small>
+            <strong id="sales">0 L</strong>
+        </div>
+
+        <div class="card">
+            <small>Cash</small>
+            <strong id="cash">0 L</strong>
+        </div>
+
+        <div class="card">
+            <small>Kartë</small>
+            <strong id="card">0 L</strong>
+        </div>
+
+        <div class="card">
+            <small>Fatura</small>
+            <strong id="invoices">0</strong>
+        </div>
+
+    </div>
+
+    <div class="grid">
+
+        <div class="box">
+
+            <h2>🏆 Produktet më të shitura</h2>
+
+            <div id="products"></div>
+
+        </div>
+
+        <div class="box">
+
+            <h2>👨‍💼 Shitjet sipas kamarierit</h2>
+
+            <div id="waiters"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const INVOICES_KEY = "barInvoicesV3";
+
+let currentPeriod = "today";
+
+function getInvoices() {
+
+    try {
+        return JSON.parse(
+            localStorage.getItem(INVOICES_KEY)
+        ) || [];
+    } catch {
+        return [];
+    }
+}
+
+function getDate(invoice) {
+
+    return new Date(
+        invoice.date ||
+        invoice.createdAt ||
+        invoice.timestamp ||
+        Date.now()
+    );
+}
+
+function isInPeriod(date) {
+
+    const now = new Date();
+
+    if (currentPeriod === "all") {
+        return true;
+    }
+
+    if (currentPeriod === "today") {
+
+        return (
+            date.getDate() === now.getDate() &&
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear()
+        );
+    }
+
+    if (currentPeriod === "week") {
+
+        const start = new Date(now);
+
+        const day = start.getDay() || 7;
+
+        start.setDate(start.getDate() - day + 1);
+
+        start.setHours(0,0,0,0);
+
+        return date >= start;
+    }
+
+    if (currentPeriod === "month") {
+
+        return (
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear()
+        );
+    }
+
+    return true;
+}
+
+function setPeriod(period, button) {
+
+    currentPeriod = period;
+
+    document.querySelectorAll(".period")
+        .forEach(x => x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    render();
+}
+
+function getAmount(invoice) {
+
+    return Number(
+        invoice.total ||
+        invoice.amount ||
+        invoice.grandTotal ||
+        0
+    );
+}
+
+function getPayment(invoice) {
+
+    return String(
+        invoice.payment ||
+        invoice.paymentMethod ||
+        invoice.method ||
+        "cash"
+    ).toLowerCase();
+}
+
+function render() {
+
+    const invoices = getInvoices()
+        .filter(i => isInPeriod(getDate(i)));
+
+    let sales = 0;
+    let cash = 0;
+    let card = 0;
+
+    const products = {};
+    const waiters = {};
+
+    invoices.forEach(invoice => {
+
+        const amount = getAmount(invoice);
+
+        sales += amount;
+
+        if (
+            getPayment(invoice).includes("card") ||
+            getPayment(invoice).includes("kart")
+        ) {
+            card += amount;
+        } else {
+            cash += amount;
+        }
+
+        const waiter =
+            invoice.waiterName ||
+            invoice.userName ||
+            invoice.user ||
+            invoice.waiter ||
+            "Pa emër";
+
+        if (!waiters[waiter]) {
+            waiters[waiter] = {
+                amount: 0,
+                invoices: 0
+            };
+        }
+
+        waiters[waiter].amount += amount;
+        waiters[waiter].invoices++;
+
+        const items =
+            invoice.items ||
+            invoice.orderItems ||
+            invoice.products ||
+            [];
+
+        items.forEach(item => {
+
+            const name =
+                item.name ||
+                item.productName ||
+                "Produkt";
+
+            const quantity =
+                Number(
+                    item.quantity ||
+                    item.qty ||
+                    1
+                );
+
+            const itemTotal =
+                Number(
+                    item.total ||
+                    item.subtotal ||
+                    ((item.price || 0) * quantity)
+                );
+
+            if (!products[name]) {
+                products[name] = {
+                    quantity: 0,
+                    amount: 0
+                };
+            }
+
+            products[name].quantity += quantity;
+            products[name].amount += itemTotal;
+
+        });
+
+    });
+
+    document.getElementById("sales")
+        .textContent = money(sales);
+
+    document.getElementById("cash")
+        .textContent = money(cash);
+
+    document.getElementById("card")
+        .textContent = money(card);
+
+    document.getElementById("invoices")
+        .textContent = invoices.length;
+
+    renderProducts(products);
+    renderWaiters(waiters);
+}
+
+function renderProducts(products) {
+
+    const list = Object.entries(products)
+        .sort((a,b) =>
+            b[1].quantity - a[1].quantity
+        );
+
+    if (!list.length) {
+
+        document.getElementById("products").innerHTML =
+            `<div class="muted">
+                Nuk ka shitje për këtë periudhë.
+            </div>`;
+
+        return;
+    }
+
+    document.getElementById("products").innerHTML =
+        list.slice(0,10).map(([name,data]) => `
+
+            <div class="row">
+
+                <div>
+                    <div class="name">
+                        ${escapeHtml(name)}
+                    </div>
+
+                    <div class="muted">
+                        ${data.quantity} copë
+                    </div>
+                </div>
+
+                <strong>
+                    ${money(data.amount)}
+                </strong>
+
+            </div>
+
+        `).join("");
+}
+
+function renderWaiters(waiters) {
+
+    const list = Object.entries(waiters)
+        .sort((a,b) =>
+            b[1].amount - a[1].amount
+        );
+
+    if (!list.length) {
+
+        document.getElementById("waiters").innerHTML =
+            `<div class="muted">
+                Nuk ka të dhëna.
+            </div>`;
+
+        return;
+    }
+
+    document.getElementById("waiters").innerHTML =
+        list.map(([name,data]) => `
+
+            <div class="row">
+
+                <div>
+                    <div class="name">
+                        ${escapeHtml(name)}
+                    </div>
+
+                    <div class="muted">
+                        ${data.invoices} fatura
+                    </div>
+                </div>
+
+                <strong>
+                    ${money(data.amount)}
+                </strong>
+
+            </div>
+
+        `).join("");
+}
+
+function money(value) {
+
+    return Number(value || 0)
+        .toLocaleString("sq-AL") + " L";
+}
+
+function escapeHtml(text) {
+
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+render();
+
+</script>
+
+</body>
+</html>
