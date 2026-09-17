@@ -4,493 +4,354 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SABI • Bar Lulishtja</title>
+<!-- VERSION I RI -->
+<meta name="version" content="SABI-2026-V2">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<title>SABI • Bar Lulishtja • V2</title>
 
 <style>
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html,body{
     width:100%;
     height:100%;
+    overflow:hidden;
 }
 
 body{
-    overflow:hidden;
-    background:#030404;
+    background:#020504;
     color:white;
     font-family:Arial,Helvetica,sans-serif;
+    position:relative;
 }
 
-/* BACKGROUND */
-
-.background{
-    position:fixed;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255,255,255,.045),
-            transparent 38%
-        ),
-        linear-gradient(
-            135deg,
-            #020303,
-            #090b0a 50%,
-            #020303
-        );
-}
-
-.background::before{
+/* BACKGROUND GRID */
+body::before{
     content:"";
     position:absolute;
     inset:0;
-
-    background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-
-    background-size:75px 75px;
+    background:
+        linear-gradient(rgba(0,255,140,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,255,140,.035) 1px,transparent 1px);
+    background-size:45px 45px;
+    pointer-events:none;
 }
 
+/* CENTRAL LIGHT */
+body::after{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(
+        circle,
+        rgba(0,255,140,.09) 0%,
+        rgba(0,255,140,.035) 35%,
+        transparent 70%
+    );
+    pointer-events:none;
+}
 
-/* LED */
-
+/* SIDE LED */
 .led{
-    position:fixed;
+    position:absolute;
     top:0;
     bottom:0;
     width:3px;
+    background:#00ff88;
+    animation:colorChange 8s linear infinite;
     z-index:5;
-
-    background:#00ff66;
-
-    animation:
-        colorChange 10s linear infinite,
-        brightness 2.5s ease-in-out infinite;
-
-    box-shadow:
-        0 0 8px currentColor,
-        0 0 20px currentColor,
-        0 0 45px currentColor,
-        0 0 90px currentColor;
 }
 
 .led.left{
-    left:18px;
+    left:0;
 }
 
 .led.right{
-    right:18px;
-    animation-delay:-5s;
+    right:0;
 }
-
-@keyframes colorChange{
-
-    0%{
-        background:#00ff66;
-        color:#00ff66;
-    }
-
-    14%{
-        background:#00d9ff;
-        color:#00d9ff;
-    }
-
-    28%{
-        background:#315cff;
-        color:#315cff;
-    }
-
-    42%{
-        background:#a855f7;
-        color:#a855f7;
-    }
-
-    56%{
-        background:#ff2d8d;
-        color:#ff2d8d;
-    }
-
-    70%{
-        background:#ff6535;
-        color:#ff6535;
-    }
-
-    84%{
-        background:#ffd23f;
-        color:#ffd23f;
-    }
-
-    100%{
-        background:#00ff66;
-        color:#00ff66;
-    }
-}
-
-@keyframes brightness{
-
-    0%,100%{
-        opacity:.45;
-    }
-
-    50%{
-        opacity:1;
-    }
-}
-
-
-/* LED BALL */
 
 .led::after{
     content:"";
-
     position:absolute;
-    left:50%;
-
-    width:12px;
-    height:170px;
-
-    transform:translateX(-50%);
-
+    width:100%;
+    height:130px;
+    top:-130px;
+    left:0;
     background:linear-gradient(
         to bottom,
         transparent,
-        currentColor,
-        white,
-        currentColor,
+        rgba(255,255,255,.95),
         transparent
     );
-
     box-shadow:
-        0 0 15px currentColor,
-        0 0 40px currentColor,
-        0 0 80px currentColor;
-
-    animation:travel 4s linear infinite;
-}
-
-.led.right::after{
-    animation-delay:-2s;
+        0 0 12px currentColor,
+        0 0 30px currentColor;
+    animation:travel 3s linear infinite;
 }
 
 @keyframes travel{
-
     0%{
-        top:-180px;
+        top:-130px;
     }
-
     100%{
         top:100%;
     }
 }
 
+@keyframes colorChange{
+    0%{background:#00ff88;color:#00ff88;}
+    16%{background:#00ffff;color:#00ffff;}
+    32%{background:#0088ff;color:#0088ff;}
+    48%{background:#8a2be2;color:#8a2be2;}
+    64%{background:#ff00cc;color:#ff00cc;}
+    80%{background:#ff8800;color:#ff8800;}
+    100%{background:#ffff00;color:#ffff00;}
+}
 
-/* CORNERS */
-
+/* CORNER LINES */
 .corner{
-    position:fixed;
-    width:38px;
-    height:38px;
-    z-index:20;
-    border-color:rgba(255,255,255,.20);
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-color:rgba(0,255,140,.5);
+    z-index:2;
 }
 
-.c1{
-    top:24px;
-    left:24px;
+.corner.tl{
+    top:25px;
+    left:25px;
     border-top:1px solid;
     border-left:1px solid;
 }
 
-.c2{
-    top:24px;
-    right:24px;
+.corner.tr{
+    top:25px;
+    right:25px;
     border-top:1px solid;
     border-right:1px solid;
 }
 
-.c3{
-    bottom:24px;
-    left:24px;
+.corner.bl{
+    bottom:25px;
+    left:25px;
     border-bottom:1px solid;
     border-left:1px solid;
 }
 
-.c4{
-    bottom:24px;
-    right:24px;
+.corner.br{
+    bottom:25px;
+    right:25px;
     border-bottom:1px solid;
     border-right:1px solid;
 }
-
 
 /* MAIN */
-
 .container{
     position:relative;
     z-index:10;
-
     width:100%;
     height:100%;
-
     display:flex;
-    justify-content:center;
     align-items:center;
-
+    justify-content:center;
     text-align:center;
+    padding:25px;
 }
 
 .content{
-    width:min(92%,680px);
+    width:min(600px,100%);
 }
 
-
 /* BADGE */
-
 .badge{
     display:inline-flex;
     align-items:center;
-
-    padding:8px 15px;
-
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:100px;
-
-    background:rgba(255,255,255,.035);
-
-    backdrop-filter:blur(15px);
-
-    color:#cfd6d1;
-
-    font-size:8px;
+    gap:8px;
+    padding:8px 16px;
+    border:1px solid rgba(0,255,140,.35);
+    border-radius:30px;
+    background:rgba(0,255,140,.04);
+    color:#00ff88;
+    font-size:11px;
     letter-spacing:3px;
-
-    margin-bottom:32px;
+    margin-bottom:28px;
+    box-shadow:0 0 20px rgba(0,255,140,.08);
 }
 
-.badge::before{
-    content:"";
-
-    width:5px;
-    height:5px;
-
+.badge-dot{
+    width:6px;
+    height:6px;
     border-radius:50%;
-
-    background:#7aff9b;
-
-    box-shadow:
-        0 0 8px #7aff9b,
-        0 0 18px #7aff9b;
-
-    margin-right:9px;
+    background:#00ff88;
+    box-shadow:0 0 10px #00ff88;
+    animation:pulse 1.5s infinite;
 }
 
+@keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.3;}
+}
 
 /* LOGO */
-
 .logo{
-    width:100px;
-    height:100px;
-
-    margin:0 auto 35px;
-
+    width:92px;
+    height:92px;
+    margin:0 auto 28px;
+    position:relative;
     transform:rotate(45deg);
-
-    border:1px solid rgba(255,255,255,.35);
-
+    border:2px solid #00ff88;
+    background:rgba(0,255,140,.025);
+    box-shadow:
+        0 0 20px rgba(0,255,140,.25),
+        inset 0 0 25px rgba(0,255,140,.05);
     display:flex;
     align-items:center;
     justify-content:center;
-
-    background:rgba(255,255,255,.025);
-
-    box-shadow:
-        0 0 50px rgba(255,255,255,.06);
-
-    animation:logoColor 10s linear infinite;
+    animation:logoGlow 4s ease-in-out infinite;
 }
 
 .logo span{
     transform:rotate(-45deg);
-
-    font-size:50px;
-
-    font-weight:300;
-
-    color:white;
+    font-size:38px;
+    font-weight:900;
+    color:#00ff88;
+    text-shadow:
+        0 0 10px #00ff88,
+        0 0 25px #00ff88;
 }
 
-@keyframes logoColor{
-
-    0%{
-        color:#00ff66;
-        border-color:#00ff66;
+@keyframes logoGlow{
+    0%,100%{
+        box-shadow:
+            0 0 20px rgba(0,255,140,.25),
+            inset 0 0 25px rgba(0,255,140,.05);
     }
 
-    20%{
-        color:#00d9ff;
-        border-color:#00d9ff;
-    }
-
-    40%{
-        color:#a855f7;
-        border-color:#a855f7;
-    }
-
-    60%{
-        color:#ff2d8d;
-        border-color:#ff2d8d;
-    }
-
-    80%{
-        color:#ff8b32;
-        border-color:#ff8b32;
-    }
-
-    100%{
-        color:#00ff66;
-        border-color:#00ff66;
+    50%{
+        box-shadow:
+            0 0 40px rgba(0,255,140,.45),
+            inset 0 0 35px rgba(0,255,140,.1);
     }
 }
-
 
 /* TITLE */
-
-h1{
-    font-size:clamp(45px,8vw,82px);
-
-    font-weight:200;
-
-    letter-spacing:9px;
-
-    line-height:1;
-
-    color:#f4f6f5;
+.title{
+    font-size:clamp(38px,8vw,72px);
+    font-weight:900;
+    letter-spacing:7px;
+    margin-bottom:14px;
+    color:white;
+    text-shadow:
+        0 0 20px rgba(255,255,255,.15);
 }
 
 .subtitle{
-    margin-top:18px;
-
-    font-size:10px;
-
+    font-size:12px;
     letter-spacing:5px;
-
-    color:#8b9690;
+    color:rgba(255,255,255,.5);
+    margin-bottom:25px;
 }
 
+/* DIVIDER */
 .divider{
-    width:170px;
+    width:180px;
     height:1px;
-
-    margin:35px auto;
-
+    margin:0 auto 28px;
     background:linear-gradient(
         90deg,
         transparent,
-        rgba(255,255,255,.35),
+        #00ff88,
         transparent
     );
+    box-shadow:0 0 10px rgba(0,255,140,.5);
 }
 
-
-/* ENTER */
-
-.enter{
-    width:230px;
-    height:53px;
-
-    border:1px solid rgba(255,255,255,.25);
-    border-radius:3px;
-
-    background:rgba(255,255,255,.04);
-
-    color:#eef2ef;
-
-    font-size:9px;
-
+/* BUTTON */
+.enter-btn{
+    border:1px solid #00ff88;
+    background:rgba(0,255,140,.05);
+    color:#00ff88;
+    padding:15px 28px;
+    min-width:220px;
+    border-radius:5px;
+    font-size:12px;
+    font-weight:bold;
     letter-spacing:3px;
-
     cursor:pointer;
-
     transition:.3s;
+    box-shadow:0 0 15px rgba(0,255,140,.08);
 }
 
-.enter:hover{
-    border-color:white;
-
+.enter-btn:hover{
+    background:#00ff88;
+    color:#00140b;
     box-shadow:
-        0 0 30px rgba(255,255,255,.08);
-
+        0 0 20px #00ff88,
+        0 0 50px rgba(0,255,140,.4);
     transform:translateY(-2px);
 }
 
+.enter-btn:active{
+    transform:scale(.97);
+}
 
-/* =========================
-   SMALL CONTACT
-========================= */
+/* FOOTER */
+.footer{
+    position:absolute;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%);
+    color:rgba(255,255,255,.25);
+    font-size:9px;
+    letter-spacing:3px;
+    white-space:nowrap;
+    z-index:20;
+}
 
-.contact-button{
-    position:fixed;
-
+/* CONTACT */
+.contact{
+    position:absolute;
+    bottom:22px;
     left:25px;
-    bottom:25px;
+    z-index:30;
+}
 
-    z-index:100;
-
-    padding:8px 12px;
-
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.14);
-
-    color:#737d77;
-
-    font-size:7px;
-
+.contact button{
+    background:none;
+    border:none;
+    color:rgba(255,255,255,.35);
+    font-size:9px;
     letter-spacing:2px;
-
     cursor:pointer;
-
-    backdrop-filter:blur(12px);
-
     transition:.3s;
 }
 
-.contact-button:hover{
-    color:white;
-
-    border-color:rgba(255,255,255,.55);
-
-    box-shadow:
-        0 0 20px rgba(255,255,255,.06);
+.contact button:hover{
+    color:#00ff88;
 }
 
-
-/* =========================
-   CONTACT PANEL
-========================= */
-
+/* CONTACT SCREEN */
 .contact-screen{
     position:fixed;
-
     inset:0;
-
-    z-index:200;
-
+    background:rgba(0,0,0,.92);
+    backdrop-filter:blur(15px);
+    z-index:100;
     display:none;
-
-    justify-content:center;
     align-items:center;
-
-    background:rgba(2,3,3,.94);
-
-    backdrop-filter:blur(20px);
+    justify-content:center;
+    padding:25px;
 }
 
 .contact-screen.active{
@@ -498,119 +359,42 @@ h1{
 }
 
 .contact-box{
-    width:min(88%,360px);
-
-    padding:30px 24px;
-
+    width:min(430px,100%);
+    background:#050908;
+    border:1px solid rgba(0,255,140,.35);
+    border-radius:12px;
+    padding:28px;
     text-align:center;
-
-    background:rgba(255,255,255,.035);
-
-    border:1px solid rgba(255,255,255,.14);
-
-    border-radius:14px;
-
     box-shadow:
-        0 25px 80px rgba(0,0,0,.6);
-
-    animation:showBox .35s ease;
-}
-
-@keyframes showBox{
-
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-.contact-label{
-    font-size:7px;
-
-    letter-spacing:3px;
-
-    color:#68726c;
-
-    margin-bottom:12px;
+        0 0 40px rgba(0,255,140,.12);
 }
 
 .contact-title{
-    font-size:21px;
-
-    font-weight:300;
-
-    letter-spacing:3px;
-
-    margin-bottom:9px;
-}
-
-.contact-text{
-    color:#7d8781;
-
-    font-size:10px;
-
-    line-height:1.6;
-
-    margin-bottom:20px;
-}
-
-
-/* OPTIONS */
-
-.contact-options{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-}
-
-.option-button{
-    width:100%;
-
-    padding:13px;
-
-    background:rgba(255,255,255,.035);
-
-    border:1px solid rgba(255,255,255,.13);
-
-    border-radius:7px;
-
-    color:#b9c1bc;
-
-    font-size:8px;
-
+    color:#00ff88;
+    font-size:18px;
+    font-weight:bold;
     letter-spacing:2px;
+    margin-bottom:22px;
+}
 
+.contact-option{
+    width:100%;
+    margin-bottom:12px;
+    padding:14px;
+    background:rgba(0,255,140,.04);
+    border:1px solid rgba(0,255,140,.25);
+    color:white;
+    border-radius:6px;
     cursor:pointer;
-
+    font-size:11px;
+    letter-spacing:1px;
     transition:.3s;
 }
 
-.option-button:hover{
-    color:white;
-
-    border-color:#7aff9b;
-
-    box-shadow:
-        0 0 20px rgba(0,255,100,.07);
+.contact-option:hover{
+    background:rgba(0,255,140,.12);
+    border-color:#00ff88;
 }
-
-.price{
-    color:#7aff9b;
-
-    margin-left:7px;
-
-    font-weight:bold;
-}
-
-
-/* WAITING */
 
 .waiting{
     display:none;
@@ -620,29 +404,28 @@ h1{
     display:block;
 }
 
-.countdown{
-    font-size:52px;
-
-    font-weight:200;
-
-    margin:15px 0;
-
-    animation:pulse 1s infinite;
+.spinner{
+    width:35px;
+    height:35px;
+    border:2px solid rgba(0,255,140,.15);
+    border-top-color:#00ff88;
+    border-radius:50%;
+    margin:0 auto 20px;
+    animation:spin 1s linear infinite;
 }
 
-@keyframes pulse{
-
-    0%,100%{
-        opacity:.45;
-    }
-
-    50%{
-        opacity:1;
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
     }
 }
 
-
-/* REPORT */
+.count{
+    color:#00ff88;
+    font-size:25px;
+    font-weight:bold;
+    margin:10px;
+}
 
 .report-area{
     display:none;
@@ -654,182 +437,136 @@ h1{
 
 textarea{
     width:100%;
-
-    height:120px;
-
+    height:130px;
     resize:none;
-
-    outline:none;
-
-    padding:12px;
-
-    border-radius:7px;
-
-    border:1px solid rgba(255,255,255,.13);
-
-    background:rgba(255,255,255,.035);
-
+    background:#020504;
+    border:1px solid rgba(0,255,140,.25);
     color:white;
-
+    border-radius:6px;
+    padding:12px;
+    outline:none;
     font-family:Arial;
-
-    font-size:11px;
-
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 
 textarea:focus{
-    border-color:#7aff9b;
+    border-color:#00ff88;
+    box-shadow:0 0 15px rgba(0,255,140,.1);
 }
 
-textarea::placeholder{
-    color:#59635d;
-}
-
-.send{
+.send-btn{
     width:100%;
-
-    height:43px;
-
-    border-radius:7px;
-
-    border:1px solid rgba(255,255,255,.22);
-
-    background:rgba(255,255,255,.05);
-
-    color:white;
-
-    font-size:8px;
-
-    letter-spacing:3px;
-
+    padding:13px;
+    border:none;
+    border-radius:5px;
+    background:#00ff88;
+    color:#00140b;
+    font-weight:bold;
     cursor:pointer;
-}
-
-
-/* CLOSE */
-
-.close{
-    margin-top:15px;
-
-    border:0;
-
-    background:none;
-
-    color:#535d57;
-
-    font-size:7px;
-
     letter-spacing:2px;
+}
 
+.close-btn{
+    margin-top:12px;
+    background:none;
+    border:none;
+    color:rgba(255,255,255,.4);
     cursor:pointer;
+    font-size:10px;
 }
-
-.close:hover{
-    color:white;
-}
-
-
-/* FOOTER */
-
-.footer{
-    position:fixed;
-
-    bottom:22px;
-
-    left:0;
-    right:0;
-
-    text-align:center;
-
-    font-size:7px;
-
-    letter-spacing:3px;
-
-    color:#454e49;
-}
-
 
 /* MOBILE */
-
 @media(max-width:600px){
 
-    .led.left{
-        left:8px;
+    .corner{
+        width:45px;
+        height:45px;
     }
 
-    .led.right{
-        right:8px;
+    .corner.tl,
+    .corner.tr{
+        top:15px;
+    }
+
+    .corner.bl,
+    .corner.br{
+        bottom:15px;
+    }
+
+    .corner.tl,
+    .corner.bl{
+        left:15px;
+    }
+
+    .corner.tr,
+    .corner.br{
+        right:15px;
     }
 
     .logo{
-        width:80px;
-        height:80px;
-
-        margin-bottom:28px;
+        width:78px;
+        height:78px;
+        margin-bottom:25px;
     }
 
     .logo span{
-        font-size:40px;
+        font-size:32px;
     }
 
-    h1{
-        font-size:43px;
+    .title{
         letter-spacing:5px;
     }
 
     .subtitle{
-        font-size:8px;
+        font-size:9px;
         letter-spacing:3px;
     }
 
-    .contact-button{
-        left:17px;
-        bottom:17px;
+    .enter-btn{
+        width:100%;
+        max-width:280px;
     }
 
-    .contact-box{
-        width:88%;
-        padding:27px 20px;
+    .contact{
+        left:15px;
+        bottom:15px;
     }
 
+    .footer{
+        bottom:15px;
+        font-size:7px;
+        letter-spacing:2px;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
-
-
-<div class="background"></div>
 
 <div class="led left"></div>
 <div class="led right"></div>
 
-<div class="corner c1"></div>
-<div class="corner c2"></div>
-<div class="corner c3"></div>
-<div class="corner c4"></div>
-
-
-<!-- MAIN -->
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
 
 <div class="container">
 
     <div class="content">
 
         <div class="badge">
-            SISTEM PREMIUM
+            <span class="badge-dot"></span>
+            SISTEM PREMIUM • V2
         </div>
 
         <div class="logo">
             <span>S</span>
         </div>
 
-        <h1>
+        <div class="title">
             MIRË SE VINI
-        </h1>
+        </div>
 
         <div class="subtitle">
             SISTEMI I MENAXHIMIT
@@ -837,10 +574,7 @@ textarea::placeholder{
 
         <div class="divider"></div>
 
-        <button
-            class="enter"
-            onclick="hyjNeSistem()"
-        >
+        <button class="enter-btn" onclick="hyjNeSistem()">
             HYR NË SISTEM →
         </button>
 
@@ -848,139 +582,65 @@ textarea::placeholder{
 
 </div>
 
-
 <div class="footer">
-    SABI • SISTEM PREMIUM • 2026
+    SABI • SISTEM PREMIUM • 2026 • V2
 </div>
 
+<div class="contact">
+    <button onclick="openContact()">
+        CONTACT
+    </button>
+</div>
 
-<!-- VETËM NJË CONTACT -->
-
-<button
-    class="contact-button"
-    onclick="openContact()"
->
-    CONTACT
-</button>
-
-
-<!-- CONTACT PANEL -->
-
-<div
-    class="contact-screen"
-    id="contactScreen"
->
+<!-- CONTACT MODAL -->
+<div class="contact-screen" id="contactScreen">
 
     <div class="contact-box">
 
-
-        <!-- MENU -->
+        <div class="contact-title">
+            SABI SUPPORT
+        </div>
 
         <div id="contactMenu">
 
-            <div class="contact-label">
-                SABI SYSTEM
-            </div>
+            <button class="contact-option" onclick="startReport()">
+                RAPORTO NJË PROBLEM
+            </button>
 
-            <div class="contact-title">
-                CONTACT
-            </div>
-
-            <div class="contact-text">
-                Zgjidhni një nga opsionet.
-            </div>
-
-
-            <div class="contact-options">
-
-                <button
-                    class="option-button"
-                    onclick="startReport()"
-                >
-                    RAPORTO NJË PROBLEM
-                </button>
-
-
-                <button
-                    class="option-button"
-                    onclick="buyApp()"
-                >
-                    BLI APLIKACIONIN
-                    <span class="price">49€</span>
-                </button>
-
-            </div>
+            <button class="contact-option" onclick="buyApp()">
+                BLI APLIKACIONIN • 49€
+            </button>
 
         </div>
 
+        <div class="waiting" id="waiting">
 
-        <!-- WAITING -->
+            <div class="spinner"></div>
 
-        <div
-            class="waiting"
-            id="waiting"
-        >
-
-            <div class="contact-label">
-                CONTACT SYSTEM
+            <div style="color:rgba(255,255,255,.5);font-size:11px;">
+                Ju lutem prisni...
             </div>
 
-            <div class="contact-title">
-                PRISNI
-            </div>
-
-            <div class="contact-text">
-                Po përgatitet raportimi.
-            </div>
-
-            <div
-                class="countdown"
-                id="countdown"
-            >
+            <div class="count" id="countdown">
                 5
             </div>
 
         </div>
 
-
-        <!-- REPORT -->
-
-        <div
-            class="report-area"
-            id="reportArea"
-        >
-
-            <div class="contact-label">
-                CONTACT SYSTEM
-            </div>
-
-            <div class="contact-title">
-                RAPORTIMI
-            </div>
-
-            <div class="contact-text">
-                Shkruani raportimin tuaj.
-            </div>
+        <div class="report-area" id="reportArea">
 
             <textarea
                 id="reportText"
-                placeholder="Shkruani këtu..."
+                placeholder="Shkruani problemin këtu..."
             ></textarea>
 
-            <button
-                class="send"
-                onclick="sendReport()"
-            >
-                DËRGO
+            <button class="send-btn" onclick="sendReport()">
+                DËRGO RAPORTIMIN
             </button>
 
         </div>
 
-
-        <button
-            class="close"
-            onclick="closeContact()"
-        >
+        <button class="close-btn" onclick="closeContact()">
             MBYLL
         </button>
 
@@ -988,25 +648,19 @@ textarea::placeholder{
 
 </div>
 
-
 <script>
 
+/* VERSION */
+const SABI_VERSION = "2026-V2";
 
 /* HYRJA */
-
 function hyjNeSistem(){
-
-    window.location.href =
-        "login.html";
-
+    window.location.href = "login.html";
 }
-
-
-/* CONTACT */
 
 let timer = null;
 
-
+/* CONTACT */
 function openContact(){
 
     document
@@ -1027,9 +681,7 @@ function openContact(){
 
 }
 
-
-/* RAPORT */
-
+/* REPORT */
 function startReport(){
 
     document
@@ -1047,16 +699,13 @@ function startReport(){
 
     countdown.textContent = seconds;
 
-
     clearInterval(timer);
-
 
     timer = setInterval(function(){
 
         seconds--;
 
         countdown.textContent = seconds;
-
 
         if(seconds <= 0){
 
@@ -1076,9 +725,7 @@ function startReport(){
 
 }
 
-
-/* DËRGO RAPORT */
-
+/* SEND REPORT */
 function sendReport(){
 
     const report =
@@ -1087,28 +734,21 @@ function sendReport(){
         .value
         .trim();
 
-
     if(!report){
 
-        alert(
-            "Ju lutem shkruani raportimin."
-        );
+        alert("Ju lutem shkruani raportimin.");
 
         return;
 
     }
 
-
-    /* VENDOS NUMRIN TËND KËTU */
-
-    const myNumber =
-        "+355XXXXXXXXX";
-
+    const myNumber = "+355XXXXXXXXX";
 
     const message =
         "RAPORTIM SABI\n\n" +
-        report;
-
+        report +
+        "\n\nVersion: " +
+        SABI_VERSION;
 
     const sms =
         "sms:" +
@@ -1116,25 +756,17 @@ function sendReport(){
         "?body=" +
         encodeURIComponent(message);
 
-
     window.location.href = sms;
-
 }
 
-
-/* BLI APLIKACIONIN */
-
+/* BUY */
 function buyApp(){
 
-    /* VENDOS NUMRIN TËND KËTU */
-
-    const myNumber =
-        "+355XXXXXXXXX";
-
+    const myNumber = "+355XXXXXXXXX";
 
     const message =
-        "Përshëndetje, jam i interesuar të blej aplikacionin SABI për 49€.";
-
+        "Përshëndetje, jam i interesuar të blej aplikacionin SABI për 49€.\n\nVersion: " +
+        SABI_VERSION;
 
     const sms =
         "sms:" +
@@ -1142,14 +774,10 @@ function buyApp(){
         "?body=" +
         encodeURIComponent(message);
 
-
     window.location.href = sms;
-
 }
 
-
-/* MBYLL */
-
+/* CLOSE */
 function closeContact(){
 
     clearInterval(timer);
