@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html lang="sq">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Lulishtja</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+<header class="topbar">
 
     <div>
-
         <h1>🍸 Bar Lulishtja</h1>
-
-        <p id="userInfo">
-            Menaxhimi i Barit
-        </p>
-
+        <p id="loggedUser">Sistemi i menaxhimit</p>
     </div>
 
-    <div
-        class="time"
-        id="clock"
-    ></div>
+    <div class="topbar-right">
+        <span id="clock">00:00</span>
+
+        <button onclick="logout()" class="logout-btn">
+            Dil
+        </button>
+    </div>
 
 </header>
 
 
-<nav>
+<nav class="navigation">
 
-    <button
-        class="nav-btn active"
-        onclick="showPage('dashboard')"
-    >
+    <button class="nav-btn active" onclick="showPage('dashboard')">
         🏠 Dashboard
     </button>
 
-    <button
-        class="nav-btn"
-        onclick="showPage('tables')"
-    >
-        🪑 Tavolinat
+    <button class="nav-btn" onclick="showPage('tables')">
+        🪑 Tavolina
     </button>
 
-    <button
-        class="nav-btn"
-        onclick="showPage('menu')"
-    >
+    <button class="nav-btn" onclick="showPage('menu')">
         🍹 Menu
     </button>
 
-    <button
-        class="nav-btn"
-        onclick="showPage('orders')"
-    >
-        🧾 Porositë
+    <button class="nav-btn" onclick="showPage('orders')">
+        🧾 Porosia
     </button>
 
-    <button
-        class="nav-btn admin-only"
-        onclick="showPage('cash')"
-    >
+    <button class="nav-btn admin-only" onclick="showPage('cash')">
         💰 Arka
     </button>
 
-    <button
-        class="nav-btn admin-only"
-        onclick="showPage('admin')"
-    >
-        ⚙️ Admin
+    <button class="nav-btn admin-only" onclick="showPage('history')">
+        📋 Historiku
     </button>
 
-    <button
-        class="nav-btn"
-        onclick="logout()"
-    >
-        🚪 Dil
+    <button class="nav-btn admin-only" onclick="showPage('admin')">
+        ⚙️ Admin
     </button>
 
 </nav>
@@ -98,77 +64,74 @@
 <main>
 
 
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
 
-<section
-    id="dashboard"
-    class="page active-page"
->
+<section id="dashboard" class="page active">
 
-    <h2>Dashboard</h2>
+    <div class="page-title">
+        <div>
+            <h2>Dashboard</h2>
+            <p>Përmbledhja e lokalit</p>
+        </div>
+    </div>
 
-    <div class="cards">
 
-        <div class="card">
+    <div class="stats-grid">
 
-            <span>💰</span>
-
+        <div class="stat-card">
+            <div class="stat-icon">💰</div>
             <div>
-
                 <p>Shitje sot</p>
-
-                <h3 id="todaySales">
-                    0 Lek
-                </h3>
-
+                <h2 id="dashboardSales">0 Lek</h2>
             </div>
-
         </div>
 
 
-        <div class="card">
-
-            <span>🪑</span>
-
+        <div class="stat-card">
+            <div class="stat-icon">🪑</div>
             <div>
-
                 <p>Tavolina aktive</p>
-
-                <h3 id="activeTables">
-                    0
-                </h3>
-
+                <h2 id="dashboardTables">0</h2>
             </div>
-
         </div>
 
 
-        <div class="card">
-
-            <span>🧾</span>
-
+        <div class="stat-card">
+            <div class="stat-icon">🧾</div>
             <div>
-
-                <p>Porosi të mbyllura</p>
-
-                <h3 id="orderCount">
-                    0
-                </h3>
-
+                <p>Fatura sot</p>
+                <h2 id="dashboardInvoices">0</h2>
             </div>
+        </div>
 
+
+        <div class="stat-card">
+            <div class="stat-icon">💳</div>
+            <div>
+                <p>Kartë</p>
+                <h2 id="dashboardCard">0 Lek</h2>
+            </div>
         </div>
 
     </div>
 
 
-    <div class="section-box">
+    <div class="content-box">
 
-        <h2>Tavolinat</h2>
+        <div class="section-title">
+            <h3>Tavolinat</h3>
+
+            <button
+                class="secondary-btn"
+                onclick="showPage('tables')"
+            >
+                Shiko të gjitha
+            </button>
+        </div>
 
         <div
+            id="dashboardTableGrid"
             class="table-grid"
-            id="dashboardTables"
         ></div>
 
     </div>
@@ -177,38 +140,41 @@
 
 
 
-<!-- TABLES -->
+<!-- ================= TABLES ================= -->
 
-<section
-    id="tables"
-    class="page"
->
+<section id="tables" class="page">
 
-    <h2>🪑 Tavolinat</h2>
+    <div class="page-title">
+        <div>
+            <h2>🪑 Tavolinat</h2>
+            <p>Zgjidh tavolinën për të marrë porosinë</p>
+        </div>
+    </div>
+
 
     <div
+        id="tableGrid"
         class="table-grid"
-        id="tablesList"
     ></div>
 
 </section>
 
 
 
-<!-- MENU -->
+<!-- ================= MENU ================= -->
 
-<section
-    id="menu"
-    class="page"
->
+<section id="menu" class="page">
 
-    <div class="page-header">
+    <div class="page-title">
 
-        <h2>🍹 Menuja</h2>
+        <div>
+            <h2>🍹 Menuja</h2>
+            <p>Produktet e lokalit</p>
+        </div>
 
         <button
-            class="admin-button admin-only"
-            onclick="openProductForm()"
+            class="primary-btn admin-only"
+            onclick="openProductModal()"
         >
             + Shto produkt
         </button>
@@ -217,84 +183,99 @@
 
 
     <div
-        class="menu-grid"
+        id="categoryButtons"
+        class="categories"
+    ></div>
+
+
+    <div
         id="menuGrid"
+        class="menu-grid"
     ></div>
 
 </section>
 
 
 
-<!-- ORDERS -->
+<!-- ================= ORDERS ================= -->
 
-<section
-    id="orders"
-    class="page"
->
+<section id="orders" class="page">
 
-    <h2>🧾 Porosia</h2>
+    <div class="page-title">
 
-    <div class="order-box">
-
-        <h3 id="selectedTableTitle">
-            Zgjidh një tavolinë
-        </h3>
-
-        <div id="orderItems">
-
-            <p class="empty">
-                Nuk ka produkte.
+        <div>
+            <h2>🧾 Porosia</h2>
+            <p id="orderTableText">
+                Zgjidh një tavolinë
             </p>
-
         </div>
-
-
-        <div class="total">
-
-            <span>Total</span>
-
-            <strong id="orderTotal">
-                0 Lek
-            </strong>
-
-        </div>
-
 
         <button
-            class="pay-btn"
-            onclick="completeOrder()"
+            class="secondary-btn"
+            onclick="showPage('tables')"
         >
-            💳 Mbyll porosinë
+            ← Tavolinat
         </button>
 
     </div>
 
-</section>
+
+    <div class="order-layout">
 
 
+        <div class="content-box">
 
-<!-- CASH -->
+            <h3>Produktet</h3>
 
-<section
-    id="cash"
-    class="page admin-only"
->
+            <div
+                id="orderMenuGrid"
+                class="order-menu-grid"
+            ></div>
 
-    <h2>💰 Arka</h2>
+        </div>
 
-    <div class="cash-box">
 
-        <p>Shitjet totale</p>
+        <div class="content-box order-summary">
 
-        <h1 id="cashTotal">
-            0 Lek
-        </h1>
+            <div class="section-title">
 
-        <p>Porosi të përfunduara</p>
+                <h3>Porosia</h3>
 
-        <h3 id="completedOrders">
-            0
-        </h3>
+                <span id="orderStatus">
+                    E hapur
+                </span>
+
+            </div>
+
+
+            <div id="orderItems">
+
+                <div class="empty-state">
+                    Nuk ka produkte.
+                </div>
+
+            </div>
+
+
+            <div class="order-total">
+
+                <span>Total</span>
+
+                <strong id="orderTotal">
+                    0 Lek
+                </strong>
+
+            </div>
+
+
+            <button
+                class="primary-btn full-btn"
+                onclick="openPaymentModal()"
+            >
+                💳 Mbyll & Prej Faturën
+            </button>
+
+        </div>
 
     </div>
 
@@ -302,27 +283,135 @@
 
 
 
-<!-- ADMIN -->
+<!-- ================= CASH ================= -->
 
-<section
-    id="admin"
-    class="page admin-only"
->
+<section id="cash" class="page admin-only">
 
-    <h2>⚙️ Paneli i Administratorit</h2>
+    <div class="page-title">
+
+        <div>
+            <h2>💰 Arka</h2>
+            <p>Përmbledhje financiare</p>
+        </div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">💰</div>
+
+            <div>
+                <p>Total shitje</p>
+                <h2 id="cashSales">0 Lek</h2>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">💵</div>
+
+            <div>
+                <p>Cash</p>
+                <h2 id="cashCash">0 Lek</h2>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">💳</div>
+
+            <div>
+                <p>Kartë</p>
+                <h2 id="cashCard">0 Lek</h2>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">🧾</div>
+
+            <div>
+                <p>Fatura</p>
+                <h2 id="cashInvoices">0</h2>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="content-box">
+
+        <h3>Pagesat e sotme</h3>
+
+        <div id="cashPayments"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HISTORY ================= -->
+
+<section id="history" class="page admin-only">
+
+    <div class="page-title">
+
+        <div>
+            <h2>📋 Historiku</h2>
+            <p>Faturat e përfunduara</p>
+        </div>
+
+        <button
+            class="danger-btn"
+            onclick="clearHistory()"
+        >
+            Fshi historikun
+        </button>
+
+    </div>
+
+
+    <div class="content-box">
+
+        <div id="historyList"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ADMIN ================= -->
+
+<section id="admin" class="page admin-only">
+
+    <div class="page-title">
+
+        <div>
+            <h2>⚙️ Administratori</h2>
+            <p>Menaxho lokalin</p>
+        </div>
+
+    </div>
 
 
     <!-- USERS -->
 
-    <div class="section-box">
+    <div class="content-box">
 
-        <div class="page-header">
+        <div class="section-title">
 
-            <h3>👤 Kamarierët</h3>
+            <div>
+                <h3>👤 Kamarierët</h3>
+                <p>Menaxho përdoruesit</p>
+            </div>
 
             <button
-                class="admin-button"
-                onclick="openUserForm()"
+                class="primary-btn"
+                onclick="openWaiterModal()"
             >
                 + Shto kamarier
             </button>
@@ -340,17 +429,20 @@
 
     <!-- PRODUCTS -->
 
-    <div class="section-box">
+    <div class="content-box">
 
-        <div class="page-header">
+        <div class="section-title">
 
-            <h3>🍹 Menaxhimi i Menu-së</h3>
+            <div>
+                <h3>🍹 Menaxho menunë</h3>
+                <p>Shto, ndrysho ose fshi produkte</p>
+            </div>
 
             <button
-                class="admin-button"
-                onclick="openProductForm()"
+                class="primary-btn"
+                onclick="openProductModal()"
             >
-                + Shto produkt
+                + Produkt
             </button>
 
         </div>
@@ -364,28 +456,32 @@
     <br>
 
 
-    <!-- PASSWORD -->
+    <!-- ADMIN PASSWORD -->
 
-    <div class="section-box">
+    <div class="content-box">
 
-        <h3>🔐 Ndrysho password-in e Adminit</h3>
+        <h3>🔐 Password i Administratorit</h3>
+
+        <p class="muted">
+            Ndrysho password-in e administratorit.
+        </p>
 
         <br>
 
         <input
-            class="admin-input"
-            type="password"
             id="newAdminPassword"
+            class="form-input"
+            type="password"
             placeholder="Password i ri"
         >
 
         <br><br>
 
         <button
-            class="admin-button"
+            class="primary-btn"
             onclick="changeAdminPassword()"
         >
-            Ndrysho Password
+            Ndrysho password
         </button>
 
     </div>
@@ -397,29 +493,192 @@
 
 
 
-<!-- MODAL -->
+<!-- ================= PAYMENT MODAL ================= -->
 
-<div
-    id="modal"
-    class="modal"
->
+<div id="paymentModal" class="modal">
 
     <div class="modal-box">
 
         <div class="modal-header">
 
-            <h2 id="modalTitle">
-                Formë
-            </h2>
+            <div>
+                <h2>💳 Pagesa</h2>
+                <p>Zgjidh mënyrën e pagesës</p>
+            </div>
 
             <button
                 class="close-btn"
-                onclick="closeModal()"
+                onclick="closePaymentModal()"
             >
                 ✕
             </button>
 
         </div>
+
+
+        <div class="payment-total">
+
+            <span>Total për pagesë</span>
+
+            <strong id="paymentTotal">
+                0 Lek
+            </strong>
+
+        </div>
+
+
+        <div class="payment-buttons">
+
+            <button
+                class="payment-btn"
+                onclick="completePayment('cash')"
+            >
+                💵
+                <span>Cash</span>
+            </button>
+
+
+            <button
+                class="payment-btn"
+                onclick="completePayment('card')"
+            >
+                💳
+                <span>Kartë</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= INVOICE MODAL ================= -->
+
+<div id="invoiceModal" class="modal">
+
+    <div class="invoice">
+
+        <div class="invoice-top">
+
+            <h1>🍸 Bar Lulishtja</h1>
+
+            <p>Faturë / Kupon</p>
+
+        </div>
+
+
+        <div class="invoice-info">
+
+            <div>
+                <span>Nr. faturës</span>
+                <strong id="invoiceNumber">---</strong>
+            </div>
+
+            <div>
+                <span>Tavolina</span>
+                <strong id="invoiceTable">---</strong>
+            </div>
+
+            <div>
+                <span>Kamarieri</span>
+                <strong id="invoiceWaiter">---</strong>
+            </div>
+
+            <div>
+                <span>Data / Ora</span>
+                <strong id="invoiceDate">---</strong>
+            </div>
+
+            <div>
+                <span>Pagesa</span>
+                <strong id="invoicePayment">---</strong>
+            </div>
+
+        </div>
+
+
+        <div class="invoice-items">
+
+            <div class="invoice-item invoice-head">
+
+                <span>Produkt</span>
+                <span>Total</span>
+
+            </div>
+
+            <div id="invoiceItems"></div>
+
+        </div>
+
+
+        <div class="invoice-total">
+
+            <span>TOTAL</span>
+
+            <strong id="invoiceTotal">
+                0 Lek
+            </strong>
+
+        </div>
+
+
+        <div class="invoice-footer">
+
+            <p>Faleminderit që zgjodhët</p>
+            <strong>Bar Lulishtja</strong>
+
+        </div>
+
+
+        <div class="invoice-actions">
+
+            <button
+                class="primary-btn"
+                onclick="printInvoice()"
+            >
+                🖨️ Printo
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="closeInvoice()"
+            >
+                Mbyll
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= GENERAL MODAL ================= -->
+
+<div id="generalModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="modalTitle">
+                    Formë
+                </h2>
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="closeGeneralModal()"
+            >
+                ✕
+            </button>
+
+        </div>
+
 
         <div id="modalContent"></div>
 
@@ -428,8 +687,8 @@
 </div>
 
 
+
 <script src="app.js"></script>
 
 </body>
-
 </html>
