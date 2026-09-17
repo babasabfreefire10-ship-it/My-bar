@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bar Lulishtja - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #111;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #error {
+            color: #ff5555;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>🍸 Bar Lulishtja</h1>
+
+    <p class="subtitle">
+        Hyr në sistem
+    </p>
+
+    <form id="loginForm">
+
+        <label>Username / Adresa</label>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Shkruaj username"
+            required
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Shkruaj password"
+            required
+        >
+
+        <button type="submit">
+            🔐 Hyr
+        </button>
+
+        <p id="error">
+            Username ose password i gabuar!
+        </p>
+
+    </form>
+
+</div>
+
+<script>
+
+const users = [
+    {
+        username: "admin",
+        password: "1234",
+        role: "admin"
+    },
+    {
+        username: "kamarier1",
+        password: "1234",
+        role: "waiter"
+    }
+];
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const user = users.find(
+        u =>
+            u.username === username &&
+            u.password === password
+    );
+
+    if (!user) {
+
+        document.getElementById("error").style.display = "block";
+
+        return;
+    }
+
+    localStorage.setItem(
+        "barUser",
+        JSON.stringify({
+            username: user.username,
+            role: user.role
+        })
+    );
+
+    window.location.href = "index.html";
+
+});
+
+</script>
+
+</body>
+</html>
