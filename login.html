@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Bar Lulishtja - Login</title>
 
     <style>
@@ -19,8 +18,8 @@
             color: white;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
@@ -31,6 +30,12 @@
             border: 1px solid #333;
             border-radius: 20px;
             padding: 30px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 10px;
         }
 
         h1 {
@@ -46,20 +51,20 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
             color: #aaa;
+            margin-bottom: 8px;
         }
 
         input {
             width: 100%;
             padding: 14px;
             margin-bottom: 18px;
-            border: 1px solid #333;
-            border-radius: 10px;
             background: #111;
             color: white;
-            font-size: 16px;
+            border: 1px solid #333;
+            border-radius: 10px;
             outline: none;
+            font-size: 16px;
         }
 
         button {
@@ -69,16 +74,26 @@
             border-radius: 10px;
             background: white;
             color: black;
-            font-size: 16px;
             font-weight: bold;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        #error {
+        .error {
+            display: none;
             color: #ff5555;
             text-align: center;
             margin-top: 15px;
-            display: none;
+        }
+
+        .info {
+            margin-top: 25px;
+            padding: 12px;
+            background: #151515;
+            border-radius: 10px;
+            color: #777;
+            font-size: 12px;
+            text-align: center;
         }
     </style>
 </head>
@@ -87,20 +102,23 @@
 
 <div class="login-box">
 
-    <h1>🍸 Bar Lulishtja</h1>
+    <div class="logo">🍸</div>
+
+    <h1>Bar Lulishtja</h1>
 
     <p class="subtitle">
-        Hyr në sistem
+        Sistemi i menaxhimit
     </p>
 
     <form id="loginForm">
 
-        <label>Username / Adresa</label>
+        <label>Username</label>
 
         <input
             type="text"
             id="username"
-            placeholder="Shkruaj username"
+            placeholder="Username"
+            autocomplete="username"
             required
         >
 
@@ -109,71 +127,102 @@
         <input
             type="password"
             id="password"
-            placeholder="Shkruaj password"
+            placeholder="Password"
+            autocomplete="current-password"
             required
         >
 
         <button type="submit">
-            🔐 Hyr
+            🔐 Hyr në sistem
         </button>
 
-        <p id="error">
+        <p id="error" class="error">
             Username ose password i gabuar!
         </p>
 
     </form>
 
+    <div class="info">
+        Bar Lulishtja • Menaxhimi i Barit
+    </div>
+
 </div>
 
 <script>
 
-const users = [
+const defaultUsers = [
     {
+        id: "admin",
         username: "admin",
         password: "1234",
-        role: "admin"
+        role: "admin",
+        name: "Administrator"
     },
     {
+        id: "waiter1",
         username: "kamarier1",
         password: "1234",
-        role: "waiter"
+        role: "waiter",
+        name: "Kamarier 1"
     }
 ];
 
-document.getElementById("loginForm").addEventListener("submit", function(e) {
+function getUsers() {
 
-    e.preventDefault();
+    const saved = localStorage.getItem("barUsers");
 
-    const username =
-        document.getElementById("username").value.trim();
+    if (!saved) {
+        localStorage.setItem(
+            "barUsers",
+            JSON.stringify(defaultUsers)
+        );
 
-    const password =
-        document.getElementById("password").value;
-
-    const user = users.find(
-        u =>
-            u.username === username &&
-            u.password === password
-    );
-
-    if (!user) {
-
-        document.getElementById("error").style.display = "block";
-
-        return;
+        return defaultUsers;
     }
 
-    localStorage.setItem(
-        "barUser",
-        JSON.stringify({
-            username: user.username,
-            role: user.role
-        })
-    );
+    return JSON.parse(saved);
+}
 
-    window.location.href = "index.html";
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", function(event) {
 
-});
+        event.preventDefault();
+
+        const username =
+            document.getElementById("username").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const users = getUsers();
+
+        const user = users.find(
+            u =>
+                u.username === username &&
+                u.password === password
+        );
+
+        if (!user) {
+
+            document.getElementById("error").style.display =
+                "block";
+
+            return;
+        }
+
+        localStorage.setItem(
+            "barCurrentUser",
+            JSON.stringify({
+                id: user.id,
+                username: user.username,
+                role: user.role,
+                name: user.name
+            })
+        );
+
+        window.location.href = "index.html";
+    });
 
 </script>
 
