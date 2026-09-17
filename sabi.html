@@ -1,776 +1,577 @@
 <!DOCTYPE html>
-<html lang="sq">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050807">
-
-<title>SABI | Bar Lulishtja</title>
+<title>WELCOME MY BAR</title>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 :root{
-    --green:#22ff88;
-    --green2:#00c96b;
-    --dark:#030605;
-    --glass:rgba(10,20,15,.68);
+    --green:#00ff88;
+    --green2:#00c86b;
+    --dark:#020604;
 }
 
 body{
     min-height:100vh;
     overflow:hidden;
-    background:#020403;
+    background:#010302;
     color:white;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
-
+/* BACKGROUND */
 .background{
     position:fixed;
     inset:0;
     overflow:hidden;
     background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(0,255,120,.08),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 10% 20%,
-            rgba(0,255,120,.08),
-            transparent 25%
-        ),
-        #020403;
+        radial-gradient(circle at 50% 50%,rgba(0,255,136,.09),transparent 35%),
+        radial-gradient(circle at 10% 20%,rgba(0,255,136,.06),transparent 25%),
+        #010302;
 }
 
-/* LED lines */
-
+/* MOVING LED LINES */
 .led{
     position:absolute;
     height:2px;
-    width:70vw;
-    max-width:900px;
+    width:75vw;
     background:linear-gradient(
         90deg,
         transparent,
-        rgba(34,255,136,.15),
-        var(--green),
-        rgba(34,255,136,.15),
+        rgba(0,255,136,.1),
+        #00ff88,
+        white,
+        #00ff88,
+        rgba(0,255,136,.1),
         transparent
     );
-
     box-shadow:
-        0 0 5px var(--green),
-        0 0 18px var(--green),
-        0 0 45px rgba(34,255,136,.5);
-
-    opacity:.55;
-    animation:ledMove 5s linear infinite;
+        0 0 5px #00ff88,
+        0 0 15px #00ff88,
+        0 0 35px rgba(0,255,136,.8);
+    opacity:.8;
 }
 
-.led.one{
+.led1{
     top:12%;
-    left:-15%;
-    transform:rotate(12deg);
+    left:-80%;
+    transform:rotate(-14deg);
+    animation:move1 7s linear infinite;
 }
 
-.led.two{
-    top:30%;
-    right:-15%;
-    transform:rotate(-10deg);
-    animation-delay:1.4s;
-}
-
-.led.three{
-    bottom:24%;
-    left:-20%;
-    transform:rotate(-8deg);
-    animation-delay:2.3s;
-}
-
-.led.four{
-    bottom:9%;
-    right:-15%;
-    transform:rotate(11deg);
-    animation-delay:3.2s;
-}
-
-@keyframes ledMove{
-    0%{
-        transform:translateX(-25%) rotate(10deg);
-        opacity:.15;
-    }
-
-    50%{
-        opacity:.9;
-    }
-
-    100%{
-        transform:translateX(45%) rotate(10deg);
-        opacity:.15;
-    }
-}
-
-/* Vertical neon */
-
-.neon-line{
-    position:absolute;
-    top:-10%;
-    width:1px;
-    height:120%;
-    background:var(--green);
-
-    box-shadow:
-        0 0 8px var(--green),
-        0 0 25px var(--green);
-
-    opacity:.12;
-    animation:pulse 3s ease-in-out infinite;
-}
-
-.neon-line:nth-child(5){
-    left:12%;
-}
-
-.neon-line:nth-child(6){
-    left:88%;
+.led2{
+    top:35%;
+    left:-80%;
+    transform:rotate(9deg);
+    animation:move2 9s linear infinite;
     animation-delay:1s;
 }
 
-@keyframes pulse{
-    0%,100%{
-        opacity:.05;
-    }
-
-    50%{
-        opacity:.25;
-    }
-}
-
-/* Floating lights */
-
-.light{
-    position:absolute;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:
-        0 0 10px var(--green),
-        0 0 25px var(--green);
-
-    animation:float 7s ease-in-out infinite;
-}
-
-.light:nth-child(7){
-    left:20%;
-    top:25%;
-}
-
-.light:nth-child(8){
-    left:75%;
-    top:18%;
+.led3{
+    top:62%;
+    left:-80%;
+    transform:rotate(-7deg);
+    animation:move1 8s linear infinite;
     animation-delay:2s;
 }
 
-.light:nth-child(9){
-    left:15%;
-    bottom:20%;
+.led4{
+    top:82%;
+    left:-80%;
+    transform:rotate(12deg);
+    animation:move2 10s linear infinite;
     animation-delay:3s;
 }
 
-.light:nth-child(10){
-    right:15%;
-    bottom:30%;
-    animation-delay:1s;
+@keyframes move1{
+    from{transform:translateX(0) rotate(-14deg)}
+    to{transform:translateX(220vw) rotate(-14deg)}
 }
+
+@keyframes move2{
+    from{transform:translateX(0) rotate(9deg)}
+    to{transform:translateX(220vw) rotate(9deg)}
+}
+
+/* VERTICAL LED */
+.vline{
+    position:absolute;
+    width:1px;
+    height:100%;
+    background:linear-gradient(
+        transparent,
+        rgba(0,255,136,.5),
+        transparent
+    );
+    box-shadow:0 0 15px #00ff88;
+    opacity:.25;
+}
+
+.v1{left:8%;animation:pulse 3s infinite}
+.v2{left:25%;animation:pulse 4s infinite .5s}
+.v3{left:75%;animation:pulse 3.5s infinite 1s}
+.v4{left:92%;animation:pulse 4.5s infinite 1.5s}
+
+@keyframes pulse{
+    0%,100%{opacity:.12}
+    50%{opacity:.5}
+}
+
+/* GLOW DOTS */
+.dot{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#00ff88;
+    box-shadow:
+        0 0 8px #00ff88,
+        0 0 20px #00ff88;
+    animation:float 5s infinite ease-in-out;
+}
+
+.d1{left:15%;top:20%}
+.d2{left:82%;top:18%;animation-delay:1s}
+.d3{left:30%;top:78%;animation-delay:2s}
+.d4{left:70%;top:72%;animation-delay:3s}
+.d5{left:50%;top:15%;animation-delay:1.5s}
 
 @keyframes float{
-    0%,100%{
-        transform:translateY(0);
-        opacity:.25;
-    }
-
-    50%{
-        transform:translateY(-35px);
-        opacity:1;
-    }
+    0%,100%{transform:translateY(0);opacity:.3}
+    50%{transform:translateY(-30px);opacity:1}
 }
 
-/* =========================
-   MAIN
-========================= */
-
+/* MAIN */
 .main{
     position:relative;
     z-index:10;
-
     min-height:100vh;
-
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
-
+    justify-content:center;
     padding:25px;
 }
 
-/* Top badge */
-
-.badge{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    padding:8px 14px;
-
-    border:1px solid rgba(34,255,136,.25);
-    border-radius:999px;
-
-    background:rgba(0,20,10,.45);
-    backdrop-filter:blur(10px);
-
-    color:#8dafa0;
-    font-size:11px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-
-    margin-bottom:24px;
-
-    animation:fadeDown .8s ease;
+.card{
+    width:min(700px,94vw);
+    padding:55px 35px 40px;
+    text-align:center;
+    border:1px solid rgba(0,255,136,.35);
+    border-radius:30px;
+    background:rgba(2,10,6,.72);
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 0 30px rgba(0,255,136,.12),
+        inset 0 0 40px rgba(0,255,136,.025);
+    animation:cardGlow 3s infinite ease-in-out;
 }
 
+@keyframes cardGlow{
+    0%,100%{
+        box-shadow:
+        0 0 25px rgba(0,255,136,.12),
+        inset 0 0 30px rgba(0,255,136,.02);
+    }
+    50%{
+        box-shadow:
+        0 0 55px rgba(0,255,136,.25),
+        inset 0 0 50px rgba(0,255,136,.05);
+    }
+}
+
+/* STATUS */
 .status{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:8px 15px;
+    border-radius:30px;
+    border:1px solid rgba(0,255,136,.4);
+    background:rgba(0,255,136,.06);
+    color:#9dffc9;
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:25px;
+}
+
+.statusDot{
     width:7px;
     height:7px;
     border-radius:50%;
-    background:var(--green);
-
-    box-shadow:
-        0 0 8px var(--green),
-        0 0 18px var(--green);
-
-    animation:statusBlink 1.8s infinite;
+    background:#00ff88;
+    box-shadow:0 0 12px #00ff88;
+    animation:blink 1.2s infinite;
 }
 
-@keyframes statusBlink{
-    50%{
-        opacity:.35;
-    }
+@keyframes blink{
+    50%{opacity:.25}
 }
 
-/* Logo */
-
+/* LOGO */
 .logo{
-    position:relative;
-
-    width:105px;
-    height:105px;
-
+    width:100px;
+    height:100px;
+    margin:0 auto 25px;
+    border:2px solid #00ff88;
+    border-radius:28px;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    border-radius:32px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(34,255,136,.16),
-            rgba(0,0,0,.65)
-        );
-
-    border:1px solid rgba(34,255,136,.45);
-
+    font-size:43px;
+    font-weight:900;
+    color:#00ff88;
+    text-shadow:0 0 20px #00ff88;
     box-shadow:
-        0 0 20px rgba(34,255,136,.18),
-        0 0 70px rgba(34,255,136,.10),
-        inset 0 0 30px rgba(34,255,136,.06);
-
-    margin-bottom:25px;
-
-    animation:logoGlow 3s ease-in-out infinite;
+        0 0 15px #00ff88,
+        0 0 50px rgba(0,255,136,.35),
+        inset 0 0 25px rgba(0,255,136,.12);
+    animation:logoPulse 2.5s infinite;
 }
 
-.logo::before{
-    content:"";
-
-    position:absolute;
-    inset:-7px;
-
-    border-radius:38px;
-
-    border:1px solid rgba(34,255,136,.18);
-
-    animation:spin 8s linear infinite;
+@keyframes logoPulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.04)}
 }
 
-.logo span{
-    font-size:42px;
+/* TITLE */
+h1{
+    font-size:clamp(45px,10vw,82px);
+    letter-spacing:8px;
     font-weight:900;
-
-    color:var(--green);
-
-    text-shadow:
-        0 0 10px var(--green),
-        0 0 25px var(--green),
-        0 0 50px rgba(34,255,136,.5);
-
-    letter-spacing:-3px;
-}
-
-@keyframes logoGlow{
-    50%{
-        box-shadow:
-            0 0 35px rgba(34,255,136,.28),
-            0 0 100px rgba(34,255,136,.13),
-            inset 0 0 35px rgba(34,255,136,.09);
-    }
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* Title */
-
-.title{
-    text-align:center;
-    animation:fadeUp 1s ease .1s both;
-}
-
-.title h1{
-    font-size:clamp(42px,11vw,78px);
-    line-height:.95;
-
-    font-weight:900;
-
-    letter-spacing:-4px;
-
+    margin-bottom:10px;
     color:white;
-
     text-shadow:
-        0 0 15px rgba(255,255,255,.1);
+        0 0 5px white,
+        0 0 15px #00ff88,
+        0 0 35px #00ff88;
 }
 
-.title h1 span{
-    color:var(--green);
-
-    text-shadow:
-        0 0 8px var(--green),
-        0 0 22px var(--green),
-        0 0 50px rgba(34,255,136,.45);
+.subtitle{
+    color:#8cffbd;
+    letter-spacing:5px;
+    font-size:12px;
+    margin-bottom:35px;
 }
 
-.title p{
-    margin-top:14px;
-
-    color:#91a39a;
-
-    font-size:14px;
-    letter-spacing:2px;
-}
-
-/* Glass card */
-
-.card{
-    margin-top:32px;
-
-    width:min(430px,100%);
-
-    padding:18px;
-
-    border-radius:23px;
-
-    background:var(--glass);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(20px);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.5),
-        inset 0 1px 0 rgba(255,255,255,.04);
-
-    animation:fadeUp 1s ease .25s both;
-}
-
+/* FEATURES */
 .features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:8px;
+    gap:12px;
+    margin-bottom:28px;
 }
 
 .feature{
-    padding:14px 6px;
-
-    text-align:center;
-
+    padding:17px 8px;
+    border:1px solid rgba(0,255,136,.18);
     border-radius:16px;
-
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    transition:.25s;
+    background:rgba(0,255,136,.025);
+    transition:.2s;
+    cursor:pointer;
 }
 
 .feature:hover{
-    border-color:rgba(34,255,136,.3);
-
-    background:rgba(34,255,136,.06);
-
-    transform:translateY(-2px);
+    border-color:#00ff88;
+    box-shadow:0 0 25px rgba(0,255,136,.2);
+    transform:translateY(-4px);
 }
 
-.feature .icon{
-    font-size:22px;
-    margin-bottom:6px;
+.feature:active{
+    transform:scale(.94);
+    background:rgba(0,255,136,.12);
+    box-shadow:
+        0 0 10px #00ff88,
+        0 0 35px rgba(0,255,136,.8);
+}
+
+.icon{
+    font-size:25px;
+    margin-bottom:8px;
+    filter:drop-shadow(0 0 8px #00ff88);
 }
 
 .feature span{
     display:block;
-
-    color:#84938b;
-
-    font-size:10px;
+    font-size:11px;
+    color:#b9ffd7;
+    letter-spacing:1px;
 }
 
-/* Button */
-
+/* BUTTON */
 .enter{
-    width:100%;
-    height:56px;
-
-    margin-top:13px;
-
-    border:0;
-    border-radius:16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #35ff96,
-            #08b963
-        );
-
-    color:#021008;
-
-    font-size:15px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 30px rgba(34,255,136,.18);
-
-    transition:.25s;
-
     position:relative;
+    width:100%;
+    height:62px;
+    border:1px solid #00ff88;
+    border-radius:18px;
+    background:linear-gradient(
+        90deg,
+        rgba(0,255,136,.08),
+        rgba(0,255,136,.18),
+        rgba(0,255,136,.08)
+    );
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:4px;
+    cursor:pointer;
     overflow:hidden;
+    box-shadow:
+        0 0 12px rgba(0,255,136,.35),
+        inset 0 0 20px rgba(0,255,136,.05);
+    transition:.18s;
 }
 
 .enter::before{
     content:"";
-
     position:absolute;
-
     top:0;
     left:-100%;
-
-    width:70%;
+    width:100%;
     height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.45),
-            transparent
-        );
-
-    transform:skewX(-20deg);
-
-    animation:shine 3s infinite;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+    animation:shine 2.5s infinite;
 }
 
 @keyframes shine{
-    0%{
-        left:-100%;
-    }
-
-    45%,100%{
-        left:130%;
-    }
+    0%{left:-100%}
+    55%,100%{left:100%}
 }
 
 .enter:hover{
-    transform:translateY(-2px);
-
     box-shadow:
-        0 15px 45px rgba(34,255,136,.32);
+        0 0 20px #00ff88,
+        0 0 60px rgba(0,255,136,.45);
 }
 
 .enter:active{
-    transform:scale(.98);
+    transform:scale(.96);
+    background:#00ff88;
+    color:#001b0e;
+    box-shadow:
+        0 0 15px #00ff88,
+        0 0 70px #00ff88,
+        0 0 120px rgba(0,255,136,.7);
 }
 
-/* Clock */
-
-.clock{
-    margin-top:22px;
-
-    text-align:center;
-
-    color:#52635a;
-
-    font-size:12px;
-
-    letter-spacing:1px;
-
-    animation:fadeUp 1s ease .4s both;
-}
-
-.clock strong{
-    color:#82958a;
-    font-weight:600;
-}
-
-/* Footer */
-
+/* FOOTER */
 .footer{
-    position:absolute;
-
-    bottom:18px;
-
-    color:#35443c;
-
-    font-size:10px;
-
-    letter-spacing:1px;
+    margin-top:25px;
+    color:#4d8066;
+    font-size:9px;
+    letter-spacing:3px;
 }
 
-/* Animations */
+/* TOUCH RIPPLE */
+.ripple{
+    position:fixed;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    border:2px solid #00ff88;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%) scale(0);
+    animation:ripple .65s ease-out forwards;
+    box-shadow:
+        0 0 10px #00ff88,
+        0 0 30px #00ff88;
+}
 
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(22px);
-    }
-
+@keyframes ripple{
     to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes fadeDown{
-    from{
+        transform:translate(-50%,-50%) scale(8);
         opacity:0;
-        transform:translateY(-15px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
     }
 }
 
-/* Mobile */
+/* FLASH */
+.flash{
+    position:fixed;
+    inset:0;
+    background:#00ff88;
+    opacity:0;
+    pointer-events:none;
+    z-index:9998;
+}
 
-@media(max-width:500px){
+.flash.active{
+    animation:flash .35s ease-out;
+}
 
-    .main{
-        padding:18px;
+@keyframes flash{
+    0%{opacity:.12}
+    100%{opacity:0}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .card{
+        padding:40px 20px 30px;
+        border-radius:25px;
     }
 
     .logo{
-        width:90px;
-        height:90px;
-        border-radius:28px;
-    }
-
-    .logo span{
+        width:85px;
+        height:85px;
         font-size:36px;
     }
 
-    .title h1{
-        letter-spacing:-3px;
+    .subtitle{
+        letter-spacing:3px;
     }
 
-    .title p{
-        font-size:12px;
-    }
-
-    .card{
-        margin-top:25px;
-        padding:14px;
+    .features{
+        gap:7px;
     }
 
     .feature{
-        padding:12px 4px;
+        padding:14px 5px;
     }
 
-    .feature .icon{
-        font-size:20px;
+    .enter{
+        height:58px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
 <div class="background">
 
-    <div class="led one"></div>
-    <div class="led two"></div>
-    <div class="led three"></div>
-    <div class="led four"></div>
+    <div class="led led1"></div>
+    <div class="led led2"></div>
+    <div class="led led3"></div>
+    <div class="led led4"></div>
 
-    <div class="neon-line"></div>
-    <div class="neon-line"></div>
+    <div class="vline v1"></div>
+    <div class="vline v2"></div>
+    <div class="vline v3"></div>
+    <div class="vline v4"></div>
 
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
+    <div class="dot d1"></div>
+    <div class="dot d2"></div>
+    <div class="dot d3"></div>
+    <div class="dot d4"></div>
+    <div class="dot d5"></div>
 
 </div>
 
-
-<!-- MAIN -->
-<main class="main">
-
-    <div class="badge">
-        <span class="status"></span>
-        SYSTEM ONLINE
-    </div>
-
-
-    <div class="logo">
-        <span>S</span>
-    </div>
-
-
-    <div class="title">
-
-        <h1>
-            SABI<span>.</span>
-        </h1>
-
-        <p>
-            BAR LULISHTJA • MANAGEMENT SYSTEM
-        </p>
-
-    </div>
-
+<div class="main">
 
     <div class="card">
+
+        <div class="status">
+            <span class="statusDot"></span>
+            SYSTEM ONLINE
+        </div>
+
+        <div class="logo">S</div>
+
+        <h1>WELCOME</h1>
+
+        <div class="subtitle">
+            MY BAR • SABI SYSTEM
+        </div>
 
         <div class="features">
 
             <div class="feature">
                 <div class="icon">🪑</div>
-                <span>Tavolina</span>
+                <span>TAVOLINA</span>
             </div>
 
             <div class="feature">
                 <div class="icon">🍹</div>
-                <span>Menu</span>
+                <span>MENU</span>
             </div>
 
             <div class="feature">
                 <div class="icon">📊</div>
-                <span>Raporte</span>
+                <span>CONTROL</span>
             </div>
 
         </div>
 
-
-        <button class="enter" onclick="enterSystem()">
+        <button class="enter" onclick="enterSystem(event)">
             HYR NË SISTEM
         </button>
 
+        <div class="footer">
+            SABI SYSTEM © 2026
+        </div>
+
     </div>
 
+</div>
 
-    <div class="clock">
-        <strong id="time">00:00:00</strong>
-        &nbsp; • &nbsp;
-        <span id="date">--</span>
-    </div>
-
-
-    <div class="footer">
-        SABI SYSTEM © 2026
-    </div>
-
-</main>
-
+<div class="flash" id="flash"></div>
 
 <script>
 
-function updateClock(){
+/* BUTTON */
+function enterSystem(e){
 
-    const now = new Date();
+    createRipple(e.clientX,e.clientY);
 
-    const time =
-        now.toLocaleTimeString("sq-AL",{
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit"
-        });
+    document.getElementById("flash").classList.add("active");
 
-    const date =
-        now.toLocaleDateString("sq-AL",{
-            weekday:"long",
-            day:"2-digit",
-            month:"long"
-        });
-
-    document.getElementById("time").textContent = time;
-
-    document.getElementById("date").textContent =
-        date.charAt(0).toUpperCase() + date.slice(1);
+    setTimeout(()=>{
+        window.location.href="login.html";
+    },350);
 }
 
-updateClock();
+/* TOUCH / CLICK EFFECT */
+document.addEventListener("pointerdown",function(e){
 
-setInterval(updateClock,1000);
+    createRipple(e.clientX,e.clientY);
 
+});
 
-function enterSystem(){
+function createRipple(x,y){
 
-    const button =
-        document.querySelector(".enter");
+    const ripple=document.createElement("div");
 
-    button.textContent = "DUKE HAPUR SISTEMIN...";
+    ripple.className="ripple";
 
-    button.style.opacity = ".8";
+    ripple.style.left=x+"px";
+    ripple.style.top=y+"px";
 
-    setTimeout(function(){
+    document.body.appendChild(ripple);
 
-        window.location.href = "login.html";
-
-    },650);
+    setTimeout(()=>{
+        ripple.remove();
+    },700);
 }
+
+/* RANDOM LED FLASH */
+setInterval(()=>{
+
+    const lines=document.querySelectorAll(".led");
+
+    const random=lines[Math.floor(Math.random()*lines.length)];
+
+    random.style.opacity="1";
+
+    setTimeout(()=>{
+        random.style.opacity=".8";
+    },500);
+
+},1500);
 
 </script>
 
