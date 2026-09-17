@@ -2,159 +2,187 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Raporte - Bar Lulishtja</title>
+<title>MY BAR — Raporte</title>
 
 <style>
-* {
-    box-sizing: border-box;
+:root{
+    --bg:#050806;
+    --panel:#0d1510;
+    --panel2:#111b14;
+    --green:#20e879;
+    --border:rgba(255,255,255,.08);
+    --text:#f4f7f5;
+    --muted:#87938c;
+    --red:#ff5368;
+    --blue:#45a9ff;
 }
 
-body {
-    margin: 0;
-    background: #0f1115;
-    color: white;
-    font-family: Arial, sans-serif;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    min-height:100vh;
+    padding:22px;
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    background:
+        radial-gradient(circle at top,rgba(32,232,121,.07),transparent 35%),
+        var(--bg);
 }
 
-header {
-    background: #171a21;
-    border-bottom: 1px solid #292d36;
-    padding: 18px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+.container{
+    width:min(1200px,100%);
+    margin:auto;
 }
 
-.header-inner {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
 }
 
-h1 {
-    margin: 0;
-    font-size: 22px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-button {
-    cursor: pointer;
+.icon{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    color:var(--green);
+    font-weight:900;
+    background:#0c1910;
+    border:1px solid rgba(32,232,121,.25);
 }
 
-.back {
-    background: #2a2f3a;
-    color: white;
-    border: 0;
-    padding: 10px 15px;
-    border-radius: 10px;
+.logo h1{
+    font-size:22px;
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
+.logo span{
+    color:var(--green);
 }
 
-.periods {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+.back{
+    padding:10px 14px;
+    color:var(--text);
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    text-decoration:none;
 }
 
-.period {
-    background: #20242d;
-    color: white;
-    border: 1px solid #303642;
-    border-radius: 10px;
-    padding: 10px 15px;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:18px;
 }
 
-.period.active {
-    background: #fff;
-    color: #111;
+.card{
+    padding:18px;
+    border-radius:15px;
+    background:var(--panel);
+    border:1px solid var(--border);
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
+.card small{
+    color:var(--muted);
 }
 
-.card {
-    background: #171a21;
-    border: 1px solid #292d36;
-    border-radius: 15px;
-    padding: 18px;
+.card strong{
+    display:block;
+    margin-top:8px;
+    font-size:25px;
 }
 
-.card small {
-    color: #9299a8;
+.green{color:var(--green)}
+.blue{color:var(--blue)}
+
+.toolbar{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
 }
 
-.card strong {
-    display: block;
-    font-size: 25px;
-    margin-top: 8px;
+input{
+    width:100%;
+    min-height:44px;
+    padding:10px 13px;
+    color:var(--text);
+    background:#09100c;
+    border:1px solid var(--border);
+    border-radius:10px;
+    outline:none;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+.table-wrap{
+    overflow:auto;
+    border-radius:15px;
+    border:1px solid var(--border);
 }
 
-.box {
-    background: #171a21;
-    border: 1px solid #292d36;
-    border-radius: 15px;
-    padding: 18px;
+table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+    background:var(--panel);
 }
 
-.box h2 {
-    margin-top: 0;
-    font-size: 18px;
+th,td{
+    padding:13px 14px;
+    text-align:left;
+    border-bottom:1px solid var(--border);
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #292d36;
+th{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
 }
 
-.row:last-child {
-    border-bottom: 0;
+td{
+    color:var(--text);
+    font-size:13px;
 }
 
-.name {
-    font-weight: bold;
+.amount{
+    color:var(--green);
+    font-weight:900;
 }
 
-.muted {
-    color: #9299a8;
-    font-size: 13px;
+.payment{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:7px;
+    background:rgba(255,255,255,.05);
+    color:var(--muted);
+    font-size:10px;
+    font-weight:800;
 }
 
-@media(max-width:800px) {
+.empty{
+    padding:45px;
+    text-align:center;
+    color:var(--muted);
+}
 
-    .stats {
-        grid-template-columns: 1fr 1fr;
+@media(max-width:700px){
+    body{padding:13px}
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
     }
 
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media(max-width:500px) {
-
-    .stats {
-        grid-template-columns: 1fr;
+    header{
+        align-items:flex-start;
     }
 }
 </style>
@@ -162,386 +190,242 @@ button {
 
 <body>
 
-<header>
-    <div class="header-inner">
-        <h1>📊 Raporte</h1>
-
-        <button
-            class="back"
-            onclick="location.href='index.html'">
-            ← Kthehu
-        </button>
-    </div>
-</header>
-
 <div class="container">
 
-    <div class="periods">
-
-        <button
-            class="period active"
-            onclick="setPeriod('today', this)">
-            Sot
-        </button>
-
-        <button
-            class="period"
-            onclick="setPeriod('week', this)">
-            Kjo javë
-        </button>
-
-        <button
-            class="period"
-            onclick="setPeriod('month', this)">
-            Ky muaj
-        </button>
-
-        <button
-            class="period"
-            onclick="setPeriod('all', this)">
-            Gjithsej
-        </button>
-
+<header>
+    <div class="logo">
+        <div class="icon">S</div>
+        <h1>MY <span>BAR</span></h1>
     </div>
 
-    <div class="stats">
+    <a class="back" href="index.html">← Kthehu</a>
+</header>
 
-        <div class="card">
-            <small>Shitje</small>
-            <strong id="sales">0 L</strong>
-        </div>
+<div class="stats">
 
-        <div class="card">
-            <small>Cash</small>
-            <strong id="cash">0 L</strong>
-        </div>
-
-        <div class="card">
-            <small>Kartë</small>
-            <strong id="card">0 L</strong>
-        </div>
-
-        <div class="card">
-            <small>Fatura</small>
-            <strong id="invoices">0</strong>
-        </div>
-
+    <div class="card">
+        <small>Xhiro totale</small>
+        <strong class="green" id="totalSales">0 L</strong>
     </div>
 
-    <div class="grid">
+    <div class="card">
+        <small>Fatura</small>
+        <strong id="totalInvoices">0</strong>
+    </div>
 
-        <div class="box">
+    <div class="card">
+        <small>Cash</small>
+        <strong class="green" id="cashTotal">0 L</strong>
+    </div>
 
-            <h2>🏆 Produktet më të shitura</h2>
-
-            <div id="products"></div>
-
-        </div>
-
-        <div class="box">
-
-            <h2>👨‍💼 Shitjet sipas kamarierit</h2>
-
-            <div id="waiters"></div>
-
-        </div>
-
+    <div class="card">
+        <small>Kartë</small>
+        <strong class="blue" id="cardTotal">0 L</strong>
     </div>
 
 </div>
 
+<div class="toolbar">
+    <input
+        id="search"
+        type="search"
+        placeholder="Kërko faturë, tavolinë ose pagesë..."
+    >
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+    <th>Fatura</th>
+    <th>Data</th>
+    <th>Tavolina</th>
+    <th>Pagesa</th>
+    <th>Total</th>
+</tr>
+</thead>
+
+<tbody id="reports"></tbody>
+</table>
+</div>
+
+</div>
+
 <script>
+const INVOICES_KEY="barInvoicesV4";
 
-const INVOICES_KEY = "barInvoicesV3";
+function getInvoices(){
+    try{
+        const data=
+            JSON.parse(localStorage.getItem(INVOICES_KEY));
 
-let currentPeriod = "today";
-
-function getInvoices() {
-
-    try {
-        return JSON.parse(
-            localStorage.getItem(INVOICES_KEY)
-        ) || [];
-    } catch {
+        return Array.isArray(data) ? data : [];
+    }catch(e){
         return [];
     }
 }
 
-function getDate(invoice) {
+let invoices=getInvoices();
 
-    return new Date(
-        invoice.date ||
-        invoice.createdAt ||
-        invoice.timestamp ||
-        Date.now()
-    );
-}
-
-function isInPeriod(date) {
-
-    const now = new Date();
-
-    if (currentPeriod === "all") {
-        return true;
-    }
-
-    if (currentPeriod === "today") {
-
-        return (
-            date.getDate() === now.getDate() &&
-            date.getMonth() === now.getMonth() &&
-            date.getFullYear() === now.getFullYear()
-        );
-    }
-
-    if (currentPeriod === "week") {
-
-        const start = new Date(now);
-
-        const day = start.getDay() || 7;
-
-        start.setDate(start.getDate() - day + 1);
-
-        start.setHours(0,0,0,0);
-
-        return date >= start;
-    }
-
-    if (currentPeriod === "month") {
-
-        return (
-            date.getMonth() === now.getMonth() &&
-            date.getFullYear() === now.getFullYear()
-        );
-    }
-
-    return true;
-}
-
-function setPeriod(period, button) {
-
-    currentPeriod = period;
-
-    document.querySelectorAll(".period")
-        .forEach(x => x.classList.remove("active"));
-
-    button.classList.add("active");
-
-    render();
-}
-
-function getAmount(invoice) {
-
+function getTotal(invoice){
     return Number(
-        invoice.total ||
-        invoice.amount ||
-        invoice.grandTotal ||
+        invoice.total ??
+        invoice.amount ??
+        invoice.grandTotal ??
         0
     );
 }
 
-function getPayment(invoice) {
-
+function getPayment(invoice){
     return String(
-        invoice.payment ||
-        invoice.paymentMethod ||
-        invoice.method ||
-        "cash"
-    ).toLowerCase();
+        invoice.paymentMethod ??
+        invoice.payment ??
+        invoice.method ??
+        "Cash"
+    );
 }
 
-function render() {
+function getDate(invoice){
+    return invoice.createdAt ??
+           invoice.date ??
+           invoice.time ??
+           "";
+}
 
-    const invoices = getInvoices()
-        .filter(i => isInPeriod(getDate(i)));
+function getTable(invoice){
+    return invoice.tableName ??
+           invoice.table ??
+           invoice.tableId ??
+           "-";
+}
 
-    let sales = 0;
-    let cash = 0;
-    let card = 0;
+function formatMoney(value){
+    return Number(value).toLocaleString("sq-AL")+" L";
+}
 
-    const products = {};
-    const waiters = {};
+function formatDate(value){
+    if(!value) return "-";
 
-    invoices.forEach(invoice => {
+    const date=new Date(value);
 
-        const amount = getAmount(invoice);
+    if(Number.isNaN(date.getTime())){
+        return String(value);
+    }
 
-        sales += amount;
+    return date.toLocaleString("sq-AL",{
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+    });
+}
 
-        if (
-            getPayment(invoice).includes("card") ||
-            getPayment(invoice).includes("kart")
-        ) {
-            card += amount;
-        } else {
-            cash += amount;
-        }
+function render(){
+    const search=
+        document.getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
 
-        const waiter =
-            invoice.waiterName ||
-            invoice.userName ||
-            invoice.user ||
-            invoice.waiter ||
-            "Pa emër";
+    const filtered=invoices.filter(invoice=>{
+        const text=[
+            invoice.id,
+            getTable(invoice),
+            getPayment(invoice),
+            getDate(invoice)
+        ].join(" ").toLowerCase();
 
-        if (!waiters[waiter]) {
-            waiters[waiter] = {
-                amount: 0,
-                invoices: 0
-            };
-        }
-
-        waiters[waiter].amount += amount;
-        waiters[waiter].invoices++;
-
-        const items =
-            invoice.items ||
-            invoice.orderItems ||
-            invoice.products ||
-            [];
-
-        items.forEach(item => {
-
-            const name =
-                item.name ||
-                item.productName ||
-                "Produkt";
-
-            const quantity =
-                Number(
-                    item.quantity ||
-                    item.qty ||
-                    1
-                );
-
-            const itemTotal =
-                Number(
-                    item.total ||
-                    item.subtotal ||
-                    ((item.price || 0) * quantity)
-                );
-
-            if (!products[name]) {
-                products[name] = {
-                    quantity: 0,
-                    amount: 0
-                };
-            }
-
-            products[name].quantity += quantity;
-            products[name].amount += itemTotal;
-
-        });
-
+        return text.includes(search);
     });
 
-    document.getElementById("sales")
-        .textContent = money(sales);
+    const tbody=document.getElementById("reports");
 
-    document.getElementById("cash")
-        .textContent = money(cash);
-
-    document.getElementById("card")
-        .textContent = money(card);
-
-    document.getElementById("invoices")
-        .textContent = invoices.length;
-
-    renderProducts(products);
-    renderWaiters(waiters);
-}
-
-function renderProducts(products) {
-
-    const list = Object.entries(products)
-        .sort((a,b) =>
-            b[1].quantity - a[1].quantity
-        );
-
-    if (!list.length) {
-
-        document.getElementById("products").innerHTML =
-            `<div class="muted">
-                Nuk ka shitje për këtë periudhë.
-            </div>`;
-
+    if(!filtered.length){
+        tbody.innerHTML=`
+            <tr>
+                <td colspan="5">
+                    <div class="empty">
+                        Nuk ka të dhëna.
+                    </div>
+                </td>
+            </tr>
+        `;
         return;
     }
 
-    document.getElementById("products").innerHTML =
-        list.slice(0,10).map(([name,data]) => `
+    tbody.innerHTML=filtered.map((invoice,index)=>{
 
-            <div class="row">
+        const payment=getPayment(invoice);
 
-                <div>
-                    <div class="name">
-                        ${escapeHtml(name)}
-                    </div>
+        return `
+        <tr>
+            <td>#${escapeHtml(
+                invoice.id || String(index+1)
+            )}</td>
 
-                    <div class="muted">
-                        ${data.quantity} copë
-                    </div>
-                </div>
+            <td>${escapeHtml(
+                formatDate(getDate(invoice))
+            )}</td>
 
-                <strong>
-                    ${money(data.amount)}
-                </strong>
+            <td>${escapeHtml(
+                getTable(invoice)
+            )}</td>
 
-            </div>
+            <td>
+                <span class="payment">
+                    ${escapeHtml(payment)}
+                </span>
+            </td>
 
-        `).join("");
+            <td class="amount">
+                ${formatMoney(getTotal(invoice))}
+            </td>
+        </tr>
+        `;
+    }).join("");
 }
 
-function renderWaiters(waiters) {
+function updateStats(){
 
-    const list = Object.entries(waiters)
-        .sort((a,b) =>
-            b[1].amount - a[1].amount
-        );
+    let total=0;
+    let cash=0;
+    let card=0;
 
-    if (!list.length) {
+    invoices.forEach(invoice=>{
 
-        document.getElementById("waiters").innerHTML =
-            `<div class="muted">
-                Nuk ka të dhëna.
-            </div>`;
+        const amount=getTotal(invoice);
 
-        return;
-    }
+        total+=amount;
 
-    document.getElementById("waiters").innerHTML =
-        list.map(([name,data]) => `
+        const payment=
+            getPayment(invoice).toLowerCase();
 
-            <div class="row">
+        if(
+            payment.includes("card") ||
+            payment.includes("kart")
+        ){
+            card+=amount;
+        }else{
+            cash+=amount;
+        }
+    });
 
-                <div>
-                    <div class="name">
-                        ${escapeHtml(name)}
-                    </div>
+    document.getElementById("totalSales")
+        .textContent=formatMoney(total);
 
-                    <div class="muted">
-                        ${data.invoices} fatura
-                    </div>
-                </div>
+    document.getElementById("totalInvoices")
+        .textContent=invoices.length;
 
-                <strong>
-                    ${money(data.amount)}
-                </strong>
+    document.getElementById("cashTotal")
+        .textContent=formatMoney(cash);
 
-            </div>
-
-        `).join("");
+    document.getElementById("cardTotal")
+        .textContent=formatMoney(card);
 }
 
-function money(value) {
-
-    return Number(value || 0)
-        .toLocaleString("sq-AL") + " L";
-}
-
-function escapeHtml(text) {
-
-    return String(text)
+function escapeHtml(value){
+    return String(value ?? "")
         .replaceAll("&","&amp;")
         .replaceAll("<","&lt;")
         .replaceAll(">","&gt;")
@@ -549,8 +433,11 @@ function escapeHtml(text) {
         .replaceAll("'","&#039;");
 }
 
-render();
+document.getElementById("search")
+    .addEventListener("input",render);
 
+updateStats();
+render();
 </script>
 
 </body>
