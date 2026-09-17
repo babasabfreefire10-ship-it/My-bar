@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050807">
+
+<title>SABI | Bar Lulishtja</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --green:#22ff88;
+    --green2:#00c96b;
+    --dark:#030605;
+    --glass:rgba(10,20,15,.68);
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    background:#020403;
+    color:white;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0,255,120,.08),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(0,255,120,.08),
+            transparent 25%
+        ),
+        #020403;
+}
+
+/* LED lines */
+
+.led{
+    position:absolute;
+    height:2px;
+    width:70vw;
+    max-width:900px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(34,255,136,.15),
+        var(--green),
+        rgba(34,255,136,.15),
+        transparent
+    );
+
+    box-shadow:
+        0 0 5px var(--green),
+        0 0 18px var(--green),
+        0 0 45px rgba(34,255,136,.5);
+
+    opacity:.55;
+    animation:ledMove 5s linear infinite;
+}
+
+.led.one{
+    top:12%;
+    left:-15%;
+    transform:rotate(12deg);
+}
+
+.led.two{
+    top:30%;
+    right:-15%;
+    transform:rotate(-10deg);
+    animation-delay:1.4s;
+}
+
+.led.three{
+    bottom:24%;
+    left:-20%;
+    transform:rotate(-8deg);
+    animation-delay:2.3s;
+}
+
+.led.four{
+    bottom:9%;
+    right:-15%;
+    transform:rotate(11deg);
+    animation-delay:3.2s;
+}
+
+@keyframes ledMove{
+    0%{
+        transform:translateX(-25%) rotate(10deg);
+        opacity:.15;
+    }
+
+    50%{
+        opacity:.9;
+    }
+
+    100%{
+        transform:translateX(45%) rotate(10deg);
+        opacity:.15;
+    }
+}
+
+/* Vertical neon */
+
+.neon-line{
+    position:absolute;
+    top:-10%;
+    width:1px;
+    height:120%;
+    background:var(--green);
+
+    box-shadow:
+        0 0 8px var(--green),
+        0 0 25px var(--green);
+
+    opacity:.12;
+    animation:pulse 3s ease-in-out infinite;
+}
+
+.neon-line:nth-child(5){
+    left:12%;
+}
+
+.neon-line:nth-child(6){
+    left:88%;
+    animation-delay:1s;
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:.05;
+    }
+
+    50%{
+        opacity:.25;
+    }
+}
+
+/* Floating lights */
+
+.light{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:
+        0 0 10px var(--green),
+        0 0 25px var(--green);
+
+    animation:float 7s ease-in-out infinite;
+}
+
+.light:nth-child(7){
+    left:20%;
+    top:25%;
+}
+
+.light:nth-child(8){
+    left:75%;
+    top:18%;
+    animation-delay:2s;
+}
+
+.light:nth-child(9){
+    left:15%;
+    bottom:20%;
+    animation-delay:3s;
+}
+
+.light:nth-child(10){
+    right:15%;
+    bottom:30%;
+    animation-delay:1s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+        opacity:.25;
+    }
+
+    50%{
+        transform:translateY(-35px);
+        opacity:1;
+    }
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    position:relative;
+    z-index:10;
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:25px;
+}
+
+/* Top badge */
+
+.badge{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 14px;
+
+    border:1px solid rgba(34,255,136,.25);
+    border-radius:999px;
+
+    background:rgba(0,20,10,.45);
+    backdrop-filter:blur(10px);
+
+    color:#8dafa0;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    margin-bottom:24px;
+
+    animation:fadeDown .8s ease;
+}
+
+.status{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+
+    box-shadow:
+        0 0 8px var(--green),
+        0 0 18px var(--green);
+
+    animation:statusBlink 1.8s infinite;
+}
+
+@keyframes statusBlink{
+    50%{
+        opacity:.35;
+    }
+}
+
+/* Logo */
+
+.logo{
+    position:relative;
+
+    width:105px;
+    height:105px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34,255,136,.16),
+            rgba(0,0,0,.65)
+        );
+
+    border:1px solid rgba(34,255,136,.45);
+
+    box-shadow:
+        0 0 20px rgba(34,255,136,.18),
+        0 0 70px rgba(34,255,136,.10),
+        inset 0 0 30px rgba(34,255,136,.06);
+
+    margin-bottom:25px;
+
+    animation:logoGlow 3s ease-in-out infinite;
+}
+
+.logo::before{
+    content:"";
+
+    position:absolute;
+    inset:-7px;
+
+    border-radius:38px;
+
+    border:1px solid rgba(34,255,136,.18);
+
+    animation:spin 8s linear infinite;
+}
+
+.logo span{
+    font-size:42px;
+    font-weight:900;
+
+    color:var(--green);
+
+    text-shadow:
+        0 0 10px var(--green),
+        0 0 25px var(--green),
+        0 0 50px rgba(34,255,136,.5);
+
+    letter-spacing:-3px;
+}
+
+@keyframes logoGlow{
+    50%{
+        box-shadow:
+            0 0 35px rgba(34,255,136,.28),
+            0 0 100px rgba(34,255,136,.13),
+            inset 0 0 35px rgba(34,255,136,.09);
+    }
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* Title */
+
+.title{
+    text-align:center;
+    animation:fadeUp 1s ease .1s both;
+}
+
+.title h1{
+    font-size:clamp(42px,11vw,78px);
+    line-height:.95;
+
+    font-weight:900;
+
+    letter-spacing:-4px;
+
+    color:white;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.1);
+}
+
+.title h1 span{
+    color:var(--green);
+
+    text-shadow:
+        0 0 8px var(--green),
+        0 0 22px var(--green),
+        0 0 50px rgba(34,255,136,.45);
+}
+
+.title p{
+    margin-top:14px;
+
+    color:#91a39a;
+
+    font-size:14px;
+    letter-spacing:2px;
+}
+
+/* Glass card */
+
+.card{
+    margin-top:32px;
+
+    width:min(430px,100%);
+
+    padding:18px;
+
+    border-radius:23px;
+
+    background:var(--glass);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    animation:fadeUp 1s ease .25s both;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.feature{
+    padding:14px 6px;
+
+    text-align:center;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:.25s;
+}
+
+.feature:hover{
+    border-color:rgba(34,255,136,.3);
+
+    background:rgba(34,255,136,.06);
+
+    transform:translateY(-2px);
+}
+
+.feature .icon{
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.feature span{
+    display:block;
+
+    color:#84938b;
+
+    font-size:10px;
+}
+
+/* Button */
+
+.enter{
+    width:100%;
+    height:56px;
+
+    margin-top:13px;
+
+    border:0;
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #35ff96,
+            #08b963
+        );
+
+    color:#021008;
+
+    font-size:15px;
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 30px rgba(34,255,136,.18);
+
+    transition:.25s;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.enter::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:70%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:shine 3s infinite;
+}
+
+@keyframes shine{
+    0%{
+        left:-100%;
+    }
+
+    45%,100%{
+        left:130%;
+    }
+}
+
+.enter:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 15px 45px rgba(34,255,136,.32);
+}
+
+.enter:active{
+    transform:scale(.98);
+}
+
+/* Clock */
+
+.clock{
+    margin-top:22px;
+
+    text-align:center;
+
+    color:#52635a;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    animation:fadeUp 1s ease .4s both;
+}
+
+.clock strong{
+    color:#82958a;
+    font-weight:600;
+}
+
+/* Footer */
+
+.footer{
+    position:absolute;
+
+    bottom:18px;
+
+    color:#35443c;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+}
+
+/* Animations */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(22px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:500px){
+
+    .main{
+        padding:18px;
+    }
+
+    .logo{
+        width:90px;
+        height:90px;
+        border-radius:28px;
+    }
+
+    .logo span{
+        font-size:36px;
+    }
+
+    .title h1{
+        letter-spacing:-3px;
+    }
+
+    .title p{
+        font-size:12px;
+    }
+
+    .card{
+        margin-top:25px;
+        padding:14px;
+    }
+
+    .feature{
+        padding:12px 4px;
+    }
+
+    .feature .icon{
+        font-size:20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background">
+
+    <div class="led one"></div>
+    <div class="led two"></div>
+    <div class="led three"></div>
+    <div class="led four"></div>
+
+    <div class="neon-line"></div>
+    <div class="neon-line"></div>
+
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+
+</div>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <div class="badge">
+        <span class="status"></span>
+        SYSTEM ONLINE
+    </div>
+
+
+    <div class="logo">
+        <span>S</span>
+    </div>
+
+
+    <div class="title">
+
+        <h1>
+            SABI<span>.</span>
+        </h1>
+
+        <p>
+            BAR LULISHTJA • MANAGEMENT SYSTEM
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="icon">🪑</div>
+                <span>Tavolina</span>
+            </div>
+
+            <div class="feature">
+                <div class="icon">🍹</div>
+                <span>Menu</span>
+            </div>
+
+            <div class="feature">
+                <div class="icon">📊</div>
+                <span>Raporte</span>
+            </div>
+
+        </div>
+
+
+        <button class="enter" onclick="enterSystem()">
+            HYR NË SISTEM
+        </button>
+
+    </div>
+
+
+    <div class="clock">
+        <strong id="time">00:00:00</strong>
+        &nbsp; • &nbsp;
+        <span id="date">--</span>
+    </div>
+
+
+    <div class="footer">
+        SABI SYSTEM © 2026
+    </div>
+
+</main>
+
+
+<script>
+
+function updateClock(){
+
+    const now = new Date();
+
+    const time =
+        now.toLocaleTimeString("sq-AL",{
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit"
+        });
+
+    const date =
+        now.toLocaleDateString("sq-AL",{
+            weekday:"long",
+            day:"2-digit",
+            month:"long"
+        });
+
+    document.getElementById("time").textContent = time;
+
+    document.getElementById("date").textContent =
+        date.charAt(0).toUpperCase() + date.slice(1);
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+function enterSystem(){
+
+    const button =
+        document.querySelector(".enter");
+
+    button.textContent = "DUKE HAPUR SISTEMIN...";
+
+    button.style.opacity = ".8";
+
+    setTimeout(function(){
+
+        window.location.href = "login.html";
+
+    },650);
+}
+
+</script>
+
+</body>
+</html>
