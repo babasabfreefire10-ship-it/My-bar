@@ -2,333 +2,215 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07110c">
-<title>MY BAR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MY BAR — POS</title>
 
 <style>
-:root{
-  --bg:#060b08;
-  --panel:#0b1510;
-  --panel2:#101c15;
-  --line:#1d3025;
-  --green:#19d878;
-  --green2:#0fa85b;
-  --text:#f4f8f5;
-  --muted:#8c9b92;
-  --danger:#ff5555;
-  --gold:#d8b36a;
-  --radius:18px;
-}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:
-    radial-gradient(circle at 20% 0%,rgba(25,216,120,.09),transparent 28%),
-    radial-gradient(circle at 100% 100%,rgba(25,216,120,.05),transparent 30%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  min-height:100vh;
-}
+html,body{margin:0;width:100%;height:100%;font-family:Arial,Helvetica,sans-serif;background:#070b09;color:#fff}
 button,input{font:inherit}
 button{cursor:pointer}
-.app{display:flex;min-height:100vh}
 
+:root{
+ --bg:#070b09;
+ --panel:#0d1511;
+ --panel2:#111c16;
+ --line:#203028;
+ --green:#19d878;
+ --green2:#0eaa5d;
+ --text:#f4f7f5;
+ --muted:#91a098;
+ --red:#ff5c5c;
+ --yellow:#ffc857;
+}
+
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
 .sidebar{
-  width:245px;
-  min-height:100vh;
-  background:rgba(7,15,11,.96);
-  border-right:1px solid var(--line);
-  padding:22px 15px;
-  position:fixed;
-  left:0;top:0;bottom:0;
-  z-index:20;
+ width:235px;background:#08100c;border-right:1px solid var(--line);
+ padding:22px 14px;display:flex;flex-direction:column
 }
-.logo{
-  display:flex;align-items:center;gap:12px;
-  padding:8px 10px 25px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:18px;
-}
-.logoMark{
-  width:42px;height:42px;border-radius:13px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--green),#087f45);
-  color:#031108;font-weight:1000;font-size:20px;
-  box-shadow:0 8px 25px rgba(25,216,120,.2);
-}
-.logo strong{font-size:20px;letter-spacing:1px}
-.logo small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-
-.nav{display:grid;gap:7px}
+.logo{font-size:26px;font-weight:900;letter-spacing:2px;padding:8px 12px 25px}
+.logo span{color:var(--green)}
+.nav{display:flex;flex-direction:column;gap:6px}
 .nav button{
-  width:100%;border:0;background:transparent;color:#9aa79f;
-  text-align:left;padding:13px 14px;border-radius:12px;
-  display:flex;align-items:center;gap:12px;font-weight:700;
+ border:0;background:transparent;color:#aab8b1;text-align:left;
+ padding:13px 14px;border-radius:10px;font-weight:700
 }
-.nav button:hover,.nav button.active{
-  color:#fff;background:rgba(25,216,120,.11);
-}
+.nav button:hover,.nav button.active{background:#12221a;color:#fff}
 .nav button.active{box-shadow:inset 3px 0 var(--green)}
-.icon{width:22px;text-align:center;font-size:17px}
+.bottom{margin-top:auto}
+.status{font-size:12px;color:var(--muted);padding:15px}
+.dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-right:7px}
 
-.sidebarBottom{
-  position:absolute;left:15px;right:15px;bottom:18px;
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.top{
+ height:72px;border-bottom:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;padding:0 25px;
+ background:#09110d
 }
-.userBox{
-  border:1px solid var(--line);background:var(--panel);
-  border-radius:14px;padding:12px;
-}
-.userBox small{color:var(--muted)}
-.userRow{display:flex;justify-content:space-between;align-items:center}
-.logout{
-  margin-top:10px;width:100%;padding:9px;border-radius:10px;
-  border:1px solid #392020;background:#1a0e0e;color:#ff8b8b;
-}
-
-.main{margin-left:245px;width:calc(100% - 245px);min-width:0}
-.topbar{
-  height:75px;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;background:rgba(6,11,8,.76);
-  backdrop-filter:blur(15px);
-  position:sticky;top:0;z-index:10;
-}
-.topTitle h1{font-size:20px;margin:0}
-.topTitle span{color:var(--muted);font-size:12px}
+.title{font-size:21px;font-weight:800}
 .clock{color:var(--green);font-weight:800}
+.content{padding:25px;overflow:auto;flex:1}
 
-.content{padding:28px;max-width:1500px;margin:auto}
+/* SECTIONS */
 .section{display:none}
 .section.active{display:block}
 
-.hero{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:22px;gap:20px;
-}
-.hero h2{font-size:28px;margin:0 0 6px}
-.hero p{color:var(--muted);margin:0}
-.primary{
-  border:0;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#031108;padding:12px 18px;font-weight:900;
-  box-shadow:0 8px 24px rgba(25,216,120,.16);
-}
-.secondary{
-  border:1px solid var(--line);background:var(--panel);
-  color:#fff;padding:11px 16px;border-radius:12px;font-weight:800;
-}
-.danger{
-  border:1px solid #492323;background:#1b0d0d;color:#ff8f8f;
-  padding:10px 14px;border-radius:10px;font-weight:800;
-}
-
-.stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:15px;
-  margin-bottom:22px;
-}
+/* DASHBOARD */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .stat{
-  background:linear-gradient(145deg,var(--panel),#0a120d);
-  border:1px solid var(--line);border-radius:var(--radius);
-  padding:19px;
+ background:var(--panel);border:1px solid var(--line);border-radius:14px;
+ padding:20px
 }
-.statTop{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
-.statValue{font-size:28px;font-weight:950;margin-top:12px}
-.statGreen{color:var(--green)}
+.stat small{color:var(--muted)}
+.stat strong{display:block;font-size:28px;margin-top:10px}
+.green{color:var(--green)}
 
-.card{
-  background:rgba(11,21,16,.9);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:20px;
-}
-.cardTitle{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:16px;
-}
-.cardTitle h3{margin:0;font-size:16px}
-
-.tables{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-.tableCard{
-  border:1px solid var(--line);
-  background:var(--panel);
-  border-radius:16px;
-  padding:17px;
-  min-height:145px;
-  transition:.2s;
-}
-.tableCard:hover{transform:translateY(-2px);border-color:#28553c}
-.tableHead{display:flex;justify-content:space-between;align-items:center}
-.tableNumber{font-size:20px;font-weight:950}
-.status{
-  font-size:10px;padding:5px 8px;border-radius:20px;font-weight:900;
-}
-.free{background:#10311f;color:#42ef94}
-.busy{background:#3b2a0e;color:#ffd36c}
-.tableInfo{color:var(--muted);font-size:12px;margin:15px 0}
-.tableActions{display:flex;gap:7px}
-.tableActions button{flex:1;padding:9px 6px;border-radius:9px;border:1px solid var(--line);background:#101b15;color:#fff;font-size:11px;font-weight:800}
-.tableActions button:first-child{background:rgba(25,216,120,.1);color:var(--green)}
-
-.menuTools{
-  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;
+.toolbar{
+ display:flex;gap:10px;align-items:center;margin:22px 0 15px;flex-wrap:wrap
 }
 .search{
-  flex:1;min-width:220px;
-  background:var(--panel);border:1px solid var(--line);
-  color:#fff;padding:12px 14px;border-radius:12px;outline:none;
+ background:var(--panel);border:1px solid var(--line);color:#fff;
+ padding:12px 14px;border-radius:9px;outline:none;min-width:260px
 }
-.search:focus{border-color:var(--green)}
-.categories{display:flex;gap:7px;flex-wrap:wrap}
-.cat{
-  border:1px solid var(--line);background:var(--panel);
-  color:#aab5ae;padding:10px 13px;border-radius:10px;font-weight:700;
+.btn{
+ border:1px solid var(--line);background:#111c16;color:#fff;
+ padding:11px 15px;border-radius:9px;font-weight:800
 }
-.cat.active{background:var(--green);color:#041009;border-color:var(--green)}
+.btn:hover{border-color:#35634b}
+.btn.greenbtn{background:var(--green);color:#041008;border-color:var(--green)}
+.btn.redbtn{background:#331515;color:#ff9b9b;border-color:#542020}
 
-.products{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:15px;
+/* TABLES */
+.tables{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.table{
+ background:var(--panel);border:1px solid var(--line);border-radius:14px;
+ padding:18px;min-height:125px;transition:.15s
 }
+.table:hover{border-color:#39614c}
+.table.busy{border-color:#b68b35;background:#17140d}
+.table-number{font-size:19px;font-weight:900}
+.table-status{font-size:12px;color:var(--muted);margin-top:8px}
+.table-total{font-size:22px;font-weight:900;margin-top:13px}
+
+/* MENU */
+.categories{display:flex;gap:8px;flex-wrap:wrap}
+.cat.active{background:var(--green);color:#031008}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .product{
-  background:var(--panel);border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;
+ background:var(--panel);border:1px solid var(--line);border-radius:14px;
+ padding:17px
 }
-.productImg{
-  height:130px;background:
-    linear-gradient(135deg,rgba(25,216,120,.16),rgba(0,0,0,.5)),
-    radial-gradient(circle at 50% 30%,#214d36,#0b120e);
-  display:grid;place-items:center;font-size:46px;
-}
-.productBody{padding:15px}
-.productName{font-weight:900}
-.productCat{color:var(--muted);font-size:11px;margin:5px 0 12px}
-.productBottom{display:flex;justify-content:space-between;align-items:center}
-.price{font-weight:950;color:var(--green)}
+.product-name{font-weight:900;font-size:17px}
+.product-cat{font-size:12px;color:var(--muted);margin-top:5px}
+.product-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.price{color:var(--green);font-weight:900}
 .add{
-  border:0;background:var(--green);color:#031108;
-  width:35px;height:35px;border-radius:10px;font-size:20px;font-weight:900;
+ border:0;background:var(--green);color:#041008;
+ width:38px;height:38px;border-radius:9px;font-weight:900;font-size:20px
 }
 
-.orderLayout{
-  display:grid;grid-template-columns:1fr 360px;gap:18px;
+/* ORDER */
+.order-layout{display:grid;grid-template-columns:1.6fr .8fr;gap:18px}
+.box{
+ background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px
 }
-.orderItems{display:grid;gap:10px}
-.orderItem{
-  display:flex;justify-content:space-between;align-items:center;
-  border:1px solid var(--line);background:var(--panel);
-  border-radius:13px;padding:13px;
+.box h2{margin-top:0}
+.order-row{
+ display:grid;grid-template-columns:1fr 80px 100px 40px;
+ gap:10px;align-items:center;border-bottom:1px solid var(--line);
+ padding:13px 0
 }
-.orderName{font-weight:800}
-.orderPrice{color:var(--green);font-weight:900}
-.qty{display:flex;align-items:center;gap:8px}
-.qty button{
-  width:28px;height:28px;border-radius:8px;
-  border:1px solid var(--line);background:#101b15;color:#fff;
+.qty{
+ background:#17231c;border:1px solid var(--line);color:#fff;
+ border-radius:6px;padding:6px;text-align:center
 }
-.totalBox{border-top:1px solid var(--line);margin-top:18px;padding-top:18px}
-.totalLine{display:flex;justify-content:space-between;margin:9px 0;color:#aeb8b1}
-.totalFinal{font-size:25px;font-weight:950;color:#fff}
-.totalFinal span:last-child{color:var(--green)}
-.payButtons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
-.payButtons button{padding:13px;border-radius:11px;font-weight:900}
-.cash{background:var(--green);border:0;color:#031108}
-.cardPay{background:#111d17;color:#fff;border:1px solid var(--line)}
+.totalline{
+ display:flex;justify-content:space-between;font-size:19px;
+ padding:9px 0
+}
+.totalline.final{font-size:27px;font-weight:900;border-top:1px solid var(--line);margin-top:10px;padding-top:18px}
 
-.historyTable{width:100%;border-collapse:collapse}
-.historyTable th,.historyTable td{
-  padding:13px;text-align:left;border-bottom:1px solid var(--line);
-  font-size:13px;
-}
-.historyTable th{color:var(--muted);font-size:11px;text-transform:uppercase}
-.badge{padding:5px 8px;border-radius:20px;background:#10311f;color:#42ef94;font-size:10px;font-weight:900}
+/* HISTORY */
+.history{width:100%;border-collapse:collapse}
+.history th,.history td{padding:13px;border-bottom:1px solid var(--line);text-align:left}
+.history th{color:var(--muted);font-size:12px}
 
-.empty{
-  text-align:center;padding:50px 20px;color:var(--muted);
-}
-
+/* MODAL */
 .modal{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);
-  display:none;align-items:center;justify-content:center;
-  z-index:100;padding:18px;
-  backdrop-filter:blur(5px);
+ display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);
+ align-items:center;justify-content:center;z-index:50
 }
-.modal.show{display:flex}
-.modalBox{
-  width:min(500px,100%);
-  background:#0b1510;border:1px solid #294634;
-  border-radius:20px;padding:23px;
-  box-shadow:0 30px 90px #000;
+.modal.open{display:flex}
+.modalbox{
+ width:430px;max-width:94%;background:#0c1510;border:1px solid #294335;
+ border-radius:15px;padding:22px;box-shadow:0 20px 70px #000
 }
-.modalHeader{display:flex;justify-content:space-between;align-items:center}
-.modalHeader h3{margin:0}
-.close{
-  width:34px;height:34px;border:1px solid var(--line);
-  background:#111b16;color:#fff;border-radius:9px;
+.modalbox h2{margin-top:0}
+.payoptions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.payoption{
+ border:1px solid var(--line);background:#111c16;color:#fff;padding:16px;
+ border-radius:9px;font-weight:900
 }
-.form{display:grid;gap:11px;margin-top:18px}
-.form label{font-size:12px;color:var(--muted)}
-.form input,.form select{
-  width:100%;background:#07100b;border:1px solid var(--line);
-  color:#fff;padding:12px;border-radius:10px;outline:none;
-}
-.form input:focus,.form select:focus{border-color:var(--green)}
-.modalActions{display:flex;gap:9px;margin-top:18px}
-.modalActions button{flex:1;padding:12px;border-radius:10px}
+.payoption.selected{border-color:var(--green);background:#12301f}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
 
-.toast{
-  position:fixed;right:20px;bottom:20px;z-index:200;
-  background:#112118;border:1px solid #31513e;
-  padding:13px 17px;border-radius:12px;
-  transform:translateY(100px);opacity:0;transition:.25s;
-  box-shadow:0 15px 40px #0008;
-}
-.toast.show{transform:translateY(0);opacity:1}
+/* RECEIPT SCREEN - hidden normally */
+#printArea{display:none}
 
-.mobileMenu{
-  display:none;border:1px solid var(--line);background:var(--panel);
-  color:#fff;width:40px;height:40px;border-radius:10px;
+/* MOBILE */
+@media(max-width:1000px){
+ .sidebar{width:190px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .tables,.products{grid-template-columns:repeat(2,1fr)}
+ .order-layout{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+ .app{display:block;overflow:auto}
+ .sidebar{
+  width:100%;height:auto;border-right:0;border-bottom:1px solid var(--line);
+  padding:8px
+ }
+ .logo{padding:8px 10px}
+ .nav{flex-direction:row;overflow:auto}
+ .nav button{white-space:nowrap}
+ .bottom{display:none}
+ .top{height:58px;padding:0 12px}
+ .content{padding:13px}
+ .stats{grid-template-columns:1fr 1fr}
+ .tables,.products{grid-template-columns:1fr 1fr}
+ .search{min-width:0;width:100%}
 }
 
-@media(max-width:1100px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .tables{grid-template-columns:repeat(3,1fr)}
-  .products{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:800px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s;
-    box-shadow:30px 0 70px #000;
-  }
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0;width:100%}
-  .mobileMenu{display:block}
-  .topbar{padding:0 15px}
-  .content{padding:18px 14px}
-  .hero{align-items:flex-start;flex-direction:column}
-  .stats{grid-template-columns:1fr 1fr}
-  .tables{grid-template-columns:1fr 1fr}
-  .products{grid-template-columns:1fr 1fr}
-  .orderLayout{grid-template-columns:1fr}
-}
-@media(max-width:520px){
-  .stats{gap:9px}
-  .stat{padding:14px}
-  .statValue{font-size:21px}
-  .tables{grid-template-columns:1fr 1fr;gap:9px}
-  .tableCard{padding:12px;min-height:130px}
-  .products{grid-template-columns:1fr 1fr;gap:9px}
-  .productImg{height:100px}
-  .productBody{padding:11px}
-  .productName{font-size:13px}
-  .topTitle h1{font-size:16px}
-  .clock{font-size:11px}
-  .historyTable{min-width:600px}
-  .card{padding:14px}
+/* REAL THERMAL RECEIPT PRINT */
+@media print{
+ body>*{display:none!important}
+ #printArea{
+  display:block!important;
+  width:80mm;
+  margin:0;
+  padding:0 3mm;
+  color:#000!important;
+  background:#fff!important;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+ }
+ #printArea *{color:#000!important}
+ .receipt-center{text-align:center}
+ .receipt-title{font-size:20px;font-weight:900;margin-bottom:4px}
+ .receipt-sub{font-size:10px}
+ .receipt-line{border-top:1px dashed #000;margin:7px 0}
+ .receipt-row{display:flex;justify-content:space-between;gap:5px;margin:4px 0}
+ .receipt-item{flex:1}
+ .receipt-total{font-size:15px;font-weight:900}
+ .receipt-footer{text-align:center;margin-top:12px}
+ @page{
+  size:80mm auto;
+  margin:0;
+ }
 }
 </style>
 </head>
@@ -337,254 +219,158 @@ button{cursor:pointer}
 
 <div class="app">
 
-<aside class="sidebar" id="sidebar">
-  <div class="logo">
-    <div class="logoMark">M</div>
-    <div>
-      <strong>MY BAR</strong>
-      <small>MANAGEMENT SYSTEM</small>
-    </div>
-  </div>
+<aside class="sidebar">
+ <div class="logo">MY <span>BAR</span></div>
 
-  <nav class="nav">
-    <button class="active" onclick="showSection('dashboard',this)">
-      <span class="icon">⌂</span> Dashboard
-    </button>
-    <button onclick="showSection('tables',this)">
-      <span class="icon">▦</span> Tavolinat
-    </button>
-    <button onclick="showSection('menu',this)">
-      <span class="icon">☕</span> Menu
-    </button>
-    <button onclick="showSection('orders',this)">
-      <span class="icon">🛒</span> Porositë
-    </button>
-    <button onclick="showSection('cash',this)">
-      <span class="icon">€</span> Arka
-    </button>
-    <button onclick="showSection('history',this)">
-      <span class="icon">↺</span> Historiku
-    </button>
-    <button onclick="showSection('admin',this)">
-      <span class="icon">⚙</span> Admin
-    </button>
-  </nav>
+ <div class="nav">
+  <button class="active" onclick="show('dashboard',this)">▣ Dashboard</button>
+  <button onclick="show('tables',this)">▦ Tavolinat</button>
+  <button onclick="show('menu',this)">☷ Menu</button>
+  <button onclick="show('order',this)">🛒 Porosia</button>
+  <button onclick="show('history',this)">◷ Historiku</button>
+ </div>
 
-  <div class="sidebarBottom">
-    <div class="userBox">
-      <div class="userRow">
-        <div>
-          <strong id="userName">Administrator</strong><br>
-          <small id="userRole">ADMIN</small>
-        </div>
-        <span style="color:var(--green)">●</span>
-      </div>
-      <button class="logout" onclick="resetApp()">Reset Demo</button>
-    </div>
-  </div>
+ <div class="bottom status">
+  <span class="dot"></span>Sistemi aktiv
+ </div>
 </aside>
 
 <main class="main">
 
-<header class="topbar">
-  <div style="display:flex;align-items:center;gap:12px">
-    <button class="mobileMenu" onclick="toggleSidebar()">☰</button>
-    <div class="topTitle">
-      <h1 id="pageTitle">Dashboard</h1>
-      <span id="dateText"></span>
-    </div>
-  </div>
-  <div class="clock" id="clock">00:00:00</div>
+<header class="top">
+ <div class="title" id="pageTitle">Dashboard</div>
+ <div class="clock" id="clock"></div>
 </header>
 
 <div class="content">
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="section active">
-  <div class="hero">
-    <div>
-      <h2>Mirë se erdhe 👋</h2>
-      <p>Menaxho MY BAR nga një panel i vetëm.</p>
-    </div>
-    <button class="primary" onclick="showSection('menu')">+ Porosi e re</button>
-  </div>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="statTop"><span>Shitje sot</span><span>€</span></div>
-      <div class="statValue statGreen" id="statSales">€0.00</div>
-    </div>
-    <div class="stat">
-      <div class="statTop"><span>Porosi</span><span>↗</span></div>
-      <div class="statValue" id="statOrders">0</div>
-    </div>
-    <div class="stat">
-      <div class="statTop"><span>Tavolina aktive</span><span>●</span></div>
-      <div class="statValue" id="statBusy">0</div>
-    </div>
-    <div class="stat">
-      <div class="statTop"><span>Mesatarja</span><span>★</span></div>
-      <div class="statValue" id="statAverage">€0.00</div>
-    </div>
+ <div class="stats">
+  <div class="stat">
+   <small>XHIRO SOT</small>
+   <strong class="green" id="todayRevenue">€0.00</strong>
   </div>
+  <div class="stat">
+   <small>FATURA SOT</small>
+   <strong id="todayInvoices">0</strong>
+  </div>
+  <div class="stat">
+   <small>TAVOLINA AKTIVE</small>
+   <strong id="busyTables">0</strong>
+  </div>
+  <div class="stat">
+   <small>POROSIA AKTIVE</small>
+   <strong id="activeOrders">0</strong>
+  </div>
+ </div>
 
-  <div class="card">
-    <div class="cardTitle">
-      <h3>Tavolinat</h3>
-      <button class="secondary" onclick="showSection('tables')">Shiko të gjitha</button>
-    </div>
-    <div class="tables" id="dashboardTables"></div>
-  </div>
+ <div class="toolbar">
+  <button class="btn greenbtn" onclick="show('tables')">+ Hap Tavolinë</button>
+  <button class="btn" onclick="show('menu')">Menu</button>
+  <button class="btn" onclick="show('history')">Historiku</button>
+ </div>
+
+ <div class="box">
+  <h2>Gjendja e tavolinave</h2>
+  <div class="tables" id="dashboardTables"></div>
+ </div>
+
 </section>
 
 <!-- TABLES -->
 <section id="tables" class="section">
-  <div class="hero">
-    <div>
-      <h2>Tavolinat</h2>
-      <p>Hap dhe menaxho porositë e tavolinave.</p>
-    </div>
-    <button class="primary" onclick="newOrder()">+ Porosi</button>
-  </div>
-  <div class="tables" id="allTables"></div>
+
+ <div class="toolbar">
+  <button class="btn" onclick="clearTable()">Pastro tavolinën</button>
+  <button class="btn greenbtn" onclick="show('menu')">+ Shto porosi</button>
+ </div>
+
+ <div class="tables" id="tablesGrid"></div>
+
 </section>
 
 <!-- MENU -->
 <section id="menu" class="section">
-  <div class="hero">
-    <div>
-      <h2>Menu</h2>
-      <p>Zgjidh produktet për porosinë.</p>
-    </div>
-  </div>
 
-  <div class="menuTools">
-    <input class="search" id="search" placeholder="Kërko produkt..." oninput="renderProducts()">
-    <div class="categories">
-      <button class="cat active" onclick="setCategory('Të gjitha',this)">Të gjitha</button>
-      <button class="cat" onclick="setCategory('Kafe',this)">Kafe</button>
-      <button class="cat" onclick="setCategory('Pije',this)">Pije</button>
-      <button class="cat" onclick="setCategory('Birra',this)">Birra</button>
-      <button class="cat" onclick="setCategory('Ushqim',this)">Ushqim</button>
-    </div>
-  </div>
+ <div class="toolbar">
+  <input class="search" id="search" placeholder="Kërko produkt..." oninput="renderProducts()">
+ </div>
 
-  <div class="products" id="products"></div>
+ <div class="toolbar categories">
+  <button class="btn cat active" onclick="setCat('Të gjitha',this)">Të gjitha</button>
+  <button class="btn cat" onclick="setCat('Kafe',this)">Kafe</button>
+  <button class="btn cat" onclick="setCat('Pije',this)">Pije</button>
+  <button class="btn cat" onclick="setCat('Birra',this)">Birra</button>
+  <button class="btn cat" onclick="setCat('Ushqim',this)">Ushqim</button>
+ </div>
+
+ <div class="products" id="products"></div>
+
 </section>
 
-<!-- ORDERS -->
-<section id="orders" class="section">
-  <div class="hero">
-    <div>
-      <h2>Porosia aktuale</h2>
-      <p id="orderTableLabel">Pa tavolinë të zgjedhur</p>
-    </div>
-    <button class="secondary" onclick="clearOrder()">Pastro</button>
+<!-- ORDER -->
+<section id="order" class="section">
+
+ <div class="order-layout">
+
+  <div class="box">
+   <h2>Porosia — Tavolina <span id="orderTable">-</span></h2>
+   <div id="orderItems"></div>
   </div>
 
-  <div class="orderLayout">
-    <div class="card">
-      <div class="cardTitle">
-        <h3>Produktet</h3>
-        <span id="orderCount" class="badge">0 artikuj</span>
-      </div>
-      <div class="orderItems" id="orderItems"></div>
-    </div>
+  <div class="box">
+   <h2>Përmbledhje</h2>
 
-    <div class="card">
-      <div class="cardTitle"><h3>Përmbledhje</h3></div>
-      <div class="totalBox" style="border-top:0;margin-top:0;padding-top:0">
-        <div class="totalLine"><span>Nëntotali</span><strong id="subtotal">€0.00</strong></div>
-        <div class="totalLine"><span>TVSH</span><strong id="tax">€0.00</strong></div>
-        <div class="totalLine totalFinal"><span>Total</span><span id="total">€0.00</span></div>
-      </div>
-      <div class="payButtons">
-        <button class="cash" onclick="payOrder('Cash')">💶 CASH</button>
-        <button class="cardPay" onclick="payOrder('Kartë')">💳 KARTË</button>
-      </div>
-    </div>
-  </div>
-</section>
+   <div class="totalline">
+    <span>Nëntotali</span>
+    <strong id="subtotal">€0.00</strong>
+   </div>
 
-<!-- CASH -->
-<section id="cash" class="section">
-  <div class="hero">
-    <div>
-      <h2>Arka</h2>
-      <p>Përmbledhja e shitjeve.</p>
-    </div>
+   <div class="totalline">
+    <span>TVSH</span>
+    <strong id="tax">€0.00</strong>
+   </div>
+
+   <div class="totalline final">
+    <span>TOTAL</span>
+    <strong id="grandTotal" class="green">€0.00</strong>
+   </div>
+
+   <button class="btn greenbtn" style="width:100%;margin-top:15px" onclick="openPayment()">
+    💳 Paguaj & Faturë
+   </button>
+
   </div>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="statTop"><span>Cash</span><span>€</span></div>
-      <div class="statValue statGreen" id="cashTotal">€0.00</div>
-    </div>
-    <div class="stat">
-      <div class="statTop"><span>Kartë</span><span>💳</span></div>
-      <div class="statValue" id="cardTotal">€0.00</div>
-    </div>
-    <div class="stat">
-      <div class="statTop"><span>Total</span><span>Σ</span></div>
-      <div class="statValue" id="cashGrand">€0.00</div>
-    </div>
-    <div class="stat">
-      <div class="statTop"><span>Fatura</span><span>№</span></div>
-      <div class="statValue" id="invoiceCount">0</div>
-    </div>
-  </div>
+ </div>
 
-  <div class="card">
-    <div class="cardTitle"><h3>Gjendja e arkës</h3></div>
-    <div style="font-size:36px;font-weight:950;color:var(--green)" id="cashBig">€0.00</div>
-    <p style="color:var(--muted)">Totali i shitjeve të regjistruara në këtë pajisje.</p>
-  </div>
 </section>
 
 <!-- HISTORY -->
 <section id="history" class="section">
-  <div class="hero">
-    <div>
-      <h2>Historiku</h2>
-      <p>Faturat e regjistruara.</p>
-    </div>
-    <button class="danger" onclick="clearHistory()">Fshi historikun</button>
-  </div>
 
-  <div class="card" style="overflow:auto">
-    <table class="historyTable">
-      <thead>
-        <tr>
-          <th>Fatura</th>
-          <th>Ora</th>
-          <th>Tavolina</th>
-          <th>Pagesa</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="historyBody"></tbody>
-    </table>
-  </div>
-</section>
+ <div class="toolbar">
+  <button class="btn redbtn" onclick="clearHistory()">Fshi historikun</button>
+ </div>
 
-<!-- ADMIN -->
-<section id="admin" class="section">
-  <div class="hero">
-    <div>
-      <h2>Admin</h2>
-      <p>Kontrolli i sistemit MY BAR.</p>
-    </div>
-  </div>
+ <div class="box">
+  <table class="history">
+   <thead>
+    <tr>
+     <th>Fatura</th>
+     <th>Data/Ora</th>
+     <th>Tavolina</th>
+     <th>Pagesa</th>
+     <th>Total</th>
+     <th></th>
+    </tr>
+   </thead>
+   <tbody id="historyBody"></tbody>
+  </table>
+ </div>
 
-  <div class="card" style="max-width:700px">
-    <div class="cardTitle"><h3>Informacion sistemi</h3></div>
-    <div style="display:grid;gap:14px">
-      <div class="totalLine"><span>Emri</span><strong>MY BAR</strong></div>
-      <div class="totalLine"><span>Versioni</span><strong>SUPER 1.0</strong></div>
-      <div class="totalLine"><span>Statusi</span><strong style="color:var(--green)">● ONLINE</strong></div>
-      <div class="totalLine"><span>Ruajtja</span><strong>LocalStorage</strong></div>
-    </div>
-  </div>
 </section>
 
 </div>
@@ -593,492 +379,432 @@ button{cursor:pointer}
 
 <!-- PAYMENT MODAL -->
 <div class="modal" id="paymentModal">
-  <div class="modalBox">
-    <div class="modalHeader">
-      <h3>Pagesa</h3>
-      <button class="close" onclick="closeModal()">×</button>
-    </div>
+ <div class="modalbox">
+  <h2>Pagesa</h2>
 
-    <div class="form">
-      <label>Metoda</label>
-      <select id="paymentMethod">
-        <option>Cash</option>
-        <option>Kartë</option>
-      </select>
+  <div style="font-size:30px;font-weight:900;text-align:center;margin:20px" id="paymentTotal">€0.00</div>
 
-      <label>Shuma e marrë</label>
-      <input id="amountReceived" type="number" step="0.01" placeholder="0.00">
-
-      <div class="totalLine totalFinal">
-        <span>Total</span>
-        <span id="modalTotal">€0.00</span>
-      </div>
-
-      <div id="changeLine" class="totalLine" style="display:none">
-        <span>Kusuri</span>
-        <strong style="color:var(--green)" id="change">€0.00</strong>
-      </div>
-    </div>
-
-    <div class="modalActions">
-      <button class="secondary" onclick="closeModal()">Anulo</button>
-      <button class="primary" onclick="confirmPayment()">Konfirmo</button>
-    </div>
+  <div class="payoptions">
+   <button class="payoption selected" onclick="selectPay('CASH',this)">💶 CASH</button>
+   <button class="payoption" onclick="selectPay('KARTË',this)">💳 KARTË</button>
   </div>
+
+  <div class="modal-actions">
+   <button class="btn" onclick="closePayment()">Anulo</button>
+   <button class="btn greenbtn" onclick="finishPayment()">✓ Paguaj & Printo</button>
+  </div>
+ </div>
 </div>
 
-<div class="modal" id="invoiceModal">
-  <div class="modalBox">
-    <div class="modalHeader">
-      <h3>🧾 Fatura</h3>
-      <button class="close" onclick="closeInvoice()">×</button>
-    </div>
-    <div id="invoiceContent" style="margin-top:20px"></div>
-    <div class="modalActions">
-      <button class="secondary" onclick="window.print()">Print</button>
-      <button class="primary" onclick="closeInvoice()">Mbyll</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast">U ruajt me sukses.</div>
+<!-- RECEIPT -->
+<div id="printArea"></div>
 
 <script>
-const PRODUCTS=[
- {id:1,name:"Espresso",cat:"Kafe",price:1.20,icon:"☕"},
- {id:2,name:"Cappuccino",cat:"Kafe",price:1.80,icon:"☕"},
- {id:3,name:"Macchiato",cat:"Kafe",price:1.50,icon:"☕"},
- {id:4,name:"Freddo Cappuccino",cat:"Kafe",price:2.20,icon:"🧊"},
- {id:5,name:"Coca Cola",cat:"Pije",price:1.50,icon:"🥤"},
- {id:6,name:"Red Bull",cat:"Pije",price:2.50,icon:"🥤"},
- {id:7,name:"Ujë",cat:"Pije",price:1.00,icon:"💧"},
- {id:8,name:"Birra Korça",cat:"Birra",price:2.00,icon:"🍺"},
- {id:9,name:"Birra Tirana",cat:"Birra",price:2.00,icon:"🍺"},
- {id:10,name:"Club Sandwich",cat:"Ushqim",price:4.50,icon:"🥪"},
- {id:11,name:"Burger",cat:"Ushqim",price:5.50,icon:"🍔"},
- {id:12,name:"Patate",cat:"Ushqim",price:2.50,icon:"🍟"}
+const products=[
+ {id:1,name:"Espresso",price:1.20,cat:"Kafe"},
+ {id:2,name:"Cappuccino",price:1.80,cat:"Kafe"},
+ {id:3,name:"Macchiato",price:1.50,cat:"Kafe"},
+ {id:4,name:"Freddo Cappuccino",price:2.20,cat:"Kafe"},
+ {id:5,name:"Coca Cola",price:1.50,cat:"Pije"},
+ {id:6,name:"Red Bull",price:2.50,cat:"Pije"},
+ {id:7,name:"Ujë",price:1.00,cat:"Pije"},
+ {id:8,name:"Birra Korça",price:2.00,cat:"Birra"},
+ {id:9,name:"Birra Tirana",price:2.00,cat:"Birra"},
+ {id:10,name:"Club Sandwich",price:4.50,cat:"Ushqim"},
+ {id:11,name:"Burger",price:5.50,cat:"Ushqim"},
+ {id:12,name:"Patate",price:2.50,cat:"Ushqim"}
 ];
 
-let state=JSON.parse(localStorage.getItem("MY_BAR_SUPER")||"null")||{
- tables:Array.from({length:12},(_,i)=>({id:i+1,busy:false,order:[]})),
- history:[],
- sales:0
+let state=JSON.parse(localStorage.getItem("MY_BAR_POS")||"null")||{
+ selectedTable:1,
+ category:"Të gjitha",
+ tables:Array.from({length:12},(_,i)=>({id:i+1,items:[]})),
+ invoices:[]
 };
 
-let currentTable=null;
-let currentOrder=[];
-let category="Të gjitha";
+let paymentMethod="CASH";
 
 function save(){
- localStorage.setItem("MY_BAR_SUPER",JSON.stringify(state));
- updateDashboard();
+ localStorage.setItem("MY_BAR_POS",JSON.stringify(state));
 }
 
 function money(n){
  return "€"+Number(n||0).toFixed(2);
 }
 
-function toast(text){
- const t=document.getElementById("toast");
- t.textContent=text;
- t.classList.add("show");
- setTimeout(()=>t.classList.remove("show"),2200);
+function now(){
+ return new Date().toLocaleString("sq-AL");
 }
 
-function updateClock(){
- const d=new Date();
- document.getElementById("clock").textContent=d.toLocaleTimeString("sq-AL");
- document.getElementById("dateText").textContent=d.toLocaleDateString("sq-AL",{
-  weekday:"long",day:"numeric",month:"long",year:"numeric"
- });
-}
-setInterval(updateClock,1000);
-updateClock();
-
-function showSection(id,btn){
- document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+function show(id,btn=null){
+ document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
  document.getElementById(id).classList.add("active");
-
- document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
- if(btn) btn.classList.add("active");
- else{
-  const found=[...document.querySelectorAll(".nav button")]
-   .find(b=>b.getAttribute("onclick")?.includes("'"+id+"'"));
-  if(found)found.classList.add("active");
- }
 
  const names={
   dashboard:"Dashboard",
   tables:"Tavolinat",
   menu:"Menu",
-  orders:"Porositë",
-  cash:"Arka",
-  history:"Historiku",
-  admin:"Admin"
+  order:"Porosia",
+  history:"Historiku"
  };
- document.getElementById("pageTitle").textContent=names[id]||"MY BAR";
 
- if(id==="dashboard")renderDashboardTables();
+ document.getElementById("pageTitle").textContent=names[id]||id;
+
+ if(btn){
+  document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+ }
+
  if(id==="tables")renderTables();
+ if(id==="dashboard")renderDashboard();
  if(id==="menu")renderProducts();
- if(id==="orders")renderOrder();
- if(id==="cash")renderCash();
+ if(id==="order")renderOrder();
  if(id==="history")renderHistory();
-
- document.getElementById("sidebar").classList.remove("open");
 }
 
-function toggleSidebar(){
- document.getElementById("sidebar").classList.toggle("open");
+function selectTable(id){
+ state.selectedTable=id;
+ save();
+ renderTables();
+ renderOrder();
+ show("order");
 }
 
-function renderDashboardTables(){
- const el=document.getElementById("dashboardTables");
- el.innerHTML=state.tables.slice(0,8).map(tableHTML).join("");
+function tableTotal(table){
+ return table.items.reduce((s,x)=>s+x.price*x.qty,0);
 }
 
 function renderTables(){
- document.getElementById("allTables").innerHTML=state.tables.map(tableHTML).join("");
+ const html=state.tables.map(t=>{
+  const total=tableTotal(t);
+  const busy=t.items.length>0;
+
+  return `
+   <div class="table ${busy?"busy":""}" onclick="selectTable(${t.id})">
+    <div class="table-number">Tavolina ${String(t.id).padStart(2,"0")}</div>
+    <div class="table-status">${busy?"● Në përdorim":"○ E lirë"}</div>
+    <div class="table-total">${busy?money(total):"—"}</div>
+   </div>`;
+ }).join("");
+
+ document.getElementById("tablesGrid").innerHTML=html;
 }
 
-function tableHTML(t){
- const total=t.order.reduce((s,x)=>s+x.price*x.qty,0);
- return `
- <div class="tableCard">
-  <div class="tableHead">
-   <div class="tableNumber">Tavolina ${t.id}</div>
-   <span class="status ${t.busy?"busy":"free"}">${t.busy?"AKTIVE":"E LIRË"}</span>
-  </div>
-  <div class="tableInfo">
-   ${t.busy ? t.order.reduce((s,x)=>s+x.qty,0)+" artikuj • "+money(total) : "Gati për porosi"}
-  </div>
-  <div class="tableActions">
-   <button onclick="openTable(${t.id})">${t.busy?"Hap":"Porosi"}</button>
-   ${t.busy?`<button onclick="finishTable(${t.id})">Mbyll</button>`:""}
-  </div>
- </div>`;
+function renderDashboard(){
+ document.getElementById("dashboardTables").innerHTML=state.tables.map(t=>{
+  const total=tableTotal(t);
+  const busy=t.items.length>0;
+  return `
+   <div class="table ${busy?"busy":""}" onclick="selectTable(${t.id})">
+    <div class="table-number">Tavolina ${String(t.id).padStart(2,"0")}</div>
+    <div class="table-status">${busy?"● Në përdorim":"○ E lirë"}</div>
+    <div class="table-total">${busy?money(total):"—"}</div>
+   </div>`;
+ }).join("");
+
+ const revenue=state.invoices.reduce((s,x)=>s+x.total,0);
+
+ document.getElementById("todayRevenue").textContent=money(revenue);
+ document.getElementById("todayInvoices").textContent=state.invoices.length;
+ document.getElementById("busyTables").textContent=
+  state.tables.filter(t=>t.items.length).length;
+ document.getElementById("activeOrders").textContent=
+  state.tables.reduce((s,t)=>s+t.items.length,0);
 }
 
-function openTable(id){
- currentTable=id;
- currentOrder=JSON.parse(JSON.stringify(state.tables[id-1].order||[]));
- showSection("orders");
- renderOrder();
-}
-
-function newOrder(){
- const free=state.tables.find(t=>!t.busy);
- if(!free){
-  toast("Nuk ka tavolina të lira.");
-  return;
- }
- openTable(free.id);
+function setCat(cat,el){
+ state.category=cat;
+ document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
+ if(el)el.classList.add("active");
+ renderProducts();
 }
 
 function renderProducts(){
  const q=(document.getElementById("search")?.value||"").toLowerCase();
- const list=PRODUCTS.filter(p=>
-  (category==="Të gjitha"||p.cat===category)&&
-  p.name.toLowerCase().includes(q)
- );
- const el=document.getElementById("products");
- el.innerHTML=list.map(p=>`
+
+ const list=products.filter(p=>{
+  const okCat=state.category==="Të gjitha"||p.cat===state.category;
+  const okSearch=p.name.toLowerCase().includes(q);
+  return okCat&&okSearch;
+ });
+
+ document.getElementById("products").innerHTML=list.map(p=>`
   <div class="product">
-   <div class="productImg">${p.icon}</div>
-   <div class="productBody">
-    <div class="productName">${p.name}</div>
-    <div class="productCat">${p.cat}</div>
-    <div class="productBottom">
-     <span class="price">${money(p.price)}</span>
-     <button class="add" onclick="addProduct(${p.id})">+</button>
-    </div>
+   <div class="product-name">${p.name}</div>
+   <div class="product-cat">${p.cat}</div>
+   <div class="product-bottom">
+    <div class="price">${money(p.price)}</div>
+    <button class="add" onclick="addProduct(${p.id})">+</button>
    </div>
   </div>
  `).join("");
 }
 
-function setCategory(cat,btn){
- category=cat;
- document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
- btn.classList.add("active");
- renderProducts();
-}
-
 function addProduct(id){
- const p=PRODUCTS.find(x=>x.id===id);
- if(!p)return;
+ const table=state.tables.find(t=>t.id===state.selectedTable);
+ const p=products.find(x=>x.id===id);
+ if(!table||!p)return;
 
- if(!currentTable){
-  const free=state.tables.find(t=>!t.busy);
-  if(!free){
-   toast("Nuk ka tavolina të lira.");
-   return;
-  }
-  currentTable=free.id;
- }
+ const existing=table.items.find(x=>x.id===id);
 
- const found=currentOrder.find(x=>x.id===id);
- if(found)found.qty++;
- else currentOrder.push({...p,qty:1});
-
- state.tables[currentTable-1].busy=true;
- state.tables[currentTable-1].order=currentOrder;
+ if(existing) existing.qty++;
+ else table.items.push({
+  id:p.id,
+  name:p.name,
+  price:p.price,
+  qty:1
+ });
 
  save();
- toast(p.name+" u shtua");
- showSection("orders");
+ renderTables();
+ renderDashboard();
  renderOrder();
+ show("order");
+}
+
+function changeQty(id,delta){
+ const table=state.tables.find(t=>t.id===state.selectedTable);
+ const item=table.items.find(x=>x.id===id);
+ if(!item)return;
+
+ item.qty+=delta;
+
+ if(item.qty<=0){
+  table.items=table.items.filter(x=>x.id!==id);
+ }
+
+ save();
+ renderOrder();
+ renderTables();
+ renderDashboard();
 }
 
 function renderOrder(){
- const items=document.getElementById("orderItems");
- document.getElementById("orderTableLabel").textContent=
-  currentTable?"Tavolina "+currentTable:"Pa tavolinë të zgjedhur";
+ const table=state.tables.find(t=>t.id===state.selectedTable);
+ if(!table)return;
 
- if(!currentOrder.length){
-  items.innerHTML='<div class="empty">Nuk ka produkte në porosi.<br>Zgjidh produkte nga Menu.</div>';
- }else{
-  items.innerHTML=currentOrder.map((x,i)=>`
-   <div class="orderItem">
-    <div>
-     <div class="orderName">${x.name}</div>
-     <div style="color:var(--muted);font-size:11px">${money(x.price)} / copë</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:16px">
-     <div class="qty">
-      <button onclick="changeQty(${i},-1)">−</button>
-      <strong>${x.qty}</strong>
-      <button onclick="changeQty(${i},1)">+</button>
-     </div>
-     <div class="orderPrice">${money(x.price*x.qty)}</div>
-    </div>
+ document.getElementById("orderTable").textContent=
+  String(table.id).padStart(2,"0");
+
+ const html=table.items.length?
+ table.items.map(i=>`
+  <div class="order-row">
+   <div>
+    <strong>${i.name}</strong><br>
+    <small>${money(i.price)}</small>
    </div>
-  `).join("");
- }
+   <input class="qty" value="${i.qty}" readonly>
+   <strong>${money(i.price*i.qty)}</strong>
+   <button class="btn" onclick="changeQty(${i.id},-1)">−</button>
+  </div>
+ `).join("")
+ :
+ `<div style="color:var(--muted);padding:30px 0;text-align:center">
+   Nuk ka produkte në këtë porosi.
+  </div>`;
 
- const subtotal=currentOrder.reduce((s,x)=>s+x.price*x.qty,0);
- const tax=subtotal*0.10;
- const total=subtotal+tax;
+ document.getElementById("orderItems").innerHTML=html;
 
- document.getElementById("orderCount").textContent=
-  currentOrder.reduce((s,x)=>s+x.qty,0)+" artikuj";
+ const subtotal=tableTotal(table);
+ const tax=subtotal*0.20;
+ const total=subtotal;
+
  document.getElementById("subtotal").textContent=money(subtotal);
  document.getElementById("tax").textContent=money(tax);
- document.getElementById("total").textContent=money(total);
+ document.getElementById("grandTotal").textContent=money(total);
 }
 
-function changeQty(index,delta){
- if(!currentOrder[index])return;
- currentOrder[index].qty+=delta;
- if(currentOrder[index].qty<=0)currentOrder.splice(index,1);
+function clearTable(){
+ const table=state.tables.find(t=>t.id===state.selectedTable);
+ if(!table)return;
 
- if(currentTable){
-  state.tables[currentTable-1].order=currentOrder;
-  state.tables[currentTable-1].busy=currentOrder.length>0;
+ if(confirm("Ta pastrojmë porosinë e kësaj tavoline?")){
+  table.items=[];
   save();
+  renderTables();
+  renderDashboard();
+  renderOrder();
  }
- renderOrder();
 }
 
-function clearOrder(){
- if(currentTable){
-  state.tables[currentTable-1].order=[];
-  state.tables[currentTable-1].busy=false;
-  save();
- }
- currentOrder=[];
- currentTable=null;
- renderOrder();
- toast("Porosia u pastrua");
-}
+function openPayment(){
+ const table=state.tables.find(t=>t.id===state.selectedTable);
 
-function payOrder(method){
- if(!currentOrder.length){
-  toast("Porosia është bosh.");
+ if(!table||!table.items.length){
+  alert("Kjo tavolinë nuk ka porosi.");
   return;
  }
- const subtotal=currentOrder.reduce((s,x)=>s+x.price*x.qty,0);
- const total=subtotal*1.10;
 
- document.getElementById("paymentMethod").value=method;
- document.getElementById("modalTotal").textContent=money(total);
- document.getElementById("amountReceived").value=method==="Kartë"?total:"";
- document.getElementById("paymentModal").classList.add("show");
-
- updateChange();
+ document.getElementById("paymentTotal").textContent=money(tableTotal(table));
+ document.getElementById("paymentModal").classList.add("open");
 }
 
-document.getElementById("amountReceived").addEventListener("input",updateChange);
-
-function updateChange(){
- const total=currentOrder.reduce((s,x)=>s+x.price*x.qty,0)*1.10;
- const received=Number(document.getElementById("amountReceived").value||0);
- const line=document.getElementById("changeLine");
- if(received>0&&received>=total){
-  line.style.display="flex";
-  document.getElementById("change").textContent=money(received-total);
- }else line.style.display="none";
+function closePayment(){
+ document.getElementById("paymentModal").classList.remove("open");
 }
 
-function closeModal(){
- document.getElementById("paymentModal").classList.remove("show");
+function selectPay(method,el){
+ paymentMethod=method;
+ document.querySelectorAll(".payoption").forEach(x=>x.classList.remove("selected"));
+ el.classList.add("selected");
 }
 
-function confirmPayment(){
- if(!currentOrder.length)return;
+function finishPayment(){
+ const table=state.tables.find(t=>t.id===state.selectedTable);
 
- const method=document.getElementById("paymentMethod").value;
- const subtotal=currentOrder.reduce((s,x)=>s+x.price*x.qty,0);
- const total=subtotal*1.10;
- const received=Number(document.getElementById("amountReceived").value||0);
+ if(!table||!table.items.length)return;
 
- if(method==="Cash"&&received<total){
-  toast("Shuma e marrë është më e vogël se totali.");
-  return;
- }
+ const subtotal=tableTotal(table);
+ const tax=subtotal*0.20;
+ const total=subtotal;
 
  const invoice={
-  id:"MB-"+String(Date.now()).slice(-6),
-  time:new Date().toLocaleString("sq-AL"),
-  table:currentTable||"-",
-  method,
-  total:Number(total.toFixed(2)),
-  items:JSON.parse(JSON.stringify(currentOrder))
+  id:"F-"+Date.now().toString().slice(-8),
+  date:now(),
+  table:table.id,
+  items:JSON.parse(JSON.stringify(table.items)),
+  subtotal,
+  tax,
+  total,
+  payment:paymentMethod
  };
 
- state.history.unshift(invoice);
- state.sales+=total;
-
- if(currentTable){
-  state.tables[currentTable-1].busy=false;
-  state.tables[currentTable-1].order=[];
- }
+ state.invoices.unshift(invoice);
+ table.items=[];
 
  save();
 
- currentOrder=[];
- currentTable=null;
- closeModal();
+ closePayment();
 
- showInvoice(invoice);
- renderOrder();
  renderTables();
- toast("Pagesa u regjistrua.");
+ renderDashboard();
+ renderHistory();
+ renderOrder();
+
+ /* KJO ËSHTË FATURA REALE E PRINTIMIT */
+ printInvoice(invoice);
 }
 
-function showInvoice(inv){
- document.getElementById("invoiceContent").innerHTML=`
-  <div style="text-align:center;border-bottom:1px solid var(--line);padding-bottom:16px">
-   <div style="font-size:25px;font-weight:950">MY BAR</div>
-   <div style="color:var(--muted);font-size:12px">FATURË</div>
+function printInvoice(inv){
+ const area=document.getElementById("printArea");
+
+ area.innerHTML=`
+  <div class="receipt-center">
+   <div class="receipt-title">MY BAR</div>
+   <div class="receipt-sub">FATURË SHITJE</div>
+   <div class="receipt-sub">${inv.id}</div>
   </div>
-  <div style="margin-top:16px;display:grid;gap:8px">
-   <div class="totalLine"><span>Nr.</span><strong>${inv.id}</strong></div>
-   <div class="totalLine"><span>Data</span><strong>${inv.time}</strong></div>
-   <div class="totalLine"><span>Tavolina</span><strong>${inv.table}</strong></div>
-   <div class="totalLine"><span>Pagesa</span><strong>${inv.method}</strong></div>
+
+  <div class="receipt-line"></div>
+
+  <div>Data: ${inv.date}</div>
+  <div>Tavolina: ${String(inv.table).padStart(2,"0")}</div>
+  <div>Pagesa: ${inv.payment}</div>
+
+  <div class="receipt-line"></div>
+
+  ${inv.items.map(i=>`
+   <div class="receipt-row">
+    <div class="receipt-item">${i.qty} x ${i.name}</div>
+    <div>${money(i.price*i.qty)}</div>
+   </div>
+  `).join("")}
+
+  <div class="receipt-line"></div>
+
+  <div class="receipt-row">
+   <div>Nëntotali</div>
+   <div>${money(inv.subtotal)}</div>
   </div>
-  <div style="border-top:1px solid var(--line);margin-top:15px;padding-top:12px">
-   ${inv.items.map(x=>`
-    <div class="totalLine">
-     <span>${x.name} × ${x.qty}</span>
-     <strong>${money(x.price*x.qty)}</strong>
-    </div>
-   `).join("")}
+
+  <div class="receipt-row">
+   <div>TVSH 20%</div>
+   <div>${money(inv.tax)}</div>
   </div>
-  <div class="totalLine totalFinal">
-   <span>TOTAL</span><span>${money(inv.total)}</span>
+
+  <div class="receipt-line"></div>
+
+  <div class="receipt-row receipt-total">
+   <div>TOTAL</div>
+   <div>${money(inv.total)}</div>
+  </div>
+
+  <div class="receipt-footer">
+   FALEMINDERIT!<br>
+   MY BAR
   </div>
  `;
- document.getElementById("invoiceModal").classList.add("show");
-}
 
-function closeInvoice(){
- document.getElementById("invoiceModal").classList.remove("show");
-}
-
-function finishTable(id){
- const t=state.tables[id-1];
- if(!t.busy)return;
- currentTable=id;
- currentOrder=JSON.parse(JSON.stringify(t.order));
- payOrder("Cash");
-}
-
-function renderCash(){
- let cash=0,card=0;
- state.history.forEach(x=>{
-  if(x.method==="Cash")cash+=x.total;
-  else card+=x.total;
- });
- document.getElementById("cashTotal").textContent=money(cash);
- document.getElementById("cardTotal").textContent=money(card);
- document.getElementById("cashGrand").textContent=money(cash+card);
- document.getElementById("invoiceCount").textContent=state.history.length;
- document.getElementById("cashBig").textContent=money(cash+card);
+ /*
+  Browser-i hap printimin e Windows.
+  Zgjidh printerin termik 80mm.
+ */
+ setTimeout(()=>window.print(),150);
 }
 
 function renderHistory(){
  const body=document.getElementById("historyBody");
- if(!state.history.length){
-  body.innerHTML='<tr><td colspan="5" class="empty">Nuk ka fatura akoma.</td></tr>';
+
+ if(!state.invoices.length){
+  body.innerHTML=`
+   <tr>
+    <td colspan="6" style="text-align:center;color:#91a098;padding:30px">
+     Nuk ka fatura.
+    </td>
+   </tr>`;
   return;
  }
- body.innerHTML=state.history.map(x=>`
+
+ body.innerHTML=state.invoices.map(inv=>`
   <tr>
-   <td><strong>${x.id}</strong></td>
-   <td>${x.time}</td>
-   <td>Tavolina ${x.table}</td>
-   <td><span class="badge">${x.method}</span></td>
-   <td><strong style="color:var(--green)">${money(x.total)}</strong></td>
+   <td><strong>${inv.id}</strong></td>
+   <td>${inv.date}</td>
+   <td>${String(inv.table).padStart(2,"0")}</td>
+   <td>${inv.payment}</td>
+   <td class="green"><strong>${money(inv.total)}</strong></td>
+   <td>
+    <button class="btn" onclick="printInvoiceById('${inv.id}')">🖨 Print</button>
+   </td>
   </tr>
  `).join("");
 }
 
-function updateDashboard(){
- const busy=state.tables.filter(t=>t.busy).length;
- const orders=state.history.length;
- const avg=orders?state.sales/orders:0;
-
- document.getElementById("statSales").textContent=money(state.sales);
- document.getElementById("statOrders").textContent=orders;
- document.getElementById("statBusy").textContent=busy;
- document.getElementById("statAverage").textContent=money(avg);
-
- renderDashboardTables();
- renderTables();
- renderCash();
- renderHistory();
+function printInvoiceById(id){
+ const inv=state.invoices.find(x=>x.id===id);
+ if(inv)printInvoice(inv);
 }
 
 function clearHistory(){
- if(!confirm("A dëshiron të fshish të gjithë historikun?"))return;
- state.history=[];
- state.sales=0;
- save();
- toast("Historiku u fshi.");
-}
+ if(!state.invoices.length)return;
 
-function resetApp(){
- if(!confirm("Kjo do të pastrojë të dhënat demo. Vazhdon?"))return;
- localStorage.removeItem("MY_BAR_SUPER");
- location.reload();
-}
-
-document.getElementById("paymentMethod").addEventListener("change",()=>{
- const method=document.getElementById("paymentMethod").value;
- if(method==="Kartë"){
-  const total=currentOrder.reduce((s,x)=>s+x.price*x.qty,0)*1.10;
-  document.getElementById("amountReceived").value=total.toFixed(2);
- }else{
-  document.getElementById("amountReceived").value="";
+ if(confirm("Je i sigurt që do të fshish historikun?")){
+  state.invoices=[];
+  save();
+  renderHistory();
+  renderDashboard();
  }
- updateChange();
-});
+}
 
+function updateClock(){
+ document.getElementById("clock").textContent=
+  new Date().toLocaleString("sq-AL",{
+   day:"2-digit",
+   month:"2-digit",
+   year:"numeric",
+   hour:"2-digit",
+   minute:"2-digit",
+   second:"2-digit"
+  });
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+renderTables();
+renderDashboard();
 renderProducts();
-updateDashboard();
 renderOrder();
+renderHistory();
 </script>
 
 </body>
