@@ -8,7 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#050805;
     color:#fff;
 }
@@ -54,9 +54,8 @@ button{cursor:pointer}
     border-color:#24452f;
     color:#fff;
 }
-.nav button.admin{
-    display:none;
-}
+.nav .admin-secret{display:none}
+
 .logout{
     position:absolute;
     bottom:20px;
@@ -113,6 +112,12 @@ button{cursor:pointer}
 .stat strong{font-size:22px}
 .green{color:#38e879}
 
+.grid2{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:18px;
+}
+
 .panel{
     background:#0a110c;
     border:1px solid #1b3021;
@@ -120,12 +125,6 @@ button{cursor:pointer}
     padding:18px;
 }
 .panel-title{font-weight:800;margin-bottom:15px}
-
-.grid2{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:18px;
-}
 
 .table-grid{
     display:grid;
@@ -143,7 +142,12 @@ button{cursor:pointer}
 }
 .table-card.active{border-color:#d0a23d;background:#181309}
 .table-card.selected{border-color:#38e879}
-.table-card span{display:block;color:#7e8d84;margin-top:7px;font-size:12px}
+.table-card span{
+    display:block;
+    color:#7e8d84;
+    margin-top:7px;
+    font-size:12px
+}
 
 .pos{
     display:grid;
@@ -210,10 +214,19 @@ button{cursor:pointer}
     border:1px solid #1d3022;
     border-radius:10px;
 }
-.order-item small{display:block;color:#78867d;margin-top:4px}
-.actions{display:flex;align-items:center;gap:5px}
+.order-item small{
+    display:block;
+    color:#78867d;
+    margin-top:4px
+}
+.actions{
+    display:flex;
+    align-items:center;
+    gap:5px
+}
 .actions button{
-    width:28px;height:28px;
+    width:28px;
+    height:28px;
     border-radius:7px;
     border:1px solid #29402f;
     background:#111b14;
@@ -244,6 +257,7 @@ button{cursor:pointer}
     grid-template-columns:repeat(2,1fr);
     gap:14px;
 }
+.field{margin-bottom:12px}
 .field label{
     display:block;
     color:#7e8d84;
@@ -257,7 +271,9 @@ button{cursor:pointer}
     color:#fff;
     border:1px solid #24382a;
     border-radius:9px;
+    outline:none;
 }
+
 .btn{
     padding:11px 15px;
     border-radius:9px;
@@ -275,6 +291,11 @@ button{cursor:pointer}
     border-color:#80632c;
     color:#e6bd5b;
 }
+.btn.blue{
+    background:#0c1d2d;
+    border-color:#27577c;
+    color:#68bfff;
+}
 
 .row{
     display:flex;
@@ -287,7 +308,11 @@ button{cursor:pointer}
     border-radius:10px;
     margin-bottom:8px;
 }
-.row small{display:block;color:#748179;margin-top:4px}
+.row small{
+    display:block;
+    color:#748179;
+    margin-top:4px
+}
 
 .badge{
     display:inline-block;
@@ -297,7 +322,36 @@ button{cursor:pointer}
     color:#43eb82;
     font-size:11px;
 }
-.badge.red{background:#2a1010;color:#ff7777}
+.badge.red{
+    background:#2a1010;
+    color:#ff7777
+}
+.badge.gold{
+    background:#21190a;
+    color:#e5bd5b
+}
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.admin-section{
+    background:#0a110c;
+    border:1px solid #1b3021;
+    border-radius:16px;
+    padding:18px;
+}
+.admin-section h3{
+    margin-bottom:15px;
+    color:#38e879;
+}
+.admin-actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
 
 .modal{
     display:none;
@@ -312,6 +366,8 @@ button{cursor:pointer}
 .modal-box{
     width:440px;
     max-width:100%;
+    max-height:90vh;
+    overflow:auto;
     background:#0a110c;
     border:1px solid #294a32;
     border-radius:17px;
@@ -408,15 +464,32 @@ button{cursor:pointer}
     .stats{grid-template-columns:repeat(3,1fr)}
     .grid2,.pos{grid-template-columns:1fr}
     .menu-grid{grid-template-columns:repeat(3,1fr)}
+    .admin-grid{grid-template-columns:1fr}
 }
 @media(max-width:700px){
-    .sidebar{width:68px;padding:15px 7px}
-    .logo{font-size:16px;letter-spacing:1px}
+    .sidebar{
+        width:68px;
+        padding:15px 7px
+    }
+    .logo{
+        font-size:16px;
+        letter-spacing:1px
+    }
     .logo-sub{display:none}
-    .nav button{font-size:0;text-align:center;padding:12px 5px}
-    .logout{left:7px;right:7px}
+    .nav button{
+        font-size:0;
+        text-align:center;
+        padding:12px 5px
+    }
+    .logout{
+        left:7px;
+        right:7px
+    }
     .logout button{font-size:0}
-    .main{margin-left:68px;width:calc(100% - 68px)}
+    .main{
+        margin-left:68px;
+        width:calc(100% - 68px)
+    }
     .topbar{padding:0 12px}
     .user-info{display:none}
     .page{padding:14px}
@@ -433,64 +506,114 @@ button{cursor:pointer}
 <div class="app">
 
 <aside class="sidebar">
+
     <div class="logo">MY BAR</div>
     <div class="logo-sub">MANAGEMENT SYSTEM</div>
 
     <nav class="nav">
-        <button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
-        <button onclick="showPage('pos',this)">🛒 Porosi</button>
-        <button onclick="showPage('tables',this)">🪑 Tavolina</button>
-        <button onclick="showPage('inventory',this)">📦 Inventar</button>
-        <button onclick="showPage('shifts',this)">🌙 Turni</button>
-        <button onclick="showPage('cash',this)">💰 Kasa</button>
-        <button onclick="showPage('reports',this)">📊 Raporte</button>
-        <button onclick="showPage('history',this)">🧾 Historia</button>
-        <button id="adminNav" class="admin" onclick="showPage('settings',this)">⚙️ Admin</button>
+
+        <button class="active"
+                onclick="showPage('dashboard',this)">
+            🏠 Dashboard
+        </button>
+
+        <button onclick="showPage('pos',this)">
+            🛒 Porosi
+        </button>
+
+        <button onclick="showPage('tables',this)">
+            🪑 Tavolina
+        </button>
+
+        <button onclick="showPage('inventory',this)">
+            📦 Inventar
+        </button>
+
+        <button onclick="showPage('shifts',this)">
+            🌙 Turni
+        </button>
+
+        <button onclick="showPage('cash',this)">
+            💰 Kasa
+        </button>
+
+        <button onclick="showPage('reports',this)">
+            📊 Raporte
+        </button>
+
+        <button onclick="showPage('history',this)">
+            🧾 Historia
+        </button>
+
+        <!-- SEKRET -->
+        <button id="adminNav"
+                class="admin-secret"
+                onclick="showPage('admin',this)">
+            ⚙️ Admin
+        </button>
+
     </nav>
 
     <div class="logout">
-        <button onclick="logout()">Dil nga sistemi</button>
+        <button onclick="logout()">
+            Dil nga sistemi
+        </button>
     </div>
+
 </aside>
 
 <main class="main">
 
 <header class="topbar">
-    <div class="bar-name" id="barNameTop">MY BAR</div>
-    <div class="top-right">
-        <span class="user-info" id="userInfo">-</span>
-        <span class="clock" id="clock">00:00:00</span>
+
+    <div class="bar-name" id="barNameTop">
+        MY BAR
     </div>
+
+    <div class="top-right">
+        <span id="userInfo" class="user-info">-</span>
+        <span id="clock" class="clock">00:00:00</span>
+    </div>
+
 </header>
 
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
+
 <section id="dashboard" class="page active">
+
     <div class="title">Dashboard</div>
 
     <div class="stats">
+
         <div class="stat">
             <small>Shitje sot</small>
             <strong id="salesToday" class="green">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Cash</small>
             <strong id="cashToday">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Kartë</small>
             <strong id="cardToday">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Fatura</small>
             <strong id="invoiceToday">0</strong>
         </div>
+
         <div class="stat">
             <small>Tavolina aktive</small>
             <strong id="activeTables">0</strong>
         </div>
+
     </div>
 
     <div class="grid2">
+
         <div class="panel">
             <div class="panel-title">Tavolinat</div>
             <div id="dashboardTables" class="table-grid"></div>
@@ -500,31 +623,47 @@ button{cursor:pointer}
             <div class="panel-title">Pagesat e fundit</div>
             <div id="recentPayments"></div>
         </div>
+
     </div>
+
 </section>
 
-<!-- POS -->
+<!-- ================= POS ================= -->
+
 <section id="pos" class="page">
+
     <div class="title">Porosi</div>
 
     <div class="pos">
 
         <div class="panel">
-            <div id="selectedTableText" class="badge">
+
+            <div id="selectedTableText"
+                 class="badge">
                 Zgjidh tavolinë
             </div>
 
-            <div id="categories" class="categories" style="margin-top:13px"></div>
+            <div id="categories"
+                 class="categories"
+                 style="margin-top:13px">
+            </div>
 
             <input id="menuSearch"
                    class="search"
                    placeholder="Kërko produkt...">
 
-            <div id="menuGrid" class="menu-grid"></div>
+            <div id="menuGrid"
+                 class="menu-grid">
+            </div>
+
         </div>
 
         <div class="panel">
-            <div class="panel-title">Porosia</div>
+
+            <div class="panel-title">
+                Porosia
+            </div>
+
             <div id="orderItems"></div>
 
             <div class="total">
@@ -532,215 +671,353 @@ button{cursor:pointer}
                 <strong id="orderTotal">0 L</strong>
             </div>
 
-            <button class="pay" onclick="openPayment()">
+            <button class="pay"
+                    onclick="openPayment()">
                 PËRFUNDO PAGESËN
             </button>
+
         </div>
 
     </div>
+
 </section>
 
-<!-- TABLES -->
+<!-- ================= TABLES ================= -->
+
 <section id="tables" class="page">
+
     <div class="title">Tavolina</div>
+
     <div class="panel">
-        <div id="tableGrid" class="table-grid"></div>
+        <div id="tableGrid"
+             class="table-grid">
+        </div>
     </div>
+
 </section>
 
-<!-- INVENTORY -->
+<!-- ================= INVENTORY ================= -->
+
 <section id="inventory" class="page">
+
     <div class="title">Inventar</div>
 
     <div class="panel">
-        <div class="form-grid" style="margin-bottom:20px">
+
+        <div class="form-grid">
+
             <div class="field">
                 <label>Kërko produkt</label>
-                <input id="inventorySearch" placeholder="Emri i produktit">
+                <input id="inventorySearch"
+                       placeholder="Emri i produktit">
             </div>
 
             <div class="field">
                 <label>Minimum stok</label>
-                <input id="minimumStock" type="number" value="5">
+                <input id="minimumStock"
+                       type="number"
+                       value="5">
             </div>
+
         </div>
 
         <div id="inventoryList"></div>
+
     </div>
+
 </section>
 
-<!-- SHIFTS -->
+<!-- ================= SHIFT ================= -->
+
 <section id="shifts" class="page">
+
     <div class="title">Turni</div>
 
     <div class="grid2">
 
         <div class="panel">
-            <div class="panel-title">Turni aktual</div>
+
+            <div class="panel-title">
+                Turni aktual
+            </div>
 
             <div id="shiftStatus"></div>
 
-            <div class="field" style="margin-top:15px">
+            <div class="field"
+                 style="margin-top:15px">
+
                 <label>Cash fillestar</label>
-                <input id="openingCash" type="number" value="0">
+
+                <input id="openingCash"
+                       type="number"
+                       value="0">
+
             </div>
 
             <button id="shiftButton"
                     class="btn"
-                    style="margin-top:10px"
                     onclick="toggleShift()">
                 Hap turnin
             </button>
+
         </div>
 
         <div class="panel">
-            <div class="panel-title">Turnet e fundit</div>
+
+            <div class="panel-title">
+                Turnet e fundit
+            </div>
+
             <div id="shiftHistory"></div>
+
         </div>
 
     </div>
+
 </section>
 
-<!-- CASH -->
+<!-- ================= CASH ================= -->
+
 <section id="cash" class="page">
+
     <div class="title">Kasa</div>
 
     <div class="stats">
+
         <div class="stat">
             <small>Cash nga shitjet</small>
             <strong id="cashSales">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Cash fillestar</small>
             <strong id="openingCashView">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Cash i pritshëm</small>
             <strong id="expectedCash">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Hyrje/Dalje</small>
             <strong id="cashMovements">0 L</strong>
         </div>
+
     </div>
 
     <div class="panel">
-        <div class="panel-title">Lëvizje kase</div>
+
+        <div class="panel-title">
+            Lëvizje kase
+        </div>
 
         <div class="form-grid">
+
             <div class="field">
                 <label>Lloji</label>
+
                 <select id="cashMovementType">
-                    <option value="in">Hyrje</option>
-                    <option value="out">Dalje</option>
+                    <option value="in">
+                        Hyrje
+                    </option>
+                    <option value="out">
+                        Dalje
+                    </option>
                 </select>
             </div>
 
             <div class="field">
                 <label>Shuma</label>
-                <input id="cashMovementAmount" type="number">
+                <input id="cashMovementAmount"
+                       type="number">
             </div>
 
             <div class="field">
                 <label>Përshkrimi</label>
-                <input id="cashMovementNote" placeholder="P.sh. furnizim">
+                <input id="cashMovementNote"
+                       placeholder="P.sh. furnizim">
             </div>
+
         </div>
 
         <button class="btn"
-                style="margin-top:13px"
                 onclick="addCashMovement()">
-            Regjistro lëvizjen
+            Regjistro
         </button>
+
     </div>
+
 </section>
 
-<!-- REPORTS -->
+<!-- ================= REPORTS ================= -->
+
 <section id="reports" class="page">
+
     <div class="title">Raporte</div>
 
     <div class="stats">
+
         <div class="stat">
             <small>Sot</small>
             <strong id="reportToday">0 L</strong>
         </div>
+
         <div class="stat">
             <small>7 ditët</small>
             <strong id="reportWeek">0 L</strong>
         </div>
+
         <div class="stat">
             <small>Fatura</small>
             <strong id="reportInvoices">0</strong>
         </div>
+
     </div>
 
     <div class="grid2">
 
         <div class="panel">
-            <div class="panel-title">Shitjet sipas produktit</div>
+            <div class="panel-title">
+                Shitjet sipas produktit
+            </div>
+
             <div id="productReport"></div>
         </div>
 
         <div class="panel">
-            <div class="panel-title">Shitjet sipas kamarierit</div>
+            <div class="panel-title">
+                Shitjet sipas kamarierit
+            </div>
+
             <div id="waiterReport"></div>
         </div>
 
     </div>
+
 </section>
 
-<!-- HISTORY -->
+<!-- ================= HISTORY ================= -->
+
 <section id="history" class="page">
+
     <div class="title">Historia</div>
 
     <div class="panel">
+
         <div id="historyList"></div>
 
         <button id="deleteHistoryButton"
                 class="btn red"
-                style="margin-top:15px"
                 onclick="deleteHistory()">
             Fshi historikun
         </button>
+
     </div>
+
 </section>
 
-<!-- ADMIN -->
-<section id="settings" class="page">
-    <div class="title">Admin</div>
+<!-- ================= SECRET ADMIN ================= -->
 
-    <div class="grid2">
+<section id="admin" class="page">
 
-        <div class="panel">
-            <div class="panel-title">Lokali</div>
+    <div class="title">
+        Admin Control Center
+    </div>
+
+    <div class="admin-grid">
+
+        <!-- PRODUCTS -->
+
+        <div class="admin-section">
+
+            <h3>🍹 Menaxho Produktet</h3>
 
             <div class="field">
                 <label>Emri</label>
-                <input id="barNameInput">
+                <input id="productName"
+                       placeholder="P.sh. Espresso">
             </div>
 
-            <div class="field" style="margin-top:12px">
-                <label>Adresa</label>
-                <input id="barAddressInput">
+            <div class="field">
+                <label>Kategoria</label>
+                <input id="productCategory"
+                       placeholder="P.sh. Kafe">
             </div>
 
-            <div class="field" style="margin-top:12px">
-                <label>Telefon</label>
-                <input id="barPhoneInput">
+            <div class="field">
+                <label>Çmimi</label>
+                <input id="productPrice"
+                       type="number"
+                       placeholder="100">
+            </div>
+
+            <div class="field">
+                <label>Stoku fillestar</label>
+                <input id="productStock"
+                       type="number"
+                       value="20">
+            </div>
+
+            <div class="admin-actions">
+
+                <button class="btn"
+                        onclick="addProductAdmin()">
+                    + Shto produkt
+                </button>
+
+            </div>
+
+            <div id="adminProductList"
+                 style="margin-top:15px">
+            </div>
+
+        </div>
+
+        <!-- WAITERS -->
+
+        <div class="admin-section">
+
+            <h3>👤 Menaxho Kamarierët</h3>
+
+            <div class="field">
+                <label>Emri</label>
+                <input id="waiterName"
+                       placeholder="Emri i kamarierit">
+            </div>
+
+            <div class="field">
+                <label>Username</label>
+                <input id="waiterUsername"
+                       placeholder="kamarier2">
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input id="waiterPassword"
+                       type="password"
+                       placeholder="1234">
             </div>
 
             <button class="btn"
-                    style="margin-top:8px"
-                    onclick="saveSettings()">
-                Ruaj
+                    onclick="addWaiter()">
+                + Shto kamarier
             </button>
+
+            <div id="adminWaiterList"
+                 style="margin-top:15px">
+            </div>
+
         </div>
 
-        <div class="panel">
-            <div class="panel-title">Tavolina</div>
+        <!-- TABLES -->
+
+        <div class="admin-section">
+
+            <h3>🪑 Menaxho Tavolinat</h3>
 
             <div class="field">
-                <label>Numri</label>
+                <label>Numri i tavolinave</label>
                 <input id="tableCountInput"
                        type="number"
                        min="1"
@@ -748,78 +1025,184 @@ button{cursor:pointer}
             </div>
 
             <button class="btn"
-                    style="margin-top:8px"
                     onclick="saveTableCount()">
                 Ruaj tavolinat
             </button>
+
         </div>
 
-        <div class="panel">
-            <div class="panel-title">Fjalëkalimi Admin</div>
+        <!-- BAR SETTINGS -->
+
+        <div class="admin-section">
+
+            <h3>🏪 Të dhënat e lokalit</h3>
 
             <div class="field">
-                <label>Fjalëkalim i ri</label>
-                <input id="newAdminPassword" type="password">
+                <label>Emri i lokalit</label>
+                <input id="barNameInput">
+            </div>
+
+            <div class="field">
+                <label>Adresa</label>
+                <input id="barAddressInput">
+            </div>
+
+            <div class="field">
+                <label>Telefon</label>
+                <input id="barPhoneInput">
             </div>
 
             <button class="btn"
-                    style="margin-top:8px"
-                    onclick="changeAdminPassword()">
-                Ndrysho
+                    onclick="saveSettings()">
+                Ruaj të dhënat
             </button>
+
+        </div>
+
+        <!-- PASSWORD -->
+
+        <div class="admin-section">
+
+            <h3>🔐 Siguria</h3>
+
+            <div class="field">
+                <label>Password i ri Admin</label>
+                <input id="newAdminPassword"
+                       type="password">
+            </div>
+
+            <button class="btn"
+                    onclick="changeAdminPassword()">
+                Ndrysho password
+            </button>
+
+        </div>
+
+        <!-- DANGER -->
+
+        <div class="admin-section">
+
+            <h3>⚠️ Zona e rrezikshme</h3>
+
+            <p style="color:#78857d;line-height:1.6;margin-bottom:15px">
+                Këto veprime ndryshojnë të dhënat e sistemit.
+            </p>
+
+            <button class="btn red"
+                    onclick="clearAllInvoices()">
+                Fshi të gjitha faturat
+            </button>
+
         </div>
 
     </div>
+
 </section>
 
 </main>
 </div>
 
 <!-- PAYMENT -->
+
 <div id="paymentModal" class="modal">
+
     <div class="modal-box">
+
         <h2>Pagesa</h2>
 
-        <div id="paymentTotal" class="modal-total">0 L</div>
-
-        <div class="modal-buttons">
-            <button onclick="completePayment('cash')">💵 CASH</button>
-            <button onclick="completePayment('card')">💳 KARTË</button>
+        <div id="paymentTotal"
+             class="modal-total">
+            0 L
         </div>
 
-        <button class="close" onclick="closePayment()">Anulo</button>
+        <div class="modal-buttons">
+
+            <button onclick="completePayment('cash')">
+                💵 CASH
+            </button>
+
+            <button onclick="completePayment('card')">
+                💳 KARTË
+            </button>
+
+        </div>
+
+        <button class="close"
+                onclick="closePayment()">
+            Anulo
+        </button>
+
     </div>
+
 </div>
 
 <!-- INVOICE -->
+
 <div id="invoiceModal" class="modal">
+
     <div class="modal-box">
 
-        <div id="invoicePrint" class="invoice">
-            <h2 id="invoiceBarName">MY BAR</h2>
+        <div id="invoicePrint"
+             class="invoice">
+
+            <h2 id="invoiceBarName">
+                MY BAR
+            </h2>
 
             <div class="invoice-meta">
-                <div>Fatura: <b id="invoiceNumber"></b></div>
-                <div>Data: <span id="invoiceDate"></span></div>
-                <div>Tavolina: <span id="invoiceTable"></span></div>
-                <div>Kamarieri: <span id="invoiceWaiter"></span></div>
+
+                <div>
+                    Fatura:
+                    <b id="invoiceNumber"></b>
+                </div>
+
+                <div>
+                    Data:
+                    <span id="invoiceDate"></span>
+                </div>
+
+                <div>
+                    Tavolina:
+                    <span id="invoiceTable"></span>
+                </div>
+
+                <div>
+                    Kamarieri:
+                    <span id="invoiceWaiter"></span>
+                </div>
+
             </div>
 
             <div id="invoiceItems"></div>
 
             <div class="invoice-total">
+
                 <span>TOTAL</span>
-                <span id="invoiceTotal">0 L</span>
+
+                <span id="invoiceTotal">
+                    0 L
+                </span>
+
             </div>
 
-            <button class="print" onclick="window.print()">PRINT</button>
+            <button class="print"
+                    onclick="window.print()">
+                PRINT
+            </button>
+
         </div>
 
-        <button class="close" onclick="closeInvoice()">Mbyll</button>
+        <button class="close"
+                onclick="closeInvoice()">
+            Mbyll
+        </button>
+
     </div>
+
 </div>
 
-<div id="toast" class="toast"></div>
+<div id="toast"
+     class="toast"></div>
 
 <script>
 
@@ -835,12 +1218,13 @@ const INVOICES_KEY="MYBAR_INVOICES_FINAL";
 const SETTINGS_KEY="MYBAR_SETTINGS_FINAL";
 const STOCK_KEY="MYBAR_STOCK_FINAL";
 const TABLE_COUNT_KEY="MYBAR_TABLE_COUNT_FINAL";
+
 const SHIFT_KEY="MYBAR_CURRENT_SHIFT";
 const SHIFT_HISTORY_KEY="MYBAR_SHIFT_HISTORY";
 const CASH_MOVEMENTS_KEY="MYBAR_CASH_MOVEMENTS";
 
 /* =========================================================
-   USERS
+   DEFAULT USERS
 ========================================================= */
 
 const DEFAULT_USERS=[
@@ -859,7 +1243,7 @@ const DEFAULT_USERS=[
 ];
 
 /* =========================================================
-   PRODUCTS
+   DEFAULT PRODUCTS
 ========================================================= */
 
 const DEFAULT_PRODUCTS=[
@@ -955,21 +1339,24 @@ function setJSON(key,value){
     localStorage.setItem(key,JSON.stringify(value));
 }
 
-function money(v){
-    return Number(v||0).toLocaleString("sq-AL")+" L";
+function money(value){
+    return Number(value||0)
+        .toLocaleString("sq-AL")+" L";
 }
 
-function escapeHTML(v){
-    return String(v??"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+function escapeHTML(value){
+    return String(value??"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
 function toast(message){
+
     const box=document.getElementById("toast");
+
     box.textContent=message;
     box.style.display="block";
 
@@ -986,25 +1373,34 @@ function toast(message){
 
 function getCurrentSession(){
 
-    let s=getJSON(SESSION_KEY,null);
+    let session=getJSON(
+        SESSION_KEY,
+        null
+    );
 
-    if(!s){
-        s=getJSON("barCurrentUser",null);
+    if(!session){
+        session=getJSON(
+            "barCurrentUser",
+            null
+        );
     }
 
-    if(!s)return null;
+    if(!session)return null;
 
     const username=String(
-        s.username||s.user||""
+        session.username||
+        session.user||
+        ""
     ).toLowerCase();
 
     const role=String(
-        s.role||""
+        session.role||
+        ""
     ).toLowerCase();
 
     if(
-        username==="admin" ||
-        role==="admin" ||
+        username==="admin"||
+        role==="admin"||
         role==="administrator"
     ){
         return{
@@ -1016,20 +1412,34 @@ function getCurrentSession(){
     }
 
     if(
-        username==="kamarier" ||
-        username==="kamarier1" ||
-        role==="waiter" ||
+        username==="kamarier"||
+        username==="kamarier1"||
+        role==="waiter"||
         role==="kamarier"
     ){
         return{
-            username:username||"kamarier",
-            user:username||"kamarier",
+            username:
+                username||"kamarier",
+            user:
+                username||"kamarier",
             role:"waiter",
-            name:s.name||"Kamarier"
+            name:
+                session.name||
+                "Kamarier"
         };
     }
 
-    return s;
+    return session;
+}
+
+function isAdmin(){
+
+    const user=getCurrentSession();
+
+    return !!(
+        user &&
+        user.role==="admin"
+    );
 }
 
 /* =========================================================
@@ -1048,14 +1458,20 @@ function initialize(){
         setJSON(INVOICES_KEY,[]);
 
     if(!localStorage.getItem(SETTINGS_KEY))
-        setJSON(SETTINGS_KEY,{
-            barName:"MY BAR",
-            address:"",
-            phone:""
-        });
+        setJSON(
+            SETTINGS_KEY,
+            {
+                barName:"MY BAR",
+                address:"",
+                phone:""
+            }
+        );
 
     if(!localStorage.getItem(TABLE_COUNT_KEY))
-        localStorage.setItem(TABLE_COUNT_KEY,"12");
+        localStorage.setItem(
+            TABLE_COUNT_KEY,
+            "12"
+        );
 
     initializeTables();
     initializeStock();
@@ -1068,22 +1484,25 @@ function initialize(){
 function initializeTables(){
 
     const count=Number(
-        localStorage.getItem(TABLE_COUNT_KEY)
+        localStorage.getItem(
+            TABLE_COUNT_KEY
+        )
     )||12;
 
-    let tables=getJSON(TABLES_KEY,[]);
+    const oldTables=getJSON(
+        TABLES_KEY,
+        []
+    );
 
-    if(!Array.isArray(tables)){
-        tables=[];
-    }
-
-    const result=[];
+    const tables=[];
 
     for(let i=1;i<=count;i++){
 
-        const old=tables.find(t=>t.id===i);
+        const old=oldTables.find(
+            t=>t.id===i
+        );
 
-        result.push(
+        tables.push(
             old||{
                 id:i,
                 name:"Tavolina "+i,
@@ -1092,20 +1511,31 @@ function initializeTables(){
         );
     }
 
-    setJSON(TABLES_KEY,result);
+    setJSON(
+        TABLES_KEY,
+        tables
+    );
 }
 
 function getTables(){
-    return getJSON(TABLES_KEY,[]);
+    return getJSON(
+        TABLES_KEY,
+        []
+    );
 }
 
 function saveTables(tables){
-    setJSON(TABLES_KEY,tables);
+    setJSON(
+        TABLES_KEY,
+        tables
+    );
 }
 
 function getSelectedTable(){
     return Number(
-        localStorage.getItem("MYBAR_SELECTED_TABLE")||0
+        localStorage.getItem(
+            "MYBAR_SELECTED_TABLE"
+        )||0
     );
 }
 
@@ -1121,7 +1551,9 @@ function selectTable(id){
 
     showPage(
         "pos",
-        document.querySelectorAll(".nav button")[1]
+        document.querySelectorAll(
+            ".nav button"
+        )[1]
     );
 }
 
@@ -1141,29 +1573,50 @@ function initializeStock(){
         {}
     );
 
-    products.forEach(p=>{
-        if(stock[p.id]===undefined)
-            stock[p.id]=20;
+    products.forEach(product=>{
+
+        if(
+            stock[product.id]===undefined
+        ){
+            stock[product.id]=20;
+        }
+
     });
 
-    setJSON(STOCK_KEY,stock);
+    setJSON(
+        STOCK_KEY,
+        stock
+    );
 }
 
 function getStock(id){
-    const stock=getJSON(STOCK_KEY,{});
-    return Number(stock[id]??0);
+
+    const stock=getJSON(
+        STOCK_KEY,
+        {}
+    );
+
+    return Number(
+        stock[id]??0
+    );
 }
 
 function setStock(id,value){
 
-    const stock=getJSON(STOCK_KEY,{});
+    const stock=getJSON(
+        STOCK_KEY,
+        {}
+    );
 
     stock[id]=Math.max(
         0,
         Number(value)||0
     );
 
-    setJSON(STOCK_KEY,stock);
+    setJSON(
+        STOCK_KEY,
+        stock
+    );
 }
 
 /* =========================================================
@@ -1188,6 +1641,7 @@ function renderHeader(){
     const user=getCurrentSession();
 
     if(user){
+
         document.getElementById(
             "userInfo"
         ).textContent=
@@ -1201,30 +1655,49 @@ function renderHeader(){
     }
 }
 
+/* =========================================================
+   SECRET ADMIN ACCESS
+========================================================= */
+
 function applyRole(){
 
-    const user=getCurrentSession();
+    const adminNav=document.getElementById(
+        "adminNav"
+    );
 
-    const admin=document.getElementById("adminNav");
+    if(isAdmin()){
 
-    const deleteButton=
-        document.getElementById(
-            "deleteHistoryButton"
-        );
+        /*
+          Vetëm admini e merr butonin.
+          Për kamarierin ai nuk ekziston vizualisht.
+        */
 
-    if(user&&user.role==="admin"){
-
-        admin.style.display="block";
-
-        if(deleteButton)
-            deleteButton.style.display="inline-block";
+        adminNav.style.display="block";
 
     }else{
 
-        admin.style.display="none";
+        adminNav.style.display="none";
 
-        if(deleteButton)
-            deleteButton.style.display="none";
+        /*
+          Nëse dikush ka tentuar të hapë
+          adminin më parë, ktheje në dashboard.
+        */
+
+        const adminPage=document.getElementById(
+            "admin"
+        );
+
+        if(
+            adminPage &&
+            adminPage.classList.contains("active")
+        ){
+            showPage(
+                "dashboard",
+                document.querySelector(
+                    ".nav button"
+                )
+            );
+        }
     }
 }
 
@@ -1234,45 +1707,75 @@ function applyRole(){
 
 function showPage(id,button){
 
-    const user=getCurrentSession();
-
     if(
-        id==="settings" &&
-        (!user||user.role!=="admin")
+        id==="admin" &&
+        !isAdmin()
     ){
-        toast("Vetëm administratori ka akses.");
+        toast(
+            "Akses i refuzuar."
+        );
         return;
     }
 
     document
-    .querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
+        .querySelectorAll(".page")
+        .forEach(
+            p=>p.classList.remove("active")
+        );
 
     const page=document.getElementById(id);
 
-    if(page)page.classList.add("active");
+    if(page)
+        page.classList.add("active");
 
     document
-    .querySelectorAll(".nav button")
-    .forEach(b=>b.classList.remove("active"));
+        .querySelectorAll(".nav button")
+        .forEach(
+            b=>b.classList.remove("active")
+        );
 
-    if(button)button.classList.add("active");
+    if(button)
+        button.classList.add("active");
 
-    if(id==="dashboard")updateDashboard();
+    if(id==="dashboard")
+        updateDashboard();
+
     if(id==="pos"){
         renderMenu();
         renderOrder();
     }
-    if(id==="tables")renderTables();
-    if(id==="inventory")renderInventory();
+
+    if(id==="tables")
+        renderTables();
+
+    if(id==="inventory")
+        renderInventory();
+
     if(id==="shifts"){
         renderShift();
         renderShiftHistory();
     }
-    if(id==="cash")renderCash();
-    if(id==="reports")renderReports();
-    if(id==="history")renderHistory();
-    if(id==="settings")loadSettings();
+
+    if(id==="cash")
+        renderCash();
+
+    if(id==="reports")
+        renderReports();
+
+    if(id==="history")
+        renderHistory();
+
+    if(id==="admin"){
+
+        if(!isAdmin()){
+            toast("Akses i refuzuar.");
+            return;
+        }
+
+        renderAdminProducts();
+        renderAdminWaiters();
+        loadSettings();
+    }
 }
 
 /* =========================================================
@@ -1282,31 +1785,42 @@ function showPage(id,button){
 function renderTables(){
 
     const tables=getTables();
+
     const selected=getSelectedTable();
 
-    const html=tables.map(t=>{
+    const html=tables.map(table=>{
 
-        const active=t.items&&t.items.length>0;
+        const active=
+            table.items &&
+            table.items.length>0;
 
-        const total=(t.items||[]).reduce(
-            (sum,i)=>
-                sum+
-                Number(i.price)*
-                Number(i.quantity),
-            0
-        );
+        const total=
+            (table.items||[])
+            .reduce(
+                (sum,item)=>
+                    sum+
+                    Number(item.price)*
+                    Number(item.quantity),
+                0
+            );
 
         return`
         <button
             class="table-card
             ${active?"active":""}
-            ${selected===t.id?"selected":""}"
-            onclick="selectTable(${t.id})">
+            ${selected===table.id?"selected":""}"
+            onclick="selectTable(${table.id})">
 
-            <strong>${escapeHTML(t.name)}</strong>
+            <strong>
+                ${escapeHTML(table.name)}
+            </strong>
 
             <span>
-                ${active?money(total):"E lirë"}
+                ${
+                    active
+                    ?money(total)
+                    :"E lirë"
+                }
             </span>
 
         </button>`;
@@ -1332,1408 +1846,90 @@ function renderTables(){
    MENU
 ========================================================= */
 
-function renderMenu(category="Të gjitha"){
+function renderMenu(
+    category="Të gjitha"
+){
 
     const products=getJSON(
         PRODUCTS_KEY,
         DEFAULT_PRODUCTS
     );
 
-    const cats=[
+    const categories=[
         "Të gjitha",
-        ...new Set(products.map(p=>p.category))
+        ...new Set(
+            products.map(
+                p=>p.category
+            )
+        )
     ];
 
     document.getElementById(
         "categories"
-    ).innerHTML=cats.map(c=>`
-        <button
-            class="${c===category?"active":""}"
-            onclick='renderMenu(${JSON.stringify(c)})'>
-            ${escapeHTML(c)}
-        </button>
-    `).join("");
+    ).innerHTML=
+        categories.map(
+            cat=>`
+            <button
+                class="${
+                    cat===category
+                    ?"active"
+                    :""
+                }"
+                onclick='renderMenu(${JSON.stringify(cat)})'>
+                ${escapeHTML(cat)}
+            </button>
+            `
+        ).join("");
 
     drawProducts(
         category==="Të gjitha"
         ?products
-        :products.filter(p=>p.category===category)
+        :products.filter(
+            p=>p.category===category
+        )
     );
 }
 
 function drawProducts(products){
 
-    const grid=document.getElementById("menuGrid");
+    document.getElementById(
+        "menuGrid"
+    ).innerHTML=
+        products.map(product=>{
 
-    grid.innerHTML=products.map(p=>{
+            const stock=getStock(
+                product.id
+            );
 
-        const stock=getStock(p.id);
+            return`
+            <button
+                class="menu-card
+                ${stock<=0?"out":""}"
+                ${stock<=0?"disabled":""}
+                onclick="addProduct(${product.id})">
 
-        return`
-        <button
-            class="menu-card ${stock<=0?"out":""}"
-            ${stock<=0?"disabled":""}
-            onclick="addProduct(${p.id})">
+                <strong>
+                    ${escapeHTML(product.name)}
+                </strong>
 
-            <strong>${escapeHTML(p.name)}</strong>
+                <span class="price">
+                    ${money(product.price)}
+                </span>
 
-            <span class="price">${money(p.price)}</span>
+                <small>
+                    Stok: ${stock}
+                </small>
 
-            <small>Stok: ${stock}</small>
-
-        </button>`;
-    }).join("");
+            </button>`;
+        }).join("");
 }
 
 /* =========================================================
    ADD PRODUCT
 ========================================================= */
 
-function addProduct(id){
+function addProduct(productId){
 
     const tableId=getSelectedTable();
 
-    if(!tableId){
-        toast("Zgjidh fillimisht një tavolinë.");
-        return;
-    }
-
-    const products=getJSON(
-        PRODUCTS_KEY,
-        DEFAULT_PRODUCTS
-    );
-
-    const product=products.find(
-        p=>Number(p.id)===Number(id)
-    );
-
-    if(!product)return;
-
-    const stock=getStock(id);
-
-    if(stock<=0){
-        toast("Ky produkt nuk ka stok.");
-        return;
-    }
-
-    const tables=getTables();
-
-    const table=tables.find(
-        t=>t.id===tableId
-    );
-
-    if(!table)return;
-
-    if(!Array.isArray(table.items))
-        table.items=[];
-
-    const existing=table.items.find(
-        i=>Number(i.productId)===Number(id)
-    );
-
-    if(existing){
-
-        if(existing.quantity>=stock){
-            toast("Nuk ka më stok.");
-            return;
-        }
-
-        existing.quantity++;
-
-    }else{
-
-        table.items.push({
-            productId:product.id,
-            name:product.name,
-            price:Number(product.price),
-            quantity:1
-        });
-    }
-
-    saveTables(tables);
-
-    renderTables();
-    renderOrder();
-
-    toast(product.name+" u shtua.");
-}
-
-/* =========================================================
-   ORDER
-========================================================= */
-
-function renderOrder(){
-
-    const tableId=getSelectedTable();
-
-    const table=getTables().find(
-        t=>t.id===tableId
-    );
-
-    const box=document.getElementById(
-        "orderItems"
-    );
-
-    if(!table||!table.items.length){
-
-        box.innerHTML=
-            `<div style="color:#69766e;padding:25px;text-align:center">
-                Porosia është bosh.
-            </div>`;
-
-        document.getElementById(
-            "orderTotal"
-        ).textContent=money(0);
-
-        return;
-    }
-
-    let total=0;
-
-    box.innerHTML=table.items.map(
-        (item,index)=>{
-
-            const itemTotal=
-                Number(item.price)*
-                Number(item.quantity);
-
-            total+=itemTotal;
-
-            return`
-            <div class="order-item">
-
-                <div>
-                    <strong>
-                        ${escapeHTML(item.name)}
-                    </strong>
-
-                    <small>
-                        ${money(item.price)}
-                        × ${item.quantity}
-                    </small>
-                </div>
-
-                <div class="actions">
-
-                    <button
-                        onclick="changeOrderQuantity(${index},-1)">
-                        −
-                    </button>
-
-                    <span>${item.quantity}</span>
-
-                    <button
-                        onclick="changeOrderQuantity(${index},1)">
-                        +
-                    </button>
-
-                    <button
-                        onclick="removeOrderItem(${index})">
-                        ×
-                    </button>
-
-                </div>
-
-            </div>`;
-        }
-    ).join("");
-
-    document.getElementById(
-        "orderTotal"
-    ).textContent=money(total);
-}
-
-function changeOrderQuantity(index,amount){
-
-    const tableId=getSelectedTable();
-
-    const tables=getTables();
-
-    const table=tables.find(
-        t=>t.id===tableId
-    );
-
-    if(!table)return;
-
-    const item=table.items[index];
-
-    if(!item)return;
-
-    const newQty=
-        Number(item.quantity)+
-        Number(amount);
-
-    if(newQty<=0){
-
-        table.items.splice(index,1);
-
-    }else{
-
-        if(newQty>getStock(item.productId)){
-            toast("Nuk ka mjaftueshëm stok.");
-            return;
-        }
-
-        item.quantity=newQty;
-    }
-
-    saveTables(tables);
-    renderTables();
-    renderOrder();
-}
-
-function removeOrderItem(index){
-
-    const tables=getTables();
-
-    const table=tables.find(
-        t=>t.id===getSelectedTable()
-    );
-
-    if(!table)return;
-
-    table.items.splice(index,1);
-
-    saveTables(tables);
-
-    renderTables();
-    renderOrder();
-}
-
-/* =========================================================
-   PAYMENT
-========================================================= */
-
-function getOrderTotal(table){
-
-    return(table.items||[]).reduce(
-        (sum,i)=>
-            sum+
-            Number(i.price)*
-            Number(i.quantity),
-        0
-    );
-}
-
-function openPayment(){
-
-    const table=getTables().find(
-        t=>t.id===getSelectedTable()
-    );
-
-    if(!table){
-        toast("Zgjidh një tavolinë.");
-        return;
-    }
-
-    if(!table.items.length){
-        toast("Porosia është bosh.");
-        return;
-    }
-
-    document.getElementById(
-        "paymentTotal"
-    ).textContent=money(
-        getOrderTotal(table)
-    );
-
-    document.getElementById(
-        "paymentModal"
-    ).style.display="flex";
-}
-
-function closePayment(){
-    document.getElementById(
-        "paymentModal"
-    ).style.display="none";
-}
-
-function completePayment(method){
-
-    const tableId=getSelectedTable();
-
-    const tables=getTables();
-
-    const table=tables.find(
-        t=>t.id===tableId
-    );
-
-    if(!table||!table.items.length){
-        toast("Porosia është bosh.");
-        return;
-    }
-
-    for(const item of table.items){
-
-        if(
-            Number(item.quantity)>
-            getStock(item.productId)
-        ){
-            toast(
-                "Stok i pamjaftueshëm: "+
-                item.name
-            );
-            return;
-        }
-    }
-
-    for(const item of table.items){
-
-        setStock(
-            item.productId,
-            getStock(item.productId)-
-            Number(item.quantity)
-        );
-    }
-
-    const user=getCurrentSession();
-
-    const invoice={
-        id:Date.now(),
-        number:"INV-"+Date.now(),
-        date:new Date().toISOString(),
-        table:tableId,
-        tableName:"Tavolina "+tableId,
-        items:JSON.parse(
-            JSON.stringify(table.items)
-        ),
-        total:getOrderTotal(table),
-        payment:method,
-        waiterName:
-            user?user.name:"Pa emër"
-    };
-
-    const invoices=getJSON(
-        INVOICES_KEY,
-        []
-    );
-
-    invoices.push(invoice);
-
-    setJSON(
-        INVOICES_KEY,
-        invoices
-    );
-
-    table.items=[];
-
-    saveTables(tables);
-
-    localStorage.removeItem(
-        "MYBAR_SELECTED_TABLE"
-    );
-
-    closePayment();
-
-    renderTables();
-    renderOrder();
-    renderMenu();
-    updateDashboard();
-    renderInventory();
-    renderHistory();
-    renderReports();
-    renderCash();
-
-    showInvoice(invoice);
-
-    toast("Pagesa u krye me sukses.");
-}
-
-/* =========================================================
-   INVOICE
-========================================================= */
-
-function showInvoice(invoice){
-
-    document.getElementById(
-        "invoiceNumber"
-    ).textContent=invoice.number;
-
-    document.getElementById(
-        "invoiceDate"
-    ).textContent=
-        new Date(invoice.date)
-        .toLocaleString("sq-AL");
-
-    document.getElementById(
-        "invoiceTable"
-    ).textContent=invoice.tableName;
-
-    document.getElementById(
-        "invoiceWaiter"
-    ).textContent=invoice.waiterName;
-
-    document.getElementById(
-        "invoiceItems"
-    ).innerHTML=
-        invoice.items.map(i=>`
-            <div class="invoice-line">
-                <span>
-                    ${escapeHTML(i.name)}
-                    × ${i.quantity}
-                </span>
-                <b>
-                    ${money(
-                        i.price*i.quantity
-                    )}
-                </b>
-            </div>
-        `).join("");
-
-    document.getElementById(
-        "invoiceTotal"
-    ).textContent=money(invoice.total);
-
-    document.getElementById(
-        "invoiceModal"
-    ).style.display="flex";
-}
-
-function closeInvoice(){
-    document.getElementById(
-        "invoiceModal"
-    ).style.display="none";
-}
-
-/* =========================================================
-   INVENTORY
-========================================================= */
-
-function renderInventory(){
-
-    const products=getJSON(
-        PRODUCTS_KEY,
-        DEFAULT_PRODUCTS
-    );
-
-    const query=
-        (
-            document.getElementById(
-                "inventorySearch"
-            )?.value||""
-        )
-        .toLowerCase();
-
-    const min=Number(
-        document.getElementById(
-            "minimumStock"
-        )?.value||5
-    );
-
-    const filtered=products.filter(
-        p=>p.name.toLowerCase().includes(query)
-    );
-
-    document.getElementById(
-        "inventoryList"
-    ).innerHTML=
-        filtered.map(p=>{
-
-            const stock=getStock(p.id);
-
-            return`
-            <div class="row">
-
-                <div>
-                    <strong>
-                        ${escapeHTML(p.name)}
-                    </strong>
-
-                    <small>
-                        ${escapeHTML(p.category)}
-                        • ${money(p.price)}
-                    </small>
-                </div>
-
-                <div style="text-align:right">
-
-                    <span class="badge ${
-                        stock<=min?"red":""
-                    }">
-                        Stok: ${stock}
-                    </span>
-
-                    <div style="margin-top:7px">
-
-                        <button
-                            class="btn"
-                            onclick="stockChange(${p.id},-1)">
-                            −
-                        </button>
-
-                        <button
-                            class="btn"
-                            onclick="stockChange(${p.id},1)">
-                            +
-                        </button>
-
-                        <button
-                            class="btn gold"
-                            onclick="stockAddDialog(${p.id})">
-                            +STOK
-                        </button>
-
-                    </div>
-                </div>
-
-            </div>`;
-        }).join("");
-}
-
-function stockChange(id,amount){
-
-    setStock(
-        id,
-        getStock(id)+amount
-    );
-
-    renderInventory();
-    renderMenu();
-}
-
-function stockAddDialog(id){
-
-    const amount=prompt(
-        "Sa copë do të shtosh në stok?"
-    );
-
-    if(amount===null)return;
-
-    const n=Number(amount);
-
-    if(!Number.isFinite(n)||n<=0){
-        toast("Shuma nuk është e vlefshme.");
-        return;
-    }
-
-    stockChange(id,n);
-
-    toast("Stoku u shtua.");
-}
-
-/* =========================================================
-   SHIFTS
-========================================================= */
-
-function getCurrentShift(){
-    return getJSON(SHIFT_KEY,null);
-}
-
-function toggleShift(){
-
-    const user=getCurrentSession();
-
-    if(!user){
-        toast("Nuk ka përdorues aktiv.");
-        return;
-    }
-
-    const current=getCurrentShift();
-
-    if(!current){
-
-        const opening=Number(
-            document.getElementById(
-                "openingCash"
-            ).value||0
-        );
-
-        const shift={
-            id:Date.now(),
-            user:user.name,
-            username:user.username,
-            start:new Date().toISOString(),
-            openingCash:opening
-        };
-
-        setJSON(
-            SHIFT_KEY,
-            shift
-        );
-
-        toast("Turni u hap.");
-
-    }else{
-
-        const invoices=getJSON(
-            INVOICES_KEY,
-            []
-        );
-
-        const cashSales=invoices
-            .filter(i=>
-                i.payment==="cash" &&
-                new Date(i.date)>=
-                new Date(current.start)
-            )
-            .reduce(
-                (s,i)=>s+Number(i.total||0),
-                0
-            );
-
-        const movements=getJSON(
-            CASH_MOVEMENTS_KEY,
-            []
-        )
-        .filter(m=>
-            m.time>=current.start
-        )
-        .reduce(
-            (s,m)=>
-                s+
-                (
-                    m.type==="in"
-                    ?Number(m.amount)
-                    :-Number(m.amount)
-                ),
-            0
-        );
-
-        const closed={
-            ...current,
-            end:new Date().toISOString(),
-            cashSales,
-            movements,
-            expectedCash:
-                Number(current.openingCash||0)+
-                cashSales+
-                movements
-        };
-
-        const history=getJSON(
-            SHIFT_HISTORY_KEY,
-            []
-        );
-
-        history.push(closed);
-
-        setJSON(
-            SHIFT_HISTORY_KEY,
-            history
-        );
-
-        localStorage.removeItem(
-            SHIFT_KEY
-        );
-
-        toast("Turni u mbyll.");
-    }
-
-    renderShift();
-    renderShiftHistory();
-    renderCash();
-}
-
-function renderShift(){
-
-    const shift=getCurrentShift();
-
-    const box=document.getElementById(
-        "shiftStatus"
-    );
-
-    const button=document.getElementById(
-        "shiftButton"
-    );
-
-    if(!shift){
-
-        box.innerHTML=`
-            <span class="badge red">
-                TURNI I MBYLLUR
-            </span>`;
-
-        button.textContent="Hap turnin";
-
-        return;
-    }
-
-    box.innerHTML=`
-        <span class="badge">
-            TURNI AKTIV
-        </span>
-
-        <div style="margin-top:13px;color:#89978e">
-            Kamarieri: <b>${escapeHTML(shift.user)}</b><br>
-            Filloi:
-            ${new Date(shift.start).toLocaleString("sq-AL")}<br>
-            Cash fillestar:
-            <b>${money(shift.openingCash)}</b>
-        </div>`;
-
-    button.textContent="Mbyll turnin";
-    button.className="btn red";
-}
-
-function renderShiftHistory(){
-
-    const history=getJSON(
-        SHIFT_HISTORY_KEY,
-        []
-    ).slice(-10).reverse();
-
-    document.getElementById(
-        "shiftHistory"
-    ).innerHTML=
-        history.length
-        ?history.map(s=>`
-            <div class="row">
-                <div>
-                    <strong>${escapeHTML(s.user)}</strong>
-                    <small>
-                        ${new Date(s.start)
-                            .toLocaleString("sq-AL")}
-                        →
-                        ${s.end
-                            ?new Date(s.end)
-                            .toLocaleString("sq-AL")
-                            :"Aktiv"}
-                    </small>
-                </div>
-                <strong>${money(s.expectedCash||0)}</strong>
-            </div>
-        `).join("")
-        :`<div style="color:#68756d">
-            Nuk ka turne të mbyllura.
-        </div>`;
-}
-
-/* =========================================================
-   CASH
-========================================================= */
-
-function addCashMovement(){
-
-    const type=document.getElementById(
-        "cashMovementType"
-    ).value;
-
-    const amount=Number(
-        document.getElementById(
-            "cashMovementAmount"
-        ).value
-    );
-
-    const note=document.getElementById(
-        "cashMovementNote"
-    ).value.trim();
-
-    if(!amount||amount<=0){
-        toast("Vendos shumën.");
-        return;
-    }
-
-    const list=getJSON(
-        CASH_MOVEMENTS_KEY,
-        []
-    );
-
-    list.push({
-        id:Date.now(),
-        type,
-        amount,
-        note,
-        time:new Date().toISOString(),
-        user:
-            getCurrentSession()?.name||
-            "Pa emër"
-    });
-
-    setJSON(
-        CASH_MOVEMENTS_KEY,
-        list
-    );
-
-    document.getElementById(
-        "cashMovementAmount"
-    ).value="";
-
-    document.getElementById(
-        "cashMovementNote"
-    ).value="";
-
-    renderCash();
-
-    toast("Lëvizja u regjistrua.");
-}
-
-function renderCash(){
-
-    const invoices=getJSON(
-        INVOICES_KEY,
-        []
-    );
-
-    const today=new Date().toDateString();
-
-    const cashSales=invoices
-        .filter(i=>
-            i.payment==="cash" &&
-            new Date(i.date).toDateString()===today
-        )
-        .reduce(
-            (s,i)=>s+Number(i.total||0),
-            0
-        );
-
-    const shift=getCurrentShift();
-
-    const movements=getJSON(
-        CASH_MOVEMENTS_KEY,
-        []
-    );
-
-    const movementTotal=movements
-        .filter(m=>
-            !shift ||
-            m.time>=shift.start
-        )
-        .reduce(
-            (s,m)=>
-                s+
-                (
-                    m.type==="in"
-                    ?Number(m.amount)
-                    :-Number(m.amount)
-                ),
-            0
-        );
-
-    document.getElementById(
-        "cashSales"
-    ).textContent=money(cashSales);
-
-    document.getElementById(
-        "openingCashView"
-    ).textContent=
-        money(shift?.openingCash||0);
-
-    document.getElementById(
-        "expectedCash"
-    ).textContent=
-        money(
-            Number(shift?.openingCash||0)+
-            cashSales+
-            movementTotal
-        );
-
-    document.getElementById(
-        "cashMovements"
-    ).textContent=
-        money(movementTotal);
-}
-
-/* =========================================================
-   REPORTS
-========================================================= */
-
-function renderReports(){
-
-    const invoices=getJSON(
-        INVOICES_KEY,
-        []
-    );
-
-    const now=Date.now();
-
-    const today=new Date().toDateString();
-
-    const todayInvoices=invoices.filter(
-        i=>new Date(i.date).toDateString()===today
-    );
-
-    const weekInvoices=invoices.filter(
-        i=>now-new Date(i.date).getTime()
-            <=7*24*60*60*1000
-    );
-
-    document.getElementById(
-        "reportToday"
-    ).textContent=money(
-        todayInvoices.reduce(
-            (s,i)=>s+Number(i.total||0),
-            0
-        )
-    );
-
-    document.getElementById(
-        "reportWeek"
-    ).textContent=money(
-        weekInvoices.reduce(
-            (s,i)=>s+Number(i.total||0),
-            0
-        )
-    );
-
-    document.getElementById(
-        "reportInvoices"
-    ).textContent=weekInvoices.length;
-
-    const products={};
-    const waiters={};
-
-    weekInvoices.forEach(invoice=>{
-
-        const waiter=invoice.waiterName||"Pa emër";
-
-        waiters[waiter]=
-            (waiters[waiter]||0)+
-            Number(invoice.total||0);
-
-        invoice.items.forEach(item=>{
-
-            products[item.name]=
-                (products[item.name]||0)+
-                Number(item.price)*
-                Number(item.quantity);
-        });
-    });
-
-    document.getElementById(
-        "productReport"
-    ).innerHTML=
-        Object.entries(products)
-        .sort((a,b)=>b[1]-a[1])
-        .map(([name,total])=>`
-            <div class="row">
-                <span>${escapeHTML(name)}</span>
-                <strong>${money(total)}</strong>
-            </div>
-        `).join("")||
-        `<div style="color:#68756d">
-            Nuk ka shitje.
-        </div>`;
-
-    document.getElementById(
-        "waiterReport"
-    ).innerHTML=
-        Object.entries(waiters)
-        .sort((a,b)=>b[1]-a[1])
-        .map(([name,total])=>`
-            <div class="row">
-                <span>${escapeHTML(name)}</span>
-                <strong>${money(total)}</strong>
-            </div>
-        `).join("")||
-        `<div style="color:#68756d">
-            Nuk ka shitje.
-        </div>`;
-}
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function updateDashboard(){
-
-    const invoices=getJSON(
-        INVOICES_KEY,
-        []
-    );
-
-    const today=new Date().toDateString();
-
-    const list=invoices.filter(
-        i=>new Date(i.date).toDateString()===today
-    );
-
-    const sales=list.reduce(
-        (s,i)=>s+Number(i.total||0),
-        0
-    );
-
-    const cash=list
-        .filter(i=>i.payment==="cash")
-        .reduce(
-            (s,i)=>s+Number(i.total||0),
-            0
-        );
-
-    const card=list
-        .filter(i=>i.payment==="card")
-        .reduce(
-            (s,i)=>s+Number(i.total||0),
-            0
-        );
-
-    document.getElementById(
-        "salesToday"
-    ).textContent=money(sales);
-
-    document.getElementById(
-        "cashToday"
-    ).textContent=money(cash);
-
-    document.getElementById(
-        "cardToday"
-    ).textContent=money(card);
-
-    document.getElementById(
-        "invoiceToday"
-    ).textContent=list.length;
-
-    document.getElementById(
-        "activeTables"
-    ).textContent=
-        getTables().filter(
-            t=>t.items&&t.items.length
-        ).length;
-
-    document.getElementById(
-        "recentPayments"
-    ).innerHTML=
-        list.slice(-6).reverse().map(i=>`
-            <div class="row">
-                <div>
-                    <strong>${escapeHTML(i.number)}</strong>
-                    <small>
-                        ${escapeHTML(i.waiterName)}
-                        • ${escapeHTML(i.payment)}
-                    </small>
-                </div>
-                <strong>${money(i.total)}</strong>
-            </div>
-        `).join("")||
-        `<div style="color:#68756d">
-            Nuk ka pagesa sot.
-        </div>`;
-}
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-function renderHistory(){
-
-    const invoices=getJSON(
-        INVOICES_KEY,
-        []
-    ).slice().reverse();
-
-    document.getElementById(
-        "historyList"
-    ).innerHTML=
-        invoices.map(i=>`
-            <div class="row">
-                <div>
-                    <strong>${escapeHTML(i.number)}</strong>
-                    <small>
-                        ${new Date(i.date)
-                            .toLocaleString("sq-AL")}
-                        •
-                        ${escapeHTML(i.waiterName)}
-                        •
-                        ${escapeHTML(i.payment)}
-                    </small>
-                </div>
-
-                <strong>${money(i.total)}</strong>
-            </div>
-        `).join("")||
-        `<div style="color:#68756d">
-            Nuk ka histori.
-        </div>`;
-}
-
-function deleteHistory(){
-
-    const user=getCurrentSession();
-
-    if(!user||user.role!=="admin"){
-        toast("Vetëm administratori.");
-        return;
-    }
-
-    if(!confirm(
-        "Dëshiron të fshish të gjithë historikun?"
-    ))return;
-
-    setJSON(
-        INVOICES_KEY,
-        []
-    );
-
-    renderHistory();
-    updateDashboard();
-    renderReports();
-
-    toast("Historiku u fshi.");
-}
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-function loadSettings(){
-
-    const s=getJSON(
-        SETTINGS_KEY,
-        {
-            barName:"MY BAR",
-            address:"",
-            phone:""
-        }
-    );
-
-    document.getElementById(
-        "barNameInput"
-    ).value=s.barName;
-
-    document.getElementById(
-        "barAddressInput"
-    ).value=s.address;
-
-    document.getElementById(
-        "barPhoneInput"
-    ).value=s.phone;
-
-    document.getElementById(
-        "tableCountInput"
-    ).value=
-        localStorage.getItem(
-            TABLE_COUNT_KEY
-        )||12;
-}
-
-function saveSettings(){
-
-    const s={
-        barName:
-            document.getElementById(
-                "barNameInput"
-            ).value.trim()||"MY BAR",
-
-        address:
-            document.getElementById(
-                "barAddressInput"
-            ).value.trim(),
-
-        phone:
-            document.getElementById(
-                "barPhoneInput"
-            ).value.trim()
-    };
-
-    setJSON(
-        SETTINGS_KEY,
-        s
-    );
-
-    renderHeader();
-
-    toast("Cilësimet u ruajtën.");
-}
-
-function saveTableCount(){
-
-    const count=Math.max(
-        1,
-        Math.min(
-            100,
-            Number(
-                document.getElementById(
-                    "tableCountInput"
-                ).value
-            )
-        )
-    );
-
-    localStorage.setItem(
-        TABLE_COUNT_KEY,
-        String(count)
-    );
-
-    initializeTables();
-    renderTables();
-
-    toast("Tavolinat u ruajtën.");
-}
-
-function changeAdminPassword(){
-
-    const user=getCurrentSession();
-
-    if(!user||user.role!=="admin"){
-        toast("Vetëm administratori.");
-        return;
-    }
-
-    const password=document.getElementById(
-        "newAdminPassword"
-    ).value.trim();
-
-    if(!password){
-        toast("Shkruaj fjalëkalimin.");
-        return;
-    }
-
-    const users=getJSON(
-        USERS_KEY,
-        DEFAULT_USERS
-    );
-
-    const admin=users.find(
-        u=>u.username==="admin"
-    );
-
-    if(!admin)return;
-
-    admin.password=password;
-
-    setJSON(
-        USERS_KEY,
-        users
-    );
-
-    document.getElementById(
-        "newAdminPassword"
-    ).value="";
-
-    toast("Fjalëkalimi u ndryshua.");
-}
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-document.getElementById(
-    "menuSearch"
-).addEventListener(
-    "input",
-    function(){
-
-        const q=this.value
-            .trim()
-            .toLowerCase();
-
-        const products=getJSON(
-            PRODUCTS_KEY,
-            DEFAULT_PRODUCTS
-        );
-
-        drawProducts(
-            products.filter(
-                p=>p.name
-                    .toLowerCase()
-                    .includes(q)
-            )
-        );
-    }
-);
-
-document.getElementById(
-    "inventorySearch"
-).addEventListener(
-    "input",
-    renderInventory
-);
-
-document.getElementById(
-    "minimumStock"
-).addEventListener(
-    "input",
-    renderInventory
-);
-
-/* =========================================================
-   CLOCK
-========================================================= */
-
-function updateClock(){
-
-    document.getElementById(
-        "clock"
-    ).textContent=
-        new Date().toLocaleTimeString(
-            "sq-AL",
-            {
-                hour:"2-digit",
-                minute:"2-digit",
-                second:"2-digit"
-            }
-        );
-}
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-function logout(){
-
-    localStorage.removeItem(
-        SESSION_KEY
-    );
-
-    localStorage.removeItem(
-        "barCurrentUser"
-    );
-
-    localStorage.removeItem(
-        "MYBAR_SELECTED_TABLE"
-    );
-
-    window.location.href="login.html";
-}
-
-/* =========================================================
-   START
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    ()=>{
-
-        initialize();
-
-        renderHeader();
-        applyRole();
-
-        renderTables();
-        renderMenu();
-        renderOrder();
-        updateDashboard();
-        renderInventory();
-        renderShift();
-        renderShiftHistory();
-        renderCash();
-        renderReports();
-        renderHistory();
-        loadSettings();
-
-        updateClock();
-
-        setInterval(
-            updateClock,
-            1000
-        );
-    }
-);
-
-/* =========================================================
-   GLOBALS
-========================================================= */
-
-window.showPage=showPage;
-window.selectTable=selectTable;
-window.renderMenu=renderMenu;
-window.addProduct=addProduct;
-window.changeOrderQuantity=changeOrderQuantity;
-window.removeOrderItem=removeOrderItem;
-window.openPayment=openPayment;
-window.closePayment=closePayment;
-window.completePayment=completePayment;
-window.closeInvoice=closeInvoice;
-window.stockChange=stockChange;
-window.stockAddDialog=stockAddDialog;
-window.toggleShift=toggleShift;
-window.addCashMovement=addCashMovement;
-window.deleteHistory=deleteHistory;
-window.saveSettings=saveSettings;
-window.saveTableCount=saveTableCount;
-window.changeAdminPassword=changeAdminPassword;
-window.logout=logout;
-
-</script>
-
-</body>
-</html>
+   
