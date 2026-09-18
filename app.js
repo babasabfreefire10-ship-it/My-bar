@@ -603,11 +603,20 @@ function getBillTotal(table) {
 
     if (!table) return 0;
 
-    return (table.items || []).reduce(
+    if (!Array.isArray(table.items)) {
+        return 0;
+    }
+
+    return table.items.reduce(
         (total, item) => {
-            return total +
-                Number(item.price || 0) *
+
+            const price =
+                Number(item.price || 0);
+
+            const quantity =
                 Number(item.quantity || 0);
+
+            return total + (price * quantity);
         },
         0
     );
@@ -624,6 +633,10 @@ function changeQuantity(index, amount) {
     );
 
     if (!table) return;
+
+    if (!Array.isArray(table.items)) {
+        table.items = [];
+    }
 
     const item = table.items[index];
 
@@ -667,6 +680,10 @@ function removeItem(index) {
 
     if (!table) return;
 
+    if (!Array.isArray(table.items)) {
+        table.items = [];
+    }
+
     table.items.splice(index, 1);
 
     saveTables(tables);
@@ -680,52 +697,89 @@ function removeItem(index) {
 
 function payCurrent(method) {
 
-    const table =
-        getSelectedTableObject();
+    const table = getSelectedTableObject();
 
     if (!table) {
         toast("Zgjidh një tavolinë.");
         return;
     }
 
-    if (!table.items.length) {
+    if (
+        !Array.isArray(table.items) ||
+        table.items.length === 0
+    ) {
         toast("Porosia është bosh.");
         return;
     }
 
-    const total =
-        getBillTotal(table);
+    /*
+       IMPORTANT:
+       Total is calculated directly from the
+       currently selected table BEFORE payment.
+    */
+    const total = getBillTotal(table);
 
-    const modal =
-        document.getElementById(
-            "paymentModal"
-        );
-
-    const text =
-        document.getElementById(
-            "paymentText"
-        );
-
-    const confirm =
-        document.getElementById(
-            "paymentConfirm"
-        );
-
-    if (!modal || !text || !confirm) {
-        completePayment(method);
+    if (total <= 0) {
+        toast("Totali i faturës është 0 L.");
         return;
     }
 
-    text.textContent =
-        "Pagesë " +
-        method.toUpperCase() +
-        " • " +
-        money(total);
+    const modal =
+        document.getElementById("paymentModal");
 
-    confirm.onclick = () =>
+    const text =
+        document.getElementById("paymentText");
+
+    const totalElement =
+        document.getElementById("paymentTotal");
+
+    const amountElement =
+        document.getElementById("paymentAmount");
+
+    const confirmButton =
+        document.getElementById("paymentConfirm");
+
+    /*
+       Support different modal IDs so the
+       total doesn't remain 0 L.
+    */
+
+    if (text) {
+        text.textContent =
+            "Pagesë " +
+            String(method).toUpperCase() +
+            " • " +
+            money(total);
+    }
+
+    if (totalElement) {
+        totalElement.textContent =
+            money(total);
+    }
+
+    if (amountElement) {
+        amountElement.textContent =
+            money(total);
+    }
+
+    window.MYBAR_CURRENT_PAYMENT_TOTAL = total;
+    window.MYBAR_CURRENT_PAYMENT_METHOD = method;
+
+    if (confirmButton) {
+
+        confirmButton.onclick = function () {
+            completePayment(method);
+        };
+    }
+
+    if (modal) {
+
+        modal.classList.add("show");
+
+    } else {
+
         completePayment(method);
-
-    modal.classList.add("show");
+    }
 }
 
 function completePayment(method) {
@@ -739,19 +793,37 @@ function completePayment(method) {
                 getSelectedTable()
         );
 
-    if (!table || !table.items.length) {
-        closeModal("paymentModal");
+    if (!table) {
+        toast("Zgjidh një tavolinë.");
         return;
     }
 
-    /* STOCK CHECK */
+    if (
+        !Array.isArray(table.items) ||
+        table.items.length === 0
+    ) {
+
+        closeModal("paymentModal");
+
+        toast("Porosia është bosh.");
+
+        return;
+    }
+
+    /* =========================
+       STOCK CHECK
+    ========================= */
 
     for (const item of table.items) {
 
+        const quantity =
+            Number(item.quantity || 0);
+
         if (
-            Number(item.quantity) >
+            quantity >
             getStock(item.productId)
         ) {
+
             toast(
                 "Stok i pamjaftueshëm: " +
                 item.name
@@ -761,22 +833,52 @@ function completePayment(method) {
         }
     }
 
-    /* STOCK DECREASE */
+    /*
+       IMPORTANT:
+       Calculate the total BEFORE clearing
+       the table.
+    */
+    const total =
+        table.items.reduce(
+            (sum, item) => {
+
+                const price =
+                    Number(item.price || 0);
+
+                const quantity =
+                    Number(item.quantity || 0);
+
+                return sum + (price * quantity);
+
+            },
+            0
+        );
+
+    if (total <= 0) {
+        toast("Totali i faturës është 0 L.");
+        return;
+    }
+
+    /* =========================
+       STOCK DECREASE
+    ========================= */
 
     table.items.forEach(item => {
 
         setStock(
             item.productId,
             getStock(item.productId) -
-            Number(item.quantity)
+            Number(item.quantity || 0)
         );
+
     });
 
     const user =
         getCurrentSession();
 
-    const total =
-        getBillTotal(table);
+    /* =========================
+       CREATE INVOICE
+    ========================= */
 
     const invoice = {
 
@@ -790,6 +892,9 @@ function completePayment(method) {
             new Date().toISOString(),
 
         createdAt:
+            Date.now(),
+
+        timestamp:
             Date.now(),
 
         table:
@@ -847,6 +952,10 @@ function completePayment(method) {
         invoices
     );
 
+    /*
+       Clear table ONLY after invoice
+       has been successfully created.
+    */
     table.items = [];
 
     saveTables(tables);
@@ -874,10 +983,16 @@ function openTransfer() {
     const table =
         getSelectedTableObject();
 
-    if (!table || !table.items.length) {
+    if (
+        !table ||
+        !Array.isArray(table.items) ||
+        !table.items.length
+    ) {
+
         toast(
             "Nuk ka faturë për transferim."
         );
+
         return;
     }
 
@@ -910,6 +1025,7 @@ function openTransfer() {
                 <option value="${item.id}">
                     ${escapeHTML(item.name)}
                     ${
+                        item.items &&
                         item.items.length
                             ? " • AKTIVE"
                             : ""
@@ -957,6 +1073,14 @@ function confirmTransfer() {
 
     if (!from || !to) return;
 
+    if (!Array.isArray(from.items)) {
+        from.items = [];
+    }
+
+    if (!Array.isArray(to.items)) {
+        to.items = [];
+    }
+
     if (to.items.length) {
 
         const accepted =
@@ -978,9 +1102,12 @@ function confirmTransfer() {
             );
 
         if (existing) {
+
             existing.quantity +=
                 Number(item.quantity);
+
         } else {
+
             to.items.push(
                 JSON.parse(
                     JSON.stringify(item)
@@ -1022,8 +1149,24 @@ function openCloseTable() {
         return;
     }
 
-    if (!table.items.length) {
+    if (
+        !Array.isArray(table.items) ||
+        table.items.length === 0
+    ) {
+
         toast("Tavolina është bosh.");
+
+        return;
+    }
+
+    /*
+       Calculate the real current table total.
+    */
+    const total =
+        getBillTotal(table);
+
+    if (total <= 0) {
+        toast("Totali i tavolinës është 0 L.");
         return;
     }
 
@@ -1032,12 +1175,27 @@ function openCloseTable() {
             "closeTableText"
         );
 
+    const totalElement =
+        document.getElementById(
+            "closeTableTotal"
+        );
+
     if (text) {
+
         text.textContent =
             table.name +
             " • " +
-            money(getBillTotal(table));
+            money(total);
     }
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            money(total);
+    }
+
+    window.MYBAR_CURRENT_CLOSE_TOTAL =
+        total;
 
     openModal("closeTableModal");
 }
@@ -1048,6 +1206,30 @@ function confirmCloseTable() {
         getSelectedTableObject();
 
     if (!table) return;
+
+    if (
+        !Array.isArray(table.items) ||
+        table.items.length === 0
+    ) {
+
+        closeModal("closeTableModal");
+
+        toast("Tavolina është bosh.");
+
+        return;
+    }
+
+    const total =
+        getBillTotal(table);
+
+    if (total <= 0) {
+
+        toast(
+            "Totali i tavolinës është 0 L."
+        );
+
+        return;
+    }
 
     const tables =
         getTables();
@@ -1061,6 +1243,10 @@ function confirmCloseTable() {
 
     if (index < 0) return;
 
+    /*
+       MBYLL TAVOLINË is intentionally separate
+       from payment. It clears the open table.
+    */
     tables[index].items = [];
 
     saveTables(tables);
@@ -1075,7 +1261,8 @@ function confirmCloseTable() {
 
     toast(
         table.name +
-        " u mbyll."
+        " u mbyll • " +
+        money(total)
     );
 }
 
@@ -1123,6 +1310,7 @@ function renderInvoices() {
         user &&
         user.role !== "admin"
     ) {
+
         invoices =
             invoices.filter(
                 invoice =>
@@ -1140,6 +1328,7 @@ function renderInvoices() {
         );
 
     if (summary) {
+
         summary.textContent =
             invoices.length +
             " faturë";
@@ -1835,6 +2024,7 @@ function renderTableCards() {
         );
 
     if (summary) {
+
         summary.textContent =
             active +
             " aktive • " +
@@ -1970,6 +2160,7 @@ function showPage(page, button) {
                 element.textContent.trim() ===
                 names[page]
             ) {
+
                 element.classList.add(
                     "active"
                 );
