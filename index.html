@@ -2,752 +2,728 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY BAR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MY BAR — Management</title>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07100b;
-  --panel:#0d1811;
-  --panel2:#111f15;
-  --line:#1d3825;
-  --green:#20e060;
-  --green2:#8affad;
-  --text:#f2fff5;
-  --muted:#8ea595;
-  --danger:#ff4d5e;
-  --yellow:#ffd45c;
-  --white:#fff;
+  --bg:#050706;
+  --panel:#0a0e0c;
+  --panel2:#0d1310;
+  --line:#1b2921;
+  --green:#00e875;
+  --green2:#00b957;
+  --text:#f2f5f3;
+  --muted:#7b8781;
+  --red:#ff5757;
+  --yellow:#ffc857;
 }
-
-*{box-sizing:border-box}
-
 body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
-  background:
-    radial-gradient(circle at top right,#12321d 0,transparent 30%),
-    linear-gradient(135deg,#050b07,#08130c 55%,#050906);
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
   color:var(--text);
   min-height:100vh;
 }
-
-button,input,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-  border:0;
-}
-
+button,input,select{font:inherit}
+button{cursor:pointer}
 .hidden{display:none!important}
 
-/* LOGIN */
-
-#loginScreen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.loginBox{
-  width:min(430px,100%);
-  background:rgba(10,20,13,.94);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:35px;
-  box-shadow:0 30px 80px #0008;
-}
-
-.logo{
-  width:65px;
-  height:65px;
-  border:2px solid var(--green);
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--green);
-  font-size:28px;
-  font-weight:900;
-  margin-bottom:20px;
-}
-
-.loginBox h1{
-  margin:0;
-  font-size:32px;
-  letter-spacing:2px;
-}
-
-.loginBox p{
-  color:var(--muted);
-  margin:8px 0 25px;
-}
-
-.field{
-  margin-bottom:15px;
-}
-
-.field label{
-  display:block;
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:7px;
-}
-
-.field input,
-.field select{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:#08110b;
-  color:white;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:var(--green);
-}
-
-.primary{
-  width:100%;
-  padding:15px;
-  background:var(--green);
-  color:#031007;
-  border-radius:12px;
-  font-weight:900;
-  margin-top:8px;
-}
-
-.primary:hover{filter:brightness(1.08)}
-
-.error{
-  min-height:20px;
-  color:#ff6b78;
-  text-align:center;
-  margin-top:12px;
-  font-size:13px;
-}
-
-/* APP */
-
-#app{
-  min-height:100vh;
-  display:flex;
-}
-
-.sidebar{
-  width:250px;
-  min-height:100vh;
-  background:#08110b;
-  border-right:1px solid var(--line);
-  padding:22px 15px;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  z-index:20;
-}
-
-.brand{
-  padding:8px 10px 25px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:18px;
-}
-
-.brand strong{
-  display:block;
-  font-size:22px;
-  letter-spacing:2px;
-}
-
-.brand span{
-  color:var(--green);
-  font-size:11px;
-  letter-spacing:2px;
-}
-
-.userCard{
-  padding:13px;
-  background:#0d1910;
-  border:1px solid var(--line);
-  border-radius:13px;
-  margin-bottom:18px;
-}
-
-.userCard strong{display:block}
-.userCard small{color:var(--green)}
-
-.nav button{
-  width:100%;
-  text-align:left;
-  padding:13px;
-  margin:4px 0;
-  color:#b7c8ba;
-  background:transparent;
-  border-radius:10px;
-}
-
-.nav button:hover,
-.nav button.active{
-  background:#12351d;
-  color:var(--green2);
-}
-
-.logout{
-  position:absolute;
-  left:15px;
-  right:15px;
-  bottom:20px;
-  background:#1b0c0f!important;
-  color:#ff7380!important;
-}
-
-.main{
-  margin-left:250px;
-  width:calc(100% - 250px);
-  padding:25px;
-}
-
+/* TOP */
 .topbar{
+  height:70px;
+  border-bottom:1px solid var(--line);
+  background:#070a08;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:25px;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
-
-.topbar h2{
-  margin:0;
-  font-size:28px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
 }
-
-.topbar span{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.page{display:none}
-.page.active{display:block}
-
-/* CARDS */
-
-.stats{
+.brand-logo{
+  width:40px;height:40px;
+  border:1px solid rgba(0,232,117,.45);
+  border-radius:50%;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:25px;
-}
-
-.stat{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:18px;
-}
-
-.stat small{
-  color:var(--muted);
-}
-
-.stat strong{
-  display:block;
-  font-size:27px;
-  margin-top:8px;
-}
-
-/* TABLES */
-
-.tables{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.tableCard{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:18px;
-  min-height:155px;
-  transition:.15s;
-}
-
-.tableCard:hover{
-  border-color:#2d613b;
-  transform:translateY(-2px);
-}
-
-.tableNumber{
-  font-size:23px;
-  font-weight:900;
-}
-
-.tableStatus{
-  color:var(--muted);
-  font-size:13px;
-  margin:5px 0 15px;
-}
-
-.tableCard.open{
-  border-color:#2d9d4b;
-}
-
-.tableTotal{
+  place-items:center;
   color:var(--green);
   font-weight:900;
-  margin-bottom:12px;
+  font-size:18px;
+  box-shadow:0 0 15px rgba(0,232,117,.08);
 }
-
-.btnRow{
+.brand-name{
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+.role{
+  color:var(--green);
+  font-size:9px;
+  letter-spacing:1.5px;
+  margin-top:3px;
+}
+.top-actions{
   display:flex;
   gap:8px;
 }
-
-.btn{
-  padding:10px 12px;
-  border-radius:9px;
-  background:#14231a;
-  color:#dff9e5;
+.top-btn{
+  height:38px;
+  padding:0 14px;
+  background:#0b110e;
   border:1px solid var(--line);
+  border-radius:7px;
+  color:#aeb8b2;
+  font-size:11px;
 }
-
-.btn.green{
-  background:var(--green);
-  color:#031007;
-  font-weight:900;
-}
-
-.btn.red{
-  background:#321016;
-  color:#ff8993;
-}
-
-/* POS */
-
-.pos{
-  display:grid;
-  grid-template-columns:1.4fr .8fr;
-  gap:20px;
-}
-
-.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:20px;
-}
-
-.panel h3{
-  margin-top:0;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.product{
-  padding:14px;
-  border-radius:12px;
-  background:#101f14;
-  border:1px solid var(--line);
-  color:white;
-  text-align:left;
-}
-
-.product:hover{
-  border-color:var(--green);
-}
-
-.product strong{
-  display:block;
-  margin-bottom:5px;
-}
-
-.product span{
+.top-btn:hover{
+  border-color:var(--green2);
   color:var(--green);
-  font-weight:800;
 }
 
-.orderItem{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.orderItem small{
-  color:var(--muted);
-}
-
-.totalBox{
-  margin-top:18px;
-  padding-top:18px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  font-size:21px;
-  font-weight:900;
-}
-
-.empty{
-  color:var(--muted);
-  padding:25px 0;
-  text-align:center;
-}
-
-/* SETTINGS */
-
-.settingsGrid{
+/* LAYOUT */
+.app{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
+  grid-template-columns:260px 1fr 370px;
+  min-height:calc(100vh - 70px);
 }
 
-.settingBox{
+/* SIDEBAR */
+.sidebar{
+  border-right:1px solid var(--line);
+  background:#070a08;
+  padding:22px 15px;
+}
+.side-title{
+  color:#56625c;
+  font-size:9px;
+  letter-spacing:2px;
+  margin:0 10px 12px;
+}
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.nav button{
+  height:44px;
+  border:1px solid transparent;
+  background:transparent;
+  color:#87938d;
+  border-radius:7px;
+  text-align:left;
+  padding:0 13px;
+  font-size:12px;
+}
+.nav button:hover,
+.nav button.active{
+  color:var(--green);
+  background:#0a120e;
+  border-color:#173225;
+}
+.nav button.active{
+  box-shadow:inset 3px 0 0 var(--green);
+}
+.side-info{
+  margin-top:35px;
+  padding:15px;
+  border:1px solid var(--line);
+  background:#090d0b;
+  border-radius:8px;
+}
+.side-info small{
+  color:#56625c;
+  font-size:8px;
+  letter-spacing:1.5px;
+}
+.side-info strong{
+  display:block;
+  margin-top:7px;
+  font-size:13px;
+}
+
+/* MAIN */
+.main{
+  padding:25px;
+  min-width:0;
+}
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:22px;
+}
+.page-title{
+  font-size:25px;
+  letter-spacing:1px;
+}
+.page-sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:6px;
+}
+.stats{
+  display:flex;
+  gap:9px;
+}
+.stat{
+  min-width:115px;
+  padding:12px 14px;
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:17px;
-  padding:20px;
+  border-radius:8px;
 }
-
-.settingBox h3{
-  margin-top:0;
-  color:var(--green2);
+.stat span{
+  display:block;
+  color:#64716b;
+  font-size:8px;
+  letter-spacing:1.5px;
 }
-
-.settingBox .btn{
-  margin-top:8px;
-}
-
-/* HISTORY */
-
-.historyRow{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 120px;
-  gap:10px;
-  align-items:center;
-  padding:14px;
-  border-bottom:1px solid var(--line);
-}
-
-.historyRow small{
-  color:var(--muted);
-}
-
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:#000b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  z-index:100;
-}
-
-.modalBox{
-  width:min(600px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#0b160f;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:22px;
-}
-
-.modalHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.modalHead h3{margin:0}
-
-.close{
-  background:#201015;
-  color:#ff8791;
-  width:35px;
-  height:35px;
-  border-radius:9px;
-}
-
-/* RECEIPT */
-
-.receipt{
-  width:80mm;
-  background:white;
-  color:#111;
-  padding:8mm 5mm;
-  font-family:Arial,sans-serif;
-  margin:auto;
-}
-
-.receipt h2{
-  text-align:center;
-  margin:0 0 4px;
-}
-
-.receipt .center{text-align:center}
-
-.receiptLine{
-  display:flex;
-  justify-content:space-between;
-  margin:6px 0;
-}
-
-.receipt hr{
-  border:0;
-  border-top:1px dashed #333;
-}
-
-.receiptTotal{
-  font-weight:900;
+.stat strong{
+  display:block;
+  margin-top:5px;
   font-size:18px;
 }
 
-/* MOBILE */
+/* TABLES */
+.tables{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(150px,1fr));
+  gap:12px;
+}
+.table-card{
+  min-height:145px;
+  background:linear-gradient(145deg,#0b100d,#080c0a);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:17px;
+  transition:.18s;
+  position:relative;
+  overflow:hidden;
+}
+.table-card:hover{
+  transform:translateY(-2px);
+  border-color:#285139;
+}
+.table-card.open{
+  border-color:rgba(0,232,117,.45);
+  box-shadow:0 0 18px rgba(0,232,117,.05);
+}
+.table-card.paid{
+  border-color:rgba(255,200,87,.35);
+}
+.table-number{
+  color:#67736d;
+  font-size:9px;
+  letter-spacing:1.5px;
+}
+.table-name{
+  font-size:21px;
+  font-weight:900;
+  margin-top:8px;
+}
+.table-status{
+  margin-top:13px;
+  font-size:9px;
+  color:#6d7973;
+}
+.table-total{
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  font-size:14px;
+  font-weight:900;
+}
+.open .table-total{color:var(--green)}
+.paid .table-total{color:var(--yellow)}
+.status-dot{
+  position:absolute;
+  right:17px;
+  top:18px;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#28322d;
+}
+.open .status-dot{
+  background:var(--green);
+  box-shadow:0 0 10px var(--green);
+}
 
-.mobileTop{
+/* RIGHT ORDER */
+.order-panel{
+  border-left:1px solid var(--line);
+  background:#070a08;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.order-head{
+  padding:22px;
+  border-bottom:1px solid var(--line);
+}
+.order-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.order-title h2{
+  font-size:17px;
+}
+.order-table{
+  color:var(--green);
+  font-size:11px;
+}
+.order-body{
+  flex:1;
+  overflow:auto;
+  padding:15px;
+}
+.empty{
+  min-height:180px;
+  display:grid;
+  place-items:center;
+  color:#4e5a54;
+  text-align:center;
+  font-size:11px;
+}
+.order-item{
+  border:1px solid var(--line);
+  background:#0a0f0c;
+  border-radius:7px;
+  padding:11px;
+  margin-bottom:7px;
+}
+.item-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.item-name{font-size:12px;font-weight:700}
+.item-price{color:var(--green);font-size:11px}
+.item-controls{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:9px;
+}
+.qty-btn{
+  width:25px;height:25px;
+  border:1px solid var(--line);
+  background:#0d1510;
+  color:#b5c0ba;
+  border-radius:5px;
+}
+.qty{
+  min-width:20px;
+  text-align:center;
+  font-size:11px;
+}
+.delete{
+  margin-left:auto;
+  color:#8a5757;
+}
+.order-footer{
+  border-top:1px solid var(--line);
+  padding:16px;
+}
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.total-row span{color:#6e7a74;font-size:10px}
+.total-row strong{font-size:22px;color:var(--green)}
+.action-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+.action{
+  height:43px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:#0b110e;
+  color:#adb7b1;
+  font-size:10px;
+}
+.action:hover{
+  border-color:#2b5039;
+  color:#fff;
+}
+.action.primary{
+  background:var(--green);
+  color:#001b0b;
+  border-color:var(--green);
+  font-weight:900;
+}
+.action.danger{
+  color:#ff7777;
+}
+
+/* MENU PAGE */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
+}
+.product{
+  padding:16px;
+  background:#0a0e0c;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.product h3{
+  font-size:13px;
+  margin-bottom:8px;
+}
+.product .cat{
+  color:#59665f;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.product-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:15px;
+}
+.product-price{
+  color:var(--green);
+  font-weight:900;
+  font-size:14px;
+}
+.add-btn{
+  width:32px;height:32px;
+  border:1px solid #21402e;
+  border-radius:6px;
+  background:#0c1711;
+  color:var(--green);
+  font-size:18px;
+}
+
+/* GENERIC */
+.panel{
+  background:#090d0b;
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:20px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.field label{
+  display:block;
+  color:#68756e;
+  font-size:9px;
+  letter-spacing:1.2px;
+  margin-bottom:6px;
+}
+.field input,
+.field select{
+  width:100%;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:#060a08;
+  color:#fff;
+  padding:0 11px;
+  outline:none;
+}
+.field input:focus,
+.field select:focus{
+  border-color:var(--green2);
+}
+.save{
+  margin-top:16px;
+  height:42px;
+  padding:0 20px;
+  border:0;
+  border-radius:6px;
+  background:var(--green);
+  color:#001b0b;
+  font-weight:900;
+}
+.section-title{
+  font-size:13px;
+  margin-bottom:15px;
+}
+.section-title small{
+  display:block;
+  color:#5d6963;
+  font-size:9px;
+  margin-top:5px;
+  font-weight:normal;
+}
+.list-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding:13px 0;
+}
+.list-row:last-child{border-bottom:0}
+.list-row strong{font-size:12px}
+.list-row span{color:#6e7a74;font-size:10px}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(6px);
   display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:min(520px,92vw);
+  max-height:85vh;
+  overflow:auto;
+  background:#090d0b;
+  border:1px solid #203329;
+  border-radius:10px;
+  padding:22px;
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+.close{
+  border:0;
+  background:none;
+  color:#77837d;
+  font-size:22px;
 }
 
-@media(max-width:1000px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .tables{grid-template-columns:repeat(3,1fr)}
-  .products{grid-template-columns:repeat(2,1fr)}
-  .pos{grid-template-columns:1fr}
+/* TOAST */
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  padding:12px 16px;
+  background:#0d1711;
+  border:1px solid #21402e;
+  color:#b8c4bd;
+  border-radius:7px;
+  font-size:11px;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:.25s;
+  z-index:200;
 }
-
-@media(max-width:700px){
-  .sidebar{
-    display:none;
-  }
-
-  .main{
-    margin-left:0;
-    width:100%;
-    padding:15px;
-  }
-
-  .mobileTop{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-  }
-
-  .mobileTop strong{
-    letter-spacing:2px;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .tables{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .settingsGrid{
-    grid-template-columns:1fr;
-  }
-
-  .historyRow{
-    grid-template-columns:1fr 1fr;
-  }
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* PRINT */
+.print-area{display:none}
 
 @media print{
-  body *{
-    visibility:hidden!important;
+  body *{display:none!important}
+  .print-area{
+    display:block!important;
+    color:#000!important;
+    background:#fff!important;
+    font-family:Arial,sans-serif!important;
+    padding:20px!important;
   }
+}
 
-  #receiptPrint,
-  #receiptPrint *{
-    visibility:visible!important;
+/* MOBILE TEST */
+@media(max-width:1100px){
+  .app{grid-template-columns:210px 1fr}
+  .order-panel{
+    position:fixed;
+    right:0;
+    top:70px;
+    bottom:0;
+    width:360px;
+    z-index:40;
+    transform:translateX(100%);
+    transition:.25s;
   }
+  .order-panel.mobile-open{
+    transform:translateX(0);
+  }
+  .tables{grid-template-columns:repeat(3,1fr)}
+  .menu-grid{grid-template-columns:repeat(3,1fr)}
+}
 
-  #receiptPrint{
-    position:absolute;
-    left:0;
-    top:0;
-    width:80mm;
+@media(max-width:750px){
+  .app{display:block}
+  .sidebar{
+    display:none;
   }
+  .main{padding:15px}
+  .topbar{padding:0 14px}
+  .top-btn span{display:none}
+  .stats{display:none}
+  .tables{grid-template-columns:repeat(2,1fr)}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .page-title{font-size:20px}
+  .form-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<section id="loginScreen">
-  <div class="loginBox">
-    <div class="logo">M</div>
-    <h1>MY BAR</h1>
-    <p>Sistemi i menaxhimit</p>
-
-    <div class="field">
-      <label>Përdoruesi</label>
-      <input id="loginUser" autocomplete="username" placeholder="admin">
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo">M</div>
+    <div>
+      <div class="brand-name" id="brandName">MY BAR</div>
+      <div class="role" id="roleText">SISTEMI I MENAXHIMIT</div>
     </div>
-
-    <div class="field">
-      <label>Fjalëkalimi</label>
-      <input id="loginPass" type="password" autocomplete="current-password" placeholder="••••">
-    </div>
-
-    <button class="primary" onclick="login()">HYR NË SISTEM</button>
-    <div id="loginError" class="error"></div>
   </div>
-</section>
 
-<!-- APP -->
-<section id="app" class="hidden">
+  <div class="top-actions">
+    <button class="top-btn" onclick="openOrderOnMobile()">POROSI</button>
+    <button class="top-btn" onclick="logout()">DALJE</button>
+  </div>
+</header>
+
+<div class="app">
 
   <aside class="sidebar">
-    <div class="brand">
-      <strong id="sideBarName">MY BAR</strong>
-      <span>SISTEM PREMIUM</span>
-    </div>
 
-    <div class="userCard">
-      <strong id="sideUser">-</strong>
-      <small id="sideRole">-</small>
-    </div>
+    <div class="side-title">MENU</div>
 
     <nav class="nav">
-      <button class="active" onclick="showPage('dashboard',this)">▦ Dashboard</button>
-      <button onclick="showPage('tables',this)">▣ Tavolinat</button>
-      <button onclick="showPage('menu',this)">☰ Menu</button>
-      <button onclick="showPage('history',this)">◷ Historiku</button>
-      <button id="settingsBtn" onclick="showPage('settings',this)">⚙ Settings</button>
-      <button onclick="showContact()">◎ Contact</button>
+      <button class="active" onclick="showPage('dashboard',this)">
+        DASHBOARD
+      </button>
+
+      <button onclick="showPage('menu',this)">
+        MENU
+      </button>
+
+      <button onclick="showPage('history',this)">
+        HISTORI
+      </button>
+
+      <button id="settingsBtn" class="hidden"
+              onclick="showPage('settings',this)">
+        SETTINGS
+      </button>
     </nav>
 
-    <button class="nav logout" onclick="logout()">↪ Dil</button>
+    <div class="side-info">
+      <small>USER</small>
+      <strong id="sideUser">—</strong>
+      <small style="display:block;margin-top:15px">ROLE</small>
+      <strong id="sideRole">—</strong>
+    </div>
+
   </aside>
 
   <main class="main">
 
-    <div class="mobileTop">
-      <strong id="mobileBarName">MY BAR</strong>
-      <button class="btn" onclick="logout()">Dil</button>
-    </div>
-
     <!-- DASHBOARD -->
-    <div id="dashboard" class="page active">
-      <div class="topbar">
+    <section id="dashboardPage">
+
+      <div class="page-head">
         <div>
-          <h2>Dashboard</h2>
-          <span>Mirë se vini në sistem</span>
+          <h1 class="page-title">Dashboard</h1>
+          <div class="page-sub">
+            Menaxho tavolinat dhe porositë
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span>TAVOLINA</span>
+            <strong id="statTables">0</strong>
+          </div>
+
+          <div class="stat">
+            <span>HAPUR</span>
+            <strong id="statOpen">0</strong>
+          </div>
+
+          <div class="stat">
+            <span>SOT</span>
+            <strong id="statSales">€0.00</strong>
+          </div>
         </div>
       </div>
 
-      <div class="stats">
-        <div class="stat">
-          <small>Tavolina aktive</small>
-          <strong id="statOpen">0</strong>
-        </div>
-        <div class="stat">
-          <small>Shitje sot</small>
-          <strong id="statSales">0.00 €</strong>
-        </div>
-        <div class="stat">
-          <small>Fatura</small>
-          <strong id="statInvoices">0</strong>
-        </div>
-        <div class="stat">
-          <small>Produkte</small>
-          <strong id="statProducts">0</strong>
-        </div>
-      </div>
+      <div id="tables" class="tables"></div>
 
-      <div class="panel">
-        <h3>Tavolinat</h3>
-        <div id="dashboardTables" class="tables"></div>
-      </div>
-    </div>
-
-    <!-- TABLES -->
-    <div id="tables" class="page">
-      <div class="topbar">
-        <h2>Tavolinat</h2>
-      </div>
-      <div id="tablesGrid" class="tables"></div>
-    </div>
+    </section>
 
     <!-- MENU -->
-    <div id="menu" class="page">
-      <div class="topbar">
+    <section id="menuPage" class="hidden">
+
+      <div class="page-head">
         <div>
-          <h2>Menu & Porosi</h2>
-          <span id="selectedTableText">Zgjidh një tavolinë</span>
-        </div>
-      </div>
-
-      <div class="pos">
-        <div class="panel">
-          <h3>Produktet</h3>
-          <div id="productsGrid" class="products"></div>
-        </div>
-
-        <div class="panel">
-          <h3 id="orderTitle">Porosia</h3>
-          <div id="orderList"></div>
-
-          <div class="totalBox">
-            <span>TOTAL</span>
-            <span id="orderTotal">0.00 €</span>
-          </div>
-
-          <div class="btnRow" style="margin-top:18px">
-            <button class="btn red" onclick="clearOrder()">Pastro</button>
-            <button class="btn green" style="flex:1" onclick="openPayment()">Paguaj</button>
+          <h1 class="page-title">Menu</h1>
+          <div class="page-sub">
+            Zgjidh produktin dhe shtoje në tavolinë
           </div>
         </div>
       </div>
-    </div>
+
+      <div id="menuGrid" class="menu-grid"></div>
+
+    </section>
 
     <!-- HISTORY -->
-    <div id="history" class="page">
-      <div class="topbar">
-        <h2>Historiku</h2>
+    <section id="historyPage" class="hidden">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Histori</h1>
+          <div class="page-sub">
+            Faturat e përfunduara
+          </div>
+        </div>
       </div>
 
       <div class="panel">
         <div id="historyList"></div>
       </div>
-    </div>
 
-    <!-- SETTINGS ADMIN ONLY -->
-    <div id="settings" class="page">
-      <div class="topbar">
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settingsPage" class="hidden">
+
+      <div class="page-head">
         <div>
-          <h2>Settings</h2>
-          <span>Vetëm Administratori</span>
+          <h1 class="page-title">Settings</h1>
+          <div class="page-sub">
+            Vetëm administratori mund të ndryshojë sistemin
+          </div>
         </div>
       </div>
 
-      <div class="settingsGrid">
+      <div class="panel">
 
-        <div class="settingBox">
-          <h3>Informacioni i lokalit</h3>
+        <div class="section-title">
+          KONFIGURIMI I BARIT
+          <small>Emri dhe informacioni i lokalit</small>
+        </div>
+
+        <div class="form-grid">
 
           <div class="field">
-            <label>Emri i lokalit</label>
+            <label>Emri</label>
             <input id="setBarName">
           </div>
 
@@ -761,26 +737,25 @@ button{
             <input id="setPhone">
           </div>
 
-          <button class="btn green" onclick="saveGeneral()">RUaj NDRYSHIMET</button>
-        </div>
-
-        <div class="settingBox">
-          <h3>Menaxhimi i tavolinave</h3>
-
           <div class="field">
             <label>Numri i tavolinave</label>
-            <input id="setTables" type="number" min="1" max="100">
+            <input id="setTableCount" type="number" min="1" max="100">
           </div>
 
-          <button class="btn green" onclick="saveTables()">PËRDITËSO TAVOLINAT</button>
         </div>
 
-        <div class="settingBox">
-          <h3>Printeri</h3>
+        <br>
+
+        <div class="section-title">
+          PRINTER
+          <small>Konfigurimi për printim nga PC</small>
+        </div>
+
+        <div class="form-grid">
 
           <div class="field">
             <label>Emri i printerit</label>
-            <input id="setPrinter" placeholder="p.sh. POS-58">
+            <input id="setPrinter">
           </div>
 
           <div class="field">
@@ -788,174 +763,172 @@ button{
             <select id="setPaper">
               <option value="58">58mm</option>
               <option value="80">80mm</option>
-              <option value="A4">A4</option>
             </select>
           </div>
 
-          <button class="btn green" onclick="savePrinter()">RUAJ PRINTERIN</button>
-          <button class="btn" onclick="testPrint()">TEST PRINT</button>
         </div>
 
-        <div class="settingBox">
-          <h3>Administratori</h3>
+        <br>
+
+        <div class="section-title">
+          ADMINISTRATOR
+        </div>
+
+        <div class="form-grid">
 
           <div class="field">
-            <label>Username Admin</label>
+            <label>Username admin</label>
             <input id="setAdminUser">
           </div>
 
           <div class="field">
-            <label>Password Admin</label>
-            <input id="setAdminPass" type="password">
+            <label>Password admin</label>
+            <input id="setAdminPass">
           </div>
 
-          <button class="btn green" onclick="saveAdmin()">RUAJ ADMININ</button>
         </div>
 
-        <div class="settingBox">
-          <h3>Kamarieri</h3>
+        <br>
+
+        <div class="section-title">
+          KAMARIER
+        </div>
+
+        <div class="form-grid">
 
           <div class="field">
-            <label>Username Kamarier</label>
+            <label>Username kamarieri</label>
             <input id="setWaiterUser">
           </div>
 
           <div class="field">
-            <label>Password Kamarier</label>
-            <input id="setWaiterPass" type="password">
+            <label>Password kamarieri</label>
+            <input id="setWaiterPass">
           </div>
 
-          <button class="btn green" onclick="saveWaiter()">RUAJ KAMARIERIN</button>
         </div>
 
-        <div class="settingBox">
-          <h3>Menuja</h3>
-          <p style="color:var(--muted)">
-            Shto, ndrysho ose fshi produktet dhe çmimet.
-          </p>
-          <button class="btn green" onclick="openProductManager()">MENAXHO MENUNË</button>
-        </div>
+        <button class="save" onclick="saveSettings()">
+          RUAJ NDRYSHIMET
+        </button>
 
-        <div class="settingBox">
-          <h3>Contact</h3>
-          <p style="color:var(--muted)">
-            MY BAR — Sistem menaxhimi profesional.
-          </p>
-          <strong style="font-size:24px;color:var(--green)">49€</strong>
-        </div>
-
-        <div class="settingBox">
-          <h3>Reset sistemi</h3>
-          <p style="color:var(--muted)">
-            Fshin tavolinat, historikun dhe cilësimet lokale.
-          </p>
-          <button class="btn red" onclick="resetSystem()">RESET SISTEMIN</button>
-        </div>
+        <button class="save"
+          style="background:#171d19;color:#ff7777;margin-left:7px"
+          onclick="resetAll()">
+          RESET SISTEMIN
+        </button>
 
       </div>
-    </div>
+
+      <br>
+
+      <div class="panel">
+
+        <div class="section-title">
+          PRODUKTET
+          <small>Shto ose ndrysho produktet e menusë</small>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>Emri</label>
+            <input id="newProductName" placeholder="p.sh. Coca Cola">
+          </div>
+
+          <div class="field">
+            <label>Çmimi €</label>
+            <input id="newProductPrice" type="number" step="0.01">
+          </div>
+
+          <div class="field">
+            <label>Kategoria</label>
+            <input id="newProductCat" placeholder="Pije">
+          </div>
+
+        </div>
+
+        <button class="save" onclick="addProduct()">
+          SHTO PRODUKT
+        </button>
+
+        <div id="productAdminList" style="margin-top:18px"></div>
+
+      </div>
+
+    </section>
 
   </main>
-</section>
 
-<!-- PAYMENT MODAL -->
-<div id="paymentModal" class="modal hidden">
-  <div class="modalBox">
-    <div class="modalHead">
-      <h3>Përfundo pagesën</h3>
-      <button class="close" onclick="closeModal('paymentModal')">×</button>
+  <!-- ORDER PANEL -->
+  <aside id="orderPanel" class="order-panel">
+
+    <div class="order-head">
+
+      <div class="order-title">
+        <h2>POROSIA</h2>
+        <span id="orderTable" class="order-table">
+          Zgjidh tavolinën
+        </span>
+      </div>
+
     </div>
 
-    <div class="field">
-      <label>Metoda e pagesës</label>
-      <select id="paymentMethod">
-        <option>Cash</option>
-        <option>Kartë</option>
-      </select>
+    <div id="orderBody" class="order-body">
+
+      <div class="empty">
+        Zgjidh një tavolinë për të filluar porosinë.
+      </div>
+
     </div>
 
-    <div style="font-size:25px;font-weight:900;margin:15px 0">
-      TOTAL: <span id="paymentTotal">0.00 €</span>
+    <div class="order-footer">
+
+      <div class="total-row">
+        <span>TOTAL</span>
+        <strong id="orderTotal">€0.00</strong>
+      </div>
+
+      <div class="action-grid">
+
+        <button class="action"
+                onclick="clearCurrentOrder()">
+          PASTRO
+        </button>
+
+        <button class="action"
+                onclick="printCurrent()">
+          F6 • PRINT
+        </button>
+
+        <button class="action primary"
+                onclick="completePayment()">
+          PËRFUNDO / PAGO
+        </button>
+
+        <button class="action danger"
+                onclick="closeOrderPanel()">
+          MBYLL
+        </button>
+
+      </div>
+
     </div>
 
-    <button class="primary" onclick="completePayment()">PËRFUNDO & PRINT</button>
-  </div>
+  </aside>
+
 </div>
 
-<!-- PRODUCT MODAL -->
-<div id="productModal" class="modal hidden">
-  <div class="modalBox">
-    <div class="modalHead">
-      <h3>Menaxho Menunë</h3>
-      <button class="close" onclick="closeModal('productModal')">×</button>
-    </div>
+<div id="toast" class="toast"></div>
 
-    <div class="field">
-      <label>Emri i produktit</label>
-      <input id="newProductName" placeholder="p.sh. Coca Cola">
-    </div>
-
-    <div class="field">
-      <label>Çmimi €</label>
-      <input id="newProductPrice" type="number" step="0.01" placeholder="2.00">
-    </div>
-
-    <button class="btn green" onclick="addProduct()">SHTO PRODUKT</button>
-
-    <div id="adminProductList" style="margin-top:20px"></div>
-  </div>
-</div>
-
-<!-- CONTACT MODAL -->
-<div id="contactModal" class="modal hidden">
-  <div class="modalBox">
-    <div class="modalHead">
-      <h3>Contact</h3>
-      <button class="close" onclick="closeModal('contactModal')">×</button>
-    </div>
-
-    <p style="color:var(--muted)">
-      Për blerjen e sistemit MY BAR ose raportimin e një problemi.
-    </p>
-
-    <div style="font-size:30px;font-weight:900;color:var(--green);margin:20px 0">
-      49€
-    </div>
-
-    <button class="btn green" style="width:100%" onclick="alert('Kontaktoni administratorin për blerjen e aplikacionit.')">
-      BLI APLIKACIONIN
-    </button>
-
-    <button class="btn" style="width:100%;margin-top:10px" onclick="alert('Raporti u hap. Kontaktoni administratorin për problemin.')">
-      RAPORTO NJË PROBLEM
-    </button>
-  </div>
-</div>
-
-<!-- RECEIPT -->
-<div id="receiptPrint" class="receipt hidden"></div>
+<div id="printArea" class="print-area"></div>
 
 <script>
 /* =========================
-   DEFAULT DATA
+   DATA
 ========================= */
 
-const DEFAULT_PRODUCTS = [
-  {id:1,name:"Coca Cola",price:2},
-  {id:2,name:"Pepsi",price:2},
-  {id:3,name:"Ujë",price:1},
-  {id:4,name:"Kafe",price:1.5},
-  {id:5,name:"Espresso",price:1.5},
-  {id:6,name:"Cappuccino",price:2},
-  {id:7,name:"Birrë",price:2.5},
-  {id:8,name:"Red Bull",price:3},
-  {id:9,name:"Lëng Portokalli",price:2},
-  {id:10,name:"Pizza",price:6},
-  {id:11,name:"Burger",price:5},
-  {id:12,name:"Patate",price:3}
-];
-
-const DEFAULT_SETTINGS = {
+const DEFAULT_SETTINGS={
   barName:"MY BAR",
   address:"",
   phone:"",
@@ -968,219 +941,281 @@ const DEFAULT_SETTINGS = {
   tableCount:12
 };
 
-let products = JSON.parse(localStorage.getItem("MY_BAR_PRODUCTS")) || DEFAULT_PRODUCTS;
-let settings = JSON.parse(localStorage.getItem("MY_BAR_SETTINGS")) || DEFAULT_SETTINGS;
-let tables = JSON.parse(localStorage.getItem("MY_BAR_TABLES")) || [];
-let history = JSON.parse(localStorage.getItem("MY_BAR_HISTORY")) || [];
-let session = JSON.parse(localStorage.getItem("MY_BAR_SESSION")) || null;
-let selectedTable = null;
-let currentReceipt = null;
+const DEFAULT_PRODUCTS=[
+  {id:1,name:"Coca Cola",price:1.50,cat:"Pije"},
+  {id:2,name:"Pepsi",price:1.50,cat:"Pije"},
+  {id:3,name:"Ujë",price:1.00,cat:"Pije"},
+  {id:4,name:"Red Bull",price:2.50,cat:"Pije"},
+  {id:5,name:"Espresso",price:1.00,cat:"Kafe"},
+  {id:6,name:"Cappuccino",price:1.50,cat:"Kafe"},
+  {id:7,name:"Freddo",price:2.00,cat:"Kafe"},
+  {id:8,name:"Birrë",price:2.00,cat:"Alkool"},
+  {id:9,name:"Verë",price:3.00,cat:"Alkool"},
+  {id:10,name:"Vodka",price:4.00,cat:"Alkool"},
+  {id:11,name:"Burger",price:5.00,cat:"Ushqim"},
+  {id:12,name:"Pasta",price:5.50,cat:"Ushqim"}
+];
+
+let settings=
+  JSON.parse(localStorage.getItem("MY_BAR_SETTINGS"))
+  || {...DEFAULT_SETTINGS};
+
+let products=
+  JSON.parse(localStorage.getItem("MY_BAR_PRODUCTS"))
+  || DEFAULT_PRODUCTS;
+
+let tables=
+  JSON.parse(localStorage.getItem("MY_BAR_TABLES"))
+  || createTables(settings.tableCount);
+
+let history=
+  JSON.parse(localStorage.getItem("MY_BAR_HISTORY"))
+  || [];
+
+let session=
+  JSON.parse(localStorage.getItem("MY_BAR_SESSION"))
+  || null;
+
+let currentTable=null;
+let currentReceipt=null;
+
+/* =========================
+   SESSION
+========================= */
+
+function requireLogin(){
+
+  if(!session){
+    window.location.href="./login.html";
+    return false;
+  }
+
+  return true;
+}
+
+function logout(){
+
+  localStorage.removeItem("MY_BAR_SESSION");
+  window.location.href="./login.html";
+}
+
+if(!requireLogin()){
+  throw new Error("No session");
+}
 
 /* =========================
    INIT
 ========================= */
 
-function init(){
-  if(!tables.length){
-    createTables(settings.tableCount);
-  }
+document.getElementById("brandName").textContent=settings.barName;
+document.getElementById("sideUser").textContent=session.user;
+document.getElementById("sideRole").textContent=session.role;
 
-  updateBrand();
-
-  if(session){
-    startApp();
-  }else{
-    showLogin();
-  }
-
-  document.getElementById("loginPass").addEventListener("keydown",e=>{
-    if(e.key==="Enter") login();
-  });
+if(session.role==="Administrator"){
+  document.getElementById("settingsBtn")
+    .classList.remove("hidden");
 }
 
-function createTables(count){
-  tables = [];
-  for(let i=1;i<=count;i++){
-    tables.push({
-      id:i,
-      items:[]
-    });
-  }
-  saveTablesData();
+if(session.role==="Kamarier"){
+  document.getElementById("roleText").textContent="KAMARIER";
+}else{
+  document.getElementById("roleText").textContent="ADMINISTRATOR";
 }
 
-function saveTablesData(){
-  localStorage.setItem("MY_BAR_TABLES",JSON.stringify(tables));
-}
-
-function saveProducts(){
-  localStorage.setItem("MY_BAR_PRODUCTS",JSON.stringify(products));
-}
-
-function saveSettings(){
-  localStorage.setItem("MY_BAR_SETTINGS",JSON.stringify(settings));
-}
-
-function saveHistory(){
-  localStorage.setItem("MY_BAR_HISTORY",JSON.stringify(history));
-}
-
-/* =========================
-   LOGIN
-========================= */
-
-function showLogin(){
-  document.getElementById("loginScreen").classList.remove("hidden");
-  document.getElementById("app").classList.add("hidden");
-}
-
-function login(){
-  const user=document.getElementById("loginUser").value.trim();
-  const pass=document.getElementById("loginPass").value;
-
-  let role=null;
-
-  if(user===settings.adminUser && pass===settings.adminPass){
-    role="Administrator";
-  }else if(user===settings.waiterUser && pass===settings.waiterPass){
-    role="Kamarier";
-  }else{
-    document.getElementById("loginError").textContent="Përdoruesi ose fjalëkalimi është gabim.";
-    return;
-  }
-
-  session={user,role};
-  localStorage.setItem("MY_BAR_SESSION",JSON.stringify(session));
-  document.getElementById("loginError").textContent="";
-  startApp();
-}
-
-function startApp(){
-  document.getElementById("loginScreen").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-
-  document.getElementById("sideUser").textContent=session.user;
-  document.getElementById("sideRole").textContent=session.role;
-
-  const settingsBtn=document.getElementById("settingsBtn");
-
-  if(session.role==="Administrator"){
-    settingsBtn.classList.remove("hidden");
-  }else{
-    settingsBtn.classList.add("hidden");
-  }
-
-  updateBrand();
-  renderTables();
-  renderProducts();
-  renderHistory();
-  updateStats();
-}
-
-function logout(){
-  localStorage.removeItem("MY_BAR_SESSION");
-  session=null;
-  selectedTable=null;
-  showLogin();
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function showPage(id,btn){
-  if(id==="settings" && session.role!=="Administrator"){
-    alert("Settings është vetëm për Administratorin.");
-    return;
-  }
-
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
-  if(btn) btn.classList.add("active");
-
-  if(id==="tables") renderTables();
-  if(id==="menu"){
-    renderProducts();
-    renderOrder();
-  }
-  if(id==="history") renderHistory();
-  if(id==="settings") loadSettings();
-}
-
-/* =========================
-   BRAND
-========================= */
-
-function updateBrand(){
-  document.getElementById("sideBarName").textContent=settings.barName;
-  document.getElementById("mobileBarName").textContent=settings.barName;
-  document.title=settings.barName;
-}
+renderTables();
+renderMenu();
+renderHistory();
+renderSettings();
+renderProductsAdmin();
+updateStats();
 
 /* =========================
    TABLES
 ========================= */
 
-function renderTables(){
-  const html=tables.map(table=>{
-    const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
-    const open=table.items.length>0;
+function createTables(count){
 
-    return `
-      <div class="tableCard ${open?"open":""}">
-        <div class="tableNumber">Tavolina ${table.id}</div>
-        <div class="tableStatus">${open?"● E hapur":"○ E lirë"}</div>
-        ${open?`<div class="tableTotal">${money(total)}</div>`:""}
-        <div class="btnRow">
-          <button class="btn green" onclick="openTable(${table.id})">
-            ${open?"HAP POROSINË":"HAP TAVOLINË"}
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
-
-  document.getElementById("tablesGrid").innerHTML=html;
-  document.getElementById("dashboardTables").innerHTML=html;
+  return Array.from(
+    {length:Number(count)},
+    (_,i)=>({
+      id:i+1,
+      name:"Tavolina "+(i+1),
+      items:[]
+    })
+  );
 }
 
-function openTable(id){
-  selectedTable=id;
-  document.getElementById("selectedTableText").textContent="Tavolina "+id;
-  document.getElementById("orderTitle").textContent="Porosia — Tavolina "+id;
+function renderTables(){
 
-  showPage("menu");
-  renderProducts();
+  const box=document.getElementById("tables");
+  box.innerHTML="";
+
+  tables.forEach(table=>{
+
+    const total=getTableTotal(table);
+
+    const card=document.createElement("div");
+
+    card.className=
+      "table-card "+
+      (table.items.length ? "open" : "");
+
+    card.onclick=()=>selectTable(table.id);
+
+    card.innerHTML=`
+      <div class="status-dot"></div>
+      <div class="table-number">
+        TAVOLINA ${table.id}
+      </div>
+      <div class="table-name">
+        ${escapeHtml(table.name)}
+      </div>
+      <div class="table-status">
+        ${table.items.length
+          ? table.items.reduce((a,b)=>a+b.qty,0)+" artikuj"
+          : "E lirë"}
+      </div>
+      <div class="table-total">
+        €${total.toFixed(2)}
+      </div>
+    `;
+
+    box.appendChild(card);
+
+  });
+
+  document.getElementById("statTables").textContent=tables.length;
+
+}
+
+function selectTable(id){
+
+  currentTable=id;
+
+  const table=
+    tables.find(t=>t.id===id);
+
+  document.getElementById("orderTable").textContent=
+    table.name;
+
   renderOrder();
+
+  if(window.innerWidth<=1100){
+    document.getElementById("orderPanel")
+      .classList.add("mobile-open");
+  }
 }
 
 /* =========================
-   PRODUCTS
+   ORDER
 ========================= */
 
-function renderProducts(){
-  document.getElementById("productsGrid").innerHTML=products.map(p=>`
-    <button class="product" onclick="addToOrder(${p.id})">
-      <strong>${escapeHtml(p.name)}</strong>
-      <span>${money(p.price)}</span>
-    </button>
-  `).join("");
-}
+function renderOrder(){
 
-function addToOrder(productId){
-  if(!selectedTable){
-    alert("Zgjidh fillimisht një tavolinë.");
+  const body=document.getElementById("orderBody");
+
+  if(!currentTable){
+
+    body.innerHTML=`
+      <div class="empty">
+        Zgjidh një tavolinë për të filluar porosinë.
+      </div>
+    `;
+
+    document.getElementById("orderTotal")
+      .textContent="€0.00";
+
     return;
   }
 
-  const table=tables.find(t=>t.id===selectedTable);
-  const product=products.find(p=>p.id===productId);
+  const table=
+    tables.find(t=>t.id===currentTable);
+
+  if(!table || !table.items.length){
+
+    body.innerHTML=`
+      <div class="empty">
+        Tavolina është bosh.<br>
+        Shto produkte nga MENU.
+      </div>
+    `;
+
+    document.getElementById("orderTotal")
+      .textContent="€0.00";
+
+    return;
+  }
+
+  body.innerHTML="";
+
+  table.items.forEach((item,index)=>{
+
+    const row=document.createElement("div");
+
+    row.className="order-item";
+
+    row.innerHTML=`
+      <div class="item-row">
+        <div class="item-name">
+          ${escapeHtml(item.name)}
+        </div>
+        <div class="item-price">
+          €${(item.price*item.qty).toFixed(2)}
+        </div>
+      </div>
+
+      <div class="item-controls">
+
+        <button class="qty-btn"
+          onclick="changeQty(${index},-1)">
+          −
+        </button>
+
+        <span class="qty">
+          ${item.qty}
+        </span>
+
+        <button class="qty-btn"
+          onclick="changeQty(${index},1)">
+          +
+        </button>
+
+        <button class="qty-btn delete"
+          onclick="removeItem(${index})">
+          ×
+        </button>
+
+      </div>
+    `;
+
+    body.appendChild(row);
+
+  });
+
+  document.getElementById("orderTotal")
+    .textContent=
+      "€"+getTableTotal(table).toFixed(2);
+
+}
+
+function addToTable(productId){
+
+  if(!currentTable){
+
+    showToast("Zgjidh fillimisht një tavolinë.");
+    return;
+  }
+
+  const table=
+    tables.find(t=>t.id===currentTable);
+
+  const product=
+    products.find(p=>p.id===productId);
 
   if(!table || !product)return;
 
-  const existing=table.items.find(i=>i.productId===productId);
+  const existing=
+    table.items.find(i=>i.productId===product.id);
 
   if(existing){
     existing.qty++;
@@ -1193,136 +1228,173 @@ function addToOrder(productId){
     });
   }
 
-  saveTablesData();
-  renderOrder();
+  saveTables();
   renderTables();
+  renderOrder();
   updateStats();
+
+  showToast(product.name+" u shtua.");
 }
 
-function renderOrder(){
-  const list=document.getElementById("orderList");
+function changeQty(index,amount){
 
-  if(!selectedTable){
-    list.innerHTML='<div class="empty">Zgjidh një tavolinë.</div>';
-    document.getElementById("orderTotal").textContent=money(0);
-    return;
-  }
+  if(!currentTable)return;
 
-  const table=tables.find(t=>t.id===selectedTable);
+  const table=
+    tables.find(t=>t.id===currentTable);
 
-  if(!table || !table.items.length){
-    list.innerHTML='<div class="empty">Nuk ka produkte në porosi.</div>';
-    document.getElementById("orderTotal").textContent=money(0);
-    return;
-  }
-
-  list.innerHTML=table.items.map((item,index)=>`
-    <div class="orderItem">
-      <div>
-        <strong>${escapeHtml(item.name)}</strong>
-        <br>
-        <small>${item.qty} × ${money(item.price)}</small>
-      </div>
-
-      <div style="text-align:right">
-        <strong>${money(item.price*item.qty)}</strong>
-        <br>
-        <button class="btn" onclick="removeOne(${index})">−</button>
-        <button class="btn" onclick="addOne(${index})">+</button>
-      </div>
-    </div>
-  `).join("");
-
-  const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
-  document.getElementById("orderTotal").textContent=money(total);
-}
-
-function addOne(index){
-  const table=tables.find(t=>t.id===selectedTable);
-  if(table){
-    table.items[index].qty++;
-    saveTablesData();
-    renderOrder();
-    renderTables();
-  }
-}
-
-function removeOne(index){
-  const table=tables.find(t=>t.id===selectedTable);
   if(!table)return;
 
-  table.items[index].qty--;
+  table.items[index].qty+=amount;
 
   if(table.items[index].qty<=0){
     table.items.splice(index,1);
   }
 
-  saveTablesData();
-  renderOrder();
+  saveTables();
   renderTables();
+  renderOrder();
+  updateStats();
 }
 
-function clearOrder(){
-  if(!selectedTable)return;
+function removeItem(index){
 
-  if(confirm("Të fshihet e gjithë porosia?")){
-    const table=tables.find(t=>t.id===selectedTable);
-    table.items=[];
-    saveTablesData();
-    renderOrder();
-    renderTables();
-    updateStats();
+  if(!currentTable)return;
+
+  const table=
+    tables.find(t=>t.id===currentTable);
+
+  if(!table)return;
+
+  table.items.splice(index,1);
+
+  saveTables();
+  renderTables();
+  renderOrder();
+  updateStats();
+}
+
+function clearCurrentOrder(){
+
+  if(!currentTable)return;
+
+  const table=
+    tables.find(t=>t.id===currentTable);
+
+  if(!table)return;
+
+  if(table.items.length &&
+     !confirm("A dëshiron të fshish porosinë?")){
+    return;
   }
+
+  table.items=[];
+
+  saveTables();
+  renderTables();
+  renderOrder();
+  updateStats();
+
+  showToast("Porosia u pastrua.");
+}
+
+function getTableTotal(table){
+
+  return table.items.reduce(
+    (sum,item)=>
+      sum+(Number(item.price)*Number(item.qty)),
+    0
+  );
+}
+
+/* =========================
+   MENU
+========================= */
+
+function renderMenu(){
+
+  const grid=
+    document.getElementById("menuGrid");
+
+  grid.innerHTML="";
+
+  products.forEach(product=>{
+
+    const card=document.createElement("div");
+
+    card.className="product";
+
+    card.innerHTML=`
+      <h3>${escapeHtml(product.name)}</h3>
+      <div class="cat">
+        ${escapeHtml(product.cat)}
+      </div>
+
+      <div class="product-bottom">
+        <div class="product-price">
+          €${Number(product.price).toFixed(2)}
+        </div>
+
+        <button class="add-btn"
+          onclick="addToTable(${product.id})">
+          +
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
 }
 
 /* =========================
    PAYMENT
 ========================= */
 
-function openPayment(){
-  if(!selectedTable){
-    alert("Zgjidh tavolinën.");
+function completePayment(){
+
+  if(!currentTable){
+
+    showToast("Zgjidh një tavolinë.");
     return;
   }
 
-  const table=tables.find(t=>t.id===selectedTable);
+  const table=
+    tables.find(t=>t.id===currentTable);
 
   if(!table || !table.items.length){
-    alert("Kjo tavolinë nuk ka porosi.");
+
+    showToast("Kjo tavolinë nuk ka porosi.");
     return;
   }
 
-  const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
-  document.getElementById("paymentTotal").textContent=money(total);
-  document.getElementById("paymentModal").classList.remove("hidden");
-}
+  const total=getTableTotal(table);
 
-function completePayment(){
-  const table=tables.find(t=>t.id===selectedTable);
-  if(!table)return;
-
-  const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
-  const method=document.getElementById("paymentMethod").value;
+  if(!confirm(
+    "Konfirmo pagesën €"+
+    total.toFixed(2)+
+    " për "+table.name+"?"
+  )){
+    return;
+  }
 
   const invoice={
-    id:Date.now(),
-    invoiceNo:"INV-"+String(history.length+1).padStart(5,"0"),
-    date:new Date().toLocaleString("sq-AL"),
-    table:table.id,
+    id:"INV-"+Date.now(),
+    table:table.name,
     items:JSON.parse(JSON.stringify(table.items)),
-    total,
-    method
+    total:total,
+    user:session.user,
+    date:new Date().toLocaleString("sq-AL")
   };
 
   history.unshift(invoice);
+
+  table.items=[];
+
+  saveTables();
   saveHistory();
 
   currentReceipt=invoice;
-
-  table.items=[];
-  saveTablesData();
-
-  closeModal("paymentModal");
 
   renderTables();
   renderOrder();
@@ -1330,91 +1402,109 @@ function completePayment(){
   updateStats();
 
   printReceipt(invoice);
+
+  showToast("Pagesa u përfundua.");
 }
 
 /* =========================
-   RECEIPT / PRINT
+   PRINT
 ========================= */
 
-function buildReceipt(invoice){
-  return `
-    <div class="center">
-      <h2>${escapeHtml(settings.barName)}</h2>
-      ${settings.address?`<div>${escapeHtml(settings.address)}</div>`:""}
-      ${settings.phone?`<div>${escapeHtml(settings.phone)}</div>`:""}
-      <hr>
-      <div>FATURË ${invoice.invoiceNo}</div>
-      <div>${invoice.date}</div>
-      <div>Tavolina ${invoice.table}</div>
-      <hr>
-    </div>
+function printCurrent(){
 
-    ${invoice.items.map(item=>`
-      <div class="receiptLine">
-        <span>${item.qty} × ${escapeHtml(item.name)}</span>
-        <span>${money(item.qty*item.price)}</span>
-      </div>
-    `).join("")}
+  if(!currentTable){
 
-    <hr>
+    showToast("Zgjidh një tavolinë.");
+    return;
+  }
 
-    <div class="receiptLine receiptTotal">
-      <span>TOTAL</span>
-      <span>${money(invoice.total)}</span>
-    </div>
+  const table=
+    tables.find(t=>t.id===currentTable);
 
-    <div class="receiptLine">
-      <span>Pagesa</span>
-      <span>${escapeHtml(invoice.method)}</span>
-    </div>
+  if(!table || !table.items.length){
 
-    <hr>
+    showToast("Nuk ka porosi për printim.");
+    return;
+  }
 
-    <div class="center">
-      Faleminderit!
-    </div>
-  `;
+  const invoice={
+    id:"PREVIEW-"+Date.now(),
+    table:table.name,
+    items:table.items,
+    total:getTableTotal(table),
+    user:session.user,
+    date:new Date().toLocaleString("sq-AL")
+  };
+
+  printReceipt(invoice);
 }
 
 function printReceipt(invoice){
-  const receipt=document.getElementById("receiptPrint");
-  receipt.innerHTML=buildReceipt(invoice);
-  receipt.classList.remove("hidden");
 
-  setTimeout(()=>{
-    window.print();
-    setTimeout(()=>{
-      receipt.classList.add("hidden");
-    },1000);
-  },150);
+  const area=document.getElementById("printArea");
+
+  area.innerHTML=`
+    <div style="max-width:420px;margin:auto">
+      <h2 style="text-align:center">
+        ${escapeHtml(settings.barName)}
+      </h2>
+
+      <p style="text-align:center">
+        ${escapeHtml(settings.address || "")}
+      </p>
+
+      <hr>
+
+      <p>
+        Fatura: ${escapeHtml(invoice.id)}<br>
+        Tavolina: ${escapeHtml(invoice.table)}<br>
+        Kamarieri: ${escapeHtml(invoice.user)}<br>
+        Data: ${escapeHtml(invoice.date)}
+      </p>
+
+      <hr>
+
+      ${invoice.items.map(item=>`
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin:7px 0
+        ">
+          <span>
+            ${escapeHtml(item.name)}
+            ×${item.qty}
+          </span>
+          <span>
+            €${(item.price*item.qty).toFixed(2)}
+          </span>
+        </div>
+      `).join("")}
+
+      <hr>
+
+      <h2 style="text-align:right">
+        TOTAL €${invoice.total.toFixed(2)}
+      </h2>
+
+      <p style="text-align:center;margin-top:25px">
+        Faleminderit!
+      </p>
+    </div>
+  `;
+
+  window.print();
 }
 
-function testPrint(){
-  const test={
-    invoiceNo:"TEST",
-    date:new Date().toLocaleString("sq-AL"),
-    table:"TEST",
-    items:[
-      {name:"Test Produkt",qty:1,price:2}
-    ],
-    total:2,
-    method:"Cash"
-  };
-
-  currentReceipt=test;
-  printReceipt(test);
-}
-
+/* F6 */
 document.addEventListener("keydown",e=>{
+
   if(e.key==="F6"){
+
     e.preventDefault();
 
-    if(currentReceipt){
-      printReceipt(currentReceipt);
-    }else{
-      alert("Nuk ka faturë për printim.");
-    }
+    printCurrent();
   }
+
 });
 
 /* =========================
@@ -1422,44 +1512,345 @@ document.addEventListener("keydown",e=>{
 ========================= */
 
 function renderHistory(){
-  const list=document.getElementById("historyList");
+
+  const box=
+    document.getElementById("historyList");
 
   if(!history.length){
-    list.innerHTML='<div class="empty">Nuk ka fatura.</div>';
+
+    box.innerHTML=`
+      <div class="empty">
+        Nuk ka ende fatura.
+      </div>
+    `;
+
     return;
   }
 
-  list.innerHTML=history.map(invoice=>`
-    <div class="historyRow">
+  box.innerHTML="";
+
+  history.forEach(invoice=>{
+
+    const row=document.createElement("div");
+
+    row.className="list-row";
+
+    row.innerHTML=`
       <div>
-        <strong>${invoice.invoiceNo}</strong>
-        <br>
-        <small>${invoice.date}</small>
+        <strong>${escapeHtml(invoice.id)}</strong>
+        <div style="
+          color:#59665f;
+          font-size:9px;
+          margin-top:4px
+        ">
+          ${escapeHtml(invoice.table)}
+          •
+          ${escapeHtml(invoice.date)}
+        </div>
       </div>
 
       <div>
-        Tavolina ${invoice.table}
+        <strong style="color:#00e875">
+          €${Number(invoice.total).toFixed(2)}
+        </strong>
       </div>
+    `;
 
-      <div>
-        <strong>${money(invoice.total)}</strong>
-        <br>
-        <small>${invoice.method}</small>
-      </div>
+    box.appendChild(row);
 
-      <button class="btn green" onclick="reprint(${invoice.id})">
-        PRINT
-      </button>
-    </div>
-  `).join("");
+  });
 }
 
-function reprint(id){
-  const invoice=history.find(x=>x.id===id);
-  if(invoice){
-    currentReceipt=invoice;
-    printReceipt(invoice);
+/* =========================
+   SETTINGS
+========================= */
+
+function renderSettings(){
+
+  if(session.role!=="Administrator")return;
+
+  document.getElementById("setBarName").value=
+    settings.barName;
+
+  document.getElementById("setAddress").value=
+    settings.address;
+
+  document.getElementById("setPhone").value=
+    settings.phone;
+
+  document.getElementById("setTableCount").value=
+    settings.tableCount;
+
+  document.getElementById("setPrinter").value=
+    settings.printer;
+
+  document.getElementById("setPaper").value=
+    settings.paper;
+
+  document.getElementById("setAdminUser").value=
+    settings.adminUser;
+
+  document.getElementById("setAdminPass").value=
+    settings.adminPass;
+
+  document.getElementById("setWaiterUser").value=
+    settings.waiterUser;
+
+  document.getElementById("setWaiterPass").value=
+    settings.waiterPass;
+}
+
+function saveSettings(){
+
+  if(session.role!=="Administrator")return;
+
+  const oldCount=
+    Number(settings.tableCount);
+
+  settings.barName=
+    document.getElementById("setBarName").value.trim()
+    || "MY BAR";
+
+  settings.address=
+    document.getElementById("setAddress").value.trim();
+
+  settings.phone=
+    document.getElementById("setPhone").value.trim();
+
+  settings.tableCount=
+    Math.max(
+      1,
+      Number(document.getElementById("setTableCount").value)||1
+    );
+
+  settings.printer=
+    document.getElementById("setPrinter").value.trim();
+
+  settings.paper=
+    document.getElementById("setPaper").value;
+
+  settings.adminUser=
+    document.getElementById("setAdminUser").value.trim()
+    || "admin";
+
+  settings.adminPass=
+    document.getElementById("setAdminPass").value
+    || "1234";
+
+  settings.waiterUser=
+    document.getElementById("setWaiterUser").value.trim()
+    || "kamarier";
+
+  settings.waiterPass=
+    document.getElementById("setWaiterPass").value
+    || "1234";
+
+  localStorage.setItem(
+    "MY_BAR_SETTINGS",
+    JSON.stringify(settings)
+  );
+
+  /* resize tables */
+  if(settings.tableCount!==oldCount){
+
+    if(settings.tableCount>tables.length){
+
+      for(
+        let i=tables.length+1;
+        i<=settings.tableCount;
+        i++
+      ){
+        tables.push({
+          id:i,
+          name:"Tavolina "+i,
+          items:[]
+        });
+      }
+
+    }else{
+
+      tables=tables.slice(0,settings.tableCount);
+
+    }
+
+    saveTables();
   }
+
+  document.getElementById("brandName")
+    .textContent=settings.barName;
+
+  renderTables();
+  renderSettings();
+
+  showToast("Settings u ruajtën.");
+}
+
+/* =========================
+   PRODUCTS ADMIN
+========================= */
+
+function addProduct(){
+
+  if(session.role!=="Administrator")return;
+
+  const name=
+    document.getElementById("newProductName")
+      .value.trim();
+
+  const price=
+    Number(
+      document.getElementById("newProductPrice").value
+    );
+
+  const cat=
+    document.getElementById("newProductCat")
+      .value.trim()
+      || "Tjetër";
+
+  if(!name || !price){
+
+    showToast("Plotëso emrin dhe çmimin.");
+    return;
+  }
+
+  products.push({
+    id:Date.now(),
+    name:name,
+    price:price,
+    cat:cat
+  });
+
+  localStorage.setItem(
+    "MY_BAR_PRODUCTS",
+    JSON.stringify(products)
+  );
+
+  document.getElementById("newProductName").value="";
+  document.getElementById("newProductPrice").value="";
+  document.getElementById("newProductCat").value="";
+
+  renderMenu();
+  renderProductsAdmin();
+
+  showToast("Produkti u shtua.");
+}
+
+function renderProductsAdmin(){
+
+  if(session.role!=="Administrator")return;
+
+  const box=
+    document.getElementById("productAdminList");
+
+  box.innerHTML="";
+
+  products.forEach(product=>{
+
+    const row=document.createElement("div");
+
+    row.className="list-row";
+
+    row.innerHTML=`
+      <div>
+        <strong>${escapeHtml(product.name)}</strong>
+        <div style="
+          color:#59665f;
+          font-size:9px;
+          margin-top:3px
+        ">
+          ${escapeHtml(product.cat)}
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px">
+        <strong style="color:#00e875">
+          €${Number(product.price).toFixed(2)}
+        </strong>
+
+        <button
+          class="qty-btn"
+          style="color:#ff7777"
+          onclick="deleteProduct(${product.id})">
+          ×
+        </button>
+      </div>
+    `;
+
+    box.appendChild(row);
+
+  });
+}
+
+function deleteProduct(id){
+
+  if(!confirm("Fshi këtë produkt?"))return;
+
+  products=
+    products.filter(p=>p.id!==id);
+
+  localStorage.setItem(
+    "MY_BAR_PRODUCTS",
+    JSON.stringify(products)
+  );
+
+  renderMenu();
+  renderProductsAdmin();
+
+  showToast("Produkti u fshi.");
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(page,button){
+
+  document.getElementById("dashboardPage")
+    .classList.add("hidden");
+
+  document.getElementById("menuPage")
+    .classList.add("hidden");
+
+  document.getElementById("historyPage")
+    .classList.add("hidden");
+
+  document.getElementById("settingsPage")
+    .classList.add("hidden");
+
+  if(page==="dashboard"){
+    document.getElementById("dashboardPage")
+      .classList.remove("hidden");
+  }
+
+  if(page==="menu"){
+    document.getElementById("menuPage")
+      .classList.remove("hidden");
+  }
+
+  if(page==="history"){
+    document.getElementById("historyPage")
+      .classList.remove("hidden");
+  }
+
+  if(page==="settings"){
+
+    if(session.role!=="Administrator"){
+
+      showToast("Vetëm administratori ka akses.");
+      return;
+    }
+
+    document.getElementById("settingsPage")
+      .classList.remove("hidden");
+
+    renderSettings();
+    renderProductsAdmin();
+  }
+
+  document.querySelectorAll(".nav button")
+    .forEach(b=>b.classList.remove("active"));
+
+  if(button)button.classList.add("active");
 }
 
 /* =========================
@@ -1467,266 +1858,79 @@ function reprint(id){
 ========================= */
 
 function updateStats(){
-  const open=tables.filter(t=>t.items.length).length;
 
-  const today=new Date().toLocaleDateString("sq-AL");
+  const open=
+    tables.filter(t=>t.items.length).length;
 
-  const todaySales=history
-    .filter(i=>i.date.startsWith(today))
-    .reduce((s,i)=>s+i.total,0);
+  document.getElementById("statOpen")
+    .textContent=open;
 
-  document.getElementById("statOpen").textContent=open;
-  document.getElementById("statSales").textContent=money(todaySales);
-  document.getElementById("statInvoices").textContent=history.length;
-  document.getElementById("statProducts").textContent=products.length;
+  const today=
+    new Date().toLocaleDateString("sq-AL");
+
+  const sales=
+    history
+      .filter(x=>x.date.startsWith(today))
+      .reduce((sum,x)=>sum+Number(x.total),0);
+
+  document.getElementById("statSales")
+    .textContent="€"+sales.toFixed(2);
 }
 
 /* =========================
-   ADMIN SETTINGS
+   MOBILE
 ========================= */
 
-function loadSettings(){
-  if(session.role!=="Administrator")return;
+function openOrderOnMobile(){
 
-  document.getElementById("setBarName").value=settings.barName;
-  document.getElementById("setAddress").value=settings.address;
-  document.getElementById("setPhone").value=settings.phone;
-
-  document.getElementById("setTables").value=settings.tableCount;
-
-  document.getElementById("setPrinter").value=settings.printer;
-  document.getElementById("setPaper").value=settings.paper;
-
-  document.getElementById("setAdminUser").value=settings.adminUser;
-  document.getElementById("setAdminPass").value=settings.adminPass;
-
-  document.getElementById("setWaiterUser").value=settings.waiterUser;
-  document.getElementById("setWaiterPass").value=settings.waiterPass;
+  document.getElementById("orderPanel")
+    .classList.add("mobile-open");
 }
 
-function saveGeneral(){
-  settings.barName=document.getElementById("setBarName").value.trim() || "MY BAR";
-  settings.address=document.getElementById("setAddress").value.trim();
-  settings.phone=document.getElementById("setPhone").value.trim();
+function closeOrderPanel(){
 
-  saveSettings();
-  updateBrand();
-
-  alert("Cilësimet u ruajtën.");
+  document.getElementById("orderPanel")
+    .classList.remove("mobile-open");
 }
+
+/* =========================
+   STORAGE
+========================= */
 
 function saveTables(){
-  const count=Math.max(
-    1,
-    Math.min(
-      100,
-      Number(document.getElementById("setTables").value)||12
-    )
+
+  localStorage.setItem(
+    "MY_BAR_TABLES",
+    JSON.stringify(tables)
   );
-
-  settings.tableCount=count;
-
-  const oldTables=tables;
-
-  tables=[];
-
-  for(let i=1;i<=count;i++){
-    const old=oldTables.find(t=>t.id===i);
-
-    tables.push(
-      old || {
-        id:i,
-        items:[]
-      }
-    );
-  }
-
-  saveSettings();
-  saveTablesData();
-
-  renderTables();
-  updateStats();
-
-  alert("Tavolinat u përditësuan.");
 }
 
-function savePrinter(){
-  settings.printer=document.getElementById("setPrinter").value.trim();
-  settings.paper=document.getElementById("setPaper").value;
+function saveHistory(){
 
-  saveSettings();
-
-  alert("Printeri u ruajt.");
-}
-
-function saveAdmin(){
-  const user=document.getElementById("setAdminUser").value.trim();
-  const pass=document.getElementById("setAdminPass").value;
-
-  if(!user || !pass){
-    alert("Plotëso username dhe password.");
-    return;
-  }
-
-  settings.adminUser=user;
-  settings.adminPass=pass;
-
-  saveSettings();
-
-  alert("Kredencialet e Administratorit u ndryshuan.");
-}
-
-function saveWaiter(){
-  const user=document.getElementById("setWaiterUser").value.trim();
-  const pass=document.getElementById("setWaiterPass").value;
-
-  if(!user || !pass){
-    alert("Plotëso username dhe password.");
-    return;
-  }
-
-  settings.waiterUser=user;
-  settings.waiterPass=pass;
-
-  saveSettings();
-
-  alert("Kredencialet e Kamarierit u ndryshuan.");
-}
-
-/* =========================
-   PRODUCT MANAGER
-========================= */
-
-function openProductManager(){
-  if(session.role!=="Administrator"){
-    alert("Vetëm Administratori.");
-    return;
-  }
-
-  renderAdminProducts();
-  document.getElementById("productModal").classList.remove("hidden");
-}
-
-function renderAdminProducts(){
-  document.getElementById("adminProductList").innerHTML=products.map(p=>`
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding:12px 0;
-      border-bottom:1px solid var(--line);
-    ">
-      <div style="flex:1">
-        <strong>${escapeHtml(p.name)}</strong>
-        <br>
-        <small style="color:var(--green)">${money(p.price)}</small>
-      </div>
-
-      <button class="btn" onclick="editProduct(${p.id})">EDIT</button>
-      <button class="btn red" onclick="deleteProduct(${p.id})">Fshi</button>
-    </div>
-  `).join("");
-}
-
-function addProduct(){
-  const name=document.getElementById("newProductName").value.trim();
-  const price=Number(document.getElementById("newProductPrice").value);
-
-  if(!name || !price || price<=0){
-    alert("Vendos emrin dhe çmimin.");
-    return;
-  }
-
-  products.push({
-    id:Date.now(),
-    name,
-    price
-  });
-
-  saveProducts();
-
-  document.getElementById("newProductName").value="";
-  document.getElementById("newProductPrice").value="";
-
-  renderAdminProducts();
-  renderProducts();
-  updateStats();
-}
-
-function editProduct(id){
-  const product=products.find(p=>p.id===id);
-  if(!product)return;
-
-  const name=prompt("Emri i produktit:",product.name);
-  if(name===null)return;
-
-  const price=prompt("Çmimi €:",product.price);
-  if(price===null)return;
-
-  const num=Number(price);
-
-  if(!name.trim() || !num || num<=0){
-    alert("Të dhënat nuk janë të sakta.");
-    return;
-  }
-
-  product.name=name.trim();
-  product.price=num;
-
-  saveProducts();
-  renderAdminProducts();
-  renderProducts();
-  updateStats();
-}
-
-function deleteProduct(id){
-  const product=products.find(p=>p.id===id);
-  if(!product)return;
-
-  if(confirm("Të fshihet "+product.name+"?")){
-    products=products.filter(p=>p.id!==id);
-    saveProducts();
-    renderAdminProducts();
-    renderProducts();
-    updateStats();
-  }
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-function showContact(){
-  document.getElementById("contactModal").classList.remove("hidden");
-}
-
-/* =========================
-   MODALS
-========================= */
-
-function closeModal(id){
-  document.getElementById(id).classList.add("hidden");
+  localStorage.setItem(
+    "MY_BAR_HISTORY",
+    JSON.stringify(history)
+  );
 }
 
 /* =========================
    RESET
 ========================= */
 
-function resetSystem(){
+function resetAll(){
+
   if(session.role!=="Administrator")return;
 
-  const ok=confirm(
-    "KUJDES!\n\nKjo do të fshijë të dhënat lokale të MY BAR.\n\nVazhdo?"
-  );
+  if(!confirm(
+    "Kjo do të fshijë tavolinat, historinë dhe produktet e personalizuara. Vazhdon?"
+  )){
+    return;
+  }
 
-  if(!ok)return;
-
-  localStorage.removeItem("MY_BAR_PRODUCTS");
   localStorage.removeItem("MY_BAR_SETTINGS");
+  localStorage.removeItem("MY_BAR_PRODUCTS");
   localStorage.removeItem("MY_BAR_TABLES");
   localStorage.removeItem("MY_BAR_HISTORY");
-  localStorage.removeItem("MY_BAR_SESSION");
 
   location.reload();
 }
@@ -1735,11 +1939,24 @@ function resetSystem(){
    HELPERS
 ========================= */
 
-function money(value){
-  return Number(value||0).toFixed(2)+" €";
+function showToast(message){
+
+  const toast=
+    document.getElementById("toast");
+
+  toast.textContent=message;
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=
+    setTimeout(()=>{
+      toast.classList.remove("show");
+    },2200);
 }
 
 function escapeHtml(value){
+
   return String(value)
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
@@ -1748,8 +1965,30 @@ function escapeHtml(value){
     .replaceAll("'","&#039;");
 }
 
-/* START */
-init();
+/* =========================
+   TEST PRINTER
+========================= */
+
+function testPrint(){
+
+  const test={
+    id:"TEST",
+    table:"TEST",
+    items:[
+      {
+        name:"TEST PRINT",
+        price:0,
+        qty:1
+      }
+    ],
+    total:0,
+    user:session.user,
+    date:new Date().toLocaleString("sq-AL")
+  };
+
+  printReceipt(test);
+}
+
 </script>
 
 </body>
