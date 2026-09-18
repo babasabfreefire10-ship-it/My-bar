@@ -9,1180 +9,1551 @@
 *{box-sizing:border-box}
 
 :root{
-  --bg:#07100b;
-  --panel:#0d1711;
-  --panel2:#111e15;
-  --border:#233329;
-  --green:#20d66b;
-  --greenDark:#123b23;
-  --text:#f5f7f6;
-  --muted:#89968e;
-  --red:#ef5555;
+ --bg:#060b08;
+ --panel:#0d1510;
+ --panel2:#111c15;
+ --border:#233329;
+ --green:#20d66b;
+ --green2:#0e8e45;
+ --text:#f4f7f5;
+ --muted:#89968e;
+ --red:#ed5b5b;
 }
 
 html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+ margin:0;
+ width:100%;
+ height:100%;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial,Helvetica,sans-serif;
 }
 
-body{
-  overflow:hidden;
+button,input,select{
+ font:inherit;
 }
 
-/* LOGIN */
+button{
+ cursor:pointer;
+}
 
-.login{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at 50% 15%,#164d2a 0,#07100b 42%,#030604 100%);
-  z-index:999;
+/* ================= LOGIN ================= */
+
+#login{
+ position:fixed;
+ inset:0;
+ z-index:1000;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:
+ radial-gradient(circle at 50% 15%,#164d2b 0,#07100b 42%,#020403 100%);
 }
 
 .login-card{
-  width:390px;
-  padding:40px;
-  border:1px solid #294333;
-  background:#0d1811;
-  border-radius:24px;
-  box-shadow:0 30px 100px #000;
+ width:390px;
+ padding:40px;
+ border:1px solid #294333;
+ background:#0c1710;
+ border-radius:24px;
+ box-shadow:0 30px 100px #000;
 }
 
-.logo{
-  width:64px;
-  height:64px;
-  margin:0 auto 18px;
-  display:grid;
-  place-items:center;
-  border-radius:18px;
-  background:linear-gradient(135deg,#20d66b,#0a793b);
-  color:#031008;
-  font-size:30px;
-  font-weight:900;
+.login-logo{
+ width:64px;
+ height:64px;
+ margin:auto auto 18px;
+ display:grid;
+ place-items:center;
+ border-radius:18px;
+ background:linear-gradient(135deg,var(--green),#08763b);
+ color:#031008;
+ font-size:30px;
+ font-weight:900;
 }
 
-.login h1{
-  text-align:center;
-  margin:0;
+.login-card h1{
+ text-align:center;
+ margin:0;
 }
 
-.login p{
-  text-align:center;
-  color:var(--muted);
-  margin:8px 0 25px;
+.login-card p{
+ text-align:center;
+ color:var(--muted);
+ margin:7px 0 25px;
 }
 
 .input{
-  margin-bottom:13px;
+ margin-bottom:13px;
 }
 
 .input label{
-  display:block;
-  font-size:12px;
-  color:#aeb9b2;
-  margin-bottom:6px;
+ display:block;
+ font-size:12px;
+ color:#aeb9b2;
+ margin-bottom:6px;
 }
 
 .input input{
-  width:100%;
-  padding:14px;
-  border-radius:11px;
-  border:1px solid var(--border);
-  background:#07100b;
-  color:white;
-  outline:none;
+ width:100%;
+ padding:14px;
+ border-radius:10px;
+ border:1px solid var(--border);
+ background:#07100b;
+ color:#fff;
+ outline:none;
 }
 
 .input input:focus{
-  border-color:var(--green);
+ border-color:var(--green);
 }
 
 .login-btn{
-  width:100%;
-  border:0;
-  border-radius:11px;
-  padding:14px;
-  background:var(--green);
-  color:#031008;
-  font-weight:900;
-  margin-top:6px;
+ width:100%;
+ padding:14px;
+ border:0;
+ border-radius:10px;
+ background:var(--green);
+ color:#031008;
+ font-weight:900;
 }
 
-.error{
-  color:#ff7777;
-  text-align:center;
-  min-height:20px;
-  margin-top:10px;
-  font-size:12px;
+.login-error{
+ min-height:20px;
+ margin-top:10px;
+ color:#ff7777;
+ text-align:center;
+ font-size:12px;
 }
 
-/* APP */
+/* ================= APP ================= */
 
-.app{
-  display:none;
-  height:100vh;
-  grid-template-columns:220px 1fr 380px;
+#app{
+ display:none;
+ height:100vh;
+ grid-template-columns:220px minmax(0,1fr) 380px;
 }
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
 
 .sidebar{
-  border-right:1px solid var(--border);
-  background:#09120d;
-  padding:18px 13px;
-  display:flex;
-  flex-direction:column;
+ background:#09110c;
+ border-right:1px solid var(--border);
+ padding:18px 13px;
+ display:flex;
+ flex-direction:column;
 }
 
 .brand{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  padding:4px 7px 25px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:4px 7px 25px;
 }
 
 .brand-logo{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border-radius:12px;
-  background:var(--green);
-  color:#031008;
-  font-weight:900;
+ width:42px;
+ height:42px;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ background:var(--green);
+ color:#031008;
+ font-weight:900;
 }
 
 .brand b{
-  font-size:18px;
+ font-size:18px;
 }
 
 .brand small{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  margin-top:2px;
+ display:block;
+ color:var(--muted);
+ font-size:9px;
+ margin-top:2px;
 }
 
 .nav{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
+ display:flex;
+ flex-direction:column;
+ gap:5px;
 }
 
 .nav button{
-  border:0;
-  background:transparent;
-  color:#9ba69f;
-  padding:13px;
-  text-align:left;
-  border-radius:10px;
+ border:0;
+ background:transparent;
+ color:#99a59d;
+ padding:13px;
+ text-align:left;
+ border-radius:10px;
 }
 
 .nav button:hover,
 .nav button.active{
-  background:#132319;
-  color:white;
+ background:#132319;
+ color:white;
 }
 
 .nav button.active{
-  box-shadow:inset 3px 0 var(--green);
+ box-shadow:inset 3px 0 var(--green);
+}
+
+.sidebar-bottom{
+ margin-top:auto;
+}
+
+.contact-btn{
+ width:100%;
+ margin-bottom:8px;
+ padding:11px;
+ border-radius:9px;
+ border:1px solid #31503c;
+ background:#102017;
+ color:#bfeacc;
 }
 
 .logout{
-  margin-top:auto;
-  border:1px solid var(--border);
-  background:#101a14;
-  color:#b8c2bc;
-  border-radius:9px;
-  padding:11px;
+ width:100%;
+ padding:11px;
+ border-radius:9px;
+ border:1px solid var(--border);
+ background:#101913;
+ color:#b9c3bd;
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
 
 .main{
-  min-width:0;
-  overflow:auto;
-  padding:23px;
+ min-width:0;
+ overflow:auto;
+ padding:23px;
 }
 
 .header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:20px;
 }
 
 .header h2{
-  margin:0;
+ margin:0;
+ font-size:25px;
 }
 
 .header p{
-  color:var(--muted);
-  font-size:12px;
-  margin:6px 0 0;
+ margin:6px 0 0;
+ color:var(--muted);
+ font-size:12px;
 }
 
 .clock{
-  color:#aeb9b2;
-  font-size:12px;
+ color:#aeb9b2;
+ font-size:12px;
 }
 
-/* PAGES */
-
 .page{
-  display:none;
+ display:none;
 }
 
 .page.active{
-  display:block;
+ display:block;
 }
 
-/* DASHBOARD */
+/* ================= STATS ================= */
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:20px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin-bottom:22px;
 }
 
 .stat{
-  padding:17px;
-  border-radius:14px;
-  background:var(--panel);
-  border:1px solid var(--border);
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:14px;
+ padding:17px;
 }
 
 .stat span{
-  color:var(--muted);
-  font-size:11px;
+ color:var(--muted);
+ font-size:11px;
 }
 
 .stat strong{
-  display:block;
-  margin-top:8px;
-  font-size:23px;
+ display:block;
+ margin-top:8px;
+ font-size:23px;
 }
 
-/* TABLES */
+/* ================= TABLES ================= */
 
 .tables{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:13px;
 }
 
 .table{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:16px;
-  min-height:135px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:16px;
+ min-height:135px;
 }
 
 .table.busy{
-  background:#18160d;
-  border-color:#67572c;
+ background:#18160d;
+ border-color:#66572d;
 }
 
 .table-top{
-  display:flex;
-  justify-content:space-between;
+ display:flex;
+ justify-content:space-between;
 }
 
 .table-number{
-  font-weight:900;
-  font-size:20px;
+ font-size:20px;
+ font-weight:900;
 }
 
 .status{
-  font-size:9px;
-  border-radius:20px;
-  padding:5px 8px;
-  background:#17351f;
-  color:#68e998;
+ padding:5px 8px;
+ border-radius:20px;
+ background:#173620;
+ color:#65e994;
+ font-size:9px;
 }
 
 .busy .status{
-  background:#3e3217;
-  color:#f2cc56;
+ background:#3e3217;
+ color:#f1cb55;
 }
 
 .table-total{
-  margin-top:22px;
-  font-size:17px;
+ margin-top:22px;
+ font-size:17px;
 }
 
 .table button{
-  width:100%;
-  margin-top:13px;
-  padding:9px;
-  border:0;
-  border-radius:9px;
-  background:#173021;
-  color:white;
+ width:100%;
+ margin-top:13px;
+ padding:9px;
+ border:0;
+ border-radius:8px;
+ background:#173021;
+ color:#fff;
 }
 
-/* MENU */
+/* ================= MENU ================= */
 
 .categories{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-bottom:15px;
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+ margin-bottom:15px;
 }
 
 .categories button{
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:#aeb8b1;
-  padding:8px 12px;
-  border-radius:9px;
+ padding:8px 12px;
+ border:1px solid var(--border);
+ border-radius:9px;
+ background:var(--panel);
+ color:#aeb8b1;
 }
 
 .categories button.active{
-  background:var(--green);
-  color:#031008;
-  font-weight:900;
+ background:var(--green);
+ color:#031008;
+ font-weight:900;
 }
 
 .products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
 }
 
 .product{
-  border:1px solid var(--border);
-  background:var(--panel);
-  border-radius:14px;
-  padding:15px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:14px;
+ padding:15px;
 }
 
 .product-name{
-  font-weight:900;
+ font-weight:900;
 }
 
 .product-cat{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
+ margin-top:5px;
+ color:var(--muted);
+ font-size:10px;
 }
 
 .product-bottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:19px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin-top:19px;
 }
 
 .price{
-  font-size:17px;
-  font-weight:900;
+ font-size:17px;
+ font-weight:900;
 }
 
 .add{
-  width:35px;
-  height:35px;
-  border:0;
-  border-radius:9px;
-  background:var(--green);
-  color:#031008;
-  font-size:20px;
-  font-weight:900;
+ width:35px;
+ height:35px;
+ border:0;
+ border-radius:9px;
+ background:var(--green);
+ color:#031008;
+ font-size:20px;
+ font-weight:900;
 }
 
-/* ORDER */
+/* ================= ORDER ================= */
 
 .order{
-  border-left:1px solid var(--border);
-  background:#0a130e;
-  display:flex;
-  flex-direction:column;
-  min-width:0;
+ background:#0a130e;
+ border-left:1px solid var(--border);
+ display:flex;
+ flex-direction:column;
+ min-width:0;
 }
 
 .order-head{
-  padding:20px;
-  border-bottom:1px solid var(--border);
+ padding:20px;
+ border-bottom:1px solid var(--border);
 }
 
 .order-title{
-  display:flex;
-  justify-content:space-between;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
 
 .order-title h2{
-  margin:0;
+ margin:0;
 }
 
 .clear{
-  border:0;
-  background:none;
-  color:#ee6666;
+ border:0;
+ background:none;
+ color:#ee6666;
 }
 
 .order-table{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:8px;
+ margin-top:8px;
+ color:var(--muted);
+ font-size:11px;
 }
 
 .order-items{
-  flex:1;
-  overflow:auto;
-  padding:14px;
+ flex:1;
+ overflow:auto;
+ padding:14px;
 }
 
 .empty{
-  height:100%;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  color:#637067;
+ height:100%;
+ display:grid;
+ place-items:center;
+ text-align:center;
+ color:#627067;
 }
 
 .item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px;
-  padding:12px 0;
-  border-bottom:1px solid #17241b;
+ display:grid;
+ grid-template-columns:1fr auto;
+ gap:8px;
+ padding:12px 0;
+ border-bottom:1px solid #17241b;
 }
 
 .item-name{
-  font-weight:800;
-  font-size:13px;
+ font-size:13px;
+ font-weight:800;
 }
 
 .item-small{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
+ margin-top:4px;
+ color:var(--muted);
+ font-size:10px;
 }
 
 .qty{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  margin-top:8px;
+ display:flex;
+ gap:6px;
+ align-items:center;
+ margin-top:8px;
 }
 
 .qty button{
-  width:24px;
-  height:24px;
-  border:1px solid #304035;
-  background:#111c15;
-  color:white;
-  border-radius:6px;
+ width:24px;
+ height:24px;
+ border:1px solid #304035;
+ border-radius:6px;
+ background:#111c15;
+ color:#fff;
 }
 
-.remove{
-  border:0!important;
-  background:none!important;
-  color:#e86666!important;
-  width:auto!important;
+.qty .remove{
+ width:auto;
+ border:0;
+ background:none;
+ color:#e86666;
 }
 
 .item-price{
-  font-weight:900;
+ font-weight:900;
 }
 
 .order-bottom{
-  padding:17px;
-  border-top:1px solid var(--border);
+ padding:17px;
+ border-top:1px solid var(--border);
 }
 
 .total-line{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  color:#aeb9b1;
-  margin-bottom:8px;
+ display:flex;
+ justify-content:space-between;
+ margin-bottom:8px;
+ color:#aeb9b1;
+ font-size:12px;
 }
 
-.total-line.total{
-  color:white;
-  font-size:20px;
-  font-weight:900;
-  margin:14px 0;
+.total-line.final{
+ margin:14px 0;
+ color:#fff;
+ font-size:20px;
+ font-weight:900;
 }
 
 .actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
 }
 
 .action{
-  border:1px solid #2c4233;
-  background:#122018;
-  color:white;
-  padding:12px;
-  border-radius:9px;
+ padding:12px;
+ border:1px solid #2c4233;
+ border-radius:9px;
+ background:#122018;
+ color:#fff;
 }
 
 .action.primary{
-  grid-column:1/-1;
-  background:var(--green);
-  color:#031008;
-  border-color:var(--green);
-  font-weight:900;
+ grid-column:1/-1;
+ background:var(--green);
+ border-color:var(--green);
+ color:#031008;
+ font-weight:900;
 }
 
-/* HISTORY */
+/* ================= HISTORY ================= */
 
 .history{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:14px;
-  overflow:hidden;
+ overflow:hidden;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:14px;
 }
 
 .history-row{
-  display:grid;
-  grid-template-columns:1fr 1.4fr .8fr 1fr auto;
-  gap:10px;
-  padding:14px;
-  border-bottom:1px solid var(--border);
-  font-size:12px;
-  align-items:center;
+ display:grid;
+ grid-template-columns:1fr 1.4fr .8fr 1fr auto;
+ gap:10px;
+ align-items:center;
+ padding:14px;
+ border-bottom:1px solid var(--border);
+ font-size:12px;
 }
 
 .history-head{
-  color:var(--muted);
-  font-size:10px;
-  text-transform:uppercase;
+ color:var(--muted);
+ font-size:10px;
+ text-transform:uppercase;
 }
 
 .history-row button{
-  border:1px solid #304636;
-  background:#122219;
-  color:#bce6c8;
-  border-radius:7px;
-  padding:7px 10px;
+ padding:7px 10px;
+ border:1px solid #304636;
+ border-radius:7px;
+ background:#122219;
+ color:#bce6c8;
 }
 
-/* PAYMENT */
+/* ================= PRINTER PAGE ================= */
 
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  place-items:center;
-  background:#000b;
-  z-index:100;
-}
-
-.modal.show{
-  display:grid;
-}
-
-.modal-card{
-  width:390px;
-  padding:24px;
-  background:#0d1811;
-  border:1px solid #294333;
-  border-radius:18px;
-}
-
-.modal-card h3{
-  margin-top:0;
-}
-
-.payments{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:20px 0;
-}
-
-.payment{
-  padding:18px;
-  border:1px solid #304234;
-  background:#111d15;
-  color:white;
-  border-radius:11px;
-}
-
-.payment.selected{
-  border-color:var(--green);
-  background:#153622;
-}
-
-.modal-actions{
-  display:flex;
-  gap:8px;
-}
-
-.modal-actions button{
-  flex:1;
-  padding:12px;
-  border-radius:9px;
-  border:1px solid #304234;
-  background:#111d15;
-  color:white;
-}
-
-.modal-actions .ok{
-  background:var(--green);
-  color:#031008;
-  border-color:var(--green);
-  font-weight:900;
-}
-
-/* PRINT SETTINGS */
-
-.print-settings{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
-  max-width:650px;
+.settings-box{
+ max-width:700px;
+ padding:20px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:15px;
 }
 
 .setting{
-  padding:18px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:14px;
+ margin-bottom:14px;
 }
 
 .setting label{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-  margin-bottom:8px;
+ display:block;
+ margin-bottom:7px;
+ color:var(--muted);
+ font-size:11px;
 }
 
 .setting input,
 .setting select{
-  width:100%;
-  padding:11px;
-  border-radius:8px;
-  border:1px solid var(--border);
-  background:#07100b;
-  color:white;
+ width:100%;
+ padding:11px;
+ border:1px solid var(--border);
+ border-radius:8px;
+ background:#07100b;
+ color:#fff;
 }
 
-.print-help{
-  margin-top:15px;
-  max-width:650px;
-  padding:15px;
-  border-radius:12px;
-  background:#101d15;
-  border:1px solid var(--border);
-  color:#9facA4;
-  font-size:12px;
-  line-height:1.6;
+.help{
+ margin-top:15px;
+ padding:15px;
+ border-radius:10px;
+ background:#101d15;
+ color:#9facA4;
+ font-size:12px;
+ line-height:1.6;
 }
 
-/* MOBILE */
+/* ================= PAYMENT MODAL ================= */
 
-@media(max-width:1100px){
-  .app{
-    grid-template-columns:190px 1fr;
-  }
+.modal{
+ position:fixed;
+ inset:0;
+ z-index:500;
+ display:none;
+ place-items:center;
+ background:#000b;
+}
 
-  .order{
-    position:fixed;
-    right:0;
-    top:0;
-    bottom:0;
-    width:380px;
-    transform:translateX(100%);
-    transition:.2s;
-    z-index:40;
-  }
+.modal.show{
+ display:grid;
+}
 
-  .order.open{
-    transform:translateX(0);
-  }
+.modal-box{
+ width:390px;
+ padding:24px;
+ background:#0d1811;
+ border:1px solid #294333;
+ border-radius:18px;
+}
+
+.payments{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin:20px 0;
+}
+
+.payment{
+ padding:18px;
+ border:1px solid #304234;
+ border-radius:11px;
+ background:#111d15;
+ color:#fff;
+}
+
+.payment.selected{
+ border-color:var(--green);
+ background:#153622;
+}
+
+.modal-actions{
+ display:flex;
+ gap:8px;
+}
+
+.modal-actions button{
+ flex:1;
+ padding:12px;
+ border:1px solid #304234;
+ border-radius:9px;
+ background:#111d15;
+ color:#fff;
+}
+
+.modal-actions .ok{
+ background:var(--green);
+ border-color:var(--green);
+ color:#031008;
+ font-weight:900;
+}
+
+/* ================= RECEIPT PREVIEW ================= */
+
+.receipt-modal{
+ position:fixed;
+ inset:0;
+ z-index:600;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ background:rgba(0,0,0,.82);
+ padding:20px;
+}
+
+.receipt-modal.show{
+ display:flex;
+}
+
+.receipt-window{
+ width:min(520px,100%);
+ max-height:92vh;
+ overflow:auto;
+ background:#222;
+ border:1px solid #3b483f;
+ border-radius:16px;
+ padding:15px;
+}
+
+.receipt-toolbar{
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ margin-bottom:12px;
+}
+
+.receipt-toolbar button{
+ padding:10px 14px;
+ border-radius:8px;
+ border:1px solid #425047;
+ background:#111;
+ color:#fff;
+}
+
+.receipt-toolbar .print-now{
+ background:var(--green);
+ color:#031008;
+ border-color:var(--green);
+ font-weight:900;
+}
+
+/*
+   KU PËRDORET LETRA
+   Nuk ka width 80mm.
+   Nuk ka width 58mm.
+   Printeri kontrollon madhësinë.
+*/
+
+.receipt-paper{
+ background:#fff;
+ color:#000;
+ width:100%;
+ min-height:300px;
+ padding:22px;
+ font-family:Arial,Helvetica,sans-serif;
+}
+
+.receipt-center{
+ text-align:center;
+}
+
+.receipt-title{
+ font-size:25px;
+ font-weight:900;
+}
+
+.receipt-subtitle{
+ font-size:11px;
+ margin-top:4px;
+}
+
+.receipt-line{
+ border-top:1px dashed #000;
+ margin:12px 0;
+}
+
+.receipt-info{
+ font-size:11px;
+ line-height:1.65;
+}
+
+.receipt-table{
+ width:100%;
+ border-collapse:collapse;
+ font-size:11px;
+}
+
+.receipt-table td{
+ padding:5px 0;
+ vertical-align:top;
+}
+
+.receipt-table td:last-child{
+ text-align:right;
+ white-space:nowrap;
+}
+
+.receipt-total{
+ font-size:17px;
+ font-weight:900;
+}
+
+.receipt-thanks{
+ margin-top:15px;
+ text-align:center;
+ font-size:10px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-modal{
+ position:fixed;
+ inset:0;
+ z-index:700;
+ display:none;
+ place-items:center;
+ background:#000c;
+ padding:20px;
+}
+
+.contact-modal.show{
+ display:grid;
+}
+
+.contact-card{
+ width:400px;
+ max-width:100%;
+ padding:28px;
+ background:#0d1811;
+ border:1px solid #294333;
+ border-radius:18px;
+ text-align:center;
+}
+
+.contact-card h2{
+ margin:0 0 7px;
+}
+
+.contact-card p{
+ color:var(--muted);
+ font-size:12px;
+ line-height:1.6;
+}
+
+.price-big{
+ margin:22px 0;
+ font-size:42px;
+ font-weight:900;
+ color:var(--green);
+}
+
+.contact-buttons{
+ display:flex;
+ gap:8px;
+}
+
+.contact-buttons button{
+ flex:1;
+ padding:12px;
+ border-radius:9px;
+ border:1px solid #304234;
+ background:#111d15;
+ color:#fff;
+}
+
+.contact-buttons .buy{
+ background:var(--green);
+ color:#031008;
+ border-color:var(--green);
+ font-weight:900;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1150px){
+
+ #app{
+   grid-template-columns:190px 1fr;
+ }
+
+ .order{
+   position:fixed;
+   top:0;
+   right:0;
+   bottom:0;
+   width:380px;
+   z-index:50;
+   transform:translateX(100%);
+   transition:.2s;
+ }
+
+ .order.open{
+   transform:translateX(0);
+ }
+
+ .tables,
+ .products{
+   grid-template-columns:repeat(3,1fr);
+ }
+
 }
 
 @media(max-width:800px){
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
 
-  .tables,
-  .products{
-    grid-template-columns:repeat(2,1fr);
-  }
+ .stats{
+   grid-template-columns:1fr 1fr;
+ }
+
+ .tables,
+ .products{
+   grid-template-columns:repeat(2,1fr);
+ }
+
 }
 
-/* PRINT
-   Nuk vendosim madhësi 80mm.
-   Printeri/Windows vendos madhësinë e letrës.
-*/
+@media(max-width:600px){
+
+ .login-card{
+   width:calc(100% - 30px);
+   padding:28px;
+ }
+
+ #app{
+   display:none!important;
+ }
+
+}
+
+/* ==================================================
+   PRINT
+   ================================================== */
 
 @media print{
 
-  body{
-    background:white!important;
-    color:black!important;
-    overflow:visible!important;
-  }
+ html,
+ body{
+   margin:0!important;
+   padding:0!important;
+   width:100%!important;
+   height:auto!important;
+   background:#fff!important;
+ }
 
-  body > *{
-    display:none!important;
-  }
+ body *{
+   visibility:hidden!important;
+ }
 
-  #printDocument{
-    display:block!important;
-    color:black!important;
-    background:white!important;
-    width:100%!important;
-    margin:0!important;
-    padding:0!important;
-  }
+ #printArea,
+ #printArea *{
+   visibility:visible!important;
+ }
 
-  #printDocument *{
-    color:black!important;
-  }
-}
+ #printArea{
+   display:block!important;
+   position:absolute!important;
+   left:0!important;
+   top:0!important;
+   width:100%!important;
+   margin:0!important;
+   padding:0!important;
+   background:#fff!important;
+   color:#000!important;
+ }
 
-#printDocument{
-  display:none;
+ #printArea .receipt-paper{
+   width:100%!important;
+   min-height:0!important;
+   padding:5mm!important;
+   margin:0!important;
+   color:#000!important;
+   background:#fff!important;
+ }
+
+ #printArea .receipt-toolbar{
+   display:none!important;
+ }
+
+ @page{
+   margin:0;
+ }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
 
-<div id="login" class="login">
+<div id="login">
 
-  <div class="login-card">
+ <div class="login-card">
 
-    <div class="logo">M</div>
+   <div class="login-logo">M</div>
 
-    <h1>MY BAR</h1>
-    <p>Professional POS</p>
+   <h1>MY BAR</h1>
 
-    <div class="input">
-      <label>Përdoruesi</label>
-      <input id="username" value="admin">
-    </div>
+   <p>Professional Point of Sale</p>
 
-    <div class="input">
-      <label>Fjalëkalimi</label>
-      <input id="password" type="password" value="1234">
-    </div>
+   <div class="input">
+     <label>Përdoruesi</label>
+     <input id="username" value="admin">
+   </div>
 
-    <button class="login-btn" onclick="login()">
-      HYR NË SISTEM
-    </button>
+   <div class="input">
+     <label>Fjalëkalimi</label>
+     <input id="password" type="password" value="1234">
+   </div>
 
-    <div id="loginError" class="error"></div>
+   <button class="login-btn" onclick="login()">
+     HYR NË SISTEM
+   </button>
 
-  </div>
+   <div id="loginError" class="login-error"></div>
+
+ </div>
 
 </div>
 
 
-<!-- APPLICATION -->
+<!-- ================= APP ================= -->
 
-<div id="app" class="app">
+<div id="app">
 
-  <!-- SIDEBAR -->
+ <!-- SIDEBAR -->
 
-  <aside class="sidebar">
+ <aside class="sidebar">
 
-    <div class="brand">
+   <div class="brand">
 
-      <div class="brand-logo">M</div>
+     <div class="brand-logo">M</div>
 
-      <div>
-        <b>MY BAR</b>
-        <small>POINT OF SALE</small>
-      </div>
+     <div>
+       <b>MY BAR</b>
+       <small>POINT OF SALE</small>
+     </div>
 
-    </div>
+   </div>
 
-    <nav class="nav">
+   <nav class="nav">
 
-      <button class="active"
-        onclick="page('dashboard',this)">
-        ▦ Dashboard
-      </button>
+     <button class="active"
+       onclick="showPage('dashboard',this)">
+       ▦ Dashboard
+     </button>
 
-      <button onclick="page('tables',this)">
-        ▤ Tavolinat
-      </button>
+     <button
+       onclick="showPage('tables',this)">
+       ▤ Tavolinat
+     </button>
 
-      <button onclick="page('menu',this)">
-        ☷ Menu
-      </button>
+     <button
+       onclick="showPage('menu',this)">
+       ☷ Menu
+     </button>
 
-      <button onclick="page('history',this)">
-        ◷ Historiku
-      </button>
+     <button
+       onclick="showPage('history',this)">
+       ◷ Historiku
+     </button>
 
-      <button onclick="page('printer',this)">
-        🖨 Printer
-      </button>
+     <button
+       onclick="showPage('printer',this)">
+       🖨 Printer
+     </button>
 
-    </nav>
+   </nav>
 
-    <button class="logout" onclick="logout()">
-      Dil nga sistemi
-    </button>
+   <div class="sidebar-bottom">
 
-  </aside>
+     <button
+       class="contact-btn"
+       onclick="openContact()">
+       CONTACT
+     </button>
 
+     <button
+       class="logout"
+       onclick="logout()">
+       Dil nga sistemi
+     </button>
 
-  <!-- MAIN -->
+   </div>
 
-  <main class="main">
+ </aside>
 
-    <!-- DASHBOARD -->
 
-    <section id="dashboard" class="page active">
+ <!-- MAIN -->
 
-      <div class="header">
+ <main class="main">
 
-        <div>
-          <h2>Dashboard</h2>
-          <p>Menaxhimi i lokalit</p>
-        </div>
+   <!-- DASHBOARD -->
 
-        <div id="clock" class="clock"></div>
+   <section
+     id="dashboard"
+     class="page active">
 
-      </div>
+     <div class="header">
 
-      <div class="stats">
+       <div>
+         <h2>Dashboard</h2>
+         <p>Menaxhimi i lokalit</p>
+       </div>
 
-        <div class="stat">
-          <span>Shitje sot</span>
-          <strong id="sales">€0.00</strong>
-        </div>
+       <div
+         id="clock"
+         class="clock">
+       </div>
 
-        <div class="stat">
-          <span>Fatura</span>
-          <strong id="invoiceCount">0</strong>
-        </div>
+     </div>
 
-        <div class="stat">
-          <span>Tavolina aktive</span>
-          <strong id="busyTables">0</strong>
-        </div>
+     <div class="stats">
 
-        <div class="stat">
-          <span>Porosi aktive</span>
-          <strong id="activeOrders">0</strong>
-        </div>
+       <div class="stat">
+         <span>Shitje sot</span>
+         <strong id="sales">€0.00</strong>
+       </div>
 
-      </div>
+       <div class="stat">
+         <span>Fatura</span>
+         <strong id="invoiceCount">0</strong>
+       </div>
 
-      <h3>Tavolinat</h3>
+       <div class="stat">
+         <span>Tavolina aktive</span>
+         <strong id="busyTables">0</strong>
+       </div>
 
-      <div id="dashboardTables" class="tables"></div>
+       <div class="stat">
+         <span>Produkte në porosi</span>
+         <strong id="activeOrders">0</strong>
+       </div>
 
-    </section>
+     </div>
 
+     <h3>Tavolinat</h3>
 
-    <!-- TABLES -->
+     <div
+       id="dashboardTables"
+       class="tables">
+     </div>
 
-    <section id="tables" class="page">
+   </section>
 
-      <div class="header">
 
-        <div>
-          <h2>Tavolinat</h2>
-          <p>Zgjidh tavolinën</p>
-        </div>
+   <!-- TABLES -->
 
-      </div>
+   <section
+     id="tables"
+     class="page">
 
-      <div id="tablesGrid" class="tables"></div>
+     <div class="header">
 
-    </section>
+       <div>
+         <h2>Tavolinat</h2>
+         <p>Zgjidh tavolinën për porosi</p>
+       </div>
 
+     </div>
 
-    <!-- MENU -->
+     <div
+       id="tablesGrid"
+       class="tables">
+     </div>
 
-    <section id="menu" class="page">
+   </section>
 
-      <div class="header">
 
-        <div>
-          <h2>Menu</h2>
-          <p>Shto produktet në porosi</p>
-        </div>
+   <!-- MENU -->
 
-      </div>
+   <section
+     id="menu"
+     class="page">
 
-      <div id="categories" class="categories"></div>
+     <div class="header">
 
-      <div id="products" class="products"></div>
+       <div>
+         <h2>Menu</h2>
+         <p>Shto produkte në porosi</p>
+       </div>
 
-    </section>
+     </div>
 
+     <div
+       id="categories"
+       class="categories">
+     </div>
 
-    <!-- HISTORY -->
+     <div
+       id="products"
+       class="products">
+     </div>
 
-    <section id="history" class="page">
+   </section>
 
-      <div class="header">
 
-        <div>
-          <h2>Historiku</h2>
-          <p>Faturat e mbyllura</p>
-        </div>
+   <!-- HISTORY -->
 
-      </div>
+   <section
+     id="history"
+     class="page">
 
-      <div class="history">
+     <div class="header">
 
-        <div class="history-row history-head">
-          <div>Fatura</div>
-          <div>Data</div>
-          <div>Tavolina</div>
-          <div>Total</div>
-          <div></div>
-        </div>
+       <div>
+         <h2>Historiku</h2>
+         <p>Faturat e mbyllura</p>
+       </div>
 
-        <div id="historyList"></div>
+     </div>
 
-      </div>
+     <div class="history">
 
-    </section>
+       <div class="history-row history-head">
+         <div>Fatura</div>
+         <div>Data</div>
+         <div>Tavolina</div>
+         <div>Total</div>
+         <div></div>
+       </div>
 
+       <div id="historyList"></div>
 
-    <!-- PRINTER -->
+     </div>
 
-    <section id="printer" class="page">
+   </section>
 
-      <div class="header">
 
-        <div>
-          <h2>Printer</h2>
-          <p>Konfigurimi i printimit për PC</p>
-        </div>
+   <!-- PRINTER -->
 
-      </div>
+   <section
+     id="printer"
+     class="page">
 
-      <div class="print-settings">
+     <div class="header">
 
-        <div class="setting">
+       <div>
+         <h2>Printer</h2>
+         <p>Konfigurimi i faturës</p>
+       </div>
 
-          <label>Emri i lokalit</label>
+     </div>
 
-          <input
-            id="barName"
-            value="MY BAR"
-          >
+     <div class="settings-box">
 
-        </div>
+       <div class="setting">
 
-        <div class="setting">
+         <label>Emri i lokalit</label>
 
-          <label>Adresë / Telefon</label>
+         <input
+           id="barName"
+           value="MY BAR">
 
-          <input
-            id="barInfo"
-            value=""
-            placeholder="Opsionale"
-          >
+       </div>
 
-        </div>
+       <div class="setting">
 
-        <div class="setting">
+         <label>Informacion shtesë</label>
 
-          <label>Shkalla e printimit</label>
+         <input
+           id="barInfo"
+           placeholder="Adresë / telefon">
 
-          <select id="printScale">
-            <option value="100">100%</option>
-            <option value="90">90%</option>
-            <option value="80">80%</option>
-            <option value="70">70%</option>
-          </select>
+       </div>
 
-        </div>
+       <div class="setting">
 
-      </div>
+         <label>Madhësia vizuale e faturës</label>
 
-      <div class="print-help">
+         <select id="receiptScale">
 
-        <b>F6 — PRINT</b><br><br>
+           <option value="1">
+             Normal
+           </option>
 
-        Në PC, shtyp <b>F6</b> nga çdo pjesë e sistemit
-        për të printuar porosinë aktuale.<br><br>
+           <option value=".9">
+             90%
+           </option>
 
-        Sistemi nuk e detyron më faturën në 80mm.
-        Madhësinë e letrës e kontrollon printeri në
-        dritaren e printimit të Windows/browserit.<br><br>
+           <option value=".8">
+             80%
+           </option>
 
-        Për printer termik zgjidh 58mm ose 80mm në
-        <b>Printer Preferences</b> të Windows.
-        Për printer normal mund të zgjedhësh A4.
-      </div>
+         </select>
 
-      <br>
+       </div>
 
-      <button
-        class="action primary"
-        style="max-width:250px"
-        onclick="printCurrent()">
-        🖨 TESTO PRINTIMIN
-      </button>
+       <div class="help">
 
-    </section>
+         <b>F6 = KUPON / PRINT</b><br><br>
 
-  </main>
+         F6 hap kuponin e porosisë aktuale.
+         Kuponi shfaqet në ekran para printimit.
+         Pastaj shtyp <b>PRINT</b> dhe zgjedh printerin
+         e instaluar në kompjuter.<br><br>
 
+         Sistemi nuk e detyron në 80mm.
+         Madhësinë 58mm, 80mm, A4 etj. e zgjedh
+         te konfigurimi i printerit në Windows.
 
-  <!-- ORDER -->
+       </div>
 
-  <aside id="orderPanel" class="order">
+       <br>
 
-    <div class="order-head">
+       <button
+         class="action primary"
+         style="max-width:280px"
+         onclick="printCurrent()">
 
-      <div class="order-title">
+         🖨 TESTO KUPONIN
 
-        <h2>Porosia</h2>
+       </button>
 
-        <button
-          class="clear"
-          onclick="clearOrder()">
-          Pastro
-        </button>
+     </div>
 
-      </div>
+   </section>
 
-      <div id="orderTable" class="order-table">
-        Zgjidh tavolinë
-      </div>
+ </main>
 
-    </div>
 
+ <!-- ORDER -->
 
-    <div id="orderItems" class="order-items">
+ <aside
+   id="orderPanel"
+   class="order">
 
-      <div class="empty">
-        <div>
-          🧾
-          <br><br>
-          Porosia është bosh
-        </div>
-      </div>
+   <div class="order-head">
 
-    </div>
+     <div class="order-title">
 
+       <h2>Porosia</h2>
 
-    <div class="order-bottom">
+       <button
+         class="clear"
+         onclick="clearOrder()">
+         Pastro
+       </button>
 
-      <div class="total-line">
-        <span>Nëntotali</span>
-        <span id="subtotal">€0.00</span>
-      </div>
+     </div>
 
-      <div class="total-line">
-        <span>TVSH 20%</span>
-        <span id="tax">€0.00</span>
-      </div>
+     <div
+       id="orderTable"
+       class="order-table">
+       Zgjidh tavolinë
+     </div>
 
-      <div class="total-line total">
-        <span>TOTAL</span>
-        <span id="total">€0.00</span>
-      </div>
+   </div>
 
-      <div class="actions">
 
-        <button
-          class="action"
-          onclick="saveOrder()">
-          Ruaj
-        </button>
+   <div
+     id="orderItems"
+     class="order-items">
 
-        <button
-          class="action"
-          onclick="printCurrent()">
-          Print
-        </button>
+     <div class="empty">
 
-        <button
-          class="action primary"
-          onclick="openPayment()">
-          PËRFUNDO & PAGESË
-        </button>
+       <div>
+         🪑
+         <br><br>
+         Zgjidh një tavolinë
+       </div>
 
-      </div>
+     </div>
 
-    </div>
+   </div>
 
-  </aside>
+
+   <div class="order-bottom">
+
+     <div class="total-line">
+
+       <span>Nëntotali</span>
+       <span id="subtotal">€0.00</span>
+
+     </div>
+
+     <div class="total-line">
+
+       <span>TVSH 20%</span>
+       <span id="tax">€0.00</span>
+
+     </div>
+
+     <div class="total-line final">
+
+       <span>TOTAL</span>
+       <span id="total">€0.00</span>
+
+     </div>
+
+     <div class="actions">
+
+       <button
+         class="action"
+         onclick="saveOrder()">
+         Ruaj
+       </button>
+
+       <button
+         class="action"
+         onclick="printCurrent()">
+         Print
+       </button>
+
+       <button
+         class="action primary"
+         onclick="openPayment()">
+         PËRFUNDO & PAGESË
+       </button>
+
+     </div>
+
+   </div>
+
+ </aside>
 
 </div>
 
 
-<!-- PAYMENT -->
+<!-- ================= PAYMENT ================= -->
 
-<div id="paymentModal" class="modal">
+<div
+ id="paymentModal"
+ class="modal">
 
-  <div class="modal-card">
+ <div class="modal-box">
 
-    <h3>Mënyra e pagesës</h3>
+   <h3>Mënyra e pagesës</h3>
 
-    <div class="payments">
+   <div class="payments">
 
-      <button
-        id="cash"
-        class="payment selected"
-        onclick="payment('CASH')">
-        💶<br><br>
-        CASH
-      </button>
+     <button
+       id="cash"
+       class="payment selected"
+       onclick="setPayment('CASH')">
 
-      <button
-        id="card"
-        class="payment"
-        onclick="payment('KARTË')">
-        💳<br><br>
-        KARTË
-      </button>
+       💶
+       <br><br>
+       CASH
 
-    </div>
+     </button>
 
-    <div class="modal-actions">
+     <button
+       id="card"
+       class="payment"
+       onclick="setPayment('KARTË')">
 
-      <button onclick="closePayment()">
-        Anulo
-      </button>
+       💳
+       <br><br>
+       KARTË
 
-      <button
-        class="ok"
-        onclick="finishSale()">
-        PËRFUNDO
-      </button>
+     </button>
 
-    </div>
+   </div>
 
-  </div>
+   <div class="modal-actions">
+
+     <button onclick="closePayment()">
+       Anulo
+     </button>
+
+     <button
+       class="ok"
+       onclick="finishSale()">
+       PËRFUNDO
+     </button>
+
+   </div>
+
+ </div>
 
 </div>
 
 
-<!-- PRINT DOCUMENT -->
+<!-- ================= RECEIPT PREVIEW ================= -->
 
-<div id="printDocument"></div>
+<div
+ id="receiptModal"
+ class="receipt-modal">
+
+ <div class="receipt-window">
+
+   <div class="receipt-toolbar">
+
+     <button onclick="closeReceipt()">
+       Mbyll
+     </button>
+
+     <button
+       class="print-now"
+       onclick="realPrint()">
+       🖨 PRINT
+     </button>
+
+   </div>
+
+   <div
+     id="printArea">
+   </div>
+
+ </div>
+
+</div>
+
+
+<!-- ================= CONTACT ================= -->
+
+<div
+ id="contactModal"
+ class="contact-modal">
+
+ <div class="contact-card">
+
+   <h2>MY BAR</h2>
+
+   <p>
+     Sistem profesional për menaxhimin
+     e tavolinave, porosive, pagesave dhe faturave.
+   </p>
+
+   <div class="price-big">
+     49€
+   </div>
+
+   <p>
+     <b>Çmimi i aplikacionit: 49€</b>
+   </p>
+
+   <div class="contact-buttons">
+
+     <button onclick="closeContact()">
+       Mbyll
+     </button>
+
+     <button
+       class="buy"
+       onclick="buyApp()">
+       BLI APLIKACIONIN
+     </button>
+
+   </div>
+
+ </div>
+
+</div>
 
 
 <script>
 
-/* ================================
-   PRODUCTS
-================================ */
+/* ==================================================
+   DATA
+================================================== */
 
-const products=[
+const PRODUCTS=[
+
  {id:1,name:"Espresso",price:1.20,cat:"Kafe"},
  {id:2,name:"Cappuccino",price:1.80,cat:"Kafe"},
  {id:3,name:"Macchiato",price:1.50,cat:"Kafe"},
@@ -1198,27 +1569,25 @@ const products=[
  {id:10,name:"Club Sandwich",price:4.50,cat:"Ushqim"},
  {id:11,name:"Burger",price:5.50,cat:"Ushqim"},
  {id:12,name:"Patate",price:2.50,cat:"Ushqim"}
+
 ];
 
-
-/* ================================
-   TABLES
-================================ */
-
-const tables=Array.from(
- {length:12},
- (_,i)=>({id:i+1})
-);
+const TABLES=
+ Array.from(
+   {length:12},
+   (_,i)=>({id:i+1})
+ );
 
 
-/* ================================
+/* ==================================================
    STATE
-================================ */
+================================================== */
 
-let state=JSON.parse(
- localStorage.getItem("MY_BAR_POS_PC")
- || "null"
-);
+let state=
+ JSON.parse(
+   localStorage.getItem("MY_BAR_FINAL_PC")
+   ||"null"
+ );
 
 if(!state){
 
@@ -1232,28 +1601,38 @@ if(!state){
 }
 
 let category="Të gjitha";
+let currentReceipt=null;
 
+
+/* ==================================================
+   STORAGE
+================================================== */
 
 function save(){
+
  localStorage.setItem(
-   "MY_BAR_POS_PC",
+   "MY_BAR_FINAL_PC",
    JSON.stringify(state)
  );
+
 }
 
 
-/* ================================
+/* ==================================================
    LOGIN
-================================ */
+================================================== */
 
 function login(){
 
- const u=document.getElementById("username").value;
- const p=document.getElementById("password").value;
+ const user=
+   document.getElementById("username").value.trim();
+
+ const pass=
+   document.getElementById("password").value;
 
  if(
-   (u==="admin" && p==="1234") ||
-   (u==="kamarier" && p==="1234")
+   (user==="admin" && pass==="1234") ||
+   (user==="kamarier" && pass==="1234")
  ){
 
    sessionStorage.setItem(
@@ -1276,7 +1655,7 @@ function login(){
    document.getElementById(
      "loginError"
    ).textContent=
-     "Të dhënat janë gabim.";
+   "Përdoruesi ose fjalëkalimi është gabim.";
 
  }
 
@@ -1309,15 +1688,17 @@ if(
 }
 
 
-/* ================================
-   NAVIGATION
-================================ */
+/* ==================================================
+   NAV
+================================================== */
 
-function page(id,button){
+function showPage(id,button){
 
  document
    .querySelectorAll(".page")
-   .forEach(x=>x.classList.remove("active"));
+   .forEach(
+     x=>x.classList.remove("active")
+   );
 
  document
    .getElementById(id)
@@ -1325,9 +1706,12 @@ function page(id,button){
 
  document
    .querySelectorAll(".nav button")
-   .forEach(x=>x.classList.remove("active"));
+   .forEach(
+     x=>x.classList.remove("active")
+   );
 
- button.classList.add("active");
+ if(button)
+   button.classList.add("active");
 
  if(id==="history")
    renderHistory();
@@ -1335,7 +1719,7 @@ function page(id,button){
 }
 
 
-function openOrder(){
+function openOrderPanel(){
 
  document
    .getElementById("orderPanel")
@@ -1344,15 +1728,18 @@ function openOrder(){
 }
 
 
-/* ================================
+/* ==================================================
    TABLES
-================================ */
+================================================== */
 
-function subtotal(order){
+function calcSubtotal(order){
 
  return (order||[])
    .reduce(
-     (s,x)=>s+x.price*x.qty,
+     (sum,item)=>
+       sum+
+       item.price*
+       item.qty,
      0
    );
 
@@ -1361,19 +1748,26 @@ function subtotal(order){
 
 function renderTables(){
 
- const html=tables.map(t=>{
+ const html=
+ TABLES.map(table=>{
 
-   const order=state.orders[t.id]||[];
-   const total=subtotal(order);
-   const busy=order.length>0;
+   const order=
+     state.orders[table.id]||[];
+
+   const total=
+     calcSubtotal(order);
+
+   const busy=
+     order.length>0;
 
    return `
+
    <div class="table ${busy?"busy":""}">
 
      <div class="table-top">
 
        <div class="table-number">
-         T${t.id}
+         T${table.id}
        </div>
 
        <div class="status">
@@ -1383,15 +1777,22 @@ function renderTables(){
      </div>
 
      <div class="table-total">
-       ${busy?"€"+total.toFixed(2):"—"}
+       ${busy
+         ?"€"+total.toFixed(2)
+         :"—"}
      </div>
 
      <button
-       onclick="selectTable(${t.id})">
-       ${busy?"Hap porosinë":"Hap tavolinën"}
+       onclick="selectTable(${table.id})">
+
+       ${busy
+         ?"Hap porosinë"
+         :"Hap tavolinën"}
+
      </button>
 
    </div>
+
    `;
 
  }).join("");
@@ -1419,41 +1820,45 @@ function selectTable(id){
  document.getElementById(
    "orderTable"
  ).textContent=
-   "Tavolina "+id;
+ "Tavolina "+id;
 
  renderOrder();
  renderTables();
 
- page(
+ showPage(
    "menu",
    document.querySelectorAll(".nav button")[2]
  );
 
- openOrder();
+ openOrderPanel();
 
 }
 
 
-/* ================================
+/* ==================================================
    MENU
-================================ */
+================================================== */
 
 function renderCategories(){
 
- const categories=[
+ const cats=[
    "Të gjitha",
-   ...new Set(products.map(x=>x.cat))
+   ...new Set(
+     PRODUCTS.map(x=>x.cat)
+   )
  ];
 
  document.getElementById(
    "categories"
  ).innerHTML=
- categories.map(c=>`
+ cats.map(c=>`
 
    <button
      class="${category===c?"active":""}"
      onclick="setCategory('${c}')">
+
      ${c}
+
    </button>
 
  `).join("");
@@ -1464,7 +1869,6 @@ function renderCategories(){
 function setCategory(c){
 
  category=c;
-
  renderProducts();
 
 }
@@ -1475,40 +1879,42 @@ function renderProducts(){
  renderCategories();
 
  const list=
-   category==="Të gjitha"
-   ?products
-   :products.filter(x=>x.cat===category);
+ category==="Të gjitha"
+ ?PRODUCTS
+ :PRODUCTS.filter(
+    x=>x.cat===category
+  );
 
  document.getElementById(
    "products"
  ).innerHTML=
  list.map(p=>`
 
- <div class="product">
+   <div class="product">
 
-   <div class="product-name">
-     ${p.name}
-   </div>
-
-   <div class="product-cat">
-     ${p.cat}
-   </div>
-
-   <div class="product-bottom">
-
-     <div class="price">
-       €${p.price.toFixed(2)}
+     <div class="product-name">
+       ${p.name}
      </div>
 
-     <button
-       class="add"
-       onclick="addProduct(${p.id})">
-       +
-     </button>
+     <div class="product-cat">
+       ${p.cat}
+     </div>
+
+     <div class="product-bottom">
+
+       <div class="price">
+         €${p.price.toFixed(2)}
+       </div>
+
+       <button
+         class="add"
+         onclick="addProduct(${p.id})">
+         +
+       </button>
+
+     </div>
 
    </div>
-
- </div>
 
  `).join("");
 
@@ -1519,7 +1925,9 @@ function addProduct(id){
 
  if(!state.currentTable){
 
-   alert("Zgjidh tavolinën.");
+   alert(
+     "Zgjidh fillimisht një tavolinë."
+   );
 
    return;
 
@@ -1529,10 +1937,14 @@ function addProduct(id){
    state.orders[state.currentTable]||[];
 
  const product=
-   products.find(x=>x.id===id);
+   PRODUCTS.find(
+     x=>x.id===id
+   );
 
  const existing=
-   order.find(x=>x.id===id);
+   order.find(
+     x=>x.id===id
+   );
 
  if(existing){
 
@@ -1541,44 +1953,56 @@ function addProduct(id){
  }else{
 
    order.push({
+
      id:product.id,
      name:product.name,
      price:product.price,
      qty:1
+
    });
 
  }
 
- state.orders[state.currentTable]=order;
+ state.orders[state.currentTable]=
+   order;
 
  save();
 
  renderOrder();
  renderTables();
+ renderStats();
 
 }
 
 
-/* ================================
+/* ==================================================
    ORDER
-================================ */
+================================================== */
 
 function renderOrder(){
 
  const box=
-   document.getElementById("orderItems");
+   document.getElementById(
+     "orderItems"
+   );
 
  if(!state.currentTable){
 
    box.innerHTML=`
-   <div class="empty">
-     <div>
-       🪑<br><br>
-       Zgjidh një tavolinë
-     </div>
-   </div>`;
 
-   totals(0);
+     <div class="empty">
+
+       <div>
+         🪑
+         <br><br>
+         Zgjidh një tavolinë
+       </div>
+
+     </div>
+
+   `;
+
+   updateTotals(0);
 
    return;
 
@@ -1590,107 +2014,127 @@ function renderOrder(){
  if(!order.length){
 
    box.innerHTML=`
-   <div class="empty">
-     <div>
-       🧾<br><br>
-       Porosia është bosh
+
+     <div class="empty">
+
+       <div>
+         🧾
+         <br><br>
+         Porosia është bosh
+       </div>
+
      </div>
-   </div>`;
+
+   `;
 
  }else{
 
    box.innerHTML=
-   order.map(x=>`
+   order.map(item=>`
 
-   <div class="item">
+     <div class="item">
 
-     <div>
+       <div>
 
-       <div class="item-name">
-         ${x.name}
+         <div class="item-name">
+           ${item.name}
+         </div>
+
+         <div class="item-small">
+           €${item.price.toFixed(2)} / copë
+         </div>
+
+         <div class="qty">
+
+           <button
+             onclick="changeQty(${item.id},-1)">
+             −
+           </button>
+
+           <span>
+             ${item.qty}
+           </span>
+
+           <button
+             onclick="changeQty(${item.id},1)">
+             +
+           </button>
+
+           <button
+             class="remove"
+             onclick="removeItem(${item.id})">
+             Hiq
+           </button>
+
+         </div>
+
        </div>
 
-       <div class="item-small">
-         €${x.price.toFixed(2)} / copë
-       </div>
-
-       <div class="qty">
-
-         <button
-           onclick="qty(${x.id},-1)">
-           −
-         </button>
-
-         <span>${x.qty}</span>
-
-         <button
-           onclick="qty(${x.id},1)">
-           +
-         </button>
-
-         <button
-           class="remove"
-           onclick="removeItem(${x.id})">
-           Hiq
-         </button>
-
+       <div class="item-price">
+         €${(
+           item.price*
+           item.qty
+         ).toFixed(2)}
        </div>
 
      </div>
-
-     <div class="item-price">
-       €${(x.price*x.qty).toFixed(2)}
-     </div>
-
-   </div>
 
    `).join("");
 
  }
 
- totals(subtotal(order));
+ updateTotals(
+   calcSubtotal(order)
+ );
 
 }
 
 
-function totals(sub){
+function updateTotals(sub){
 
  const tax=sub*.20;
+ const total=sub+tax;
 
  document.getElementById(
    "subtotal"
  ).textContent=
-   "€"+sub.toFixed(2);
+ "€"+sub.toFixed(2);
 
  document.getElementById(
    "tax"
  ).textContent=
-   "€"+tax.toFixed(2);
+ "€"+tax.toFixed(2);
 
  document.getElementById(
    "total"
  ).textContent=
-   "€"+(sub+tax).toFixed(2);
+ "€"+total.toFixed(2);
 
 }
 
 
-function qty(id,change){
+function changeQty(id,amount){
+
+ if(!state.currentTable)return;
 
  const order=
    state.orders[state.currentTable];
 
  const item=
-   order.find(x=>x.id===id);
+   order.find(
+     x=>x.id===id
+   );
 
  if(!item)return;
 
- item.qty+=change;
+ item.qty+=amount;
 
  if(item.qty<=0){
 
    state.orders[state.currentTable]=
-     order.filter(x=>x.id!==id);
+     order.filter(
+       x=>x.id!==id
+     );
 
  }
 
@@ -1698,20 +2142,26 @@ function qty(id,change){
 
  renderOrder();
  renderTables();
+ renderStats();
 
 }
 
 
 function removeItem(id){
 
+ if(!state.currentTable)return;
+
  state.orders[state.currentTable]=
-   state.orders[state.currentTable]
-   .filter(x=>x.id!==id);
+ state.orders[state.currentTable]
+ .filter(
+   x=>x.id!==id
+ );
 
  save();
 
  renderOrder();
  renderTables();
+ renderStats();
 
 }
 
@@ -1720,7 +2170,11 @@ function clearOrder(){
 
  if(!state.currentTable)return;
 
- if(confirm("Të fshihet porosia?")){
+ if(
+   confirm(
+     "Të fshihet e gjithë porosia?"
+   )
+ ){
 
    state.orders[state.currentTable]=[];
 
@@ -1728,6 +2182,7 @@ function clearOrder(){
 
    renderOrder();
    renderTables();
+   renderStats();
 
  }
 
@@ -1738,22 +2193,24 @@ function saveOrder(){
 
  save();
 
- renderTables();
-
- alert("Porosia u ruajt.");
+ alert(
+   "Porosia u ruajt."
+ );
 
 }
 
 
-/* ================================
+/* ==================================================
    PAYMENT
-================================ */
+================================================== */
 
 function openPayment(){
 
  if(!state.currentTable){
 
-   alert("Zgjidh tavolinën.");
+   alert(
+     "Zgjidh tavolinën."
+   );
 
    return;
 
@@ -1764,7 +2221,9 @@ function openPayment(){
 
  if(!order.length){
 
-   alert("Porosia është bosh.");
+   alert(
+     "Porosia është bosh."
+   );
 
    return;
 
@@ -1786,7 +2245,7 @@ function closePayment(){
 }
 
 
-function payment(type){
+function setPayment(type){
 
  state.payment=type;
 
@@ -1807,37 +2266,71 @@ function payment(type){
 }
 
 
-/* ================================
+/* ==================================================
    FINISH SALE
-================================ */
+================================================== */
 
 function finishSale(){
 
- const table=state.currentTable;
- const order=state.orders[table];
+ const table=
+   state.currentTable;
 
- const sub=subtotal(order);
- const tax=sub*.20;
+ const order=
+   state.orders[table];
+
+ if(!order || !order.length){
+
+   closePayment();
+   return;
+
+ }
+
+ const sub=
+   calcSubtotal(order);
+
+ const tax=
+   sub*.20;
 
  const invoice={
-   id:"F-"+Date.now().toString().slice(-8),
-   date:new Date().toLocaleString("sq-AL"),
-   table,
+
+   id:
+     "F-"+Date.now()
+       .toString()
+       .slice(-8),
+
+   date:
+     new Date()
+       .toLocaleString("sq-AL"),
+
+   table:table,
+
    waiter:
      document.getElementById(
        "username"
      ).value || "admin",
-   payment:state.payment,
-   items:JSON.parse(
-     JSON.stringify(order)
-   ),
+
+   payment:
+     state.payment,
+
+   items:
+     JSON.parse(
+       JSON.stringify(order)
+     ),
+
    subtotal:sub,
-   tax,
+
+   tax:tax,
+
    total:sub+tax
+
  };
 
- state.history.unshift(invoice);
+ state.history.unshift(
+   invoice
+ );
+
  state.orders[table]=[];
+
  state.currentTable=null;
 
  save();
@@ -1847,330 +2340,214 @@ function finishSale(){
  render();
 
  /*
-   Printo menjëherë faturën e mbyllur.
+   Pas përfundimit:
+   KUPONI HAPET DIREKT.
  */
- printInvoice(invoice);
+
+ showReceipt(invoice);
 
 }
 
 
-/* ================================
-   PRINT ENGINE
-================================ */
+/* ==================================================
+   RECEIPT
+================================================== */
 
-/*
-   Këtu nuk ka:
-   size:80mm
-   size:A4
-   size:58mm
-
-   Browseri përdor printerin dhe
-   Paper Size që zgjedh ti në Windows.
-*/
-
-function printInvoice(invoice){
+function receiptHTML(invoice){
 
  const barName=
-   document.getElementById("barName")?.value
+   document.getElementById(
+     "barName"
+   )?.value
    ||"MY BAR";
 
  const barInfo=
-   document.getElementById("barInfo")?.value
+   document.getElementById(
+     "barInfo"
+   )?.value
    ||"";
 
  const scale=
-   document.getElementById("printScale")?.value
-   ||"100";
+   document.getElementById(
+     "receiptScale"
+   )?.value
+   ||"1";
 
- const items=invoice.items.map(x=>`
+ const rows=
+ invoice.items.map(item=>`
 
    <tr>
+
      <td>
-       ${x.name}<br>
-       <small>${x.qty} x €${x.price.toFixed(2)}</small>
+       <b>${item.name}</b><br>
+       ${item.qty} x
+       €${item.price.toFixed(2)}
      </td>
 
      <td>
-       €${(x.price*x.qty).toFixed(2)}
+       €${(
+         item.price*
+         item.qty
+       ).toFixed(2)}
      </td>
+
    </tr>
 
  `).join("");
 
- const html=`
+ return `
 
- <!DOCTYPE html>
+ <div
+   class="receipt-paper"
+   style="transform:scale(${scale});
+          transform-origin:top left">
 
- <html>
+   <div class="receipt-center">
 
- <head>
-
- <meta charset="UTF-8">
-
- <title>${invoice.id}</title>
-
- <style>
-
- *{
-   box-sizing:border-box;
- }
-
- html,body{
-   margin:0;
-   padding:0;
-   background:white;
-   color:black;
-   font-family:Arial,Helvetica,sans-serif;
- }
-
- /*
-    IMPORTANT:
-    Nuk caktojmë width në mm.
-    width:100% merr gjerësinë e letrës
-    që zgjedh printeri.
- */
-
- .invoice{
-   width:100%;
-   padding:12px;
-   transform:scale(${scale/100});
-   transform-origin:top left;
-   font-size:12px;
- }
-
- .center{
-   text-align:center;
- }
-
- .title{
-   font-size:25px;
-   font-weight:900;
-   margin-bottom:4px;
- }
-
- .subtitle{
-   font-size:11px;
- }
-
- .line{
-   border-top:1px dashed #000;
-   margin:10px 0;
- }
-
- .info{
-   font-size:11px;
-   line-height:1.65;
- }
-
- table{
-   width:100%;
-   border-collapse:collapse;
- }
-
- td{
-   padding:5px 0;
-   vertical-align:top;
- }
-
- td:last-child{
-   text-align:right;
-   white-space:nowrap;
- }
-
- .total{
-   font-size:17px;
-   font-weight:900;
- }
-
- .thanks{
-   text-align:center;
-   margin-top:15px;
-   font-size:10px;
- }
-
- @media print{
-
-   html,body{
-     margin:0;
-     padding:0;
-   }
-
-   .invoice{
-     width:100%;
-   }
-
- }
-
- </style>
-
- </head>
-
- <body>
-
- <div class="invoice">
-
-   <div class="center">
-
-     <div class="title">
+     <div class="receipt-title">
        ${barName}
      </div>
 
      ${
        barInfo
-       ? `<div class="subtitle">${barInfo}</div>`
+       ?`
+       <div class="receipt-subtitle">
+         ${barInfo}
+       </div>
+       `
        :""
      }
 
+     <div class="receipt-subtitle">
+       Faturë / Kupon
+     </div>
+
    </div>
 
-   <div class="line"></div>
+   <div class="receipt-line"></div>
 
-   <div class="info">
+   <div class="receipt-info">
 
      <b>Fatura:</b>
-     ${invoice.id}<br>
+     ${invoice.id}
+     <br>
 
      <b>Data:</b>
-     ${invoice.date}<br>
+     ${invoice.date}
+     <br>
 
      <b>Tavolina:</b>
-     ${invoice.table}<br>
+     T${invoice.table}
+     <br>
 
      <b>Kamarieri:</b>
-     ${invoice.waiter}<br>
+     ${invoice.waiter}
+     <br>
 
      <b>Pagesa:</b>
      ${invoice.payment}
 
    </div>
 
-   <div class="line"></div>
+   <div class="receipt-line"></div>
 
-   <table>
+   <table class="receipt-table">
 
-     ${items}
-
-   </table>
-
-   <div class="line"></div>
-
-   <table>
-
-     <tr>
-       <td>Nëntotali</td>
-       <td>€${invoice.subtotal.toFixed(2)}</td>
-     </tr>
-
-     <tr>
-       <td>TVSH 20%</td>
-       <td>€${invoice.tax.toFixed(2)}</td>
-     </tr>
-
-     <tr class="total">
-       <td>TOTAL</td>
-       <td>€${invoice.total.toFixed(2)}</td>
-     </tr>
+     ${rows}
 
    </table>
 
-   <div class="line"></div>
+   <div class="receipt-line"></div>
 
-   <div class="thanks">
+   <table class="receipt-table">
 
-     Faleminderit që zgjodhët<br>
+     <tr>
 
+       <td>
+         Nëntotali
+       </td>
+
+       <td>
+         €${invoice.subtotal.toFixed(2)}
+       </td>
+
+     </tr>
+
+     <tr>
+
+       <td>
+         TVSH 20%
+       </td>
+
+       <td>
+         €${invoice.tax.toFixed(2)}
+       </td>
+
+     </tr>
+
+     <tr class="receipt-total">
+
+       <td>
+         TOTAL
+       </td>
+
+       <td>
+         €${invoice.total.toFixed(2)}
+       </td>
+
+     </tr>
+
+   </table>
+
+   <div class="receipt-line"></div>
+
+   <div class="receipt-thanks">
+
+     Faleminderit që zgjodhët
+     <br>
      <b>${barName}</b>
 
    </div>
 
  </div>
 
- <script>
-
- window.onload=function(){
-
-   setTimeout(function(){
-
-     window.focus();
-
-     window.print();
-
-   },400);
-
- };
-
- <\/script>
-
- </body>
-
- </html>
-
  `;
-
-
- /*
-   Dritarja hapet menjëherë.
-   Kjo shmang bllokimin e popup-it
-   nga browseri.
- */
-
- const w=
-   window.open(
-     "",
-     "_blank",
-     "width=500,height=700"
-   );
-
- if(!w){
-
-   alert(
-     "Printimi u bllokua nga browseri. " +
-     "Lejo Pop-ups për MY BAR."
-   );
-
-   return;
-
- }
-
- w.document.open();
- w.document.write(html);
- w.document.close();
 
 }
 
 
-/* ================================
-   F6 PRINT
-================================ */
+function showReceipt(invoice){
 
-document.addEventListener(
- "keydown",
- function(e){
+ currentReceipt=invoice;
 
-   /*
-      F6
-   */
+ document.getElementById(
+   "printArea"
+ ).innerHTML=
+ receiptHTML(invoice);
 
-   if(e.key==="F6"){
+ document.getElementById(
+   "receiptModal"
+ ).classList.add("show");
 
-     e.preventDefault();
+}
 
-     printCurrent();
 
-   }
+function closeReceipt(){
 
- }
-);
+ document.getElementById(
+   "receiptModal"
+ ).classList.remove("show");
+
+}
 
 
 function printCurrent(){
 
- /*
-    Nëse ka porosi aktive:
-    printo preview.
+ let invoice=null;
 
-    Nëse nuk ka porosi aktive:
-    printo faturën e fundit.
+ /*
+   Nëse ka porosi aktive:
+   krijo kupon preview.
  */
 
  if(state.currentTable){
@@ -2180,20 +2557,24 @@ function printCurrent(){
 
    if(!order.length){
 
-     alert("Porosia është bosh.");
+     alert(
+       "Porosia është bosh."
+     );
 
      return;
 
    }
 
-   const sub=subtotal(order);
+   const sub=
+     calcSubtotal(order);
 
-   const invoice={
+   invoice={
 
      id:"PREVIEW",
 
      date:
-       new Date().toLocaleString("sq-AL"),
+       new Date()
+       .toLocaleString("sq-AL"),
 
      table:
        state.currentTable,
@@ -2206,7 +2587,10 @@ function printCurrent(){
      payment:
        state.payment,
 
-     items:order,
+     items:
+       JSON.parse(
+         JSON.stringify(order)
+       ),
 
      subtotal:sub,
 
@@ -2216,34 +2600,73 @@ function printCurrent(){
 
    };
 
-   printInvoice(invoice);
+ }else{
 
-   return;
+   /*
+     Nëse nuk ka porosi,
+     përdor faturën e fundit.
+   */
+
+   if(!state.history.length){
+
+     alert(
+       "Nuk ka faturë për printim."
+     );
+
+     return;
+
+   }
+
+   invoice=
+     state.history[0];
 
  }
 
+ showReceipt(invoice);
 
- if(state.history.length){
+}
 
-   printInvoice(
-     state.history[0]
+
+/*
+   KY ËSHTË PRINTI REAL.
+   Nuk hapim popup.
+   Nuk përdorim window.open.
+*/
+
+function realPrint(){
+
+ if(!currentReceipt){
+
+   alert(
+     "Nuk ka kupon për printim."
    );
 
    return;
 
  }
 
+ document.getElementById(
+   "printArea"
+ ).innerHTML=
+ receiptHTML(currentReceipt);
 
- alert(
-   "Nuk ka asnjë porosi për printim."
+ /*
+   Hap print preview të browserit.
+ */
+
+ setTimeout(
+   ()=>{
+     window.print();
+   },
+   100
  );
 
 }
 
 
-/* ================================
+/* ==================================================
    HISTORY
-================================ */
+================================================== */
 
 function renderHistory(){
 
@@ -2255,12 +2678,16 @@ function renderHistory(){
  if(!state.history.length){
 
    box.innerHTML=`
+
      <div style="
        padding:30px;
        text-align:center;
        color:#68756e">
-       Nuk ka fatura.
+
+       Nuk ka ende fatura.
+
      </div>
+
    `;
 
    return;
@@ -2269,25 +2696,33 @@ function renderHistory(){
 
  box.innerHTML=
  state.history.map(
-   (x,i)=>`
+ (invoice,index)=>`
 
    <div class="history-row">
 
-     <div>${x.id}</div>
-
-     <div>${x.date}</div>
-
-     <div>T${x.table}</div>
+     <div>
+       ${invoice.id}
+     </div>
 
      <div>
-       €${x.total.toFixed(2)}
+       ${invoice.date}
+     </div>
+
+     <div>
+       T${invoice.table}
+     </div>
+
+     <div>
+       €${invoice.total.toFixed(2)}
      </div>
 
      <div>
 
        <button
-         onclick="reprint(${i})">
+         onclick="reprint(${index})">
+
          Riboto
+
        </button>
 
      </div>
@@ -2305,21 +2740,20 @@ function reprint(index){
    state.history[index];
 
  if(invoice)
-   printInvoice(invoice);
+   showReceipt(invoice);
 
 }
 
 
-/* ================================
+/* ==================================================
    STATS
-================================ */
+================================================== */
 
 function renderStats(){
 
  const today=
-   new Date().toLocaleDateString(
-     "sq-AL"
-   );
+   new Date()
+   .toLocaleDateString("sq-AL");
 
  const invoices=
    state.history.filter(
@@ -2328,76 +2762,98 @@ function renderStats(){
 
  const sales=
    invoices.reduce(
-     (s,x)=>s+x.total,
+     (sum,x)=>
+       sum+x.total,
      0
    );
 
  const busy=
-   tables.filter(
+   TABLES.filter(
      t=>
        state.orders[t.id] &&
        state.orders[t.id].length
    ).length;
 
  const active=
-   tables.reduce(
-     (s,t)=>
-       s+
-       (state.orders[t.id]?.length||0),
+   TABLES.reduce(
+     (sum,t)=>
+       sum+
+       (
+         state.orders[t.id]?.length
+         ||0
+       ),
      0
    );
 
  document.getElementById(
    "sales"
  ).textContent=
-   "€"+sales.toFixed(2);
+ "€"+sales.toFixed(2);
 
  document.getElementById(
    "invoiceCount"
  ).textContent=
-   invoices.length;
+ invoices.length;
 
  document.getElementById(
    "busyTables"
  ).textContent=
-   busy;
+ busy;
 
  document.getElementById(
    "activeOrders"
  ).textContent=
-   active;
+ active;
 
 }
 
 
-/* ================================
-   RENDER
-================================ */
+/* ==================================================
+   CONTACT
+================================================== */
 
-function render(){
+function openContact(){
 
- renderTables();
- renderProducts();
- renderOrder();
- renderHistory();
- renderStats();
+ document
+   .getElementById(
+     "contactModal"
+   )
+   .classList.add("show");
 
 }
 
 
-render();
+function closeContact(){
+
+ document
+   .getElementById(
+     "contactModal"
+   )
+   .classList.remove("show");
+
+}
 
 
-/* ================================
+function buyApp(){
+
+ alert(
+   "Aplikacioni MY BAR kushton 49€."
+ );
+
+}
+
+
+/* ==================================================
    CLOCK
-================================ */
+================================================== */
 
-function clock(){
+function updateClock(){
 
  document.getElementById(
    "clock"
  ).textContent=
- new Date().toLocaleString(
+ new Date()
+ .toLocaleString(
    "sq-AL",
    {
      weekday:"short",
@@ -2412,9 +2868,49 @@ function clock(){
 
 }
 
-clock();
+updateClock();
 
-setInterval(clock,1000);
+setInterval(
+ updateClock,
+ 1000
+);
+
+
+/* ==================================================
+   RENDER
+================================================== */
+
+function render(){
+
+ renderTables();
+ renderProducts();
+ renderOrder();
+ renderHistory();
+ renderStats();
+
+}
+
+render();
+
+
+/* ==================================================
+   F6
+================================================== */
+
+document.addEventListener(
+ "keydown",
+ function(event){
+
+   if(event.key==="F6"){
+
+     event.preventDefault();
+
+     printCurrent();
+
+   }
+
+ }
+);
 
 </script>
 
