@@ -1841,4 +1841,691 @@ function renderOrder(){
 
       `).join("")
       : `
-        <div style
+        <div style="color:#87938b">
+          Shto produkte nga menuja.
+        </div>
+      `;
+
+  const total =
+    orderTotal();
+
+  document.getElementById("orderTotal").textContent =
+    euro(total);
+
+}
+
+
+/* ---------------------------------------------------------
+   CHANGE QTY
+--------------------------------------------------------- */
+
+function changeQty(index,delta){
+
+  const items =
+    tables[currentTable].items;
+
+  if(!items[index]) return;
+
+  items[index].qty += delta;
+
+  if(items[index].qty <= 0)
+    items.splice(index,1);
+
+  saveAll();
+
+  renderOrder();
+
+}
+
+
+/* ---------------------------------------------------------
+   ORDER TOTAL
+--------------------------------------------------------- */
+
+function orderTotal(){
+
+  const items =
+    tables[currentTable]?.items || [];
+
+  return items.reduce(
+    (sum,item)=>
+      sum +
+      Number(item.price) *
+      Number(item.qty),
+    0
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   CLEAR ORDER
+--------------------------------------------------------- */
+
+function clearOrder(){
+
+  if(!currentTable) return;
+
+  tables[currentTable].items = [];
+
+  saveAll();
+
+  renderOrder();
+
+}
+
+
+/* ---------------------------------------------------------
+   PAYMENT
+--------------------------------------------------------- */
+
+function openPayment(){
+
+  if(orderTotal() <= 0){
+
+    alert("Porosia është bosh.");
+
+    return;
+  }
+
+  document
+    .getElementById("paymentModal")
+    .classList.add("show");
+
+}
+
+
+function completePayment(method){
+
+  closeModal("paymentModal");
+
+  const table =
+    tables[currentTable];
+
+  if(!table || !table.items.length)
+    return;
+
+  const total =
+    orderTotal();
+
+  const invoice = {
+
+    id:
+      "F-" +
+      String(Date.now()).slice(-8),
+
+    table:
+      currentTable,
+
+    waiter:
+      getSessionUser(),
+
+    payment:
+      method,
+
+    total:
+      Number(total.toFixed(2)),
+
+    items:
+      JSON.parse(
+        JSON.stringify(table.items)
+      ),
+
+    date:
+      new Date().toLocaleString("sq-AL"),
+
+    dateOnly:
+      new Date().toLocaleDateString("sq-AL")
+
+  };
+
+  invoices.push(invoice);
+
+  table.items = [];
+
+  saveAll();
+
+  currentInvoice = invoice;
+
+  renderReceipt(invoice);
+
+  showReceiptModal();
+
+  updateAll();
+
+}
+
+
+/* ---------------------------------------------------------
+   RECEIPT
+--------------------------------------------------------- */
+
+function renderReceipt(invoice){
+
+  if(!invoice) return;
+
+  const items =
+    invoice.items || [];
+
+  const html = `
+
+    <div class="receipt">
+
+      <div class="receiptTitle">
+        MY BAR
+      </div>
+
+      <div class="receiptCenter">
+        SISTEMI I MENAXHIMIT
+      </div>
+
+      <div class="dash"></div>
+
+      <div style="font-size:12px;line-height:1.6">
+
+        Fatura:
+        <b>${escapeHTML(invoice.id)}</b><br>
+
+        Tavolina:
+        ${escapeHTML(invoice.table)}<br>
+
+        Kamarier:
+        ${escapeHTML(invoice.waiter)}<br>
+
+        Data:
+        ${escapeHTML(invoice.date)}
+
+      </div>
+
+      <div class="dash"></div>
+
+      ${
+        items.map(item => `
+
+          <div class="receiptRow">
+
+            <span>
+              ${escapeHTML(item.name)}
+              ×${item.qty}
+            </span>
+
+            <span>
+              ${euro(
+                Number(item.price) *
+                Number(item.qty)
+              )}
+            </span>
+
+          </div>
+
+        `).join("")
+      }
+
+      <div class="dash"></div>
+
+      <div class="receiptTotal">
+
+        <span>TOTAL</span>
+
+        <span>
+          ${euro(invoice.total)}
+        </span>
+
+      </div>
+
+      <div class="dash"></div>
+
+      <div class="receiptCenter" style="font-size:12px">
+
+        Pagesa: ${escapeHTML(invoice.payment)}
+
+        <br><br>
+
+        FALEMINDERIT!
+
+        <br>
+
+        MY BAR
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.getElementById("modalReceipt").innerHTML =
+    html;
+
+  document.getElementById("printArea").innerHTML =
+    html;
+
+}
+
+
+/* ---------------------------------------------------------
+   RECEIPT MODAL
+--------------------------------------------------------- */
+
+function showReceiptModal(){
+
+  document
+    .getElementById("receiptModal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* ---------------------------------------------------------
+   PRINT CURRENT
+--------------------------------------------------------- */
+
+function printCurrent(){
+
+  let invoice =
+    currentInvoice ||
+    invoices[invoices.length-1];
+
+  if(!invoice){
+
+    alert("Nuk ka faturë për printim.");
+
+    return;
+
+  }
+
+  currentInvoice = invoice;
+
+  renderReceipt(invoice);
+
+  showReceiptModal();
+
+}
+
+
+/* ---------------------------------------------------------
+   REAL PRINT
+--------------------------------------------------------- */
+
+function realPrint(){
+
+  closeModal("receiptModal");
+
+  setTimeout(() => {
+
+    window.print();
+
+  },150);
+
+}
+
+
+/* ---------------------------------------------------------
+   TEST PRINT
+--------------------------------------------------------- */
+
+function testPrint(){
+
+  const testInvoice = {
+
+    id:"TEST-001",
+
+    table:"1",
+
+    waiter:"TEST",
+
+    payment:"CASH",
+
+    total:5.00,
+
+    items:[
+
+      {
+        name:"TEST PRODUCT",
+        price:5,
+        qty:1
+      }
+
+    ],
+
+    date:
+      new Date().toLocaleString("sq-AL")
+
+  };
+
+  renderReceipt(testInvoice);
+
+  currentInvoice = testInvoice;
+
+  showReceiptModal();
+
+}
+
+
+/* ---------------------------------------------------------
+   PRINTER
+--------------------------------------------------------- */
+
+function savePrinter(){
+
+  const name =
+    document.getElementById("printerName").value.trim();
+
+  const size =
+    document.getElementById("paperSize").value;
+
+  localStorage.setItem(
+    "MY_BAR_PRINTER_NAME",
+    name
+  );
+
+  localStorage.setItem(
+    "MY_BAR_PAPER",
+    size
+  );
+
+  document.getElementById("printerStatus").textContent =
+    name
+      ? "Printeri u ruajt: " + name
+      : "Printeri përdor printimin e Windows.";
+
+  document.getElementById("printerDot")
+    .classList.add("ok");
+
+}
+
+
+/* ---------------------------------------------------------
+   RENDER PRINTER
+--------------------------------------------------------- */
+
+function renderPrinter(){
+
+  const name =
+    localStorage.getItem(
+      "MY_BAR_PRINTER_NAME"
+    ) || "";
+
+  const size =
+    localStorage.getItem(
+      "MY_BAR_PAPER"
+    ) || "80mm";
+
+  document.getElementById("printerName").value =
+    name;
+
+  document.getElementById("paperSize").value =
+    size;
+
+  if(name){
+
+    document.getElementById("printerStatus")
+      .textContent =
+        "Printeri: " + name;
+
+    document.getElementById("printerDot")
+      .classList.add("ok");
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   HISTORY
+--------------------------------------------------------- */
+
+function renderHistory(){
+
+  const body =
+    document.getElementById("historyBody");
+
+  const rows =
+    invoices.slice().reverse();
+
+  body.innerHTML =
+    rows.length
+      ? rows.map(invoice => `
+
+        <tr>
+
+          <td>
+            <b>${escapeHTML(invoice.id)}</b>
+          </td>
+
+          <td>
+            ${escapeHTML(invoice.table)}
+          </td>
+
+          <td>
+            ${escapeHTML(invoice.date)}
+          </td>
+
+          <td>
+            ${escapeHTML(invoice.payment)}
+          </td>
+
+          <td>
+            <b>${euro(invoice.total)}</b>
+          </td>
+
+          <td>
+
+            <button
+              class="miniBtn"
+              onclick="reprint('${invoice.id}')"
+            >
+              RIPRINT
+            </button>
+
+          </td>
+
+        </tr>
+
+      `).join("")
+      : `
+        <tr>
+          <td colspan="6" style="color:#89958d">
+            Nuk ka fatura.
+          </td>
+        </tr>
+      `;
+
+}
+
+
+/* ---------------------------------------------------------
+   REPRINT
+--------------------------------------------------------- */
+
+function reprint(id){
+
+  const invoice =
+    invoices.find(x => x.id === id);
+
+  if(!invoice) return;
+
+  currentInvoice = invoice;
+
+  renderReceipt(invoice);
+
+  showReceiptModal();
+
+}
+
+
+/* ---------------------------------------------------------
+   CONTACT
+--------------------------------------------------------- */
+
+function showContact(){
+
+  document
+    .getElementById("contactModal")
+    .classList.add("show");
+
+}
+
+
+function buyApp(){
+
+  alert(
+    "MY BAR kushton 49€.\n\n" +
+    "Faleminderit!"
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   UPDATE
+--------------------------------------------------------- */
+
+function updateAll(){
+
+  saveAll();
+
+  renderDashboard();
+
+  renderTables("tablesPage");
+
+  if(!document.getElementById("page-menu").classList.contains("hidden"))
+    renderMenu();
+
+  renderHistory();
+
+}
+
+
+/* ---------------------------------------------------------
+   SESSION
+--------------------------------------------------------- */
+
+function getSessionUser(){
+
+  const session =
+    JSON.parse(
+      localStorage.getItem("MY_BAR_SESSION")
+    );
+
+  return session?.user || "Kamarier";
+
+}
+
+
+/* ---------------------------------------------------------
+   EURO
+--------------------------------------------------------- */
+
+function euro(value){
+
+  return "€" +
+    Number(value || 0)
+      .toFixed(2);
+
+}
+
+
+/* ---------------------------------------------------------
+   ESCAPE
+--------------------------------------------------------- */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ---------------------------------------------------------
+   CLOCK
+--------------------------------------------------------- */
+
+function updateClock(){
+
+  document.getElementById("clock")
+    .textContent =
+      new Date().toLocaleString(
+        "sq-AL",
+        {
+          dateStyle:"short",
+          timeStyle:"medium"
+        }
+      );
+
+}
+
+
+/* ---------------------------------------------------------
+   F6
+--------------------------------------------------------- */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "F6"){
+
+      event.preventDefault();
+
+      printCurrent();
+
+    }
+
+  }
+);
+
+
+/* ---------------------------------------------------------
+   LOGIN ENTER
+--------------------------------------------------------- */
+
+document
+  .getElementById("loginPass")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(event.key === "Enter")
+        login();
+
+    }
+  );
+
+
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
+
+setInterval(
+  updateClock,
+  1000
+);
+
+updateClock();
+
+if(
+  localStorage.getItem("MY_BAR_SESSION")
+){
+
+  startApp();
+
+}
+
+</script>
+
+</body>
+</html>
