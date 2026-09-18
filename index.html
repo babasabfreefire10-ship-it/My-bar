@@ -2,33 +2,34 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MY BAR — POS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY BAR</title>
 
 <style>
 :root{
-  --bg:#050806;
-  --panel:#0b120d;
-  --panel2:#101a13;
+  --bg:#07100b;
+  --panel:#0d1811;
+  --panel2:#111f15;
   --line:#1d3825;
-  --green:#31e875;
-  --green2:#19b957;
-  --text:#f4f7f5;
-  --muted:#8d9b91;
-  --danger:#ef5555;
-  --gold:#d6b46a;
+  --green:#20e060;
+  --green2:#8affad;
+  --text:#f2fff5;
+  --muted:#8ea595;
+  --danger:#ff4d5e;
+  --yellow:#ffd45c;
+  --white:#fff;
 }
 
 *{box-sizing:border-box}
 
-html,body{
+body{
   margin:0;
-  padding:0;
-  width:100%;
-  min-height:100%;
-  background:var(--bg);
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,#12321d 0,transparent 30%),
+    linear-gradient(135deg,#050b07,#08130c 55%,#050906);
   color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
 }
 
 button,input,select{
@@ -37,11 +38,10 @@ button,input,select{
 
 button{
   cursor:pointer;
+  border:0;
 }
 
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
 /* LOGIN */
 
@@ -51,183 +51,190 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:
-    radial-gradient(circle at 50% 20%,#163d25 0,#071009 35%,#050806 75%);
 }
 
 .loginBox{
-  width:min(420px,100%);
-  background:rgba(10,18,13,.96);
-  border:1px solid #21472d;
-  border-radius:20px;
+  width:min(430px,100%);
+  background:rgba(10,20,13,.94);
+  border:1px solid var(--line);
+  border-radius:24px;
   padding:35px;
-  box-shadow:0 30px 80px #000b;
+  box-shadow:0 30px 80px #0008;
 }
 
-.brand{
-  text-align:center;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:5px;
-}
-
-.brand span{
+.logo{
+  width:65px;
+  height:65px;
+  border:2px solid var(--green);
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   color:var(--green);
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:20px;
 }
 
-.loginSub{
-  text-align:center;
+.loginBox h1{
+  margin:0;
+  font-size:32px;
+  letter-spacing:2px;
+}
+
+.loginBox p{
   color:var(--muted);
-  margin:8px 0 28px;
+  margin:8px 0 25px;
 }
 
-.input{
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.field input,
+.field select{
   width:100%;
   padding:14px;
-  margin-bottom:12px;
-  border-radius:10px;
-  border:1px solid #294633;
-  background:#07100a;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#08110b;
   color:white;
   outline:none;
 }
 
-.input:focus{
+.field input:focus,
+.field select:focus{
   border-color:var(--green);
 }
 
-.btn{
+.primary{
   width:100%;
-  border:0;
-  border-radius:10px;
-  padding:14px;
+  padding:15px;
   background:var(--green);
-  color:#031008;
+  color:#031007;
+  border-radius:12px;
   font-weight:900;
+  margin-top:8px;
 }
 
-.loginError{
-  color:#ff7777;
-  text-align:center;
+.primary:hover{filter:brightness(1.08)}
+
+.error{
   min-height:20px;
+  color:#ff6b78;
+  text-align:center;
   margin-top:12px;
+  font-size:13px;
 }
 
 /* APP */
 
 #app{
   min-height:100vh;
-  display:none;
+  display:flex;
 }
 
 .sidebar{
+  width:250px;
+  min-height:100vh;
+  background:#08110b;
+  border-right:1px solid var(--line);
+  padding:22px 15px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  width:235px;
-  background:#08100b;
-  border-right:1px solid var(--line);
-  padding:22px 15px;
   z-index:20;
 }
 
-.sideLogo{
-  font-weight:900;
-  font-size:22px;
-  letter-spacing:3px;
+.brand{
   padding:8px 10px 25px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:18px;
 }
 
-.sideLogo span{
+.brand strong{
+  display:block;
+  font-size:22px;
+  letter-spacing:2px;
+}
+
+.brand span{
   color:var(--green);
+  font-size:11px;
+  letter-spacing:2px;
 }
 
-.userBox{
-  background:#101b13;
-  border:1px solid #1d3825;
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:20px;
+.userCard{
+  padding:13px;
+  background:#0d1910;
+  border:1px solid var(--line);
+  border-radius:13px;
+  margin-bottom:18px;
 }
 
-.userRole{
-  color:var(--green);
-  font-size:12px;
-  margin-top:4px;
-}
-
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
+.userCard strong{display:block}
+.userCard small{color:var(--green)}
 
 .nav button{
   width:100%;
   text-align:left;
-  background:transparent;
-  color:#aab5ad;
-  border:1px solid transparent;
   padding:13px;
-  border-radius:9px;
+  margin:4px 0;
+  color:#b7c8ba;
+  background:transparent;
+  border-radius:10px;
 }
 
 .nav button:hover,
 .nav button.active{
-  background:#122219;
-  border-color:#23462d;
-  color:white;
-}
-
-.nav button.active{
-  color:var(--green);
+  background:#12351d;
+  color:var(--green2);
 }
 
 .logout{
   position:absolute;
-  bottom:20px;
   left:15px;
-  width:calc(100% - 30px);
-  background:#281010;
-  border:1px solid #512020;
-  color:#ff7777;
-  padding:12px;
-  border-radius:9px;
+  right:15px;
+  bottom:20px;
+  background:#1b0c0f!important;
+  color:#ff7380!important;
 }
 
 .main{
-  margin-left:235px;
-  min-height:100vh;
+  margin-left:250px;
+  width:calc(100% - 250px);
+  padding:25px;
 }
 
 .topbar{
-  height:72px;
-  border-bottom:1px solid var(--line);
-  background:#08100b;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:0 28px;
-  position:sticky;
-  top:0;
-  z-index:10;
+  align-items:center;
+  margin-bottom:25px;
 }
 
-.pageTitle{
-  font-size:21px;
-  font-weight:900;
+.topbar h2{
+  margin:0;
+  font-size:28px;
 }
 
-.clock{
+.topbar span{
   color:var(--muted);
+  font-size:13px;
 }
 
-.content{
-  padding:28px;
-}
+.page{display:none}
+.page.active{display:block}
 
-/* DASHBOARD */
+/* CARDS */
 
 .stats{
   display:grid;
@@ -239,27 +246,90 @@ button{
 .stat{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:14px;
-  padding:20px;
+  border-radius:16px;
+  padding:18px;
 }
 
-.statLabel{
+.stat small{
   color:var(--muted);
-  font-size:12px;
-  text-transform:uppercase;
 }
 
-.statValue{
+.stat strong{
+  display:block;
   font-size:27px;
-  font-weight:900;
   margin-top:8px;
 }
 
-.green{
-  color:var(--green);
+/* TABLES */
+
+.tables{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
-.grid{
+.tableCard{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:18px;
+  min-height:155px;
+  transition:.15s;
+}
+
+.tableCard:hover{
+  border-color:#2d613b;
+  transform:translateY(-2px);
+}
+
+.tableNumber{
+  font-size:23px;
+  font-weight:900;
+}
+
+.tableStatus{
+  color:var(--muted);
+  font-size:13px;
+  margin:5px 0 15px;
+}
+
+.tableCard.open{
+  border-color:#2d9d4b;
+}
+
+.tableTotal{
+  color:var(--green);
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.btnRow{
+  display:flex;
+  gap:8px;
+}
+
+.btn{
+  padding:10px 12px;
+  border-radius:9px;
+  background:#14231a;
+  color:#dff9e5;
+  border:1px solid var(--line);
+}
+
+.btn.green{
+  background:var(--green);
+  color:#031007;
+  font-weight:900;
+}
+
+.btn.red{
+  background:#321016;
+  color:#ff8993;
+}
+
+/* POS */
+
+.pos{
   display:grid;
   grid-template-columns:1.4fr .8fr;
   gap:20px;
@@ -268,83 +338,26 @@ button{
 .panel{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:15px;
+  border-radius:17px;
   padding:20px;
 }
 
-.panelTitle{
-  font-size:17px;
-  font-weight:900;
-  margin-bottom:17px;
-}
-
-/* TABLES */
-
-.tables{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-.tableCard{
-  min-height:130px;
-  background:#0d1710;
-  border:1px solid #203d28;
-  border-radius:13px;
-  padding:15px;
-  transition:.15s;
-}
-
-.tableCard:hover{
-  transform:translateY(-2px);
-  border-color:var(--green);
-}
-
-.tableNumber{
-  font-size:24px;
-  font-weight:900;
-}
-
-.tableStatus{
-  margin-top:9px;
-  font-size:12px;
-  color:var(--muted);
-}
-
-.tableTotal{
-  margin-top:15px;
-  font-weight:900;
-  color:var(--green);
-}
-
-.tableCard.busy{
-  border-color:#775c24;
-  background:#17150c;
-}
-
-.tableCard.busy .tableStatus{
-  color:#e1bd63;
-}
-
-/* MENU */
-
-.menuLayout{
-  display:grid;
-  grid-template-columns:1fr 380px;
-  gap:20px;
+.panel h3{
+  margin-top:0;
 }
 
 .products{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:13px;
+  gap:10px;
 }
 
 .product{
-  background:#0d1710;
-  border:1px solid #203d28;
+  padding:14px;
   border-radius:12px;
-  padding:16px;
+  background:#101f14;
+  border:1px solid var(--line);
+  color:white;
   text-align:left;
 }
 
@@ -352,196 +365,81 @@ button{
   border-color:var(--green);
 }
 
-.productName{
-  font-weight:900;
+.product strong{
+  display:block;
+  margin-bottom:5px;
 }
 
-.productPrice{
+.product span{
   color:var(--green);
-  margin-top:8px;
-  font-weight:900;
-}
-
-.orderPanel{
-  position:sticky;
-  top:95px;
-  height:max-content;
-}
-
-.orderTable{
-  color:var(--green);
-}
-
-.orderItems{
-  margin-top:15px;
-  max-height:360px;
-  overflow:auto;
+  font-weight:800;
 }
 
 .orderItem{
   display:flex;
   justify-content:space-between;
   gap:10px;
-  border-bottom:1px solid #1a2b1e;
-  padding:11px 0;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
 }
 
-.qty{
-  display:flex;
-  gap:5px;
-  align-items:center;
-}
-
-.qty button{
-  width:25px;
-  height:25px;
-  padding:0;
-  background:#17271b;
-  color:white;
-  border:1px solid #294633;
-  border-radius:5px;
+.orderItem small{
+  color:var(--muted);
 }
 
 .totalBox{
+  margin-top:18px;
+  padding-top:18px;
   border-top:1px solid var(--line);
-  margin-top:15px;
-  padding-top:15px;
-}
-
-.totalRow{
   display:flex;
   justify-content:space-between;
   font-size:21px;
   font-weight:900;
 }
 
-.action{
-  width:100%;
-  border:0;
-  padding:13px;
-  border-radius:9px;
-  margin-top:10px;
-  font-weight:900;
+.empty{
+  color:var(--muted);
+  padding:25px 0;
+  text-align:center;
 }
 
-.action.greenBtn{
-  background:var(--green);
-  color:#031008;
+/* SETTINGS */
+
+.settingsGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
-.action.darkBtn{
-  background:#16231a;
-  color:white;
-  border:1px solid #294633;
+.settingBox{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:20px;
 }
 
-.action.redBtn{
-  background:#421515;
-  color:#ff8b8b;
+.settingBox h3{
+  margin-top:0;
+  color:var(--green2);
+}
+
+.settingBox .btn{
+  margin-top:8px;
 }
 
 /* HISTORY */
 
-.history{
-  width:100%;
-  border-collapse:collapse;
-}
-
-.history th,
-.history td{
-  padding:13px 10px;
-  text-align:left;
-  border-bottom:1px solid #1b2b20;
-}
-
-.history th{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.miniBtn{
-  background:#16231a;
-  color:white;
-  border:1px solid #294633;
-  border-radius:7px;
-  padding:7px 10px;
-}
-
-/* PRINTER */
-
-.printerGrid{
+.historyRow{
   display:grid;
-  grid-template-columns:360px 1fr;
-  gap:20px;
+  grid-template-columns:1fr 1fr 1fr 120px;
+  gap:10px;
+  align-items:center;
+  padding:14px;
+  border-bottom:1px solid var(--line);
 }
 
-.statusBox{
-  padding:15px;
-  border-radius:10px;
-  background:#111b14;
-  border:1px solid var(--line);
-  margin-bottom:15px;
-}
-
-.statusDot{
-  display:inline-block;
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#777;
-  margin-right:7px;
-}
-
-.statusDot.ok{
-  background:var(--green);
-}
-
-.receiptPreview{
-  background:#282d29;
-  min-height:500px;
-  padding:25px;
-  display:flex;
-  justify-content:center;
-  border-radius:12px;
-}
-
-.receipt{
-  background:white;
-  color:black;
-  width:80mm;
-  min-height:120mm;
-  padding:6mm;
-  font-family:Arial,sans-serif;
-}
-
-.receiptTitle{
-  text-align:center;
-  font-weight:900;
-  font-size:21px;
-}
-
-.receiptCenter{
-  text-align:center;
-}
-
-.dash{
-  border-top:1px dashed black;
-  margin:10px 0;
-}
-
-.receiptRow{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  margin:5px 0;
-  font-size:13px;
-}
-
-.receiptTotal{
-  display:flex;
-  justify-content:space-between;
-  font-size:18px;
-  font-weight:900;
+.historyRow small{
+  color:var(--muted);
 }
 
 /* MODAL */
@@ -550,117 +448,107 @@ button{
   position:fixed;
   inset:0;
   background:#000b;
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
-  z-index:100;
   padding:20px;
-}
-
-.modal.show{
-  display:flex;
+  z-index:100;
 }
 
 .modalBox{
-  width:min(500px,100%);
-  background:#0b140e;
-  border:1px solid #294c32;
-  border-radius:15px;
-  padding:24px;
-  box-shadow:0 25px 80px #000;
+  width:min(600px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0b160f;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:22px;
 }
 
-.modalTitle{
-  font-size:20px;
-  font-weight:900;
+.modalHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:18px;
 }
 
-.modalActions{
-  display:flex;
-  gap:10px;
+.modalHead h3{margin:0}
+
+.close{
+  background:#201015;
+  color:#ff8791;
+  width:35px;
+  height:35px;
+  border-radius:9px;
 }
 
-.modalActions button{
-  flex:1;
+/* RECEIPT */
+
+.receipt{
+  width:80mm;
+  background:white;
+  color:#111;
+  padding:8mm 5mm;
+  font-family:Arial,sans-serif;
+  margin:auto;
 }
 
-.payButtons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.payBtn{
-  padding:20px;
-  background:#132018;
-  color:white;
-  border:1px solid #294633;
-  border-radius:12px;
-  font-weight:900;
-}
-
-.payBtn:hover{
-  border-color:var(--green);
-}
-
-/* CONTACT */
-
-.price{
+.receipt h2{
   text-align:center;
-  font-size:55px;
-  color:var(--green);
+  margin:0 0 4px;
+}
+
+.receipt .center{text-align:center}
+
+.receiptLine{
+  display:flex;
+  justify-content:space-between;
+  margin:6px 0;
+}
+
+.receipt hr{
+  border:0;
+  border-top:1px dashed #333;
+}
+
+.receiptTotal{
   font-weight:900;
-  margin:20px;
+  font-size:18px;
 }
 
 /* MOBILE */
 
+.mobileTop{
+  display:none;
+}
+
 @media(max-width:1000px){
   .stats{grid-template-columns:repeat(2,1fr)}
-  .grid,.menuLayout,.printerGrid{grid-template-columns:1fr}
-  .products{grid-template-columns:repeat(2,1fr)}
   .tables{grid-template-columns:repeat(3,1fr)}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .pos{grid-template-columns:1fr}
 }
 
 @media(max-width:700px){
   .sidebar{
-    width:100%;
-    height:auto;
-    bottom:auto;
-    position:fixed;
-    padding:8px;
-  }
-
-  .sideLogo,
-  .userBox,
-  .logout{
     display:none;
-  }
-
-  .nav{
-    flex-direction:row;
-    overflow:auto;
-  }
-
-  .nav button{
-    white-space:nowrap;
-    font-size:11px;
-    padding:10px;
   }
 
   .main{
     margin-left:0;
-    padding-top:62px;
-  }
-
-  .topbar{
-    height:58px;
-    padding:0 15px;
-  }
-
-  .content{
+    width:100%;
     padding:15px;
+  }
+
+  .mobileTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+  }
+
+  .mobileTop strong{
+    letter-spacing:2px;
   }
 
   .stats{
@@ -671,50 +559,32 @@ button{
     grid-template-columns:1fr 1fr;
   }
 
-  .products{
-    grid-template-columns:1fr 1fr;
+  .settingsGrid{
+    grid-template-columns:1fr;
   }
 
-  .history{
-    font-size:12px;
+  .historyRow{
+    grid-template-columns:1fr 1fr;
   }
 }
 
 /* PRINT */
 
 @media print{
-
-  body{
-    background:white!important;
-  }
-
   body *{
     visibility:hidden!important;
   }
 
-  #printArea,
-  #printArea *{
+  #receiptPrint,
+  #receiptPrint *{
     visibility:visible!important;
   }
 
-  #printArea{
-    position:absolute!important;
-    left:0!important;
-    top:0!important;
-    width:100%!important;
-    background:white!important;
-    display:block!important;
-  }
-
-  #printArea .receipt{
-    width:100%!important;
-    min-height:0!important;
-    margin:0!important;
-    box-shadow:none!important;
-  }
-
-  @page{
-    margin:0;
+  #receiptPrint{
+    position:absolute;
+    left:0;
+    top:0;
+    width:80mm;
   }
 }
 </style>
@@ -723,1808 +593,1163 @@ button{
 <body>
 
 <!-- LOGIN -->
-
 <section id="loginScreen">
-
   <div class="loginBox">
+    <div class="logo">M</div>
+    <h1>MY BAR</h1>
+    <p>Sistemi i menaxhimit</p>
 
-    <div class="brand">
-      MY <span>BAR</span>
+    <div class="field">
+      <label>Përdoruesi</label>
+      <input id="loginUser" autocomplete="username" placeholder="admin">
     </div>
 
-    <div class="loginSub">
-      SISTEMI I MENAXHIMIT
+    <div class="field">
+      <label>Fjalëkalimi</label>
+      <input id="loginPass" type="password" autocomplete="current-password" placeholder="••••">
     </div>
 
-    <input
-      id="loginUser"
-      class="input"
-      placeholder="Përdoruesi"
-      autocomplete="username"
-    >
-
-    <input
-      id="loginPass"
-      class="input"
-      type="password"
-      placeholder="Fjalëkalimi"
-      autocomplete="current-password"
-    >
-
-    <button class="btn" onclick="login()">
-      HYR NË SISTEM
-    </button>
-
-    <div id="loginError" class="loginError"></div>
-
+    <button class="primary" onclick="login()">HYR NË SISTEM</button>
+    <div id="loginError" class="error"></div>
   </div>
-
 </section>
 
-
 <!-- APP -->
-
-<section id="app">
+<section id="app" class="hidden">
 
   <aside class="sidebar">
-
-    <div class="sideLogo">
-      MY <span>BAR</span>
+    <div class="brand">
+      <strong id="sideBarName">MY BAR</strong>
+      <span>SISTEM PREMIUM</span>
     </div>
 
-    <div class="userBox">
-      <b id="sideUser">Admin</b>
-      <div id="sideRole" class="userRole">Administrator</div>
+    <div class="userCard">
+      <strong id="sideUser">-</strong>
+      <small id="sideRole">-</small>
     </div>
 
     <nav class="nav">
-
-      <button data-page="dashboard" onclick="showPage('dashboard')">
-        ▦ Dashboard
-      </button>
-
-      <button data-page="tables" onclick="showPage('tables')">
-        ▦ Tavolinat
-      </button>
-
-      <button data-page="menu" onclick="showPage('menu')">
-        ☰ Menu
-      </button>
-
-      <button data-page="history" onclick="showPage('history')">
-        ◷ Historiku
-      </button>
-
-      <button data-page="printer" onclick="showPage('printer')">
-        🖨 Printer
-      </button>
-
-      <button data-page="contact" onclick="showContact()">
-        CONTACT
-      </button>
-
+      <button class="active" onclick="showPage('dashboard',this)">▦ Dashboard</button>
+      <button onclick="showPage('tables',this)">▣ Tavolinat</button>
+      <button onclick="showPage('menu',this)">☰ Menu</button>
+      <button onclick="showPage('history',this)">◷ Historiku</button>
+      <button id="settingsBtn" onclick="showPage('settings',this)">⚙ Settings</button>
+      <button onclick="showContact()">◎ Contact</button>
     </nav>
 
-    <button class="logout" onclick="logout()">
-      Dil nga sistemi
-    </button>
-
+    <button class="nav logout" onclick="logout()">↪ Dil</button>
   </aside>
-
 
   <main class="main">
 
-    <header class="topbar">
+    <div class="mobileTop">
+      <strong id="mobileBarName">MY BAR</strong>
+      <button class="btn" onclick="logout()">Dil</button>
+    </div>
 
-      <div id="pageTitle" class="pageTitle">
-        Dashboard
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page active">
+      <div class="topbar">
+        <div>
+          <h2>Dashboard</h2>
+          <span>Mirë se vini në sistem</span>
+        </div>
       </div>
 
-      <div id="clock" class="clock"></div>
-
-    </header>
-
-    <div class="content">
-
-
-      <!-- DASHBOARD -->
-
-      <section id="page-dashboard" class="page">
-
-        <div class="stats">
-
-          <div class="stat">
-            <div class="statLabel">Shitje sot</div>
-            <div id="statSales" class="statValue green">€0.00</div>
-          </div>
-
-          <div class="stat">
-            <div class="statLabel">Fatura</div>
-            <div id="statInvoices" class="statValue">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="statLabel">Tavolina aktive</div>
-            <div id="statTables" class="statValue">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="statLabel">Produkte</div>
-            <div id="statProducts" class="statValue">0</div>
-          </div>
-
+      <div class="stats">
+        <div class="stat">
+          <small>Tavolina aktive</small>
+          <strong id="statOpen">0</strong>
         </div>
-
-
-        <div class="grid">
-
-          <div class="panel">
-
-            <div class="panelTitle">
-              Tavolinat
-            </div>
-
-            <div id="dashboardTables" class="tables"></div>
-
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panelTitle">
-              Shitjet e fundit
-            </div>
-
-            <div id="recentSales"></div>
-
-          </div>
-
+        <div class="stat">
+          <small>Shitje sot</small>
+          <strong id="statSales">0.00 €</strong>
         </div>
+        <div class="stat">
+          <small>Fatura</small>
+          <strong id="statInvoices">0</strong>
+        </div>
+        <div class="stat">
+          <small>Produkte</small>
+          <strong id="statProducts">0</strong>
+        </div>
+      </div>
 
-      </section>
+      <div class="panel">
+        <h3>Tavolinat</h3>
+        <div id="dashboardTables" class="tables"></div>
+      </div>
+    </div>
 
+    <!-- TABLES -->
+    <div id="tables" class="page">
+      <div class="topbar">
+        <h2>Tavolinat</h2>
+      </div>
+      <div id="tablesGrid" class="tables"></div>
+    </div>
 
-      <!-- TABLES -->
+    <!-- MENU -->
+    <div id="menu" class="page">
+      <div class="topbar">
+        <div>
+          <h2>Menu & Porosi</h2>
+          <span id="selectedTableText">Zgjidh një tavolinë</span>
+        </div>
+      </div>
 
-      <section id="page-tables" class="page hidden">
+      <div class="pos">
+        <div class="panel">
+          <h3>Produktet</h3>
+          <div id="productsGrid" class="products"></div>
+        </div>
 
         <div class="panel">
+          <h3 id="orderTitle">Porosia</h3>
+          <div id="orderList"></div>
 
-          <div class="panelTitle">
-            TAVOLINAT
+          <div class="totalBox">
+            <span>TOTAL</span>
+            <span id="orderTotal">0.00 €</span>
           </div>
 
-          <div id="tablesPage" class="tables"></div>
+          <div class="btnRow" style="margin-top:18px">
+            <button class="btn red" onclick="clearOrder()">Pastro</button>
+            <button class="btn green" style="flex:1" onclick="openPayment()">Paguaj</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- HISTORY -->
+    <div id="history" class="page">
+      <div class="topbar">
+        <h2>Historiku</h2>
+      </div>
+
+      <div class="panel">
+        <div id="historyList"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS ADMIN ONLY -->
+    <div id="settings" class="page">
+      <div class="topbar">
+        <div>
+          <h2>Settings</h2>
+          <span>Vetëm Administratori</span>
+        </div>
+      </div>
+
+      <div class="settingsGrid">
+
+        <div class="settingBox">
+          <h3>Informacioni i lokalit</h3>
+
+          <div class="field">
+            <label>Emri i lokalit</label>
+            <input id="setBarName">
+          </div>
+
+          <div class="field">
+            <label>Adresa</label>
+            <input id="setAddress">
+          </div>
+
+          <div class="field">
+            <label>Telefon</label>
+            <input id="setPhone">
+          </div>
+
+          <button class="btn green" onclick="saveGeneral()">RUaj NDRYSHIMET</button>
         </div>
 
-      </section>
+        <div class="settingBox">
+          <h3>Menaxhimi i tavolinave</h3>
 
-
-      <!-- MENU -->
-
-      <section id="page-menu" class="page hidden">
-
-        <div class="menuLayout">
-
-          <div class="panel">
-
-            <div class="panelTitle">
-              MENU
-            </div>
-
-            <div id="products" class="products"></div>
-
+          <div class="field">
+            <label>Numri i tavolinave</label>
+            <input id="setTables" type="number" min="1" max="100">
           </div>
 
-
-          <div class="panel orderPanel">
-
-            <div class="panelTitle">
-              POROSIA
-              <span id="orderTableLabel" class="orderTable"></span>
-            </div>
-
-            <div id="orderItems" class="orderItems"></div>
-
-            <div class="totalBox">
-
-              <div class="totalRow">
-                <span>TOTAL</span>
-                <span id="orderTotal">€0.00</span>
-              </div>
-
-              <button
-                class="action greenBtn"
-                onclick="openPayment()"
-              >
-                PËRFUNDO POROSINË
-              </button>
-
-              <button
-                class="action darkBtn"
-                onclick="clearOrder()"
-              >
-                PASTRO POROSINË
-              </button>
-
-            </div>
-
-          </div>
-
+          <button class="btn green" onclick="saveTables()">PËRDITËSO TAVOLINAT</button>
         </div>
 
-      </section>
+        <div class="settingBox">
+          <h3>Printeri</h3>
 
-
-      <!-- HISTORY -->
-
-      <section id="page-history" class="page hidden">
-
-        <div class="panel">
-
-          <div class="panelTitle">
-            HISTORIKU I FATURAVE
-          </div>
-
-          <div style="overflow:auto">
-
-            <table class="history">
-
-              <thead>
-                <tr>
-                  <th>Fatura</th>
-                  <th>Tavolina</th>
-                  <th>Data</th>
-                  <th>Pagesa</th>
-                  <th>Total</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody id="historyBody"></tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PRINTER -->
-
-      <section id="page-printer" class="page hidden">
-
-        <div class="printerGrid">
-
-          <div class="panel">
-
-            <div class="panelTitle">
-              🖨 PRINTER
-            </div>
-
-            <div class="statusBox">
-
-              <span id="printerDot" class="statusDot"></span>
-
-              <span id="printerStatus">
-                Printeri përdor printimin e Windows.
-              </span>
-
-            </div>
-
+          <div class="field">
             <label>Emri i printerit</label>
+            <input id="setPrinter" placeholder="p.sh. POS-58">
+          </div>
 
-            <input
-              id="printerName"
-              class="input"
-              placeholder="P.sh. XP-80C"
-            >
-
-            <label>Formati</label>
-
-            <select id="paperSize" class="input">
-
-              <option value="80mm">
-                Thermal 80mm
-              </option>
-
-              <option value="58mm">
-                Thermal 58mm
-              </option>
-
-              <option value="A4">
-                A4
-              </option>
-
+          <div class="field">
+            <label>Letra</label>
+            <select id="setPaper">
+              <option value="58">58mm</option>
+              <option value="80">80mm</option>
+              <option value="A4">A4</option>
             </select>
-
-            <button
-              class="action greenBtn"
-              onclick="savePrinter()"
-            >
-              RUAJ PRINTERIN
-            </button>
-
-            <button
-              class="action darkBtn"
-              onclick="testPrint()"
-            >
-              🧾 TEST PRINT
-            </button>
-
-            <button
-              class="action darkBtn"
-              onclick="printCurrent()"
-            >
-              ⚡ PRINT F6
-            </button>
-
-            <div class="statusBox" style="margin-top:15px">
-
-              <b>F6</b><br><br>
-
-              Shtyp F6 nga tastiera për të hapur
-              faturën e fundit dhe për ta dërguar
-              te printimi i Windows.
-
-            </div>
-
           </div>
 
-
-          <div class="panel">
-
-            <div class="panelTitle">
-              PREVIEW
-            </div>
-
-            <div class="receiptPreview">
-
-              <div id="printArea">
-
-                <div id="receipt" class="receipt">
-
-                  <div class="receiptTitle">
-                    MY BAR
-                  </div>
-
-                  <div class="receiptCenter">
-                    SISTEMI I MENAXHIMIT
-                  </div>
-
-                  <div class="dash"></div>
-
-                  <div class="receiptCenter">
-                    Gati për printim
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
+          <button class="btn green" onclick="savePrinter()">RUAJ PRINTERIN</button>
+          <button class="btn" onclick="testPrint()">TEST PRINT</button>
         </div>
 
-      </section>
+        <div class="settingBox">
+          <h3>Administratori</h3>
 
-
-      <!-- CONTACT -->
-
-      <section id="page-contact" class="page hidden">
-
-        <div class="panel" style="max-width:650px;margin:auto">
-
-          <div class="panelTitle">
-            CONTACT
+          <div class="field">
+            <label>Username Admin</label>
+            <input id="setAdminUser">
           </div>
 
-          <div style="text-align:center;color:#9da99f">
-            MY BAR — SISTEMI PREMIUM I MENAXHIMIT
+          <div class="field">
+            <label>Password Admin</label>
+            <input id="setAdminPass" type="password">
           </div>
 
-          <div class="price">
-            49€
-          </div>
-
-          <div style="text-align:center;color:#9da99f">
-            Çmimi i aplikacionit MY BAR
-          </div>
-
-          <button
-            class="action greenBtn"
-            onclick="buyApp()"
-          >
-            BLI APLIKACIONIN
-          </button>
-
+          <button class="btn green" onclick="saveAdmin()">RUAJ ADMININ</button>
         </div>
 
-      </section>
+        <div class="settingBox">
+          <h3>Kamarieri</h3>
 
+          <div class="field">
+            <label>Username Kamarier</label>
+            <input id="setWaiterUser">
+          </div>
 
+          <div class="field">
+            <label>Password Kamarier</label>
+            <input id="setWaiterPass" type="password">
+          </div>
+
+          <button class="btn green" onclick="saveWaiter()">RUAJ KAMARIERIN</button>
+        </div>
+
+        <div class="settingBox">
+          <h3>Menuja</h3>
+          <p style="color:var(--muted)">
+            Shto, ndrysho ose fshi produktet dhe çmimet.
+          </p>
+          <button class="btn green" onclick="openProductManager()">MENAXHO MENUNË</button>
+        </div>
+
+        <div class="settingBox">
+          <h3>Contact</h3>
+          <p style="color:var(--muted)">
+            MY BAR — Sistem menaxhimi profesional.
+          </p>
+          <strong style="font-size:24px;color:var(--green)">49€</strong>
+        </div>
+
+        <div class="settingBox">
+          <h3>Reset sistemi</h3>
+          <p style="color:var(--muted)">
+            Fshin tavolinat, historikun dhe cilësimet lokale.
+          </p>
+          <button class="btn red" onclick="resetSystem()">RESET SISTEMIN</button>
+        </div>
+
+      </div>
     </div>
 
   </main>
-
 </section>
 
-
 <!-- PAYMENT MODAL -->
-
-<div id="paymentModal" class="modal">
-
+<div id="paymentModal" class="modal hidden">
   <div class="modalBox">
-
-    <div class="modalTitle">
-      Zgjidh mënyrën e pagesës
+    <div class="modalHead">
+      <h3>Përfundo pagesën</h3>
+      <button class="close" onclick="closeModal('paymentModal')">×</button>
     </div>
 
-    <div class="payButtons">
-
-      <button
-        class="payBtn"
-        onclick="completePayment('CASH')"
-      >
-        💵 CASH
-      </button>
-
-      <button
-        class="payBtn"
-        onclick="completePayment('KARTË')"
-      >
-        💳 KARTË
-      </button>
-
+    <div class="field">
+      <label>Metoda e pagesës</label>
+      <select id="paymentMethod">
+        <option>Cash</option>
+        <option>Kartë</option>
+      </select>
     </div>
 
-    <button
-      class="action darkBtn"
-      onclick="closeModal('paymentModal')"
-    >
-      ANULO
-    </button>
+    <div style="font-size:25px;font-weight:900;margin:15px 0">
+      TOTAL: <span id="paymentTotal">0.00 €</span>
+    </div>
 
+    <button class="primary" onclick="completePayment()">PËRFUNDO & PRINT</button>
   </div>
-
 </div>
 
-
-<!-- RECEIPT MODAL -->
-
-<div id="receiptModal" class="modal">
-
-  <div class="modalBox" style="max-width:560px">
-
-    <div class="modalTitle">
-      Fatura
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal hidden">
+  <div class="modalBox">
+    <div class="modalHead">
+      <h3>Menaxho Menunë</h3>
+      <button class="close" onclick="closeModal('productModal')">×</button>
     </div>
 
-    <div
-      id="modalReceipt"
-      style="background:#303530;padding:15px;border-radius:10px"
-    ></div>
-
-    <div class="modalActions">
-
-      <button
-        class="action greenBtn"
-        onclick="realPrint()"
-      >
-        🖨 PRINT
-      </button>
-
-      <button
-        class="action darkBtn"
-        onclick="closeModal('receiptModal')"
-      >
-        MBYLL
-      </button>
-
+    <div class="field">
+      <label>Emri i produktit</label>
+      <input id="newProductName" placeholder="p.sh. Coca Cola">
     </div>
 
+    <div class="field">
+      <label>Çmimi €</label>
+      <input id="newProductPrice" type="number" step="0.01" placeholder="2.00">
+    </div>
+
+    <button class="btn green" onclick="addProduct()">SHTO PRODUKT</button>
+
+    <div id="adminProductList" style="margin-top:20px"></div>
   </div>
-
 </div>
-
 
 <!-- CONTACT MODAL -->
-
-<div id="contactModal" class="modal">
-
+<div id="contactModal" class="modal hidden">
   <div class="modalBox">
-
-    <div class="modalTitle">
-      MY BAR
+    <div class="modalHead">
+      <h3>Contact</h3>
+      <button class="close" onclick="closeModal('contactModal')">×</button>
     </div>
 
-    <p style="color:#aab5ad">
-      Aplikacion premium për menaxhimin e
-      tavolinave, menusë, faturave dhe printerit.
+    <p style="color:var(--muted)">
+      Për blerjen e sistemit MY BAR ose raportimin e një problemi.
     </p>
 
-    <div class="price">
+    <div style="font-size:30px;font-weight:900;color:var(--green);margin:20px 0">
       49€
     </div>
 
-    <button
-      class="action greenBtn"
-      onclick="buyApp()"
-    >
+    <button class="btn green" style="width:100%" onclick="alert('Kontaktoni administratorin për blerjen e aplikacionit.')">
       BLI APLIKACIONIN
     </button>
 
-    <button
-      class="action darkBtn"
-      onclick="closeModal('contactModal')"
-    >
-      MBYLL
+    <button class="btn" style="width:100%;margin-top:10px" onclick="alert('Raporti u hap. Kontaktoni administratorin për problemin.')">
+      RAPORTO NJË PROBLEM
     </button>
-
   </div>
-
 </div>
 
+<!-- RECEIPT -->
+<div id="receiptPrint" class="receipt hidden"></div>
 
 <script>
-
-/* =========================================================
-   MY BAR — SINGLE FILE POS
-   ========================================================= */
-
-
-/* DATA */
+/* =========================
+   DEFAULT DATA
+========================= */
 
 const DEFAULT_PRODUCTS = [
-
-  {
-    id:"p1",
-    name:"Espresso",
-    price:1.20
-  },
-
-  {
-    id:"p2",
-    name:"Cappuccino",
-    price:1.80
-  },
-
-  {
-    id:"p3",
-    name:"Macchiato",
-    price:1.50
-  },
-
-  {
-    id:"p4",
-    name:"Freddo Cappuccino",
-    price:2.20
-  },
-
-  {
-    id:"p5",
-    name:"Coca Cola",
-    price:1.50
-  },
-
-  {
-    id:"p6",
-    name:"Red Bull",
-    price:2.50
-  },
-
-  {
-    id:"p7",
-    name:"Ujë",
-    price:1.00
-  },
-
-  {
-    id:"p8",
-    name:"Birra Korça",
-    price:2.00
-  },
-
-  {
-    id:"p9",
-    name:"Birra Tirana",
-    price:2.00
-  },
-
-  {
-    id:"p10",
-    name:"Club Sandwich",
-    price:4.50
-  },
-
-  {
-    id:"p11",
-    name:"Burger",
-    price:5.50
-  },
-
-  {
-    id:"p12",
-    name:"Patate",
-    price:2.50
-  }
-
+  {id:1,name:"Coca Cola",price:2},
+  {id:2,name:"Pepsi",price:2},
+  {id:3,name:"Ujë",price:1},
+  {id:4,name:"Kafe",price:1.5},
+  {id:5,name:"Espresso",price:1.5},
+  {id:6,name:"Cappuccino",price:2},
+  {id:7,name:"Birrë",price:2.5},
+  {id:8,name:"Red Bull",price:3},
+  {id:9,name:"Lëng Portokalli",price:2},
+  {id:10,name:"Pizza",price:6},
+  {id:11,name:"Burger",price:5},
+  {id:12,name:"Patate",price:3}
 ];
 
+const DEFAULT_SETTINGS = {
+  barName:"MY BAR",
+  address:"",
+  phone:"",
+  printer:"",
+  paper:"80",
+  adminUser:"admin",
+  adminPass:"1234",
+  waiterUser:"kamarier",
+  waiterPass:"1234",
+  tableCount:12
+};
 
-let products =
-  JSON.parse(
-    localStorage.getItem("MY_BAR_PRODUCTS")
-  ) || DEFAULT_PRODUCTS;
+let products = JSON.parse(localStorage.getItem("MY_BAR_PRODUCTS")) || DEFAULT_PRODUCTS;
+let settings = JSON.parse(localStorage.getItem("MY_BAR_SETTINGS")) || DEFAULT_SETTINGS;
+let tables = JSON.parse(localStorage.getItem("MY_BAR_TABLES")) || [];
+let history = JSON.parse(localStorage.getItem("MY_BAR_HISTORY")) || [];
+let session = JSON.parse(localStorage.getItem("MY_BAR_SESSION")) || null;
+let selectedTable = null;
+let currentReceipt = null;
 
+/* =========================
+   INIT
+========================= */
 
-let tables =
-  JSON.parse(
-    localStorage.getItem("MY_BAR_TABLES")
-  ) || createTables();
+function init(){
+  if(!tables.length){
+    createTables(settings.tableCount);
+  }
 
+  updateBrand();
 
-let invoices =
-  JSON.parse(
-    localStorage.getItem("MY_BAR_INVOICES")
-  ) || [];
+  if(session){
+    startApp();
+  }else{
+    showLogin();
+  }
 
+  document.getElementById("loginPass").addEventListener("keydown",e=>{
+    if(e.key==="Enter") login();
+  });
+}
 
-let orders =
-  JSON.parse(
-    localStorage.getItem("MY_BAR_ORDERS")
-  ) || {};
-
-
-let currentTable = null;
-let currentInvoice = null;
-
-
-/* ---------------------------------------------------------
-   TABLES
---------------------------------------------------------- */
-
-function createTables(){
-
-  const arr = {};
-
-  for(let i=1;i<=12;i++){
-
-    arr[i] = {
+function createTables(count){
+  tables = [];
+  for(let i=1;i<=count;i++){
+    tables.push({
       id:i,
       items:[]
-    };
-
+    });
   }
-
-  return arr;
+  saveTablesData();
 }
 
-
-/* ---------------------------------------------------------
-   STORAGE
---------------------------------------------------------- */
-
-function saveAll(){
-
-  localStorage.setItem(
-    "MY_BAR_PRODUCTS",
-    JSON.stringify(products)
-  );
-
-  localStorage.setItem(
-    "MY_BAR_TABLES",
-    JSON.stringify(tables)
-  );
-
-  localStorage.setItem(
-    "MY_BAR_INVOICES",
-    JSON.stringify(invoices)
-  );
-
-  localStorage.setItem(
-    "MY_BAR_ORDERS",
-    JSON.stringify(orders)
-  );
-
+function saveTablesData(){
+  localStorage.setItem("MY_BAR_TABLES",JSON.stringify(tables));
 }
 
+function saveProducts(){
+  localStorage.setItem("MY_BAR_PRODUCTS",JSON.stringify(products));
+}
 
-/* ---------------------------------------------------------
+function saveSettings(){
+  localStorage.setItem("MY_BAR_SETTINGS",JSON.stringify(settings));
+}
+
+function saveHistory(){
+  localStorage.setItem("MY_BAR_HISTORY",JSON.stringify(history));
+}
+
+/* =========================
    LOGIN
---------------------------------------------------------- */
+========================= */
+
+function showLogin(){
+  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById("app").classList.add("hidden");
+}
 
 function login(){
+  const user=document.getElementById("loginUser").value.trim();
+  const pass=document.getElementById("loginPass").value;
 
-  const user =
-    document.getElementById("loginUser").value.trim();
+  let role=null;
 
-  const pass =
-    document.getElementById("loginPass").value;
-
-  let role = "";
-
-  if(user === "admin" && pass === "1234"){
-    role = "Administrator";
-  }
-  else if(user === "kamarier" && pass === "1234"){
-    role = "Kamarier";
-  }
-  else{
-
-    document.getElementById("loginError").textContent =
-      "Përdoruesi ose fjalëkalimi është gabim.";
-
+  if(user===settings.adminUser && pass===settings.adminPass){
+    role="Administrator";
+  }else if(user===settings.waiterUser && pass===settings.waiterPass){
+    role="Kamarier";
+  }else{
+    document.getElementById("loginError").textContent="Përdoruesi ose fjalëkalimi është gabim.";
     return;
   }
 
-  localStorage.setItem(
-    "MY_BAR_SESSION",
-    JSON.stringify({
-      user,
-      role
-    })
-  );
-
+  session={user,role};
+  localStorage.setItem("MY_BAR_SESSION",JSON.stringify(session));
+  document.getElementById("loginError").textContent="";
   startApp();
-
 }
-
-
-/* ---------------------------------------------------------
-   START
---------------------------------------------------------- */
 
 function startApp(){
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 
-  const session =
-    JSON.parse(
-      localStorage.getItem("MY_BAR_SESSION")
-    );
+  document.getElementById("sideUser").textContent=session.user;
+  document.getElementById("sideRole").textContent=session.role;
 
-  if(!session) return;
+  const settingsBtn=document.getElementById("settingsBtn");
 
-  document.getElementById("loginScreen").style.display =
-    "none";
+  if(session.role==="Administrator"){
+    settingsBtn.classList.remove("hidden");
+  }else{
+    settingsBtn.classList.add("hidden");
+  }
 
-  document.getElementById("app").style.display =
-    "block";
-
-  document.getElementById("sideUser").textContent =
-    session.user;
-
-  document.getElementById("sideRole").textContent =
-    session.role;
-
-  showPage("dashboard");
-
-  updateAll();
-
+  updateBrand();
+  renderTables();
+  renderProducts();
+  renderHistory();
+  updateStats();
 }
-
-
-/* ---------------------------------------------------------
-   LOGOUT
---------------------------------------------------------- */
 
 function logout(){
-
   localStorage.removeItem("MY_BAR_SESSION");
-
-  location.reload();
-
+  session=null;
+  selectedTable=null;
+  showLogin();
 }
 
-
-/* ---------------------------------------------------------
-   PAGES
---------------------------------------------------------- */
-
-function showPage(page){
-
-  document.querySelectorAll(".page")
-    .forEach(x => x.classList.add("hidden"));
-
-  const target =
-    document.getElementById("page-" + page);
-
-  if(target)
-    target.classList.remove("hidden");
-
-  document.querySelectorAll(".nav button")
-    .forEach(btn => {
-
-      btn.classList.toggle(
-        "active",
-        btn.dataset.page === page
-      );
-
-    });
-
-  const titles = {
-    dashboard:"Dashboard",
-    tables:"Tavolinat",
-    menu:"Menu",
-    history:"Historiku",
-    printer:"Printer"
-  };
-
-  document.getElementById("pageTitle").textContent =
-    titles[page] || page;
-
-  if(page === "dashboard")
-    renderDashboard();
-
-  if(page === "tables")
-    renderTables("tablesPage");
-
-  if(page === "menu")
-    renderMenu();
-
-  if(page === "history")
-    renderHistory();
-
-  if(page === "printer")
-    renderPrinter();
-}
-
-
-/* ---------------------------------------------------------
-   DASHBOARD
---------------------------------------------------------- */
-
-function renderDashboard(){
-
-  renderTables("dashboardTables");
-
-  const today =
-    new Date().toLocaleDateString("sq-AL");
-
-  const todayInvoices =
-    invoices.filter(x => x.dateOnly === today);
-
-  const sales =
-    todayInvoices.reduce(
-      (sum,x)=>sum + Number(x.total || 0),
-      0
-    );
-
-  document.getElementById("statSales").textContent =
-    euro(sales);
-
-  document.getElementById("statInvoices").textContent =
-    todayInvoices.length;
-
-  const active =
-    Object.values(tables)
-      .filter(t => t.items && t.items.length)
-      .length;
-
-  document.getElementById("statTables").textContent =
-    active;
-
-  document.getElementById("statProducts").textContent =
-    products.length;
-
-  const recent =
-    invoices.slice(-5).reverse();
-
-  document.getElementById("recentSales").innerHTML =
-    recent.length
-      ? recent.map(x => `
-        <div class="orderItem">
-          <span>${escapeHTML(x.id)}</span>
-          <b>${euro(x.total)}</b>
-        </div>
-      `).join("")
-      : `<div style="color:#88958d">
-          Ende nuk ka shitje.
-         </div>`;
-
-}
-
-
-/* ---------------------------------------------------------
-   TABLES
---------------------------------------------------------- */
-
-function renderTables(targetId){
-
-  const target =
-    document.getElementById(targetId);
-
-  if(!target) return;
-
-  target.innerHTML =
-    Object.values(tables).map(table => {
-
-      const items =
-        table.items || [];
-
-      const total =
-        items.reduce(
-          (sum,item)=>
-            sum + Number(item.price)*Number(item.qty),
-          0
-        );
-
-      const busy =
-        items.length > 0;
-
-      return `
-
-        <div
-          class="tableCard ${busy ? "busy":""}"
-          onclick="openTable(${table.id})"
-        >
-
-          <div class="tableNumber">
-            ${table.id}
-          </div>
-
-          <div class="tableStatus">
-            ${busy ? "E zënë":"E lirë"}
-          </div>
-
-          ${
-            busy
-            ? `<div class="tableTotal">
-                ${euro(total)}
-               </div>`
-            : ""
-          }
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* ---------------------------------------------------------
-   OPEN TABLE
---------------------------------------------------------- */
-
-function openTable(id){
-
-  currentTable = Number(id);
-
-  if(!tables[id])
-    tables[id] = {
-      id,
-      items:[]
-    };
-
-  showPage("menu");
-
-}
-
-
-/* ---------------------------------------------------------
-   MENU
---------------------------------------------------------- */
-
-function renderMenu(){
-
-  if(!currentTable){
-
-    currentTable = 1;
-
-  }
-
-  document.getElementById("orderTableLabel").textContent =
-    " • Tavolina " + currentTable;
-
-  document.getElementById("products").innerHTML =
-    products.map(p => `
-
-      <button
-        class="product"
-        onclick="addProduct('${p.id}')"
-      >
-
-        <div class="productName">
-          ${escapeHTML(p.name)}
-        </div>
-
-        <div class="productPrice">
-          ${euro(p.price)}
-        </div>
-
-      </button>
-
-    `).join("");
-
-  renderOrder();
-
-}
-
-
-/* ---------------------------------------------------------
-   ADD PRODUCT
---------------------------------------------------------- */
-
-function addProduct(id){
-
-  const product =
-    products.find(x => x.id === id);
-
-  if(!product) return;
-
-  if(!tables[currentTable])
-    tables[currentTable] = {
-      id:currentTable,
-      items:[]
-    };
-
-  const items =
-    tables[currentTable].items;
-
-  const existing =
-    items.find(x => x.productId === id);
-
-  if(existing){
-
-    existing.qty++;
-
-  }else{
-
-    items.push({
-
-      productId:id,
-      name:product.name,
-      price:product.price,
-      qty:1
-
-    });
-
-  }
-
-  saveAll();
-
-  renderOrder();
-
-}
-
-
-/* ---------------------------------------------------------
-   RENDER ORDER
---------------------------------------------------------- */
-
-function renderOrder(){
-
-  const items =
-    tables[currentTable]?.items || [];
-
-  const target =
-    document.getElementById("orderItems");
-
-  target.innerHTML =
-    items.length
-      ? items.map((item,index) => `
-
-        <div class="orderItem">
-
-          <div>
-            <b>${escapeHTML(item.name)}</b>
-            <div style="color:#89958d;font-size:12px">
-              ${euro(item.price)} × ${item.qty}
-            </div>
-          </div>
-
-          <div class="qty">
-
-            <button
-              onclick="changeQty(${index},-1)"
-            >
-              −
-            </button>
-
-            <b>${item.qty}</b>
-
-            <button
-              onclick="changeQty(${index},1)"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      `).join("")
-      : `
-        <div style="color:#87938b">
-          Shto produkte nga menuja.
-        </div>
-      `;
-
-  const total =
-    orderTotal();
-
-  document.getElementById("orderTotal").textContent =
-    euro(total);
-
-}
-
-
-/* ---------------------------------------------------------
-   CHANGE QTY
---------------------------------------------------------- */
-
-function changeQty(index,delta){
-
-  const items =
-    tables[currentTable].items;
-
-  if(!items[index]) return;
-
-  items[index].qty += delta;
-
-  if(items[index].qty <= 0)
-    items.splice(index,1);
-
-  saveAll();
-
-  renderOrder();
-
-}
-
-
-/* ---------------------------------------------------------
-   ORDER TOTAL
---------------------------------------------------------- */
-
-function orderTotal(){
-
-  const items =
-    tables[currentTable]?.items || [];
-
-  return items.reduce(
-    (sum,item)=>
-      sum +
-      Number(item.price) *
-      Number(item.qty),
-    0
-  );
-
-}
-
-
-/* ---------------------------------------------------------
-   CLEAR ORDER
---------------------------------------------------------- */
-
-function clearOrder(){
-
-  if(!currentTable) return;
-
-  tables[currentTable].items = [];
-
-  saveAll();
-
-  renderOrder();
-
-}
-
-
-/* ---------------------------------------------------------
-   PAYMENT
---------------------------------------------------------- */
-
-function openPayment(){
-
-  if(orderTotal() <= 0){
-
-    alert("Porosia është bosh.");
-
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(id,btn){
+  if(id==="settings" && session.role!=="Administrator"){
+    alert("Settings është vetëm për Administratorin.");
     return;
   }
 
-  document
-    .getElementById("paymentModal")
-    .classList.add("show");
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+
+  if(id==="tables") renderTables();
+  if(id==="menu"){
+    renderProducts();
+    renderOrder();
+  }
+  if(id==="history") renderHistory();
+  if(id==="settings") loadSettings();
 }
 
+/* =========================
+   BRAND
+========================= */
 
-function completePayment(method){
+function updateBrand(){
+  document.getElementById("sideBarName").textContent=settings.barName;
+  document.getElementById("mobileBarName").textContent=settings.barName;
+  document.title=settings.barName;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+function renderTables(){
+  const html=tables.map(table=>{
+    const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
+    const open=table.items.length>0;
+
+    return `
+      <div class="tableCard ${open?"open":""}">
+        <div class="tableNumber">Tavolina ${table.id}</div>
+        <div class="tableStatus">${open?"● E hapur":"○ E lirë"}</div>
+        ${open?`<div class="tableTotal">${money(total)}</div>`:""}
+        <div class="btnRow">
+          <button class="btn green" onclick="openTable(${table.id})">
+            ${open?"HAP POROSINË":"HAP TAVOLINË"}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("tablesGrid").innerHTML=html;
+  document.getElementById("dashboardTables").innerHTML=html;
+}
+
+function openTable(id){
+  selectedTable=id;
+  document.getElementById("selectedTableText").textContent="Tavolina "+id;
+  document.getElementById("orderTitle").textContent="Porosia — Tavolina "+id;
+
+  showPage("menu");
+  renderProducts();
+  renderOrder();
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+function renderProducts(){
+  document.getElementById("productsGrid").innerHTML=products.map(p=>`
+    <button class="product" onclick="addToOrder(${p.id})">
+      <strong>${escapeHtml(p.name)}</strong>
+      <span>${money(p.price)}</span>
+    </button>
+  `).join("");
+}
+
+function addToOrder(productId){
+  if(!selectedTable){
+    alert("Zgjidh fillimisht një tavolinë.");
+    return;
+  }
+
+  const table=tables.find(t=>t.id===selectedTable);
+  const product=products.find(p=>p.id===productId);
+
+  if(!table || !product)return;
+
+  const existing=table.items.find(i=>i.productId===productId);
+
+  if(existing){
+    existing.qty++;
+  }else{
+    table.items.push({
+      productId:product.id,
+      name:product.name,
+      price:Number(product.price),
+      qty:1
+    });
+  }
+
+  saveTablesData();
+  renderOrder();
+  renderTables();
+  updateStats();
+}
+
+function renderOrder(){
+  const list=document.getElementById("orderList");
+
+  if(!selectedTable){
+    list.innerHTML='<div class="empty">Zgjidh një tavolinë.</div>';
+    document.getElementById("orderTotal").textContent=money(0);
+    return;
+  }
+
+  const table=tables.find(t=>t.id===selectedTable);
+
+  if(!table || !table.items.length){
+    list.innerHTML='<div class="empty">Nuk ka produkte në porosi.</div>';
+    document.getElementById("orderTotal").textContent=money(0);
+    return;
+  }
+
+  list.innerHTML=table.items.map((item,index)=>`
+    <div class="orderItem">
+      <div>
+        <strong>${escapeHtml(item.name)}</strong>
+        <br>
+        <small>${item.qty} × ${money(item.price)}</small>
+      </div>
+
+      <div style="text-align:right">
+        <strong>${money(item.price*item.qty)}</strong>
+        <br>
+        <button class="btn" onclick="removeOne(${index})">−</button>
+        <button class="btn" onclick="addOne(${index})">+</button>
+      </div>
+    </div>
+  `).join("");
+
+  const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("orderTotal").textContent=money(total);
+}
+
+function addOne(index){
+  const table=tables.find(t=>t.id===selectedTable);
+  if(table){
+    table.items[index].qty++;
+    saveTablesData();
+    renderOrder();
+    renderTables();
+  }
+}
+
+function removeOne(index){
+  const table=tables.find(t=>t.id===selectedTable);
+  if(!table)return;
+
+  table.items[index].qty--;
+
+  if(table.items[index].qty<=0){
+    table.items.splice(index,1);
+  }
+
+  saveTablesData();
+  renderOrder();
+  renderTables();
+}
+
+function clearOrder(){
+  if(!selectedTable)return;
+
+  if(confirm("Të fshihet e gjithë porosia?")){
+    const table=tables.find(t=>t.id===selectedTable);
+    table.items=[];
+    saveTablesData();
+    renderOrder();
+    renderTables();
+    updateStats();
+  }
+}
+
+/* =========================
+   PAYMENT
+========================= */
+
+function openPayment(){
+  if(!selectedTable){
+    alert("Zgjidh tavolinën.");
+    return;
+  }
+
+  const table=tables.find(t=>t.id===selectedTable);
+
+  if(!table || !table.items.length){
+    alert("Kjo tavolinë nuk ka porosi.");
+    return;
+  }
+
+  const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("paymentTotal").textContent=money(total);
+  document.getElementById("paymentModal").classList.remove("hidden");
+}
+
+function completePayment(){
+  const table=tables.find(t=>t.id===selectedTable);
+  if(!table)return;
+
+  const total=table.items.reduce((s,i)=>s+i.price*i.qty,0);
+  const method=document.getElementById("paymentMethod").value;
+
+  const invoice={
+    id:Date.now(),
+    invoiceNo:"INV-"+String(history.length+1).padStart(5,"0"),
+    date:new Date().toLocaleString("sq-AL"),
+    table:table.id,
+    items:JSON.parse(JSON.stringify(table.items)),
+    total,
+    method
+  };
+
+  history.unshift(invoice);
+  saveHistory();
+
+  currentReceipt=invoice;
+
+  table.items=[];
+  saveTablesData();
 
   closeModal("paymentModal");
 
-  const table =
-    tables[currentTable];
+  renderTables();
+  renderOrder();
+  renderHistory();
+  updateStats();
 
-  if(!table || !table.items.length)
-    return;
-
-  const total =
-    orderTotal();
-
-  const invoice = {
-
-    id:
-      "F-" +
-      String(Date.now()).slice(-8),
-
-    table:
-      currentTable,
-
-    waiter:
-      getSessionUser(),
-
-    payment:
-      method,
-
-    total:
-      Number(total.toFixed(2)),
-
-    items:
-      JSON.parse(
-        JSON.stringify(table.items)
-      ),
-
-    date:
-      new Date().toLocaleString("sq-AL"),
-
-    dateOnly:
-      new Date().toLocaleDateString("sq-AL")
-
-  };
-
-  invoices.push(invoice);
-
-  table.items = [];
-
-  saveAll();
-
-  currentInvoice = invoice;
-
-  renderReceipt(invoice);
-
-  showReceiptModal();
-
-  updateAll();
-
+  printReceipt(invoice);
 }
 
+/* =========================
+   RECEIPT / PRINT
+========================= */
 
-/* ---------------------------------------------------------
-   RECEIPT
---------------------------------------------------------- */
-
-function renderReceipt(invoice){
-
-  if(!invoice) return;
-
-  const items =
-    invoice.items || [];
-
-  const html = `
-
-    <div class="receipt">
-
-      <div class="receiptTitle">
-        MY BAR
-      </div>
-
-      <div class="receiptCenter">
-        SISTEMI I MENAXHIMIT
-      </div>
-
-      <div class="dash"></div>
-
-      <div style="font-size:12px;line-height:1.6">
-
-        Fatura:
-        <b>${escapeHTML(invoice.id)}</b><br>
-
-        Tavolina:
-        ${escapeHTML(invoice.table)}<br>
-
-        Kamarier:
-        ${escapeHTML(invoice.waiter)}<br>
-
-        Data:
-        ${escapeHTML(invoice.date)}
-
-      </div>
-
-      <div class="dash"></div>
-
-      ${
-        items.map(item => `
-
-          <div class="receiptRow">
-
-            <span>
-              ${escapeHTML(item.name)}
-              ×${item.qty}
-            </span>
-
-            <span>
-              ${euro(
-                Number(item.price) *
-                Number(item.qty)
-              )}
-            </span>
-
-          </div>
-
-        `).join("")
-      }
-
-      <div class="dash"></div>
-
-      <div class="receiptTotal">
-
-        <span>TOTAL</span>
-
-        <span>
-          ${euro(invoice.total)}
-        </span>
-
-      </div>
-
-      <div class="dash"></div>
-
-      <div class="receiptCenter" style="font-size:12px">
-
-        Pagesa: ${escapeHTML(invoice.payment)}
-
-        <br><br>
-
-        FALEMINDERIT!
-
-        <br>
-
-        MY BAR
-
-      </div>
-
+function buildReceipt(invoice){
+  return `
+    <div class="center">
+      <h2>${escapeHtml(settings.barName)}</h2>
+      ${settings.address?`<div>${escapeHtml(settings.address)}</div>`:""}
+      ${settings.phone?`<div>${escapeHtml(settings.phone)}</div>`:""}
+      <hr>
+      <div>FATURË ${invoice.invoiceNo}</div>
+      <div>${invoice.date}</div>
+      <div>Tavolina ${invoice.table}</div>
+      <hr>
     </div>
 
+    ${invoice.items.map(item=>`
+      <div class="receiptLine">
+        <span>${item.qty} × ${escapeHtml(item.name)}</span>
+        <span>${money(item.qty*item.price)}</span>
+      </div>
+    `).join("")}
+
+    <hr>
+
+    <div class="receiptLine receiptTotal">
+      <span>TOTAL</span>
+      <span>${money(invoice.total)}</span>
+    </div>
+
+    <div class="receiptLine">
+      <span>Pagesa</span>
+      <span>${escapeHtml(invoice.method)}</span>
+    </div>
+
+    <hr>
+
+    <div class="center">
+      Faleminderit!
+    </div>
   `;
-
-  document.getElementById("modalReceipt").innerHTML =
-    html;
-
-  document.getElementById("printArea").innerHTML =
-    html;
-
 }
 
+function printReceipt(invoice){
+  const receipt=document.getElementById("receiptPrint");
+  receipt.innerHTML=buildReceipt(invoice);
+  receipt.classList.remove("hidden");
 
-/* ---------------------------------------------------------
-   RECEIPT MODAL
---------------------------------------------------------- */
-
-function showReceiptModal(){
-
-  document
-    .getElementById("receiptModal")
-    .classList.add("show");
-
-}
-
-
-function closeModal(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("show");
-
-}
-
-
-/* ---------------------------------------------------------
-   PRINT CURRENT
---------------------------------------------------------- */
-
-function printCurrent(){
-
-  let invoice =
-    currentInvoice ||
-    invoices[invoices.length-1];
-
-  if(!invoice){
-
-    alert("Nuk ka faturë për printim.");
-
-    return;
-
-  }
-
-  currentInvoice = invoice;
-
-  renderReceipt(invoice);
-
-  showReceiptModal();
-
-}
-
-
-/* ---------------------------------------------------------
-   REAL PRINT
---------------------------------------------------------- */
-
-function realPrint(){
-
-  closeModal("receiptModal");
-
-  setTimeout(() => {
-
+  setTimeout(()=>{
     window.print();
-
+    setTimeout(()=>{
+      receipt.classList.add("hidden");
+    },1000);
   },150);
-
 }
-
-
-/* ---------------------------------------------------------
-   TEST PRINT
---------------------------------------------------------- */
 
 function testPrint(){
-
-  const testInvoice = {
-
-    id:"TEST-001",
-
-    table:"1",
-
-    waiter:"TEST",
-
-    payment:"CASH",
-
-    total:5.00,
-
+  const test={
+    invoiceNo:"TEST",
+    date:new Date().toLocaleString("sq-AL"),
+    table:"TEST",
     items:[
-
-      {
-        name:"TEST PRODUCT",
-        price:5,
-        qty:1
-      }
-
+      {name:"Test Produkt",qty:1,price:2}
     ],
-
-    date:
-      new Date().toLocaleString("sq-AL")
-
+    total:2,
+    method:"Cash"
   };
 
-  renderReceipt(testInvoice);
-
-  currentInvoice = testInvoice;
-
-  showReceiptModal();
-
+  currentReceipt=test;
+  printReceipt(test);
 }
 
+document.addEventListener("keydown",e=>{
+  if(e.key==="F6"){
+    e.preventDefault();
 
-/* ---------------------------------------------------------
-   PRINTER
---------------------------------------------------------- */
-
-function savePrinter(){
-
-  const name =
-    document.getElementById("printerName").value.trim();
-
-  const size =
-    document.getElementById("paperSize").value;
-
-  localStorage.setItem(
-    "MY_BAR_PRINTER_NAME",
-    name
-  );
-
-  localStorage.setItem(
-    "MY_BAR_PAPER",
-    size
-  );
-
-  document.getElementById("printerStatus").textContent =
-    name
-      ? "Printeri u ruajt: " + name
-      : "Printeri përdor printimin e Windows.";
-
-  document.getElementById("printerDot")
-    .classList.add("ok");
-
-}
-
-
-/* ---------------------------------------------------------
-   RENDER PRINTER
---------------------------------------------------------- */
-
-function renderPrinter(){
-
-  const name =
-    localStorage.getItem(
-      "MY_BAR_PRINTER_NAME"
-    ) || "";
-
-  const size =
-    localStorage.getItem(
-      "MY_BAR_PAPER"
-    ) || "80mm";
-
-  document.getElementById("printerName").value =
-    name;
-
-  document.getElementById("paperSize").value =
-    size;
-
-  if(name){
-
-    document.getElementById("printerStatus")
-      .textContent =
-        "Printeri: " + name;
-
-    document.getElementById("printerDot")
-      .classList.add("ok");
-
+    if(currentReceipt){
+      printReceipt(currentReceipt);
+    }else{
+      alert("Nuk ka faturë për printim.");
+    }
   }
+});
 
-}
-
-
-/* ---------------------------------------------------------
+/* =========================
    HISTORY
---------------------------------------------------------- */
+========================= */
 
 function renderHistory(){
+  const list=document.getElementById("historyList");
 
-  const body =
-    document.getElementById("historyBody");
+  if(!history.length){
+    list.innerHTML='<div class="empty">Nuk ka fatura.</div>';
+    return;
+  }
 
-  const rows =
-    invoices.slice().reverse();
+  list.innerHTML=history.map(invoice=>`
+    <div class="historyRow">
+      <div>
+        <strong>${invoice.invoiceNo}</strong>
+        <br>
+        <small>${invoice.date}</small>
+      </div>
 
-  body.innerHTML =
-    rows.length
-      ? rows.map(invoice => `
+      <div>
+        Tavolina ${invoice.table}
+      </div>
 
-        <tr>
+      <div>
+        <strong>${money(invoice.total)}</strong>
+        <br>
+        <small>${invoice.method}</small>
+      </div>
 
-          <td>
-            <b>${escapeHTML(invoice.id)}</b>
-          </td>
-
-          <td>
-            ${escapeHTML(invoice.table)}
-          </td>
-
-          <td>
-            ${escapeHTML(invoice.date)}
-          </td>
-
-          <td>
-            ${escapeHTML(invoice.payment)}
-          </td>
-
-          <td>
-            <b>${euro(invoice.total)}</b>
-          </td>
-
-          <td>
-
-            <button
-              class="miniBtn"
-              onclick="reprint('${invoice.id}')"
-            >
-              RIPRINT
-            </button>
-
-          </td>
-
-        </tr>
-
-      `).join("")
-      : `
-        <tr>
-          <td colspan="6" style="color:#89958d">
-            Nuk ka fatura.
-          </td>
-        </tr>
-      `;
-
+      <button class="btn green" onclick="reprint(${invoice.id})">
+        PRINT
+      </button>
+    </div>
+  `).join("");
 }
-
-
-/* ---------------------------------------------------------
-   REPRINT
---------------------------------------------------------- */
 
 function reprint(id){
-
-  const invoice =
-    invoices.find(x => x.id === id);
-
-  if(!invoice) return;
-
-  currentInvoice = invoice;
-
-  renderReceipt(invoice);
-
-  showReceiptModal();
-
+  const invoice=history.find(x=>x.id===id);
+  if(invoice){
+    currentReceipt=invoice;
+    printReceipt(invoice);
+  }
 }
 
+/* =========================
+   STATS
+========================= */
 
-/* ---------------------------------------------------------
+function updateStats(){
+  const open=tables.filter(t=>t.items.length).length;
+
+  const today=new Date().toLocaleDateString("sq-AL");
+
+  const todaySales=history
+    .filter(i=>i.date.startsWith(today))
+    .reduce((s,i)=>s+i.total,0);
+
+  document.getElementById("statOpen").textContent=open;
+  document.getElementById("statSales").textContent=money(todaySales);
+  document.getElementById("statInvoices").textContent=history.length;
+  document.getElementById("statProducts").textContent=products.length;
+}
+
+/* =========================
+   ADMIN SETTINGS
+========================= */
+
+function loadSettings(){
+  if(session.role!=="Administrator")return;
+
+  document.getElementById("setBarName").value=settings.barName;
+  document.getElementById("setAddress").value=settings.address;
+  document.getElementById("setPhone").value=settings.phone;
+
+  document.getElementById("setTables").value=settings.tableCount;
+
+  document.getElementById("setPrinter").value=settings.printer;
+  document.getElementById("setPaper").value=settings.paper;
+
+  document.getElementById("setAdminUser").value=settings.adminUser;
+  document.getElementById("setAdminPass").value=settings.adminPass;
+
+  document.getElementById("setWaiterUser").value=settings.waiterUser;
+  document.getElementById("setWaiterPass").value=settings.waiterPass;
+}
+
+function saveGeneral(){
+  settings.barName=document.getElementById("setBarName").value.trim() || "MY BAR";
+  settings.address=document.getElementById("setAddress").value.trim();
+  settings.phone=document.getElementById("setPhone").value.trim();
+
+  saveSettings();
+  updateBrand();
+
+  alert("Cilësimet u ruajtën.");
+}
+
+function saveTables(){
+  const count=Math.max(
+    1,
+    Math.min(
+      100,
+      Number(document.getElementById("setTables").value)||12
+    )
+  );
+
+  settings.tableCount=count;
+
+  const oldTables=tables;
+
+  tables=[];
+
+  for(let i=1;i<=count;i++){
+    const old=oldTables.find(t=>t.id===i);
+
+    tables.push(
+      old || {
+        id:i,
+        items:[]
+      }
+    );
+  }
+
+  saveSettings();
+  saveTablesData();
+
+  renderTables();
+  updateStats();
+
+  alert("Tavolinat u përditësuan.");
+}
+
+function savePrinter(){
+  settings.printer=document.getElementById("setPrinter").value.trim();
+  settings.paper=document.getElementById("setPaper").value;
+
+  saveSettings();
+
+  alert("Printeri u ruajt.");
+}
+
+function saveAdmin(){
+  const user=document.getElementById("setAdminUser").value.trim();
+  const pass=document.getElementById("setAdminPass").value;
+
+  if(!user || !pass){
+    alert("Plotëso username dhe password.");
+    return;
+  }
+
+  settings.adminUser=user;
+  settings.adminPass=pass;
+
+  saveSettings();
+
+  alert("Kredencialet e Administratorit u ndryshuan.");
+}
+
+function saveWaiter(){
+  const user=document.getElementById("setWaiterUser").value.trim();
+  const pass=document.getElementById("setWaiterPass").value;
+
+  if(!user || !pass){
+    alert("Plotëso username dhe password.");
+    return;
+  }
+
+  settings.waiterUser=user;
+  settings.waiterPass=pass;
+
+  saveSettings();
+
+  alert("Kredencialet e Kamarierit u ndryshuan.");
+}
+
+/* =========================
+   PRODUCT MANAGER
+========================= */
+
+function openProductManager(){
+  if(session.role!=="Administrator"){
+    alert("Vetëm Administratori.");
+    return;
+  }
+
+  renderAdminProducts();
+  document.getElementById("productModal").classList.remove("hidden");
+}
+
+function renderAdminProducts(){
+  document.getElementById("adminProductList").innerHTML=products.map(p=>`
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:12px 0;
+      border-bottom:1px solid var(--line);
+    ">
+      <div style="flex:1">
+        <strong>${escapeHtml(p.name)}</strong>
+        <br>
+        <small style="color:var(--green)">${money(p.price)}</small>
+      </div>
+
+      <button class="btn" onclick="editProduct(${p.id})">EDIT</button>
+      <button class="btn red" onclick="deleteProduct(${p.id})">Fshi</button>
+    </div>
+  `).join("");
+}
+
+function addProduct(){
+  const name=document.getElementById("newProductName").value.trim();
+  const price=Number(document.getElementById("newProductPrice").value);
+
+  if(!name || !price || price<=0){
+    alert("Vendos emrin dhe çmimin.");
+    return;
+  }
+
+  products.push({
+    id:Date.now(),
+    name,
+    price
+  });
+
+  saveProducts();
+
+  document.getElementById("newProductName").value="";
+  document.getElementById("newProductPrice").value="";
+
+  renderAdminProducts();
+  renderProducts();
+  updateStats();
+}
+
+function editProduct(id){
+  const product=products.find(p=>p.id===id);
+  if(!product)return;
+
+  const name=prompt("Emri i produktit:",product.name);
+  if(name===null)return;
+
+  const price=prompt("Çmimi €:",product.price);
+  if(price===null)return;
+
+  const num=Number(price);
+
+  if(!name.trim() || !num || num<=0){
+    alert("Të dhënat nuk janë të sakta.");
+    return;
+  }
+
+  product.name=name.trim();
+  product.price=num;
+
+  saveProducts();
+  renderAdminProducts();
+  renderProducts();
+  updateStats();
+}
+
+function deleteProduct(id){
+  const product=products.find(p=>p.id===id);
+  if(!product)return;
+
+  if(confirm("Të fshihet "+product.name+"?")){
+    products=products.filter(p=>p.id!==id);
+    saveProducts();
+    renderAdminProducts();
+    renderProducts();
+    updateStats();
+  }
+}
+
+/* =========================
    CONTACT
---------------------------------------------------------- */
+========================= */
 
 function showContact(){
-
-  document
-    .getElementById("contactModal")
-    .classList.add("show");
-
+  document.getElementById("contactModal").classList.remove("hidden");
 }
 
+/* =========================
+   MODALS
+========================= */
 
-function buyApp(){
+function closeModal(id){
+  document.getElementById(id).classList.add("hidden");
+}
 
-  alert(
-    "MY BAR kushton 49€.\n\n" +
-    "Faleminderit!"
+/* =========================
+   RESET
+========================= */
+
+function resetSystem(){
+  if(session.role!=="Administrator")return;
+
+  const ok=confirm(
+    "KUJDES!\n\nKjo do të fshijë të dhënat lokale të MY BAR.\n\nVazhdo?"
   );
 
+  if(!ok)return;
+
+  localStorage.removeItem("MY_BAR_PRODUCTS");
+  localStorage.removeItem("MY_BAR_SETTINGS");
+  localStorage.removeItem("MY_BAR_TABLES");
+  localStorage.removeItem("MY_BAR_HISTORY");
+  localStorage.removeItem("MY_BAR_SESSION");
+
+  location.reload();
 }
 
+/* =========================
+   HELPERS
+========================= */
 
-/* ---------------------------------------------------------
-   UPDATE
---------------------------------------------------------- */
-
-function updateAll(){
-
-  saveAll();
-
-  renderDashboard();
-
-  renderTables("tablesPage");
-
-  if(!document.getElementById("page-menu").classList.contains("hidden"))
-    renderMenu();
-
-  renderHistory();
-
+function money(value){
+  return Number(value||0).toFixed(2)+" €";
 }
 
-
-/* ---------------------------------------------------------
-   SESSION
---------------------------------------------------------- */
-
-function getSessionUser(){
-
-  const session =
-    JSON.parse(
-      localStorage.getItem("MY_BAR_SESSION")
-    );
-
-  return session?.user || "Kamarier";
-
+function escapeHtml(value){
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
-
-/* ---------------------------------------------------------
-   EURO
---------------------------------------------------------- */
-
-function euro(value){
-
-  return "€" +
-    Number(value || 0)
-      .toFixed(2);
-
-}
-
-
-/* ---------------------------------------------------------
-   ESCAPE
---------------------------------------------------------- */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* ---------------------------------------------------------
-   CLOCK
---------------------------------------------------------- */
-
-function updateClock(){
-
-  document.getElementById("clock")
-    .textContent =
-      new Date().toLocaleString(
-        "sq-AL",
-        {
-          dateStyle:"short",
-          timeStyle:"medium"
-        }
-      );
-
-}
-
-
-/* ---------------------------------------------------------
-   F6
---------------------------------------------------------- */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key === "F6"){
-
-      event.preventDefault();
-
-      printCurrent();
-
-    }
-
-  }
-);
-
-
-/* ---------------------------------------------------------
-   LOGIN ENTER
---------------------------------------------------------- */
-
-document
-  .getElementById("loginPass")
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(event.key === "Enter")
-        login();
-
-    }
-  );
-
-
-/* ---------------------------------------------------------
-   START
---------------------------------------------------------- */
-
-setInterval(
-  updateClock,
-  1000
-);
-
-updateClock();
-
-if(
-  localStorage.getItem("MY_BAR_SESSION")
-){
-
-  startApp();
-
-}
-
+/* START */
+init();
 </script>
 
 </body>
