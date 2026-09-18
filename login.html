@@ -1,499 +1,624 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
-
-    <title>MY BAR — Hyrje</title>
-
-    <style>
-        :root {
-            --bg: #050806;
-            --panel: #0c130f;
-            --panel2: #101913;
-            --green: #20e879;
-            --green-soft: rgba(32, 232, 121, .10);
-            --green-border: rgba(32, 232, 121, .28);
-            --text: #f4f7f5;
-            --muted: #87938c;
-            --danger: #ff5368;
-            --border: rgba(255,255,255,.08);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 20px;
-
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                sans-serif;
-
-            color: var(--text);
-
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(32,232,121,.09),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 100% 100%,
-                    rgba(32,232,121,.04),
-                    transparent 30%
-                ),
-                #050806;
-        }
-
-        .login-box {
-            width: min(420px, 100%);
-
-            padding: 34px 30px 30px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(16,25,19,.98),
-                    rgba(8,14,10,.98)
-                );
-
-            border: 1px solid var(--border);
-
-            border-radius: 22px;
-
-            box-shadow:
-                0 30px 80px rgba(0,0,0,.48);
-        }
-
-        .logo {
-            width: 58px;
-            height: 58px;
-
-            display: grid;
-            place-items: center;
-
-            margin: 0 auto 18px;
-
-            border-radius: 16px;
-
-            color: var(--green);
-
-            font-size: 22px;
-            font-weight: 950;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #12251a,
-                    #09120d
-                );
-
-            border: 1px solid var(--green-border);
-
-            box-shadow:
-                inset 0 0 25px rgba(32,232,121,.04);
-        }
-
-        .brand {
-            text-align: center;
-        }
-
-        .brand h1 {
-            color: var(--text);
-
-            font-size: 26px;
-            font-weight: 950;
-
-            letter-spacing: 1px;
-        }
-
-        .brand h1 span {
-            color: var(--green);
-        }
-
-        .brand p {
-            margin-top: 5px;
-
-            color: var(--muted);
-
-            font-size: 12px;
-        }
-
-        .divider {
-            width: 45px;
-            height: 2px;
-
-            margin: 22px auto;
-
-            border-radius: 10px;
-
-            background: var(--green);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-
-            margin-bottom: 7px;
-
-            color: #b9c4bd;
-
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        input {
-            width: 100%;
-            height: 48px;
-
-            padding: 0 14px;
-
-            outline: none;
-
-            color: var(--text);
-
-            background: #080e0a;
-
-            border: 1px solid var(--border);
-
-            border-radius: 11px;
-
-            font-size: 14px;
-
-            transition:
-                border-color .18s ease,
-                box-shadow .18s ease,
-                background .18s ease;
-        }
-
-        input::placeholder {
-            color: #5f6a63;
-        }
-
-        input:focus {
-            background: #09110c;
-
-            border-color: var(--green-border);
-
-            box-shadow:
-                0 0 0 3px rgba(32,232,121,.05);
-        }
-
-        .login-button {
-            width: 100%;
-            height: 49px;
-
-            margin-top: 6px;
-
-            border: 0;
-            border-radius: 11px;
-
-            cursor: pointer;
-
-            color: #041009;
-
-            background: var(--green);
-
-            font-size: 14px;
-            font-weight: 950;
-
-            transition:
-                transform .18s ease,
-                background .18s ease,
-                box-shadow .18s ease;
-        }
-
-        .login-button:hover {
-            background: #3af18a;
-
-            box-shadow:
-                0 10px 28px rgba(32,232,121,.12);
-        }
-
-        .login-button:active {
-            transform: scale(.98);
-        }
-
-        .error {
-            min-height: 18px;
-
-            margin-top: 12px;
-
-            color: var(--danger);
-
-            text-align: center;
-
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .footer {
-            margin-top: 23px;
-
-            color: #59645d;
-
-            text-align: center;
-
-            font-size: 10px;
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 14px;
-            }
-
-            .login-box {
-                padding: 28px 20px 24px;
-
-                border-radius: 18px;
-            }
-
-            .logo {
-                width: 54px;
-                height: 54px;
-            }
-
-            .brand h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY BAR — Login</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#020403;
+  color:#fff;
+}
+
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+/* BACKGROUND */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(0,255,120,.08),transparent 35%),
+    radial-gradient(circle at 20% 80%,rgba(0,255,120,.035),transparent 30%),
+    #020403;
+  z-index:-5;
+}
+
+/* MOVING LED SIDES */
+.led{
+  position:fixed;
+  top:0;
+  bottom:0;
+  width:3px;
+  overflow:hidden;
+  background:rgba(0,255,110,.08);
+  box-shadow:0 0 12px rgba(0,255,110,.18);
+  z-index:-1;
+}
+
+.led.left{
+  left:18px;
+}
+
+.led.right{
+  right:18px;
+}
+
+.led::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:170px;
+  background:linear-gradient(
+    to bottom,
+    transparent,
+    #00ff73,
+    #8affbd,
+    #00ff73,
+    transparent
+  );
+  filter:drop-shadow(0 0 9px #00ff73);
+  animation:ledMove 3.5s linear infinite;
+}
+
+.led.right::after{
+  animation-delay:1.7s;
+}
+
+@keyframes ledMove{
+  0%{
+    top:-180px;
+  }
+  100%{
+    top:100%;
+  }
+}
+
+/* SIDE LIGHT STREAKS */
+.streak{
+  position:fixed;
+  width:90px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#00ff73,transparent);
+  opacity:.35;
+  filter:blur(.2px);
+  animation:streakMove 5s linear infinite;
+}
+
+.streak.s1{left:0;top:18%;animation-delay:0s;}
+.streak.s2{right:0;top:42%;animation-delay:1.4s;}
+.streak.s3{left:0;top:70%;animation-delay:2.8s;}
+.streak.s4{right:0;top:83%;animation-delay:3.8s;}
+
+@keyframes streakMove{
+  0%{
+    transform:translateX(-100%);
+    opacity:0;
+  }
+  15%{opacity:.5;}
+  50%{opacity:.8;}
+  85%{opacity:.3;}
+  100%{
+    transform:translateX(100%);
+    opacity:0;
+  }
+}
+
+/* CORNER ACCENTS */
+.corner{
+  position:fixed;
+  width:65px;
+  height:65px;
+  opacity:.5;
+}
+
+.corner::before,
+.corner::after{
+  content:"";
+  position:absolute;
+  background:#00ff73;
+  box-shadow:0 0 8px rgba(0,255,115,.7);
+}
+
+.corner::before{
+  width:45px;
+  height:1px;
+}
+
+.corner::after{
+  width:1px;
+  height:45px;
+}
+
+.tl{
+  top:22px;
+  left:28px;
+}
+.tl::after{left:0;top:0;}
+.tl::before{left:0;top:0;}
+
+.tr{
+  top:22px;
+  right:28px;
+  transform:rotate(90deg);
+}
+
+.bl{
+  bottom:22px;
+  left:28px;
+  transform:rotate(-90deg);
+}
+
+.br{
+  bottom:22px;
+  right:28px;
+  transform:rotate(180deg);
+}
+
+/* LOGIN CARD */
+.login-box{
+  width:min(410px,90vw);
+  padding:42px 34px 30px;
+  border:1px solid rgba(0,255,115,.17);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,18,14,.96),
+      rgba(2,5,3,.97)
+    );
+  border-radius:18px;
+  box-shadow:
+    0 0 50px rgba(0,255,115,.06),
+    inset 0 0 35px rgba(0,255,115,.025);
+  position:relative;
+  overflow:hidden;
+}
+
+/* TOP LED LINE */
+.login-box::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #00ff73,
+    #b8ffd5,
+    transparent
+  );
+  box-shadow:0 0 12px #00ff73;
+  animation:topLed 3s linear infinite;
+}
+
+@keyframes topLed{
+  0%{left:-40%;}
+  100%{left:110%;}
+}
+
+/* LOGO */
+.logo{
+  width:76px;
+  height:76px;
+  margin:0 auto 18px;
+  border:1px solid rgba(0,255,115,.45);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:31px;
+  font-weight:900;
+  color:#00ff73;
+  text-shadow:0 0 15px rgba(0,255,115,.6);
+  box-shadow:
+    0 0 25px rgba(0,255,115,.08),
+    inset 0 0 18px rgba(0,255,115,.04);
+  position:relative;
+}
+
+.logo::before{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border:1px solid rgba(0,255,115,.08);
+  border-radius:50%;
+  animation:logoPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+  0%,100%{
+    transform:scale(1);
+    opacity:.35;
+  }
+  50%{
+    transform:scale(1.08);
+    opacity:.8;
+  }
+}
+
+.badge{
+  width:max-content;
+  margin:0 auto 13px;
+  padding:6px 11px;
+  border:1px solid rgba(0,255,115,.18);
+  border-radius:20px;
+  font-size:9px;
+  letter-spacing:2.5px;
+  color:#72ffad;
+  background:rgba(0,255,115,.025);
+}
+
+h1{
+  text-align:center;
+  font-size:28px;
+  letter-spacing:5px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#718078;
+  font-size:10px;
+  letter-spacing:2.4px;
+  margin-bottom:32px;
+}
+
+/* INPUTS */
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  color:#6f7c75;
+  font-size:9px;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+}
+
+.input{
+  width:100%;
+  height:48px;
+  border:1px solid #1a2921;
+  background:#060a08;
+  color:white;
+  border-radius:9px;
+  padding:0 14px;
+  outline:none;
+  font-size:14px;
+  transition:.2s;
+}
+
+.input:focus{
+  border-color:#00b957;
+  box-shadow:0 0 0 3px rgba(0,255,115,.055);
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+  width:100%;
+  height:49px;
+  margin-top:9px;
+  border:1px solid #00e866;
+  border-radius:9px;
+  background:linear-gradient(
+    135deg,
+    #00d95f,
+    #00a94a
+  );
+  color:#001b0b;
+  font-weight:900;
+  letter-spacing:1.5px;
+  cursor:pointer;
+  transition:.2s;
+  box-shadow:0 0 18px rgba(0,255,115,.13);
+}
+
+.login-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 0 25px rgba(0,255,115,.28);
+}
+
+.login-btn:active{
+  transform:scale(.98);
+}
+
+.error{
+  min-height:17px;
+  text-align:center;
+  color:#ff5f5f;
+  font-size:11px;
+  margin-top:12px;
+}
+
+/* CONTACT */
+.contact{
+  margin-top:25px;
+  border-top:1px solid #142019;
+  padding-top:18px;
+}
+
+.contact-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  color:#78857e;
+  font-size:9px;
+  letter-spacing:2px;
+  user-select:none;
+}
+
+.arrow{
+  color:#00ff73;
+  font-size:18px;
+  line-height:10px;
+}
+
+.contact-content{
+  display:none;
+  margin-top:14px;
+  gap:8px;
+}
+
+.contact-content.open{
+  display:grid;
+}
+
+.contact-btn{
+  height:40px;
+  border:1px solid #1a2921;
+  background:#070b09;
+  color:#b5c0ba;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:9px;
+  letter-spacing:1px;
+  transition:.2s;
+}
+
+.contact-btn:hover{
+  border-color:#00b957;
+  color:#00ff73;
+}
+
+.buy{
+  border-color:rgba(0,255,115,.22);
+  color:#00ff73;
+}
+
+/* FOOTER */
+.footer{
+  position:fixed;
+  bottom:18px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#3d4943;
+  font-size:8px;
+  letter-spacing:2px;
+}
+
+@media(max-width:500px){
+  .login-box{
+    padding:35px 24px 25px;
+  }
+
+  .led.left{
+    left:8px;
+  }
+
+  .led.right{
+    right:8px;
+  }
+
+  .corner{
+    display:none;
+  }
+
+  h1{
+    font-size:24px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <main class="login-box">
+<div class="bg"></div>
 
-        <div class="logo">S</div>
+<div class="led left"></div>
+<div class="led right"></div>
 
-        <div class="brand">
-            <h1>MY <span>BAR</span></h1>
-            <p>SISTEMI I MENAXHIMIT</p>
-        </div>
+<div class="streak s1"></div>
+<div class="streak s2"></div>
+<div class="streak s3"></div>
+<div class="streak s4"></div>
 
-        <div class="divider"></div>
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
 
-        <form id="loginForm">
+<div class="login-box">
 
-            <div class="form-group">
-                <label for="username">Përdoruesi</label>
+  <div class="logo">M</div>
 
-                <input
-                    id="username"
-                    type="text"
-                    placeholder="Shkruaj përdoruesin"
-                    autocomplete="username"
-                    required
-                >
-            </div>
+  <div class="badge">SISTEM PREMIUM</div>
 
-            <div class="form-group">
-                <label for="password">Fjalëkalimi</label>
+  <h1>MY BAR</h1>
 
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Shkruaj fjalëkalimin"
-                    autocomplete="current-password"
-                    required
-                >
-            </div>
+  <div class="subtitle">
+    SISTEMI I MENAXHIMIT
+  </div>
 
-            <button
-                type="submit"
-                class="login-button"
-            >
-                HYR NË SISTEM →
-            </button>
+  <div class="field">
+    <label>Përdoruesi</label>
+    <input
+      id="username"
+      class="input"
+      type="text"
+      autocomplete="username"
+      placeholder="Shkruaj përdoruesin"
+    >
+  </div>
 
-            <div
-                id="error"
-                class="error"
-            ></div>
+  <div class="field">
+    <label>Fjalëkalimi</label>
+    <input
+      id="password"
+      class="input"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Shkruaj fjalëkalimin"
+    >
+  </div>
 
-        </form>
+  <button class="login-btn" onclick="login()">
+    HYR NË SISTEM
+  </button>
 
-        <div class="footer">
-            MY BAR • SYSTEM PREMIUM
-        </div>
+  <div id="error" class="error"></div>
 
-    </main>
+  <div class="contact">
 
+    <div class="contact-head" onclick="toggleContact()">
+      <span>CONTACT</span>
+      <span id="arrow" class="arrow">+</span>
+    </div>
 
-    <script>
-        const USERS_KEY = "barUsersV4";
-        const CURRENT_USER_KEY = "barCurrentUserV4";
-        const APP_NAME_KEY = "barAppNameV4";
+    <div id="contactContent" class="contact-content">
 
-        const defaultUsers = [
-            {
-                id: "admin",
-                username: "admin",
-                password: "1234",
-                role: "admin",
-                name: "Administrator"
-            },
-            {
-                id: "kamarier1",
-                username: "kamarier1",
-                password: "1234",
-                role: "waiter",
-                name: "Kamarier 1"
-            }
-        ];
+      <button class="contact-btn buy" onclick="buyApp()">
+        BLI APLIKACIONIN • 49€
+      </button>
 
-        function getUsers() {
-            try {
-                const saved = localStorage.getItem(USERS_KEY);
+      <button class="contact-btn" onclick="reportProblem()">
+        RAPORTO NJË PROBLEM
+      </button>
 
-                if (!saved) {
-                    localStorage.setItem(
-                        USERS_KEY,
-                        JSON.stringify(defaultUsers)
-                    );
+    </div>
 
-                    return defaultUsers;
-                }
+  </div>
 
-                const users = JSON.parse(saved);
+</div>
 
-                if (!Array.isArray(users) || users.length === 0) {
-                    localStorage.setItem(
-                        USERS_KEY,
-                        JSON.stringify(defaultUsers)
-                    );
+<div class="footer">
+  MY BAR • PREMIUM MANAGEMENT SYSTEM
+</div>
 
-                    return defaultUsers;
-                }
+<script>
 
-                return users;
+function login(){
 
-            } catch (error) {
-                return defaultUsers;
-            }
-        }
+  const user =
+    document.getElementById("username").value.trim();
 
+  const pass =
+    document.getElementById("password").value;
 
-        // Nëse përdoruesi është tashmë i loguar
-        const currentUser =
-            localStorage.getItem(CURRENT_USER_KEY);
+  const error =
+    document.getElementById("error");
 
-        if (currentUser) {
-            window.location.replace("index.html");
-        }
+  if(
+    (user === "admin" && pass === "1234") ||
+    (user === "kamarier" && pass === "1234")
+  ){
 
+    localStorage.setItem(
+      "MY_BAR_SESSION",
+      JSON.stringify({
+        user:user,
+        role:user === "admin"
+          ? "Administrator"
+          : "Kamarier"
+      })
+    );
 
-        // Emri i aplikacionit
-        try {
-            const savedAppName =
-                localStorage.getItem(APP_NAME_KEY);
+    window.location.href = "./index.html";
 
-            if (savedAppName) {
-                document.title =
-                    savedAppName + " — Hyrje";
-            }
-        } catch (error) {
-            // Mos blloko login-in
-        }
+  }else{
 
+    error.textContent =
+      "Përdoruesi ose fjalëkalimi është gabim.";
 
-        const form =
-            document.getElementById("loginForm");
+  }
+}
 
-        const usernameInput =
-            document.getElementById("username");
+function toggleContact(){
 
-        const passwordInput =
-            document.getElementById("password");
+  const box =
+    document.getElementById("contactContent");
 
-        const errorBox =
-            document.getElementById("error");
+  const arrow =
+    document.getElementById("arrow");
 
+  box.classList.toggle("open");
 
-        form.addEventListener("submit", function(event) {
+  arrow.textContent =
+    box.classList.contains("open")
+      ? "−"
+      : "+";
+}
 
-            event.preventDefault();
+function buyApp(){
 
-            errorBox.textContent = "";
+  alert(
+    "MY BAR\n\n" +
+    "Çmimi i aplikacionit: 49€\n\n" +
+    "Kontaktoni administratorin për blerjen."
+  );
 
-            const username =
-                usernameInput.value.trim();
+}
 
-            const password =
-                passwordInput.value;
+function reportProblem(){
 
-            if (!username || !password) {
-                errorBox.textContent =
-                    "Plotëso përdoruesin dhe fjalëkalimin.";
+  const problem =
+    prompt(
+      "Shkruaj problemin që dëshiron të raportosh:"
+    );
 
-                return;
-            }
+  if(problem && problem.trim()){
 
-            const users = getUsers();
+    alert(
+      "Raporti u regjistrua.\n\n" +
+      "Problemi:\n" +
+      problem
+    );
 
-            const user = users.find(function(item) {
+  }
+}
 
-                return (
-                    String(item.username).toLowerCase() ===
-                    username.toLowerCase()
-                    &&
-                    String(item.password) === password
-                );
+/* ENTER = LOGIN */
+document.addEventListener("keydown",function(e){
 
-            });
+  if(e.key === "Enter"){
+    login();
+  }
 
+});
 
-            if (!user) {
-
-                errorBox.textContent =
-                    "Përdoruesi ose fjalëkalimi është gabim.";
-
-                passwordInput.value = "";
-                passwordInput.focus();
-
-                return;
-            }
-
-
-            const sessionUser = {
-                id: user.id,
-                username: user.username,
-                role: user.role,
-                name: user.name
-            };
-
-
-            localStorage.setItem(
-                CURRENT_USER_KEY,
-                JSON.stringify(sessionUser)
-            );
-
-
-            window.location.replace("index.html");
-        });
-
-
-        usernameInput.focus();
-    </script>
+</script>
 
 </body>
 </html>
