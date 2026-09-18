@@ -1,0 +1,33 @@
+{
+  "name": "my-bar",
+  "version": "1.0.0",
+  "description": "MY BAR - Bar Management System",
+  "main": "electron/main.js",
+  "author": "MY BAR",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "make": "electron-forge make"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.3",
+    "@electron-forge/maker-squirrel": "^7.8.3",
+    "electron": "^38.1.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "name": "MY BAR",
+        "executableName": "MY BAR"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "my_bar"
+          }
+        }
+      ]
+    }
+  }
+}
