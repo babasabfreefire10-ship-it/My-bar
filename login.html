@@ -150,6 +150,7 @@ body{
   top:22px;
   left:28px;
 }
+
 .tl::after{left:0;top:0;}
 .tl::before{left:0;top:0;}
 
@@ -529,10 +530,16 @@ h1{
 
 <script>
 
+"use strict";
+
+/* =========================
+   LOGIN
+========================= */
+
 function login(){
 
   const user =
-    document.getElementById("username").value.trim();
+    document.getElementById("username").value.trim().toLowerCase();
 
   const pass =
     document.getElementById("password").value;
@@ -540,30 +547,73 @@ function login(){
   const error =
     document.getElementById("error");
 
-  if(
-    (user === "admin" && pass === "1234") ||
-    (user === "kamarier" && pass === "1234")
-  ){
+  /* Clear previous error */
+  error.textContent = "";
 
-    localStorage.setItem(
-      "MY_BAR_SESSION",
-      JSON.stringify({
-        user:user,
-        role:user === "admin"
-          ? "Administrator"
-          : "Kamarier"
-      })
-    );
+  /*
+   * IMPORTANT:
+   * index.html checks:
+   *
+   * user.role === "admin"
+   *
+   * therefore the role MUST be:
+   * "admin" or "waiter"
+   */
 
-    window.location.href = "./index.html";
+  let session = null;
+
+  if(user === "admin" && pass === "1234"){
+
+    session = {
+      username: "admin",
+      user: "admin",
+      role: "admin",
+      name: "Administrator"
+    };
+
+  }else if(user === "kamarier" && pass === "1234"){
+
+    session = {
+      username: "kamarier",
+      user: "kamarier",
+      role: "waiter",
+      name: "Kamarier"
+    };
 
   }else{
 
     error.textContent =
       "Përdoruesi ose fjalëkalimi është gabim.";
 
+    return;
   }
+
+  /*
+   * Save the SAME session key used by index.html.
+   */
+  localStorage.setItem(
+    "MY_BAR_SESSION",
+    JSON.stringify(session)
+  );
+
+  /*
+   * Small compatibility layer for older MY BAR versions.
+   */
+  localStorage.setItem(
+    "barCurrentUser",
+    JSON.stringify(session)
+  );
+
+  /*
+   * Go to the main application.
+   */
+  window.location.href = "./index.html";
 }
+
+
+/* =========================
+   CONTACT
+========================= */
 
 function toggleContact(){
 
@@ -581,6 +631,11 @@ function toggleContact(){
       : "+";
 }
 
+
+/* =========================
+   BUY APP
+========================= */
+
 function buyApp(){
 
   alert(
@@ -590,6 +645,11 @@ function buyApp(){
   );
 
 }
+
+
+/* =========================
+   REPORT PROBLEM
+========================= */
 
 function reportProblem(){
 
@@ -603,20 +663,28 @@ function reportProblem(){
     alert(
       "Raporti u regjistrua.\n\n" +
       "Problemi:\n" +
-      problem
+      problem.trim()
     );
 
   }
+
 }
 
-/* ENTER = LOGIN */
-document.addEventListener("keydown",function(e){
 
-  if(e.key === "Enter"){
-    login();
+/* =========================
+   ENTER = LOGIN
+========================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Enter"){
+      login();
+    }
+
   }
-
-});
+);
 
 </script>
 
