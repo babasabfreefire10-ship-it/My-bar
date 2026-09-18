@@ -572,7 +572,473 @@ button{
 </style>
 </head>
 
-<body>
+<body><script>
+/* =====================================================
+   MY BAR — TABLES ADD-ON
+   Vendose para </body>
+===================================================== */
+
+(function () {
+    "use strict";
+
+    const TABLES_KEY = "MYBAR_TABLES_ADDON_V1";
+    const SELECTED_TABLE_KEY = "MYBAR_SELECTED_TABLE_V1";
+
+    /* ---------- DEFAULT TABLES ---------- */
+
+    function createDefaultTables() {
+        const tables = [];
+
+        for (let i = 1; i <= 12; i++) {
+            tables.push({
+                id: i,
+                name: "Tavolina " + i,
+                items: []
+            });
+        }
+
+        return tables;
+    }
+
+    /* ---------- STORAGE ---------- */
+
+    function getTablesAddon() {
+        try {
+            const saved = localStorage.getItem(TABLES_KEY);
+
+            if (saved) {
+                const data = JSON.parse(saved);
+
+                if (Array.isArray(data) && data.length) {
+                    return data;
+                }
+            }
+        } catch (error) {
+            console.error("Table storage error:", error);
+        }
+
+        const tables = createDefaultTables();
+        saveTablesAddon(tables);
+
+        return tables;
+    }
+
+    function saveTablesAddon(tables) {
+        localStorage.setItem(
+            TABLES_KEY,
+            JSON.stringify(tables)
+        );
+    }
+
+    /* ---------- SELECTED TABLE ---------- */
+
+    function getSelectedTableAddon() {
+        return Number(
+            localStorage.getItem(SELECTED_TABLE_KEY) || 0
+        );
+    }
+
+    function selectTableAddon(id) {
+        localStorage.setItem(
+            SELECTED_TABLE_KEY,
+            String(id)
+        );
+
+        renderTablesAddon();
+
+        /*
+         * Nëse index-i yt ka funksionin selectTable(),
+         * e thërrasim edhe atë.
+         */
+        if (typeof window.selectTable === "function") {
+            try {
+                window.selectTable(id);
+            } catch (error) {
+                console.warn(
+                    "selectTable ekzistues nuk u ekzekutua:",
+                    error
+                );
+            }
+        }
+
+        const text =
+            document.getElementById("addonSelectedTable");
+
+        if (text) {
+            text.textContent =
+                "Tavolina " + id + " u zgjodh.";
+        }
+    }
+
+    /* ---------- TOTAL ---------- */
+
+    function getTableTotal(table) {
+        if (!table || !Array.isArray(table.items)) {
+            return 0;
+        }
+
+        return table.items.reduce(function (total, item) {
+            return total +
+                Number(item.price || 0) *
+                Number(item.quantity || 0);
+        }, 0);
+    }
+
+    function formatMoney(value) {
+        return Number(value || 0).toLocaleString("sq-AL") + " L";
+    }
+
+    /* ---------- TABLE UI ---------- */
+
+    function renderTablesAddon() {
+        const container =
+            document.getElementById("addonTables");
+
+        if (!container) return;
+
+        const tables = getTablesAddon();
+        const selected = getSelectedTableAddon();
+
+        container.innerHTML = tables.map(function (table) {
+
+            const items =
+                Array.isArray(table.items)
+                    ? table.items
+                    : [];
+
+            const occupied = items.length > 0;
+
+            const total =
+                getTableTotal(table);
+
+            return `
+                <button
+                    type="button"
+                    class="addon-table
+                    ${occupied ? "occupied" : "free"}
+                    ${selected === Number(table.id) ? "selected" : ""}"
+                    onclick="selectTableAddon(${table.id})"
+                >
+                    <span class="addon-table-number">
+                        ${table.id}
+                    </span>
+
+                    <strong>
+                        ${table.name}
+                    </strong>
+
+                    <small>
+                        ${
+                            occupied
+                                ? "E zënë • " + formatMoney(total)
+                                : "E lirë"
+                        }
+                    </small>
+                </button>
+            `;
+        }).join("");
+
+        const selectedText =
+            document.getElementById("addonSelectedTable");
+
+        if (selectedText) {
+            selectedText.textContent =
+                selected
+                    ? "Tavolina " + selected
+                    : "Zgjidh një tavolinë";
+        }
+    }
+
+    /* ---------- CREATE UI ---------- */
+
+    function createTablesAddon() {
+
+        if (document.getElementById("addonTables")) {
+            renderTablesAddon();
+            return;
+        }
+
+        const wrapper =
+            document.createElement("section");
+
+        wrapper.id = "tablesAddonWrapper";
+
+        wrapper.innerHTML = `
+            <div class="addon-tables-header">
+                <div>
+                    <h2>Tavolinat</h2>
+                    <p id="addonSelectedTable">
+                        Zgjidh një tavolinë
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="refreshTablesAddon()"
+                    class="addon-refresh"
+                >
+                    ↻ Rifresko
+                </button>
+            </div>
+
+            <div
+                id="addonTables"
+                class="addon-tables-grid"
+            ></div>
+        `;
+
+        /*
+         * E vendosim në fillim të body,
+         * pa fshirë asgjë nga index-i.
+         */
+        document.body.prepend(wrapper);
+
+        renderTablesAddon();
+    }
+
+    /* ---------- REFRESH ---------- */
+
+    window.refreshTablesAddon = function () {
+        renderTablesAddon();
+
+        /*
+         * Rifreskon edhe funksionet ekzistuese
+         * nëse janë në index.
+         */
+        if (typeof window.renderTables === "function") {
+            try {
+                window.renderTables();
+            } catch (error) {
+                console.warn(error);
+            }
+        }
+
+        if (typeof window.renderOrder === "function") {
+            try {
+                window.renderOrder();
+            } catch (error) {
+                console.warn(error);
+            }
+        }
+    };
+
+    /* ---------- ADD TEST PRODUCT ---------- */
+
+    window.addTestTableItem = function (
+        tableId,
+        name,
+        price,
+        quantity
+    ) {
+        const tables = getTablesAddon();
+
+        const table =
+            tables.find(
+                t => Number(t.id) === Number(tableId)
+            );
+
+        if (!table) return;
+
+        if (!Array.isArray(table.items)) {
+            table.items = [];
+        }
+
+        table.items.push({
+            productId: Date.now(),
+            name: name || "Produkt",
+            price: Number(price || 0),
+            quantity: Number(quantity || 1)
+        });
+
+        saveTablesAddon(tables);
+
+        renderTablesAddon();
+    };
+
+    /* ---------- CLEAR TABLE ---------- */
+
+    window.clearTableAddon = function (tableId) {
+
+        const tables = getTablesAddon();
+
+        const table =
+            tables.find(
+                t => Number(t.id) === Number(tableId)
+            );
+
+        if (!table) return;
+
+        table.items = [];
+
+        saveTablesAddon(tables);
+
+        if (
+            Number(getSelectedTableAddon()) ===
+            Number(tableId)
+        ) {
+            localStorage.removeItem(
+                SELECTED_TABLE_KEY
+            );
+        }
+
+        renderTablesAddon();
+
+        if (typeof window.renderTables === "function") {
+            try {
+                window.renderTables();
+            } catch (error) {}
+        }
+
+        if (typeof window.renderOrder === "function") {
+            try {
+                window.renderOrder();
+            } catch (error) {}
+        }
+    };
+
+    /* ---------- CSS ---------- */
+
+    const style =
+        document.createElement("style");
+
+    style.textContent = `
+        #tablesAddonWrapper {
+            width: 100%;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 18px;
+            background: #0b110e;
+            border: 1px solid #20382b;
+            box-sizing: border-box;
+        }
+
+        .addon-tables-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .addon-tables-header h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .addon-tables-header p {
+            margin: 5px 0 0;
+            color: #7e9186;
+            font-size: 13px;
+        }
+
+        .addon-refresh {
+            border: 1px solid #31583f;
+            background: #111a15;
+            color: #9ee6b4;
+            border-radius: 10px;
+            padding: 9px 13px;
+            cursor: pointer;
+        }
+
+        .addon-tables-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+        }
+
+        .addon-table {
+            min-height: 105px;
+            border-radius: 15px;
+            border: 1px solid #263c30;
+            background: #111814;
+            color: #fff;
+            padding: 15px;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: .18s ease;
+        }
+
+        .addon-table:hover {
+            transform: translateY(-2px);
+            border-color: #4ca86c;
+        }
+
+        .addon-table.free {
+            border-color: #244b34;
+        }
+
+        .addon-table.occupied {
+            background: #17130f;
+            border-color: #79572c;
+        }
+
+        .addon-table.selected {
+            border: 2px solid #42d477;
+            box-shadow:
+                0 0 0 2px rgba(66,212,119,.10),
+                0 0 22px rgba(66,212,119,.12);
+        }
+
+        .addon-table-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1b2920;
+            color: #74e698;
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .addon-table strong {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .addon-table small {
+            margin-top: 5px;
+            color: #8d9d94;
+            font-size: 11px;
+        }
+
+        @media (max-width: 700px) {
+            #tablesAddonWrapper {
+                padding: 14px;
+            }
+
+            .addon-tables-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .addon-table {
+                min-height: 95px;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+
+    /* ---------- START ---------- */
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            createTablesAddon
+        );
+    } else {
+        createTablesAddon();
+    }
+
+})();
+</script>
 
 <div class="app">
 
