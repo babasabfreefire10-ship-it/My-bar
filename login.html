@@ -2,689 +2,947 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MY BAR — Login</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#020403;
-  color:#fff;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at top,#10251a 0%,#050805 42%,#020302 100%);
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    padding:20px;
 }
 
-/* BACKGROUND */
-.bg{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 50% 45%,rgba(0,255,120,.08),transparent 35%),
-    radial-gradient(circle at 20% 80%,rgba(0,255,120,.035),transparent 30%),
-    #020403;
-  z-index:-5;
-}
-
-/* MOVING LED SIDES */
-.led{
-  position:fixed;
-  top:0;
-  bottom:0;
-  width:3px;
-  overflow:hidden;
-  background:rgba(0,255,110,.08);
-  box-shadow:0 0 12px rgba(0,255,110,.18);
-  z-index:-1;
-}
-
-.led.left{
-  left:18px;
-}
-
-.led.right{
-  right:18px;
-}
-
-.led::after{
-  content:"";
-  position:absolute;
-  left:0;
-  width:100%;
-  height:170px;
-  background:linear-gradient(
-    to bottom,
-    transparent,
-    #00ff73,
-    #8affbd,
-    #00ff73,
-    transparent
-  );
-  filter:drop-shadow(0 0 9px #00ff73);
-  animation:ledMove 3.5s linear infinite;
-}
-
-.led.right::after{
-  animation-delay:1.7s;
-}
-
-@keyframes ledMove{
-  0%{
-    top:-180px;
-  }
-  100%{
-    top:100%;
-  }
-}
-
-/* SIDE LIGHT STREAKS */
-.streak{
-  position:fixed;
-  width:90px;
-  height:1px;
-  background:linear-gradient(90deg,transparent,#00ff73,transparent);
-  opacity:.35;
-  filter:blur(.2px);
-  animation:streakMove 5s linear infinite;
-}
-
-.streak.s1{left:0;top:18%;animation-delay:0s;}
-.streak.s2{right:0;top:42%;animation-delay:1.4s;}
-.streak.s3{left:0;top:70%;animation-delay:2.8s;}
-.streak.s4{right:0;top:83%;animation-delay:3.8s;}
-
-@keyframes streakMove{
-  0%{
-    transform:translateX(-100%);
-    opacity:0;
-  }
-  15%{opacity:.5;}
-  50%{opacity:.8;}
-  85%{opacity:.3;}
-  100%{
-    transform:translateX(100%);
-    opacity:0;
-  }
-}
-
-/* CORNER ACCENTS */
-.corner{
-  position:fixed;
-  width:65px;
-  height:65px;
-  opacity:.5;
-}
-
-.corner::before,
-.corner::after{
-  content:"";
-  position:absolute;
-  background:#00ff73;
-  box-shadow:0 0 8px rgba(0,255,115,.7);
-}
-
-.corner::before{
-  width:45px;
-  height:1px;
-}
-
-.corner::after{
-  width:1px;
-  height:45px;
-}
-
-.tl{
-  top:22px;
-  left:28px;
-}
-
-.tl::after{left:0;top:0;}
-.tl::before{left:0;top:0;}
-
-.tr{
-  top:22px;
-  right:28px;
-  transform:rotate(90deg);
-}
-
-.bl{
-  bottom:22px;
-  left:28px;
-  transform:rotate(-90deg);
-}
-
-.br{
-  bottom:22px;
-  right:28px;
-  transform:rotate(180deg);
-}
-
-/* LOGIN CARD */
 .login-box{
-  width:min(410px,90vw);
-  padding:42px 34px 30px;
-  border:1px solid rgba(0,255,115,.17);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(10,18,14,.96),
-      rgba(2,5,3,.97)
-    );
-  border-radius:18px;
-  box-shadow:
-    0 0 50px rgba(0,255,115,.06),
-    inset 0 0 35px rgba(0,255,115,.025);
-  position:relative;
-  overflow:hidden;
+    width:430px;
+    max-width:100%;
+    background:rgba(8,13,9,.96);
+    border:1px solid #24452f;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65),
+        0 0 35px rgba(56,232,121,.06);
 }
 
-/* TOP LED LINE */
-.login-box::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-40%;
-  width:40%;
-  height:2px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #00ff73,
-    #b8ffd5,
-    transparent
-  );
-  box-shadow:0 0 12px #00ff73;
-  animation:topLed 3s linear infinite;
-}
-
-@keyframes topLed{
-  0%{left:-40%;}
-  100%{left:110%;}
-}
-
-/* LOGO */
 .logo{
-  width:76px;
-  height:76px;
-  margin:0 auto 18px;
-  border:1px solid rgba(0,255,115,.45);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:31px;
-  font-weight:900;
-  color:#00ff73;
-  text-shadow:0 0 15px rgba(0,255,115,.6);
-  box-shadow:
-    0 0 25px rgba(0,255,115,.08),
-    inset 0 0 18px rgba(0,255,115,.04);
-  position:relative;
-}
-
-.logo::before{
-  content:"";
-  position:absolute;
-  inset:-7px;
-  border:1px solid rgba(0,255,115,.08);
-  border-radius:50%;
-  animation:logoPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes logoPulse{
-  0%,100%{
-    transform:scale(1);
-    opacity:.35;
-  }
-  50%{
-    transform:scale(1.08);
-    opacity:.8;
-  }
-}
-
-.badge{
-  width:max-content;
-  margin:0 auto 13px;
-  padding:6px 11px;
-  border:1px solid rgba(0,255,115,.18);
-  border-radius:20px;
-  font-size:9px;
-  letter-spacing:2.5px;
-  color:#72ffad;
-  background:rgba(0,255,115,.025);
-}
-
-h1{
-  text-align:center;
-  font-size:28px;
-  letter-spacing:5px;
-  font-weight:900;
-  margin-bottom:7px;
+    text-align:center;
+    color:#38e879;
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:6px;
 }
 
 .subtitle{
-  text-align:center;
-  color:#718078;
-  font-size:10px;
-  letter-spacing:2.4px;
-  margin-bottom:32px;
+    text-align:center;
+    color:#68786e;
+    font-size:10px;
+    letter-spacing:3px;
+    margin-top:8px;
+    margin-bottom:30px;
 }
 
-/* INPUTS */
-.field{
-  margin-bottom:15px;
+.title{
+    text-align:center;
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:18px;
 }
 
-.field label{
-  display:block;
-  margin-bottom:7px;
-  color:#6f7c75;
-  font-size:9px;
-  letter-spacing:1.7px;
-  text-transform:uppercase;
+.options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.input{
-  width:100%;
-  height:48px;
-  border:1px solid #1a2921;
-  background:#060a08;
-  color:white;
-  border-radius:9px;
-  padding:0 14px;
-  outline:none;
-  font-size:14px;
-  transition:.2s;
+.option{
+    min-height:125px;
+    border:1px solid #203627;
+    background:#0c150f;
+    color:#fff;
+    border-radius:15px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    transition:.2s;
 }
 
-.input:focus{
-  border-color:#00b957;
-  box-shadow:0 0 0 3px rgba(0,255,115,.055);
+.option:hover{
+    border-color:#38e879;
+    background:#102016;
+    transform:translateY(-2px);
 }
 
-/* LOGIN BUTTON */
+.option .icon{
+    font-size:32px;
+}
+
+.option strong{
+    font-size:15px;
+}
+
+.option small{
+    color:#708078;
+    font-size:11px;
+}
+
+.screen{
+    display:none;
+}
+
+.screen.active{
+    display:block;
+}
+
+.back{
+    width:100%;
+    margin-top:12px;
+    padding:12px;
+    border-radius:10px;
+    background:#101712;
+    border:1px solid #263a2c;
+    color:#9aaa9f;
+}
+
+.back:hover{
+    color:#fff;
+    border-color:#38e879;
+}
+
+.input-group{
+    margin-bottom:13px;
+}
+
+.input-group label{
+    display:block;
+    color:#7d8b83;
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #29402f;
+    background:#060a07;
+    color:#fff;
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:#38e879;
+    box-shadow:0 0 0 2px rgba(56,232,121,.08);
+}
+
 .login-btn{
-  width:100%;
-  height:49px;
-  margin-top:9px;
-  border:1px solid #00e866;
-  border-radius:9px;
-  background:linear-gradient(
-    135deg,
-    #00d95f,
-    #00a94a
-  );
-  color:#001b0b;
-  font-weight:900;
-  letter-spacing:1.5px;
-  cursor:pointer;
-  transition:.2s;
-  box-shadow:0 0 18px rgba(0,255,115,.13);
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:10px;
+    background:#32df70;
+    color:#031007;
+    font-weight:900;
+    margin-top:3px;
 }
 
 .login-btn:hover{
-  transform:translateY(-1px);
-  box-shadow:0 0 25px rgba(0,255,115,.28);
+    background:#42ed82;
 }
 
-.login-btn:active{
-  transform:scale(.98);
+.user-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    max-height:330px;
+    overflow:auto;
 }
 
-.error{
-  min-height:17px;
-  text-align:center;
-  color:#ff5f5f;
-  font-size:11px;
-  margin-top:12px;
+.waiter{
+    width:100%;
+    padding:14px;
+    background:#0d160f;
+    border:1px solid #203527;
+    border-radius:11px;
+    color:#fff;
+    text-align:left;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* CONTACT */
-.contact{
-  margin-top:25px;
-  border-top:1px solid #142019;
-  padding-top:18px;
+.waiter:hover{
+    border-color:#38e879;
+    background:#102016;
 }
 
-.contact-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  cursor:pointer;
-  color:#78857e;
-  font-size:9px;
-  letter-spacing:2px;
-  user-select:none;
+.waiter-info strong{
+    display:block;
+    font-size:15px;
+}
+
+.waiter-info small{
+    display:block;
+    color:#718078;
+    margin-top:4px;
 }
 
 .arrow{
-  color:#00ff73;
-  font-size:18px;
-  line-height:10px;
+    color:#38e879;
+    font-size:20px;
 }
 
-.contact-content{
-  display:none;
-  margin-top:14px;
-  gap:8px;
+.selected-user{
+    text-align:center;
+    margin-bottom:18px;
 }
 
-.contact-content.open{
-  display:grid;
+.selected-user .icon{
+    font-size:36px;
+    margin-bottom:8px;
 }
 
-.contact-btn{
-  height:40px;
-  border:1px solid #1a2921;
-  background:#070b09;
-  color:#b5c0ba;
-  border-radius:7px;
-  cursor:pointer;
-  font-size:9px;
-  letter-spacing:1px;
-  transition:.2s;
+.selected-user strong{
+    display:block;
+    font-size:19px;
 }
 
-.contact-btn:hover{
-  border-color:#00b957;
-  color:#00ff73;
+.selected-user small{
+    color:#718078;
+    display:block;
+    margin-top:4px;
 }
 
-.buy{
-  border-color:rgba(0,255,115,.22);
-  color:#00ff73;
+.error{
+    display:none;
+    background:#2a1010;
+    border:1px solid #693333;
+    color:#ff8b8b;
+    padding:10px;
+    border-radius:9px;
+    margin-bottom:12px;
+    text-align:center;
+    font-size:13px;
 }
 
-/* FOOTER */
+.empty{
+    text-align:center;
+    color:#718078;
+    padding:20px 10px;
+    border:1px dashed #24382a;
+    border-radius:10px;
+}
+
 .footer{
-  position:fixed;
-  bottom:18px;
-  left:0;
-  right:0;
-  text-align:center;
-  color:#3d4943;
-  font-size:8px;
-  letter-spacing:2px;
+    text-align:center;
+    color:#435149;
+    font-size:10px;
+    margin-top:25px;
+    letter-spacing:1px;
 }
 
 @media(max-width:500px){
-  .login-box{
-    padding:35px 24px 25px;
-  }
+    .login-box{
+        padding:22px;
+    }
 
-  .led.left{
-    left:8px;
-  }
+    .options{
+        grid-template-columns:1fr;
+    }
 
-  .led.right{
-    right:8px;
-  }
-
-  .corner{
-    display:none;
-  }
-
-  h1{
-    font-size:24px;
-  }
+    .option{
+        min-height:105px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-
-<div class="led left"></div>
-<div class="led right"></div>
-
-<div class="streak s1"></div>
-<div class="streak s2"></div>
-<div class="streak s3"></div>
-<div class="streak s4"></div>
-
-<div class="corner tl"></div>
-<div class="corner tr"></div>
-<div class="corner bl"></div>
-<div class="corner br"></div>
-
 <div class="login-box">
 
-  <div class="logo">M</div>
+    <div class="logo">MY BAR</div>
 
-  <div class="badge">SISTEM PREMIUM</div>
-
-  <h1>MY BAR</h1>
-
-  <div class="subtitle">
-    SISTEMI I MENAXHIMIT
-  </div>
-
-  <div class="field">
-    <label>Përdoruesi</label>
-    <input
-      id="username"
-      class="input"
-      type="text"
-      autocomplete="username"
-      placeholder="Shkruaj përdoruesin"
-    >
-  </div>
-
-  <div class="field">
-    <label>Fjalëkalimi</label>
-    <input
-      id="password"
-      class="input"
-      type="password"
-      autocomplete="current-password"
-      placeholder="Shkruaj fjalëkalimin"
-    >
-  </div>
-
-  <button class="login-btn" onclick="login()">
-    HYR NË SISTEM
-  </button>
-
-  <div id="error" class="error"></div>
-
-  <div class="contact">
-
-    <div class="contact-head" onclick="toggleContact()">
-      <span>CONTACT</span>
-      <span id="arrow" class="arrow">+</span>
+    <div class="subtitle">
+        MANAGEMENT SYSTEM
     </div>
 
-    <div id="contactContent" class="contact-content">
+    <!-- ROLE -->
+    <div id="roleScreen" class="screen active">
 
-      <button class="contact-btn buy" onclick="buyApp()">
-        BLI APLIKACIONIN • 49€
-      </button>
+        <div class="title">
+            Zgjidh përdoruesin
+        </div>
 
-      <button class="contact-btn" onclick="reportProblem()">
-        RAPORTO NJË PROBLEM
-      </button>
+        <div class="options">
+
+            <button
+                class="option"
+                onclick="openAdminLogin()">
+
+                <div class="icon">⚙️</div>
+
+                <strong>ADMIN</strong>
+
+                <small>
+                    Administratori
+                </small>
+
+            </button>
+
+            <button
+                class="option"
+                onclick="openWaiterList()">
+
+                <div class="icon">👤</div>
+
+                <strong>KAMARIER</strong>
+
+                <small>
+                    Hyr si kamarier
+                </small>
+
+            </button>
+
+        </div>
 
     </div>
 
-  </div>
+    <!-- ADMIN LOGIN -->
+    <div id="adminScreen" class="screen">
 
-</div>
+        <div class="title">
+            Hyr si Administrator
+        </div>
 
-<div class="footer">
-  MY BAR • PREMIUM MANAGEMENT SYSTEM
+        <div id="adminError" class="error"></div>
+
+        <div class="input-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                id="adminPassword"
+                type="password"
+                placeholder="Shkruaj password-in"
+                autocomplete="current-password"
+                onkeydown="handleEnter(event,'admin')">
+
+        </div>
+
+        <button
+            class="login-btn"
+            onclick="loginAdmin()">
+
+            HYR NË SISTEM
+
+        </button>
+
+        <button
+            class="back"
+            onclick="backToRoles()">
+
+            ← Kthehu
+
+        </button>
+
+    </div>
+
+    <!-- WAITER LIST -->
+    <div id="waiterListScreen" class="screen">
+
+        <div class="title">
+            Zgjidh Kamarierin
+        </div>
+
+        <div id="waiterList"
+             class="user-list">
+        </div>
+
+        <button
+            class="back"
+            onclick="backToRoles()">
+
+            ← Kthehu
+
+        </button>
+
+    </div>
+
+    <!-- WAITER PASSWORD -->
+    <div id="waiterPasswordScreen" class="screen">
+
+        <div class="selected-user">
+
+            <div class="icon">
+                👤
+            </div>
+
+            <strong id="selectedWaiterName">
+                Kamarier
+            </strong>
+
+            <small id="selectedWaiterUsername">
+                -
+            </small>
+
+        </div>
+
+        <div id="waiterError" class="error"></div>
+
+        <div class="input-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                id="waiterPassword"
+                type="password"
+                placeholder="Shkruaj password-in"
+                autocomplete="current-password"
+                onkeydown="handleEnter(event,'waiter')">
+
+        </div>
+
+        <button
+            class="login-btn"
+            onclick="loginWaiter()">
+
+            HYR NË SISTEM
+
+        </button>
+
+        <button
+            class="back"
+            onclick="openWaiterList()">
+
+            ← Kthehu te kamarierët
+
+        </button>
+
+    </div>
+
+    <div class="footer">
+        MY BAR • PREMIUM MANAGEMENT SYSTEM
+    </div>
+
 </div>
 
 <script>
 
-"use strict";
+/* =========================================================
+   SAME USER DATABASE AS INDEX.HTML
+========================================================= */
 
-/* =========================
-   LOGIN
-========================= */
+const USERS_KEY = "MYBAR_USERS_FINAL";
 
-function login(){
+const SESSION_KEY = "MY_BAR_SESSION";
 
-  const user =
-    document.getElementById("username").value.trim().toLowerCase();
+const OLD_SESSION_KEY = "barCurrentUser";
 
-  const pass =
-    document.getElementById("password").value;
+/* =========================================================
+   DEFAULT USERS
+========================================================= */
 
-  const error =
-    document.getElementById("error");
+const DEFAULT_USERS = [
+    {
+        username:"admin",
+        password:"1234",
+        role:"admin",
+        name:"Administrator"
+    },
+    {
+        username:"kamarier",
+        password:"1234",
+        role:"waiter",
+        name:"Kamarier"
+    }
+];
 
-  /* Clear previous error */
-  error.textContent = "";
+/* =========================================================
+   STORAGE
+========================================================= */
 
-  /*
-   * IMPORTANT:
-   * index.html checks:
-   *
-   * user.role === "admin"
-   *
-   * therefore the role MUST be:
-   * "admin" or "waiter"
-   */
+function getUsers(){
 
-  let session = null;
+    try{
 
-  if(user === "admin" && pass === "1234"){
+        const saved =
+            localStorage.getItem(USERS_KEY);
 
-    session = {
-      username: "admin",
-      user: "admin",
-      role: "admin",
-      name: "Administrator"
-    };
+        if(!saved){
 
-  }else if(user === "kamarier" && pass === "1234"){
+            localStorage.setItem(
+                USERS_KEY,
+                JSON.stringify(DEFAULT_USERS)
+            );
 
-    session = {
-      username: "kamarier",
-      user: "kamarier",
-      role: "waiter",
-      name: "Kamarier"
-    };
+            return JSON.parse(
+                JSON.stringify(DEFAULT_USERS)
+            );
+        }
 
-  }else{
+        const users =
+            JSON.parse(saved);
 
-    error.textContent =
-      "Përdoruesi ose fjalëkalimi është gabim.";
+        if(!Array.isArray(users) || !users.length){
 
-    return;
-  }
+            localStorage.setItem(
+                USERS_KEY,
+                JSON.stringify(DEFAULT_USERS)
+            );
 
-  /*
-   * Save the SAME session key used by index.html.
-   */
-  localStorage.setItem(
-    "MY_BAR_SESSION",
-    JSON.stringify(session)
-  );
+            return JSON.parse(
+                JSON.stringify(DEFAULT_USERS)
+            );
+        }
 
-  /*
-   * Small compatibility layer for older MY BAR versions.
-   */
-  localStorage.setItem(
-    "barCurrentUser",
-    JSON.stringify(session)
-  );
+        return users;
 
-  /*
-   * Go to the main application.
-   */
-  window.location.href = "./index.html";
+    }catch(error){
+
+        localStorage.setItem(
+            USERS_KEY,
+            JSON.stringify(DEFAULT_USERS)
+        );
+
+        return JSON.parse(
+            JSON.stringify(DEFAULT_USERS)
+        );
+    }
 }
 
+function setUsers(users){
 
-/* =========================
-   CONTACT
-========================= */
-
-function toggleContact(){
-
-  const box =
-    document.getElementById("contactContent");
-
-  const arrow =
-    document.getElementById("arrow");
-
-  box.classList.toggle("open");
-
-  arrow.textContent =
-    box.classList.contains("open")
-      ? "−"
-      : "+";
-}
-
-
-/* =========================
-   BUY APP
-========================= */
-
-function buyApp(){
-
-  alert(
-    "MY BAR\n\n" +
-    "Çmimi i aplikacionit: 49€\n\n" +
-    "Kontaktoni administratorin për blerjen."
-  );
-
-}
-
-
-/* =========================
-   REPORT PROBLEM
-========================= */
-
-function reportProblem(){
-
-  const problem =
-    prompt(
-      "Shkruaj problemin që dëshiron të raportosh:"
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
     );
-
-  if(problem && problem.trim()){
-
-    alert(
-      "Raporti u regjistrua.\n\n" +
-      "Problemi:\n" +
-      problem.trim()
-    );
-
-  }
-
 }
 
+/* =========================================================
+   SCREENS
+========================================================= */
 
-/* =========================
-   ENTER = LOGIN
-========================= */
+function showScreen(id){
 
-document.addEventListener(
-  "keydown",
-  function(e){
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen=>{
+            screen.classList.remove("active");
+        });
 
-    if(e.key === "Enter"){
-      login();
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+    clearErrors();
+}
+
+function clearErrors(){
+
+    document
+        .querySelectorAll(".error")
+        .forEach(error=>{
+            error.style.display="none";
+            error.textContent="";
+        });
+}
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+function openAdminLogin(){
+
+    showScreen("adminScreen");
+
+    setTimeout(()=>{
+        document
+            .getElementById("adminPassword")
+            .focus();
+    },100);
+}
+
+function openWaiterList(){
+
+    renderWaiters();
+
+    showScreen(
+        "waiterListScreen"
+    );
+}
+
+function backToRoles(){
+
+    showScreen("roleScreen");
+}
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+function loginAdmin(){
+
+    const password =
+        document
+        .getElementById("adminPassword")
+        .value;
+
+    const users =
+        getUsers();
+
+    const admin =
+        users.find(user =>
+            String(user.username)
+            .toLowerCase()==="admin"
+            &&
+            String(user.role)
+            .toLowerCase()==="admin"
+        );
+
+    if(!admin){
+
+        showError(
+            "adminError",
+            "Administratori nuk ekziston."
+        );
+
+        return;
     }
 
-  }
-);
+    if(
+        String(password)!==
+        String(admin.password)
+    ){
+
+        showError(
+            "adminError",
+            "Password-i është i gabuar."
+        );
+
+        document
+            .getElementById("adminPassword")
+            .select();
+
+        return;
+    }
+
+    createSession(admin);
+
+}
+
+/* =========================================================
+   WAITER LIST
+========================================================= */
+
+function renderWaiters(){
+
+    const box =
+        document.getElementById(
+            "waiterList"
+        );
+
+    const users =
+        getUsers();
+
+    const waiters =
+        users.filter(user =>
+            String(user.role)
+            .toLowerCase()==="waiter"
+            ||
+            String(user.role)
+            .toLowerCase()==="kamarier"
+        );
+
+    if(!waiters.length){
+
+        box.innerHTML = `
+            <div class="empty">
+                Nuk ka kamarierë të regjistruar.
+            </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML =
+        waiters.map((user,index)=>{
+
+            return `
+                <button
+                    class="waiter"
+                    onclick="selectWaiter(${index})">
+
+                    <div class="waiter-info">
+
+                        <strong>
+                            ${escapeHTML(
+                                user.name ||
+                                "Kamarier"
+                            )}
+                        </strong>
+
+                        <small>
+                            @${escapeHTML(
+                                user.username
+                            )}
+                        </small>
+
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                </button>
+            `;
+
+        }).join("");
+
+    window.loginWaiters = waiters;
+}
+
+/* =========================================================
+   SELECT WAITER
+========================================================= */
+
+function selectWaiter(index){
+
+    const users =
+        getUsers();
+
+    const waiters =
+        users.filter(user =>
+            String(user.role)
+            .toLowerCase()==="waiter"
+            ||
+            String(user.role)
+            .toLowerCase()==="kamarier"
+        );
+
+    const waiter =
+        waiters[index];
+
+    if(!waiter)
+        return;
+
+    window.selectedWaiter =
+        waiter;
+
+    document
+        .getElementById(
+            "selectedWaiterName"
+        )
+        .textContent =
+            waiter.name ||
+            "Kamarier";
+
+    document
+        .getElementById(
+            "selectedWaiterUsername"
+        )
+        .textContent =
+            "@"+waiter.username;
+
+    document
+        .getElementById(
+            "waiterPassword"
+        )
+        .value="";
+
+    showScreen(
+        "waiterPasswordScreen"
+    );
+
+    setTimeout(()=>{
+        document
+            .getElementById(
+                "waiterPassword"
+            )
+            .focus();
+    },100);
+}
+
+/* =========================================================
+   WAITER LOGIN
+========================================================= */
+
+function loginWaiter(){
+
+    const waiter =
+        window.selectedWaiter;
+
+    if(!waiter){
+
+        openWaiterList();
+
+        return;
+    }
+
+    const password =
+        document
+        .getElementById(
+            "waiterPassword"
+        )
+        .value;
+
+    const users =
+        getUsers();
+
+    const current =
+        users.find(user =>
+            String(user.username)
+            .toLowerCase() ===
+            String(waiter.username)
+            .toLowerCase()
+        );
+
+    if(!current){
+
+        showError(
+            "waiterError",
+            "Ky kamarier nuk ekziston më."
+        );
+
+        return;
+    }
+
+    if(
+        String(password)!==
+        String(current.password)
+    ){
+
+        showError(
+            "waiterError",
+            "Password-i është i gabuar."
+        );
+
+        document
+            .getElementById(
+                "waiterPassword"
+            )
+            .select();
+
+        return;
+    }
+
+    createSession(current);
+}
+
+/* =========================================================
+   CREATE SESSION
+========================================================= */
+
+function createSession(user){
+
+    const session = {
+
+        username:
+            user.username,
+
+        user:
+            user.username,
+
+        role:
+            user.role,
+
+        name:
+            user.name,
+
+        loginAt:
+            new Date().toISOString()
+
+    };
+
+    /*
+       Ruajmë të dyja formatet
+       që index.html aktual
+       dhe versionet e vjetra
+       të funksionojnë.
+    */
+
+    localStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify(session)
+    );
+
+    localStorage.setItem(
+        OLD_SESSION_KEY,
+        JSON.stringify(session)
+    );
+
+    window.location.href =
+        "index.html";
+}
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+function handleEnter(event,type){
+
+    if(event.key!=="Enter")
+        return;
+
+    if(type==="admin")
+        loginAdmin();
+
+    if(type==="waiter")
+        loginWaiter();
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(id,message){
+
+    const box =
+        document.getElementById(id);
+
+    box.textContent =
+        message;
+
+    box.style.display =
+        "block";
+}
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value??"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+/* =========================================================
+   START
+========================================================= */
+
+getUsers();
 
 </script>
 
