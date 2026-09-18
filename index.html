@@ -2,1530 +2,936 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#05070a">
 <title>MY BAR</title>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-    --bg:#07090c;
-    --panel:#101419;
-    --panel2:#151a20;
-    --line:#252c34;
-    --text:#f3f5f7;
-    --muted:#8e98a4;
-    --blue:#1677ff;
-    --blue2:#0d5fd6;
-    --green:#19b86b;
-    --red:#e5484d;
-    --orange:#f59e0b;
-    --radius:16px;
+  --bg:#05070a;
+  --panel:#0b1016;
+  --panel2:#101720;
+  --line:#1b2732;
+  --text:#f5f7fa;
+  --muted:#84919d;
+  --blue:#1677ff;
+  --blue2:#0d5ed7;
+  --green:#20c878;
+  --red:#ef4444;
+  --yellow:#f4b942;
 }
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html,body{
-    width:100%;
-    min-height:100%;
-    background:var(--bg);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-}
-
 body{
-    overflow-x:hidden;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
 }
-
-button,
-input{
-    font:inherit;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar{
-    height:72px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    padding:10px 16px;
-
-    background:rgba(7,9,12,.96);
-    border-bottom:1px solid var(--line);
-    backdrop-filter:blur(18px);
-}
-
-.brand{
-    min-width:150px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-right:8px;
-}
-
-.brand-logo{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#111820;
-    border:1px solid #2d3742;
-
-    font-weight:900;
-    color:#fff;
-}
-
-.brand-name{
-    font-weight:800;
-    letter-spacing:.5px;
-}
-
-.nav{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    flex:1;
-}
-
-.nav-btn{
-    min-height:44px;
-    padding:0 15px;
-
-    border-radius:11px;
-
-    background:#11161c;
-    color:#aeb7c2;
-    border:1px solid #242b33;
-
-    font-size:13px;
-    font-weight:750;
-
-    transition:.15s ease;
-}
-
-.nav-btn:hover{
-    color:#fff;
-    border-color:#3a4652;
-}
-
-.nav-btn.active{
-    background:var(--blue);
-    border-color:var(--blue);
-    color:white;
-    box-shadow:0 5px 20px rgba(22,119,255,.25);
-}
-
-.nav-btn.danger{
-    color:#ff777c;
-}
-
-.nav-btn.danger.active{
-    background:var(--red);
-    color:#fff;
-}
-
-.user-area{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding-left:10px;
-}
-
-.user-name{
-    font-size:13px;
-    font-weight:700;
-}
-
-.clock{
-    color:var(--muted);
-    font-size:13px;
-    font-variant-numeric:tabular-nums;
-}
-
-.status-dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 10px rgba(25,184,107,.5);
-}
-
-/* =========================
-   APP
-========================= */
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
 .app{
-    width:100%;
-    max-width:1500px;
-    margin:auto;
-    padding:28px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-/* =========================
-   WELCOME
-========================= */
+/* TOP BAR */
+.topbar{
+  height:68px;
+  background:#080c11;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.logo{
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:2px;
+  min-width:120px;
+}
+.status{
+  width:8px;
+  height:8px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--green);
+}
+.top-actions{
+  display:flex;
+  gap:7px;
+  flex:1;
+}
+.top-btn{
+  background:#0d141b;
+  border:1px solid #1d2934;
+  color:#aab5bf;
+  padding:10px 13px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+}
+.top-btn:hover,
+.top-btn.active{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:#fff;
+}
+.user-box{
+  text-align:right;
+  white-space:nowrap;
+}
+.user-box strong{display:block;font-size:12px}
+.user-box small{color:var(--muted);font-size:10px}
+.clock{
+  font-size:13px;
+  font-weight:800;
+  min-width:70px;
+  text-align:right;
+}
 
+/* WELCOME */
 .welcome{
-    min-height:calc(100vh - 130px);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
+  min-height:calc(100vh - 68px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
 }
-
-.welcome-small{
-    color:var(--blue);
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:3px;
-    margin-bottom:15px;
+.welcome-inner{
+  width:min(1050px,100%);
+  text-align:center;
 }
-
+.welcome-badge{
+  display:inline-block;
+  border:1px solid #24415e;
+  color:#67aaff;
+  padding:7px 14px;
+  border-radius:100px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:24px;
+}
 .welcome h1{
-    font-size:clamp(38px,6vw,72px);
-    line-height:1;
-    letter-spacing:-3px;
-    margin-bottom:12px;
+  font-size:clamp(38px,7vw,78px);
+  letter-spacing:6px;
+  font-weight:950;
 }
-
 .welcome p{
-    color:var(--muted);
-    font-size:15px;
-    margin-bottom:36px;
+  color:#7f8b96;
+  margin:12px 0 35px;
+}
+.welcome-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.welcome-card{
+  background:linear-gradient(145deg,#0c1219,#080d12);
+  border:1px solid #1c2935;
+  border-radius:15px;
+  padding:22px 12px;
+  color:#dce3e9;
+  font-size:12px;
+  font-weight:800;
+}
+.welcome-card:hover{
+  border-color:#287cff;
+  transform:translateY(-2px);
+}
+.welcome-card.main{
+  grid-column:span 4;
+  background:linear-gradient(135deg,#1677ff,#084cb5);
+  border-color:#2583ff;
+  padding:30px;
+  font-size:18px;
+  box-shadow:0 15px 50px rgba(22,119,255,.2);
 }
 
-.new-bill{
-    width:min(390px,90vw);
-    min-height:115px;
-
-    border-radius:20px;
-
-    background:linear-gradient(145deg,#1677ff,#0759c9);
-    color:white;
-
-    box-shadow:0 18px 50px rgba(22,119,255,.25);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    transition:.15s;
+/* CONTENT */
+.content{
+  padding:15px;
+  display:none;
 }
-
-.new-bill:hover{
-    transform:translateY(-2px);
-}
-
-.new-bill strong{
-    font-size:22px;
-}
-
-.new-bill span{
-    margin-top:7px;
-    opacity:.8;
-    font-size:12px;
-}
-
-.quick-grid{
-    width:min(850px,100%);
-    margin-top:18px;
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-}
-
-.quick-btn{
-    min-height:72px;
-
-    background:var(--panel);
-    color:#dce1e6;
-
-    border:1px solid var(--line);
-    border-radius:15px;
-
-    font-weight:700;
-    font-size:13px;
-
-    transition:.15s;
-}
-
-.quick-btn:hover{
-    border-color:#3b4652;
-    background:var(--panel2);
-}
-
-.quick-btn.blue{
-    border-color:rgba(22,119,255,.45);
-}
-
-.quick-btn.red{
-    color:#ff777c;
-}
-
-.quick-btn small{
-    display:block;
-    color:var(--muted);
-    font-weight:500;
-    margin-top:5px;
-}
-
-/* =========================
-   PAGE
-========================= */
+.content.show{display:block}
 
 .page{
-    display:none;
+  display:none;
 }
-
-.page.active{
-    display:block;
-}
+.page.active{display:block}
 
 .page-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
 }
+.page-title h2{font-size:20px}
+.page-title span{color:var(--muted);font-size:12px}
 
-.page-title h2{
-    font-size:25px;
-    letter-spacing:-.5px;
-}
-
-.page-title span{
-    color:var(--muted);
-    font-size:13px;
-}
-
-/* =========================
-   POS
-========================= */
-
+/* POS */
 .pos-layout{
-    display:grid;
-    grid-template-columns:1fr 390px;
-    gap:18px;
+  display:grid;
+  grid-template-columns:190px 1fr 350px;
+  gap:12px;
+  min-height:calc(100vh - 100px);
 }
-
 .panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
 }
-
 .panel-head{
-    min-height:58px;
-    padding:14px 17px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:1px solid var(--line);
+  padding:13px;
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+  font-weight:800;
+  color:#b9c4cd;
 }
 
-.panel-head strong{
-    font-size:14px;
+/* TABLES */
+.tables-list{
+  padding:10px;
+  display:grid;
+  gap:7px;
 }
-
-.panel-head span{
-    color:var(--muted);
-    font-size:12px;
+.table-btn{
+  border:1px solid #1b2935;
+  background:#0d141b;
+  color:#d7dde2;
+  border-radius:9px;
+  padding:12px 8px;
+  text-align:left;
 }
-
-.tables{
-    padding:14px;
-
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:8px;
+.table-btn strong{
+  display:block;
+  font-size:12px;
 }
-
-.table{
-    min-height:60px;
-
-    border-radius:12px;
-    border:1px solid var(--line);
-
-    background:#0c1014;
-    color:#d9dee4;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    gap:4px;
+.table-btn small{
+  color:#6f7d89;
+  font-size:10px;
 }
-
-.table small{
-    color:#68727d;
+.table-btn.open{
+  border-color:#3a6b9f;
+  background:#102033;
 }
-
-.table.open{
-    border-color:#1e70e7;
-    background:rgba(22,119,255,.12);
+.table-btn.selected{
+  background:var(--blue);
+  border-color:var(--blue);
 }
+.table-btn.selected small{color:#dbeaff}
 
-.table.selected{
-    background:var(--blue);
-    border-color:var(--blue);
-    color:white;
+/* MENU */
+.menu-area{
+  padding:12px;
 }
-
-.table.selected small{
-    color:rgba(255,255,255,.7);
-}
-
 .categories{
-    padding:14px;
-
-    display:flex;
-    gap:7px;
-
-    overflow-x:auto;
-
-    border-top:1px solid var(--line);
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  margin-bottom:10px;
+  padding-bottom:3px;
 }
-
 .category{
-    white-space:nowrap;
-
-    padding:9px 13px;
-
-    border-radius:9px;
-
-    background:#0c1014;
-    border:1px solid var(--line);
-
-    color:#9da6b0;
-    font-size:12px;
-    font-weight:700;
+  flex:0 0 auto;
+  border:1px solid #1d2a35;
+  background:#0d141b;
+  color:#8997a3;
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:700;
 }
-
 .category.active{
-    background:var(--blue);
-    color:white;
-    border-color:var(--blue);
+  color:#fff;
+  background:var(--blue);
+  border-color:var(--blue);
 }
+.search{
+  width:100%;
+  background:#080d12;
+  color:#fff;
+  border:1px solid #1b2833;
+  border-radius:9px;
+  padding:11px 13px;
+  outline:none;
+  margin-bottom:10px;
+}
+.search:focus{border-color:#287cff}
 
 .products{
-    padding:14px;
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:9px;
-
-    max-height:520px;
-    overflow-y:auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
 }
-
 .product{
-    min-height:88px;
-
-    background:#0d1217;
-    border:1px solid var(--line);
-    border-radius:13px;
-
-    color:#e8ebee;
-
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
-
-    padding:13px;
-
-    text-align:left;
-
-    transition:.12s;
+  min-height:100px;
+  background:#0d141b;
+  border:1px solid #1b2934;
+  border-radius:10px;
+  color:#fff;
+  padding:13px;
+  text-align:left;
 }
-
 .product:hover{
-    border-color:#3a4652;
-    background:#121820;
+  border-color:#267dff;
+  background:#101b27;
 }
-
+.product:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
 .product strong{
-    font-size:13px;
-    line-height:1.2;
+  display:block;
+  font-size:12px;
+  margin-bottom:8px;
 }
-
-.product span{
-    margin-top:8px;
-    color:#62a3ff;
-    font-weight:800;
-    font-size:13px;
+.product .price{
+  display:block;
+  color:#65a8ff;
+  font-weight:900;
 }
-
 .product small{
-    color:#66717d;
-    margin-top:3px;
+  display:block;
+  color:#697681;
+  margin-top:7px;
+  font-size:10px;
 }
 
-/* =========================
-   BILL
-========================= */
-
+/* BILL */
 .bill{
-    display:flex;
-    flex-direction:column;
-    min-height:670px;
+  display:flex;
+  flex-direction:column;
 }
-
 .bill-head{
-    padding:17px;
-
-    border-bottom:1px solid var(--line);
+  padding:14px;
+  border-bottom:1px solid var(--line);
 }
-
-.bill-head-top{
-    display:flex;
-    justify-content:space-between;
+.bill-head strong{font-size:15px}
+.bill-head small{
+  display:block;
+  color:var(--muted);
+  margin-top:4px;
 }
-
-.bill-number{
-    font-weight:900;
-}
-
-.bill-status{
-    color:var(--green);
-    font-size:11px;
-    font-weight:800;
-}
-
-.bill-table{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:7px;
-}
-
 .bill-items{
-    flex:1;
-    padding:8px 14px;
-    overflow-y:auto;
+  flex:1;
+  overflow:auto;
+  padding:10px;
 }
-
+.empty{
+  color:#56636e;
+  text-align:center;
+  padding:45px 15px;
+  font-size:12px;
+}
 .bill-item{
-    padding:13px 4px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:1px solid #1b2026;
+  border-bottom:1px solid #17212a;
+  padding:11px 4px;
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
 }
-
-.bill-item-name{
-    font-size:13px;
-    font-weight:700;
+.bill-item-info strong{
+  display:block;
+  font-size:12px;
 }
-
-.bill-item-info{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
+.bill-item-info small{
+  color:var(--muted);
+  font-size:10px;
 }
-
 .qty{
-    display:flex;
-    align-items:center;
-    gap:7px;
+  display:flex;
+  align-items:center;
+  gap:5px;
 }
-
 .qty button{
-    width:27px;
-    height:27px;
-
-    border-radius:7px;
-
-    background:#1a2027;
-    color:#fff;
+  width:27px;
+  height:27px;
+  border:1px solid #263541;
+  background:#101821;
+  color:#fff;
+  border-radius:6px;
 }
-
-.qty span{
-    min-width:17px;
-    text-align:center;
-    font-size:12px;
-}
-
+.qty button.remove{color:#ff6b6b}
 .bill-bottom{
-    border-top:1px solid var(--line);
-    padding:16px;
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+.total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.total span{color:#8996a2;font-size:12px}
+.total strong{font-size:22px}
+.pay-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+.pay{
+  border:0;
+  border-radius:9px;
+  padding:13px;
+  color:#fff;
+  font-weight:900;
+}
+.cash{background:#16865a}
+.card{background:#126be4}
+.secondary{
+  width:100%;
+  border:1px solid #24323e;
+  background:#0c131a;
+  color:#bac4cc;
+  padding:10px;
+  border-radius:9px;
+  margin-top:7px;
+  font-size:11px;
 }
 
-.total-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:13px;
+/* GENERIC */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
-
-.total-row span{
-    color:var(--muted);
+.stat{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
 }
-
-.total-row strong{
-    font-size:27px;
-}
-
-.payments{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-}
-
-.pay-btn{
-    height:54px;
-    border-radius:11px;
-
-    color:#fff;
-    font-weight:900;
-}
-
-.pay-cash{
-    background:#15945a;
-}
-
-.pay-card{
-    background:#1769d8;
-}
-
-.close-bill{
-    width:100%;
-    height:44px;
-    margin-top:8px;
-
-    border-radius:10px;
-
-    background:#20262d;
-    color:#fff;
-    border:1px solid #323a43;
-
-    font-weight:800;
-}
-
-/* =========================
-   LISTS
-========================= */
-
+.stat small{color:#788692;font-size:10px}
+.stat strong{display:block;font-size:22px;margin-top:8px}
 .list{
-    display:flex;
-    flex-direction:column;
+  margin-top:12px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px;
+  border-bottom:1px solid #17212a;
+}
+.row:last-child{border-bottom:0}
+.row strong{font-size:12px}
+.row small{display:block;color:#74818d;font-size:10px;margin-top:4px}
+
+.action{
+  border:1px solid #273540;
+  background:#101820;
+  color:#fff;
+  border-radius:8px;
+  padding:8px 11px;
+  font-size:11px;
+  font-weight:800;
+}
+.action.blue{background:var(--blue);border-color:var(--blue)}
+.action.red{background:#41191c;border-color:#703034;color:#ffb1b1}
+.action.green{background:#123d2c;border-color:#1c6848;color:#79e8b4}
+
+.form{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+}
+.form label{
+  display:block;
+  color:#7e8c98;
+  font-size:10px;
+  margin-bottom:6px;
+}
+.form input,.form select{
+  width:100%;
+  background:#080d12;
+  border:1px solid #202e39;
+  color:#fff;
+  border-radius:8px;
+  padding:10px;
+  outline:none;
+  margin-bottom:10px;
 }
 
-.list-row{
-    min-height:70px;
-
-    padding:14px 17px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:1px solid var(--line);
-}
-
-.list-row:last-child{
-    border-bottom:0;
-}
-
-.list-main strong{
-    display:block;
-    font-size:13px;
-}
-
-.list-main small{
-    display:block;
-    color:var(--muted);
-    margin-top:5px;
-    font-size:11px;
-}
-
-.list-actions{
-    display:flex;
-    gap:7px;
-}
-
-.small-btn{
-    padding:8px 11px;
-
-    border-radius:8px;
-
-    background:#1b222a;
-    color:#fff;
-
-    font-size:11px;
-    font-weight:800;
-}
-
-.small-btn.blue{
-    background:var(--blue);
-}
-
-.small-btn.red{
-    color:#ff7378;
-}
-
-/* =========================
-   MODAL
-========================= */
-
+/* MODAL */
 .modal{
-    position:fixed;
-    inset:0;
-
-    z-index:3000;
-
-    display:none;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(7px);
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
 }
-
-.modal.show{
-    display:flex;
-}
-
+.modal.show{display:flex}
 .modal-box{
-    width:min(520px,100%);
-
-    background:#101419;
-    border:1px solid #303842;
-    border-radius:18px;
-
-    box-shadow:0 30px 100px rgba(0,0,0,.6);
-
-    overflow:hidden;
+  width:min(470px,100%);
+  background:#0b1117;
+  border:1px solid #24333f;
+  border-radius:15px;
+  box-shadow:0 30px 90px #000;
+  padding:20px;
 }
-
-.modal-head{
-    padding:18px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:1px solid var(--line);
-}
-
-.modal-head h3{
-    font-size:16px;
-}
-
-.modal-close{
-    background:none;
-    color:#8e98a4;
-    font-size:22px;
-}
-
-.modal-body{
-    padding:20px;
-}
-
+.modal-box h3{font-size:17px;margin-bottom:6px}
+.modal-box p{font-size:11px;color:#7d8a96;margin-bottom:16px}
 .modal-actions{
-    padding:15px;
-
-    display:flex;
-    gap:8px;
-
-    border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
-
 .modal-actions button{
-    flex:1;
-    height:46px;
-
-    border-radius:10px;
-
-    font-weight:800;
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #293743;
+  background:#111a22;
+  color:#fff;
+}
+.modal-actions .primary{
+  background:var(--blue);
+  border-color:var(--blue);
 }
 
-.btn-blue{
-    background:var(--blue);
-    color:white;
-}
-
-.btn-dark{
-    background:#20262d;
-    color:white;
-}
-
-.input{
-    width:100%;
-    height:48px;
-
-    background:#0a0e12;
-    border:1px solid #303842;
-    border-radius:10px;
-
-    color:white;
-
-    padding:0 13px;
-
-    outline:none;
-}
-
-.input:focus{
-    border-color:var(--blue);
-}
-
-.field{
-    margin-bottom:14px;
-}
-
-.field label{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-    font-weight:700;
-    margin-bottom:7px;
-}
-
-.close-summary{
-    display:grid;
-    gap:9px;
-}
-
-.summary-row{
-    display:flex;
-    justify-content:space-between;
-
-    padding:11px 0;
-
-    border-bottom:1px solid #20262d;
-}
-
-.summary-row span{
-    color:var(--muted);
-}
-
-.summary-row strong{
-    font-variant-numeric:tabular-nums;
-}
-
-/* =========================
-   TOAST
-========================= */
-
+/* TOAST */
 .toast{
-    position:fixed;
-
-    left:50%;
-    bottom:24px;
-
-    transform:translateX(-50%) translateY(20px);
-
-    z-index:5000;
-
-    padding:12px 18px;
-
-    border-radius:10px;
-
-    background:#171c22;
-    border:1px solid #37404a;
-
-    color:#fff;
-
-    font-size:13px;
-    font-weight:700;
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:.18s;
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%) translateY(20px);
+  background:#101820;
+  border:1px solid #294154;
+  color:#fff;
+  padding:11px 16px;
+  border-radius:9px;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:1000;
 }
-
 .toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* PRINT */
+.print-area{display:none}
 
-@media(max-width:1000px){
-
-    .topbar{
-        height:auto;
-        min-height:70px;
-        flex-wrap:wrap;
-    }
-
-    .brand{
-        min-width:auto;
-    }
-
-    .nav{
-        order:3;
-        width:100%;
-        overflow-x:auto;
-        padding-bottom:2px;
-    }
-
-    .user-area{
-        margin-left:auto;
-    }
-
-    .app{
-        padding:18px;
-    }
-
-    .pos-layout{
-        grid-template-columns:1fr;
-    }
-
-    .bill{
-        min-height:500px;
-    }
+@media print{
+  body>*{display:none!important}
+  .print-area{
+    display:block!important;
+    color:#000!important;
+    background:#fff!important;
+    padding:20px;
+  }
 }
 
-@media(max-width:700px){
-
-    .brand-name{
-        display:none;
-    }
-
-    .clock{
-        display:none;
-    }
-
-    .quick-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .tables{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .products{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .welcome h1{
-        letter-spacing:-2px;
-    }
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .pos-layout{grid-template-columns:160px 1fr 310px}
+  .products{grid-template-columns:repeat(3,1fr)}
 }
-
-@media(max-width:450px){
-
-    .app{
-        padding:12px;
-    }
-
-    .quick-grid{
-        grid-template-columns:1fr;
-    }
-
-    .tables{
-        grid-template-columns:repeat(3,1fr);
-    }
+@media(max-width:850px){
+  .topbar{
+    height:auto;
+    min-height:60px;
+    flex-wrap:wrap;
+    padding:9px;
+  }
+  .logo{min-width:auto}
+  .top-actions{
+    order:3;
+    width:100%;
+    overflow-x:auto;
+  }
+  .user-box{margin-left:auto}
+  .pos-layout{grid-template-columns:1fr}
+  .tables-panel{order:1}
+  .menu-panel{order:2}
+  .bill{order:3;min-height:450px}
+  .tables-list{
+    grid-template-columns:repeat(4,1fr);
+  }
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .welcome-grid{grid-template-columns:repeat(2,1fr)}
+  .welcome-card.main{grid-column:span 2}
+}
+@media(max-width:520px){
+  .products{grid-template-columns:repeat(2,1fr)}
+  .tables-list{grid-template-columns:repeat(3,1fr)}
+  .cards{grid-template-columns:1fr}
+  .welcome-grid{grid-template-columns:1fr 1fr}
+  .welcome-card.main{grid-column:span 2}
 }
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
 <header class="topbar">
+  <div class="logo">MY BAR</div>
+  <div class="status"></div>
 
-    <div class="brand">
-        <div class="brand-logo">M</div>
-        <div class="brand-name" id="appName">MY BAR</div>
-    </div>
+  <div class="top-actions">
+    <button class="top-btn active" onclick="showPage('pos',this)">FATURË E RE</button>
+    <button class="top-btn" onclick="showPage('tables',this)">TAVOLINAT</button>
+    <button class="top-btn" onclick="showPage('invoices',this)">FATURAT</button>
+    <button class="top-btn" onclick="showPage('cash',this)">ARKA</button>
+    <button class="top-btn" onclick="showPage('shift',this)">TURNI</button>
+    <button class="top-btn" onclick="showPage('fiscal',this)">FISKAL</button>
+  </div>
 
-    <nav class="nav">
+  <div class="user-box">
+    <strong id="userName">Kamarier</strong>
+    <small id="userRole">KAMARIER</small>
+  </div>
 
-        <button class="nav-btn active" data-page="welcome">
-            KRYESORE
-        </button>
-
-        <button class="nav-btn" data-page="pos">
-            FATURË E RE
-        </button>
-
-        <button class="nav-btn" data-page="invoices">
-            FATURAT
-        </button>
-
-        <button class="nav-btn" data-page="tables">
-            TAVOLINAT
-        </button>
-
-        <button class="nav-btn" data-page="cash">
-            ARKA
-        </button>
-
-        <button class="nav-btn" data-page="fiscal">
-            FISKAL
-        </button>
-
-        <button class="nav-btn" id="shiftButton">
-            HAP TURNIN
-        </button>
-
-    </nav>
-
-    <div class="user-area">
-        <span class="user-name" id="userName">Kamarier</span>
-        <span class="clock" id="clock">00:00</span>
-        <span class="status-dot"></span>
-    </div>
-
+  <div class="clock" id="clock">00:00</div>
 </header>
 
+<!-- WELCOME -->
+<section class="welcome" id="welcome">
+  <div class="welcome-inner">
+    <div class="welcome-badge">SISTEM PREMIUM</div>
+    <h1>WELCOME MY BAR</h1>
+    <p id="welcomeInfo">Sistem profesional për menaxhimin e barit</p>
 
-<main class="app">
+    <div class="welcome-grid">
+      <button class="welcome-card main" onclick="newBill()">
+        FATURË E RE
+      </button>
 
-<!-- =========================
-     WELCOME
-========================= -->
+      <button class="welcome-card" onclick="showPage('tables')">
+        TAVOLINAT
+      </button>
 
-<section class="page active" id="page-welcome">
+      <button class="welcome-card" onclick="showPage('invoices')">
+        FATURAT E MIA
+      </button>
 
-    <div class="welcome">
+      <button class="welcome-card" onclick="openTransfer()">
+        TRANSFERO
+      </button>
 
-        <div class="welcome-small">MY BAR POS</div>
+      <button class="welcome-card" onclick="showPage('cash')">
+        PËRMBLEDHJE
+      </button>
 
-        <h1>MIRË SE VINI</h1>
+      <button class="welcome-card" onclick="openCloseTable()">
+        MBYLL TAVOLINË
+      </button>
 
-        <p id="welcomeText">
-            Sistemi është gati për punë.
-        </p>
+      <button class="welcome-card" onclick="toggleShift()">
+        HAP / MBYLL TURNIN
+      </button>
 
-        <button class="new-bill" onclick="newBill()">
-            <strong>FATURË E RE</strong>
-            <span>Hap një faturë të re</span>
+      <button class="welcome-card" onclick="lockScreen()">
+        BLLOKO
+      </button>
+
+      <button class="welcome-card" onclick="logout()">
+        DALJE
+      </button>
+    </div>
+  </div>
+</section>
+
+<main class="content" id="content">
+
+<!-- POS -->
+<section class="page active" id="page-pos">
+
+  <div class="page-title">
+    <h2>Faturë e re</h2>
+    <span id="selectedTableLabel">Zgjidh tavolinën</span>
+  </div>
+
+  <div class="pos-layout">
+
+    <div class="panel tables-panel">
+      <div class="panel-head">TAVOLINAT</div>
+      <div class="tables-list" id="posTables"></div>
+    </div>
+
+    <div class="panel menu-panel">
+      <div class="panel-head">MENU</div>
+
+      <div class="menu-area">
+
+        <input
+          class="search"
+          id="search"
+          type="search"
+          placeholder="Kërko produkt..."
+          oninput="renderProducts()"
+        >
+
+        <div class="categories" id="categories"></div>
+
+        <div class="products" id="products"></div>
+
+      </div>
+    </div>
+
+    <div class="panel bill">
+      <div class="bill-head">
+        <strong id="billTitle">Faturë e re</strong>
+        <small id="billMeta">Zgjidh një tavolinë</small>
+      </div>
+
+      <div class="bill-items" id="billItems">
+        <div class="empty">Zgjidh një tavolinë dhe shto produkte.</div>
+      </div>
+
+      <div class="bill-bottom">
+
+        <div class="total">
+          <span>TOTAL</span>
+          <strong id="billTotal">0 L</strong>
+        </div>
+
+        <div class="pay-grid">
+          <button class="pay cash" onclick="payCurrent('cash')">
+            CASH
+          </button>
+
+          <button class="pay card" onclick="payCurrent('card')">
+            CARD
+          </button>
+        </div>
+
+        <button class="secondary" onclick="openTransfer()">
+          TRANSFERO FATURËN
         </button>
 
-        <div class="quick-grid">
+        <button class="secondary" onclick="openCloseTable()">
+          MBYLL TAVOLINËN
+        </button>
 
-            <button class="quick-btn" onclick="showPage('invoices')">
-                FATURAT E MIA
-                <small>Shiko faturat</small>
-            </button>
-
-            <button class="quick-btn" onclick="showPage('tables')">
-                DETAJE TAVOLINE
-                <small>Shiko tavolinat</small>
-            </button>
-
-            <button class="quick-btn" onclick="transferTable()">
-                TRANSFERO
-                <small>Ndrysho tavolinën</small>
-            </button>
-
-            <button class="quick-btn" onclick="showPage('cash')">
-                PËRMBLEDHJE
-                <small>Shitjet e turnit</small>
-            </button>
-
-            <button class="quick-btn blue" onclick="closeTableMenu()">
-                MBYLL TAVOLINË
-                <small>Mbyll faturën e tavolinës</small>
-            </button>
-
-            <button class="quick-btn red" onclick="logout()">
-                DALJE
-                <small>Dil nga llogaria</small>
-            </button>
-
-        </div>
-
+      </div>
     </div>
 
+  </div>
 </section>
 
-
-<!-- =========================
-     POS
-========================= -->
-
-<section class="page" id="page-pos">
-
-    <div class="page-title">
-        <div>
-            <h2>FATURË E RE</h2>
-            <span id="posSubtitle">Zgjidh tavolinën dhe shto produktet</span>
-        </div>
-    </div>
-
-    <div class="pos-layout">
-
-        <div>
-
-            <div class="panel">
-
-                <div class="panel-head">
-                    <strong>TAVOLINAT</strong>
-                    <span id="selectedTableLabel">
-                        Pa tavolinë
-                    </span>
-                </div>
-
-                <div class="tables" id="posTables"></div>
-
-                <div class="categories" id="categories"></div>
-
-                <div class="products" id="products"></div>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel bill">
-
-            <div class="bill-head">
-
-                <div class="bill-head-top">
-                    <strong class="bill-number" id="billNumber">
-                        Asnjë faturë
-                    </strong>
-
-                    <span class="bill-status" id="billStatus">
-                        —
-                    </span>
-                </div>
-
-                <div class="bill-table" id="billTable">
-                    Zgjidh tavolinën
-                </div>
-
-            </div>
-
-            <div class="bill-items" id="billItems">
-
-                <div style="
-                    padding:40px 15px;
-                    text-align:center;
-                    color:#69737e;
-                    font-size:13px;
-                ">
-                    Nuk ka faturë aktive.
-                </div>
-
-            </div>
-
-            <div class="bill-bottom">
-
-                <div class="total-row">
-                    <span>TOTAL</span>
-                    <strong id="billTotal">0 L</strong>
-                </div>
-
-                <div class="payments">
-
-                    <button
-                        class="pay-btn pay-cash"
-                        onclick="payBill('cash')"
-                    >
-                        CASH
-                    </button>
-
-                    <button
-                        class="pay-btn pay-card"
-                        onclick="payBill('card')"
-                    >
-                        CARD
-                    </button>
-
-                </div>
-
-                <button
-                    class="close-bill"
-                    onclick="closeCurrentBill()"
-                >
-                    MBYLL FATURË
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     INVOICES
-========================= -->
-
-<section class="page" id="page-invoices">
-
-    <div class="page-title">
-        <div>
-            <h2>FATURAT E MIA</h2>
-            <span>Faturat e hapura dhe të mbyllura</span>
-        </div>
-    </div>
-
-    <div class="panel">
-        <div class="list" id="invoiceList"></div>
-    </div>
-
-</section>
-
-
-<!-- =========================
-     TABLES
-========================= -->
-
+<!-- TABLES -->
 <section class="page" id="page-tables">
+  <div class="page-title">
+    <h2>Tavolinat</h2>
+    <span id="tablesSummary"></span>
+  </div>
 
-    <div class="page-title">
-        <div>
-            <h2>TAVOLINAT</h2>
-            <span>Gjendja e tavolinave</span>
-        </div>
-    </div>
-
-    <div class="panel">
-
-        <div class="tables" id="allTables"></div>
-
-    </div>
-
+  <div class="cards" id="tableCards"></div>
 </section>
 
+<!-- INVOICES -->
+<section class="page" id="page-invoices">
+  <div class="page-title">
+    <h2>Faturat e mia</h2>
+    <span id="invoiceSummary"></span>
+  </div>
 
-<!-- =========================
-     CASH
-========================= -->
+  <div class="list" id="invoiceList"></div>
+</section>
 
+<!-- CASH -->
 <section class="page" id="page-cash">
+  <div class="page-title">
+    <h2>Arka / Përmbledhje</h2>
+    <span>Sot</span>
+  </div>
 
-    <div class="page-title">
-        <div>
-            <h2>ARKA</h2>
-            <span>Përmbledhja e turnit</span>
-        </div>
+  <div class="cards">
+    <div class="stat">
+      <small>SHITJE SOT</small>
+      <strong id="salesToday">0 L</strong>
     </div>
 
-    <div class="panel">
-
-        <div class="list">
-
-            <div class="list-row">
-                <div class="list-main">
-                    <strong>Shitje totale</strong>
-                    <small>Turni aktual</small>
-                </div>
-                <strong id="cashSales">0 L</strong>
-            </div>
-
-            <div class="list-row">
-                <div class="list-main">
-                    <strong>CASH</strong>
-                    <small>Pagesa me para</small>
-                </div>
-                <strong id="cashCash">0 L</strong>
-            </div>
-
-            <div class="list-row">
-                <div class="list-main">
-                    <strong>CARD</strong>
-                    <small>Pagesa me kartë</small>
-                </div>
-                <strong id="cashCard">0 L</strong>
-            </div>
-
-            <div class="list-row">
-                <div class="list-main">
-                    <strong>Fatura</strong>
-                    <small>Numri i faturave</small>
-                </div>
-                <strong id="cashInvoices">0</strong>
-            </div>
-
-        </div>
-
+    <div class="stat">
+      <small>CASH</small>
+      <strong id="cashToday">0 L</strong>
     </div>
 
+    <div class="stat">
+      <small>CARD</small>
+      <strong id="cardToday">0 L</strong>
+    </div>
+
+    <div class="stat">
+      <small>FATURA</small>
+      <strong id="invoiceCount">0</strong>
+    </div>
+  </div>
+
+  <div class="list" id="cashList"></div>
 </section>
 
+<!-- SHIFT -->
+<section class="page" id="page-shift">
+  <div class="page-title">
+    <h2>Turni</h2>
+    <span id="shiftStatus">Mbyllur</span>
+  </div>
 
-<!-- =========================
-     FISCAL
-========================= -->
+  <div class="cards">
+    <div class="stat">
+      <small>STATUSI</small>
+      <strong id="shiftStatusBig">MBYLLUR</strong>
+    </div>
 
+    <div class="stat">
+      <small>SHITJE</small>
+      <strong id="shiftSales">0 L</strong>
+    </div>
+
+    <div class="stat">
+      <small>CASH</small>
+      <strong id="shiftCash">0 L</strong>
+    </div>
+
+    <div class="stat">
+      <small>CARD</small>
+      <strong id="shiftCard">0 L</strong>
+    </div>
+  </div>
+
+  <div class="form">
+    <button class="action blue" onclick="toggleShift()">
+      HAP / MBYLL TURNIN
+    </button>
+  </div>
+</section>
+
+<!-- FISCAL -->
 <section class="page" id="page-fiscal">
+  <div class="page-title">
+    <h2>Fiskal</h2>
+    <span>Manual</span>
+  </div>
 
-    <div class="page-title">
-        <div>
-            <h2>FISKAL</h2>
-            <span>Menaxhim manual fiskal</span>
-        </div>
-    </div>
+  <div class="form">
+    <p style="color:#8996a2;font-size:12px;line-height:1.6">
+      Faturat normale nuk fiskalizohen dhe nuk printohen automatikisht.
+      Kur klienti kërkon faturë fiskale, zgjidh faturën dhe përdor
+      FATURO → FISKALIZO → PRINT.
+    </p>
 
-    <div class="panel">
-
-        <div class="list">
-
-            <div class="list-row">
-                <div class="list-main">
-                    <strong>Printer fiskal</strong>
-                    <small id="printerStatus">OFF</small>
-                </div>
-
-                <button
-                    class="small-btn blue"
-                    onclick="togglePrinter()"
-                    id="printerButton"
-                >
-                    AKTIVIZO
-                </button>
-            </div>
-
-            <div class="list-row">
-                <div class="list-main">
-                    <strong>Faturim manual</strong>
-                    <small>Zgjidh faturën dhe fiskalizoje manualisht</small>
-                </div>
-
-                <button
-                    class="small-btn blue"
-                    onclick="fiscalizeSelected()"
-                >
-                    FATURO
-                </button>
-            </div>
-
-        </div>
-
-    </div>
-
+    <div class="list" id="fiscalList"></div>
+  </div>
 </section>
 
 </main>
 
-
-<!-- =========================
-     SHIFT MODAL
-========================= -->
-
-<div class="modal" id="shiftModal">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-            <h3 id="shiftModalTitle">HAP TURNIN</h3>
-            <button class="modal-close" onclick="closeModal('shiftModal')">
-                ×
-            </button>
-        </div>
-
-        <div class="modal-body">
-
-            <div id="openShiftBody">
-
-                <div class="field">
-                    <label>PARA FILLIMTARE NË ARKË</label>
-                    <input
-                        class="input"
-                        id="openingCash"
-                        type="number"
-                        min="0"
-                        value="0"
-                    >
-                </div>
-
-            </div>
-
-            <div id="closeShiftBody" class="hidden">
-
-                <div class="close-summary">
-
-                    <div class="summary-row">
-                        <span>Shitje totale</span>
-                        <strong id="shiftSales">0 L</strong>
-                    </div>
-
-                    <div class="summary-row">
-                        <span>Cash</span>
-                        <strong id="shiftCash">0 L</strong>
-                    </div>
-
-                    <div class="summary-row">
-                        <span>Card</span>
-                        <strong id="shiftCard">0 L</strong>
-                    </div>
-
-                    <div class="summary-row">
-                        <span>Cash i pritshëm</span>
-                        <strong id="expectedCash">0 L</strong>
-                    </div>
-
-                    <div class="field" style="margin-top:12px">
-                        <label>CASH NË ARKË</label>
-
-                        <input
-                            class="input"
-                            id="countedCash"
-                            type="number"
-                            min="0"
-                            value="0"
-                            oninput="calculateDifference()"
-                        >
-                    </div>
-
-                    <div class="summary-row">
-                        <span>Diferenca</span>
-                        <strong id="cashDifference">0 L</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="modal-actions">
-
-            <button
-                class="btn-dark"
-                onclick="closeModal('shiftModal')"
-            >
-                ANULO
-            </button>
-
-            <button
-                class="btn-blue"
-                id="shiftConfirmButton"
-                onclick="confirmShiftAction()"
-            >
-                HAP TURNIN
-            </button>
-
-        </div>
-
-    </div>
-
 </div>
 
+<!-- PAYMENT MODAL -->
+<div class="modal" id="paymentModal">
+  <div class="modal-box">
+    <h3>Konfirmo pagesën</h3>
+    <p id="paymentText"></p>
 
-<!-- =========================
-     TABLE CLOSE MODAL
-========================= -->
-
-<div class="modal" id="tableModal">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-            <h3>MBYLL TAVOLINË</h3>
-
-            <button class="modal-close"
-                    onclick="closeModal('tableModal')">
-                ×
-            </button>
-        </div>
-
-        <div class="modal-body">
-
-            <div class="tables" id="closeTableGrid"></div>
-
-        </div>
-
+    <div class="modal-actions">
+      <button onclick="closeModal('paymentModal')">ANULO</button>
+      <button class="primary" id="paymentConfirm">KONFIRMO</button>
     </div>
-
+  </div>
 </div>
 
-
-<!-- =========================
-     TRANSFER MODAL
-========================= -->
-
+<!-- TRANSFER MODAL -->
 <div class="modal" id="transferModal">
+  <div class="modal-box">
+    <h3>Transfero faturën</h3>
+    <p>Zgjidh tavolinën ku do të transferohet porosia.</p>
 
-    <div class="modal-box">
+    <select id="transferSelect"
+      style="width:100%;background:#080d12;color:#fff;border:1px solid #24333f;padding:11px;border-radius:8px;margin-bottom:15px">
+    </select>
 
-        <div class="modal-head">
-            <h3>TRANSFERIM TAVOLINE</h3>
-
-            <button class="modal-close"
-                    onclick="closeModal('transferModal')">
-                ×
-            </button>
-        </div>
-
-        <div class="modal-body">
-
-            <div class="field">
-                <label>TAVOLINA AKTUALE</label>
-                <input class="input" id="transferFrom" disabled>
-            </div>
-
-            <div class="field">
-                <label>TAVOLINA E RE</label>
-                <select class="input" id="transferTo"></select>
-            </div>
-
-        </div>
-
-        <div class="modal-actions">
-
-            <button
-                class="btn-dark"
-                onclick="closeModal('transferModal')"
-            >
-                ANULO
-            </button>
-
-            <button
-                class="btn-blue"
-                onclick="confirmTransfer()"
-            >
-                TRANSFERO
-            </button>
-
-        </div>
-
+    <div class="modal-actions">
+      <button onclick="closeModal('transferModal')">ANULO</button>
+      <button class="primary" onclick="confirmTransfer()">TRANSFERO</button>
     </div>
-
+  </div>
 </div>
 
+<!-- CLOSE TABLE -->
+<div class="modal" id="closeTableModal">
+  <div class="modal-box">
+    <h3>Mbyll tavolinën</h3>
+    <p id="closeTableText"></p>
 
-<!-- =========================
-     TOAST
-========================= -->
+    <div class="modal-actions">
+      <button onclick="closeModal('closeTableModal')">ANULO</button>
+      <button class="primary" onclick="confirmCloseTable()">MBYLL</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHIFT MODAL -->
+<div class="modal" id="shiftModal">
+  <div class="modal-box">
+    <h3 id="shiftModalTitle">Hap turnin</h3>
+    <p id="shiftModalText"></p>
+
+    <input
+      id="shiftCashInput"
+      type="number"
+      min="0"
+      placeholder="Cash fillestar"
+      style="width:100%;background:#080d12;color:#fff;border:1px solid #24333f;padding:11px;border-radius:8px;margin-bottom:15px"
+    >
+
+    <div class="modal-actions">
+      <button onclick="closeModal('shiftModal')">ANULO</button>
+      <button class="primary" onclick="confirmShift()">KONFIRMO</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOCK -->
+<div class="modal" id="lockModal">
+  <div class="modal-box">
+    <h3>MY BAR është bllokuar</h3>
+    <p>Shkruaj fjalëkalimin e përdoruesit për të vazhduar.</p>
+
+    <input
+      id="unlockPassword"
+      type="password"
+      placeholder="Fjalëkalimi"
+      style="width:100%;background:#080d12;color:#fff;border:1px solid #24333f;padding:11px;border-radius:8px;margin-bottom:15px"
+    >
+
+    <div class="modal-actions">
+      <button class="primary" style="grid-column:span 2" onclick="unlockScreen()">
+        HAP
+      </button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
+<div class="print-area" id="printArea"></div>
 
 <script>
 "use strict";
@@ -1534,28 +940,43 @@ button{
    STORAGE
 ========================================================= */
 
-const USERS_KEY="MYBAR_USERS_FINAL";
-const SESSION_KEY="MY_BAR_SESSION";
+const USERS_KEY = "MYBAR_USERS_FINAL";
+const SESSION_KEY = "MY_BAR_SESSION";
+const PRODUCTS_KEY = "MYBAR_PRODUCTS_FINAL";
+const TABLES_KEY = "MYBAR_TABLES_FINAL";
+const INVOICES_KEY = "MYBAR_INVOICES_FINAL";
+const SETTINGS_KEY = "MYBAR_SETTINGS_FINAL";
+const STOCK_KEY = "MYBAR_STOCK_FINAL";
+const TABLE_COUNT_KEY = "MYBAR_TABLE_COUNT_FINAL";
+const SHIFT_KEY = "MYBAR_CURRENT_SHIFT";
+const FISCAL_KEY = "MYBAR_FISCAL_FINAL";
 
-const PRODUCTS_KEY="MYBAR_PRODUCTS_FINAL";
-const TABLES_KEY="MYBAR_TABLES_FINAL";
-const INVOICES_KEY="MYBAR_INVOICES_FINAL";
-const SETTINGS_KEY="MYBAR_SETTINGS_FINAL";
-const STOCK_KEY="MYBAR_STOCK_FINAL";
-const TABLE_COUNT_KEY="MYBAR_TABLE_COUNT_FINAL";
-
-const SHIFT_KEY="MYBAR_CURRENT_SHIFT";
-const SHIFT_HISTORY_KEY="MYBAR_SHIFT_HISTORY";
-const CASH_MOVEMENTS_KEY="MYBAR_CASH_MOVEMENTS";
-
-const FISCAL_KEY="MYBAR_FISCAL_FINAL";
-
+const SELECTED_TABLE_KEY = "MYBAR_SELECTED_TABLE";
 
 /* =========================================================
-   DEFAULT PRODUCTS
+   DEFAULT USERS
 ========================================================= */
 
-const DEFAULT_PRODUCTS=[
+const DEFAULT_USERS = [
+  {
+    username:"admin",
+    password:"1234",
+    role:"admin",
+    name:"Administrator"
+  },
+  {
+    username:"kamarier",
+    password:"1234",
+    role:"waiter",
+    name:"Kamarier"
+  }
+];
+
+/* =========================================================
+   DEFAULT MENU
+========================================================= */
+
+const DEFAULT_PRODUCTS = [
 {id:1,name:"Espresso",category:"Kafe",price:100},
 {id:2,name:"Espresso Dopio",category:"Kafe",price:150},
 {id:3,name:"Macchiato",category:"Kafe",price:120},
@@ -1631,96 +1052,107 @@ const DEFAULT_PRODUCTS=[
 {id:163,name:"Mix Nuts",category:"Snacks",price:350}
 ];
 
-
 /* =========================================================
    HELPERS
 ========================================================= */
 
 function getJSON(key,fallback){
-    try{
-        const raw=localStorage.getItem(key);
-        return raw?JSON.parse(raw):fallback;
-    }catch{
-        return fallback;
-    }
+  try{
+    const v=localStorage.getItem(key);
+    return v ? JSON.parse(v) : fallback;
+  }catch{
+    return fallback;
+  }
 }
 
 function setJSON(key,value){
-    localStorage.setItem(key,JSON.stringify(value));
+  localStorage.setItem(key,JSON.stringify(value));
 }
 
 function money(value){
-    return Number(value||0).toLocaleString("sq-AL")+" L";
+  return Number(value||0).toLocaleString("sq-AL")+" L";
 }
 
 function escapeHTML(value){
-    return String(value??"")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 function toast(message){
-    const box=document.getElementById("toast");
+  const el=document.getElementById("toast");
+  el.textContent=message;
+  el.classList.add("show");
 
-    box.textContent=message;
-    box.classList.add("show");
+  clearTimeout(window.__toastTimer);
 
-    clearTimeout(window.__toastTimer);
-
-    window.__toastTimer=setTimeout(()=>{
-        box.classList.remove("show");
-    },1800);
+  window.__toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },2200);
 }
-
 
 /* =========================================================
    SESSION
 ========================================================= */
 
 function getCurrentSession(){
+  let session=getJSON(SESSION_KEY,null);
 
-    let session=getJSON(SESSION_KEY,null);
+  if(!session){
+    session=getJSON("barCurrentUser",null);
+  }
 
-    if(!session){
-        session=getJSON("barCurrentUser",null);
-    }
+  if(!session)return null;
 
-    if(!session){
-        return null;
-    }
+  const username=String(
+    session.username||session.user||""
+  ).toLowerCase();
 
-    const username=String(
-        session.username||session.user||""
-    ).toLowerCase();
+  const role=String(
+    session.role||""
+  ).toLowerCase();
 
-    const role=String(
-        session.role||""
-    ).toLowerCase();
-
-    if(
-        username==="admin" ||
-        role==="admin" ||
-        role==="administrator"
-    ){
-        return{
-            username:"admin",
-            user:"admin",
-            role:"admin",
-            name:"Administrator"
-        };
-    }
-
+  if(
+    username==="admin" ||
+    role==="admin" ||
+    role==="administrator"
+  ){
     return{
-        username,
-        user:username,
-        role:"waiter",
-        name:session.name||"Kamarier"
+      username:"admin",
+      user:"admin",
+      role:"admin",
+      name:"Administrator"
     };
+  }
+
+  if(
+    role==="waiter" ||
+    role==="kamarier"
+  ){
+    return{
+      username:username,
+      user:username,
+      role:"waiter",
+      name:session.name||"Kamarier"
+    };
+  }
+
+  return session;
 }
 
+function requireSession(){
+  const user=getCurrentSession();
+
+  if(!user){
+    window.location.href="login.html";
+    return null;
+  }
+
+  return user;
+}
 
 /* =========================================================
    INITIALIZE
@@ -1728,46 +1160,34 @@ function getCurrentSession(){
 
 function initialize(){
 
-    if(!localStorage.getItem(PRODUCTS_KEY)){
-        setJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
-    }
+  if(!localStorage.getItem(USERS_KEY)){
+    setJSON(USERS_KEY,DEFAULT_USERS);
+  }
 
-    if(!localStorage.getItem(TABLE_COUNT_KEY)){
-        localStorage.setItem(TABLE_COUNT_KEY,"12");
-    }
+  if(!localStorage.getItem(PRODUCTS_KEY)){
+    setJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
+  }
 
-    if(!localStorage.getItem(TABLES_KEY)){
-        createTables();
-    }
+  if(!localStorage.getItem(TABLE_COUNT_KEY)){
+    localStorage.setItem(TABLE_COUNT_KEY,"12");
+  }
 
-    if(!localStorage.getItem(INVOICES_KEY)){
-        setJSON(INVOICES_KEY,[]);
-    }
+  if(!localStorage.getItem(TABLES_KEY)){
+    createTables();
+  }
 
-    if(!localStorage.getItem(STOCK_KEY)){
+  if(!localStorage.getItem(INVOICES_KEY)){
+    setJSON(INVOICES_KEY,[]);
+  }
 
-        const stock={};
+  if(!localStorage.getItem(SETTINGS_KEY)){
+    setJSON(SETTINGS_KEY,{
+      appName:"MY BAR"
+    });
+  }
 
-        DEFAULT_PRODUCTS.forEach(product=>{
-            stock[product.id]=20;
-        });
-
-        setJSON(STOCK_KEY,stock);
-    }
-
-    if(!localStorage.getItem(SETTINGS_KEY)){
-        setJSON(SETTINGS_KEY,{
-            appName:"MY BAR"
-        });
-    }
-
-    if(!localStorage.getItem(FISCAL_KEY)){
-        setJSON(FISCAL_KEY,{
-            printer:false
-        });
-    }
+  initializeStock();
 }
-
 
 /* =========================================================
    TABLES
@@ -1775,307 +1195,195 @@ function initialize(){
 
 function createTables(){
 
-    const count=
-        Number(localStorage.getItem(TABLE_COUNT_KEY))||12;
+  const count=Math.max(
+    1,
+    Math.min(
+      100,
+      Number(localStorage.getItem(TABLE_COUNT_KEY)||12)
+    )
+  );
 
-    const tables=[];
+  const old=getJSON(TABLES_KEY,[]);
 
-    for(let i=1;i<=count;i++){
+  const tables=[];
 
-        tables.push({
-            id:i,
-            name:"Tavolina "+i,
-            items:[],
-            openBillId:null
-        });
-    }
+  for(let i=1;i<=count;i++){
 
-    setJSON(TABLES_KEY,tables);
+    const existing=old.find(
+      t=>Number(t.id)===i
+    );
+
+    tables.push(
+      existing || {
+        id:i,
+        name:"Tavolina "+i,
+        items:[]
+      }
+    );
+  }
+
+  setJSON(TABLES_KEY,tables);
 }
 
 function getTables(){
-    return getJSON(TABLES_KEY,[]);
+  return getJSON(TABLES_KEY,[]);
 }
 
 function saveTables(tables){
-    setJSON(TABLES_KEY,tables);
+  setJSON(TABLES_KEY,tables);
 }
 
+function getSelectedTable(){
+  return Number(
+    localStorage.getItem(SELECTED_TABLE_KEY)||0
+  );
+}
+
+function selectTable(id){
+
+  localStorage.setItem(
+    SELECTED_TABLE_KEY,
+    String(id)
+  );
+
+  renderAll();
+
+  showPage("pos");
+
+}
+
+function getSelectedTableObject(){
+
+  const id=getSelectedTable();
+
+  return getTables().find(
+    t=>Number(t.id)===id
+  );
+}
 
 /* =========================================================
    STOCK
 ========================================================= */
 
+function initializeStock(){
+
+  const products=getJSON(
+    PRODUCTS_KEY,
+    DEFAULT_PRODUCTS
+  );
+
+  const stock=getJSON(STOCK_KEY,{});
+
+  products.forEach(p=>{
+    if(stock[p.id]===undefined){
+      stock[p.id]=20;
+    }
+  });
+
+  setJSON(STOCK_KEY,stock);
+}
+
 function getStock(id){
 
-    const stock=getJSON(STOCK_KEY,{});
+  const stock=getJSON(STOCK_KEY,{});
 
-    return Number(stock[id]??0);
+  return Number(stock[id]||0);
 }
 
+function setStock(id,value){
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+  const stock=getJSON(STOCK_KEY,{});
 
-function showPage(page){
+  stock[id]=Math.max(0,Number(value)||0);
 
-    document.querySelectorAll(".page")
-        .forEach(p=>p.classList.remove("active"));
-
-    const target=document.getElementById("page-"+page);
-
-    if(target){
-        target.classList.add("active");
-    }
-
-    document.querySelectorAll(".nav-btn[data-page]")
-        .forEach(btn=>{
-            btn.classList.toggle(
-                "active",
-                btn.dataset.page===page
-            );
-        });
-
-    if(page==="pos"){
-        renderPOS();
-    }
-
-    if(page==="invoices"){
-        renderInvoices();
-    }
-
-    if(page==="tables"){
-        renderAllTables();
-    }
-
-    if(page==="cash"){
-        renderCash();
-    }
+  setJSON(STOCK_KEY,stock);
 }
-
-
-/* =========================================================
-   NAV BUTTONS
-========================================================= */
-
-document.querySelectorAll(".nav-btn[data-page]")
-.forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-        showPage(button.dataset.page);
-
-    });
-
-});
-
-
-/* =========================================================
-   NEW BILL
-========================================================= */
-
-function newBill(){
-
-    const shift=getJSON(SHIFT_KEY,null);
-
-    if(!shift){
-
-        toast("Fillimisht hap turnin.");
-
-        openShift();
-
-        return;
-    }
-
-    showPage("pos");
-
-    toast("Zgjidh tavolinën.");
-}
-
-
-/* =========================================================
-   BILL NUMBER
-========================================================= */
-
-function nextBillNumber(){
-
-    const invoices=getJSON(INVOICES_KEY,[]);
-
-    let max=1000;
-
-    invoices.forEach(invoice=>{
-
-        const number=
-            Number(
-                String(invoice.number||"")
-                .replace(/\D/g,"")
-            );
-
-        if(number>max){
-            max=number;
-        }
-    });
-
-    return max+1;
-}
-
-
-/* =========================================================
-   POS
-========================================================= */
-
-let selectedTable=0;
-let selectedCategory="Të gjitha";
-
-function renderPOS(){
-
-    renderPOSTables();
-    renderCategories();
-    renderProducts();
-    renderBill();
-
-}
-
-function renderPOSTables(){
-
-    const container=
-        document.getElementById("posTables");
-
-    const tables=getTables();
-
-    container.innerHTML=tables.map(table=>{
-
-        const open=
-            Array.isArray(table.items)&&
-            table.items.length>0;
-
-        const selected=
-            Number(selectedTable)===Number(table.id);
-
-        const total=
-            getTableTotal(table);
-
-        return `
-            <button
-                class="table
-                ${open?"open":""}
-                ${selected?"selected":""}"
-                onclick="selectTable(${table.id})"
-            >
-                <strong>${table.id}</strong>
-                <small>
-                    ${open?money(total):"E lirë"}
-                </small>
-            </button>
-        `;
-
-    }).join("");
-}
-
-function selectTable(id){
-
-    selectedTable=Number(id);
-
-    renderPOSTables();
-    renderBill();
-
-    document.getElementById("selectedTableLabel")
-        .textContent="Tavolina "+id;
-
-    toast("Tavolina "+id);
-}
-
-
-/* =========================================================
-   CATEGORIES
-========================================================= */
-
-function renderCategories(){
-
-    const container=
-        document.getElementById("categories");
-
-    const products=
-        getJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
-
-    const categories=[
-        "Të gjitha",
-        ...new Set(products.map(p=>p.category))
-    ];
-
-    container.innerHTML=categories.map(category=>`
-
-        <button
-            class="category ${category===selectedCategory?"active":""}"
-            onclick="selectCategory(${JSON.stringify(category)})"
-        >
-            ${escapeHTML(category)}
-        </button>
-
-    `).join("");
-}
-
-function selectCategory(category){
-
-    selectedCategory=category;
-
-    renderCategories();
-    renderProducts();
-}
-
 
 /* =========================================================
    PRODUCTS
 ========================================================= */
 
-function renderProducts(){
+let selectedCategory="Të gjitha";
 
-    const container=
-        document.getElementById("products");
+function renderCategories(){
 
-    const products=
-        getJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
+  const el=document.getElementById("categories");
 
-    const filtered=
-        selectedCategory==="Të gjitha"
-        ?products
-        :products.filter(
-            p=>p.category===selectedCategory
-        );
+  const products=getJSON(
+    PRODUCTS_KEY,
+    DEFAULT_PRODUCTS
+  );
 
-    container.innerHTML=filtered.map(product=>{
+  const categories=[
+    "Të gjitha",
+    ...new Set(
+      products.map(p=>p.category)
+    )
+  ];
 
-        const stock=getStock(product.id);
-
-        return `
-
-            <button
-                class="product"
-                ${stock<=0?"disabled":""}
-                onclick="addProduct(${product.id})"
-                style="${stock<=0?"opacity:.35;cursor:not-allowed":""}"
-            >
-
-                <strong>
-                    ${escapeHTML(product.name)}
-                </strong>
-
-                <span>
-                    ${money(product.price)}
-                </span>
-
-                <small>
-                    ${stock>0?"Stok "+stock:"PA STOK"}
-                </small>
-
-            </button>
-
-        `;
-
-    }).join("");
+  el.innerHTML=categories.map(c=>`
+    <button
+      class="category ${c===selectedCategory?"active":""}"
+      onclick="selectCategory('${escapeHTML(c)}')"
+    >
+      ${escapeHTML(c)}
+    </button>
+  `).join("");
 }
 
+function selectCategory(category){
+
+  selectedCategory=category;
+
+  renderCategories();
+  renderProducts();
+
+}
+
+function renderProducts(){
+
+  const el=document.getElementById("products");
+
+  const query=
+    document.getElementById("search").value
+      .trim()
+      .toLowerCase();
+
+  const products=getJSON(
+    PRODUCTS_KEY,
+    DEFAULT_PRODUCTS
+  );
+
+  const filtered=products.filter(p=>{
+
+    const categoryOK=
+      selectedCategory==="Të gjitha" ||
+      p.category===selectedCategory;
+
+    const searchOK=
+      !query ||
+      p.name.toLowerCase().includes(query);
+
+    return categoryOK && searchOK;
+  });
+
+  el.innerHTML=filtered.map(p=>{
+
+    const stock=getStock(p.id);
+
+    return`
+      <button
+        class="product"
+        ${stock<=0?"disabled":""}
+        onclick="addProduct(${p.id})"
+      >
+        <strong>${escapeHTML(p.name)}</strong>
+        <span class="price">${money(p.price)}</span>
+        <small>Stok: ${stock}</small>
+      </button>
+    `;
+  }).join("");
+}
 
 /* =========================================================
    ADD PRODUCT
@@ -2083,763 +1391,678 @@ function renderProducts(){
 
 function addProduct(productId){
 
-    if(!selectedTable){
+  const table=getSelectedTableObject();
 
-        toast("Zgjidh një tavolinë.");
+  if(!table){
+    toast("Zgjidh një tavolinë.");
+    return;
+  }
 
-        return;
+  const products=getJSON(
+    PRODUCTS_KEY,
+    DEFAULT_PRODUCTS
+  );
+
+  const product=products.find(
+    p=>Number(p.id)===Number(productId)
+  );
+
+  if(!product)return;
+
+  const stock=getStock(productId);
+
+  if(stock<=0){
+    toast("Ky produkt nuk ka stok.");
+    return;
+  }
+
+  if(!Array.isArray(table.items)){
+    table.items=[];
+  }
+
+  const existing=table.items.find(
+    item=>Number(item.productId)===Number(productId)
+  );
+
+  if(existing){
+
+    if(existing.quantity>=stock){
+      toast("Nuk ka më stok.");
+      return;
     }
 
-    const shift=getJSON(SHIFT_KEY,null);
+    existing.quantity++;
 
-    if(!shift){
+  }else{
 
-        toast("Turni nuk është hapur.");
+    table.items.push({
+      productId:product.id,
+      name:product.name,
+      price:Number(product.price),
+      quantity:1
+    });
 
-        return;
-    }
+  }
 
-    const products=
-        getJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
+  saveTables(getTables());
 
-    const product=
-        products.find(
-            p=>Number(p.id)===Number(productId)
-        );
+  renderAll();
 
-    if(!product)return;
-
-    const tables=getTables();
-
-    const table=
-        tables.find(
-            t=>Number(t.id)===Number(selectedTable)
-        );
-
-    if(!table)return;
-
-    const stock=getStock(productId);
-
-    if(stock<=0){
-
-        toast("Ky produkt nuk ka stok.");
-
-        return;
-    }
-
-    if(!Array.isArray(table.items)){
-        table.items=[];
-    }
-
-    if(!table.openBillId){
-
-        table.openBillId=
-            Date.now();
-
-        table.billNumber=
-            nextBillNumber();
-
-        table.billCreatedAt=
-            new Date().toISOString();
-
-        table.waiter=
-            getCurrentSession()?.name||"Kamarier";
-    }
-
-    const existing=
-        table.items.find(
-            item=>
-                Number(item.productId)===Number(productId)
-        );
-
-    if(existing){
-
-        if(existing.quantity>=stock){
-
-            toast("Nuk ka më stok.");
-
-            return;
-        }
-
-        existing.quantity++;
-
-    }else{
-
-        table.items.push({
-
-            productId:product.id,
-            name:product.name,
-            price:Number(product.price),
-            quantity:1
-
-        });
-
-    }
-
-    saveTables(tables);
-
-    renderPOSTables();
-    renderBill();
-    renderProducts();
+  toast(product.name+" u shtua.");
 
 }
-
 
 /* =========================================================
    BILL
 ========================================================= */
 
-function getTableTotal(table){
+function getBillTotal(table){
 
-    return (table.items||[]).reduce(
-        (sum,item)=>
-            sum+
-            Number(item.price)*
-            Number(item.quantity),
-        0
-    );
-}
+  if(!table)return 0;
 
-function getSelectedTableObject(){
-
-    return getTables().find(
-        t=>Number(t.id)===Number(selectedTable)
-    );
+  return (table.items||[]).reduce(
+    (sum,item)=>
+      sum+
+      Number(item.price||0)*
+      Number(item.quantity||0),
+    0
+  );
 }
 
 function renderBill(){
 
-    const table=getSelectedTableObject();
+  const table=getSelectedTableObject();
 
-    const items=
-        document.getElementById("billItems");
+  const items=document.getElementById("billItems");
+  const total=document.getElementById("billTotal");
+  const title=document.getElementById("billTitle");
+  const meta=document.getElementById("billMeta");
+  const label=document.getElementById("selectedTableLabel");
 
-    const number=
-        document.getElementById("billNumber");
+  if(!table){
 
-    const status=
-        document.getElementById("billStatus");
-
-    const billTable=
-        document.getElementById("billTable");
-
-    const total=
-        document.getElementById("billTotal");
-
-    if(!table||!table.items.length){
-
-        number.textContent="Asnjë faturë";
-        status.textContent="—";
-
-        billTable.textContent=
-            selectedTable
-            ?"Tavolina "+selectedTable
-            :"Zgjidh tavolinën";
-
-        items.innerHTML=`
-
-            <div style="
-                padding:40px 15px;
-                text-align:center;
-                color:#69737e;
-                font-size:13px;
-            ">
-                Nuk ka produkte në faturë.
-            </div>
-
-        `;
-
-        total.textContent="0 L";
-
-        return;
-    }
-
-    number.textContent=
-        "Fatura #"+table.billNumber;
-
-    status.textContent="E HAPUR";
-
-    billTable.textContent=
-        table.name+" • "+(table.waiter||"Kamarier");
-
-    let sum=0;
+    title.textContent="Faturë e re";
+    meta.textContent="Zgjidh një tavolinë";
+    label.textContent="Zgjidh tavolinën";
 
     items.innerHTML=
-        table.items.map((item,index)=>{
+      `<div class="empty">
+        Zgjidh një tavolinë dhe shto produkte.
+      </div>`;
 
-            const itemTotal=
-                Number(item.price)*
-                Number(item.quantity);
+    total.textContent=money(0);
 
-            sum+=itemTotal;
+    return;
+  }
 
-            return `
+  label.textContent=table.name;
 
-                <div class="bill-item">
+  title.textContent="Faturë • "+table.name;
 
-                    <div>
-                        <div class="bill-item-name">
-                            ${escapeHTML(item.name)}
-                        </div>
+  meta.textContent=
+    table.items.length+
+    " produkt(e) në porosi";
 
-                        <div class="bill-item-info">
-                            ${money(item.price)}
-                            × ${item.quantity}
-                        </div>
-                    </div>
+  if(!table.items.length){
 
-                    <div class="qty">
+    items.innerHTML=
+      `<div class="empty">
+        Porosia është bosh.
+      </div>`;
 
-                        <button
-                            onclick="changeQuantity(${index},-1)"
-                        >
-                            −
-                        </button>
+    total.textContent=money(0);
 
-                        <span>
-                            ${item.quantity}
-                        </span>
+    return;
+  }
 
-                        <button
-                            onclick="changeQuantity(${index},1)"
-                        >
-                            +
-                        </button>
+  items.innerHTML=table.items.map((item,index)=>{
 
-                    </div>
+    const line=
+      Number(item.price)*
+      Number(item.quantity);
 
-                </div>
+    return`
+      <div class="bill-item">
 
-            `;
+        <div class="bill-item-info">
+          <strong>${escapeHTML(item.name)}</strong>
+          <small>
+            ${money(item.price)} × ${item.quantity}
+            = ${money(line)}
+          </small>
+        </div>
 
-        }).join("");
+        <div class="qty">
+          <button onclick="changeQuantity(${index},-1)">−</button>
+          <span>${item.quantity}</span>
+          <button onclick="changeQuantity(${index},1)">+</button>
+          <button
+            class="remove"
+            onclick="removeItem(${index})"
+          >×</button>
+        </div>
 
-    total.textContent=money(sum);
+      </div>
+    `;
+  }).join("");
+
+  total.textContent=money(
+    getBillTotal(table)
+  );
 }
-
-
-/* =========================================================
-   QUANTITY
-========================================================= */
 
 function changeQuantity(index,amount){
 
-    const tables=getTables();
+  const tables=getTables();
+  const id=getSelectedTable();
 
-    const table=
-        tables.find(
-            t=>Number(t.id)===Number(selectedTable)
-        );
+  const table=tables.find(
+    t=>Number(t.id)===id
+  );
 
-    if(!table)return;
+  if(!table)return;
 
-    const item=table.items[index];
+  const item=table.items[index];
 
-    if(!item)return;
+  if(!item)return;
 
-    const newQuantity=
-        Number(item.quantity)+Number(amount);
+  const next=
+    Number(item.quantity)+Number(amount);
 
-    if(newQuantity<=0){
+  if(next<=0){
 
-        table.items.splice(index,1);
+    table.items.splice(index,1);
 
-    }else{
+  }else{
 
-        if(newQuantity>getStock(item.productId)){
+    const stock=getStock(item.productId);
 
-            toast("Nuk ka mjaftueshëm stok.");
-
-            return;
-        }
-
-        item.quantity=newQuantity;
+    if(next>stock){
+      toast("Nuk ka mjaftueshëm stok.");
+      return;
     }
 
-    if(table.items.length===0){
+    item.quantity=next;
+  }
 
-        table.openBillId=null;
-        table.billNumber=null;
-        table.billCreatedAt=null;
-    }
+  saveTables(tables);
 
-    saveTables(tables);
-
-    renderPOS();
-
+  renderAll();
 }
 
+function removeItem(index){
+
+  const tables=getTables();
+  const table=tables.find(
+    t=>Number(t.id)===getSelectedTable()
+  );
+
+  if(!table)return;
+
+  table.items.splice(index,1);
+
+  saveTables(tables);
+
+  renderAll();
+}
+
+/* =========================================================
+   TABLE UI
+========================================================= */
+
+function tableButtonHTML(table){
+
+  const total=getBillTotal(table);
+  const open=(table.items||[]).length>0;
+  const selected=
+    Number(table.id)===getSelectedTable();
+
+  return`
+    <button
+      class="table-btn
+        ${open?"open":""}
+        ${selected?"selected":""}"
+      onclick="selectTable(${table.id})"
+    >
+      <strong>${escapeHTML(table.name)}</strong>
+      <small>${open?money(total):"E lirë"}</small>
+    </button>
+  `;
+}
+
+function renderPOSTables(){
+
+  const el=document.getElementById("posTables");
+
+  const tables=getTables();
+
+  el.innerHTML=tables.map(
+    tableButtonHTML
+  ).join("");
+}
+
+function renderTableCards(){
+
+  const el=document.getElementById("tableCards");
+
+  const tables=getTables();
+
+  const open=tables.filter(
+    t=>t.items&&t.items.length
+  ).length;
+
+  document.getElementById("tablesSummary").textContent=
+    open+" aktive • "+
+    (tables.length-open)+" të lira";
+
+  el.innerHTML=tables.map(table=>{
+
+    const total=getBillTotal(table);
+    const active=table.items.length>0;
+
+    return`
+      <div class="stat"
+        style="
+          border-color:${active?"#285d8e":"#1b2732"};
+          cursor:pointer
+        "
+        onclick="selectTable(${table.id})"
+      >
+        <small>${escapeHTML(table.name)}</small>
+
+        <strong>
+          ${active?money(total):"E lirë"}
+        </strong>
+
+        <button
+          class="action ${active?"blue":""}"
+          style="margin-top:12px"
+          onclick="event.stopPropagation();selectTable(${table.id})"
+        >
+          HAP
+        </button>
+      </div>
+    `;
+  }).join("");
+}
 
 /* =========================================================
    PAYMENT
 ========================================================= */
 
-function payBill(method){
+let pendingPayment=null;
 
-    const tables=getTables();
+function payCurrent(method){
 
-    const table=
-        tables.find(
-            t=>Number(t.id)===Number(selectedTable)
-        );
+  const table=getSelectedTableObject();
 
-    if(!table||!table.items.length){
+  if(!table){
+    toast("Zgjidh një tavolinë.");
+    return;
+  }
 
-        toast("Fatura është bosh.");
+  if(!table.items.length){
+    toast("Porosia është bosh.");
+    return;
+  }
 
-        return;
-    }
+  const total=getBillTotal(table);
 
-    completePayment(method);
+  pendingPayment=method;
 
+  document.getElementById("paymentText").textContent=
+    "Pagesë "+method.toUpperCase()+
+    " • "+money(total);
+
+  document.getElementById("paymentConfirm").onclick=
+    ()=>completePayment(method);
+
+  openModal("paymentModal");
 }
 
 function completePayment(method){
 
-    const tables=getTables();
+  const tables=getTables();
 
-    const table=
-        tables.find(
-            t=>Number(t.id)===Number(selectedTable)
-        );
+  const table=tables.find(
+    t=>Number(t.id)===getSelectedTable()
+  );
 
-    if(!table||!table.items.length)return;
+  if(!table||!table.items.length){
+    closeModal("paymentModal");
+    return;
+  }
 
-    const total=getTableTotal(table);
+  /* CHECK STOCK */
+  for(const item of table.items){
 
-    const products=
-        getJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
-
-    const stock=
-        getJSON(STOCK_KEY,{});
-
-    for(const item of table.items){
-
-        const available=
-            Number(stock[item.productId]??0);
-
-        if(item.quantity>available){
-
-            toast("Stoku nuk është i mjaftueshëm.");
-
-            return;
-        }
+    if(
+      Number(item.quantity)>
+      getStock(item.productId)
+    ){
+      toast(
+        "Stok i pamjaftueshëm: "+
+        item.name
+      );
+      return;
     }
+  }
 
-    for(const item of table.items){
-
-        stock[item.productId]=
-            Number(stock[item.productId]??0)
-            -Number(item.quantity);
-    }
-
-    setJSON(STOCK_KEY,stock);
-
-    const session=getCurrentSession();
-
-    const invoices=
-        getJSON(INVOICES_KEY,[]);
-
-    const invoice={
-
-        id:Date.now(),
-
-        number:
-            "INV-"+table.billNumber,
-
-        date:
-            new Date().toISOString(),
-
-        createdAt:
-            Date.now(),
-
-        table:
-            table.id,
-
-        tableName:
-            table.name,
-
-        waiterName:
-            table.waiter||
-            session?.name||
-            "Kamarier",
-
-        username:
-            session?.username||"",
-
-        items:
-            JSON.parse(
-                JSON.stringify(table.items)
-            ),
-
-        total,
-
-        amount:total,
-
-        payment:method,
-
-        paymentMethod:method,
-
-        status:"closed",
-
-        fiscal:{
-            status:"draft",
-            fiscalized:false,
-            printed:false
-        }
-
-    };
-
-    invoices.push(invoice);
-
-    setJSON(INVOICES_KEY,invoices);
-
-    table.items=[];
-    table.openBillId=null;
-    table.billNumber=null;
-    table.billCreatedAt=null;
-    table.waiter=null;
-
-    saveTables(tables);
-
-    selectedTable=0;
-
-    renderPOS();
-    renderInvoices();
-    renderCash();
-
-    toast(
-        "Fatura u mbyll • "+
-        method.toUpperCase()
+  /* DECREASE STOCK */
+  table.items.forEach(item=>{
+    setStock(
+      item.productId,
+      getStock(item.productId)-
+      Number(item.quantity)
     );
+  });
 
+  const user=getCurrentSession();
+
+  const total=getBillTotal(table);
+
+  const invoice={
+    id:Date.now(),
+    number:"INV-"+Date.now(),
+    date:new Date().toISOString(),
+
+    table:Number(table.id),
+    tableName:table.name,
+
+    items:JSON.parse(
+      JSON.stringify(table.items)
+    ),
+
+    total:total,
+    payment:method,
+
+    waiterName:
+      user?.name||
+      "Kamarier",
+
+    username:
+      user?.username||
+      ""
+  };
+
+  const invoices=getJSON(
+    INVOICES_KEY,
+    []
+  );
+
+  invoices.push(invoice);
+
+  setJSON(
+    INVOICES_KEY,
+    invoices
+  );
+
+  table.items=[];
+
+  saveTables(tables);
+
+  localStorage.removeItem(
+    SELECTED_TABLE_KEY
+  );
+
+  closeModal("paymentModal");
+
+  renderAll();
+
+  toast(
+    "Pagesa u krye • "+
+    money(total)
+  );
 }
-
-
-/* =========================================================
-   CLOSE CURRENT BILL
-========================================================= */
-
-function closeCurrentBill(){
-
-    const table=getSelectedTableObject();
-
-    if(!table||!table.items.length){
-
-        toast("Nuk ka faturë aktive.");
-
-        return;
-    }
-
-    payBill("cash");
-
-}
-
-
-/* =========================================================
-   INVOICES
-========================================================= */
-
-function renderInvoices(){
-
-    const container=
-        document.getElementById("invoiceList");
-
-    const invoices=
-        getJSON(INVOICES_KEY,[]);
-
-    const session=getCurrentSession();
-
-    const mine=
-        invoices.filter(invoice=>
-            session?.role==="admin"
-            ||
-            invoice.username===session?.username
-            ||
-            invoice.waiterName===session?.name
-        );
-
-    if(!mine.length){
-
-        container.innerHTML=`
-
-            <div style="
-                padding:45px;
-                text-align:center;
-                color:#69737e;
-            ">
-                Nuk ka fatura.
-            </div>
-
-        `;
-
-        return;
-    }
-
-    container.innerHTML=
-        [...mine].reverse().map(invoice=>`
-
-            <div class="list-row">
-
-                <div class="list-main">
-
-                    <strong>
-                        ${escapeHTML(invoice.number)}
-                    </strong>
-
-                    <small>
-                        ${escapeHTML(invoice.tableName)}
-                        •
-                        ${escapeHTML(invoice.waiterName)}
-                        •
-                        ${new Date(invoice.date)
-                            .toLocaleString("sq-AL")}
-                    </small>
-
-                </div>
-
-                <div style="text-align:right">
-
-                    <strong>
-                        ${money(invoice.total)}
-                    </strong>
-
-                    <small style="
-                        display:block;
-                        color:${invoice.payment==="card"
-                            ?"#62a3ff"
-                            :"#55d895"};
-                        margin-top:4px;
-                    ">
-                        ${String(invoice.payment||"cash").toUpperCase()}
-                    </small>
-
-                </div>
-
-            </div>
-
-        `).join("");
-}
-
-
-/* =========================================================
-   ALL TABLES
-========================================================= */
-
-function renderAllTables(){
-
-    const container=
-        document.getElementById("allTables");
-
-    const tables=getTables();
-
-    container.innerHTML=tables.map(table=>{
-
-        const open=
-            table.items&&
-            table.items.length>0;
-
-        return `
-
-            <button
-                class="table ${open?"open":""}"
-                style="min-height:90px"
-                onclick="selectTableFromTables(${table.id})"
-            >
-
-                <strong>
-                    ${table.id}
-                </strong>
-
-                <small>
-                    ${open
-                        ?money(getTableTotal(table))
-                        :"E lirë"}
-                </small>
-
-            </button>
-
-        `;
-
-    }).join("");
-}
-
-function selectTableFromTables(id){
-
-    selectedTable=id;
-
-    showPage("pos");
-
-}
-
-
-/* =========================================================
-   CLOSE TABLE
-========================================================= */
-
-function closeTableMenu(){
-
-    const container=
-        document.getElementById("closeTableGrid");
-
-    const tables=getTables();
-
-    container.innerHTML=
-        tables.map(table=>{
-
-            const open=
-                table.items&&
-                table.items.length;
-
-            return `
-
-                <button
-                    class="table ${open?"open":""}"
-                    onclick="closeTable(${table.id})"
-                >
-
-                    <strong>
-                        ${table.id}
-                    </strong>
-
-                    <small>
-                        ${open
-                            ?money(getTableTotal(table))
-                            :"E lirë"}
-                    </small>
-
-                </button>
-
-            `;
-
-        }).join("");
-
-    document.getElementById("tableModal")
-        .classList.add("show");
-}
-
-function closeTable(id){
-
-    const tables=getTables();
-
-    const table=
-        tables.find(
-            t=>Number(t.id)===Number(id)
-        );
-
-    if(!table||!table.items.length){
-
-        toast("Kjo tavolinë është e lirë.");
-
-        return;
-    }
-
-    selectedTable=id;
-
-    closeModal("tableModal");
-
-    showPage("pos");
-
-}
-
 
 /* =========================================================
    TRANSFER
 ========================================================= */
 
-function transferTable(){
+function openTransfer(){
 
-    const table=getSelectedTableObject();
+  const table=getSelectedTableObject();
 
-    if(!table||!table.items.length){
+  if(!table||!table.items.length){
+    toast("Nuk ka faturë për transferim.");
+    return;
+  }
 
-        toast("Zgjidh një tavolinë me faturë.");
+  const select=
+    document.getElementById("transferSelect");
 
-        return;
-    }
+  const tables=getTables();
 
-    const select=
-        document.getElementById("transferTo");
+  select.innerHTML=
+    `<option value="">Zgjidh tavolinën</option>`+
+    tables
+      .filter(t=>t.id!==table.id)
+      .map(t=>`
+        <option value="${t.id}">
+          ${escapeHTML(t.name)}
+          ${t.items.length?" • AKTIVE":""}
+        </option>
+      `).join("");
 
-    select.innerHTML=
-        getTables()
-        .filter(t=>
-            t.id!==table.id &&
-            (!t.items||!t.items.length)
-        )
-        .map(t=>`
-
-            <option value="${t.id}">
-                ${escapeHTML(t.name)}
-            </option>
-
-        `).join("");
-
-    if(!select.options.length){
-
-        toast("Nuk ka tavolinë të lirë.");
-
-        return;
-    }
-
-    document.getElementById("transferFrom")
-        .value=table.name;
-
-    document.getElementById("transferModal")
-        .classList.add("show");
+  openModal("transferModal");
 }
 
 function confirmTransfer(){
 
-    const from=getSelectedTableObject();
+  const targetId=
+    Number(
+      document.getElementById(
+        "transferSelect"
+      ).value
+    );
 
-    const toId=
-        Number(
-            document.getElementById("transferTo").value
-        );
+  if(!targetId){
+    toast("Zgjidh tavolinën.");
+    return;
+  }
 
-    if(!from||!toId)return;
+  const tables=getTables();
 
-    const tables=getTables();
+  const from=tables.find(
+    t=>Number(t.id)===getSelectedTable()
+  );
 
-    const to=
-        tables.find(
-            t=>Number(t.id)===toId
-        );
+  const to=tables.find(
+    t=>Number(t.id)===targetId
+  );
 
-    if(!to)return;
+  if(!from||!to)return;
 
-    if(to.items&&to.items.length){
+  if(to.items.length){
 
-        toast("Tavolina është e zënë.");
+    const ok=confirm(
+      "Tavolina e zgjedhur ka një porosi. Bashkohen produktet?"
+    );
 
-        return;
+    if(!ok)return;
+  }
+
+  from.items.forEach(item=>{
+
+    const existing=to.items.find(
+      x=>Number(x.productId)===
+      Number(item.productId)
+    );
+
+    if(existing){
+      existing.quantity+=item.quantity;
+    }else{
+      to.items.push(
+        JSON.parse(JSON.stringify(item))
+      );
     }
+  });
 
-    to.items=from.items;
-    to.openBillId=from.openBillId;
-    to.billNumber=from.billNumber;
-    to.billCreatedAt=from.billCreatedAt;
-    to.waiter=from.waiter;
+  from.items=[];
 
-    from.items=[];
-    from.openBillId=null;
-    from.billNumber=null;
-    from.billCreatedAt=null;
-    from.waiter=null;
+  saveTables(tables);
 
-    saveTables(tables);
+  localStorage.setItem(
+    SELECTED_TABLE_KEY,
+    String(targetId)
+  );
 
-    selectedTable=toId;
+  closeModal("transferModal");
 
-    closeModal("transferModal");
+  renderAll();
 
-    showPage("pos");
-
-    toast("Fatura u transferua.");
-
+  toast(
+    "Fatura u transferua në "+
+    to.name
+  );
 }
 
+/* =========================================================
+   CLOSE TABLE
+========================================================= */
+
+function openCloseTable(){
+
+  const table=getSelectedTableObject();
+
+  if(!table){
+    toast("Zgjidh një tavolinë.");
+    return;
+  }
+
+  if(!table.items.length){
+    toast("Tavolina është bosh.");
+    return;
+  }
+
+  document.getElementById(
+    "closeTableText"
+  ).textContent=
+    table.name+
+    " • "+
+    money(getBillTotal(table));
+
+  openModal("closeTableModal");
+}
+
+function confirmCloseTable(){
+
+  const table=getSelectedTableObject();
+
+  if(!table)return;
+
+  const total=getBillTotal(table);
+
+  table.items=[];
+
+  const tables=getTables();
+
+  const index=tables.findIndex(
+    t=>Number(t.id)===Number(table.id)
+  );
+
+  if(index>=0){
+    tables[index]=table;
+  }
+
+  saveTables(tables);
+
+  localStorage.removeItem(
+    SELECTED_TABLE_KEY
+  );
+
+  closeModal("closeTableModal");
+
+  renderAll();
+
+  toast(
+    table.name+
+    " u mbyll • "+
+    money(total)
+  );
+}
+
+/* =========================================================
+   INVOICES
+========================================================= */
+
+function getTodayInvoices(){
+
+  const invoices=getJSON(
+    INVOICES_KEY,
+    []
+  );
+
+  const today=new Date();
+
+  return invoices.filter(i=>{
+
+    const d=new Date(i.date);
+
+    return d.toDateString()===
+      today.toDateString();
+  });
+}
+
+function renderInvoices(){
+
+  const el=document.getElementById(
+    "invoiceList"
+  );
+
+  const invoices=getJSON(
+    INVOICES_KEY,
+    []
+  );
+
+  const user=getCurrentSession();
+
+  const mine=invoices
+    .filter(i=>
+      user?.role==="admin" ||
+      i.username===user?.username
+    )
+    .reverse();
+
+  document.getElementById(
+    "invoiceSummary"
+  ).textContent=
+    mine.length+
+    " faturë";
+
+  if(!mine.length){
+
+    el.innerHTML=
+      `<div class="row">
+        <small>Nuk ka fatura.</small>
+      </div>`;
+
+    return;
+  }
+
+  el.innerHTML=mine.map(i=>`
+
+    <div class="row">
+
+      <div>
+        <strong>${escapeHTML(i.number)}</strong>
+
+        <small>
+          ${escapeHTML(i.tableName)}
+          •
+          ${new Date(i.date)
+            .toLocaleString("sq-AL")}
+          •
+          ${escapeHTML(i.payment)}
+        </small>
+      </div>
+
+      <strong>${money(i.total)}</strong>
+
+    </div>
+
+  `).join("");
+}
 
 /* =========================================================
    CASH
@@ -2847,459 +2070,563 @@ function confirmTransfer(){
 
 function renderCash(){
 
-    const invoices=
-        getJSON(INVOICES_KEY,[]);
+  const invoices=getTodayInvoices();
 
-    const shift=
-        getJSON(SHIFT_KEY,null);
+  const sales=invoices.reduce(
+    (s,i)=>s+Number(i.total||0),
+    0
+  );
 
-    const today=
-        new Date().toDateString();
-
-    let relevant=invoices.filter(invoice=>
-        new Date(invoice.date)
-        .toDateString()===today
+  const cash=invoices
+    .filter(i=>i.payment==="cash")
+    .reduce(
+      (s,i)=>s+Number(i.total||0),
+      0
     );
 
-    if(shift){
+  const card=invoices
+    .filter(i=>i.payment==="card")
+    .reduce(
+      (s,i)=>s+Number(i.total||0),
+      0
+    );
 
-        relevant=invoices.filter(invoice=>
-            Number(invoice.createdAt)>=
-            Number(shift.startedAt)
-        );
-    }
+  document.getElementById(
+    "salesToday"
+  ).textContent=money(sales);
 
-    const sales=
-        relevant.reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+  document.getElementById(
+    "cashToday"
+  ).textContent=money(cash);
 
-    const cash=
-        relevant
-        .filter(i=>i.payment==="cash")
-        .reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+  document.getElementById(
+    "cardToday"
+  ).textContent=money(card);
 
-    const card=
-        relevant
-        .filter(i=>i.payment==="card")
-        .reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+  document.getElementById(
+    "invoiceCount"
+  ).textContent=invoices.length;
 
-    document.getElementById("cashSales")
-        .textContent=money(sales);
+  const list=
+    document.getElementById(
+      "cashList"
+    );
 
-    document.getElementById("cashCash")
-        .textContent=money(cash);
+  if(!invoices.length){
 
-    document.getElementById("cashCard")
-        .textContent=money(card);
+    list.innerHTML=
+      `<div class="row">
+        <small>Nuk ka pagesa sot.</small>
+      </div>`;
 
-    document.getElementById("cashInvoices")
-        .textContent=relevant.length;
+    return;
+  }
+
+  list.innerHTML=[
+    ...invoices
+  ].reverse().map(i=>`
+
+    <div class="row">
+
+      <div>
+        <strong>${escapeHTML(i.number)}</strong>
+
+        <small>
+          ${escapeHTML(i.waiterName)}
+          •
+          ${escapeHTML(i.payment)}
+        </small>
+      </div>
+
+      <strong>${money(i.total)}</strong>
+
+    </div>
+
+  `).join("");
 }
-
 
 /* =========================================================
    SHIFT
 ========================================================= */
 
-function updateShiftButton(){
-
-    const button=
-        document.getElementById("shiftButton");
-
-    const shift=
-        getJSON(SHIFT_KEY,null);
-
-    if(shift){
-
-        button.textContent="MBYLL TURNIN";
-        button.classList.add("active");
-
-    }else{
-
-        button.textContent="HAP TURNIN";
-        button.classList.remove("active");
-
-    }
+function getShift(){
+  return getJSON(SHIFT_KEY,null);
 }
 
-function openShift(){
+function renderShift(){
 
-    document.getElementById("shiftModalTitle")
-        .textContent="HAP TURNIN";
+  const shift=getShift();
 
-    document.getElementById("openShiftBody")
-        .classList.remove("hidden");
+  const status=shift?
+    "HAPUR":
+    "MBYLLUR";
 
-    document.getElementById("closeShiftBody")
-        .classList.add("hidden");
+  document.getElementById(
+    "shiftStatus"
+  ).textContent=status;
 
-    document.getElementById("shiftConfirmButton")
-        .textContent="HAP TURNIN";
+  document.getElementById(
+    "shiftStatusBig"
+  ).textContent=status;
 
-    document.getElementById("openingCash")
-        .value="0";
+  const invoices=shift?
+    getJSON(INVOICES_KEY,[])
+      .filter(i=>
+        Number(i.id)>=Number(shift.startedAt)
+      ):
+    [];
 
-    document.getElementById("shiftModal")
-        .classList.add("show");
+  const sales=invoices.reduce(
+    (s,i)=>s+Number(i.total||0),
+    0
+  );
+
+  const cash=invoices
+    .filter(i=>i.payment==="cash")
+    .reduce(
+      (s,i)=>s+Number(i.total||0),
+      0
+    );
+
+  const card=invoices
+    .filter(i=>i.payment==="card")
+    .reduce(
+      (s,i)=>s+Number(i.total||0),
+      0
+    );
+
+  document.getElementById(
+    "shiftSales"
+  ).textContent=money(sales);
+
+  document.getElementById(
+    "shiftCash"
+  ).textContent=money(cash);
+
+  document.getElementById(
+    "shiftCard"
+  ).textContent=money(card);
 }
 
-function closeShift(){
+function toggleShift(){
 
-    const shift=
-        getJSON(SHIFT_KEY,null);
+  const shift=getShift();
 
-    if(!shift)return;
+  if(!shift){
 
-    const openBills=
-        getTables().filter(
-            t=>t.items&&t.items.length
-        );
+    document.getElementById(
+      "shiftModalTitle"
+    ).textContent="Hap turnin";
 
-    if(openBills.length){
+    document.getElementById(
+      "shiftModalText"
+    ).textContent=
+      "Vendos cash-in fillestar të arkës.";
 
-        toast(
-            "Ka tavolina me fatura të hapura."
-        );
+    document.getElementById(
+      "shiftCashInput"
+    ).value="";
 
-        return;
-    }
+    openModal("shiftModal");
 
-    const invoices=
-        getJSON(INVOICES_KEY,[]);
+  }else{
 
-    const shiftInvoices=
-        invoices.filter(invoice=>
-            Number(invoice.createdAt)>=
-            Number(shift.startedAt)
-        );
+    const tables=getTables();
 
-    const sales=
-        shiftInvoices.reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+    const open=tables.some(
+      t=>t.items&&t.items.length
+    );
 
-    const cash=
-        shiftInvoices
-        .filter(i=>i.payment==="cash")
-        .reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+    if(open){
 
-    const card=
-        shiftInvoices
-        .filter(i=>i.payment==="card")
-        .reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+      toast(
+        "Mbyll fillimisht tavolinat aktive."
+      );
 
-    const expected=
-        Number(shift.openingCash||0)+cash;
-
-    document.getElementById("shiftSales")
-        .textContent=money(sales);
-
-    document.getElementById("shiftCash")
-        .textContent=money(cash);
-
-    document.getElementById("shiftCard")
-        .textContent=money(card);
-
-    document.getElementById("expectedCash")
-        .textContent=money(expected);
-
-    document.getElementById("countedCash")
-        .value=expected;
-
-    calculateDifference();
-
-    document.getElementById("shiftModalTitle")
-        .textContent="MBYLLJA E TURNIT";
-
-    document.getElementById("openShiftBody")
-        .classList.add("hidden");
-
-    document.getElementById("closeShiftBody")
-        .classList.remove("hidden");
-
-    document.getElementById("shiftConfirmButton")
-        .textContent="MBYLL TURNIN";
-
-    document.getElementById("shiftModal")
-        .classList.add("show");
-}
-
-function calculateDifference(){
-
-    const expected=
-        parseFloat(
-            document.getElementById("expectedCash")
-            .textContent.replace(/[^\d-]/g,"")
-        )||0;
-
-    const counted=
-        Number(
-            document.getElementById("countedCash").value
-        )||0;
-
-    const difference=counted-expected;
-
-    const element=
-        document.getElementById("cashDifference");
-
-    element.textContent=money(difference);
-
-    element.style.color=
-        difference===0
-        ?"var(--green)"
-        :"var(--red)";
-}
-
-function confirmShiftAction(){
-
-    const shift=
-        getJSON(SHIFT_KEY,null);
-
-    if(!shift){
-
-        const session=getCurrentSession();
-
-        const opening=
-            Number(
-                document.getElementById("openingCash").value
-            )||0;
-
-        const newShift={
-
-            id:Date.now(),
-
-            number:
-                Number(
-                    localStorage.getItem("MYBAR_LAST_SHIFT")||0
-                )+1,
-
-            username:
-                session?.username||"",
-
-            waiterName:
-                session?.name||"Kamarier",
-
-            openingCash:opening,
-
-            startedAt:Date.now(),
-
-            startedDate:
-                new Date().toISOString()
-
-        };
-
-        localStorage.setItem(
-            "MYBAR_LAST_SHIFT",
-            String(newShift.number)
-        );
-
-        setJSON(SHIFT_KEY,newShift);
-
-        closeModal("shiftModal");
-
-        updateShiftButton();
-
-        toast(
-            "Turni #"+
-            newShift.number+
-            " u hap."
-        );
-
-        return;
+      return;
     }
 
-    const invoices=
-        getJSON(INVOICES_KEY,[]);
+    document.getElementById(
+      "shiftModalTitle"
+    ).textContent="Mbyll turnin";
 
-    const shiftInvoices=
-        invoices.filter(invoice=>
-            Number(invoice.createdAt)>=
-            Number(shift.startedAt)
-        );
+    document.getElementById(
+      "shiftModalText"
+    ).textContent=
+      "Turni do të mbyllet dhe të dhënat ruhen.";
 
-    const sales=
-        shiftInvoices.reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+    document.getElementById(
+      "shiftCashInput"
+    ).value="";
 
-    const cash=
-        shiftInvoices
-        .filter(i=>i.payment==="cash")
-        .reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+    openModal("shiftModal");
+  }
+}
 
-    const card=
-        shiftInvoices
-        .filter(i=>i.payment==="card")
-        .reduce(
-            (sum,i)=>sum+Number(i.total||0),
-            0
-        );
+function confirmShift(){
 
-    const expected=
-        Number(shift.openingCash||0)+cash;
+  const current=getShift();
 
-    const counted=
-        Number(
-            document.getElementById("countedCash").value
-        )||0;
+  const cash=Number(
+    document.getElementById(
+      "shiftCashInput"
+    ).value||0
+  );
 
-    const history=
-        getJSON(SHIFT_HISTORY_KEY,[]);
+  if(!current){
 
-    history.push({
+    const user=getCurrentSession();
 
-        ...shift,
-
-        closedAt:Date.now(),
-
-        closedDate:
-            new Date().toISOString(),
-
-        sales,
-        cash,
-        card,
-
-        expectedCash:expected,
-
-        countedCash:counted,
-
-        difference:
-            counted-expected,
-
-        invoiceCount:
-            shiftInvoices.length
-
+    setJSON(SHIFT_KEY,{
+      startedAt:Date.now(),
+      waiter:user?.name||"Kamarier",
+      openingCash:cash
     });
-
-    setJSON(SHIFT_HISTORY_KEY,history);
-
-    localStorage.removeItem(SHIFT_KEY);
 
     closeModal("shiftModal");
 
-    updateShiftButton();
-    renderCash();
+    renderShift();
 
-    toast("Turni u mbyll me sukses.");
+    toast("Turni u hap.");
 
+  }else{
+
+    localStorage.removeItem(
+      SHIFT_KEY
+    );
+
+    closeModal("shiftModal");
+
+    renderShift();
+
+    toast("Turni u mbyll.");
+  }
 }
-
 
 /* =========================================================
    FISCAL
 ========================================================= */
 
-function togglePrinter(){
+function getFiscal(){
+  return getJSON(FISCAL_KEY,{});
+}
 
-    const fiscal=
-        getJSON(FISCAL_KEY,{printer:false});
-
-    fiscal.printer=!fiscal.printer;
-
-    setJSON(FISCAL_KEY,fiscal);
-
-    renderFiscal();
-
+function saveFiscal(value){
+  setJSON(FISCAL_KEY,value);
 }
 
 function renderFiscal(){
 
-    const fiscal=
-        getJSON(FISCAL_KEY,{printer:false});
+  const el=document.getElementById(
+    "fiscalList"
+  );
+
+  const invoices=getJSON(
+    INVOICES_KEY,
+    []
+  ).slice(-30).reverse();
+
+  const fiscal=getFiscal();
+
+  if(!invoices.length){
+
+    el.innerHTML=
+      `<div class="row">
+        <small>Nuk ka fatura për fiskalizim.</small>
+      </div>`;
+
+    return;
+  }
+
+  el.innerHTML=invoices.map(i=>{
 
     const status=
-        document.getElementById("printerStatus");
+      fiscal[i.id]?.status||
+      "DRAFT";
 
-    const button=
-        document.getElementById("printerButton");
+    return`
+      <div class="row">
 
-    status.textContent=
-        fiscal.printer
-        ?"ON"
-        :"OFF";
+        <div>
+          <strong>${escapeHTML(i.number)}</strong>
 
-    status.style.color=
-        fiscal.printer
-        ?"var(--green)"
-        :"var(--muted)";
+          <small>
+            ${escapeHTML(i.tableName)}
+            •
+            ${money(i.total)}
+            •
+            Status: ${status}
+          </small>
+        </div>
 
-    button.textContent=
-        fiscal.printer
-        ?"ÇAKTIVIZO"
-        :"AKTIVIZO";
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+
+          <button
+            class="action"
+            onclick="fiscalize(${i.id})"
+          >
+            FATURO
+          </button>
+
+          <button
+            class="action blue"
+            onclick="printInvoice(${i.id})"
+          >
+            PRINT
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  }).join("");
 }
 
-function fiscalizeSelected(){
+function fiscalize(id){
 
-    const invoices=
-        getJSON(INVOICES_KEY,[]);
+  const fiscal=getFiscal();
 
-    if(!invoices.length){
+  /*
+    Ky është vetëm regjistrim lokal i statusit.
+    Nuk pretendon fiskalizim zyrtar.
+  */
 
-        toast("Nuk ka faturë për fiskalizim.");
+  fiscal[id]={
+    status:"GATI PËR FISKALIZIM",
+    updatedAt:Date.now()
+  };
 
-        return;
-    }
+  saveFiscal(fiscal);
 
-    toast(
-        "Fiskalizimi duhet të lidhet me shërbimin fiskal."
-    );
+  renderFiscal();
+
+  toast(
+    "Fatura u shënua. Fiskalizimi zyrtar kërkon backend/DPT."
+  );
 }
 
+function printInvoice(id){
+
+  const invoices=getJSON(
+    INVOICES_KEY,
+    []
+  );
+
+  const invoice=invoices.find(
+    i=>Number(i.id)===Number(id)
+  );
+
+  if(!invoice)return;
+
+  const area=document.getElementById(
+    "printArea"
+  );
+
+  area.innerHTML=`
+
+    <h2>MY BAR</h2>
+
+    <p>
+      ${escapeHTML(invoice.number)}
+    </p>
+
+    <p>
+      ${escapeHTML(invoice.tableName)}
+    </p>
+
+    <p>
+      ${new Date(invoice.date)
+        .toLocaleString("sq-AL")}
+    </p>
+
+    <hr>
+
+    ${invoice.items.map(item=>`
+
+      <p style="display:flex;justify-content:space-between">
+        <span>
+          ${escapeHTML(item.name)}
+          × ${item.quantity}
+        </span>
+
+        <strong>
+          ${money(item.price*item.quantity)}
+        </strong>
+      </p>
+
+    `).join("")}
+
+    <hr>
+
+    <h3>
+      TOTAL: ${money(invoice.total)}
+    </h3>
+
+    <p>
+      Pagesa: ${escapeHTML(invoice.payment)}
+    </p>
+
+  `;
+
+  window.print();
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(page,button){
+
+  document.getElementById(
+    "welcome"
+  ).style.display="none";
+
+  document.getElementById(
+    "content"
+  ).classList.add("show");
+
+  document.querySelectorAll(
+    ".page"
+  ).forEach(p=>
+    p.classList.remove("active")
+  );
+
+  const target=document.getElementById(
+    "page-"+page
+  );
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(
+    ".top-btn"
+  ).forEach(b=>
+    b.classList.remove("active")
+  );
+
+  if(button){
+    button.classList.add("active");
+  }else{
+
+    const map={
+      pos:"FATURË E RE",
+      tables:"TAVOLINAT",
+      invoices:"FATURAT",
+      cash:"ARKA",
+      shift:"TURNI",
+      fiscal:"FISKAL"
+    };
+
+    document.querySelectorAll(
+      ".top-btn"
+    ).forEach(b=>{
+      if(
+        b.textContent.trim()===
+        map[page]
+      ){
+        b.classList.add("active");
+      }
+    });
+  }
+
+  if(page==="tables")renderTableCards();
+  if(page==="invoices")renderInvoices();
+  if(page==="cash")renderCash();
+  if(page==="shift")renderShift();
+  if(page==="fiscal")renderFiscal();
+}
+
+function newBill(){
+
+  document.getElementById(
+    "welcome"
+  ).style.display="none";
+
+  document.getElementById(
+    "content"
+  ).classList.add("show");
+
+  showPage("pos");
+
+  const tables=getTables();
+
+  const current=getSelectedTable();
+
+  if(current){
+    renderAll();
+    return;
+  }
+
+  const empty=tables.find(
+    t=>!t.items.length
+  );
+
+  if(empty){
+    selectTable(empty.id);
+  }else{
+    toast("Zgjidh një tavolinë.");
+  }
+}
 
 /* =========================================================
    MODALS
 ========================================================= */
 
+function openModal(id){
+  document.getElementById(id)
+    .classList.add("show");
+}
+
 function closeModal(id){
-
-    document.getElementById(id)
-        ?.classList.remove("show");
+  document.getElementById(id)
+    .classList.remove("show");
 }
-
-function confirmModalClose(id){
-
-    closeModal(id);
-}
-
 
 /* =========================================================
-   SHIFT BUTTON
+   LOCK
 ========================================================= */
 
-document.getElementById("shiftButton")
-.addEventListener("click",()=>{
+function lockScreen(){
 
-    const shift=
-        getJSON(SHIFT_KEY,null);
+  document.getElementById(
+    "unlockPassword"
+  ).value="";
 
-    if(shift){
-        closeShift();
-    }else{
-        openShift();
-    }
+  openModal("lockModal");
+}
 
-});
+function unlockScreen(){
 
+  const password=
+    document.getElementById(
+      "unlockPassword"
+    ).value;
+
+  const user=getCurrentSession();
+
+  const users=getJSON(
+    USERS_KEY,
+    DEFAULT_USERS
+  );
+
+  const found=users.find(
+    u=>
+      String(u.username).toLowerCase()===
+      String(user?.username).toLowerCase()
+  );
+
+  if(found&&String(found.password)===String(password)){
+
+    closeModal("lockModal");
+
+    toast("Sistemi u zhbllokua.");
+
+  }else{
+
+    toast("Fjalëkalim i gabuar.");
+  }
+}
 
 /* =========================================================
    LOGOUT
@@ -3307,12 +2634,61 @@ document.getElementById("shiftButton")
 
 function logout(){
 
-    localStorage.removeItem(SESSION_KEY);
-    localStorage.removeItem("barCurrentUser");
+  localStorage.removeItem(
+    SESSION_KEY
+  );
 
-    window.location.href="login.html";
+  localStorage.removeItem(
+    "barCurrentUser"
+  );
+
+  window.location.href="login.html";
 }
 
+/* =========================================================
+   HEADER
+========================================================= */
+
+function renderHeader(){
+
+  const user=getCurrentSession();
+
+  if(!user)return;
+
+  document.getElementById(
+    "userName"
+  ).textContent=
+    user.name||user.username||"Kamarier";
+
+  document.getElementById(
+    "userRole"
+  ).textContent=
+    user.role==="admin"?
+      "ADMIN":
+      "KAMARIER";
+
+}
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+  renderHeader();
+
+  renderCategories();
+  renderProducts();
+
+  renderPOSTables();
+  renderBill();
+
+  renderTableCards();
+  renderInvoices();
+  renderCash();
+  renderShift();
+  renderFiscal();
+}
 
 /* =========================================================
    CLOCK
@@ -3320,64 +2696,49 @@ function logout(){
 
 function updateClock(){
 
-    document.getElementById("clock")
-        .textContent=
-        new Date().toLocaleTimeString("sq-AL",{
-            hour:"2-digit",
-            minute:"2-digit"
-        });
+  const el=document.getElementById(
+    "clock"
+  );
 
+  el.textContent=
+    new Date().toLocaleTimeString(
+      "sq-AL",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+      }
+    );
 }
-
-setInterval(updateClock,1000);
-
 
 /* =========================================================
    START
 ========================================================= */
 
-function startApp(){
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    const user=requireSession();
+
+    if(!user)return;
 
     initialize();
 
-    const session=getCurrentSession();
-
-    if(!session){
-
-        window.location.href="login.html";
-
-        return;
-    }
-
-    document.getElementById("userName")
-        .textContent=
-        session.name||"Kamarier";
-
-    const settings=
-        getJSON(SETTINGS_KEY,{});
-
-    document.getElementById("appName")
-        .textContent=
-        settings.appName||"MY BAR";
+    renderAll();
 
     updateClock();
 
-    updateShiftButton();
+    setInterval(
+      updateClock,
+      1000
+    );
 
-    renderPOS();
-
-    renderInvoices();
-
-    renderAllTables();
-
-    renderCash();
-
-    renderFiscal();
-
-}
-
-startApp();
-
+    console.log(
+      "MY BAR POS loaded successfully."
+    );
+  }
+);
 
 /* =========================================================
    GLOBALS
@@ -3387,28 +2748,31 @@ window.showPage=showPage;
 window.newBill=newBill;
 
 window.selectTable=selectTable;
-window.addProduct=addProduct;
-window.changeQuantity=changeQuantity;
-
-window.payBill=payBill;
-window.closeCurrentBill=closeCurrentBill;
-
 window.selectCategory=selectCategory;
+window.addProduct=addProduct;
 
-window.transferTable=transferTable;
+window.changeQuantity=changeQuantity;
+window.removeItem=removeItem;
+
+window.payCurrent=payCurrent;
+
+window.openTransfer=openTransfer;
 window.confirmTransfer=confirmTransfer;
 
-window.closeTableMenu=closeTableMenu;
-window.closeTable=closeTable;
+window.openCloseTable=openCloseTable;
+window.confirmCloseTable=confirmCloseTable;
 
-window.openShift=openShift;
-window.closeShift=closeShift;
-window.calculateDifference=calculateDifference;
+window.toggleShift=toggleShift;
+window.confirmShift=confirmShift;
 
-window.togglePrinter=togglePrinter;
-window.fiscalizeSelected=fiscalizeSelected;
+window.fiscalize=fiscalize;
+window.printInvoice=printInvoice;
 
 window.closeModal=closeModal;
+
+window.lockScreen=lockScreen;
+window.unlockScreen=unlockScreen;
+
 window.logout=logout;
 
 </script>
