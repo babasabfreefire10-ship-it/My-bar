@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MY BAR</title>
 
-<!-- QR CODE -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
@@ -73,7 +72,6 @@ button{cursor:pointer}
 }
 
 .admin-secret{display:none!important}
-
 .admin-secret.show{display:block!important}
 
 .logout{
@@ -354,9 +352,7 @@ button{cursor:pointer}
     gap:14px;
 }
 
-.field{
-    margin-bottom:12px;
-}
+.field{margin-bottom:12px}
 
 .field label{
     display:block;
@@ -434,11 +430,6 @@ button{cursor:pointer}
     color:#ff7777;
 }
 
-.badge.gold{
-    background:#21190a;
-    color:#e5bd5b;
-}
-
 .admin-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -461,6 +452,7 @@ button{cursor:pointer}
     display:flex;
     gap:7px;
     flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .modal{
@@ -485,9 +477,7 @@ button{cursor:pointer}
     padding:22px;
 }
 
-.modal-box h2{
-    margin-bottom:17px;
-}
+.modal-box h2{margin-bottom:17px}
 
 .modal-total{
     text-align:center;
@@ -521,9 +511,7 @@ button{cursor:pointer}
     border:1px solid #572727;
 }
 
-/* =========================
-   INVOICE
-========================= */
+/* INVOICE */
 
 .invoice{
     width:80mm;
@@ -601,6 +589,29 @@ button{cursor:pointer}
     border-radius:7px;
 }
 
+.toast{
+    display:none;
+    position:fixed;
+    bottom:22px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#101712;
+    color:#fff;
+    border:1px solid #2d8f5b;
+    padding:11px 17px;
+    border-radius:10px;
+    z-index:5000;
+}
+
+.empty{
+    padding:20px;
+    text-align:center;
+    color:#718078;
+}
+
+.low{color:#ffb347}
+.good{color:#42ed82}
+
 @media print{
 
     @page{
@@ -639,34 +650,6 @@ button{cursor:pointer}
         position:absolute!important;
         background:#fff!important;
     }
-}
-
-.toast{
-    display:none;
-    position:fixed;
-    bottom:22px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#101712;
-    color:#fff;
-    border:1px solid #2d8f5b;
-    padding:11px 17px;
-    border-radius:10px;
-    z-index:5000;
-}
-
-.empty{
-    padding:20px;
-    text-align:center;
-    color:#718078;
-}
-
-.low{
-    color:#ffb347;
-}
-
-.good{
-    color:#42ed82;
 }
 
 @media(max-width:1100px){
@@ -824,20 +807,17 @@ button{cursor:pointer}
 
 <header class="topbar">
 
-    <div class="bar-name"
-         id="barNameTop">
+    <div class="bar-name" id="barNameTop">
         MY BAR
     </div>
 
     <div class="top-right">
 
-        <span id="userInfo"
-              class="user-info">
+        <span id="userInfo" class="user-info">
             -
         </span>
 
-        <span id="clock"
-              class="clock">
+        <span id="clock" class="clock">
             00:00:00
         </span>
 
@@ -847,8 +827,7 @@ button{cursor:pointer}
 
 <!-- DASHBOARD -->
 
-<section id="dashboard"
-         class="page active">
+<section id="dashboard" class="page active">
 
     <div class="title">
         Dashboard
@@ -858,38 +837,27 @@ button{cursor:pointer}
 
         <div class="stat">
             <small>Shitje sot</small>
-            <strong id="salesToday"
-                    class="green">
-                0 L
-            </strong>
+            <strong id="salesToday" class="green">0 L</strong>
         </div>
 
         <div class="stat">
             <small>Cash</small>
-            <strong id="cashToday">
-                0 L
-            </strong>
+            <strong id="cashToday">0 L</strong>
         </div>
 
         <div class="stat">
             <small>Kartë</small>
-            <strong id="cardToday">
-                0 L
-            </strong>
+            <strong id="cardToday">0 L</strong>
         </div>
 
         <div class="stat">
             <small>Fatura</small>
-            <strong id="invoiceToday">
-                0
-            </strong>
+            <strong id="invoiceToday">0</strong>
         </div>
 
         <div class="stat">
             <small>Tavolina aktive</small>
-            <strong id="activeTables">
-                0
-            </strong>
+            <strong id="activeTables">0</strong>
         </div>
 
     </div>
@@ -924,8 +892,7 @@ button{cursor:pointer}
 
 <!-- POS -->
 
-<section id="pos"
-         class="page">
+<section id="pos" class="page">
 
     <div class="title">
         Porosi
@@ -963,13 +930,8 @@ button{cursor:pointer}
             <div id="orderItems"></div>
 
             <div class="total">
-
                 <span>Total</span>
-
-                <strong id="orderTotal">
-                    0 L
-                </strong>
-
+                <strong id="orderTotal">0 L</strong>
             </div>
 
             <button class="pay"
@@ -985,8 +947,7 @@ button{cursor:pointer}
 
 <!-- TABLES -->
 
-<section id="tables"
-         class="page">
+<section id="tables" class="page">
 
     <div class="title">
         Tavolina
@@ -1004,8 +965,7 @@ button{cursor:pointer}
 
 <!-- INVENTORY -->
 
-<section id="inventory"
-         class="page">
+<section id="inventory" class="page">
 
     <div class="title">
         Inventar
@@ -1017,9 +977,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Kërko produkt
-                </label>
+                <label>Kërko produkt</label>
 
                 <input id="inventorySearch"
                        placeholder="Emri i produktit">
@@ -1028,9 +986,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Minimum stok
-                </label>
+                <label>Minimum stok</label>
 
                 <input id="minimumStock"
                        type="number"
@@ -1048,8 +1004,7 @@ button{cursor:pointer}
 
 <!-- SHIFT -->
 
-<section id="shifts"
-         class="page">
+<section id="shifts" class="page">
 
     <div class="title">
         Turni
@@ -1068,9 +1023,7 @@ button{cursor:pointer}
             <div class="field"
                  style="margin-top:15px">
 
-                <label>
-                    Cash fillestar
-                </label>
+                <label>Cash fillestar</label>
 
                 <input id="openingCash"
                        type="number"
@@ -1102,8 +1055,7 @@ button{cursor:pointer}
 
 <!-- CASH -->
 
-<section id="cash"
-         class="page">
+<section id="cash" class="page">
 
     <div class="title">
         Kasa
@@ -1112,51 +1064,23 @@ button{cursor:pointer}
     <div class="stats">
 
         <div class="stat">
-
-            <small>
-                Cash nga shitjet
-            </small>
-
-            <strong id="cashSales">
-                0 L
-            </strong>
-
+            <small>Cash nga shitjet</small>
+            <strong id="cashSales">0 L</strong>
         </div>
 
         <div class="stat">
-
-            <small>
-                Cash fillestar
-            </small>
-
-            <strong id="openingCashView">
-                0 L
-            </strong>
-
+            <small>Cash fillestar</small>
+            <strong id="openingCashView">0 L</strong>
         </div>
 
         <div class="stat">
-
-            <small>
-                Cash i pritshëm
-            </small>
-
-            <strong id="expectedCash">
-                0 L
-            </strong>
-
+            <small>Cash i pritshëm</small>
+            <strong id="expectedCash">0 L</strong>
         </div>
 
         <div class="stat">
-
-            <small>
-                Hyrje/Dalje
-            </small>
-
-            <strong id="cashMovements">
-                0 L
-            </strong>
-
+            <small>Hyrje/Dalje</small>
+            <strong id="cashMovements">0 L</strong>
         </div>
 
     </div>
@@ -1171,9 +1095,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Lloji
-                </label>
+                <label>Lloji</label>
 
                 <select id="cashMovementType">
 
@@ -1191,9 +1113,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Shuma
-                </label>
+                <label>Shuma</label>
 
                 <input id="cashMovementAmount"
                        type="number">
@@ -1202,9 +1122,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Përshkrimi
-                </label>
+                <label>Përshkrimi</label>
 
                 <input id="cashMovementNote"
                        placeholder="P.sh. furnizim">
@@ -1224,8 +1142,7 @@ button{cursor:pointer}
 
 <!-- REPORTS -->
 
-<section id="reports"
-         class="page">
+<section id="reports" class="page">
 
     <div class="title">
         Raporte
@@ -1234,39 +1151,18 @@ button{cursor:pointer}
     <div class="stats">
 
         <div class="stat">
-
-            <small>
-                Sot
-            </small>
-
-            <strong id="reportToday">
-                0 L
-            </strong>
-
+            <small>Sot</small>
+            <strong id="reportToday">0 L</strong>
         </div>
 
         <div class="stat">
-
-            <small>
-                7 ditët
-            </small>
-
-            <strong id="reportWeek">
-                0 L
-            </strong>
-
+            <small>7 ditët</small>
+            <strong id="reportWeek">0 L</strong>
         </div>
 
         <div class="stat">
-
-            <small>
-                Fatura
-            </small>
-
-            <strong id="reportInvoices">
-                0
-            </strong>
-
+            <small>Fatura</small>
+            <strong id="reportInvoices">0</strong>
         </div>
 
     </div>
@@ -1299,8 +1195,7 @@ button{cursor:pointer}
 
 <!-- HISTORY -->
 
-<section id="history"
-         class="page">
+<section id="history" class="page">
 
     <div class="title">
         Historia
@@ -1322,14 +1217,15 @@ button{cursor:pointer}
 
 <!-- ADMIN -->
 
-<section id="admin"
-         class="page">
+<section id="admin" class="page">
 
     <div class="title">
         Admin Control Center
     </div>
 
     <div class="admin-grid">
+
+        <!-- PRODUCTS -->
 
         <div class="admin-section">
 
@@ -1339,9 +1235,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Emri
-                </label>
+                <label>Emri</label>
 
                 <input id="productName"
                        placeholder="P.sh. Espresso">
@@ -1350,9 +1244,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Kategoria
-                </label>
+                <label>Kategoria</label>
 
                 <input id="productCategory"
                        placeholder="P.sh. Kafe">
@@ -1361,9 +1253,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Çmimi
-                </label>
+                <label>Çmimi</label>
 
                 <input id="productPrice"
                        type="number"
@@ -1373,9 +1263,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Stoku fillestar
-                </label>
+                <label>Stoku fillestar</label>
 
                 <input id="productStock"
                        type="number"
@@ -1394,6 +1282,8 @@ button{cursor:pointer}
 
         </div>
 
+        <!-- WAITERS -->
+
         <div class="admin-section">
 
             <h3>
@@ -1402,31 +1292,25 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Emri
-                </label>
+                <label>Emri</label>
 
                 <input id="waiterName"
-                       placeholder="Emri i kamarierit">
+                       placeholder="P.sh. Sabi">
 
             </div>
 
             <div class="field">
 
-                <label>
-                    Username
-                </label>
+                <label>Username</label>
 
                 <input id="waiterUsername"
-                       placeholder="kamarier2">
+                       placeholder="sabi">
 
             </div>
 
             <div class="field">
 
-                <label>
-                    Password
-                </label>
+                <label>Password</label>
 
                 <input id="waiterPassword"
                        type="password"
@@ -1445,6 +1329,8 @@ button{cursor:pointer}
 
         </div>
 
+        <!-- TABLES -->
+
         <div class="admin-section">
 
             <h3>
@@ -1453,9 +1339,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Numri i tavolinave
-                </label>
+                <label>Numri i tavolinave</label>
 
                 <input id="tableCountInput"
                        type="number"
@@ -1471,6 +1355,8 @@ button{cursor:pointer}
 
         </div>
 
+        <!-- SETTINGS -->
+
         <div class="admin-section">
 
             <h3>
@@ -1479,9 +1365,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Emri i lokalit
-                </label>
+                <label>Emri i lokalit</label>
 
                 <input id="barNameInput">
 
@@ -1489,9 +1373,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Adresa
-                </label>
+                <label>Adresa</label>
 
                 <input id="barAddressInput">
 
@@ -1499,9 +1381,7 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Telefon
-                </label>
+                <label>Telefon</label>
 
                 <input id="barPhoneInput">
 
@@ -1514,6 +1394,8 @@ button{cursor:pointer}
 
         </div>
 
+        <!-- SECURITY -->
+
         <div class="admin-section">
 
             <h3>
@@ -1522,12 +1404,11 @@ button{cursor:pointer}
 
             <div class="field">
 
-                <label>
-                    Password i ri Admin
-                </label>
+                <label>Password i ri Admin</label>
 
                 <input id="newAdminPassword"
-                       type="password">
+                       type="password"
+                       placeholder="Password i ri">
 
             </div>
 
@@ -1537,6 +1418,8 @@ button{cursor:pointer}
             </button>
 
         </div>
+
+        <!-- DANGER -->
 
         <div class="admin-section">
 
@@ -1562,10 +1445,9 @@ button{cursor:pointer}
 </main>
 </div>
 
-<!-- PAYMENT MODAL -->
+<!-- PAYMENT -->
 
-<div id="paymentModal"
-     class="modal">
+<div id="paymentModal" class="modal">
 
     <div class="modal-box">
 
@@ -1599,10 +1481,9 @@ button{cursor:pointer}
 
 </div>
 
-<!-- INVOICE MODAL -->
+<!-- INVOICE -->
 
-<div id="invoiceModal"
-     class="modal">
+<div id="invoiceModal" class="modal">
 
     <div class="modal-box">
 
@@ -1657,8 +1538,10 @@ button{cursor:pointer}
             </div>
 
             <div class="invoice-payment">
+
                 Pagesa:
                 <b id="invoicePayment"></b>
+
             </div>
 
             <div class="qr-box">
@@ -1699,6 +1582,7 @@ button{cursor:pointer}
 
 const USERS_KEY="MYBAR_USERS_FINAL";
 const SESSION_KEY="MY_BAR_SESSION";
+
 const PRODUCTS_KEY="MYBAR_PRODUCTS_FINAL";
 const TABLES_KEY="MYBAR_TABLES_FINAL";
 const INVOICES_KEY="MYBAR_INVOICES_FINAL";
@@ -1816,22 +1700,14 @@ const DEFAULT_PRODUCTS=[
 function getJSON(key,fallback){
 
     try{
-
         const value=localStorage.getItem(key);
-
-        return value
-            ?JSON.parse(value)
-            :fallback;
-
+        return value?JSON.parse(value):fallback;
     }catch{
-
         return fallback;
-
     }
 }
 
 function setJSON(key,value){
-
     localStorage.setItem(
         key,
         JSON.stringify(value)
@@ -1839,7 +1715,6 @@ function setJSON(key,value){
 }
 
 function money(value){
-
     return Number(value||0)
         .toLocaleString("sq-AL")+" L";
 }
@@ -1858,16 +1733,53 @@ function toast(message){
 
     const box=document.getElementById("toast");
 
+    if(!box)return;
+
     box.textContent=message;
     box.style.display="block";
 
     clearTimeout(window.toastTimer);
 
     window.toastTimer=setTimeout(()=>{
-
         box.style.display="none";
-
     },2200);
+}
+
+/* =========================================================
+   USERS
+========================================================= */
+
+function getUsers(){
+
+    const users=
+        getJSON(
+            USERS_KEY,
+            null
+        );
+
+    if(
+        !Array.isArray(users)||
+        !users.length
+    ){
+
+        setJSON(
+            USERS_KEY,
+            DEFAULT_USERS
+        );
+
+        return JSON.parse(
+            JSON.stringify(DEFAULT_USERS)
+        );
+    }
+
+    return users;
+}
+
+function saveUsers(users){
+    setJSON(
+        USERS_KEY,
+        users
+    );
 }
 
 /* =========================================================
@@ -1876,33 +1788,37 @@ function toast(message){
 
 function getCurrentSession(){
 
-    let session=getJSON(
-        SESSION_KEY,
-        null
-    );
+    let session=
+        getJSON(
+            SESSION_KEY,
+            null
+        );
 
     if(!session){
 
-        session=getJSON(
-            "barCurrentUser",
-            null
-        );
+        session=
+            getJSON(
+                "barCurrentUser",
+                null
+            );
 
     }
 
     if(!session)
         return null;
 
-    const username=String(
-        session.username||
-        session.user||
-        ""
-    ).toLowerCase();
+    const username=
+        String(
+            session.username||
+            session.user||
+            ""
+        ).toLowerCase();
 
-    const role=String(
-        session.role||
-        ""
-    ).toLowerCase();
+    const role=
+        String(
+            session.role||
+            ""
+        ).toLowerCase();
 
     if(
         username==="admin"||
@@ -1920,17 +1836,26 @@ function getCurrentSession(){
     }
 
     if(
-        username==="kamarier"||
-        username==="kamarier1"||
         role==="waiter"||
         role==="kamarier"
     ){
 
         return{
-            username:username||"kamarier",
-            user:username||"kamarier",
+            username:
+                username||
+                session.username||
+                "kamarier",
+
+            user:
+                username||
+                session.username||
+                "kamarier",
+
             role:"waiter",
-            name:session.name||"Kamarier"
+
+            name:
+                session.name||
+                "Kamarier"
         };
 
     }
@@ -1940,10 +1865,11 @@ function getCurrentSession(){
 
 function isAdmin(){
 
-    const user=getCurrentSession();
+    const user=
+        getCurrentSession();
 
     return !!(
-        user &&
+        user&&
         user.role==="admin"
     );
 }
@@ -1954,25 +1880,28 @@ function isAdmin(){
 
 function initialize(){
 
-    if(!localStorage.getItem(USERS_KEY))
-        setJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+    getUsers();
 
-    if(!localStorage.getItem(PRODUCTS_KEY))
+    if(!localStorage.getItem(PRODUCTS_KEY)){
+
         setJSON(
             PRODUCTS_KEY,
             DEFAULT_PRODUCTS
         );
 
-    if(!localStorage.getItem(INVOICES_KEY))
+    }
+
+    if(!localStorage.getItem(INVOICES_KEY)){
+
         setJSON(
             INVOICES_KEY,
             []
         );
 
-    if(!localStorage.getItem(SETTINGS_KEY))
+    }
+
+    if(!localStorage.getItem(SETTINGS_KEY)){
+
         setJSON(
             SETTINGS_KEY,
             {
@@ -1982,11 +1911,16 @@ function initialize(){
             }
         );
 
-    if(!localStorage.getItem(TABLE_COUNT_KEY))
+    }
+
+    if(!localStorage.getItem(TABLE_COUNT_KEY)){
+
         localStorage.setItem(
             TABLE_COUNT_KEY,
             "12"
         );
+
+    }
 
     initializeTables();
     initializeStock();
@@ -2015,9 +1949,10 @@ function initializeTables(){
 
     for(let i=1;i<=count;i++){
 
-        const old=oldTables.find(
-            table=>table.id===i
-        );
+        const old=
+            oldTables.find(
+                table=>Number(table.id)===i
+            );
 
         tables.push(
             old||{
@@ -2036,7 +1971,6 @@ function initializeTables(){
 }
 
 function getTables(){
-
     return getJSON(
         TABLES_KEY,
         []
@@ -2044,7 +1978,6 @@ function getTables(){
 }
 
 function saveTables(tables){
-
     setJSON(
         TABLES_KEY,
         tables
@@ -2070,14 +2003,14 @@ function selectTable(id){
     renderTables();
     renderOrder();
 
-    const posButton=
+    const buttons=
         document.querySelectorAll(
             ".nav button"
-        )[1];
+        );
 
     showPage(
         "pos",
-        posButton
+        buttons[1]
     );
 }
 
@@ -2161,25 +2094,48 @@ function renderHeader(){
             {barName:"MY BAR"}
         );
 
-    document.getElementById(
-        "barNameTop"
-    ).textContent=
-        settings.barName||"MY BAR";
+    const barName=
+        document.getElementById(
+            "barNameTop"
+        );
 
-    document.getElementById(
-        "invoiceBarName"
-    ).textContent=
-        settings.barName||"MY BAR";
+    const invoiceBarName=
+        document.getElementById(
+            "invoiceBarName"
+        );
+
+    if(barName){
+
+        barName.textContent=
+            settings.barName||
+            "MY BAR";
+
+    }
+
+    if(invoiceBarName){
+
+        invoiceBarName.textContent=
+            settings.barName||
+            "MY BAR";
+
+    }
 
     const user=
         getCurrentSession();
 
-    if(user){
-
+    const userInfo=
         document.getElementById(
             "userInfo"
-        ).textContent=
-            (user.name||user.username||"User")+
+        );
+
+    if(userInfo&&user){
+
+        userInfo.textContent=
+            (
+                user.name||
+                user.username||
+                "User"
+            )+
             " • "+
             (
                 user.role==="admin"
@@ -2201,13 +2157,20 @@ function applyRole(){
             "adminNav"
         );
 
+    if(!adminNav)
+        return;
+
     if(isAdmin()){
 
-        adminNav.classList.add("show");
+        adminNav.classList.add(
+            "show"
+        );
 
     }else{
 
-        adminNav.classList.remove("show");
+        adminNav.classList.remove(
+            "show"
+        );
 
     }
 }
@@ -2219,20 +2182,24 @@ function applyRole(){
 function showPage(id,button){
 
     if(
-        id==="admin" &&
+        id==="admin"&&
         !isAdmin()
     ){
 
-        toast("Akses i refuzuar.");
-        return;
+        toast(
+            "Akses i refuzuar."
+        );
 
+        return;
     }
 
     document
         .querySelectorAll(".page")
-        .forEach(page=>
-            page.classList.remove("active")
-        );
+        .forEach(page=>{
+            page.classList.remove(
+                "active"
+            );
+        });
 
     const page=
         document.getElementById(id);
@@ -2242,9 +2209,9 @@ function showPage(id,button){
 
     document
         .querySelectorAll(".nav button")
-        .forEach(btn=>
-            btn.classList.remove("active")
-        );
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
 
     if(button)
         button.classList.add("active");
@@ -2296,7 +2263,8 @@ function showPage(id,button){
 
 function renderTables(){
 
-    const tables=getTables();
+    const tables=
+        getTables();
 
     const selected=
         getSelectedTable();
@@ -2305,7 +2273,7 @@ function renderTables(){
         tables.map(table=>{
 
             const active=
-                table.items &&
+                Array.isArray(table.items)&&
                 table.items.length>0;
 
             const total=
@@ -2318,43 +2286,59 @@ function renderTables(){
                     0
                 );
 
-            return`
-            <button
-                class="table-card
-                ${active?"active":""}
-                ${selected===table.id?"selected":""}"
-                onclick="selectTable(${table.id})">
+            return `
+                <button
+                    class="table-card ${active?"active":""} ${selected===Number(table.id)?"selected":""}"
+                    onclick="selectTable(${Number(table.id)})">
 
-                <strong>
-                    ${escapeHTML(table.name)}
-                </strong>
+                    <strong>
+                        ${escapeHTML(
+                            table.name
+                        )}
+                    </strong>
 
-                <span>
-                    ${
-                        active
-                        ?money(total)
-                        :"E lirë"
-                    }
-                </span>
+                    <span>
+                        ${
+                            active
+                            ?money(total)
+                            :"E lirë"
+                        }
+                    </span>
 
-            </button>`;
+                </button>
+            `;
 
         }).join("");
 
-    document.getElementById(
-        "tableGrid"
-    ).innerHTML=html;
+    const dashboard=
+        document.getElementById(
+            "dashboardTables"
+        );
 
-    document.getElementById(
-        "dashboardTables"
-    ).innerHTML=html;
+    const grid=
+        document.getElementById(
+            "tableGrid"
+        );
 
-    document.getElementById(
-        "selectedTableText"
-    ).textContent=
-        selected
-        ?"Tavolina "+selected
-        :"Zgjidh tavolinë";
+    const selectedText=
+        document.getElementById(
+            "selectedTableText"
+        );
+
+    if(dashboard)
+        dashboard.innerHTML=html;
+
+    if(grid)
+        grid.innerHTML=html;
+
+    if(selectedText){
+
+        selectedText.textContent=
+            selected
+            ?"Tavolina "+selected
+            :"Zgjidh tavolinë";
+
+    }
 }
 
 /* =========================================================
@@ -2380,16 +2364,23 @@ function renderMenu(
         )
     ];
 
-    document.getElementById(
-        "categories"
-    ).innerHTML=
-        categories.map(cat=>`
-            <button
-                class="${cat===category?"active":""}"
-                onclick='renderMenu(${JSON.stringify(cat)})'>
-                ${escapeHTML(cat)}
-            </button>
-        `).join("");
+    const categoryBox=
+        document.getElementById(
+            "categories"
+        );
+
+    if(categoryBox){
+
+        categoryBox.innerHTML=
+            categories.map(cat=>`
+                <button
+                    class="${cat===category?"active":""}"
+                    onclick='renderMenu(${JSON.stringify(cat)})'>
+                    ${escapeHTML(cat)}
+                </button>
+            `).join("");
+
+    }
 
     const search=
         document.getElementById(
@@ -2426,33 +2417,42 @@ function renderMenu(
 
 function drawProducts(products){
 
-    document.getElementById(
-        "menuGrid"
-    ).innerHTML=
+    const grid=
+        document.getElementById(
+            "menuGrid"
+        );
+
+    if(!grid)
+        return;
+
+    grid.innerHTML=
         products.map(product=>{
 
             const stock=
                 getStock(product.id);
 
-            return`
-            <button
-                class="menu-card ${stock<=0?"out":""}"
-                ${stock<=0?"disabled":""}
-                onclick="addProduct(${product.id})">
+            return `
+                <button
+                    class="menu-card ${stock<=0?"out":""}"
+                    ${stock<=0?"disabled":""}
+                    onclick="addProduct(${Number(product.id)})">
 
-                <strong>
-                    ${escapeHTML(product.name)}
-                </strong>
+                    <strong>
+                        ${escapeHTML(
+                            product.name
+                        )}
+                    </strong>
 
-                <span class="price">
-                    ${money(product.price)}
-                </span>
+                    <span class="price">
+                        ${money(product.price)}
+                    </span>
 
-                <small>
-                    Stok: ${stock}
-                </small>
+                    <small>
+                        Stok: ${stock}
+                    </small>
 
-            </button>`;
+                </button>
+            `;
 
         }).join("");
 }
@@ -2506,7 +2506,7 @@ function addProduct(productId){
 
     const table=
         tables.find(
-            t=>t.id===tableId
+            t=>Number(t.id)===Number(tableId)
         );
 
     if(!table)
@@ -2524,7 +2524,10 @@ function addProduct(productId){
 
     if(existing){
 
-        if(existing.quantity>=stock){
+        if(
+            Number(existing.quantity)>=
+            Number(stock)
+        ){
 
             toast(
                 "Nuk ka më stok."
@@ -2538,12 +2541,10 @@ function addProduct(productId){
     }else{
 
         table.items.push({
-
             productId:product.id,
             name:product.name,
             price:Number(product.price),
             quantity:1
-
         });
 
     }
@@ -2555,7 +2556,8 @@ function addProduct(productId){
     renderOrder();
 
     toast(
-        product.name+" u shtua."
+        product.name+
+        " u shtua."
     );
 }
 
@@ -2587,15 +2589,15 @@ function renderOrder(){
             "orderTotal"
         );
 
+    if(!container)
+        return;
+
     const tableId=
         getSelectedTable();
 
-    const tables=
-        getTables();
-
     const table=
-        tables.find(
-            t=>t.id===tableId
+        getTables().find(
+            t=>Number(t.id)===Number(tableId)
         );
 
     if(
@@ -2609,8 +2611,9 @@ function renderOrder(){
                 Nuk ka produkte në porosi.
             </div>`;
 
-        totalElement.textContent=
-            money(0);
+        if(totalElement)
+            totalElement.textContent=
+                money(0);
 
         return;
     }
@@ -2627,53 +2630,57 @@ function renderOrder(){
 
                 total+=itemTotal;
 
-                return`
-                <div class="order-item">
+                return `
+                    <div class="order-item">
 
-                    <div>
+                        <div>
 
-                        <strong>
-                            ${escapeHTML(item.name)}
-                        </strong>
+                            <strong>
+                                ${escapeHTML(
+                                    item.name
+                                )}
+                            </strong>
 
-                        <small>
-                            ${money(item.price)}
-                            ×
-                            ${item.quantity}
-                        </small>
+                            <small>
+                                ${money(item.price)}
+                                ×
+                                ${item.quantity}
+                            </small>
+
+                        </div>
+
+                        <div class="actions">
+
+                            <button
+                                onclick="changeOrderQuantity(${index},-1)">
+                                −
+                            </button>
+
+                            <span>
+                                ${item.quantity}
+                            </span>
+
+                            <button
+                                onclick="changeOrderQuantity(${index},1)">
+                                +
+                            </button>
+
+                            <button
+                                onclick="removeOrderItem(${index})">
+                                ×
+                            </button>
+
+                        </div>
 
                     </div>
-
-                    <div class="actions">
-
-                        <button
-                            onclick="changeOrderQuantity(${index},-1)">
-                            −
-                        </button>
-
-                        <span>
-                            ${item.quantity}
-                        </span>
-
-                        <button
-                            onclick="changeOrderQuantity(${index},1)">
-                            +
-                        </button>
-
-                        <button
-                            onclick="removeOrderItem(${index})">
-                            ×
-                        </button>
-
-                    </div>
-
-                </div>`;
+                `;
 
             }
         ).join("");
 
-    totalElement.textContent=
-        money(total);
+    if(totalElement)
+        totalElement.textContent=
+            money(total);
 }
 
 function changeOrderQuantity(
@@ -2689,7 +2696,7 @@ function changeOrderQuantity(
 
     const table=
         tables.find(
-            t=>t.id===tableId
+            t=>Number(t.id)===Number(tableId)
         );
 
     if(!table)
@@ -2728,7 +2735,6 @@ function changeOrderQuantity(
 
         item.quantity=
             newQuantity;
-
     }
 
     saveTables(tables);
@@ -2748,7 +2754,7 @@ function removeOrderItem(index){
 
     const table=
         tables.find(
-            t=>t.id===tableId
+            t=>Number(t.id)===Number(tableId)
         );
 
     if(!table)
@@ -2786,7 +2792,7 @@ function openPayment(){
 
     const table=
         getTables().find(
-            t=>t.id===tableId
+            t=>Number(t.id)===Number(tableId)
         );
 
     if(
@@ -2834,7 +2840,7 @@ function completePayment(method){
 
     const table=
         tables.find(
-            t=>t.id===tableId
+            t=>Number(t.id)===Number(tableId)
         );
 
     if(
@@ -2864,7 +2870,6 @@ function completePayment(method){
 
             return;
         }
-
     }
 
     for(const item of table.items){
@@ -2972,7 +2977,7 @@ function completePayment(method){
 }
 
 /* =========================================================
-   QR CODE
+   QR
 ========================================================= */
 
 function generateInvoiceQR(invoice){
@@ -3003,9 +3008,7 @@ Pagesa: ${invoice.payment==="cash"?"CASH":"KARTË"}
 TOTAL: ${invoice.total} L
 ${settings.phone?`Tel: ${settings.phone}`:""}`;
 
-    if(
-        typeof QRCode!=="undefined"
-    ){
+    if(typeof QRCode!=="undefined"){
 
         new QRCode(
             qr,
@@ -3013,7 +3016,8 @@ ${settings.phone?`Tel: ${settings.phone}`:""}`;
                 text:qrText,
                 width:110,
                 height:110,
-                correctLevel:QRCode.CorrectLevel.M
+                correctLevel:
+                    QRCode.CorrectLevel.M
             }
         );
 
@@ -3032,7 +3036,6 @@ ${settings.phone?`Tel: ${settings.phone}`:""}`;
             ">
                 QR nuk u ngarkua
             </div>`;
-
     }
 }
 
@@ -3090,21 +3093,23 @@ function showInvoice(invoice){
     ).innerHTML=
         invoice.items.map(
             item=>`
-            <div class="invoice-line">
+                <div class="invoice-line">
 
-                <span>
-                    ${escapeHTML(item.name)}
-                    × ${item.quantity}
-                </span>
+                    <span>
+                        ${escapeHTML(
+                            item.name
+                        )}
+                        × ${item.quantity}
+                    </span>
 
-                <b>
-                    ${money(
-                        Number(item.price)*
-                        Number(item.quantity)
-                    )}
-                </b>
+                    <b>
+                        ${money(
+                            Number(item.price)*
+                            Number(item.quantity)
+                        )}
+                    </b>
 
-            </div>
+                </div>
             `
         ).join("");
 
@@ -3128,7 +3133,7 @@ function closeInvoice(){
 }
 
 /* =========================================================
-   DASHBOARD
+   DATE
 ========================================================= */
 
 function isToday(date){
@@ -3145,6 +3150,10 @@ function isToday(date){
         d.getFullYear()===today.getFullYear()
     );
 }
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
 function updateDashboard(){
 
@@ -3204,30 +3213,50 @@ function updateDashboard(){
                 table.items.length
         ).length;
 
-    document.getElementById(
-        "salesToday"
-    ).textContent=
-        money(sales);
+    const salesToday=
+        document.getElementById(
+            "salesToday"
+        );
 
-    document.getElementById(
-        "cashToday"
-    ).textContent=
-        money(cash);
+    const cashToday=
+        document.getElementById(
+            "cashToday"
+        );
 
-    document.getElementById(
-        "cardToday"
-    ).textContent=
-        money(card);
+    const cardToday=
+        document.getElementById(
+            "cardToday"
+        );
 
-    document.getElementById(
-        "invoiceToday"
-    ).textContent=
-        todayInvoices.length;
+    const invoiceToday=
+        document.getElementById(
+            "invoiceToday"
+        );
 
-    document.getElementById(
-        "activeTables"
-    ).textContent=
-        activeTables;
+    const activeTablesBox=
+        document.getElementById(
+            "activeTables"
+        );
+
+    if(salesToday)
+        salesToday.textContent=
+            money(sales);
+
+    if(cashToday)
+        cashToday.textContent=
+            money(cash);
+
+    if(cardToday)
+        cardToday.textContent=
+            money(card);
+
+    if(invoiceToday)
+        invoiceToday.textContent=
+            todayInvoices.length;
+
+    if(activeTablesBox)
+        activeTablesBox.textContent=
+            activeTables;
 
     renderRecentPayments(
         todayInvoices
@@ -3240,6 +3269,9 @@ function renderRecentPayments(invoices){
         document.getElementById(
             "recentPayments"
         );
+
+    if(!box)
+        return;
 
     if(!invoices.length){
 
@@ -3257,35 +3289,36 @@ function renderRecentPayments(invoices){
         .slice(0,8)
         .map(
             invoice=>`
-            <div class="row">
+                <div class="row">
 
-                <div>
+                    <div>
+
+                        <strong>
+                            ${escapeHTML(
+                                invoice.number
+                            )}
+                        </strong>
+
+                        <small>
+                            ${escapeHTML(
+                                invoice.waiterName||
+                                ""
+                            )}
+                            •
+                            ${
+                                invoice.payment==="cash"
+                                ?"CASH"
+                                :"KARTË"
+                            }
+                        </small>
+
+                    </div>
 
                     <strong>
-                        ${escapeHTML(
-                            invoice.number
-                        )}
+                        ${money(invoice.total)}
                     </strong>
 
-                    <small>
-                        ${escapeHTML(
-                            invoice.waiterName||""
-                        )}
-                        •
-                        ${
-                            invoice.payment==="cash"
-                            ?"CASH"
-                            :"KARTË"
-                        }
-                    </small>
-
                 </div>
-
-                <strong>
-                    ${money(invoice.total)}
-                </strong>
-
-            </div>
             `
         ).join("");
 }
@@ -3329,6 +3362,9 @@ function renderInventory(){
             "inventoryList"
         );
 
+    if(!box)
+        return;
+
     box.innerHTML=
         filtered.map(
             product=>{
@@ -3339,54 +3375,55 @@ function renderInventory(){
                 const low=
                     stock<=minimum;
 
-                return`
-                <div class="row">
+                return `
+                    <div class="row">
 
-                    <div>
+                        <div>
 
-                        <strong>
-                            ${escapeHTML(
-                                product.name
-                            )}
-                        </strong>
+                            <strong>
+                                ${escapeHTML(
+                                    product.name
+                                )}
+                            </strong>
 
-                        <small>
-                            ${escapeHTML(
-                                product.category
-                            )}
-                        </small>
+                            <small>
+                                ${escapeHTML(
+                                    product.category
+                                )}
+                            </small>
+
+                        </div>
+
+                        <div>
+
+                            <strong
+                                class="${low?"low":"good"}">
+                                ${stock}
+                            </strong>
+
+                            ${
+                                isAdmin()
+                                ?`
+                                    <button
+                                        class="btn"
+                                        style="margin-left:8px"
+                                        onclick="changeStockAdmin(${product.id},1)">
+                                        +
+                                    </button>
+
+                                    <button
+                                        class="btn red"
+                                        onclick="changeStockAdmin(${product.id},-1)">
+                                        −
+                                    </button>
+                                `
+                                :""
+                            }
+
+                        </div>
 
                     </div>
-
-                    <div>
-
-                        <strong
-                            class="${low?"low":"good"}">
-                            ${stock}
-                        </strong>
-
-                        ${
-                            isAdmin()
-                            ?`
-                            <button
-                                class="btn"
-                                style="margin-left:8px"
-                                onclick="changeStockAdmin(${product.id},1)">
-                                +
-                            </button>
-
-                            <button
-                                class="btn red"
-                                onclick="changeStockAdmin(${product.id},-1)">
-                                −
-                            </button>
-                            `
-                            :""
-                        }
-
-                    </div>
-
-                </div>`;
+                `;
 
             }
         ).join("");
@@ -3452,15 +3489,17 @@ function toggleShift(){
                 []
             );
 
+        const opened=
+            new Date(
+                current.openedAt
+            ).getTime();
+
         const shiftInvoices=
             invoices.filter(
                 invoice=>
                     new Date(
                         invoice.date
-                    ).getTime()>=
-                    new Date(
-                        current.openedAt
-                    ).getTime()
+                    ).getTime()>=opened
             );
 
         const cashSales=
@@ -3477,7 +3516,9 @@ function toggleShift(){
             );
 
         const closingCash=
-            Number(current.openingCash||0)+
+            Number(
+                current.openingCash||0
+            )+
             cashSales;
 
         const history=
@@ -3497,7 +3538,9 @@ function toggleShift(){
                 new Date().toISOString(),
 
             openingCash:
-                Number(current.openingCash||0),
+                Number(
+                    current.openingCash||0
+                ),
 
             cashSales:
                 cashSales,
@@ -3580,6 +3623,9 @@ function renderShift(){
             "shiftButton"
         );
 
+    if(!status||!button)
+        return;
+
     if(!current){
 
         status.innerHTML=
@@ -3599,6 +3645,7 @@ function renderShift(){
         </span>
 
         <div style="margin-top:12px;color:#7e8d84">
+
             Hapur:
             ${new Date(
                 current.openedAt
@@ -3612,6 +3659,7 @@ function renderShift(){
                     current.openingCash
                 )}
             </strong>
+
         </div>`;
 
     button.textContent=
@@ -3624,6 +3672,9 @@ function renderShiftHistory(){
         document.getElementById(
             "shiftHistory"
         );
+
+    if(!box)
+        return;
 
     const history=
         getJSON(
@@ -3647,31 +3698,31 @@ function renderShiftHistory(){
         .slice(0,10)
         .map(
             shift=>`
-            <div class="row">
+                <div class="row">
 
-                <div>
+                    <div>
+
+                        <strong>
+                            ${escapeHTML(
+                                shift.waiter||""
+                            )}
+                        </strong>
+
+                        <small>
+                            ${new Date(
+                                shift.closedAt
+                            ).toLocaleString("sq-AL")}
+                        </small>
+
+                    </div>
 
                     <strong>
-                        ${escapeHTML(
-                            shift.waiter||""
+                        ${money(
+                            shift.closingCash
                         )}
                     </strong>
 
-                    <small>
-                        ${new Date(
-                            shift.closedAt
-                        ).toLocaleString("sq-AL")}
-                    </small>
-
                 </div>
-
-                <strong>
-                    ${money(
-                        shift.closingCash
-                    )}
-                </strong>
-
-            </div>
             `
         ).join("");
 }
@@ -3806,7 +3857,9 @@ function renderCash(){
 
     const opening=
         shift
-        ?Number(shift.openingCash||0)
+        ?Number(
+            shift.openingCash||0
+        )
         :0;
 
     const expected=
@@ -3814,25 +3867,41 @@ function renderCash(){
         cashSales+
         movementTotal;
 
-    document.getElementById(
-        "cashSales"
-    ).textContent=
-        money(cashSales);
+    const cashSalesBox=
+        document.getElementById(
+            "cashSales"
+        );
 
-    document.getElementById(
-        "openingCashView"
-    ).textContent=
-        money(opening);
+    const openingBox=
+        document.getElementById(
+            "openingCashView"
+        );
 
-    document.getElementById(
-        "expectedCash"
-    ).textContent=
-        money(expected);
+    const expectedBox=
+        document.getElementById(
+            "expectedCash"
+        );
 
-    document.getElementById(
-        "cashMovements"
-    ).textContent=
-        money(movementTotal);
+    const movementBox=
+        document.getElementById(
+            "cashMovements"
+        );
+
+    if(cashSalesBox)
+        cashSalesBox.textContent=
+            money(cashSales);
+
+    if(openingBox)
+        openingBox.textContent=
+            money(opening);
+
+    if(expectedBox)
+        expectedBox.textContent=
+            money(expected);
+
+    if(movementBox)
+        movementBox.textContent=
+            money(movementTotal);
 }
 
 /* =========================================================
@@ -3847,11 +3916,8 @@ function renderReports(){
             []
         );
 
-    const now=
-        Date.now();
-
     const weekStart=
-        now-
+        Date.now()-
         7*24*60*60*1000;
 
     const todayInvoices=
@@ -3863,8 +3929,10 @@ function renderReports(){
     const weekInvoices=
         invoices.filter(
             invoice=>
-                new Date(invoice.date)
-                .getTime()>=weekStart
+                new Date(
+                    invoice.date
+                ).getTime()>=
+                weekStart
         );
 
     const todayTotal=
@@ -3883,27 +3951,40 @@ function renderReports(){
             0
         );
 
-    document.getElementById(
-        "reportToday"
-    ).textContent=
-        money(todayTotal);
+    const reportToday=
+        document.getElementById(
+            "reportToday"
+        );
 
-    document.getElementById(
-        "reportWeek"
-    ).textContent=
-        money(weekTotal);
+    const reportWeek=
+        document.getElementById(
+            "reportWeek"
+        );
 
-    document.getElementById(
-        "reportInvoices"
-    ).textContent=
-        weekInvoices.length;
+    const reportInvoices=
+        document.getElementById(
+            "reportInvoices"
+        );
+
+    if(reportToday)
+        reportToday.textContent=
+            money(todayTotal);
+
+    if(reportWeek)
+        reportWeek.textContent=
+            money(weekTotal);
+
+    if(reportInvoices)
+        reportInvoices.textContent=
+            weekInvoices.length;
 
     const products={};
 
     weekInvoices.forEach(
         invoice=>{
 
-            invoice.items.forEach(
+            (invoice.items||[])
+            .forEach(
                 item=>{
 
                     if(!products[item.name])
@@ -3923,32 +4004,40 @@ function renderReports(){
             "productReport"
         );
 
-    const productEntries=
-        Object.entries(products)
-        .sort(
-            (a,b)=>b[1]-a[1]
-        );
+    if(productBox){
 
-    productBox.innerHTML=
-        productEntries.length
-        ?productEntries.map(
-            item=>`
-            <div class="row">
+        const productEntries=
+            Object.entries(products)
+            .sort(
+                (a,b)=>b[1]-a[1]
+            );
 
-                <span>
-                    ${escapeHTML(item[0])}
-                </span>
+        productBox.innerHTML=
+            productEntries.length
+            ?productEntries.map(
+                item=>`
+                    <div class="row">
 
-                <strong>
-                    ${item[1]}
-                </strong>
+                        <span>
+                            ${escapeHTML(
+                                item[0]
+                            )}
+                        </span>
 
-            </div>
-            `
-        ).join("")
-        :`<div class="empty">
-            Nuk ka shitje.
-          </div>`;
+                        <strong>
+                            ${item[1]}
+                        </strong>
+
+                    </div>
+                `
+            ).join("")
+            :`
+                <div class="empty">
+                    Nuk ka shitje.
+                </div>
+            `;
+
+    }
 
     const waiters={};
 
@@ -3973,32 +4062,40 @@ function renderReports(){
             "waiterReport"
         );
 
-    const waiterEntries=
-        Object.entries(waiters)
-        .sort(
-            (a,b)=>b[1]-a[1]
-        );
+    if(waiterBox){
 
-    waiterBox.innerHTML=
-        waiterEntries.length
-        ?waiterEntries.map(
-            item=>`
-            <div class="row">
+        const waiterEntries=
+            Object.entries(waiters)
+            .sort(
+                (a,b)=>b[1]-a[1]
+            );
 
-                <span>
-                    ${escapeHTML(item[0])}
-                </span>
+        waiterBox.innerHTML=
+            waiterEntries.length
+            ?waiterEntries.map(
+                item=>`
+                    <div class="row">
 
-                <strong>
-                    ${money(item[1])}
-                </strong>
+                        <span>
+                            ${escapeHTML(
+                                item[0]
+                            )}
+                        </span>
 
-            </div>
-            `
-        ).join("")
-        :`<div class="empty">
-            Nuk ka shitje.
-          </div>`;
+                        <strong>
+                            ${money(item[1])}
+                        </strong>
+
+                    </div>
+                `
+            ).join("")
+            :`
+                <div class="empty">
+                    Nuk ka shitje.
+                </div>
+            `;
+
+    }
 }
 
 /* =========================================================
@@ -4011,6 +4108,9 @@ function renderHistory(){
         document.getElementById(
             "historyList"
         );
+
+    if(!box)
+        return;
 
     const invoices=
         getJSON(
@@ -4033,45 +4133,47 @@ function renderHistory(){
         .reverse()
         .map(
             invoice=>`
-            <div class="row">
+                <div class="row">
 
-                <div>
+                    <div>
 
-                    <strong>
-                        ${escapeHTML(
-                            invoice.number
-                        )}
-                    </strong>
+                        <strong>
+                            ${escapeHTML(
+                                invoice.number
+                            )}
+                        </strong>
 
-                    <small>
-                        ${new Date(
-                            invoice.date
-                        ).toLocaleString("sq-AL")}
-                        •
-                        ${escapeHTML(
-                            invoice.waiterName||""
-                        )}
-                    </small>
+                        <small>
+                            ${new Date(
+                                invoice.date
+                            ).toLocaleString("sq-AL")}
+                            •
+                            ${escapeHTML(
+                                invoice.waiterName||""
+                            )}
+                        </small>
+
+                    </div>
+
+                    <div style="text-align:right">
+
+                        <strong>
+                            ${money(
+                                invoice.total
+                            )}
+                        </strong>
+
+                        <small>
+                            ${
+                                invoice.payment==="cash"
+                                ?"CASH"
+                                :"KARTË"
+                            }
+                        </small>
+
+                    </div>
 
                 </div>
-
-                <div style="text-align:right">
-
-                    <strong>
-                        ${money(invoice.total)}
-                    </strong>
-
-                    <small>
-                        ${
-                            invoice.payment==="cash"
-                            ?"CASH"
-                            :"KARTË"
-                        }
-                    </small>
-
-                </div>
-
-            </div>
             `
         ).join("");
 }
@@ -4173,12 +4275,9 @@ function addProductAdmin(){
     products.push({
 
         id:newId,
-
-        name,
-
-        category,
-
-        price
+        name:name,
+        category:category,
+        price:price
 
     });
 
@@ -4236,47 +4335,47 @@ function renderAdminProducts(){
     box.innerHTML=
         products.map(
             product=>`
-            <div class="row">
+                <div class="row">
 
-                <div>
+                    <div>
 
-                    <strong>
-                        ${escapeHTML(
-                            product.name
-                        )}
-                    </strong>
+                        <strong>
+                            ${escapeHTML(
+                                product.name
+                            )}
+                        </strong>
 
-                    <small>
-                        ${escapeHTML(
-                            product.category
-                        )}
-                        •
-                        ${money(
-                            product.price
-                        )}
-                        • Stok:
-                        ${getStock(product.id)}
-                    </small>
+                        <small>
+                            ${escapeHTML(
+                                product.category
+                            )}
+                            •
+                            ${money(
+                                product.price
+                            )}
+                            • Stok:
+                            ${getStock(product.id)}
+                        </small>
+
+                    </div>
+
+                    <div class="admin-actions">
+
+                        <button
+                            class="btn"
+                            onclick="editProduct(${product.id})">
+                            Ndrysho
+                        </button>
+
+                        <button
+                            class="btn red"
+                            onclick="deleteProduct(${product.id})">
+                            Fshi
+                        </button>
+
+                    </div>
 
                 </div>
-
-                <div class="admin-actions">
-
-                    <button
-                        class="btn"
-                        onclick="editProduct(${product.id})">
-                        Ndrysho
-                    </button>
-
-                    <button
-                        class="btn red"
-                        onclick="deleteProduct(${product.id})">
-                        Fshi
-                    </button>
-
-                </div>
-
-            </div>
             `
         ).join("");
 }
@@ -4329,10 +4428,16 @@ function editProduct(id){
     if(!price||price<=0)
         return;
 
-    product.name=name.trim()||product.name;
+    product.name=
+        name.trim()||
+        product.name;
+
     product.category=
-        category.trim()||product.category;
-    product.price=price;
+        category.trim()||
+        product.category;
+
+    product.price=
+        price;
 
     setJSON(
         PRODUCTS_KEY,
@@ -4443,16 +4548,23 @@ function addWaiter(){
         return;
     }
 
-    const users=
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
+    if(username==="admin"){
+
+        toast(
+            "Ky username është i rezervuar."
         );
+
+        return;
+    }
+
+    const users=
+        getUsers();
 
     if(
         users.some(
             user=>
-                user.username.toLowerCase()===
+                String(user.username)
+                .toLowerCase()===
                 username
         )
     ){
@@ -4466,20 +4578,17 @@ function addWaiter(){
 
     users.push({
 
-        username,
+        username:username,
 
-        password,
+        password:password,
 
         role:"waiter",
 
-        name
+        name:name
 
     });
 
-    setJSON(
-        USERS_KEY,
-        users
-    );
+    saveUsers(users);
 
     document.getElementById(
         "waiterName"
@@ -4511,75 +4620,186 @@ function renderAdminWaiters(){
         return;
 
     const users=
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+        getUsers();
 
     box.innerHTML=
         users.map(
-            (user,index)=>`
+            (user,index)=>{
 
-            <div class="row">
+                const isAdminUser=
+                    String(user.role)
+                    .toLowerCase()==="admin"||
+                    String(user.username)
+                    .toLowerCase()==="admin";
 
-                <div>
+                return `
+                    <div class="row">
 
-                    <strong>
-                        ${escapeHTML(
-                            user.name
-                        )}
-                    </strong>
+                        <div>
 
-                    <small>
-                        ${escapeHTML(
-                            user.username
-                        )}
-                        •
-                        ${user.role}
-                    </small>
+                            <strong>
+                                ${escapeHTML(
+                                    user.name||
+                                    user.username
+                                )}
+                            </strong>
 
-                </div>
+                            <small>
+                                @${escapeHTML(
+                                    user.username
+                                )}
+                                •
+                                ${
+                                    isAdminUser
+                                    ?"ADMIN"
+                                    :"KAMARIER"
+                                }
+                            </small>
 
-                ${
-                    user.username!=="admin"
-                    ?`
-                    <button
-                        class="btn red"
-                        onclick="deleteWaiter(${index})">
-                        Fshi
-                    </button>
-                    `
-                    :""
-                }
+                        </div>
 
-            </div>
+                        ${
+                            !isAdminUser
+                            ?`
+                                <div class="admin-actions">
 
-            `
+                                    <button
+                                        class="btn blue"
+                                        onclick="changeWaiterPassword(${index})">
+                                        Password
+                                    </button>
+
+                                    <button
+                                        class="btn red"
+                                        onclick="deleteWaiter(${index})">
+                                        Fshi
+                                    </button>
+
+                                </div>
+                            `
+                            :`
+                                <span class="badge">
+                                    ADMIN
+                                </span>
+                            `
+                        }
+
+                    </div>
+                `;
+            }
         ).join("");
 }
 
-function deleteWaiter(index){
+/* =========================================================
+   CHANGE WAITER PASSWORD
+========================================================= */
 
-    if(!isAdmin())
-        return;
+function changeWaiterPassword(index){
 
-    const users=
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
+    if(!isAdmin()){
+
+        toast(
+            "Vetëm administratori."
         );
 
-    if(!users[index])
+        return;
+    }
+
+    const users=
+        getUsers();
+
+    const waiter=
+        users[index];
+
+    if(!waiter)
         return;
 
     if(
-        users[index].username==="admin"
-    )
+        String(waiter.username)
+        .toLowerCase()==="admin"
+    ){
+
+        toast(
+            "Për admin përdor Ndrysho password."
+        );
+
         return;
+    }
+
+    const newPassword=
+        prompt(
+            "Password i ri për "+
+            (waiter.name||waiter.username)+":"
+        );
+
+    if(newPassword===null)
+        return;
+
+    const password=
+        newPassword.trim();
+
+    if(!password){
+
+        toast(
+            "Password-i nuk mund të jetë bosh."
+        );
+
+        return;
+    }
+
+    waiter.password=
+        password;
+
+    saveUsers(users);
+
+    renderAdminWaiters();
+
+    toast(
+        "Password-i u ndryshua."
+    );
+}
+
+/* =========================================================
+   DELETE WAITER
+========================================================= */
+
+function deleteWaiter(index){
+
+    if(!isAdmin()){
+
+        toast(
+            "Vetëm administratori."
+        );
+
+        return;
+    }
+
+    const users=
+        getUsers();
+
+    const user=
+        users[index];
+
+    if(!user)
+        return;
+
+    if(
+        String(user.username)
+        .toLowerCase()==="admin"
+    ){
+
+        toast(
+            "Administratori nuk mund të fshihet."
+        );
+
+        return;
+    }
 
     if(
         !confirm(
-            "Fshi këtë kamarier?"
+            "Fshi kamarierin "+
+            (user.name||user.username)+
+            "?"
         )
     )
         return;
@@ -4589,10 +4809,7 @@ function deleteWaiter(index){
         1
     );
 
-    setJSON(
-        USERS_KEY,
-        users
-    );
+    saveUsers(users);
 
     renderAdminWaiters();
 
@@ -4626,7 +4843,7 @@ function saveTableCount(){
             1,
             Math.min(
                 100,
-                Number(input.value)
+                Number(input.value)||1
             )
         );
 
@@ -4684,27 +4901,47 @@ function loadSettings(){
             }
         );
 
-    document.getElementById(
-        "barNameInput"
-    ).value=
-        settings.barName||"MY BAR";
+    const name=
+        document.getElementById(
+            "barNameInput"
+        );
 
-    document.getElementById(
-        "barAddressInput"
-    ).value=
-        settings.address||"";
+    const address=
+        document.getElementById(
+            "barAddressInput"
+        );
 
-    document.getElementById(
-        "barPhoneInput"
-    ).value=
-        settings.phone||"";
+    const phone=
+        document.getElementById(
+            "barPhoneInput"
+        );
 
-    document.getElementById(
-        "tableCountInput"
-    ).value=
-        localStorage.getItem(
-            TABLE_COUNT_KEY
-        )||"12";
+    const tableCount=
+        document.getElementById(
+            "tableCountInput"
+        );
+
+    if(name)
+        name.value=
+            settings.barName||
+            "MY BAR";
+
+    if(address)
+        address.value=
+            settings.address||
+            "";
+
+    if(phone)
+        phone.value=
+            settings.phone||
+            "";
+
+    if(tableCount)
+        tableCount.value=
+            localStorage.getItem(
+                TABLE_COUNT_KEY
+            )||
+            "12";
 }
 
 function saveSettings(){
@@ -4783,26 +5020,34 @@ function changeAdminPassword(){
     }
 
     const users=
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+        getUsers();
 
     const admin=
         users.find(
             user=>
-                user.username==="admin"
+                String(user.username)
+                .toLowerCase()==="admin"
         );
 
-    if(!admin)
+    if(!admin){
+
+        toast(
+            "Administratori nuk u gjet."
+        );
+
         return;
+    }
 
-    admin.password=password;
+    admin.password=
+        password;
 
-    setJSON(
-        USERS_KEY,
-        users
-    );
+    admin.role=
+        "admin";
+
+    admin.name=
+        "Administrator";
+
+    saveUsers(users);
 
     input.value="";
 
@@ -4858,15 +5103,16 @@ function setupSearch(){
             "menuSearch"
         );
 
-    if(!search)
-        return;
+    if(search){
 
-    search.addEventListener(
-        "input",
-        ()=>{
-            renderMenu();
-        }
-    );
+        search.addEventListener(
+            "input",
+            ()=>{
+                renderMenu();
+            }
+        );
+
+    }
 
     const inventorySearch=
         document.getElementById(
@@ -4934,6 +5180,10 @@ function logout(){
 
     localStorage.removeItem(
         "barCurrentUser"
+    );
+
+    localStorage.removeItem(
+        "MYBAR_SELECTED_TABLE"
     );
 
     window.location.href=
