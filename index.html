@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
+<meta name="theme-color" content="#050505">
 
 <title>WELCOME • MY BAR</title>
 
@@ -14,102 +14,48 @@
     padding:0;
 }
 
-html,body{
-    width:100%;
-    min-height:100%;
-}
-
 body{
+    min-height:100vh;
     background:#050505;
     color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    overflow-x:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    overflow:hidden;
 }
-
-/* =========================
-   GOLD BACKGROUND
-========================= */
 
 body::before{
     content:"";
     position:fixed;
-    inset:-30%;
+    inset:0;
     background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(201,165,92,.16),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 10% 90%,
-            rgba(201,165,92,.08),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(201,165,92,.06),
-            transparent 25%
-        );
+        radial-gradient(circle at 50% 45%,rgba(201,165,92,.14),transparent 30%),
+        radial-gradient(circle at 10% 90%,rgba(201,165,92,.06),transparent 25%),
+        radial-gradient(circle at 90% 10%,rgba(201,165,92,.05),transparent 25%);
     pointer-events:none;
-    z-index:-3;
 }
-
-/* =========================
-   GOLD FRAME
-========================= */
 
 .frame{
     position:fixed;
-    inset:14px;
-    border:1px solid rgba(201,165,92,.38);
-    border-radius:22px;
+    inset:12px;
+    border:1px solid rgba(201,165,92,.35);
+    border-radius:20px;
     pointer-events:none;
-    z-index:20;
 }
-
-.frame::before,
-.frame::after{
-    content:"";
-    position:absolute;
-    width:90px;
-    height:1px;
-    background:#d7b56b;
-    box-shadow:0 0 18px #d7b56b;
-}
-
-.frame::before{
-    top:-1px;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-.frame::after{
-    bottom:-1px;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-/* =========================
-   HEADER
-========================= */
 
 header{
-    width:100%;
-    padding:28px 42px;
+    height:80px;
+    padding:0 35px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    position:relative;
-    z-index:5;
+    justify-content:space-between;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:12px;
 }
 
-.brand-logo{
+.logo{
     width:42px;
     height:42px;
     border:1px solid #c9a55c;
@@ -118,372 +64,383 @@ header{
     align-items:center;
     justify-content:center;
     color:#d9b86f;
-    font-size:20px;
-    font-weight:700;
-    box-shadow:
-        0 0 15px rgba(201,165,92,.22),
-        inset 0 0 15px rgba(201,165,92,.08);
+    font-weight:800;
 }
 
-.brand-text{
-    line-height:1.05;
-}
-
-.brand-text strong{
-    font-size:15px;
-    letter-spacing:4px;
-    color:#fff;
-}
-
-.brand-text small{
+.brand strong{
     display:block;
-    margin-top:5px;
-    color:#9c8a67;
-    letter-spacing:2px;
-    font-size:9px;
+    font-size:14px;
+    letter-spacing:4px;
 }
 
-/* =========================
-   CONTACT BUTTON
-========================= */
+.brand small{
+    display:block;
+    margin-top:4px;
+    color:#666;
+    font-size:8px;
+    letter-spacing:2px;
+}
 
-.contact-btn{
-    border:1px solid rgba(201,165,92,.65);
-    background:rgba(201,165,92,.05);
-    color:#d9b86f;
-    padding:11px 19px;
+.contact{
+    padding:11px 18px;
+    border:1px solid #66532d;
     border-radius:10px;
-    font-size:11px;
+    background:#0a0a0a;
+    color:#d9b86f;
+    font-size:10px;
     letter-spacing:2px;
     cursor:pointer;
-    transition:.25s;
 }
-
-.contact-btn:hover{
-    background:#c9a55c;
-    color:#080808;
-    box-shadow:0 0 25px rgba(201,165,92,.35);
-}
-
-/* =========================
-   MAIN
-========================= */
 
 main{
-    min-height:calc(100vh - 120px);
+    min-height:calc(100vh - 80px);
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:35px 20px 80px;
+    padding:20px;
 }
 
-.main-box{
-    width:min(100%,1050px);
+.layout{
+    width:min(100%,1000px);
     display:grid;
     grid-template-columns:1fr 330px;
     gap:70px;
     align-items:center;
 }
 
-/* =========================
-   WELCOME
-========================= */
-
-.welcome{
-    text-align:left;
-}
-
 .welcome-line{
-    width:70px;
+    width:65px;
     height:1px;
     background:#c9a55c;
-    box-shadow:0 0 12px rgba(201,165,92,.7);
-    margin-bottom:24px;
+    box-shadow:0 0 15px #c9a55c;
+    margin-bottom:25px;
 }
 
-.welcome h1{
-    font-size:clamp(54px,9vw,110px);
-    line-height:.88;
-    letter-spacing:-5px;
+h1{
+    font-size:clamp(65px,10vw,115px);
+    line-height:.85;
+    letter-spacing:-6px;
     font-weight:300;
 }
 
-.welcome h1 span{
+h1 span{
     color:#c9a55c;
 }
 
 .created{
-    margin-top:26px;
-    color:#a99a7e;
-    font-size:13px;
+    margin-top:27px;
+    color:#8b806c;
+    font-size:12px;
     letter-spacing:3px;
 }
 
-.created strong{
-    color:#d8b86c;
+.created b{
+    color:#d8b76d;
     font-weight:500;
 }
 
-.subtitle{
-    margin-top:20px;
-    max-width:470px;
-    color:#737373;
-    font-size:13px;
-    line-height:1.8;
-}
-
-/* =========================
-   USERS
-========================= */
-
 .users{
-    border:1px solid rgba(201,165,92,.3);
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.015)
-        );
-    backdrop-filter:blur(15px);
-    border-radius:20px;
     padding:25px;
-    box-shadow:
-        0 20px 70px rgba(0,0,0,.55),
-        inset 0 0 30px rgba(201,165,92,.025);
+    border:1px solid rgba(201,165,92,.3);
+    border-radius:20px;
+    background:rgba(12,12,12,.88);
+    box-shadow:0 25px 80px rgba(0,0,0,.65);
 }
 
 .users-title{
-    color:#7f7565;
-    font-size:9px;
+    color:#666;
+    font-size:8px;
     letter-spacing:3px;
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
-.user-btn{
+.user{
     width:100%;
-    border:1px solid rgba(255,255,255,.08);
-    background:#0b0b0b;
+    padding:17px;
+    margin-bottom:9px;
+    border:1px solid #202020;
+    background:#090909;
+    border-radius:12px;
     color:#fff;
-    padding:18px;
-    border-radius:13px;
-    margin-bottom:10px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     cursor:pointer;
-    transition:.25s;
+    transition:.2s;
 }
 
-.user-btn:last-child{
+.user:last-child{
     margin-bottom:0;
 }
 
-.user-btn:hover{
+.user:hover{
     border-color:#c9a55c;
     transform:translateY(-2px);
-    box-shadow:0 8px 25px rgba(201,165,92,.12);
 }
 
 .user-left{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:12px;
 }
 
 .user-icon{
     width:35px;
     height:35px;
+    border:1px solid #66532d;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid rgba(201,165,92,.45);
-    color:#c9a55c;
-    font-size:12px;
+    color:#d8b76d;
+    font-size:11px;
 }
 
 .user-name{
-    font-size:12px;
-    letter-spacing:2px;
     text-align:left;
+    font-size:11px;
+    letter-spacing:2px;
 }
 
 .user-role{
     display:block;
     margin-top:4px;
-    color:#666;
-    font-size:8px;
+    color:#555;
+    font-size:7px;
     letter-spacing:1px;
 }
 
 .arrow{
     color:#c9a55c;
-    font-size:18px;
+    font-size:20px;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 footer{
     position:fixed;
-    bottom:28px;
-    left:0;
+    bottom:25px;
     width:100%;
     text-align:center;
-    color:#4d4d4d;
-    font-size:8px;
+    color:#444;
+    font-size:7px;
     letter-spacing:3px;
 }
 
-/* =========================
-   CONTACT MODAL
-========================= */
+/* LOGIN */
 
 .overlay{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.78);
-    backdrop-filter:blur(12px);
+    background:rgba(0,0,0,.86);
+    backdrop-filter:blur(14px);
     display:none;
     align-items:center;
     justify-content:center;
-    z-index:100;
     padding:20px;
+    z-index:100;
 }
 
 .overlay.show{
     display:flex;
 }
 
-.contact-card{
-    width:min(100%,440px);
+.login{
+    width:min(100%,400px);
     background:#0b0b0b;
-    border:1px solid rgba(201,165,92,.45);
+    border:1px solid rgba(201,165,92,.4);
     border-radius:20px;
     padding:30px;
-    box-shadow:0 25px 90px rgba(0,0,0,.8);
-    position:relative;
+    box-shadow:0 30px 100px rgba(0,0,0,.8);
 }
 
 .close{
-    position:absolute;
-    top:15px;
-    right:17px;
-    width:32px;
-    height:32px;
+    float:right;
+    width:30px;
+    height:30px;
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid #292929;
     background:#111;
-    color:#aaa;
+    color:#999;
     cursor:pointer;
 }
 
-.contact-card h2{
-    font-size:25px;
-    font-weight:400;
-    margin-bottom:8px;
+.login-logo{
+    width:48px;
+    height:48px;
+    border:1px solid #c9a55c;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d9b86f;
+    font-weight:800;
+    margin:0 auto 18px;
 }
 
-.contact-card h2 span{
+.login h2{
+    text-align:center;
+    font-size:23px;
+    font-weight:400;
+    letter-spacing:2px;
+}
+
+.login h2 span{
     color:#c9a55c;
 }
 
-.contact-card p{
-    color:#777;
-    font-size:12px;
-    line-height:1.7;
-    margin-bottom:22px;
+.selected{
+    margin-top:20px;
+    text-align:center;
+    padding:13px;
+    border:1px solid #252525;
+    border-radius:10px;
+    background:#080808;
 }
 
-.contact-option{
-    width:100%;
-    border:1px solid rgba(201,165,92,.22);
-    background:#101010;
-    color:#fff;
-    padding:16px;
-    border-radius:12px;
-    margin-top:10px;
-    text-align:left;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.contact-option:hover{
-    border-color:#c9a55c;
-}
-
-.contact-option strong{
-    font-size:11px;
-    letter-spacing:1px;
-}
-
-.contact-option small{
+.selected small{
     display:block;
-    color:#666;
-    margin-top:5px;
+    color:#555;
+    font-size:7px;
+    letter-spacing:2px;
 }
 
-/* =========================
-   REPORT FORM
-========================= */
+.selected strong{
+    display:block;
+    color:#d8b76d;
+    margin-top:5px;
+    font-size:12px;
+    letter-spacing:2px;
+}
 
-.report-form{
-    display:none;
+.field{
     margin-top:15px;
 }
 
-.report-form textarea{
+.field label{
+    display:block;
+    color:#777;
+    font-size:8px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.field input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #292929;
+    background:#060606;
+    color:#fff;
+    outline:none;
+}
+
+.field input:focus{
+    border-color:#c9a55c;
+}
+
+.enter{
+    width:100%;
+    margin-top:18px;
+    padding:15px;
+    border:0;
+    border-radius:10px;
+    background:#c9a55c;
+    color:#080808;
+    font-weight:800;
+    letter-spacing:2px;
+    cursor:pointer;
+}
+
+.back{
+    width:100%;
+    margin-top:8px;
+    padding:13px;
+    border:1px solid #292929;
+    border-radius:10px;
+    background:#090909;
+    color:#888;
+    cursor:pointer;
+}
+
+.error{
+    display:none;
+    margin-top:12px;
+    padding:10px;
+    border-radius:9px;
+    background:#160909;
+    border:1px solid #492626;
+    color:#d68181;
+    text-align:center;
+    font-size:10px;
+}
+
+.error.show{
+    display:block;
+}
+
+/* CONTACT */
+
+.contact-box{
+    width:min(100%,420px);
+    background:#0b0b0b;
+    border:1px solid rgba(201,165,92,.4);
+    border-radius:20px;
+    padding:28px;
+}
+
+.contact-box h2{
+    font-size:22px;
+    font-weight:400;
+}
+
+.contact-box h2 span{
+    color:#c9a55c;
+}
+
+.contact-box p{
+    color:#666;
+    font-size:11px;
+    line-height:1.6;
+    margin:10px 0 20px;
+}
+
+textarea{
     width:100%;
     min-height:120px;
-    resize:vertical;
-    border-radius:12px;
+    resize:none;
+    padding:13px;
+    border-radius:10px;
     border:1px solid #292929;
-    background:#050505;
+    background:#060606;
     color:#fff;
-    padding:14px;
     outline:none;
     font-family:inherit;
 }
 
-.report-form textarea:focus{
-    border-color:#c9a55c;
-}
-
-.send-btn{
+.send{
     width:100%;
     margin-top:10px;
-    border:0;
-    border-radius:12px;
     padding:14px;
+    border:0;
+    border-radius:10px;
     background:#c9a55c;
-    color:#090909;
-    font-weight:700;
+    color:#080808;
+    font-weight:800;
     cursor:pointer;
 }
 
-/* =========================
-   MOBILE
-========================= */
+@media(max-width:700px){
 
-@media(max-width:760px){
-
-    .frame{
-        inset:8px;
-        border-radius:17px;
+    body{
+        overflow:auto;
     }
 
     header{
-        padding:22px 25px;
+        padding:0 22px;
     }
 
-    main{
-        padding:20px 25px 80px;
-    }
-
-    .main-box{
+    .layout{
         grid-template-columns:1fr;
-        gap:45px;
+        gap:40px;
         max-width:430px;
     }
 
@@ -492,31 +449,21 @@ footer{
     }
 
     .welcome-line{
-        margin:0 auto 22px;
+        margin-left:auto;
+        margin-right:auto;
     }
 
-    .welcome h1{
-        font-size:64px;
-        letter-spacing:-3px;
+    h1{
+        font-size:65px;
+        letter-spacing:-4px;
     }
 
     .created{
-        font-size:11px;
+        font-size:10px;
     }
 
-    .subtitle{
-        margin-left:auto;
-        margin-right:auto;
-        font-size:12px;
-    }
-
-    .users{
-        padding:20px;
-    }
-
-    footer{
-        bottom:18px;
-        font-size:7px;
+    main{
+        padding-bottom:80px;
     }
 }
 </style>
@@ -529,27 +476,27 @@ footer{
 <header>
 
     <div class="brand">
+        <div class="logo">S</div>
 
-        <div class="brand-logo">
-            S
-        </div>
-
-        <div class="brand-text">
+        <div>
             <strong>MY BAR</strong>
             <small>CREATED BY SABI</small>
         </div>
-
     </div>
 
-    <button class="contact-btn" onclick="openContact()">
+    <button
+        class="contact"
+        onclick="openContact()"
+    >
         CONTACT
     </button>
 
 </header>
 
+
 <main>
 
-    <div class="main-box">
+    <div class="layout">
 
         <section class="welcome">
 
@@ -560,15 +507,11 @@ footer{
             </h1>
 
             <div class="created">
-                Created — <strong>Sabi</strong>
+                Created — <b>Sabi</b>
             </div>
 
-            <p class="subtitle">
-                Sistem menaxhimi premium për barin tuaj.
-                Zgjidh përdoruesin për të vazhduar.
-            </p>
-
         </section>
+
 
         <section class="users">
 
@@ -576,7 +519,10 @@ footer{
                 SELECT USER
             </div>
 
-            <button class="user-btn" onclick="goLogin('admin')">
+            <button
+                class="user"
+                onclick="openLogin('admin','ADMIN','ADMINISTRATOR')"
+            >
 
                 <div class="user-left">
 
@@ -593,13 +539,15 @@ footer{
 
                 </div>
 
-                <div class="arrow">
-                    ›
-                </div>
+                <div class="arrow">›</div>
 
             </button>
 
-            <button class="user-btn" onclick="goLogin('sabi')">
+
+            <button
+                class="user"
+                onclick="openLogin('sabi','SABI','WAITER')"
+            >
 
                 <div class="user-left">
 
@@ -616,9 +564,32 @@ footer{
 
                 </div>
 
-                <div class="arrow">
-                    ›
+                <div class="arrow">›</div>
+
+            </button>
+
+
+            <button
+                class="user"
+                onclick="openLogin('mondi','MONDI','WAITER')"
+            >
+
+                <div class="user-left">
+
+                    <div class="user-icon">
+                        M
+                    </div>
+
+                    <div class="user-name">
+                        MONDI
+                        <span class="user-role">
+                            WAITER
+                        </span>
+                    </div>
+
                 </div>
+
+                <div class="arrow">›</div>
 
             </button>
 
@@ -628,18 +599,110 @@ footer{
 
 </main>
 
+
 <footer>
     PREMIUM BAR MANAGEMENT • CREATED BY SABI
 </footer>
 
 
+<!-- LOGIN -->
+
+<div
+    class="overlay"
+    id="loginOverlay"
+>
+
+    <div class="login">
+
+        <button
+            class="close"
+            onclick="closeLogin()"
+        >
+            ×
+        </button>
+
+        <div class="login-logo">
+            S
+        </div>
+
+        <h2>
+            MY <span>BAR</span>
+        </h2>
+
+        <div class="selected">
+
+            <small>SELECTED USER</small>
+
+            <strong id="selectedUser">
+                ADMIN
+            </strong>
+
+        </div>
+
+        <div class="field">
+
+            <label>USERNAME</label>
+
+            <input
+                id="username"
+                type="text"
+                autocomplete="username"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label>FJALËKALIMI</label>
+
+            <input
+                id="password"
+                type="password"
+                autocomplete="current-password"
+                onkeydown="if(event.key==='Enter') login()"
+            >
+
+        </div>
+
+        <button
+            class="enter"
+            onclick="login()"
+        >
+            HYR
+        </button>
+
+        <button
+            class="back"
+            onclick="closeLogin()"
+        >
+            KTHEHU
+        </button>
+
+        <div
+            class="error"
+            id="loginError"
+        >
+            Username ose fjalëkalim i gabuar.
+        </div>
+
+    </div>
+
+</div>
+
+
 <!-- CONTACT -->
 
-<div class="overlay" id="contactOverlay">
+<div
+    class="overlay"
+    id="contactOverlay"
+>
 
-    <div class="contact-card">
+    <div class="contact-box">
 
-        <button class="close" onclick="closeContact()">
+        <button
+            class="close"
+            onclick="closeContact()"
+        >
             ×
         </button>
 
@@ -648,46 +711,21 @@ footer{
         </h2>
 
         <p>
-            Kontakt dhe mbështetje.
-            Zgjidh një nga opsionet më poshtë.
+            Na kontakto për probleme,
+            sugjerime ose informacione.
         </p>
 
-        <button class="contact-option" onclick="showReport()">
+        <textarea
+            id="contactMessage"
+            placeholder="Shkruaj mesazhin..."
+        ></textarea>
 
-            <strong>
-                RAPORTO NJË PROBLEM
-            </strong>
-
-            <small>
-                Na shkruaj problemin që ke.
-            </small>
-
+        <button
+            class="send"
+            onclick="sendContact()"
+        >
+            DËRGO
         </button>
-
-        <button class="contact-option" onclick="buyApp()">
-
-            <strong>
-                BLI APLIKACIONIN
-            </strong>
-
-            <small>
-                Kontakt për blerjen e MY BAR.
-            </small>
-
-        </button>
-
-        <div class="report-form" id="reportForm">
-
-            <textarea
-                id="reportText"
-                placeholder="Shkruaj problemin këtu..."
-            ></textarea>
-
-            <button class="send-btn" onclick="sendReport()">
-                DËRGO MESAZHIN
-            </button>
-
-        </div>
 
     </div>
 
@@ -696,127 +734,278 @@ footer{
 
 <script>
 
-/* =========================
-   LOGIN
-========================= */
+const USERS_KEY = "MYBAR_USERS_V2";
+const SESSION_KEY = "MYBAR_SESSION_V2";
 
-function goLogin(user){
+const DEFAULT_USERS = [
+
+    {
+        username:"admin",
+        password:"1234",
+        role:"admin",
+        name:"ADMIN"
+    },
+
+    {
+        username:"sabi",
+        password:"1234",
+        role:"waiter",
+        name:"SABI"
+    },
+
+    {
+        username:"mondi",
+        password:"1234",
+        role:"waiter",
+        name:"MONDI"
+    }
+
+];
+
+
+function getUsers(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(USERS_KEY);
+
+        if(saved){
+
+            const users =
+                JSON.parse(saved);
+
+            if(Array.isArray(users) && users.length){
+
+                return users;
+
+            }
+
+        }
+
+    }catch(e){}
 
     localStorage.setItem(
-        "MYBAR_SELECTED_USER",
-        user
+        USERS_KEY,
+        JSON.stringify(DEFAULT_USERS)
     );
 
-    window.location.href = "login.html";
+    return DEFAULT_USERS;
+
 }
 
 
-/* =========================
-   CONTACT
-========================= */
+let selectedUsername = "admin";
+
+
+function openLogin(username,name,role){
+
+    selectedUsername =
+        username;
+
+    document
+        .getElementById("selectedUser")
+        .textContent =
+        name;
+
+    document
+        .getElementById("username")
+        .value =
+        username;
+
+    document
+        .getElementById("password")
+        .value = "";
+
+    document
+        .getElementById("loginError")
+        .classList.remove("show");
+
+    document
+        .getElementById("loginOverlay")
+        .classList.add("show");
+
+    setTimeout(
+        () => {
+
+            document
+                .getElementById("password")
+                .focus();
+
+        },
+        100
+    );
+
+}
+
+
+function closeLogin(){
+
+    document
+        .getElementById("loginOverlay")
+        .classList.remove("show");
+
+}
+
+
+function login(){
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+    const error =
+        document
+        .getElementById("loginError");
+
+    const users =
+        getUsers();
+
+    const user =
+        users.find(
+            u =>
+                String(u.username).toLowerCase()
+                === username
+                &&
+                String(u.password)
+                === password
+        );
+
+    if(!user){
+
+        error.classList.add("show");
+
+        return;
+
+    }
+
+    error.classList.remove("show");
+
+
+    const session = {
+
+        username:user.username,
+
+        name:user.name,
+
+        role:user.role,
+
+        loginTime:Date.now()
+
+    };
+
+
+    localStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify(session)
+    );
+
+    localStorage.setItem(
+        "MYBAR_CURRENT_USER",
+        user.username
+    );
+
+
+    /*
+       Tani nuk kalon më nga login.html.
+       Shkon direkt te app.html.
+    */
+
+    window.location.href =
+        "./app.html";
+
+}
+
 
 function openContact(){
 
     document
         .getElementById("contactOverlay")
         .classList.add("show");
+
 }
+
 
 function closeContact(){
 
     document
         .getElementById("contactOverlay")
         .classList.remove("show");
-}
 
-function showReport(){
-
-    const form =
-        document.getElementById("reportForm");
-
-    form.style.display = "block";
-
-    document
-        .getElementById("reportText")
-        .focus();
 }
 
 
-/* =========================
-   SEND REPORT
-========================= */
+function sendContact(){
 
-function sendReport(){
-
-    const text =
+    const message =
         document
-        .getElementById("reportText")
+        .getElementById("contactMessage")
         .value
         .trim();
 
-    if(!text){
+    if(!message){
 
-        alert("Shkruaj fillimisht problemin.");
+        alert("Shkruaj mesazhin.");
 
         return;
+
     }
 
-    /*
-       Për momentin ruhet lokalisht.
-       Më vonë mund ta lidhim me SMS/API.
-    */
 
     const reports =
         JSON.parse(
-            localStorage.getItem("MYBAR_REPORTS") || "[]"
+            localStorage.getItem(
+                "MYBAR_REPORTS"
+            ) || "[]"
         );
+
 
     reports.push({
 
         id:Date.now(),
 
-        message:text,
+        message:message,
 
         date:new Date().toISOString()
 
     });
+
 
     localStorage.setItem(
         "MYBAR_REPORTS",
         JSON.stringify(reports)
     );
 
+
     document
-        .getElementById("reportText")
+        .getElementById("contactMessage")
         .value = "";
 
-    alert(
-        "Mesazhi u regjistrua. Faleminderit!"
-    );
-}
-
-
-/* =========================
-   BUY APP
-========================= */
-
-function buyApp(){
 
     alert(
-        "Për të blerë MY BAR, na kontakto nga CONTACT."
+        "Mesazhi u regjistrua."
     );
+
+    closeContact();
+
 }
 
-
-/* =========================
-   CLOSE WITH ESC
-========================= */
 
 document.addEventListener(
     "keydown",
     function(e){
 
         if(e.key === "Escape"){
+
+            closeLogin();
 
             closeContact();
 
