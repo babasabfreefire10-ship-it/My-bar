@@ -2,8 +2,8 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY BAR — Hyrje</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MY BAR — Login</title>
 
 <style>
 *{
@@ -14,286 +14,173 @@
 
 body{
     min-height:100vh;
+    background:#030504;
+    color:white;
     font-family:Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at 50% 0%,#13251c 0%,#070b09 42%,#030504 100%);
-    color:#fff;
+}
+
+.login{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.left{
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
+    border-right:1px solid #17251d;
     background:
-        linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(35,180,105,.025) 50%,
-            transparent 100%
-        );
+        radial-gradient(circle at 50% 50%,rgba(20,130,70,.12),transparent 50%);
 }
 
-.login-shell{
-    width:min(1000px,94vw);
-    min-height:620px;
-    display:grid;
-    grid-template-columns:1fr 1.15fr;
-    background:rgba(8,13,10,.94);
-    border:1px solid rgba(75,130,98,.25);
-    border-radius:28px;
-    overflow:hidden;
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.65),
-        0 0 50px rgba(22,145,79,.06);
+.brand{
+    text-align:center;
 }
 
-.welcome{
-    position:relative;
-    padding:55px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(22,56,39,.55),
-            rgba(5,9,7,.2)
-        );
-    border-right:1px solid rgba(75,130,98,.18);
-}
-
-.badge{
-    display:inline-flex;
-    width:max-content;
-    padding:8px 13px;
-    border-radius:999px;
-    border:1px solid rgba(61,183,112,.3);
-    color:#7de0a5;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:28px;
-}
-
-.logo{
-    font-size:48px;
+.brand h1{
+    font-size:64px;
+    letter-spacing:9px;
     font-weight:900;
-    letter-spacing:7px;
-    line-height:1;
+}
+
+.brand p{
+    margin-top:15px;
+    color:#65736c;
+    letter-spacing:4px;
+    font-size:11px;
+}
+
+.right{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.box{
+    width:min(520px,100%);
+}
+
+.title{
+    font-size:25px;
+    margin-bottom:8px;
 }
 
 .subtitle{
-    margin-top:15px;
-    color:#87948d;
+    color:#65736c;
     font-size:13px;
+    margin-bottom:25px;
+}
+
+.users{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.user{
+    border:1px solid #1b3024;
+    background:#08100c;
+    color:white;
+    padding:22px 8px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.user:hover,
+.user.active{
+    border-color:#20d678;
+    background:#0c2115;
+    box-shadow:0 0 20px rgba(32,214,120,.12);
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    margin:auto auto 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#11271a;
+    color:#42ec91;
+    font-weight:bold;
+}
+
+.user strong{
+    display:block;
+    font-size:13px;
+}
+
+.user small{
+    color:#65736c;
+    font-size:10px;
+}
+
+.pin{
+    width:100%;
+    padding:16px;
+    background:#070d09;
+    border:1px solid #203329;
+    color:white;
+    outline:none;
+    font-size:18px;
+    text-align:center;
+    letter-spacing:7px;
+}
+
+.pin:focus{
+    border-color:#20d678;
+}
+
+.loginBtn{
+    width:100%;
+    padding:16px;
+    margin-top:12px;
+    background:#0b2517;
+    color:white;
+    border:1px solid #20d678;
+    cursor:pointer;
+    font-weight:bold;
     letter-spacing:2px;
 }
 
-.line{
-    width:80px;
-    height:2px;
-    background:#26bd70;
-    margin:32px 0;
-    box-shadow:0 0 15px rgba(38,189,112,.5);
+.loginBtn:hover{
+    background:#20d678;
+    color:#021008;
 }
 
-.welcome-title{
-    font-size:31px;
-    font-weight:700;
-}
-
-.welcome-text{
-    margin-top:12px;
-    max-width:330px;
-    color:#77837d;
-    line-height:1.6;
-    font-size:14px;
+.error{
+    color:#ff6464;
+    text-align:center;
+    margin-top:15px;
+    font-size:12px;
+    min-height:18px;
 }
 
 .clock{
-    position:absolute;
-    bottom:25px;
-    left:55px;
-    color:#5d6963;
+    position:fixed;
+    top:20px;
+    right:25px;
+    color:#65736c;
     font-size:12px;
 }
 
-/* RIGHT */
-
-.users{
-    padding:48px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.users-title{
-    font-size:13px;
-    color:#7e8b84;
-    letter-spacing:2px;
-    margin-bottom:22px;
-}
-
-.user-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-}
-
-.user-card{
-    border:1px solid #1e3026;
-    background:#0b120e;
-    color:#fff;
-    min-height:100px;
-    border-radius:18px;
-    padding:18px;
-    text-align:left;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.user-card:hover{
-    border-color:#2aa968;
-    background:#0e1b14;
-    transform:translateY(-2px);
-}
-
-.user-card.selected{
-    border-color:#31c979;
-    background:
-        linear-gradient(
-            145deg,
-            #10281b,
-            #0a130e
-        );
-    box-shadow:
-        0 0 25px rgba(43,201,117,.08);
-}
-
-.user-role{
-    display:block;
-    color:#5d7668;
-    font-size:10px;
-    letter-spacing:1.5px;
-    margin-bottom:10px;
-}
-
-.user-name{
-    font-size:20px;
-    font-weight:700;
-}
-
-.pin-area{
-    margin-top:24px;
-    padding-top:24px;
-    border-top:1px solid #17241c;
-}
-
-.pin-label{
-    display:block;
-    color:#87948d;
-    font-size:12px;
-    margin-bottom:10px;
-}
-
-.pin-input{
-    width:100%;
-    height:54px;
-    border-radius:14px;
-    border:1px solid #24372c;
-    background:#070c09;
-    color:white;
-    padding:0 17px;
-    font-size:18px;
-    outline:none;
-    letter-spacing:4px;
-}
-
-.pin-input:focus{
-    border-color:#31bd70;
-    box-shadow:0 0 0 3px rgba(49,189,112,.08);
-}
-
-.enter-btn{
-    width:100%;
-    height:54px;
-    margin-top:12px;
-    border:0;
-    border-radius:14px;
-    background:#21ae65;
-    color:white;
-    font-weight:800;
-    letter-spacing:1px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.enter-btn:hover{
-    background:#29c575;
-}
-
-.enter-btn:active{
-    transform:scale(.99);
-}
-
-.status{
-    min-height:20px;
-    margin-top:12px;
-    color:#e36c6c;
-    font-size:12px;
-}
-
-.footer{
-    margin-top:28px;
-    text-align:center;
-    color:#4f5b55;
-    font-size:10px;
-    letter-spacing:1.5px;
-}
-
-/* MOBILE */
-
-@media(max-width:760px){
-
-    body{
-        overflow:auto;
-        padding:20px 0;
-    }
-
-    .login-shell{
+@media(max-width:800px){
+    .login{
         grid-template-columns:1fr;
-        min-height:auto;
     }
 
-    .welcome{
-        padding:38px 28px;
-        min-height:300px;
+    .left{
+        min-height:230px;
         border-right:0;
-        border-bottom:1px solid rgba(75,130,98,.18);
+        border-bottom:1px solid #17251d;
     }
 
-    .logo{
-        font-size:38px;
-    }
-
-    .welcome-title{
-        font-size:25px;
-    }
-
-    .clock{
-        left:28px;
-    }
-
-    .users{
-        padding:30px 25px 35px;
-    }
-
-    .user-grid{
-        grid-template-columns:1fr 1fr;
+    .brand h1{
+        font-size:42px;
     }
 }
 </style>
@@ -301,425 +188,212 @@ body::before{
 
 <body>
 
-<div class="login-shell">
+<div class="clock" id="clock"></div>
 
-    <!-- LEFT -->
+<div class="login">
 
-    <section class="welcome">
+<section class="left">
+    <div class="brand">
+        <h1>MY BAR</h1>
+        <p>PROFESSIONAL POS SYSTEM</p>
+    </div>
+</section>
 
-        <div class="badge">
-            MY BAR • POS
-        </div>
+<section class="right">
 
-        <div class="logo">
-            MY BAR
-        </div>
+<div class="box">
 
-        <div class="subtitle">
-            PROFESSIONAL BAR SYSTEM
-        </div>
+    <div class="title">WELCOME</div>
+    <div class="subtitle">Zgjidh përdoruesin për të vazhduar</div>
 
-        <div class="line"></div>
+    <div class="users" id="users"></div>
 
-        <div class="welcome-title">
-            WELCOME
-        </div>
+    <input
+        id="pin"
+        class="pin"
+        type="password"
+        inputmode="numeric"
+        maxlength="12"
+        placeholder="PIN"
+    >
 
-        <div class="welcome-text">
-            Zgjidh përdoruesin për të hyrë
-            në sistemin e menaxhimit të barit.
-        </div>
+    <button class="loginBtn" onclick="login()">
+        HYR NË SISTEM
+    </button>
 
-        <div
-            class="clock"
-            id="loginClock"
-        >
-            00:00:00
-        </div>
+    <div class="error" id="error"></div>
 
-    </section>
+</div>
 
-    <!-- RIGHT -->
-
-    <section class="users">
-
-        <div class="users-title">
-            ZGJIDH PËRDORUESIN
-        </div>
-
-        <div
-            class="user-grid"
-            id="userGrid"
-        >
-
-            <button
-                class="user-card"
-                data-username="admin"
-                onclick="selectUser('admin','ADMIN')"
-            >
-
-                <span class="user-role">
-                    ADMINISTRATOR
-                </span>
-
-                <span class="user-name">
-                    ADMIN
-                </span>
-
-            </button>
-
-            <button
-                class="user-card"
-                data-username="sabi"
-                onclick="selectUser('sabi','SABI')"
-            >
-
-                <span class="user-role">
-                    KAMARIER
-                </span>
-
-                <span class="user-name">
-                    SABI
-                </span>
-
-            </button>
-
-            <button
-                class="user-card"
-                data-username="mondi"
-                onclick="selectUser('mondi','MONDI')"
-            >
-
-                <span class="user-role">
-                    KAMARIER
-                </span>
-
-                <span class="user-name">
-                    MONDI
-                </span>
-
-            </button>
-
-        </div>
-
-        <div class="pin-area">
-
-            <label class="pin-label">
-                PIN / FJALËKALIMI
-            </label>
-
-            <input
-                id="pin"
-                class="pin-input"
-                type="password"
-                inputmode="numeric"
-                autocomplete="off"
-                placeholder="••••"
-                onkeydown="if(event.key==='Enter') doLogin()"
-            >
-
-            <button
-                class="enter-btn"
-                onclick="doLogin()"
-            >
-                HYR NË SISTEM
-            </button>
-
-            <div
-                id="status"
-                class="status"
-            ></div>
-
-        </div>
-
-        <div class="footer">
-            MY BAR • PROFESSIONAL POS
-        </div>
-
-    </section>
+</section>
 
 </div>
 
 <script>
 
-let selectedUsername = null;
+const USERS_KEY = "MYBAR_USERS_V2";
+const SESSION_KEY = "MYBAR_SESSION_V2";
 
-/* =========================
-   USERS
-========================= */
+let selectedUser = null;
+
+const DEFAULT_USERS = [
+    {
+        username:"admin",
+        password:"1234",
+        role:"admin",
+        name:"ADMIN"
+    },
+    {
+        username:"sabi",
+        password:"1234",
+        role:"waiter",
+        name:"SABI"
+    },
+    {
+        username:"mondi",
+        password:"1234",
+        role:"waiter",
+        name:"MONDI"
+    }
+];
 
 function getUsers(){
 
     try{
 
         const users =
-            JSON.parse(
-                localStorage.getItem(
-                    "MYBAR_USERS_V2"
-                )
-            );
+            JSON.parse(localStorage.getItem(USERS_KEY));
 
-        if(
-            Array.isArray(users) &&
-            users.length
-        ){
+        if(Array.isArray(users) && users.length){
             return users;
         }
 
     }catch(e){}
 
-    return [
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(DEFAULT_USERS)
+    );
 
-        {
-            id:1,
-            username:"admin",
-            password:"1234",
-            name:"Administrator",
-            role:"admin"
-        },
-
-        {
-            id:2,
-            username:"sabi",
-            password:"1234",
-            name:"Sabi",
-            role:"waiter"
-        },
-
-        {
-            id:3,
-            username:"mondi",
-            password:"1234",
-            name:"Mondi",
-            role:"waiter"
-        }
-
-    ];
+    return DEFAULT_USERS;
 }
 
-/* =========================
-   SELECT USER
-========================= */
+function renderUsers(){
 
-function selectUser(username,name){
+    const users = getUsers();
 
-    selectedUsername =
-        username;
+    document.getElementById("users").innerHTML =
+        users.map((user,index)=>`
 
-    document
-        .querySelectorAll(".user-card")
-        .forEach(card => {
+        <button
+            class="user"
+            onclick="selectUser(${index})"
+            id="user-${index}"
+        >
 
-            card.classList.remove(
-                "selected"
-            );
+            <div class="avatar">
+                ${user.name.charAt(0).toUpperCase()}
+            </div>
 
-        });
+            <strong>${escapeHTML(user.name)}</strong>
 
-    const card =
-        document.querySelector(
-            `[data-username="${username}"]`
-        );
+            <small>
+                ${user.role === "admin" ? "ADMINISTRATOR" : "KAMARIER"}
+            </small>
 
-    if(card){
-        card.classList.add(
-            "selected"
-        );
-    }
+        </button>
 
-    const pin =
-        document.getElementById("pin");
-
-    if(pin){
-
-        pin.value = "";
-
-        pin.focus();
-
-    }
-
-    const status =
-        document.getElementById("status");
-
-    if(status){
-        status.textContent = "";
-    }
+    `).join("");
 }
 
-/* =========================
-   LOGIN
-========================= */
+function selectUser(index){
 
-function doLogin(){
+    const users = getUsers();
 
-    const pin =
-        document
-            .getElementById("pin")
-            .value
-            .trim();
+    selectedUser = users[index];
 
-    const status =
-        document.getElementById(
-            "status"
-        );
+    document.querySelectorAll(".user")
+        .forEach(x=>x.classList.remove("active"));
 
-    if(!selectedUsername){
+    const el =
+        document.getElementById("user-"+index);
 
-        status.textContent =
+    if(el) el.classList.add("active");
+
+    document.getElementById("pin").focus();
+}
+
+function login(){
+
+    const error =
+        document.getElementById("error");
+
+    error.textContent = "";
+
+    if(!selectedUser){
+
+        error.textContent =
             "Zgjidh fillimisht përdoruesin.";
 
         return;
     }
 
-    if(!pin){
+    const pin =
+        document.getElementById("pin").value;
 
-        status.textContent =
-            "Vendos PIN-in.";
+    if(pin !== selectedUser.password){
 
-        return;
-    }
-
-    const users =
-        getUsers();
-
-    const user =
-        users.find(
-            u =>
-                String(u.username)
-                    .toLowerCase() ===
-                String(selectedUsername)
-                    .toLowerCase()
-                &&
-                String(u.password) ===
-                String(pin)
-        );
-
-    if(!user){
-
-        status.textContent =
-            "PIN i gabuar.";
-
-        document
-            .getElementById("pin")
-            .value = "";
+        error.textContent =
+            "PIN-i është i gabuar.";
 
         return;
     }
-
-    const session = {
-
-        id:user.id,
-
-        username:user.username,
-
-        name:user.name,
-
-        role:user.role
-
-    };
 
     localStorage.setItem(
-        "MYBAR_SESSION_V2",
-        JSON.stringify(session)
+        SESSION_KEY,
+        JSON.stringify({
+            username:selectedUser.username,
+            name:selectedUser.name,
+            role:selectedUser.role,
+            loginTime:Date.now()
+        })
     );
-
-    /* Compatibility */
 
     localStorage.setItem(
         "barCurrentUser",
-        JSON.stringify(session)
+        JSON.stringify(selectedUser)
     );
 
-    window.location.href =
-        "index.html";
+    window.location.href = "index.html";
 }
 
-/* =========================
-   CLOCK
-========================= */
+function escapeHTML(value){
 
-function updateLoginClock(){
-
-    const clock =
-        document.getElementById(
-            "loginClock"
-        );
-
-    if(!clock) return;
-
-    clock.textContent =
-        new Date().toLocaleTimeString(
-            "sq-AL",
-            {
-                hour:"2-digit",
-                minute:"2-digit",
-                second:"2-digit"
-            }
-        );
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
-setInterval(
-    updateLoginClock,
-    1000
-);
+function updateClock(){
 
-updateLoginClock();
+    document.getElementById("clock")
+        .textContent =
+        new Date().toLocaleTimeString("sq-AL");
+}
 
-/* =========================
-   AUTO USERS
-========================= */
+document.getElementById("pin")
+    .addEventListener("keydown",e=>{
+        if(e.key === "Enter"){
+            login();
+        }
+    });
 
-(function(){
-
-    const users =
-        getUsers();
-
-    const grid =
-        document.getElementById(
-            "userGrid"
-        );
-
-    if(!grid) return;
-
-    const visibleUsers =
-        users.filter(
-            user =>
-                user.role === "admin" ||
-                user.role === "waiter"
-        );
-
-    grid.innerHTML =
-        visibleUsers
-            .map(user => `
-
-                <button
-                    class="user-card"
-                    data-username="${user.username}"
-                    onclick="selectUser(
-                        '${user.username}',
-                        '${String(user.name)
-                            .replaceAll("'","\\\\'")}'
-                    )"
-                >
-
-                    <span class="user-role">
-                        ${
-                            user.role === "admin"
-                                ? "ADMINISTRATOR"
-                                : "KAMARIER"
-                        }
-                    </span>
-
-                    <span class="user-name">
-                        ${user.name}
-                    </span>
-
-                </button>
-
-            `)
-            .join("");
-
-})();
+renderUsers();
+updateClock();
+setInterval(updateClock,1000);
 
 </script>
 
