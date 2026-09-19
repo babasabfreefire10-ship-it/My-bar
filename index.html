@@ -1,1422 +1,1629 @@
 <!DOCTYPE html>
+
 <html lang="sq">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>MY BAR — POS</title>
 
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
 
-:root{
-    --bg:#050806;
-    --panel:#0b110e;
-    --panel2:#0e1712;
-    --border:#1b2b22;
-    --green:#27c574;
-    --green2:#168d50;
-    --text:#f4f7f5;
-    --muted:#7e8b84;
-    --danger:#df5d5d;
+    box-sizing:border-box;
+
+    margin:0;
+
+    padding:0;
+
 }
 
 body{
+
+    background:#050806;
+
+    color:#f5f7f6;
+
+    font-family:Arial,Helvetica,sans-serif;
+
     min-height:100vh;
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            #183225 0%,
-            #08100b 40%,
-            #040605 100%
-        );
-    color:var(--text);
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-    overflow:hidden;
+
 }
 
-/* =====================================================
-   TOPBAR
-===================================================== */
+button,
+
+input,
+
+select{
+
+    font:inherit;
+
+}
+
+button{
+
+    cursor:pointer;
+
+}
 
 .topbar{
-    height:70px;
+
+    height:68px;
+
+    border-bottom:1px solid #1a2b21;
+
+    background:#070c09;
+
     display:flex;
+
     align-items:center;
-    justify-content:space-between;
-    padding:0 22px;
-    background:rgba(7,11,9,.96);
-    border-bottom:1px solid var(--border);
+
+    padding:0 18px;
+
+    gap:14px;
+
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
+.logo{
 
-.logo-mark{
-    width:38px;
-    height:38px;
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-        linear-gradient(
-            145deg,
-            #1a8e52,
-            #0c3d25
-        );
     font-weight:900;
-    box-shadow:
-        0 0 20px rgba(39,197,116,.12);
-}
 
-.brand-name{
-    font-size:18px;
-    font-weight:900;
-    letter-spacing:2px;
-}
+    letter-spacing:4px;
 
-.brand-sub{
-    color:#627068;
-    font-size:9px;
-    letter-spacing:1.5px;
-    margin-top:3px;
-}
+    font-size:19px;
 
-.top-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
+    margin-right:auto;
+
 }
 
 .clock{
-    color:#a4aea9;
-    font-size:13px;
-    font-variant-numeric:tabular-nums;
-}
 
-.user-info{
-    padding:9px 13px;
-    border:1px solid var(--border);
-    background:#09100c;
-    border-radius:10px;
+    color:#718078;
+
     font-size:12px;
+
 }
 
-.top-btn{
-    border:1px solid var(--border);
-    background:#0b120e;
-    color:#c8d0cb;
+.userInfo{
+
+    border:1px solid #1c3526;
+
+    background:#0a130d;
+
     padding:9px 13px;
-    border-radius:9px;
-    cursor:pointer;
+
+    color:#9daaa4;
+
+    font-size:11px;
+
 }
 
-.top-btn:hover{
-    border-color:#2a7650;
-    color:#fff;
+.topBtn{
+
+    border:1px solid #26382d;
+
+    background:#0b120e;
+
+    color:#d9dfdc;
+
+    padding:10px 14px;
+
+    font-size:11px;
+
 }
 
-/* =====================================================
-   MAIN LAYOUT
-===================================================== */
+.topBtn:hover{
+
+    border-color:#20d678;
+
+}
 
 .app{
-    height:calc(100vh - 70px);
-    display:grid;
-    grid-template-columns:220px minmax(400px,1fr) 370px;
-}
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
+    display:grid;
+
+    grid-template-columns:230px 1fr 360px;
+
+    min-height:calc(100vh - 68px);
+
+}
 
 .sidebar{
-    border-right:1px solid var(--border);
-    background:rgba(7,11,9,.92);
-    padding:18px 13px;
-    overflow:auto;
+
+    border-right:1px solid #18271f;
+
+    background:#070c09;
+
+    padding:15px;
+
 }
 
-.side-label{
-    color:#56645c;
+.sidebarTitle{
+
+    color:#53635a;
+
     font-size:9px;
-    letter-spacing:1.8px;
-    margin:7px 8px 9px;
+
+    letter-spacing:2px;
+
+    margin:8px 5px 12px;
+
 }
 
-.side-btn{
+.sideBtn{
+
     width:100%;
-    height:45px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    border:1px solid transparent;
-    background:transparent;
-    color:#aeb8b2;
-    border-radius:10px;
-    padding:0 12px;
-    margin-bottom:5px;
-    cursor:pointer;
+
+    padding:13px;
+
+    margin-bottom:7px;
+
+    border:1px solid #192a20;
+
+    background:#0a110d;
+
+    color:#d8dedb;
+
     text-align:left;
-    font-size:12px;
+
+    font-size:11px;
+
 }
 
-.side-btn:hover{
-    background:#0d1812;
-    border-color:#1a3023;
+.sideBtn:hover{
+
+    border-color:#20d678;
+
+    background:#0c1911;
+
+}
+
+.sideBtn.main{
+
+    border-color:#20d678;
+
+    background:#0c2517;
+
     color:#fff;
+
+    font-weight:bold;
+
 }
 
-.side-btn.primary{
-    background:
-        linear-gradient(
-            135deg,
-            #1eae65,
-            #147744
-        );
-    color:#fff;
-    font-weight:800;
-    box-shadow:
-        0 8px 25px rgba(20,119,68,.15);
-}
+.sideBtn.danger{
 
-.side-btn.primary:hover{
-    background:
-        linear-gradient(
-            135deg,
-            #27c574,
-            #168d50
-        );
-}
+    color:#ff7b7b;
 
-.side-btn.danger{
-    color:#d97878;
 }
-
-.side-btn.danger:hover{
-    background:#1c0d0d;
-    border-color:#4a2020;
-}
-
-.side-separator{
-    height:1px;
-    background:var(--border);
-    margin:16px 5px;
-}
-
-/* =====================================================
-   CENTER
-===================================================== */
 
 .center{
-    min-width:0;
+
+    padding:16px;
+
     overflow:auto;
-    padding:20px;
+
 }
 
-.center-header{
+.sectionHead{
+
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
-    margin-bottom:18px;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
 }
 
-.page-title{
-    font-size:20px;
-    font-weight:800;
+.sectionTitle{
+
+    font-size:18px;
+
 }
 
-.page-subtitle{
-    color:var(--muted);
+.sectionSub{
+
+    color:#637169;
+
     font-size:11px;
-    margin-top:5px;
+
+    margin-top:3px;
+
 }
 
-.selected-table{
-    padding:10px 14px;
-    background:#0a130e;
-    border:1px solid var(--border);
-    border-radius:10px;
-    color:#9ba69f;
-    font-size:12px;
-}
+.tables{
 
-/* =====================================================
-   TABLES
-===================================================== */
-
-.section-title{
-    font-size:11px;
-    color:#7f8b85;
-    letter-spacing:1.3px;
-    margin-bottom:10px;
-}
-
-.table-grid{
     display:grid;
-    grid-template-columns:
-        repeat(auto-fill,minmax(125px,1fr));
-    gap:10px;
-    margin-bottom:23px;
+
+    grid-template-columns:repeat(auto-fill,minmax(125px,1fr));
+
+    gap:9px;
+
+    margin-bottom:22px;
+
 }
 
-.table-card{
-    min-height:90px;
-    border-radius:14px;
-    border:1px solid var(--border);
-    background:
-        linear-gradient(
-            145deg,
-            #0d1711,
-            #080d0a
-        );
-    color:#fff;
-    padding:14px;
-    cursor:pointer;
+.table{
+
+    min-height:82px;
+
+    border:1px solid #1d3125;
+
+    background:#09110c;
+
+    color:white;
+
+    padding:12px;
+
     text-align:left;
-    transition:.18s;
+
+    position:relative;
+
 }
 
-.table-card:hover{
-    transform:translateY(-2px);
-    border-color:#2a6849;
+.table:hover{
+
+    border-color:#20d678;
+
 }
 
-.table-card.active{
-    border-color:#1e9c5b;
-    background:
-        linear-gradient(
-            145deg,
-            #10271a,
-            #0b1510
-        );
+.table.active{
+
+    border-color:#ba8a32;
+
+    background:#171108;
+
 }
 
-.table-card.selected{
-    border-color:#35ce7b;
-    box-shadow:
-        0 0 0 1px rgba(53,206,123,.12),
-        0 0 25px rgba(53,206,123,.08);
+.table.selected{
+
+    box-shadow:inset 0 0 0 2px #20d678;
+
 }
 
-.table-number{
+.tableName{
+
     display:block;
-    font-size:22px;
-    font-weight:900;
-    margin-bottom:5px;
+
+    font-weight:bold;
+
+    font-size:12px;
+
 }
 
-.table-card strong{
-    display:block;
-    font-size:11px;
-}
+.tableStatus{
 
-.table-card small{
     display:block;
-    margin-top:7px;
-    color:#718078;
+
+    margin-top:9px;
+
+    color:#637169;
+
     font-size:10px;
+
 }
 
-/* =====================================================
-   NEW INVOICE AREA
-===================================================== */
+.table.active .tableStatus{
 
-.invoice-area{
-    display:none;
-    border:1px solid var(--border);
-    background:#080e0b;
-    border-radius:16px;
-    padding:15px;
-    margin-bottom:15px;
+    color:#d5a747;
+
 }
 
-.invoice-area-title{
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:14px;
+.menuHead{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-bottom:10px;
+
 }
 
 .search{
-    width:100%;
-    height:43px;
-    border:1px solid var(--border);
-    background:#050907;
-    color:#fff;
-    border-radius:10px;
-    padding:0 13px;
+
+    flex:1;
+
+    padding:12px;
+
+    background:#080f0b;
+
+    border:1px solid #1d3025;
+
+    color:white;
+
     outline:none;
-    margin-bottom:13px;
+
 }
 
 .search:focus{
-    border-color:#2b9c61;
+
+    border-color:#20d678;
+
 }
 
 .categories{
+
     display:flex;
+
     gap:7px;
+
     overflow:auto;
-    padding-bottom:9px;
-    margin-bottom:13px;
+
+    padding-bottom:8px;
+
+    margin-bottom:12px;
+
 }
 
-.category-btn{
+.category{
+
     white-space:nowrap;
-    border:1px solid var(--border);
-    background:#0b120e;
-    color:#849088;
-    border-radius:9px;
+
     padding:9px 12px;
-    cursor:pointer;
+
+    background:#09110d;
+
+    border:1px solid #1c2d23;
+
+    color:#9aa69f;
+
     font-size:10px;
+
 }
 
-.category-btn:hover,
-.category-btn.active{
-    background:#123c26;
-    color:#caffdd;
-    border-color:#278d56;
-}
+.category.active{
 
-.menu-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fill,minmax(145px,1fr));
-    gap:9px;
-}
+    background:#12341f;
 
-.product-card{
-    min-height:82px;
-    border:1px solid var(--border);
-    background:#0b130e;
+    border-color:#20d678;
+
     color:#fff;
-    border-radius:12px;
-    padding:12px;
-    text-align:left;
-    cursor:pointer;
-    transition:.16s;
+
 }
 
-.product-card:hover{
-    border-color:#2ca568;
-    background:#0f1b14;
-    transform:translateY(-1px);
+.products{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+
+    gap:9px;
+
 }
 
-.product-card strong{
-    display:block;
-    font-size:12px;
-    line-height:1.3;
-}
+.product{
 
-.product-card span{
-    display:block;
-    color:#5ed992;
-    margin-top:9px;
-    font-size:11px;
-    font-weight:700;
-}
+    min-height:105px;
 
-/* =====================================================
-   RIGHT ORDER
-===================================================== */
+    background:#09110d;
 
-.order-panel{
-    border-left:1px solid var(--border);
-    background:#080d0a;
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-}
+    border:1px solid #1b2c22;
 
-.order-header{
-    padding:20px;
-    border-bottom:1px solid var(--border);
-}
+    color:#fff;
 
-.order-title{
-    font-size:16px;
-    font-weight:800;
-}
-
-.order-table{
-    color:#6f7d75;
-    font-size:11px;
-    margin-top:5px;
-}
-
-.order-items{
-    flex:1;
-    overflow:auto;
     padding:13px;
+
+    text-align:left;
+
+    display:flex;
+
+    flex-direction:column;
+
 }
 
-.empty-order{
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#526058;
-    text-align:center;
+.product:hover{
+
+    border-color:#20d678;
+
+    transform:translateY(-1px);
+
+}
+
+.productName{
+
+    font-weight:bold;
+
     font-size:12px;
+
+    margin-bottom:auto;
+
 }
 
-.order-item{
-    display:grid;
-    grid-template-columns:
-        1fr auto auto auto;
-    gap:9px;
-    align-items:center;
-    padding:12px 7px;
-    border-bottom:1px solid #142019;
+.productPrice{
+
+    color:#49e894;
+
+    font-weight:bold;
+
+    margin-top:12px;
+
 }
 
-.order-info strong{
-    display:block;
-    font-size:11px;
+.stock{
+
+    color:#59665f;
+
+    font-size:9px;
+
+    margin-top:6px;
+
 }
 
-.order-info small{
-    display:block;
-    color:#66736c;
-    margin-top:4px;
-    font-size:10px;
-}
+.orderPanel{
 
-.quantity{
+    border-left:1px solid #18271f;
+
+    background:#070c09;
+
     display:flex;
-    align-items:center;
-    gap:5px;
+
+    flex-direction:column;
+
+    min-height:calc(100vh - 68px);
+
 }
 
-.quantity button{
-    width:25px;
-    height:25px;
-    border-radius:7px;
-    border:1px solid #25372c;
-    background:#0c1510;
-    color:#d8e0db;
-    cursor:pointer;
+.orderHeader{
+
+    padding:17px;
+
+    border-bottom:1px solid #18271f;
+
 }
 
-.quantity span{
-    min-width:15px;
+.orderHeader h2{
+
+    font-size:16px;
+
+}
+
+.orderTable{
+
+    color:#36df86;
+
+    font-size:11px;
+
+    margin-top:6px;
+
+}
+
+.orderItems{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:12px;
+
+}
+
+.empty{
+
     text-align:center;
-    font-size:11px;
+
+    padding:50px 15px;
+
+    color:#46534c;
+
+    font-size:12px;
+
 }
 
-.remove-item{
-    width:24px;
-    height:24px;
-    border:0;
-    border-radius:7px;
-    background:#241010;
-    color:#df7373;
-    cursor:pointer;
+.orderItem{
+
+    border:1px solid #192a20;
+
+    background:#09110d;
+
+    padding:12px;
+
+    margin-bottom:8px;
+
 }
 
-.order-total{
-    border-top:1px solid var(--border);
-    padding:17px 20px;
-}
+.orderTop{
 
-.total-row{
     display:flex;
+
     justify-content:space-between;
-    align-items:center;
+
+    gap:10px;
+
 }
 
-.total-label{
-    color:#748078;
+.orderName{
+
     font-size:11px;
+
+    font-weight:bold;
+
 }
 
-.total-value{
-    font-size:23px;
-    font-weight:900;
-    color:#69df9c;
+.orderPrice{
+
+    color:#48e58f;
+
+    font-size:11px;
+
 }
 
-.close-invoice{
-    width:100%;
-    height:51px;
-    margin-top:13px;
+.orderBottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:10px;
+
+}
+
+.qty{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.qty button{
+
+    width:27px;
+
+    height:27px;
+
+    background:#101a14;
+
+    color:white;
+
+    border:1px solid #294132;
+
+}
+
+.qty span{
+
+    min-width:18px;
+
+    text-align:center;
+
+    font-size:11px;
+
+}
+
+.delete{
+
     border:0;
-    border-radius:12px;
-    background:#20ae65;
-    color:#fff;
-    font-weight:900;
-    cursor:pointer;
-    letter-spacing:.5px;
+
+    background:transparent;
+
+    color:#f06c6c;
+
+    font-size:17px;
+
 }
 
-.close-invoice:hover{
-    background:#29c676;
+.orderFooter{
+
+    border-top:1px solid #18271f;
+
+    padding:15px;
+
 }
 
-/* =====================================================
-   MODALS
-===================================================== */
+.totalRow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+}
+
+.totalRow span{
+
+    color:#75827b;
+
+}
+
+.total{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#4ae994;
+
+}
+
+.actionGrid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
+
+}
+
+.action{
+
+    padding:12px 8px;
+
+    border:1px solid #24382b;
+
+    background:#0a120e;
+
+    color:#dbe1de;
+
+    font-size:10px;
+
+}
+
+.action:hover{
+
+    border-color:#20d678;
+
+}
+
+.action.green{
+
+    background:#10351f;
+
+    border-color:#20d678;
+
+}
+
+.action.red{
+
+    color:#ff7777;
+
+}
 
 .modal{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.78);
+
+    background:rgba(0,0,0,.75);
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
-    z-index:9999;
-    padding:20px;
+
+    z-index:1000;
+
+    padding:15px;
+
 }
 
-.modal-box{
-    width:min(560px,100%);
+.modalBox{
+
+    width:min(600px,100%);
+
     max-height:90vh;
+
     overflow:auto;
-    background:#0b120e;
-    border:1px solid #263b2e;
-    border-radius:20px;
-    box-shadow:0 30px 100px rgba(0,0,0,.65);
+
+    background:#080d0a;
+
+    border:1px solid #294534;
+
+    box-shadow:0 25px 80px #000;
+
 }
 
-.modal-head{
-    padding:18px 20px;
-    border-bottom:1px solid var(--border);
+.modalHead{
+
+    padding:17px;
+
+    border-bottom:1px solid #1b2c22;
+
     display:flex;
+
+    justify-content:space-between;
+
     align-items:center;
-    justify-content:space-between;
+
 }
 
-.modal-head h2{
-    font-size:16px;
+.modalHead strong{
+
+    font-size:15px;
+
 }
 
-.modal-close{
-    width:32px;
-    height:32px;
-    border:1px solid var(--border);
-    border-radius:9px;
-    background:#0b130e;
-    color:#aaa;
-    cursor:pointer;
+.close{
+
+    border:0;
+
+    background:transparent;
+
+    color:#aab4af;
+
+    font-size:22px;
+
 }
 
-.modal-body{
-    padding:20px;
+.modalBody{
+
+    padding:17px;
+
 }
 
-.payment-total{
-    text-align:center;
-    font-size:32px;
-    font-weight:900;
-    color:#6de09b;
-    padding:20px 0;
-}
+.paymentButtons{
 
-.payment-buttons{
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:10px;
+
 }
 
-.payment-btn{
-    height:60px;
-    border:1px solid var(--border);
-    border-radius:13px;
-    background:#0d1711;
-    color:#fff;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:800;
+.payment{
+
+    padding:22px;
+
+    background:#0b1510;
+
+    border:1px solid #25412f;
+
+    color:white;
+
 }
 
-.payment-btn:hover{
-    border-color:#2ca96a;
-    background:#10251a;
+.payment:hover{
+
+    border-color:#20d678;
+
 }
 
-.payment-btn.cash{
-    border-color:#245c3d;
-}
+.invoice{
 
-.payment-btn.card{
-    border-color:#25455c;
-}
+    background:#fff;
 
-/* =====================================================
-   INVOICE
-===================================================== */
-
-.invoice-preview{
-    background:#f7f7f7;
     color:#111;
-    border-radius:10px;
-    padding:20px;
+
+    padding:22px;
+
+    font-family:Arial,sans-serif;
+
 }
 
-.invoice-business{
+.invoiceHeader{
+
     text-align:center;
-    margin-bottom:13px;
+
+    border-bottom:1px solid #111;
+
+    padding-bottom:12px;
+
+    margin-bottom:12px;
+
 }
 
-.invoice-business h2{
-    font-size:18px;
+.invoiceHeader h2{
+
+    font-size:20px;
+
 }
 
-.invoice-business p{
+.invoiceHeader p{
+
     font-size:10px;
-    color:#555;
+
     margin-top:3px;
+
 }
 
-.invoice-meta{
-    border-top:1px dashed #aaa;
-    border-bottom:1px dashed #aaa;
-    padding:10px 0;
-    margin:10px 0;
+.invoiceInfo{
+
     font-size:10px;
+
     line-height:1.7;
+
+    margin-bottom:10px;
+
 }
 
-.invoice-line{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    font-size:11px;
-    padding:6px 0;
-    border-bottom:1px solid #eee;
-}
+.invoiceRow{
 
-.invoice-total{
-    display:flex;
-    justify-content:space-between;
-    font-size:16px;
-    font-weight:900;
-    padding-top:14px;
-}
-
-.invoice-actions{
     display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
-    gap:8px;
-    margin-top:15px;
-}
 
-.invoice-action{
-    min-height:45px;
-    border:1px solid var(--border);
-    background:#0c1510;
-    color:#fff;
-    border-radius:10px;
-    cursor:pointer;
+    grid-template-columns:1fr 50px 80px 80px;
+
+    gap:5px;
+
     font-size:10px;
-    font-weight:800;
+
+    padding:5px 0;
+
+    border-bottom:1px dotted #aaa;
+
 }
 
-.invoice-action:hover{
-    background:#12331f;
-    border-color:#2b955d;
+.invoiceTotal{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    margin-top:15px;
+
+    border-top:2px solid #111;
+
+    padding-top:10px;
+
 }
 
-/* =====================================================
-   GENERIC MESSAGE
-===================================================== */
+.invoiceButtons{
 
-.message-content{
-    color:#aeb9b2;
-    line-height:1.8;
-    font-size:13px;
+    padding:15px;
+
+    background:#080d0a;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1fr;
+
+    gap:7px;
+
 }
 
-.message-content h2{
-    color:#fff;
-    margin-bottom:14px;
+.invoiceBtn{
+
+    padding:12px 7px;
+
+    border:1px solid #25412f;
+
+    background:#0b1510;
+
+    color:white;
+
+    font-size:10px;
+
 }
 
-.message-content strong{
-    color:#6bdc99;
+.invoiceBtn.green{
+
+    border-color:#20d678;
+
+    background:#10351f;
+
 }
 
-.message-content button{
-    border:1px solid #286f49;
-    background:#12351f;
-    color:#fff;
-    padding:11px 14px;
-    border-radius:9px;
-    cursor:pointer;
+.invoiceBtn.red{
+
+    border-color:#713535;
+
+    color:#ff8a8a;
+
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+.list{
 
-@media(max-width:1050px){
+    max-height:55vh;
+
+    overflow:auto;
+
+}
+
+.listRow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:13px;
+
+    border-bottom:1px solid #17271e;
+
+}
+
+.listRow small{
+
+    color:#65736c;
+
+    display:block;
+
+    margin-top:4px;
+
+}
+
+.form{
+
+    display:grid;
+
+    gap:10px;
+
+}
+
+.form input,
+
+.form select{
+
+    padding:12px;
+
+    background:#060b08;
+
+    border:1px solid #23372a;
+
+    color:white;
+
+    outline:none;
+
+}
+
+@media(max-width:1100px){
 
     .app{
+
         grid-template-columns:190px 1fr;
+
     }
 
-    .order-panel{
-        display:none;
+    .orderPanel{
+
+        position:fixed;
+
+        right:0;
+
+        top:68px;
+
+        bottom:0;
+
+        width:360px;
+
+        transform:translateX(100%);
+
+        transition:.2s;
+
+        z-index:50;
+
+    }
+
+    .orderPanel.open{
+
+        transform:translateX(0);
+
     }
 
 }
 
-@media(max-width:760px){
-
-    body{
-        overflow:auto;
-    }
+@media(max-width:700px){
 
     .topbar{
-        height:auto;
-        min-height:65px;
-        padding:11px 13px;
+
+        padding:0 8px;
+
     }
 
-    .brand-sub,
     .clock{
+
         display:none;
+
     }
 
-    .top-right{
-        gap:6px;
-    }
+    .userInfo{
 
-    .user-info{
         display:none;
-    }
 
-    .top-btn{
-        padding:8px 9px;
-        font-size:10px;
     }
 
     .app{
-        height:auto;
-        min-height:calc(100vh - 65px);
+
         display:block;
+
     }
 
     .sidebar{
-        border-right:0;
-        border-bottom:1px solid var(--border);
-        padding:9px;
-        display:flex;
-        overflow:auto;
+
+        display:grid;
+
+        grid-template-columns:repeat(4,1fr);
+
         gap:5px;
+
+        border-right:0;
+
+        border-bottom:1px solid #18271f;
+
     }
 
-    .side-label,
-    .side-separator{
+    .sidebarTitle{
+
         display:none;
+
     }
 
-    .side-btn{
-        flex:0 0 auto;
-        width:auto;
-        padding:0 13px;
+    .sideBtn{
+
         margin:0;
-        white-space:nowrap;
+
+        text-align:center;
+
+        padding:10px 4px;
+
+        font-size:8px;
+
     }
 
-    .center{
-        padding:13px;
+    .orderPanel{
+
+        width:100%;
+
     }
 
-    .center-header{
-        align-items:flex-start;
-    }
+    .products{
 
-    .table-grid{
-        grid-template-columns:
-            repeat(3,1fr);
-    }
+        grid-template-columns:repeat(2,1fr);
 
-    .menu-grid{
-        grid-template-columns:
-            repeat(2,1fr);
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- =====================================================
-     TOPBAR
-===================================================== -->
-
 <header class="topbar">
 
-    <div class="brand">
+    <div class="logo">MY BAR</div>
 
-        <div class="logo-mark">
-            M
-        </div>
+    <div class="clock" id="clock"></div>
 
-        <div>
-            <div class="brand-name">
-                MY BAR
-            </div>
+    <div class="userInfo" id="userInfo"></div>
 
-            <div class="brand-sub">
-                PROFESSIONAL POS
-            </div>
-        </div>
+    <button class="topBtn" onclick="logout()">
 
-    </div>
+        DIL
 
-    <div class="top-right">
-
-        <div
-            class="clock"
-            id="clock"
-        >
-            00:00:00
-        </div>
-
-        <div
-            class="user-info"
-            id="userInfo"
-        >
-            -
-        </div>
-
-        <button
-            class="top-btn"
-            onclick="logout()"
-        >
-            DIL
-        </button>
-
-    </div>
+    </button>
 
 </header>
 
-<!-- =====================================================
-     APP
-===================================================== -->
-
 <div class="app">
 
-    <!-- =================================================
-         SIDEBAR
-    ================================================== -->
+<!-- SIDEBAR -->
 
-    <aside class="sidebar">
+<aside class="sidebar">
 
-        <div class="side-label">
-            SISTEMI
+    <div class="sidebarTitle">VEPRIME</div>
+
+    <button class="sideBtn main" onclick="newInvoice()">
+
+        + FATURË E RE
+
+    </button>
+
+    <button class="sideBtn" onclick="toggleOrder()">
+
+        POROSIA
+
+    </button>
+
+    <button class="sideBtn" onclick="closeCurrentInvoice()">
+
+        MBYLL FATURËN
+
+    </button>
+
+    <button class="sideBtn" onclick="lockScreen()">
+
+        BLLOKO
+
+    </button>
+
+    <button class="sideBtn" onclick="openSummary()">
+
+        PËRMBLEDHJE
+
+    </button>
+
+    <button class="sideBtn" onclick="openMyInvoices()">
+
+        FATURAT E MIA
+
+    </button>
+
+    <button class="sideBtn" onclick="tableDetails()">
+
+        DETAJE TAVOLINE
+
+    </button>
+
+    <button class="sideBtn" onclick="transferTable()">
+
+        TRANSFERO
+
+    </button>
+
+    <button class="sideBtn" onclick="openCash()">
+
+        HAP ARKËN
+
+    </button>
+
+    <button class="sideBtn" onclick="cashReport()">
+
+        RAPORT ARKE
+
+    </button>
+
+    <button
+
+        class="sideBtn adminOnly"
+
+        onclick="openAdmin()"
+
+        style="display:none"
+
+    >
+
+        ADMIN
+
+    </button>
+
+    <button
+
+        class="sideBtn danger"
+
+        onclick="logout()"
+
+    >
+
+        DALJE
+
+    </button>
+
+</aside>
+
+<!-- CENTER -->
+
+<main class="center">
+
+    <div class="sectionHead">
+
+        <div>
+
+            <div class="sectionTitle">Tavolinat</div>
+
+            <div class="sectionSub">
+
+                Zgjidh tavolinën për faturën
+
+            </div>
+
         </div>
 
         <button
-            class="side-btn primary"
+
+            class="topBtn"
+
             onclick="newInvoice()"
+
         >
-            ＋
+
             FATURË E RE
+
         </button>
 
-        <button
-            class="side-btn"
-            onclick="openPayment()"
-        >
-            ✓
-            MBYLL FATURËN
-        </button>
+    </div>
 
-        <button
-            class="side-btn"
-            onclick="lockApp()"
-        >
-            🔒
-            BLLOKO
-        </button>
+    <div class="tables" id="tables"></div>
 
-        <div class="side-separator"></div>
+    <div class="sectionHead">
 
-        <div class="side-label">
-            RAPORTE
+        <div>
+
+            <div class="sectionTitle">
+
+                Menu
+
+            </div>
+
+            <div class="sectionSub">
+
+                Kategoritë e produkteve
+
+            </div>
+
         </div>
 
-        <button
-            class="side-btn"
-            onclick="openSummary()"
-        >
-            ≡
-            PËRMBLEDHJE
-        </button>
+    </div>
 
-        <button
-            class="side-btn"
-            onclick="openMyInvoices()"
+    <div class="menuHead">
+
+        <input
+
+            class="search"
+
+            id="search"
+
+            placeholder="Kërko produkt..."
+
         >
-            ▤
-            FATURAT E MIA
-        </button>
+
+    </div>
+
+    <div
+
+        class="categories"
+
+        id="categories"
+
+    ></div>
+
+    <div
+
+        class="products"
+
+        id="products"
+
+    ></div>
+
+</main>
+
+<!-- ORDER -->
+
+<aside class="orderPanel" id="orderPanel">
+
+    <div class="orderHeader">
+
+        <h2>FATURA</h2>
 
         <div
-            class="side-separator"
+
+            class="orderTable"
+
+            id="orderTable"
+
+        >
+
+            Nuk është zgjedhur tavolinë
+
+        </div>
+
+    </div>
+
+    <div
+
+        class="orderItems"
+
+        id="orderItems"
+
+    ></div>
+
+    <div class="orderFooter">
+
+        <div class="totalRow">
+
+            <span>TOTAL</span>
+
+            <div
+
+                class="total"
+
+                id="total"
+
+            >
+
+                0 L
+
+            </div>
+
+        </div>
+
+        <div class="actionGrid">
+
+            <button
+
+                class="action green"
+
+                onclick="openPayment()"
+
+            >
+
+                PAGESË
+
+            </button>
+
+            <button
+
+                class="action"
+
+                onclick="printCurrentPreview()"
+
+            >
+
+                PRINT
+
+            </button>
+
+            <button
+
+                class="action"
+
+                onclick="tableDetails()"
+
+            >
+
+                DETAJE
+
+            </button>
+
+            <button
+
+                class="action"
+
+                onclick="transferTable()"
+
+            >
+
+                TRANSFERO
+
+            </button>
+
+            <button
+
+                class="action red"
+
+                onclick="clearOrder()"
+
+            >
+
+                PASTRO
+
+            </button>
+
+            <button
+
+                class="action"
+
+                onclick="closeCurrentInvoice()"
+
+            >
+
+                MBYLL
+
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+
+</div>
+
+<!-- PAYMENT -->
+
+<div class="modal" id="paymentModal">
+
+<div class="modalBox">
+
+    <div class="modalHead">
+
+        <strong>
+
+            Zgjidh mënyrën e pagesës
+
+        </strong>
+
+        <button
+
+            class="close"
+
+            onclick="closeModal('paymentModal')"
+
+        >
+
+            ×
+
+        </button>
+
+    </div>
+
+    <div class="modalBody">
+
+        <div
+
+            style="font-size:28px;font-weight:bold;margin-bottom:20px;text-align:center"
+
+            id="paymentAmount"
+
+        >
+
+            0 L
+
+        </div>
+
+        <div class="paymentButtons">
+
+            <button
+
+                class="payment"
+
+                onclick="completePayment('cash')"
+
+            >
+
+                💵<br><br>
+
+                CASH
+
+            </button>
+
+            <button
+
+                class="payment"
+
+                onclick="completePayment('card')"
+
+            >
+
+                💳<br><br>
+
+                CARD
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- INVOICE -->
+
+<div class="modal" id="invoiceModal">
+
+<div class="modalBox">
+
+    <div class="invoice" id="invoicePrint">
+
+        <div class="invoiceHeader">
+
+            <h2>MY BAR</h2>
+
+            <p>BAR & RESTAURANT</p>
+
+            <p>FATURË</p>
+
+        </div>
+
+        <div
+
+            class="invoiceInfo"
+
+            id="invoiceInfo"
+
         ></div>
 
+        <div id="invoiceItems"></div>
+
+        <div class="invoiceTotal">
+
+            <span>TOTAL</span>
+
+            <span id="invoiceTotal">
+
+                0 L
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="invoiceButtons">
+
         <button
-            class="side-btn admin-only"
-            data-admin
-            onclick="openAdmin()"
+
+            class="invoiceBtn green"
+
+            onclick="printInvoice(false)"
+
         >
-            ⚙
-            ADMIN
+
+            PRINT
+
         </button>
 
-    </aside>
+        <button
 
-    <!-- =================================================
-         CENTER
-    ================================================== -->
+            class="invoiceBtn"
 
-    <main class="center">
+            onclick="printInvoice(true)"
 
-        <div class="center-header">
-
-            <div>
-
-                <div class="page-title">
-                    TAVOLINAT
-                </div>
-
-                <div class="page-subtitle">
-                    Zgjidh tavolinën për të filluar faturën
-                </div>
-
-            </div>
-
-            <div
-                class="selected-table"
-                id="selectedTableText"
-            >
-                Zgjidh tavolinë
-            </div>
-
-        </div>
-
-        <div class="section-title">
-            TAVOLINAT
-        </div>
-
-        <div
-            class="table-grid"
-            id="tableGrid"
-        >
-        </div>
-
-        <!-- NEW INVOICE -->
-
-        <section
-            class="invoice-area"
-            id="newInvoicePanel"
         >
 
-            <div class="invoice-area-title">
-                FATURË E RE
-            </div>
+            FATURË TATIMORE
 
-            <input
-                id="menuSearch"
-                class="search"
-                type="search"
-                placeholder="Kërko produkt..."
-            >
+        </button>
 
-            <div
-                class="categories"
-                id="categories"
-            >
-            </div>
+        <button
 
-            <div
-                class="menu-grid"
-                id="menuGrid"
-            >
-            </div>
+            class="invoiceBtn red"
 
-        </section>
+            onclick="finishInvoice()"
 
-    </main>
-
-    <!-- =================================================
-         ORDER
-    ================================================== -->
-
-    <aside class="order-panel">
-
-        <div class="order-header">
-
-            <div class="order-title">
-                FATURA
-            </div>
-
-            <div
-                class="order-table"
-                id="orderTable"
-            >
-                Zgjidh tavolinë
-            </div>
-
-        </div>
-
-        <div
-            class="order-items"
-            id="orderItems"
         >
 
-            <div class="empty-order">
-                Zgjidh një tavolinë
-                dhe hap faturën e re.
-            </div>
+            MBYLL & DIL
 
-        </div>
-
-        <div class="order-total">
-
-            <div class="total-row">
-
-                <span class="total-label">
-                    TOTAL
-                </span>
-
-                <span
-                    class="total-value"
-                    id="orderTotal"
-                >
-                    0 L
-                </span>
-
-            </div>
-
-            <button
-                class="close-invoice"
-                onclick="openPayment()"
-            >
-                MBYLL FATURËN
-            </button>
-
-        </div>
-
-    </aside>
-
-</div>
-
-<!-- =====================================================
-     PAYMENT MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="paymentModal"
->
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <h2>
-                MBYLL FATURËN
-            </h2>
-
-            <button
-                class="modal-close"
-                onclick="closePayment()"
-            >
-                ×
-            </button>
-
-        </div>
-
-        <div class="modal-body">
-
-            <div
-                class="payment-total"
-                id="paymentTotal"
-            >
-                0 L
-            </div>
-
-            <div class="payment-buttons">
-
-                <button
-                    class="payment-btn cash"
-                    onclick="completePayment('cash')"
-                >
-                    CASH
-                </button>
-
-                <button
-                    class="payment-btn card"
-                    onclick="completePayment('card')"
-                >
-                    CARD
-                </button>
-
-            </div>
-
-        </div>
+        </button>
 
     </div>
 
 </div>
 
-<!-- =====================================================
-     INVOICE MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="invoiceModal"
->
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <h2>
-                FATURA
-            </h2>
-
-            <button
-                class="modal-close"
-                onclick="closeInvoice()"
-            >
-                ×
-            </button>
-
-        </div>
-
-        <div class="modal-body">
-
-            <div class="invoice-preview">
-
-                <div class="invoice-business">
-
-                    <h2>
-                        MY BAR
-                    </h2>
-
-                    <p>
-                        Tiranë, Shqipëri
-                    </p>
-
-                </div>
-
-                <div class="invoice-meta">
-
-                    <div>
-                        Nr:
-                        <strong
-                            id="invoiceNumber"
-                        >
-                            -
-                        </strong>
-                    </div>
-
-                    <div>
-                        Data:
-                        <span
-                            id="invoiceDate"
-                        >
-                            -
-                        </span>
-                    </div>
-
-                    <div>
-                        Tavolina:
-                        <span
-                            id="invoiceTable"
-                        >
-                            -
-                        </span>
-                    </div>
-
-                    <div>
-                        Kamarier:
-                        <span
-                            id="invoiceWaiter"
-                        >
-                            -
-                        </span>
-                    </div>
-
-                </div>
-
-                <div
-                    id="invoiceItems"
-                >
-                </div>
-
-                <div class="invoice-total">
-
-                    <span>
-                        TOTAL
-                    </span>
-
-                    <span
-                        id="invoiceTotal"
-                    >
-                        0 L
-                    </span>
-
-                </div>
-
-            </div>
-
-            <div class="invoice-actions">
-
-                <button
-                    class="invoice-action"
-                    onclick="printInvoice()"
-                >
-                    PRINT
-                </button>
-
-                <button
-                    class="invoice-action"
-                    onclick="printTaxInvoice()"
-                >
-                    FATURË TATIMORE
-                </button>
-
-                <button
-                    class="invoice-action"
-                    onclick="closeInvoice()"
-                >
-                    MBYLL
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </div>
 
-<!-- =====================================================
-     MESSAGE MODAL
-===================================================== -->
+<!-- GENERAL -->
 
-<div
-    class="modal"
-    id="messageModal"
->
+<div class="modal" id="generalModal">
 
-    <div class="modal-box">
+<div class="modalBox">
 
-        <div class="modal-head">
+    <div class="modalHead">
 
-            <h2>
-                MY BAR
-            </h2>
+        <strong id="generalTitle">
 
-            <button
-                class="modal-close"
-                onclick="closeMessageModal()"
-            >
-                ×
-            </button>
+            MY BAR
 
-        </div>
+        </strong>
 
-        <div
-            class="modal-body message-content"
-            id="messageContent"
+        <button
+
+            class="close"
+
+            onclick="closeModal('generalModal')"
+
         >
-        </div>
+
+            ×
+
+        </button>
 
     </div>
 
+    <div
+
+        class="modalBody"
+
+        id="generalBody"
+
+    ></div>
+
 </div>
 
-<!-- =====================================================
-     APP JS
-===================================================== -->
+</div>
 
 <script src="app.js"></script>
 
-<script>
-
-/* =====================================================
-   EXTRA UI SYNC
-===================================================== */
-
-function syncSelectedTable(){
-
-    const tableId =
-        Number(
-            localStorage.getItem(
-                "MYBAR_SELECTED_TABLE"
-            ) || 0
-        );
-
-    const text =
-        document.getElementById(
-            "selectedTableText"
-        );
-
-    const orderTable =
-        document.getElementById(
-            "orderTable"
-        );
-
-    if(tableId){
-
-        if(text){
-            text.textContent =
-                "Tavolina " + tableId;
-        }
-
-        if(orderTable){
-            orderTable.textContent =
-                "Tavolina " + tableId;
-        }
-
-    }else{
-
-        if(text){
-            text.textContent =
-                "Zgjidh tavolinë";
-        }
-
-        if(orderTable){
-            orderTable.textContent =
-                "Zgjidh tavolinë";
-        }
-    }
-}
-
-setInterval(
-    syncSelectedTable,
-    200
-);
-
-syncSelectedTable();
-
-</script>
-
 </body>
+
 </html>
