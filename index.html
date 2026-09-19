@@ -1,1087 +1,691 @@
 <!DOCTYPE html>
-
 <html lang="sq">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MY BAR — POS</title>
 
 <style>
-
 *{
-
     box-sizing:border-box;
-
     margin:0;
-
     padding:0;
-
 }
 
 body{
-
     background:#050806;
-
     color:#f5f7f6;
-
     font-family:Arial,Helvetica,sans-serif;
-
     min-height:100vh;
-
 }
 
 button,
-
 input,
-
 select{
-
     font:inherit;
-
 }
 
 button{
-
     cursor:pointer;
-
 }
 
 .topbar{
-
     height:68px;
-
     border-bottom:1px solid #1a2b21;
-
     background:#070c09;
-
     display:flex;
-
     align-items:center;
-
     padding:0 18px;
-
     gap:14px;
-
 }
 
 .logo{
-
     font-weight:900;
-
     letter-spacing:4px;
-
     font-size:19px;
-
     margin-right:auto;
-
 }
 
 .clock{
-
     color:#718078;
-
     font-size:12px;
-
 }
 
 .userInfo{
-
     border:1px solid #1c3526;
-
     background:#0a130d;
-
     padding:9px 13px;
-
     color:#9daaa4;
-
     font-size:11px;
-
 }
 
 .topBtn{
-
     border:1px solid #26382d;
-
     background:#0b120e;
-
     color:#d9dfdc;
-
     padding:10px 14px;
-
     font-size:11px;
-
 }
 
 .topBtn:hover{
-
     border-color:#20d678;
-
 }
 
 .app{
-
     display:grid;
-
     grid-template-columns:230px 1fr 360px;
-
     min-height:calc(100vh - 68px);
-
 }
 
 .sidebar{
-
     border-right:1px solid #18271f;
-
     background:#070c09;
-
     padding:15px;
-
 }
 
 .sidebarTitle{
-
     color:#53635a;
-
     font-size:9px;
-
     letter-spacing:2px;
-
     margin:8px 5px 12px;
-
 }
 
 .sideBtn{
-
     width:100%;
-
     padding:13px;
-
     margin-bottom:7px;
-
     border:1px solid #192a20;
-
     background:#0a110d;
-
     color:#d8dedb;
-
     text-align:left;
-
     font-size:11px;
-
 }
 
 .sideBtn:hover{
-
     border-color:#20d678;
-
     background:#0c1911;
-
 }
 
 .sideBtn.main{
-
     border-color:#20d678;
-
     background:#0c2517;
-
     color:#fff;
-
     font-weight:bold;
-
 }
 
 .sideBtn.danger{
-
     color:#ff7b7b;
-
 }
 
 .center{
-
     padding:16px;
-
     overflow:auto;
-
 }
 
 .sectionHead{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-bottom:12px;
-
 }
 
 .sectionTitle{
-
     font-size:18px;
-
 }
 
 .sectionSub{
-
     color:#637169;
-
     font-size:11px;
-
     margin-top:3px;
-
 }
 
 .tables{
-
     display:grid;
-
     grid-template-columns:repeat(auto-fill,minmax(125px,1fr));
-
     gap:9px;
-
     margin-bottom:22px;
-
 }
 
 .table{
-
     min-height:82px;
-
     border:1px solid #1d3125;
-
     background:#09110c;
-
     color:white;
-
     padding:12px;
-
     text-align:left;
-
     position:relative;
-
 }
 
 .table:hover{
-
     border-color:#20d678;
-
 }
 
 .table.active{
-
     border-color:#ba8a32;
-
     background:#171108;
-
 }
 
 .table.selected{
-
     box-shadow:inset 0 0 0 2px #20d678;
-
 }
 
 .tableName{
-
     display:block;
-
     font-weight:bold;
-
     font-size:12px;
-
 }
 
 .tableStatus{
-
     display:block;
-
     margin-top:9px;
-
     color:#637169;
-
     font-size:10px;
-
 }
 
 .table.active .tableStatus{
-
     color:#d5a747;
-
 }
 
 .menuHead{
-
     display:flex;
-
     gap:8px;
-
     margin-bottom:10px;
-
 }
 
 .search{
-
     flex:1;
-
     padding:12px;
-
     background:#080f0b;
-
     border:1px solid #1d3025;
-
     color:white;
-
     outline:none;
-
 }
 
 .search:focus{
-
     border-color:#20d678;
-
 }
 
 .categories{
-
     display:flex;
-
     gap:7px;
-
     overflow:auto;
-
     padding-bottom:8px;
-
     margin-bottom:12px;
-
 }
 
 .category{
-
     white-space:nowrap;
-
     padding:9px 12px;
-
     background:#09110d;
-
     border:1px solid #1c2d23;
-
     color:#9aa69f;
-
     font-size:10px;
-
 }
 
 .category.active{
-
     background:#12341f;
-
     border-color:#20d678;
-
     color:#fff;
-
 }
 
 .products{
-
     display:grid;
-
     grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-
     gap:9px;
-
 }
 
 .product{
-
     min-height:105px;
-
     background:#09110d;
-
     border:1px solid #1b2c22;
-
     color:#fff;
-
     padding:13px;
-
     text-align:left;
-
     display:flex;
-
     flex-direction:column;
-
 }
 
 .product:hover{
-
     border-color:#20d678;
+}
 
-    transform:translateY(-1px);
-
+.product:disabled{
+    opacity:.35;
+    cursor:not-allowed;
 }
 
 .productName{
-
     font-weight:bold;
-
     font-size:12px;
-
-    margin-bottom:auto;
-
 }
 
 .productPrice{
-
     color:#49e894;
-
     font-weight:bold;
-
     margin-top:12px;
-
 }
 
 .stock{
-
     color:#59665f;
-
     font-size:9px;
-
     margin-top:6px;
-
 }
 
 .orderPanel{
-
     border-left:1px solid #18271f;
-
     background:#070c09;
-
     display:flex;
-
     flex-direction:column;
-
     min-height:calc(100vh - 68px);
-
 }
 
 .orderHeader{
-
     padding:17px;
-
     border-bottom:1px solid #18271f;
-
 }
 
 .orderHeader h2{
-
     font-size:16px;
-
 }
 
 .orderTable{
-
     color:#36df86;
-
     font-size:11px;
-
     margin-top:6px;
-
 }
 
 .orderItems{
-
     flex:1;
-
     overflow:auto;
-
     padding:12px;
-
 }
 
 .empty{
-
     text-align:center;
-
     padding:50px 15px;
-
     color:#46534c;
-
     font-size:12px;
-
 }
 
 .orderItem{
-
     border:1px solid #192a20;
-
     background:#09110d;
-
     padding:12px;
-
     margin-bottom:8px;
-
 }
 
 .orderTop{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
-
 }
 
 .orderName{
-
     font-size:11px;
-
     font-weight:bold;
-
 }
 
 .orderPrice{
-
     color:#48e58f;
-
     font-size:11px;
-
 }
 
 .orderBottom{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-top:10px;
-
 }
 
 .qty{
-
     display:flex;
-
     align-items:center;
-
     gap:8px;
-
 }
 
 .qty button{
-
     width:27px;
-
     height:27px;
-
     background:#101a14;
-
     color:white;
-
     border:1px solid #294132;
-
 }
 
 .qty span{
-
     min-width:18px;
-
     text-align:center;
-
     font-size:11px;
-
 }
 
 .delete{
-
     border:0;
-
     background:transparent;
-
     color:#f06c6c;
-
     font-size:17px;
-
 }
 
 .orderFooter{
-
     border-top:1px solid #18271f;
-
     padding:15px;
-
 }
 
 .totalRow{
-
     display:flex;
-
     justify-content:space-between;
-
     margin-bottom:15px;
-
 }
 
 .totalRow span{
-
     color:#75827b;
-
 }
 
 .total{
-
     font-size:24px;
-
     font-weight:bold;
-
     color:#4ae994;
-
 }
 
 .actionGrid{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:7px;
-
 }
 
 .action{
-
     padding:12px 8px;
-
     border:1px solid #24382b;
-
     background:#0a120e;
-
     color:#dbe1de;
-
     font-size:10px;
-
 }
 
 .action:hover{
-
     border-color:#20d678;
-
 }
 
 .action.green{
-
     background:#10351f;
-
     border-color:#20d678;
-
 }
 
 .action.red{
-
     color:#ff7777;
-
 }
 
 .modal{
-
     position:fixed;
-
     inset:0;
-
-    background:rgba(0,0,0,.75);
-
+    background:rgba(0,0,0,.78);
     display:none;
-
     align-items:center;
-
     justify-content:center;
-
     z-index:1000;
-
     padding:15px;
-
 }
 
 .modalBox{
-
-    width:min(600px,100%);
-
-    max-height:90vh;
-
+    width:min(620px,100%);
+    max-height:92vh;
     overflow:auto;
-
     background:#080d0a;
-
     border:1px solid #294534;
-
     box-shadow:0 25px 80px #000;
-
 }
 
 .modalHead{
-
     padding:17px;
-
     border-bottom:1px solid #1b2c22;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
 }
 
 .modalHead strong{
-
     font-size:15px;
-
 }
 
 .close{
-
     border:0;
-
     background:transparent;
-
     color:#aab4af;
-
     font-size:22px;
-
 }
 
 .modalBody{
-
     padding:17px;
-
 }
 
 .paymentButtons{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:10px;
-
 }
 
 .payment{
-
     padding:22px;
-
     background:#0b1510;
-
     border:1px solid #25412f;
-
     color:white;
-
 }
 
 .payment:hover{
-
     border-color:#20d678;
-
 }
 
+/* =========================
+   WHITE INVOICE
+========================= */
+
 .invoice{
-
+    width:100%;
     background:#fff;
-
-    color:#111;
-
-    padding:22px;
-
-    font-family:Arial,sans-serif;
-
+    color:#000;
+    padding:25px;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 .invoiceHeader{
-
     text-align:center;
-
-    border-bottom:1px solid #111;
-
+    color:#000;
+    border-bottom:1px solid #000;
     padding-bottom:12px;
-
     margin-bottom:12px;
-
 }
 
 .invoiceHeader h2{
-
-    font-size:20px;
-
+    color:#000;
+    font-size:22px;
+    margin-bottom:4px;
 }
 
 .invoiceHeader p{
-
+    color:#000;
     font-size:10px;
-
-    margin-top:3px;
-
+    margin:3px 0;
 }
 
 .invoiceInfo{
-
-    font-size:10px;
-
+    color:#000;
+    font-size:11px;
     line-height:1.7;
-
-    margin-bottom:10px;
-
 }
 
 .invoiceRow{
-
+    color:#000;
     display:grid;
-
-    grid-template-columns:1fr 50px 80px 80px;
-
+    grid-template-columns:1fr 45px 75px 75px;
     gap:5px;
-
     font-size:10px;
-
-    padding:5px 0;
-
-    border-bottom:1px dotted #aaa;
-
+    padding:6px 0;
+    border-bottom:1px dotted #777;
 }
 
 .invoiceTotal{
-
+    color:#000;
     display:flex;
-
     justify-content:space-between;
-
-    font-size:17px;
-
-    font-weight:bold;
-
+    font-size:19px;
+    font-weight:900;
     margin-top:15px;
-
-    border-top:2px solid #111;
-
+    border-top:2px solid #000;
     padding-top:10px;
-
 }
 
 .invoiceButtons{
-
     padding:15px;
-
     background:#080d0a;
-
     display:grid;
-
     grid-template-columns:1fr 1fr 1fr;
-
     gap:7px;
-
 }
 
 .invoiceBtn{
-
     padding:12px 7px;
-
     border:1px solid #25412f;
-
     background:#0b1510;
-
     color:white;
-
     font-size:10px;
-
 }
 
 .invoiceBtn.green{
-
     border-color:#20d678;
-
     background:#10351f;
-
 }
 
 .invoiceBtn.red{
-
     border-color:#713535;
-
     color:#ff8a8a;
-
 }
 
 .list{
-
     max-height:55vh;
-
     overflow:auto;
-
 }
 
 .listRow{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:15px;
-
     padding:13px;
-
     border-bottom:1px solid #17271e;
-
 }
 
 .listRow small{
-
     color:#65736c;
-
     display:block;
-
     margin-top:4px;
-
 }
 
 .form{
-
     display:grid;
-
     gap:10px;
-
 }
 
 .form input,
-
 .form select{
-
     padding:12px;
-
     background:#060b08;
-
     border:1px solid #23372a;
-
     color:white;
-
     outline:none;
-
 }
 
 @media(max-width:1100px){
 
     .app{
-
         grid-template-columns:190px 1fr;
-
     }
 
     .orderPanel{
-
         position:fixed;
-
         right:0;
-
         top:68px;
-
         bottom:0;
-
         width:360px;
-
         transform:translateX(100%);
-
         transition:.2s;
-
         z-index:50;
-
     }
 
     .orderPanel.open{
-
         transform:translateX(0);
-
     }
-
 }
 
 @media(max-width:700px){
 
     .topbar{
-
         padding:0 8px;
-
     }
 
-    .clock{
-
-        display:none;
-
-    }
-
+    .clock,
     .userInfo{
-
         display:none;
-
     }
 
     .app{
-
         display:block;
-
     }
 
     .sidebar{
-
         display:grid;
-
         grid-template-columns:repeat(4,1fr);
-
         gap:5px;
-
         border-right:0;
-
         border-bottom:1px solid #18271f;
-
     }
 
     .sidebarTitle{
-
         display:none;
-
     }
 
     .sideBtn{
-
         margin:0;
-
         text-align:center;
-
         padding:10px 4px;
-
         font-size:8px;
-
     }
 
     .orderPanel{
-
         width:100%;
-
     }
 
     .products{
-
         grid-template-columns:repeat(2,1fr);
-
     }
 
+    .invoiceRow{
+        grid-template-columns:1fr 35px 60px 65px;
+    }
+}
+
+@media print{
+
+    body{
+        background:#fff !important;
+        color:#000 !important;
+    }
+
+    .invoice{
+        width:80mm;
+        margin:0 auto;
+        padding:5mm;
+        background:#fff !important;
+        color:#000 !important;
+    }
+
+    .invoiceButtons,
+    .modalHead{
+        display:none !important;
+    }
+
+    @page{
+        size:80mm auto;
+        margin:0;
+    }
 }
 
 </style>
-
 </head>
 
 <body>
@@ -1095,137 +699,99 @@ button{
     <div class="userInfo" id="userInfo"></div>
 
     <button class="topBtn" onclick="logout()">
-
         DIL
-
     </button>
 
 </header>
 
 <div class="app">
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar">
 
-    <div class="sidebarTitle">VEPRIME</div>
+    <div class="sidebarTitle">
+        VEPRIME
+    </div>
 
-    <button class="sideBtn main" onclick="newInvoice()">
-
+    <button class="sideBtn main"
+        onclick="newInvoice()">
         + FATURË E RE
-
     </button>
 
-    <button class="sideBtn" onclick="toggleOrder()">
-
+    <button class="sideBtn"
+        onclick="toggleOrder()">
         POROSIA
-
     </button>
 
-    <button class="sideBtn" onclick="closeCurrentInvoice()">
-
+    <button class="sideBtn"
+        onclick="closeCurrentInvoice()">
         MBYLL FATURËN
-
     </button>
 
-    <button class="sideBtn" onclick="lockScreen()">
-
+    <button class="sideBtn"
+        onclick="lockScreen()">
         BLLOKO
-
     </button>
 
-    <button class="sideBtn" onclick="openSummary()">
-
+    <button class="sideBtn"
+        onclick="openSummary()">
         PËRMBLEDHJE
-
     </button>
 
-    <button class="sideBtn" onclick="openMyInvoices()">
-
+    <button class="sideBtn"
+        onclick="openMyInvoices()">
         FATURAT E MIA
-
     </button>
 
-    <button class="sideBtn" onclick="tableDetails()">
-
+    <button class="sideBtn"
+        onclick="tableDetails()">
         DETAJE TAVOLINE
-
     </button>
 
-    <button class="sideBtn" onclick="transferTable()">
-
+    <button class="sideBtn"
+        onclick="transferTable()">
         TRANSFERO
-
     </button>
 
-    <button class="sideBtn" onclick="openCash()">
-
+    <button class="sideBtn"
+        onclick="openCash()">
         HAP ARKËN
-
     </button>
 
-    <button class="sideBtn" onclick="cashReport()">
-
+    <button class="sideBtn"
+        onclick="cashReport()">
         RAPORT ARKE
-
     </button>
 
-    <button
-
-        class="sideBtn adminOnly"
-
+    <button class="sideBtn adminOnly"
         onclick="openAdmin()"
-
-        style="display:none"
-
-    >
-
+        style="display:none">
         ADMIN
-
     </button>
 
-    <button
-
-        class="sideBtn danger"
-
-        onclick="logout()"
-
-    >
-
+    <button class="sideBtn danger"
+        onclick="logout()">
         DALJE
-
     </button>
 
 </aside>
-
-<!-- CENTER -->
 
 <main class="center">
 
     <div class="sectionHead">
 
         <div>
-
-            <div class="sectionTitle">Tavolinat</div>
-
-            <div class="sectionSub">
-
-                Zgjidh tavolinën për faturën
-
+            <div class="sectionTitle">
+                Tavolinat
             </div>
 
+            <div class="sectionSub">
+                Zgjidh tavolinën
+            </div>
         </div>
 
-        <button
-
-            class="topBtn"
-
-            onclick="newInvoice()"
-
-        >
-
+        <button class="topBtn"
+            onclick="newInvoice()">
             FATURË E RE
-
         </button>
 
     </div>
@@ -1235,19 +801,13 @@ button{
     <div class="sectionHead">
 
         <div>
-
             <div class="sectionTitle">
-
                 Menu
-
             </div>
 
             <div class="sectionSub">
-
-                Kategoritë e produkteve
-
+                Zgjidh produktin
             </div>
-
         </div>
 
     </div>
@@ -1255,81 +815,59 @@ button{
     <div class="menuHead">
 
         <input
-
             class="search"
-
             id="search"
-
+            type="search"
             placeholder="Kërko produkt..."
-
         >
 
     </div>
 
     <div
-
         class="categories"
-
-        id="categories"
-
-    ></div>
+        id="categories">
+    </div>
 
     <div
-
         class="products"
-
-        id="products"
-
-    ></div>
+        id="products">
+    </div>
 
 </main>
 
-<!-- ORDER -->
-
-<aside class="orderPanel" id="orderPanel">
+<aside
+    class="orderPanel"
+    id="orderPanel">
 
     <div class="orderHeader">
 
         <h2>FATURA</h2>
 
         <div
-
             class="orderTable"
-
-            id="orderTable"
-
-        >
-
+            id="orderTable">
             Nuk është zgjedhur tavolinë
-
         </div>
 
     </div>
 
     <div
-
         class="orderItems"
-
-        id="orderItems"
-
-    ></div>
+        id="orderItems">
+    </div>
 
     <div class="orderFooter">
 
         <div class="totalRow">
 
-            <span>TOTAL</span>
+            <span>
+                TOTAL
+            </span>
 
             <div
-
                 class="total"
-
-                id="total"
-
-            >
-
+                id="total">
                 0 L
-
             </div>
 
         </div>
@@ -1337,75 +875,39 @@ button{
         <div class="actionGrid">
 
             <button
-
                 class="action green"
-
-                onclick="openPayment()"
-
-            >
-
+                onclick="openPayment()">
                 PAGESË
-
             </button>
 
             <button
-
                 class="action"
-
-                onclick="printCurrentPreview()"
-
-            >
-
+                onclick="printCurrentPreview()">
                 PRINT
-
             </button>
 
             <button
-
                 class="action"
-
-                onclick="tableDetails()"
-
-            >
-
+                onclick="tableDetails()">
                 DETAJE
-
             </button>
 
             <button
-
                 class="action"
-
-                onclick="transferTable()"
-
-            >
-
+                onclick="transferTable()">
                 TRANSFERO
-
             </button>
 
             <button
-
                 class="action red"
-
-                onclick="clearOrder()"
-
-            >
-
+                onclick="clearOrder()">
                 PASTRO
-
             </button>
 
             <button
-
                 class="action"
-
-                onclick="closeCurrentInvoice()"
-
-            >
-
+                onclick="closeCurrentInvoice()">
                 MBYLL
-
             </button>
 
         </div>
@@ -1416,214 +918,178 @@ button{
 
 </div>
 
-<!-- PAYMENT -->
 
-<div class="modal" id="paymentModal">
+<!-- PAYMENT MODAL -->
 
-<div class="modalBox">
+<div
+    class="modal"
+    id="paymentModal">
 
-    <div class="modalHead">
+    <div class="modalBox">
 
-        <strong>
+        <div class="modalHead">
 
-            Zgjidh mënyrën e pagesës
-
-        </strong>
-
-        <button
-
-            class="close"
-
-            onclick="closeModal('paymentModal')"
-
-        >
-
-            ×
-
-        </button>
-
-    </div>
-
-    <div class="modalBody">
-
-        <div
-
-            style="font-size:28px;font-weight:bold;margin-bottom:20px;text-align:center"
-
-            id="paymentAmount"
-
-        >
-
-            0 L
-
-        </div>
-
-        <div class="paymentButtons">
+            <strong>
+                Zgjidh mënyrën e pagesës
+            </strong>
 
             <button
-
-                class="payment"
-
-                onclick="completePayment('cash')"
-
-            >
-
-                💵<br><br>
-
-                CASH
-
-            </button>
-
-            <button
-
-                class="payment"
-
-                onclick="completePayment('card')"
-
-            >
-
-                💳<br><br>
-
-                CARD
-
+                class="close"
+                onclick="closeModal('paymentModal')">
+                ×
             </button>
 
         </div>
 
-    </div>
+        <div class="modalBody">
 
-</div>
-
-</div>
-
-<!-- INVOICE -->
-
-<div class="modal" id="invoiceModal">
-
-<div class="modalBox">
-
-    <div class="invoice" id="invoicePrint">
-
-        <div class="invoiceHeader">
-
-            <h2>MY BAR</h2>
-
-            <p>BAR & RESTAURANT</p>
-
-            <p>FATURË</p>
-
-        </div>
-
-        <div
-
-            class="invoiceInfo"
-
-            id="invoiceInfo"
-
-        ></div>
-
-        <div id="invoiceItems"></div>
-
-        <div class="invoiceTotal">
-
-            <span>TOTAL</span>
-
-            <span id="invoiceTotal">
-
+            <div
+                id="paymentAmount"
+                style="
+                    font-size:28px;
+                    font-weight:bold;
+                    text-align:center;
+                    margin-bottom:20px;
+                ">
                 0 L
+            </div>
 
-            </span>
+            <div class="paymentButtons">
+
+                <button
+                    class="payment"
+                    onclick="completePayment('cash')">
+                    💵<br><br>
+                    CASH
+                </button>
+
+                <button
+                    class="payment"
+                    onclick="completePayment('card')">
+                    💳<br><br>
+                    CARD
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-    <div class="invoiceButtons">
+</div>
 
-        <button
 
-            class="invoiceBtn green"
+<!-- INVOICE MODAL -->
 
-            onclick="printInvoice(false)"
+<div
+    class="modal"
+    id="invoiceModal">
 
-        >
+    <div class="modalBox">
 
-            PRINT
+        <div
+            class="invoice"
+            id="invoicePrint">
 
-        </button>
+            <div class="invoiceHeader">
 
-        <button
+                <h2>
+                    MY BAR
+                </h2>
 
-            class="invoiceBtn"
+                <p>
+                    BAR & RESTAURANT
+                </p>
 
-            onclick="printInvoice(true)"
+                <p>
+                    FATURË
+                </p>
 
-        >
+            </div>
 
-            FATURË TATIMORE
+            <div
+                class="invoiceInfo"
+                id="invoiceInfo">
+            </div>
 
-        </button>
+            <div
+                id="invoiceItems">
+            </div>
 
-        <button
+            <div class="invoiceTotal">
 
-            class="invoiceBtn red"
+                <span>
+                    TOTAL
+                </span>
 
-            onclick="finishInvoice()"
+                <span id="invoiceTotal">
+                    0 L
+                </span>
 
-        >
+            </div>
 
-            MBYLL & DIL
+        </div>
 
-        </button>
+        <div class="invoiceButtons">
+
+            <button
+                class="invoiceBtn green"
+                onclick="printInvoice(false)">
+                PRINT
+            </button>
+
+            <button
+                class="invoiceBtn"
+                onclick="printInvoice(true)">
+                FATURË TATIMORE
+            </button>
+
+            <button
+                class="invoiceBtn red"
+                onclick="finishInvoice()">
+                MBYLL & DIL
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
-</div>
 
-<!-- GENERAL -->
+<!-- GENERAL MODAL -->
 
-<div class="modal" id="generalModal">
+<div
+    class="modal"
+    id="generalModal">
 
-<div class="modalBox">
+    <div class="modalBox">
 
-    <div class="modalHead">
+        <div class="modalHead">
 
-        <strong id="generalTitle">
+            <strong id="generalTitle">
+                MY BAR
+            </strong>
 
-            MY BAR
+            <button
+                class="close"
+                onclick="closeModal('generalModal')">
+                ×
+            </button>
 
-        </strong>
+        </div>
 
-        <button
-
-            class="close"
-
-            onclick="closeModal('generalModal')"
-
-        >
-
-            ×
-
-        </button>
+        <div
+            class="modalBody"
+            id="generalBody">
+        </div>
 
     </div>
 
-    <div
-
-        class="modalBody"
-
-        id="generalBody"
-
-    ></div>
-
 </div>
 
-</div>
 
 <script src="app.js"></script>
 
 </body>
-
 </html>
