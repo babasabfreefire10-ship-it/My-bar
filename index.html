@@ -2,221 +2,122 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050505">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>MY BAR</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
     min-height:100vh;
     background:#050505;
     color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow:hidden
 }
-
-body::before{
+body:before{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
     background:
-        radial-gradient(circle at 50% 45%,
-        rgba(212,170,75,.12),
-        transparent 32%);
+    radial-gradient(circle at 50% 35%,rgba(212,175,55,.10),transparent 35%),
+    radial-gradient(circle at 10% 90%,rgba(212,175,55,.05),transparent 30%);
+    pointer-events:none
 }
+.led{position:fixed;background:#d4af37;z-index:10}
+.led.top,.led.bottom{left:0;width:100%;height:1px}
+.led.top{top:0}.led.bottom{bottom:0}
+.led.left,.led.right{top:0;width:1px;height:100%}
+.led.left{left:0}.led.right{right:0}
 
-.led{
-    position:fixed;
-    background:#c9a55c;
-    box-shadow:
-        0 0 8px #c9a55c,
-        0 0 25px rgba(201,165,92,.7);
-    z-index:5;
+.page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px
 }
-
-.led.top{
-    top:0;
-    left:0;
-    width:100%;
-    height:2px;
-}
-
-.led.bottom{
-    bottom:0;
-    right:0;
-    width:100%;
-    height:2px;
-}
-
-.led.left{
-    left:0;
-    top:0;
-    width:2px;
-    height:100%;
-}
-
-.led.right{
-    right:0;
-    top:0;
-    width:2px;
-    height:100%;
-}
-
-header{
+.main{
+    width:min(1100px,100%);
+    height:650px;
     position:relative;
-    z-index:10;
-    height:76px;
-    padding:0 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(201,165,92,.16);
+    border:1px solid rgba(212,175,55,.28);
+    border-radius:28px;
+    background:linear-gradient(145deg,#141414,#050505);
+    box-shadow:0 0 80px rgba(212,175,55,.08);
+    overflow:hidden
 }
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
 .logo{
-    width:40px;
-    height:40px;
-    border:1px solid #c9a55c;
+    position:absolute;
+    top:35px;
+    left:40px;
+    width:52px;
+    height:52px;
+    border:1px solid #d4af37;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#d9b86f;
-    font-weight:900;
-    font-size:16px;
+    color:#d4af37;
+    font-size:22px;
+    font-weight:bold
 }
-
-.brand-text strong{
-    display:block;
-    color:#d9b86f;
-    font-size:15px;
-    letter-spacing:3px;
-}
-
-.brand-text small{
-    color:#555;
-    font-size:7px;
-    letter-spacing:2px;
-}
-
 .contact{
-    border:1px solid rgba(201,165,92,.5);
-    background:#090909;
-    color:#d9b86f;
-    padding:9px 14px;
-    border-radius:9px;
-    font-size:8px;
+    position:absolute;
+    right:35px;
+    top:35px;
+    border:1px solid #d4af37;
+    background:transparent;
+    color:#d4af37;
+    padding:11px 18px;
+    border-radius:10px;
     letter-spacing:2px;
-    cursor:pointer;
+    cursor:pointer
 }
-
-main{
-    position:relative;
-    z-index:2;
-    min-height:calc(100vh - 76px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+.contact:hover{
+    background:#d4af37;
+    color:#000
 }
-
-.content{
-    width:min(92%,500px);
+.center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center
 }
-
-.badge{
-    display:inline-block;
-    padding:7px 11px;
-    border:1px solid rgba(201,165,92,.25);
-    border-radius:50px;
-    color:#777;
-    font-size:7px;
-    letter-spacing:3px;
-    margin-bottom:22px;
+.welcome{
+    font-size:clamp(50px,9vw,100px);
+    letter-spacing:10px;
+    font-weight:300
 }
-
-h1{
-    font-size:clamp(42px,12vw,82px);
-    font-weight:300;
-    letter-spacing:9px;
-    line-height:1;
+.created{
+    margin-top:18px;
+    color:#d4af37;
+    letter-spacing:5px;
+    font-size:13px
 }
-
-h1 span{
-    color:#d9b86f;
-}
-
-.subtitle{
-    margin-top:15px;
-    color:#666;
-    font-size:9px;
-    letter-spacing:4px;
-}
-
 .users{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:9px;
-    margin:34px auto 0;
-    max-width:420px;
+    position:absolute;
+    right:35px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    width:130px
 }
-
-.user-btn{
-    padding:15px 5px;
-    border:1px solid #292929;
-    background:#090909;
-    color:#aaa;
-    border-radius:11px;
+.user{
+    height:45px;
+    border:1px solid rgba(212,175,55,.4);
+    background:rgba(255,255,255,.025);
+    color:#fff;
+    border-radius:10px;
     cursor:pointer;
-    transition:.2s;
+    letter-spacing:2px
 }
-
-.user-btn:hover{
-    border-color:#c9a55c;
-    color:#d9b86f;
-    transform:translateY(-2px);
+.user:hover{
+    color:#d4af37;
+    border-color:#d4af37
 }
-
-.user-btn strong{
-    display:block;
-    font-size:11px;
-    letter-spacing:2px;
-}
-
-.user-btn small{
-    display:block;
-    margin-top:5px;
-    color:#444;
-    font-size:7px;
-}
-
-footer{
-    position:fixed;
-    z-index:5;
-    bottom:18px;
-    left:0;
-    width:100%;
-    text-align:center;
-    color:#333;
-    font-size:7px;
-    letter-spacing:2px;
-}
-
-/* LOGIN */
-
 .overlay{
     position:fixed;
     inset:0;
@@ -224,743 +125,271 @@ footer{
     display:none;
     align-items:center;
     justify-content:center;
-    padding:20px;
-    background:rgba(0,0,0,.92);
-    backdrop-filter:blur(12px);
+    background:rgba(0,0,0,.84);
+    backdrop-filter:blur(10px);
+    padding:20px
 }
-
-.overlay.show{
-    display:flex;
-}
-
-.login-box{
-    width:min(100%,390px);
-    background:#0a0a0a;
-    border:1px solid rgba(201,165,92,.45);
+.box{
+    width:min(430px,100%);
+    background:#0b0b0b;
+    border:1px solid rgba(212,175,55,.5);
     border-radius:20px;
-    padding:30px;
-    box-shadow:0 30px 100px rgba(0,0,0,.9);
+    padding:28px
 }
-
-.login-logo{
-    width:48px;
-    height:48px;
-    margin:0 auto 16px;
-    border:1px solid #c9a55c;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#d9b86f;
-    font-weight:900;
-}
-
-.login-title{
-    text-align:center;
-    font-size:22px;
+.box h2{
+    color:#d4af37;
     letter-spacing:3px;
+    margin-bottom:18px
 }
-
-.login-title span{
-    color:#d9b86f;
-}
-
-.selected{
-    text-align:center;
-    margin:10px 0 22px;
-    color:#666;
-    font-size:8px;
-    letter-spacing:2px;
-}
-
-label{
-    display:block;
-    margin:12px 0 7px;
-    color:#777;
-    font-size:8px;
-    letter-spacing:2px;
-}
-
-input{
+.box input,.box textarea{
     width:100%;
-    padding:14px;
     background:#050505;
-    border:1px solid #292929;
-    border-radius:10px;
     color:#fff;
-    outline:none;
-    font-size:15px;
-}
-
-input:focus{
-    border-color:#c9a55c;
-}
-
-.login-btn{
-    width:100%;
-    margin-top:18px;
-    padding:14px;
-    border:0;
-    border-radius:10px;
-    background:#c9a55c;
-    color:#050505;
-    font-weight:800;
-    letter-spacing:2px;
-    cursor:pointer;
-}
-
-.close-btn{
-    width:100%;
-    margin-top:9px;
-    padding:12px;
     border:1px solid #292929;
     border-radius:10px;
-    background:#090909;
-    color:#777;
-    cursor:pointer;
+    padding:13px;
+    margin-bottom:12px;
+    outline:none
 }
-
+.box textarea{
+    min-height:130px;
+    resize:none
+}
+.actions{
+    display:flex;
+    gap:10px
+}
+.actions button{
+    flex:1;
+    padding:13px;
+    border-radius:10px;
+    cursor:pointer;
+    border:1px solid #d4af37
+}
+.primary{
+    background:#d4af37;
+    color:#000
+}
+.secondary{
+    background:transparent;
+    color:#d4af37
+}
 .error{
     display:none;
-    margin-top:12px;
-    padding:10px;
-    border:1px solid #542929;
-    background:#180909;
-    border-radius:9px;
-    color:#d98787;
-    text-align:center;
-    font-size:9px;
+    color:#e55;
+    font-size:13px;
+    margin-top:10px
 }
-
-.error.show{
-    display:block;
+@media(max-width:700px){
+    .main{height:600px}
+    .logo{top:22px;left:22px}
+    .contact{top:22px;right:22px}
+    .center{top:40%}
+    .welcome{font-size:48px;letter-spacing:6px}
+    .users{
+        top:auto;
+        bottom:42px;
+        left:50%;
+        right:auto;
+        transform:translateX(-50%);
+        flex-direction:row;
+        width:auto
+    }
+    .user{width:90px;font-size:10px}
 }
-
-/* CONTACT */
-
-.contact-box{
-    width:min(100%,420px);
-    background:#0a0a0a;
-    border:1px solid rgba(201,165,92,.45);
-    border-radius:20px;
-    padding:28px;
-}
-
-.contact-box h2{
-    color:#d9b86f;
-    text-align:center;
-    font-size:20px;
-    letter-spacing:3px;
-}
-
-.contact-box p{
-    text-align:center;
-    color:#666;
-    font-size:9px;
-    margin:9px 0 20px;
-}
-
-textarea{
-    width:100%;
-    min-height:130px;
-    resize:none;
-    padding:13px;
-    background:#050505;
-    border:1px solid #292929;
-    border-radius:10px;
-    color:#fff;
-    outline:none;
-}
-
-.send-btn{
-    width:100%;
-    margin-top:12px;
-    padding:13px;
-    border:0;
-    border-radius:10px;
-    background:#c9a55c;
-    color:#050505;
-    font-weight:800;
-    cursor:pointer;
-}
-
 </style>
 </head>
 
 <body>
 
 <div class="led top"></div>
-<div class="led right"></div>
 <div class="led bottom"></div>
 <div class="led left"></div>
+<div class="led right"></div>
 
-<header>
+<div class="page">
+<main class="main">
 
-    <div class="brand">
+<div class="logo">S</div>
 
-        <div class="logo">S</div>
+<button class="contact" onclick="openContact()">
+CONTACT
+</button>
 
-        <div class="brand-text">
-            <strong>MY BAR</strong>
-            <small>CREATED BY SABI</small>
-        </div>
-
-    </div>
-
-    <button
-        class="contact"
-        onclick="openContact()"
-    >
-        CONTACT
-    </button>
-
-</header>
-
-
-<main>
-
-    <div class="content">
-
-        <div class="badge">
-            SISTEM PREMIUM
-        </div>
-
-        <h1>
-            WELCOME <span>MY BAR</span>
-        </h1>
-
-        <div class="subtitle">
-            ZGJIDH PËRDORUESIN
-        </div>
-
-
-        <div class="users">
-
-            <button
-                class="user-btn"
-                onclick="openLogin('admin','ADMIN')"
-            >
-                <strong>ADMIN</strong>
-                <small>ADMINISTRATOR</small>
-            </button>
-
-
-            <button
-                class="user-btn"
-                onclick="openLogin('sabi','SABI')"
-            >
-                <strong>SABI</strong>
-                <small>KAMARIER</small>
-            </button>
-
-
-            <button
-                class="user-btn"
-                onclick="openLogin('mondi','MONDI')"
-            >
-                <strong>MONDI</strong>
-                <small>KAMARIER</small>
-            </button>
-
-        </div>
-
-    </div>
-
-</main>
-
-
-<footer>
-    MY BAR • PRIVATE SYSTEM
-</footer>
-
-
-<!-- LOGIN -->
-
-<div
-    id="loginOverlay"
-    class="overlay"
->
-
-    <div class="login-box">
-
-        <div class="login-logo">
-            S
-        </div>
-
-        <div class="login-title">
-            MY <span>BAR</span>
-        </div>
-
-        <div
-            id="selectedUser"
-            class="selected"
-        >
-            ADMIN
-        </div>
-
-
-        <label>
-            USERNAME
-        </label>
-
-        <input
-            id="username"
-            type="text"
-            autocomplete="username"
-        >
-
-
-        <label>
-            FJALËKALIMI
-        </label>
-
-        <input
-            id="password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="••••"
-            onkeydown="if(event.key==='Enter') login()"
-        >
-
-
-        <button
-            class="login-btn"
-            onclick="login()"
-        >
-            HYR NË SISTEM
-        </button>
-
-
-        <button
-            class="close-btn"
-            onclick="closeLogin()"
-        >
-            KTHEHU
-        </button>
-
-
-        <div
-            id="loginError"
-            class="error"
-        >
-            Username ose fjalëkalim i gabuar.
-        </div>
-
-    </div>
-
+<div class="center">
+    <div class="welcome">WELCOME</div>
+    <div class="created">Created-Sabi.</div>
 </div>
 
+<div class="users">
+    <button class="user" onclick="openLogin('admin','ADMIN')">ADMIN</button>
+    <button class="user" onclick="openLogin('sabi','SABI')">SABI</button>
+    <button class="user" onclick="openLogin('mondi','MONDI')">MONDI</button>
+</div>
+
+</main>
+</div>
 
 <!-- CONTACT -->
 
-<div
-    id="contactOverlay"
-    class="overlay"
->
+<div class="overlay" id="contactOverlay">
+<div class="box">
 
-    <div class="contact-box">
+<h2>CONTACT</h2>
 
-        <h2>CONTACT</h2>
+<input id="contactPhone"
+       type="tel"
+       placeholder="Numri i telefonit">
 
-        <p>
-            Dërgo një mesazh te SABI
-        </p>
+<textarea id="contactMessage"
+          placeholder="Shkruaj mesazhin..."></textarea>
 
-        <textarea
-            id="contactMessage"
-            placeholder="Shkruaj mesazhin..."
-        ></textarea>
+<div class="actions">
+<button class="primary" onclick="sendSMS()">
+DËRGO SMS
+</button>
 
-        <button
-            class="send-btn"
-            onclick="sendContact()"
-        >
-            DËRGO MESAZH
-        </button>
-
-        <button
-            class="close-btn"
-            onclick="closeContact()"
-        >
-            MBYLL
-        </button>
-
-    </div>
-
+<button class="secondary" onclick="closeContact()">
+MBYLL
+</button>
 </div>
 
+</div>
+</div>
+
+<!-- LOGIN -->
+
+<div class="overlay" id="loginOverlay">
+<div class="box">
+
+<h2 id="loginTitle">LOGIN</h2>
+
+<input id="loginUsername"
+       type="text"
+       placeholder="Username">
+
+<input id="loginPassword"
+       type="password"
+       placeholder="Password">
+
+<button class="primary"
+        style="width:100%;padding:14px;border-radius:10px;cursor:pointer"
+        onclick="login()">
+HYR
+</button>
+
+<div class="error" id="loginError">
+Username ose password i gabuar.
+</div>
+
+</div>
+</div>
 
 <script>
 
-"use strict";
-
-
-const USERS_KEY =
-    "MYBAR_USERS_V2";
-
-const SESSION_KEY =
-    "MYBAR_SESSION_V2";
-
-const CURRENT_USER_KEY =
-    "MYBAR_CURRENT_USER";
-
-
-const DEFAULT_USERS = [
-
+const USERS=[
     {
         username:"admin",
         password:"1234",
         role:"admin",
         name:"ADMIN"
     },
-
     {
         username:"sabi",
         password:"1234",
         role:"waiter",
         name:"SABI"
     },
-
     {
         username:"mondi",
         password:"1234",
         role:"waiter",
         name:"MONDI"
     }
-
 ];
 
+function openLogin(username,name){
 
-function initializeUsers(){
+    document.getElementById("loginOverlay").style.display="flex";
 
-    const saved =
-        localStorage.getItem(
-            USERS_KEY
-        );
+    document.getElementById("loginTitle").textContent=name;
 
-    if(!saved){
+    document.getElementById("loginUsername").value=username;
 
-        localStorage.setItem(
-            USERS_KEY,
-            JSON.stringify(
-                DEFAULT_USERS
-            )
-        );
+    document.getElementById("loginPassword").value="";
 
-    }
-
+    document.getElementById("loginError").style.display="none";
 }
-
-
-function getUsers(){
-
-    try{
-
-        const users =
-            JSON.parse(
-                localStorage.getItem(
-                    USERS_KEY
-                )
-            );
-
-        if(
-            Array.isArray(users)
-            &&
-            users.length
-        ){
-
-            return users;
-
-        }
-
-    }catch(e){}
-
-    initializeUsers();
-
-    return DEFAULT_USERS;
-
-}
-
-
-let selectedUsername = "admin";
-
-
-function openLogin(
-    username,
-    name
-){
-
-    selectedUsername =
-        username;
-
-    document
-        .getElementById(
-            "selectedUser"
-        )
-        .textContent =
-        name;
-
-    document
-        .getElementById(
-            "username"
-        )
-        .value =
-        username;
-
-    document
-        .getElementById(
-            "password"
-        )
-        .value =
-        "";
-
-    document
-        .getElementById(
-            "loginError"
-        )
-        .classList
-        .remove(
-            "show"
-        );
-
-    document
-        .getElementById(
-            "loginOverlay"
-        )
-        .classList
-        .add(
-            "show"
-        );
-
-    setTimeout(() => {
-
-        document
-            .getElementById(
-                "password"
-            )
-            .focus();
-
-    },100);
-
-}
-
-
-function closeLogin(){
-
-    document
-        .getElementById(
-            "loginOverlay"
-        )
-        .classList
-        .remove(
-            "show"
-        );
-
-}
-
 
 function login(){
 
-    const username =
-        document
-        .getElementById(
-            "username"
-        )
-        .value
-        .trim()
-        .toLowerCase();
+    const username=document
+        .getElementById("loginUsername")
+        .value.trim();
 
-    const password =
-        document
-        .getElementById(
-            "password"
-        )
+    const password=document
+        .getElementById("loginPassword")
         .value;
 
-    const error =
-        document
-        .getElementById(
-            "loginError"
-        );
-
-
-    const users =
-        getUsers();
-
-
-    const user =
-        users.find(
-            u =>
-                String(
-                    u.username
-                )
-                .toLowerCase()
-                === username
-                &&
-                String(
-                    u.password
-                )
-                === password
-        );
-
+    const user=USERS.find(u=>
+        u.username===username &&
+        u.password===password
+    );
 
     if(!user){
 
-        error
-            .classList
-            .add(
-                "show"
-            );
-
+        document.getElementById("loginError").style.display="block";
         return;
-
     }
 
-
-    const session = {
-
-        username:
-            user.username,
-
-        name:
-            user.name,
-
-        role:
-            user.role,
-
-        loginTime:
-            Date.now()
-
-    };
-
-
+    localStorage.setItem("MYBAR_SESSION_V2","true");
     localStorage.setItem(
-        SESSION_KEY,
-        JSON.stringify(
-            session
-        )
+        "MYBAR_CURRENT_USER",
+        JSON.stringify(user)
     );
 
-
-    localStorage.setItem(
-        CURRENT_USER_KEY,
-        user.username
-    );
-
-
-    /*
-       SHKO DIREKT TE APP.
-       NUK KA LOGIN.HTML.
-    */
-
-    window.location.href =
-        "./app.html";
-
+    window.location.href="./app.html";
 }
-
 
 function openContact(){
-
-    document
-        .getElementById(
-            "contactOverlay"
-        )
-        .classList
-        .add(
-            "show"
-        );
-
+    document.getElementById("contactOverlay").style.display="flex";
 }
-
 
 function closeContact(){
-
-    document
-        .getElementById(
-            "contactOverlay"
-        )
-        .classList
-        .remove(
-            "show"
-        );
-
+    document.getElementById("contactOverlay").style.display="none";
 }
 
+function sendSMS(){
 
-function sendContact(){
+    const phone=document
+        .getElementById("contactPhone")
+        .value.trim();
 
-    const message =
-        document
-        .getElementById(
-            "contactMessage"
-        )
-        .value
-        .trim();
+    const message=document
+        .getElementById("contactMessage")
+        .value.trim();
 
-
-    if(!message){
-
-        alert(
-            "Shkruaj një mesazh."
-        );
-
+    if(!phone){
+        alert("Shkruaj numrin.");
         return;
-
     }
 
+    if(!message){
+        alert("Shkruaj mesazhin.");
+        return;
+    }
 
-    /*
-       Për momentin ruhet në pajisje.
-       Më vonë mund ta lidhim me SMS/backend.
-    */
-
-    const reports =
-        JSON.parse(
-            localStorage.getItem(
-                "MYBAR_REPORTS"
-            ) || "[]"
-        );
-
-
-    reports.push({
-
-        id:Date.now(),
-
-        message:message,
-
-        date:new Date()
-            .toISOString()
-
-    });
-
-
-    localStorage.setItem(
-        "MYBAR_REPORTS",
-        JSON.stringify(
-            reports
-        )
-    );
-
-
-    document
-        .getElementById(
-            "contactMessage"
-        )
-        .value =
-        "";
-
-
-    alert(
-        "Mesazhi u ruajt me sukses."
-    );
-
-
-    closeContact();
-
+    window.location.href=
+        "sms:"+encodeURIComponent(phone)+
+        "?body="+encodeURIComponent(message);
 }
 
-
-initializeUsers();
+document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+        closeContact();
+        document.getElementById("loginOverlay").style.display="none";
+    }
+});
 
 </script>
 
