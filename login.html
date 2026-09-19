@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
 
-<title>LOGIN • MY BAR</title>
+<title>MY BAR • Login</title>
 
 <style>
 *{
@@ -18,69 +18,54 @@ body{
     min-height:100vh;
     background:#050505;
     color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
+    padding:20px;
 }
 
 body::before{
     content:"";
     position:fixed;
-    width:650px;
-    height:650px;
-    border-radius:50%;
-    background:radial-gradient(
-        circle,
-        rgba(201,165,92,.13),
-        transparent 68%
-    );
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+    inset:0;
     pointer-events:none;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(201,165,92,.15),
+            transparent 35%
+        );
 }
 
-.frame{
-    position:fixed;
-    inset:12px;
-    border:1px solid rgba(201,165,92,.35);
-    border-radius:20px;
-    pointer-events:none;
-}
-
-.login-box{
-    width:min(92%,420px);
-    padding:38px;
-    border:1px solid rgba(201,165,92,.35);
-    border-radius:22px;
-    background:rgba(12,12,12,.9);
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.75),
-        inset 0 0 35px rgba(201,165,92,.025);
+.box{
     position:relative;
-    z-index:2;
+    width:min(100%,410px);
+    padding:32px;
+    background:#0b0b0b;
+    border:1px solid rgba(201,165,92,.4);
+    border-radius:22px;
+    box-shadow:0 30px 100px rgba(0,0,0,.8);
 }
 
 .logo{
-    width:52px;
-    height:52px;
-    border-radius:50%;
+    width:55px;
+    height:55px;
+    margin:0 auto 18px;
     border:1px solid #c9a55c;
+    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#d8b76d;
-    font-size:22px;
-    font-weight:700;
-    margin:0 auto 22px;
-    box-shadow:0 0 22px rgba(201,165,92,.18);
+    color:#d9b86f;
+    font-size:20px;
+    font-weight:800;
+    box-shadow:0 0 25px rgba(201,165,92,.15);
 }
 
 h1{
     text-align:center;
-    font-size:27px;
+    font-size:25px;
     font-weight:400;
     letter-spacing:3px;
 }
@@ -91,157 +76,157 @@ h1 span{
 
 .subtitle{
     text-align:center;
-    color:#666;
-    font-size:11px;
-    margin-top:8px;
-    letter-spacing:1.5px;
-}
-
-.selected-user{
-    margin-top:28px;
-    padding:14px;
-    border:1px solid rgba(201,165,92,.2);
-    border-radius:12px;
-    text-align:center;
-    background:#090909;
-}
-
-.selected-user small{
-    display:block;
+    margin-top:7px;
     color:#555;
     font-size:8px;
-    letter-spacing:2px;
-    margin-bottom:5px;
+    letter-spacing:3px;
 }
 
-.selected-user strong{
-    color:#d8b76d;
+.user{
+    margin-top:25px;
+    padding:13px;
+    border:1px solid #252525;
+    border-radius:11px;
+    background:#070707;
+    text-align:center;
+}
+
+.user small{
+    display:block;
+    color:#555;
+    font-size:7px;
     letter-spacing:2px;
+}
+
+.user strong{
+    display:block;
+    margin-top:5px;
+    color:#d8b76d;
     font-size:13px;
+    letter-spacing:2px;
 }
 
 .field{
-    margin-top:18px;
+    margin-top:16px;
 }
 
 label{
     display:block;
+    margin-bottom:7px;
     color:#777;
-    font-size:9px;
+    font-size:8px;
     letter-spacing:2px;
-    margin-bottom:8px;
 }
 
 input{
     width:100%;
+    padding:14px;
+    border-radius:10px;
     border:1px solid #292929;
-    background:#070707;
+    background:#050505;
     color:#fff;
-    border-radius:12px;
-    padding:15px;
     outline:none;
-    font-size:14px;
+    font-size:15px;
 }
 
 input:focus{
     border-color:#c9a55c;
-    box-shadow:0 0 15px rgba(201,165,92,.08);
 }
 
-.login-btn{
+.login{
     width:100%;
-    margin-top:23px;
+    margin-top:18px;
+    padding:15px;
     border:0;
-    border-radius:12px;
-    padding:16px;
+    border-radius:10px;
     background:#c9a55c;
-    color:#070707;
+    color:#050505;
     font-weight:800;
     letter-spacing:2px;
     cursor:pointer;
-    transition:.2s;
 }
 
-.login-btn:hover{
-    background:#e1c47d;
-    transform:translateY(-1px);
-}
-
-.back-btn{
+.back{
     width:100%;
-    margin-top:10px;
+    margin-top:9px;
+    padding:13px;
     border:1px solid #292929;
-    border-radius:12px;
-    padding:14px;
-    background:#0a0a0a;
+    border-radius:10px;
+    background:#090909;
     color:#888;
     cursor:pointer;
 }
 
-.back-btn:hover{
-    color:#fff;
-    border-color:#555;
-}
-
 .error{
     display:none;
-    margin-top:14px;
+    margin-top:13px;
     padding:11px;
     border-radius:10px;
-    background:rgba(180,50,50,.08);
-    border:1px solid rgba(180,50,50,.35);
-    color:#e18b8b;
+    background:#180909;
+    border:1px solid #542929;
+    color:#d98787;
     text-align:center;
-    font-size:11px;
+    font-size:10px;
 }
 
 .error.show{
     display:block;
 }
 
-footer{
-    position:fixed;
-    bottom:22px;
-    left:0;
-    width:100%;
-    text-align:center;
-    color:#444;
-    font-size:7px;
-    letter-spacing:3px;
+.users{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
 }
 
-@media(max-width:500px){
+.users button{
+    flex:1;
+    padding:10px 5px;
+    border:1px solid #222;
+    background:#090909;
+    color:#777;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:9px;
+    letter-spacing:1px;
+}
 
-    .login-box{
-        padding:28px 22px;
-    }
+.users button.active{
+    border-color:#c9a55c;
+    color:#d9b86f;
+}
 
-    h1{
-        font-size:23px;
-    }
+.footer{
+    margin-top:22px;
+    text-align:center;
+    color:#3f3f3f;
+    font-size:7px;
+    letter-spacing:2px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="frame"></div>
+<div class="box">
 
-<div class="login-box">
-
-    <div class="logo">S</div>
+    <div class="logo">
+        S
+    </div>
 
     <h1>
         MY <span>BAR</span>
     </h1>
 
     <div class="subtitle">
-        SECURE LOGIN
+        SECURE ACCESS
     </div>
 
-    <div class="selected-user">
+    <div class="user">
 
-        <small>USER</small>
+        <small>
+            USER
+        </small>
 
         <strong id="selectedUser">
             ADMIN
@@ -249,75 +234,111 @@ footer{
 
     </div>
 
+
+    <div class="users">
+
+        <button
+            id="adminBtn"
+            onclick="selectUser('admin','ADMIN')"
+        >
+            ADMIN
+        </button>
+
+        <button
+            id="sabiBtn"
+            onclick="selectUser('sabi','SABI')"
+        >
+            SABI
+        </button>
+
+        <button
+            id="mondiBtn"
+            onclick="selectUser('mondi','MONDI')"
+        >
+            MONDI
+        </button>
+
+    </div>
+
+
     <div class="field">
 
-        <label>USERNAME</label>
+        <label>
+            USERNAME
+        </label>
 
         <input
             id="username"
             type="text"
             autocomplete="username"
-            placeholder="Username"
+            value="admin"
         >
 
     </div>
 
+
     <div class="field">
 
-        <label>FJALËKALIMI</label>
+        <label>
+            FJALËKALIMI
+        </label>
 
         <input
             id="password"
             type="password"
             autocomplete="current-password"
-            placeholder="Fjalëkalimi"
+            placeholder="••••"
             onkeydown="if(event.key==='Enter') login()"
         >
 
     </div>
 
+
     <button
-        class="login-btn"
+        class="login"
         onclick="login()"
     >
-        HYR
+        HYR NË SISTEM
     </button>
+
 
     <button
-        class="back-btn"
+        class="back"
         onclick="goBack()"
     >
-        ← KTHEHU
+        KTHEHU
     </button>
 
+
     <div
-        class="error"
         id="error"
+        class="error"
     >
         Username ose fjalëkalim i gabuar.
     </div>
 
-</div>
 
-<footer>
-    MY BAR • CREATED BY SABI
-</footer>
+    <div class="footer">
+        MY BAR • CREATED BY SABI
+    </div>
+
+</div>
 
 
 <script>
 
-/* =========================
-   STORAGE
-========================= */
-
-const USERS_KEY = "MYBAR_USERS_V2";
-const SESSION_KEY = "MYBAR_SESSION_V2";
-const SELECTED_USER_KEY = "MYBAR_SELECTED_USER";
+"use strict";
 
 
-/* =========================
-   DEFAULT USERS
-========================= */
+const USERS_KEY =
+    "MYBAR_USERS_V2";
+
+const SESSION_KEY =
+    "MYBAR_SESSION_V2";
+
+const CURRENT_USER_KEY =
+    "MYBAR_CURRENT_USER";
+
 
 const DEFAULT_USERS = [
 
@@ -345,184 +366,239 @@ const DEFAULT_USERS = [
 ];
 
 
-/* =========================
-   JSON HELPERS
-========================= */
-
-function getJSON(key,fallback){
+function getUsers(){
 
     try{
 
-        const value =
-            localStorage.getItem(key);
+        const saved =
+            localStorage.getItem(
+                USERS_KEY
+            );
 
-        return value
-            ? JSON.parse(value)
-            : fallback;
+        if(saved){
 
-    }catch{
+            const users =
+                JSON.parse(saved);
 
-        return fallback;
+            if(
+                Array.isArray(users)
+                &&
+                users.length
+            ){
+
+                return users;
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.error(error);
 
     }
 
-}
-
-function setJSON(key,value){
 
     localStorage.setItem(
-        key,
-        JSON.stringify(value)
+        USERS_KEY,
+        JSON.stringify(
+            DEFAULT_USERS
+        )
     );
 
-}
 
-
-/* =========================
-   INITIALIZE USERS
-========================= */
-
-function initializeUsers(){
-
-    if(!localStorage.getItem(USERS_KEY)){
-
-        setJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
-
-    }
+    return DEFAULT_USERS;
 
 }
 
 
-/* =========================
-   SELECTED USER
-========================= */
+let selectedUsername =
+    "admin";
 
-function loadSelectedUser(){
 
-    const selected =
-        localStorage.getItem(
-            SELECTED_USER_KEY
-        );
+function selectUser(
+    username,
+    name
+){
 
-    const users =
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+    selectedUsername =
+        username;
 
-    let user =
-        users.find(
-            u =>
-                u.username.toLowerCase()
-                ===
-                String(selected || "").toLowerCase()
-        );
-
-    if(!user){
-
-        user = users[0];
-
-    }
 
     document
-        .getElementById("selectedUser")
+        .getElementById(
+            "selectedUser"
+        )
         .textContent =
-        user.name.toUpperCase();
+        name;
+
 
     document
-        .getElementById("username")
+        .getElementById(
+            "username"
+        )
         .value =
-        user.username;
+        username;
+
+
+    document
+        .getElementById(
+            "password"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "error"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .querySelectorAll(
+            ".users button"
+        )
+        .forEach(
+            button =>
+                button.classList
+                    .remove(
+                        "active"
+                    )
+        );
+
+
+    const selectedButton =
+        document.getElementById(
+            username + "Btn"
+        );
+
+
+    if(selectedButton){
+
+        selectedButton.classList
+            .add("active");
+
+    }
+
+
+    document
+        .getElementById(
+            "password"
+        )
+        .focus();
 
 }
 
-
-/* =========================
-   LOGIN
-========================= */
 
 function login(){
 
     const username =
         document
-        .getElementById("username")
+        .getElementById(
+            "username"
+        )
         .value
         .trim()
         .toLowerCase();
 
+
     const password =
         document
-        .getElementById("password")
+        .getElementById(
+            "password"
+        )
         .value;
+
 
     const error =
         document
-        .getElementById("error");
+        .getElementById(
+            "error"
+        );
+
 
     const users =
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+        getUsers();
+
 
     const user =
         users.find(
-            u =>
-                u.username.toLowerCase()
-                === username
+            item =>
+                String(
+                    item.username
+                )
+                .toLowerCase()
+                ===
+                username
                 &&
-                u.password === password
+                String(
+                    item.password
+                )
+                ===
+                password
         );
+
 
     if(!user){
 
-        error.classList.add("show");
+        error.classList
+            .add("show");
 
         return;
 
     }
 
-    error.classList.remove("show");
+
+    error.classList
+        .remove("show");
+
 
     const session = {
 
-        username:user.username,
+        username:
+            user.username,
 
-        name:user.name,
+        name:
+            user.name,
 
-        role:user.role,
+        role:
+            user.role,
 
-        loginTime:Date.now()
+        loginTime:
+            Date.now()
 
     };
 
-    setJSON(
-        SESSION_KEY,
-        session
-    );
 
     localStorage.setItem(
-        "MYBAR_CURRENT_USER",
+        SESSION_KEY,
+        JSON.stringify(
+            session
+        )
+    );
+
+
+    localStorage.setItem(
+        CURRENT_USER_KEY,
         user.username
     );
 
+
     /*
-       Pas login:
-       admin -> app.html
-       waiter -> app.html
+       Shkojmë direkt te app.html.
+       Nuk përdorim më asnjë login tjetër.
     */
 
-    window.location.href = "app.html";
+    window.location.href =
+        "app.html";
 
 }
 
-
-/* =========================
-   BACK
-========================= */
 
 function goBack(){
 
@@ -532,23 +608,11 @@ function goBack(){
 }
 
 
-/* =========================
-   START
-========================= */
+/* ADMIN si default */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        initializeUsers();
-
-        loadSelectedUser();
-
-        document
-            .getElementById("password")
-            .focus();
-
-    }
+selectUser(
+    "admin",
+    "ADMIN"
 );
 
 </script>
