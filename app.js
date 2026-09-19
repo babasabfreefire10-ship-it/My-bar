@@ -1,1004 +1,1826 @@
-/* =========================================================
-   MY BAR — APP.JS
-   POS SYSTEM — NEW VERSION
-========================================================= */
-
 "use strict";
 
-/* =========================================================
-   STORAGE
-========================================================= */
+/* =====================================================
+
+   MY BAR — SYSTEM FROM ZERO
+
+===================================================== */
 
 const USERS_KEY = "MYBAR_USERS_V2";
-const SESSION_KEY = "MYBAR_SESSION_V2";
-const TABLES_KEY = "MYBAR_TABLES_V2";
-const PRODUCTS_KEY = "MYBAR_PRODUCTS_V2";
-const INVOICES_KEY = "MYBAR_INVOICES_V2";
-const SETTINGS_KEY = "MYBAR_SETTINGS_V2";
 
-/* =========================================================
-   DEFAULT USERS
-========================================================= */
+const SESSION_KEY = "MYBAR_SESSION_V2";
+
+const TABLES_KEY = "MYBAR_TABLES_V2";
+
+const PRODUCTS_KEY = "MYBAR_PRODUCTS_V2";
+
+const INVOICES_KEY = "MYBAR_INVOICES_V2";
+
+const SELECTED_TABLE_KEY = "MYBAR_SELECTED_TABLE_V2";
+
+const INVENTORY_KEY = "MYBAR_INVENTORY_V2";
 
 const DEFAULT_USERS = [
-    {
-        id: 1,
-        username: "admin",
-        password: "1234",
-        name: "Administrator",
-        role: "admin"
-    },
-    {
-        id: 2,
-        username: "sabi",
-        password: "1234",
-        name: "Sabi",
-        role: "waiter"
-    },
-    {
-        id: 3,
-        username: "mondi",
-        password: "1234",
-        name: "Mondi",
-        role: "waiter"
-    }
-];
 
-/* =========================================================
-   DEFAULT PRODUCTS
-========================================================= */
+    {
+
+        username:"admin",
+
+        password:"1234",
+
+        role:"admin",
+
+        name:"ADMIN"
+
+    },
+
+    {
+
+        username:"sabi",
+
+        password:"1234",
+
+        role:"waiter",
+
+        name:"SABI"
+
+    },
+
+    {
+
+        username:"mondi",
+
+        password:"1234",
+
+        role:"waiter",
+
+        name:"MONDI"
+
+    }
+
+];
 
 const DEFAULT_PRODUCTS = [
 
-    /* KAFE */
+    {id:1,name:"Espresso",category:"Kafe",price:100},
 
-    { id: 1, name: "Espresso", category: "Kafe", price: 100 },
-    { id: 2, name: "Espresso Dopio", category: "Kafe", price: 150 },
-    { id: 3, name: "Macchiato", category: "Kafe", price: 120 },
-    { id: 4, name: "Cappuccino", category: "Kafe", price: 180 },
-    { id: 5, name: "Latte", category: "Kafe", price: 200 },
-    { id: 6, name: "Freddo Espresso", category: "Kafe", price: 200 },
-    { id: 7, name: "Freddo Cappuccino", category: "Kafe", price: 220 },
-    { id: 8, name: "Çaj", category: "Kafe", price: 120 },
+    {id:2,name:"Espresso Dopio",category:"Kafe",price:150},
 
-    /* PIJE FRESKUESE */
+    {id:3,name:"Macchiato",category:"Kafe",price:120},
 
-    { id: 20, name: "Coca Cola", category: "Pije Freskuese", price: 150 },
-    { id: 21, name: "Coca Cola Zero", category: "Pije Freskuese", price: 150 },
-    { id: 22, name: "Fanta", category: "Pije Freskuese", price: 150 },
-    { id: 23, name: "Sprite", category: "Pije Freskuese", price: 150 },
-    { id: 24, name: "Schweppes", category: "Pije Freskuese", price: 150 },
-    { id: 25, name: "Red Bull", category: "Pije Freskuese", price: 250 },
-    { id: 26, name: "Fresh Orange", category: "Pije Freskuese", price: 250 },
-    { id: 27, name: "Fresh Lemon", category: "Pije Freskuese", price: 250 },
+    {id:4,name:"Cappuccino",category:"Kafe",price:180},
 
-    /* UJE */
+    {id:5,name:"Latte",category:"Kafe",price:200},
 
-    { id: 40, name: "Ujë 0.5L", category: "Ujë", price: 100 },
-    { id: 41, name: "Ujë 0.75L", category: "Ujë", price: 150 },
-    { id: 42, name: "Ujë 1.5L", category: "Ujë", price: 150 },
+    {id:6,name:"Freddo Espresso",category:"Kafe",price:200},
 
-    /* BIRRA */
+    {id:7,name:"Freddo Cappuccino",category:"Kafe",price:220},
 
-    { id: 50, name: "Birra Tirana", category: "Birra", price: 200 },
-    { id: 51, name: "Birra Korça", category: "Birra", price: 200 },
-    { id: 52, name: "Heineken", category: "Birra", price: 250 },
-    { id: 53, name: "Corona", category: "Birra", price: 300 },
-    { id: 54, name: "Tuborg", category: "Birra", price: 250 },
+    {id:8,name:"Çaj",category:"Kafe",price:120},
 
-    /* WHISKY */
+    {id:20,name:"Coca Cola",category:"Pije Freskuese",price:150},
 
-    { id: 60, name: "Jack Daniel's", category: "Whisky", price: 500 },
-    { id: 61, name: "Johnnie Walker Red", category: "Whisky", price: 450 },
-    { id: 62, name: "Johnnie Walker Black", category: "Whisky", price: 650 },
-    { id: 63, name: "Chivas Regal", category: "Whisky", price: 700 },
+    {id:21,name:"Coca Cola Zero",category:"Pije Freskuese",price:150},
 
-    /* GIN */
+    {id:22,name:"Fanta",category:"Pije Freskuese",price:150},
 
-    { id: 70, name: "Gordon's Gin", category: "Gin", price: 450 },
-    { id: 71, name: "Bombay Sapphire", category: "Gin", price: 550 },
-    { id: 72, name: "Hendrick's", category: "Gin", price: 800 },
+    {id:23,name:"Sprite",category:"Pije Freskuese",price:150},
 
-    /* VODKA */
+    {id:24,name:"Schweppes",category:"Pije Freskuese",price:150},
 
-    { id: 80, name: "Absolut Vodka", category: "Vodka", price: 450 },
-    { id: 81, name: "Smirnoff", category: "Vodka", price: 450 },
-    { id: 82, name: "Grey Goose", category: "Vodka", price: 800 },
+    {id:25,name:"Red Bull",category:"Pije Freskuese",price:250},
 
-    /* RUM */
+    {id:26,name:"Fresh Orange",category:"Pije Freskuese",price:250},
 
-    { id: 90, name: "Bacardi", category: "Rum", price: 450 },
-    { id: 91, name: "Captain Morgan", category: "Rum", price: 500 },
+    {id:27,name:"Fresh Lemon",category:"Pije Freskuese",price:250},
 
-    /* TEQUILA */
+    {id:40,name:"Ujë 0.5L",category:"Ujë",price:100},
 
-    { id: 100, name: "Jose Cuervo", category: "Tequila", price: 500 },
-    { id: 101, name: "Olmeca", category: "Tequila", price: 550 },
+    {id:41,name:"Ujë 0.75L",category:"Ujë",price:150},
 
-    /* LIQUEUR */
+    {id:42,name:"Ujë 1.5L",category:"Ujë",price:150},
 
-    { id: 110, name: "Baileys", category: "Liqueur", price: 450 },
-    { id: 111, name: "Jägermeister", category: "Liqueur", price: 450 },
-    { id: 112, name: "Aperol", category: "Liqueur", price: 400 },
+    {id:50,name:"Birra Tirana",category:"Birra",price:200},
 
-    /* VERE */
+    {id:51,name:"Birra Korça",category:"Birra",price:200},
 
-    { id: 120, name: "Verë e Kuqe", category: "Verë", price: 300 },
-    { id: 121, name: "Verë e Bardhë", category: "Verë", price: 300 },
-    { id: 122, name: "Prosecco", category: "Verë", price: 600 },
+    {id:52,name:"Heineken",category:"Birra",price:250},
 
-    /* COCKTAILS */
+    {id:53,name:"Corona",category:"Birra",price:300},
 
-    { id: 130, name: "Mojito", category: "Cocktails", price: 600 },
-    { id: 131, name: "Margarita", category: "Cocktails", price: 650 },
-    { id: 132, name: "Aperol Spritz", category: "Cocktails", price: 650 },
-    { id: 133, name: "Sex on the Beach", category: "Cocktails", price: 700 },
-    { id: 134, name: "Long Island", category: "Cocktails", price: 800 },
+    {id:54,name:"Tuborg",category:"Birra",price:250},
 
-    /* LONG DRINKS */
+    {id:60,name:"Jack Daniel's",category:"Whisky",price:500},
 
-    { id: 140, name: "Gin Tonic", category: "Long Drinks", price: 550 },
-    { id: 141, name: "Vodka Red Bull", category: "Long Drinks", price: 600 },
-    { id: 142, name: "Whisky Cola", category: "Long Drinks", price: 550 },
+    {id:61,name:"Johnnie Walker Red",category:"Whisky",price:450},
 
-    /* SHOTS */
+    {id:62,name:"Johnnie Walker Black",category:"Whisky",price:650},
 
-    { id: 150, name: "Shot Tequila", category: "Shots", price: 300 },
-    { id: 151, name: "Shot Jägermeister", category: "Shots", price: 300 },
-    { id: 152, name: "Shot Vodka", category: "Shots", price: 250 },
+    {id:63,name:"Chivas Regal",category:"Whisky",price:700},
 
-    /* SNACKS */
+    {id:70,name:"Gordon's Gin",category:"Gin",price:450},
 
-    { id: 160, name: "Patatina", category: "Snacks", price: 200 },
-    { id: 161, name: "Kikirikë", category: "Snacks", price: 200 },
-    { id: 162, name: "Ullinj", category: "Snacks", price: 250 },
-    { id: 163, name: "Mix Nuts", category: "Snacks", price: 350 }
+    {id:71,name:"Bombay Sapphire",category:"Gin",price:550},
+
+    {id:72,name:"Hendrick's",category:"Gin",price:800},
+
+    {id:80,name:"Absolut Vodka",category:"Vodka",price:450},
+
+    {id:81,name:"Smirnoff",category:"Vodka",price:450},
+
+    {id:82,name:"Grey Goose",category:"Vodka",price:800},
+
+    {id:90,name:"Bacardi",category:"Rum",price:450},
+
+    {id:91,name:"Captain Morgan",category:"Rum",price:500},
+
+    {id:100,name:"Jose Cuervo",category:"Tequila",price:500},
+
+    {id:101,name:"Olmeca",category:"Tequila",price:550},
+
+    {id:110,name:"Baileys",category:"Liqueur",price:450},
+
+    {id:111,name:"Jägermeister",category:"Liqueur",price:450},
+
+    {id:112,name:"Aperol",category:"Liqueur",price:400},
+
+    {id:120,name:"Verë e Kuqe",category:"Verë",price:300},
+
+    {id:121,name:"Verë e Bardhë",category:"Verë",price:300},
+
+    {id:122,name:"Prosecco",category:"Verë",price:600},
+
+    {id:130,name:"Mojito",category:"Cocktails",price:600},
+
+    {id:131,name:"Margarita",category:"Cocktails",price:650},
+
+    {id:132,name:"Aperol Spritz",category:"Cocktails",price:650},
+
+    {id:133,name:"Sex on the Beach",category:"Cocktails",price:700},
+
+    {id:134,name:"Long Island",category:"Cocktails",price:800},
+
+    {id:140,name:"Gin Tonic",category:"Long Drinks",price:550},
+
+    {id:141,name:"Vodka Red Bull",category:"Long Drinks",price:600},
+
+    {id:142,name:"Whisky Cola",category:"Long Drinks",price:550},
+
+    {id:150,name:"Shot Tequila",category:"Shots",price:300},
+
+    {id:151,name:"Shot Jägermeister",category:"Shots",price:300},
+
+    {id:152,name:"Shot Vodka",category:"Shots",price:250},
+
+    {id:160,name:"Patatina",category:"Snacks",price:200},
+
+    {id:161,name:"Kikirikë",category:"Snacks",price:200},
+
+    {id:162,name:"Ullinj",category:"Snacks",price:250},
+
+    {id:163,name:"Mix Nuts",category:"Snacks",price:350}
+
 ];
 
-/* =========================================================
+/* =====================================================
+
    HELPERS
-========================================================= */
 
-function getJSON(key, fallback) {
-    try {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : fallback;
-    } catch {
+===================================================== */
+
+function getJSON(key,fallback){
+
+    try{
+
+        const value =
+
+            localStorage.getItem(key);
+
+        return value
+
+            ? JSON.parse(value)
+
+            : fallback;
+
+    }catch{
+
         return fallback;
+
     }
+
 }
 
-function setJSON(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+function setJSON(key,value){
+
+    localStorage.setItem(
+
+        key,
+
+        JSON.stringify(value)
+
+    );
+
 }
 
-function money(value) {
-    return Number(value || 0).toLocaleString("sq-AL") + " L";
+function money(value){
+
+    return Number(value || 0)
+
+        .toLocaleString("sq-AL") + " L";
+
 }
 
-function escapeHTML(value) {
+function escapeHTML(value){
+
     return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll("&","&amp;")
+
+        .replaceAll("<","&lt;")
+
+        .replaceAll(">","&gt;")
+
+        .replaceAll('"',"&quot;")
+
+        .replaceAll("'","&#039;");
+
 }
 
-/* =========================================================
-   SETTINGS
-========================================================= */
+/* =====================================================
 
-const DEFAULT_SETTINGS = {
-    businessName: "MY BAR",
-    nipt: "",
-    address: "Tiranë, Shqipëri",
-    phone: "",
-    tableCount: 12
-};
+   SESSION
 
-function getSettings() {
-    return {
-        ...DEFAULT_SETTINGS,
-        ...getJSON(SETTINGS_KEY, {})
-    };
+===================================================== */
+
+function getSession(){
+
+    return getJSON(
+
+        SESSION_KEY,
+
+        null
+
+    );
+
 }
 
-/* =========================================================
-   INITIALIZATION
-========================================================= */
+function requireLogin(){
 
-function initializeApp() {
+    if(!getSession()){
 
-    if (!localStorage.getItem(USERS_KEY)) {
-        setJSON(USERS_KEY, DEFAULT_USERS);
+        window.location.href =
+
+            "login.html";
+
+        return false;
+
     }
 
-    if (!localStorage.getItem(PRODUCTS_KEY)) {
-        setJSON(PRODUCTS_KEY, DEFAULT_PRODUCTS);
+    return true;
+
+}
+
+/* =====================================================
+
+   INITIALIZE
+
+===================================================== */
+
+function initialize(){
+
+    if(!localStorage.getItem(USERS_KEY)){
+
+        setJSON(
+
+            USERS_KEY,
+
+            DEFAULT_USERS
+
+        );
+
     }
 
-    if (!localStorage.getItem(INVOICES_KEY)) {
-        setJSON(INVOICES_KEY, []);
+    if(!localStorage.getItem(PRODUCTS_KEY)){
+
+        setJSON(
+
+            PRODUCTS_KEY,
+
+            DEFAULT_PRODUCTS
+
+        );
+
     }
 
-    if (!localStorage.getItem(SETTINGS_KEY)) {
-        setJSON(SETTINGS_KEY, DEFAULT_SETTINGS);
+    if(!localStorage.getItem(INVOICES_KEY)){
+
+        setJSON(
+
+            INVOICES_KEY,
+
+            []
+
+        );
+
     }
 
     initializeTables();
+
+    initializeInventory();
+
 }
 
-/* =========================================================
-   SESSION
-========================================================= */
+function initializeTables(){
 
-function getSession() {
-    return getJSON(SESSION_KEY, null);
-}
+    let tables =
 
-function setSession(user) {
+        getJSON(TABLES_KEY,null);
 
-    const session = {
-        id: user.id,
-        username: user.username,
-        name: user.name,
-        role: user.role
-    };
+    if(!Array.isArray(tables) ||
 
-    setJSON(SESSION_KEY, session);
-
-    /* compatibility */
-    setJSON("barCurrentUser", session);
-}
-
-function clearSession() {
-    localStorage.removeItem(SESSION_KEY);
-    localStorage.removeItem("barCurrentUser");
-}
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-function login(username, password) {
-
-    const users = getJSON(USERS_KEY, DEFAULT_USERS);
-
-    const user = users.find(
-        u =>
-            String(u.username).toLowerCase() ===
-            String(username).toLowerCase() &&
-            String(u.password) === String(password)
-    );
-
-    if (!user) {
-        toast("Username ose PIN i gabuar.");
-        return false;
-    }
-
-    setSession(user);
-
-    window.location.href = "index.html";
-
-    return true;
-}
-
-function logout() {
-
-    clearSession();
-
-    window.location.href = "login.html";
-}
-
-function lockApp() {
-
-    clearSession();
-
-    window.location.href = "login.html";
-}
-
-/* =========================================================
-   TABLES
-========================================================= */
-
-function initializeTables() {
-
-    const settings = getSettings();
-
-    let tables = getJSON(TABLES_KEY, null);
-
-    if (!Array.isArray(tables) ||
-        tables.length !== Number(settings.tableCount)) {
+       tables.length !== 12){
 
         tables = [];
 
-        for (let i = 1; i <= Number(settings.tableCount); i++) {
+        for(let i=1;i<=12;i++){
 
             tables.push({
-                id: i,
-                name: "Tavolina " + i,
-                items: [],
-                waiter: null
+
+                id:i,
+
+                name:"Tavolina "+i,
+
+                items:[],
+
+                opened:false,
+
+                openedAt:null,
+
+                waiter:""
+
             });
+
         }
 
-        setJSON(TABLES_KEY, tables);
+        setJSON(
+
+            TABLES_KEY,
+
+            tables
+
+        );
+
     }
+
 }
 
-function getTables() {
-    return getJSON(TABLES_KEY, []);
-}
+function initializeInventory(){
 
-function saveTables(tables) {
-    setJSON(TABLES_KEY, tables);
-}
+    const products =
 
-function getSelectedTable() {
-    return Number(
-        localStorage.getItem("MYBAR_SELECTED_TABLE") || 0
+        getJSON(
+
+            PRODUCTS_KEY,
+
+            DEFAULT_PRODUCTS
+
+        );
+
+    let inventory =
+
+        getJSON(
+
+            INVENTORY_KEY,
+
+            {}
+
+        );
+
+    products.forEach(product=>{
+
+        if(inventory[product.id] === undefined){
+
+            inventory[product.id] = 50;
+
+        }
+
+    });
+
+    setJSON(
+
+        INVENTORY_KEY,
+
+        inventory
+
     );
+
 }
 
-function selectTable(tableId) {
+/* =====================================================
+
+   TABLES
+
+===================================================== */
+
+function getTables(){
+
+    return getJSON(
+
+        TABLES_KEY,
+
+        []
+
+    );
+
+}
+
+function saveTables(tables){
+
+    setJSON(
+
+        TABLES_KEY,
+
+        tables
+
+    );
+
+}
+
+function getSelectedTable(){
+
+    return Number(
+
+        localStorage.getItem(
+
+            SELECTED_TABLE_KEY
+
+        ) || 0
+
+    );
+
+}
+
+function selectTable(id){
 
     localStorage.setItem(
-        "MYBAR_SELECTED_TABLE",
-        String(tableId)
+
+        SELECTED_TABLE_KEY,
+
+        String(id)
+
     );
 
     renderTables();
+
     renderOrder();
 
-    const text =
-        document.getElementById("selectedTableText");
-
-    if (text) {
-        text.textContent =
-            "Tavolina " + tableId;
-    }
 }
 
-/* =========================================================
-   TABLE RENDER
-========================================================= */
-
-function renderTables() {
-
-    const grid =
-        document.getElementById("tableGrid");
-
-    if (!grid) return;
-
-    const tables = getTables();
-
-    const selected = getSelectedTable();
-
-    grid.innerHTML = tables.map(table => {
-
-        const active =
-            Array.isArray(table.items) &&
-            table.items.length > 0;
-
-        const total = getTableTotal(table);
-
-        return `
-            <button
-                class="table-card
-                ${active ? "active" : ""}
-                ${selected === table.id ? "selected" : ""}"
-                onclick="selectTable(${table.id})"
-            >
-
-                <span class="table-number">
-                    ${table.id}
-                </span>
-
-                <strong>
-                    Tavolina ${table.id}
-                </strong>
-
-                <small>
-                    ${active ? money(total) : "E lirë"}
-                </small>
-
-            </button>
-        `;
-
-    }).join("");
-}
-
-/* =========================================================
-   PRODUCTS
-========================================================= */
-
-function getProducts() {
-    return getJSON(PRODUCTS_KEY, DEFAULT_PRODUCTS);
-}
-
-function renderCategories(category = "Të gjitha") {
+function renderTables(){
 
     const container =
-        document.getElementById("categories");
 
-    if (!container) return;
+        document.getElementById("tables");
 
-    const products = getProducts();
+    if(!container) return;
 
-    const categories = [
-        "Të gjitha",
-        ...new Set(products.map(p => p.category))
-    ];
+    const tables =
+
+        getTables();
+
+    const selected =
+
+        getSelectedTable();
 
     container.innerHTML =
-        categories.map(cat => `
-            <button
-                class="category-btn
-                ${cat === category ? "active" : ""}"
-                onclick="renderProducts('${escapeHTML(cat)}')"
-            >
-                ${escapeHTML(cat)}
-            </button>
-        `).join("");
-}
 
-function renderProducts(category = "Të gjitha") {
+        tables.map(table=>{
 
-    const grid =
-        document.getElementById("menuGrid");
+            const total =
 
-    if (!grid) return;
+                getTableTotal(table);
 
-    renderCategories(category);
+            const active =
 
-    const products = getProducts();
+                table.items &&
 
-    const filtered =
-        category === "Të gjitha"
-            ? products
-            : products.filter(
-                product => product.category === category
-            );
-
-    grid.innerHTML =
-        filtered.map(product => `
-            <button
-                class="product-card"
-                onclick="addProduct(${product.id})"
-            >
-
-                <strong>
-                    ${escapeHTML(product.name)}
-                </strong>
-
-                <span>
-                    ${money(product.price)}
-                </span>
-
-            </button>
-        `).join("");
-}
-
-/* =========================================================
-   ORDER
-========================================================= */
-
-function addProduct(productId) {
-
-    const tableId = getSelectedTable();
-
-    if (!tableId) {
-        toast("Zgjidh një tavolinë.");
-        return;
-    }
-
-    const products = getProducts();
-
-    const product =
-        products.find(
-            p => Number(p.id) === Number(productId)
-        );
-
-    if (!product) return;
-
-    const tables = getTables();
-
-    const table =
-        tables.find(t => Number(t.id) === tableId);
-
-    if (!table) return;
-
-    if (!Array.isArray(table.items)) {
-        table.items = [];
-    }
-
-    const existing =
-        table.items.find(
-            item =>
-                Number(item.productId) ===
-                Number(product.id)
-        );
-
-    if (existing) {
-
-        existing.quantity++;
-
-    } else {
-
-        table.items.push({
-            productId: product.id,
-            name: product.name,
-            category: product.category,
-            price: Number(product.price),
-            quantity: 1
-        });
-    }
-
-    const session = getSession();
-
-    if (session) {
-        table.waiter = session.name;
-    }
-
-    saveTables(tables);
-
-    renderTables();
-    renderOrder();
-
-    toast(product.name + " u shtua.");
-}
-
-function changeQuantity(index, amount) {
-
-    const tableId = getSelectedTable();
-
-    const tables = getTables();
-
-    const table =
-        tables.find(t => t.id === tableId);
-
-    if (!table) return;
-
-    const item = table.items[index];
-
-    if (!item) return;
-
-    item.quantity += amount;
-
-    if (item.quantity <= 0) {
-        table.items.splice(index, 1);
-    }
-
-    saveTables(tables);
-
-    renderTables();
-    renderOrder();
-}
-
-function removeItem(index) {
-
-    const tableId = getSelectedTable();
-
-    const tables = getTables();
-
-    const table =
-        tables.find(t => t.id === tableId);
-
-    if (!table) return;
-
-    table.items.splice(index, 1);
-
-    saveTables(tables);
-
-    renderTables();
-    renderOrder();
-}
-
-/* =========================================================
-   ORDER TOTAL
-========================================================= */
-
-function getTableTotal(table) {
-
-    if (!table || !Array.isArray(table.items)) {
-        return 0;
-    }
-
-    return table.items.reduce(
-        (total, item) =>
-            total +
-            Number(item.price || 0) *
-            Number(item.quantity || 0),
-        0
-    );
-}
-
-function getCurrentTotal() {
-
-    const tableId = getSelectedTable();
-
-    const table =
-        getTables().find(
-            t => Number(t.id) === tableId
-        );
-
-    return getTableTotal(table);
-}
-
-/* =========================================================
-   ORDER RENDER
-========================================================= */
-
-function renderOrder() {
-
-    const container =
-        document.getElementById("orderItems");
-
-    const total =
-        document.getElementById("orderTotal");
-
-    if (!container) return;
-
-    const tableId = getSelectedTable();
-
-    const table =
-        getTables().find(
-            t => Number(t.id) === tableId
-        );
-
-    if (!table || !table.items.length) {
-
-        container.innerHTML = `
-            <div class="empty-order">
-                Zgjidh produkte për faturën.
-            </div>
-        `;
-
-        if (total) {
-            total.textContent = money(0);
-        }
-
-        return;
-    }
-
-    container.innerHTML =
-        table.items.map((item, index) => {
-
-            const itemTotal =
-                Number(item.price) *
-                Number(item.quantity);
+                table.items.length > 0;
 
             return `
-                <div class="order-item">
 
-                    <div class="order-info">
+                <button
 
-                        <strong>
-                            ${escapeHTML(item.name)}
-                        </strong>
+                    class="table ${active ? "active":""} ${selected === table.id ? "selected":""}"
 
-                        <small>
-                            ${money(item.price)}
-                        </small>
+                    onclick="selectTable(${table.id})"
 
-                    </div>
+                >
 
-                    <div class="quantity">
+                    <span class="tableName">
 
-                        <button
-                            onclick="changeQuantity(${index}, -1)"
-                        >
-                            −
-                        </button>
+                        ${escapeHTML(table.name)}
 
-                        <span>
-                            ${item.quantity}
-                        </span>
+                    </span>
 
-                        <button
-                            onclick="changeQuantity(${index}, 1)"
-                        >
-                            +
-                        </button>
+                    <span class="tableStatus">
 
-                    </div>
+                        ${
 
-                    <strong>
-                        ${money(itemTotal)}
-                    </strong>
+                            active
 
-                    <button
-                        class="remove-item"
-                        onclick="removeItem(${index})"
-                    >
-                        ×
-                    </button>
+                            ? money(total)
 
-                </div>
+                            : "E LIRË"
+
+                        }
+
+                    </span>
+
+                </button>
+
             `;
 
         }).join("");
 
-    if (total) {
-        total.textContent =
-            money(getTableTotal(table));
-    }
 }
 
-/* =========================================================
+/* =====================================================
+
+   PRODUCTS
+
+===================================================== */
+
+function getProducts(){
+
+    return getJSON(
+
+        PRODUCTS_KEY,
+
+        DEFAULT_PRODUCTS
+
+    );
+
+}
+
+let currentCategory = "Të gjitha";
+
+function renderCategories(){
+
+    const container =
+
+        document.getElementById("categories");
+
+    if(!container) return;
+
+    const products =
+
+        getProducts();
+
+    const categories = [
+
+        "Të gjitha",
+
+        ...new Set(
+
+            products.map(
+
+                p=>p.category
+
+            )
+
+        )
+
+    ];
+
+    container.innerHTML =
+
+        categories.map(category=>`
+
+        <button
+
+            class="category ${category === currentCategory ? "active":""}"
+
+            onclick="setCategory('${escapeHTML(category)}')"
+
+        >
+
+            ${escapeHTML(category)}
+
+        </button>
+
+    `).join("");
+
+}
+
+function setCategory(category){
+
+    currentCategory =
+
+        category;
+
+    renderCategories();
+
+    renderProducts();
+
+}
+
+function renderProducts(){
+
+    const container =
+
+        document.getElementById("products");
+
+    if(!container) return;
+
+    const products =
+
+        getProducts();
+
+    const query =
+
+        (
+
+            document.getElementById("search")
+
+                ?.value || ""
+
+        )
+
+        .trim()
+
+        .toLowerCase();
+
+    let filtered =
+
+        products.filter(product=>{
+
+            const categoryOK =
+
+                currentCategory === "Të gjitha" ||
+
+                product.category === currentCategory;
+
+            const searchOK =
+
+                !query ||
+
+                product.name
+
+                    .toLowerCase()
+
+                    .includes(query);
+
+            return categoryOK && searchOK;
+
+        });
+
+    container.innerHTML =
+
+        filtered.map(product=>{
+
+            const stock =
+
+                getStock(product.id);
+
+            return `
+
+                <button
+
+                    class="product"
+
+                    onclick="addProduct(${product.id})"
+
+                    ${stock <= 0 ? "disabled":""}
+
+                >
+
+                    <span class="productName">
+
+                        ${escapeHTML(product.name)}
+
+                    </span>
+
+                    <span class="productPrice">
+
+                        ${money(product.price)}
+
+                    </span>
+
+                    <span class="stock">
+
+                        Stok: ${stock}
+
+                    </span>
+
+                </button>
+
+            `;
+
+        }).join("");
+
+}
+
+function getStock(productId){
+
+    const inventory =
+
+        getJSON(
+
+            INVENTORY_KEY,
+
+            {}
+
+        );
+
+    return Number(
+
+        inventory[productId] ?? 0
+
+    );
+
+}
+
+function changeStock(productId,amount){
+
+    const inventory =
+
+        getJSON(
+
+            INVENTORY_KEY,
+
+            {}
+
+        );
+
+    inventory[productId] =
+
+        Math.max(
+
+            0,
+
+            Number(
+
+                inventory[productId] || 0
+
+            ) + amount
+
+        );
+
+    setJSON(
+
+        INVENTORY_KEY,
+
+        inventory
+
+    );
+
+    renderProducts();
+
+}
+
+/* =====================================================
+
    NEW INVOICE
-========================================================= */
 
-function newInvoice() {
+===================================================== */
 
-    const tableId = getSelectedTable();
+function newInvoice(){
 
-    if (!tableId) {
-        toast("Zgjidh një tavolinë.");
+    const tables =
+
+        getTables();
+
+    const free =
+
+        tables.find(
+
+            table =>
+
+                !table.items ||
+
+                table.items.length === 0
+
+        );
+
+    if(!free){
+
+        toast(
+
+            "Nuk ka tavolinë të lirë."
+
+        );
+
         return;
+
     }
 
-    renderProducts("Të gjitha");
+    selectTable(free.id);
 
-    const box =
-        document.getElementById("newInvoicePanel");
+    const session =
 
-    if (box) {
-        box.style.display = "block";
-    }
+        getSession();
+
+    free.opened = true;
+
+    free.openedAt =
+
+        Date.now();
+
+    free.waiter =
+
+        session
+
+            ? session.name
+
+            : "";
+
+    saveTables(tables);
+
+    renderTables();
+
+    renderOrder();
+
+    toast(
+
+        free.name +
+
+        " u hap për faturë."
+
+    );
+
 }
 
-/* =========================================================
-   PAYMENT
-========================================================= */
+/* =====================================================
 
-function openPayment() {
+   ORDER
 
-    const total = getCurrentTotal();
+===================================================== */
 
-    if (total <= 0) {
-        toast("Fatura është bosh.");
-        return;
-    }
+function getCurrentTable(){
 
-    const modal =
-        document.getElementById("paymentModal");
+    const id =
 
-    const amount =
-        document.getElementById("paymentTotal");
+        getSelectedTable();
 
-    if (amount) {
-        amount.textContent = money(total);
-    }
+    return getTables()
 
-    if (modal) {
-        modal.style.display = "flex";
-    }
+        .find(
+
+            table =>
+
+                table.id === id
+
+        );
+
 }
 
-function closePayment() {
-
-    const modal =
-        document.getElementById("paymentModal");
-
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
-
-function completePayment(method) {
-
-    const tableId = getSelectedTable();
-
-    const tables = getTables();
+function addProduct(productId){
 
     const table =
-        tables.find(t => t.id === tableId);
 
-    if (!table || !table.items.length) {
-        toast("Fatura është bosh.");
+        getCurrentTable();
+
+    if(!table){
+
+        toast(
+
+            "Hap një FATURË E RE."
+
+        );
+
         return;
+
     }
 
-    const session = getSession();
+    const products =
+
+        getProducts();
+
+    const product =
+
+        products.find(
+
+            p =>
+
+                Number(p.id) ===
+
+                Number(productId)
+
+        );
+
+    if(!product) return;
+
+    const stock =
+
+        getStock(productId);
+
+    const existing =
+
+        table.items.find(
+
+            item =>
+
+                Number(item.productId) ===
+
+                Number(productId)
+
+        );
+
+    const currentQty =
+
+        existing
+
+        ? Number(existing.quantity)
+
+        : 0;
+
+    if(currentQty >= stock){
+
+        toast(
+
+            "Nuk ka më stok."
+
+        );
+
+        return;
+
+    }
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        table.items.push({
+
+            productId:product.id,
+
+            name:product.name,
+
+            price:Number(product.price),
+
+            quantity:1
+
+        });
+
+    }
+
+    table.opened = true;
+
+    saveTables(
+
+        getTables()
+
+    );
+
+    renderTables();
+
+    renderProducts();
+
+    renderOrder();
+
+}
+
+function changeQuantity(index,amount){
+
+    const tables =
+
+        getTables();
+
+    const id =
+
+        getSelectedTable();
+
+    const table =
+
+        tables.find(
+
+            t => t.id === id
+
+        );
+
+    if(!table) return;
+
+    const item =
+
+        table.items[index];
+
+    if(!item) return;
+
+    const newQty =
+
+        Number(item.quantity) +
+
+        Number(amount);
+
+    if(newQty <= 0){
+
+        table.items.splice(
+
+            index,
+
+            1
+
+        );
+
+    }else{
+
+        const stock =
+
+            getStock(
+
+                item.productId
+
+            );
+
+        if(newQty > stock){
+
+            toast(
+
+                "Stoku nuk mjafton."
+
+            );
+
+            return;
+
+        }
+
+        item.quantity =
+
+            newQty;
+
+    }
+
+    saveTables(tables);
+
+    renderTables();
+
+    renderProducts();
+
+    renderOrder();
+
+}
+
+function removeItem(index){
+
+    const tables =
+
+        getTables();
+
+    const id =
+
+        getSelectedTable();
+
+    const table =
+
+        tables.find(
+
+            t => t.id === id
+
+        );
+
+    if(!table) return;
+
+    table.items.splice(
+
+        index,
+
+        1
+
+    );
+
+    saveTables(tables);
+
+    renderTables();
+
+    renderProducts();
+
+    renderOrder();
+
+}
+
+function clearOrder(){
+
+    const table =
+
+        getCurrentTable();
+
+    if(!table ||
+
+       !table.items.length){
+
+        return;
+
+    }
+
+    if(!confirm(
+
+        "Dëshiron të pastrosh faturën?"
+
+    )) return;
+
+    table.items = [];
+
+    table.opened = false;
+
+    table.openedAt = null;
+
+    saveTables(
+
+        getTables()
+
+    );
+
+    renderTables();
+
+    renderOrder();
+
+}
+
+/* =====================================================
+
+   ORDER RENDER
+
+===================================================== */
+
+function getTableTotal(table){
+
+    if(!table) return 0;
+
+    return (table.items || [])
+
+        .reduce(
+
+            (sum,item)=>
+
+                sum +
+
+                Number(item.price) *
+
+                Number(item.quantity),
+
+            0
+
+        );
+
+}
+
+function renderOrder(){
+
+    const container =
+
+        document.getElementById(
+
+            "orderItems"
+
+        );
+
+    const totalElement =
+
+        document.getElementById(
+
+            "total"
+
+        );
+
+    const tableElement =
+
+        document.getElementById(
+
+            "orderTable"
+
+        );
+
+    if(!container) return;
+
+    const table =
+
+        getCurrentTable();
+
+    if(!table){
+
+        container.innerHTML =
+
+            `<div class="empty">
+
+                Zgjidh një tavolinë.
+
+             </div>`;
+
+        if(totalElement)
+
+            totalElement.textContent =
+
+                money(0);
+
+        if(tableElement)
+
+            tableElement.textContent =
+
+                "Nuk është zgjedhur tavolinë";
+
+        return;
+
+    }
+
+    if(tableElement){
+
+        tableElement.textContent =
+
+            table.name;
+
+    }
+
+    if(!table.items.length){
+
+        container.innerHTML =
+
+            `<div class="empty">
+
+                Nuk ka produkte në faturë.
+
+             </div>`;
+
+        if(totalElement)
+
+            totalElement.textContent =
+
+                money(0);
+
+        return;
+
+    }
+
+    let total = 0;
+
+    container.innerHTML =
+
+        table.items.map(
+
+            (item,index)=>{
+
+                const itemTotal =
+
+                    Number(item.price) *
+
+                    Number(item.quantity);
+
+                total += itemTotal;
+
+                return `
+
+                <div class="orderItem">
+
+                    <div class="orderTop">
+
+                        <div class="orderName">
+
+                            ${escapeHTML(item.name)}
+
+                        </div>
+
+                        <div class="orderPrice">
+
+                            ${money(itemTotal)}
+
+                        </div>
+
+                    </div>
+
+                    <div class="orderBottom">
+
+                        <div class="qty">
+
+                            <button
+
+                                onclick="changeQuantity(${index},-1)"
+
+                            >
+
+                                −
+
+                            </button>
+
+                            <span>
+
+                                ${item.quantity}
+
+                            </span>
+
+                            <button
+
+                                onclick="changeQuantity(${index},1)"
+
+                            >
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                        <button
+
+                            class="delete"
+
+                            onclick="removeItem(${index})"
+
+                        >
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+
+        ).join("");
+
+    if(totalElement){
+
+        totalElement.textContent =
+
+            money(total);
+
+    }
+
+}
+
+/* =====================================================
+
+   PAYMENT
+
+===================================================== */
+
+function openPayment(){
+
+    const table =
+
+        getCurrentTable();
+
+    if(!table ||
+
+       !table.items.length){
+
+        toast(
+
+            "Fatura është bosh."
+
+        );
+
+        return;
+
+    }
+
+    document.getElementById(
+
+        "paymentAmount"
+
+    ).textContent =
+
+        money(
+
+            getTableTotal(table)
+
+        );
+
+    openModal(
+
+        "paymentModal"
+
+    );
+
+}
+
+function completePayment(method){
+
+    const tables =
+
+        getTables();
+
+    const id =
+
+        getSelectedTable();
+
+    const table =
+
+        tables.find(
+
+            t => t.id === id
+
+        );
+
+    if(!table ||
+
+       !table.items.length){
+
+        toast(
+
+            "Fatura është bosh."
+
+        );
+
+        return;
+
+    }
+
+    /* STOCK CHECK */
+
+    for(const item of table.items){
+
+        if(
+
+            item.quantity >
+
+            getStock(item.productId)
+
+        ){
+
+            toast(
+
+                "Stoku nuk mjafton për " +
+
+                item.name
+
+            );
+
+            return;
+
+        }
+
+    }
+
+    /* REMOVE STOCK */
+
+    for(const item of table.items){
+
+        changeStock(
+
+            item.productId,
+
+            -Number(item.quantity)
+
+        );
+
+    }
+
+    const session =
+
+        getSession();
+
+    const invoices =
+
+        getJSON(
+
+            INVOICES_KEY,
+
+            []
+
+        );
 
     const total =
+
         getTableTotal(table);
 
     const invoice = {
 
-        id: Date.now(),
+        id:Date.now(),
 
         number:
-            "MB-" +
-            new Date().getFullYear() +
+
+            "MY-" +
+
+            new Date()
+
+                .getFullYear() +
+
             "-" +
-            String(Date.now()).slice(-6),
+
+            String(
+
+                invoices.length + 1
+
+            ).padStart(5,"0"),
 
         date:
+
             new Date().toISOString(),
 
         table:
+
             table.id,
 
         tableName:
-            "Tavolina " + table.id,
+
+            table.name,
 
         waiter:
-            session ? session.name : "Pa emër",
 
-        waiterUsername:
-            session ? session.username : "",
+            session
 
-        items:
-            JSON.parse(
-                JSON.stringify(table.items)
-            ),
+            ? session.name
 
-        total:
-            total,
+            : "",
 
         payment:
+
             method,
 
-        fiscalized:
-            false
+        items:
+
+            JSON.parse(
+
+                JSON.stringify(
+
+                    table.items
+
+                )
+
+            ),
+
+        total:total
 
     };
 
-    const invoices =
-        getJSON(INVOICES_KEY, []);
-
     invoices.push(invoice);
 
-    setJSON(INVOICES_KEY, invoices);
+    setJSON(
 
-    /* Clear table */
+        INVOICES_KEY,
+
+        invoices
+
+    );
+
+    /* CLEAR TABLE */
 
     table.items = [];
-    table.waiter = null;
+
+    table.opened = false;
+
+    table.openedAt = null;
 
     saveTables(tables);
 
-    closePayment();
+    closeModal(
+
+        "paymentModal"
+
+    );
+
+    localStorage.removeItem(
+
+        SELECTED_TABLE_KEY
+
+    );
 
     renderTables();
+
+    renderProducts();
+
     renderOrder();
 
     showInvoice(invoice);
 
-    toast("Fatura u mbyll me sukses.");
 }
 
-/* =========================================================
+/* =====================================================
+
    INVOICE
-========================================================= */
 
-let currentInvoice = null;
+===================================================== */
 
-function showInvoice(invoice) {
+let lastInvoice = null;
 
-    currentInvoice = invoice;
+function showInvoice(invoice){
 
-    const modal =
-        document.getElementById("invoiceModal");
+    lastInvoice =
 
-    if (!modal) return;
+        invoice;
 
-    const number =
-        document.getElementById("invoiceNumber");
+    const info =
 
-    const date =
-        document.getElementById("invoiceDate");
+        document.getElementById(
 
-    const table =
-        document.getElementById("invoiceTable");
+            "invoiceInfo"
 
-    const waiter =
-        document.getElementById("invoiceWaiter");
+        );
 
     const items =
-        document.getElementById("invoiceItems");
+
+        document.getElementById(
+
+            "invoiceItems"
+
+        );
 
     const total =
-        document.getElementById("invoiceTotal");
 
-    if (number) {
-        number.textContent =
-            invoice.number;
+        document.getElementById(
+
+            "invoiceTotal"
+
+        );
+
+    if(info){
+
+        info.innerHTML = `
+
+            <strong>
+
+                Nr: ${escapeHTML(invoice.number)}
+
+            </strong><br>
+
+            Datë:
+
+            ${new Date(invoice.date)
+
+                .toLocaleString("sq-AL")}<br>
+
+            Tavolinë:
+
+            ${escapeHTML(invoice.tableName)}<br>
+
+            Kamarier:
+
+            ${escapeHTML(invoice.waiter)}<br>
+
+            Pagesa:
+
+            ${invoice.payment === "cash"
+
+                ? "CASH"
+
+                : "CARD"}
+
+        `;
+
     }
 
-    if (date) {
-        date.textContent =
-            new Date(invoice.date)
-                .toLocaleString("sq-AL");
+    if(items){
+
+        items.innerHTML = `
+
+            <div class="invoiceRow">
+
+                <strong>Produkt</strong>
+
+                <strong>Sasi</strong>
+
+                <strong>Çmim</strong>
+
+                <strong>Total</strong>
+
+            </div>
+
+            ${
+
+                invoice.items.map(item=>`
+
+                    <div class="invoiceRow">
+
+                        <span>
+
+                            ${escapeHTML(item.name)}
+
+                        </span>
+
+                        <span>
+
+                            ${item.quantity}
+
+                        </span>
+
+                        <span>
+
+                            ${money(item.price)}
+
+                        </span>
+
+                        <strong>
+
+                            ${money(
+
+                                item.price *
+
+                                item.quantity
+
+                            )}
+
+                        </strong>
+
+                    </div>
+
+                `).join("")
+
+            }
+
+        `;
+
     }
 
-    if (table) {
-        table.textContent =
-            invoice.tableName;
-    }
+    if(total){
 
-    if (waiter) {
-        waiter.textContent =
-            invoice.waiter;
-    }
-
-    if (items) {
-
-        items.innerHTML =
-            invoice.items.map(item => `
-
-                <div class="invoice-line">
-
-                    <span>
-                        ${escapeHTML(item.name)}
-                        × ${item.quantity}
-                    </span>
-
-                    <strong>
-                        ${money(
-                            item.price *
-                            item.quantity
-                        )}
-                    </strong>
-
-                </div>
-
-            `).join("");
-    }
-
-    if (total) {
         total.textContent =
+
             money(invoice.total);
+
     }
 
-    modal.style.display = "flex";
+    openModal(
+
+        "invoiceModal"
+
+    );
+
 }
 
-function closeInvoice() {
+/* =====================================================
 
-    const modal =
-        document.getElementById("invoiceModal");
-
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
-
-/* =========================================================
    PRINT
-========================================================= */
 
-function printInvoice() {
+===================================================== */
 
-    if (!currentInvoice) {
-        toast("Nuk ka faturë.");
-        return;
-    }
+function printInvoice(tax){
 
-    const settings = getSettings();
+    if(!lastInvoice) return;
 
     const invoice =
-        currentInvoice;
+
+        lastInvoice;
 
     const rows =
-        invoice.items.map(item => `
+
+        invoice.items.map(item=>`
 
             <tr>
-                <td>${escapeHTML(item.name)}</td>
-                <td>${item.quantity}</td>
-                <td>${money(item.price)}</td>
+
                 <td>
-                    ${money(
-                        item.price *
-                        item.quantity
-                    )}
+
+                    ${escapeHTML(item.name)}
+
                 </td>
+
+                <td>
+
+                    ${item.quantity}
+
+                </td>
+
+                <td>
+
+                    ${money(item.price)}
+
+                </td>
+
+                <td>
+
+                    ${money(
+
+                        item.price *
+
+                        item.quantity
+
+                    )}
+
+                </td>
+
             </tr>
 
         `).join("");
+
+    const taxText =
+
+        tax
+
+        ? `
+
+            <hr>
+
+            <p>
+
+                <strong>FATURË TATIMORE</strong>
+
+            </p>
+
+            <p>
+
+                TVSH / të dhëna fiskale:
+
+                kërkon integrim real fiskal
+
+            </p>
+
+          `
+
+        : "";
 
     const html = `
 
@@ -1014,48 +1836,74 @@ function printInvoice() {
 
 <style>
 
-@page {
-    size: 80mm auto;
-    margin: 4mm;
+body{
+
+    font-family:Arial,sans-serif;
+
+    width:80mm;
+
+    margin:auto;
+
+    color:#000;
+
+    font-size:11px;
+
 }
 
-body {
-    font-family: Arial, sans-serif;
-    width: 72mm;
-    margin: 0 auto;
-    color: #000;
-    font-size: 12px;
+h2{
+
+    text-align:center;
+
+    margin:5px 0;
+
 }
 
-.center {
-    text-align: center;
+.center{
+
+    text-align:center;
+
 }
 
-h2 {
-    margin: 0 0 5px;
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
 }
 
-.line {
-    border-top: 1px dashed #000;
-    margin: 8px 0;
+td,th{
+
+    padding:5px 2px;
+
+    border-bottom:1px dotted #555;
+
+    text-align:left;
+
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.total{
+
+    border-top:2px solid #000;
+
+    margin-top:10px;
+
+    padding-top:8px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    display:flex;
+
+    justify-content:space-between;
+
 }
 
-td {
-    padding: 3px 0;
-}
+small{
 
-.right {
-    text-align: right;
-}
+    font-size:9px;
 
-.total {
-    font-size: 16px;
-    font-weight: bold;
 }
 
 </style>
@@ -1064,713 +1912,1607 @@ td {
 
 <body>
 
+<h2>MY BAR</h2>
+
 <div class="center">
 
-<h2>
-${escapeHTML(settings.businessName)}
-</h2>
-
-<div>
-${escapeHTML(settings.address)}
-</div>
-
-${settings.nipt
-    ? `<div>NIPT: ${escapeHTML(settings.nipt)}</div>`
-    : ""
-}
-
-${settings.phone
-    ? `<div>${escapeHTML(settings.phone)}</div>`
-    : ""
-}
+    BAR & RESTAURANT
 
 </div>
 
-<div class="line"></div>
+<hr>
 
-<div>
-Fatura: ${escapeHTML(invoice.number)}
-</div>
+<p>
 
-<div>
-Data:
-${new Date(invoice.date).toLocaleString("sq-AL")}
-</div>
+Nr: ${invoice.number}<br>
 
-<div>
-Tavolina: ${invoice.table}
-</div>
+Datë: ${new Date(invoice.date)
 
-<div>
-Kamarier: ${escapeHTML(invoice.waiter)}
-</div>
+    .toLocaleString("sq-AL")}<br>
 
-<div class="line"></div>
+Tavolinë: ${escapeHTML(invoice.tableName)}<br>
+
+Kamarier: ${escapeHTML(invoice.waiter)}<br>
+
+Pagesa: ${invoice.payment.toUpperCase()}
+
+</p>
+
+<hr>
 
 <table>
 
+<thead>
+
+<tr>
+
+<th>Produkt</th>
+
+<th>S</th>
+
+<th>Çm</th>
+
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
 ${rows}
+
+</tbody>
 
 </table>
 
-<div class="line"></div>
+<div class="total">
 
-<div class="right total">
-TOTAL: ${money(invoice.total)}
+<span>TOTAL</span>
+
+<span>${money(invoice.total)}</span>
+
 </div>
 
-<div>
-Pagesa:
-${invoice.payment === "cash"
-    ? "CASH"
-    : "CARD"}
-</div>
+${taxText}
 
-<div class="line"></div>
+<br>
 
 <div class="center">
-Faleminderit!
+
+<small>
+
+Faleminderit për vizitën!
+
+</small>
+
 </div>
 
 </body>
 
 </html>
+
 `;
 
     const printWindow =
-        window.open("", "_blank");
 
-    if (!printWindow) {
-        toast("Lejo popup-et për printim.");
+        window.open(
+
+            "",
+
+            "_blank",
+
+            "width=420,height=700"
+
+        );
+
+    if(!printWindow){
+
+        toast(
+
+            "Lejo pop-up për printim."
+
+        );
+
         return;
+
     }
 
-    printWindow.document.open();
+    printWindow.document.write(
 
-    printWindow.document.write(html);
+        html
+
+    );
 
     printWindow.document.close();
 
     printWindow.focus();
 
-    setTimeout(() => {
+    printWindow.onload = () => {
+
         printWindow.print();
-    }, 300);
+
+        /*
+
+          Pas printimit kthehemi automatikisht
+
+          te LOGIN.
+
+        */
+
+        printWindow.onafterprint =
+
+            () => {
+
+                try{
+
+                    printWindow.close();
+
+                }catch{}
+
+                finishInvoice();
+
+            };
+
+    };
+
 }
 
-/* =========================================================
-   FISCAL INVOICE
-========================================================= */
+/* =====================================================
 
-function printTaxInvoice() {
+   FINISH INVOICE
 
-    if (!currentInvoice) {
-        toast("Nuk ka faturë.");
-        return;
-    }
+===================================================== */
+
+function finishInvoice(){
+
+    closeModal(
+
+        "invoiceModal"
+
+    );
+
+    localStorage.removeItem(
+
+        SELECTED_TABLE_KEY
+
+    );
+
+    localStorage.removeItem(
+
+        SESSION_KEY
+
+    );
+
+    localStorage.removeItem(
+
+        "barCurrentUser"
+
+    );
 
     /*
-        Kjo është vetëm pamja e faturës tatimore.
 
-        Fiskalizimi REAL shqiptar kërkon
-        backend / integrim me sistemin përkatës.
+      Fatura është ruajtur.
+
+      Përdoruesi kthehet te faqja e parë.
+
     */
 
-    printInvoice();
+    window.location.href =
+
+        "login.html";
+
+}
+
+function closeCurrentInvoice(){
+
+    const table =
+
+        getCurrentTable();
+
+    if(!table ||
+
+       !table.items.length){
+
+        toast(
+
+            "Nuk ka faturë aktive."
+
+        );
+
+        return;
+
+    }
+
+    openPayment();
+
+}
+
+function printCurrentPreview(){
+
+    if(lastInvoice){
+
+        printInvoice(false);
+
+        return;
+
+    }
 
     toast(
-        "Fatura tatimore u përgatit për printim."
+
+        "Mbyll faturën përpara printimit."
+
     );
+
 }
 
-/* =========================================================
-   MY INVOICES
-========================================================= */
+/* =====================================================
 
-function openMyInvoices() {
+   TABLE DETAILS
 
-    const session = getSession();
+===================================================== */
 
-    const invoices =
-        getJSON(INVOICES_KEY, []);
+function tableDetails(){
 
-    const mine =
-        session && session.role === "waiter"
-            ? invoices.filter(
-                invoice =>
-                    invoice.waiterUsername ===
-                    session.username
-            )
-            : invoices;
+    const table =
 
-    const container =
-        document.getElementById("myInvoicesList");
+        getCurrentTable();
 
-    if (!container) {
-        openSimpleList(
-            "Faturat e mia",
-            mine
+    if(!table){
+
+        toast(
+
+            "Zgjidh një tavolinë."
+
         );
+
         return;
+
     }
-
-    container.innerHTML =
-        mine.length
-            ? [...mine]
-                .reverse()
-                .map(invoice => `
-
-                    <div class="invoice-history">
-
-                        <strong>
-                            ${invoice.number}
-                        </strong>
-
-                        <span>
-                            ${invoice.tableName}
-                        </span>
-
-                        <span>
-                            ${money(invoice.total)}
-                        </span>
-
-                        <small>
-                            ${new Date(
-                                invoice.date
-                            ).toLocaleString("sq-AL")}
-                        </small>
-
-                    </div>
-
-                `)
-                .join("")
-            : `<div>Nuk ka fatura.</div>`;
-}
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-function openSummary() {
-
-    const invoices =
-        getJSON(INVOICES_KEY, []);
-
-    const today =
-        new Date().toDateString();
-
-    const todayInvoices =
-        invoices.filter(
-            invoice =>
-                new Date(invoice.date)
-                    .toDateString() === today
-        );
 
     const total =
-        todayInvoices.reduce(
-            (sum, invoice) =>
-                sum + Number(invoice.total),
-            0
+
+        getTableTotal(table);
+
+    openGeneral(
+
+        "DETAJE TAVOLINE",
+
+        `
+
+        <div class="list">
+
+            <div class="listRow">
+
+                <div>
+
+                    <strong>${escapeHTML(table.name)}</strong>
+
+                    <small>
+
+                        ${
+
+                            table.opened
+
+                            ? "E hapur"
+
+                            : "E lirë"
+
+                        }
+
+                    </small>
+
+                </div>
+
+                <strong>
+
+                    ${money(total)}
+
+                </strong>
+
+            </div>
+
+            <div class="listRow">
+
+                <div>
+
+                    Produkte
+
+                    <small>
+
+                        ${table.items.length}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="listRow">
+
+                <div>
+
+                    Kamarier
+
+                    <small>
+
+                        ${escapeHTML(table.waiter || "-")}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+/* =====================================================
+
+   TRANSFER TABLE
+
+===================================================== */
+
+function transferTable(){
+
+    const table =
+
+        getCurrentTable();
+
+    if(!table ||
+
+       !table.items.length){
+
+        toast(
+
+            "Nuk ka porosi për transferim."
+
         );
 
-    const cash =
-        todayInvoices
-            .filter(
-                invoice =>
-                    invoice.payment === "cash"
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum + Number(invoice.total),
-                0
-            );
-
-    const card =
-        todayInvoices
-            .filter(
-                invoice =>
-                    invoice.payment === "card"
-            )
-            .reduce(
-                (sum, invoice) =>
-                    sum + Number(invoice.total),
-                0
-            );
-
-    const text = `
-        <h2>PËRMBLEDHJE</h2>
-
-        <div>
-            Fatura sot:
-            <strong>${todayInvoices.length}</strong>
-        </div>
-
-        <div>
-            CASH:
-            <strong>${money(cash)}</strong>
-        </div>
-
-        <div>
-            CARD:
-            <strong>${money(card)}</strong>
-        </div>
-
-        <div>
-            TOTAL:
-            <strong>${money(total)}</strong>
-        </div>
-    `;
-
-    openMessageModal(text);
-}
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-function openAdmin() {
-
-    const session = getSession();
-
-    if (!session || session.role !== "admin") {
-        toast("Vetëm administratori ka akses.");
         return;
+
     }
 
-    const users =
-        getJSON(USERS_KEY, DEFAULT_USERS);
+    const tables =
 
-    const waiterCount =
-        users.filter(
-            user => user.role === "waiter"
-        ).length;
+        getTables();
 
-    openMessageModal(`
+    const options =
 
-        <h2>ADMIN</h2>
+        tables
 
-        <p>
-            Kamarierë:
-            <strong>${waiterCount}</strong>
-        </p>
+        .filter(
 
-        <button
-            onclick="addWaiter()"
-        >
-            + SHTO KAMARIER
-        </button>
+            t =>
 
-    `);
-}
+                t.id !== table.id &&
 
-function addWaiter() {
+                (!t.items || !t.items.length)
 
-    const session = getSession();
-
-    if (!session || session.role !== "admin") {
-        toast("Nuk ke akses.");
-        return;
-    }
-
-    const name =
-        prompt("Emri i kamarierit:");
-
-    if (!name) return;
-
-    const username =
-        prompt("Username:");
-
-    if (!username) return;
-
-    const password =
-        prompt("PIN / Fjalëkalimi:");
-
-    if (!password) return;
-
-    const users =
-        getJSON(USERS_KEY, DEFAULT_USERS);
-
-    if (
-        users.some(
-            user =>
-                user.username.toLowerCase() ===
-                username.toLowerCase()
         )
-    ) {
-        toast("Ky username ekziston.");
+
+        .map(
+
+            t =>
+
+                `<option value="${t.id}">
+
+                    ${escapeHTML(t.name)}
+
+                 </option>`
+
+        )
+
+        .join("");
+
+    if(!options){
+
+        toast(
+
+            "Nuk ka tavolinë të lirë."
+
+        );
+
         return;
+
     }
 
-    users.push({
+    openGeneral(
 
-        id: Date.now(),
+        "TRANSFERO TAVOLINË",
 
-        username:
-            username.trim(),
+        `
 
-        password:
-            password.trim(),
+        <div class="form">
 
-        name:
-            name.trim(),
+            <select id="transferTarget">
 
-        role:
-            "waiter"
+                ${options}
 
-    });
-
-    setJSON(USERS_KEY, users);
-
-    toast("Kamarieri u shtua.");
-}
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function updateDashboard() {
-
-    const invoices =
-        getJSON(INVOICES_KEY, []);
-
-    const today =
-        new Date().toDateString();
-
-    const todayInvoices =
-        invoices.filter(
-            invoice =>
-                new Date(invoice.date)
-                    .toDateString() === today
-        );
-
-    const sales =
-        todayInvoices.reduce(
-            (sum, invoice) =>
-                sum + Number(invoice.total || 0),
-            0
-        );
-
-    const salesElement =
-        document.getElementById("salesToday");
-
-    if (salesElement) {
-        salesElement.textContent =
-            money(sales);
-    }
-
-    const invoiceElement =
-        document.getElementById("invoiceToday");
-
-    if (invoiceElement) {
-        invoiceElement.textContent =
-            todayInvoices.length;
-    }
-
-    const activeTables =
-        getTables().filter(
-            table =>
-                table.items &&
-                table.items.length
-        ).length;
-
-    const activeElement =
-        document.getElementById("activeTables");
-
-    if (activeElement) {
-        activeElement.textContent =
-            activeTables;
-    }
-}
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-function openMessageModal(content) {
-
-    let modal =
-        document.getElementById("messageModal");
-
-    if (!modal) {
-
-        modal =
-            document.createElement("div");
-
-        modal.id =
-            "messageModal";
-
-        modal.style.position =
-            "fixed";
-
-        modal.style.inset =
-            "0";
-
-        modal.style.background =
-            "rgba(0,0,0,.75)";
-
-        modal.style.display =
-            "flex";
-
-        modal.style.alignItems =
-            "center";
-
-        modal.style.justifyContent =
-            "center";
-
-        modal.style.zIndex =
-            "99999";
-
-        document.body.appendChild(modal);
-    }
-
-    modal.innerHTML = `
-
-        <div style="
-            background:#111;
-            color:white;
-            padding:25px;
-            border-radius:18px;
-            min-width:300px;
-            max-width:90%;
-            border:1px solid #26352d;
-        ">
-
-            ${content}
-
-            <br>
+            </select>
 
             <button
-                onclick="closeMessageModal()"
+
+                class="action green"
+
+                onclick="doTransfer()"
+
             >
-                MBYLL
+
+                TRANSFERO TANI
+
             </button>
 
         </div>
 
-    `;
+        `
 
-    modal.style.display = "flex";
+    );
+
 }
 
-function closeMessageModal() {
+function doTransfer(){
+
+    const target =
+
+        Number(
+
+            document.getElementById(
+
+                "transferTarget"
+
+            ).value
+
+        );
+
+    const tables =
+
+        getTables();
+
+    const from =
+
+        tables.find(
+
+            t =>
+
+                t.id ===
+
+                getSelectedTable()
+
+        );
+
+    const to =
+
+        tables.find(
+
+            t =>
+
+                t.id === target
+
+        );
+
+    if(!from || !to) return;
+
+    to.items =
+
+        JSON.parse(
+
+            JSON.stringify(
+
+                from.items
+
+            )
+
+        );
+
+    to.opened =
+
+        from.opened;
+
+    to.openedAt =
+
+        from.openedAt;
+
+    to.waiter =
+
+        from.waiter;
+
+    from.items = [];
+
+    from.opened = false;
+
+    from.openedAt = null;
+
+    saveTables(tables);
+
+    selectTable(target);
+
+    closeModal(
+
+        "generalModal"
+
+    );
+
+    renderTables();
+
+    renderOrder();
+
+    toast(
+
+        "Tavolina u transferua."
+
+    );
+
+}
+
+/* =====================================================
+
+   SUMMARY
+
+===================================================== */
+
+function openSummary(){
+
+    const invoices =
+
+        getJSON(
+
+            INVOICES_KEY,
+
+            []
+
+        );
+
+    const today =
+
+        new Date()
+
+            .toDateString();
+
+    const todayInvoices =
+
+        invoices.filter(
+
+            invoice =>
+
+                new Date(
+
+                    invoice.date
+
+                ).toDateString()
+
+                === today
+
+        );
+
+    const total =
+
+        todayInvoices.reduce(
+
+            (sum,i)=>
+
+                sum +
+
+                Number(i.total || 0),
+
+            0
+
+        );
+
+    const cash =
+
+        todayInvoices
+
+        .filter(
+
+            i =>
+
+                i.payment === "cash"
+
+        )
+
+        .reduce(
+
+            (sum,i)=>
+
+                sum +
+
+                Number(i.total || 0),
+
+            0
+
+        );
+
+    const card =
+
+        todayInvoices
+
+        .filter(
+
+            i =>
+
+                i.payment === "card"
+
+        )
+
+        .reduce(
+
+            (sum,i)=>
+
+                sum +
+
+                Number(i.total || 0),
+
+            0
+
+        );
+
+    openGeneral(
+
+        "PËRMBLEDHJE",
+
+        `
+
+        <div class="list">
+
+            <div class="listRow">
+
+                <div>
+
+                    SHITJE SOT
+
+                </div>
+
+                <strong>
+
+                    ${money(total)}
+
+                </strong>
+
+            </div>
+
+            <div class="listRow">
+
+                <div>
+
+                    CASH
+
+                </div>
+
+                <strong>
+
+                    ${money(cash)}
+
+                </strong>
+
+            </div>
+
+            <div class="listRow">
+
+                <div>
+
+                    CARD
+
+                </div>
+
+                <strong>
+
+                    ${money(card)}
+
+                </strong>
+
+            </div>
+
+            <div class="listRow">
+
+                <div>
+
+                    FATURA
+
+                </div>
+
+                <strong>
+
+                    ${todayInvoices.length}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+/* =====================================================
+
+   MY INVOICES
+
+===================================================== */
+
+function openMyInvoices(){
+
+    const session =
+
+        getSession();
+
+    const invoices =
+
+        getJSON(
+
+            INVOICES_KEY,
+
+            []
+
+        );
+
+    const mine =
+
+        session &&
+
+        session.role === "admin"
+
+        ? invoices
+
+        : invoices.filter(
+
+            i =>
+
+                i.waiter ===
+
+                session?.name
+
+        );
+
+    const html =
+
+        mine.length
+
+        ? mine
+
+            .slice()
+
+            .reverse()
+
+            .map(
+
+                invoice => `
+
+                <div class="listRow">
+
+                    <div>
+
+                        <strong>
+
+                            ${escapeHTML(
+
+                                invoice.number
+
+                            )}
+
+                        </strong>
+
+                        <small>
+
+                            ${escapeHTML(
+
+                                invoice.tableName
+
+                            )}
+
+                            •
+
+                            ${escapeHTML(
+
+                                invoice.waiter
+
+                            )}
+
+                            •
+
+                            ${invoice.payment}
+
+                        </small>
+
+                    </div>
+
+                    <strong>
+
+                        ${money(invoice.total)}
+
+                    </strong>
+
+                </div>
+
+                `
+
+            ).join("")
+
+        : `<div class="empty">
+
+             Nuk ka fatura.
+
+           </div>`;
+
+    openGeneral(
+
+        "FATURAT E MIA",
+
+        `<div class="list">${html}</div>`
+
+    );
+
+}
+
+/* =====================================================
+
+   CASH
+
+===================================================== */
+
+function openCash(){
+
+    openGeneral(
+
+        "HAP ARKËN",
+
+        `
+
+        <div style="
+
+            text-align:center;
+
+            padding:25px;
+
+        ">
+
+            <div style="
+
+                font-size:36px;
+
+                margin-bottom:10px;
+
+            ">
+
+                💰
+
+            </div>
+
+            <strong>
+
+                Arka është aktive
+
+            </strong>
+
+            <p style="
+
+                color:#65736c;
+
+                margin-top:10px;
+
+                font-size:12px;
+
+            ">
+
+                Pagesat CASH regjistrohen
+
+                automatikisht në sistem.
+
+            </p>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+function cashReport(){
+
+    openSummary();
+
+}
+
+/* =====================================================
+
+   ADMIN
+
+===================================================== */
+
+function openAdmin(){
+
+    const session =
+
+        getSession();
+
+    if(!session ||
+
+       session.role !== "admin"){
+
+        toast(
+
+            "Vetëm ADMIN ka akses."
+
+        );
+
+        return;
+
+    }
+
+    const users =
+
+        getJSON(
+
+            USERS_KEY,
+
+            DEFAULT_USERS
+
+        );
+
+    const html =
+
+        users.map(
+
+            (user,index)=>`
+
+            <div class="listRow">
+
+                <div>
+
+                    <strong>
+
+                        ${escapeHTML(user.name)}
+
+                    </strong>
+
+                    <small>
+
+                        ${escapeHTML(
+
+                            user.username
+
+                        )}
+
+                        •
+
+                        ${user.role}
+
+                    </small>
+
+                </div>
+
+                ${
+
+                    user.username !== "admin"
+
+                    ? `
+
+                        <button
+
+                            class="action red"
+
+                            onclick="deleteWaiter(${index})"
+
+                        >
+
+                            FSHI
+
+                        </button>
+
+                    `
+
+                    : ""
+
+                }
+
+            </div>
+
+            `
+
+        ).join("");
+
+    openGeneral(
+
+        "ADMIN",
+
+        `
+
+        <div class="form">
+
+            <strong>
+
+                KAMARIERËT
+
+            </strong>
+
+            <div class="list">
+
+                ${html}
+
+            </div>
+
+            <hr style="
+
+                border-color:#1b2c22;
+
+                margin:10px 0;
+
+            ">
+
+            <strong>
+
+                SHTO KAMARIER
+
+            </strong>
+
+            <input
+
+                id="newWaiterName"
+
+                placeholder="Emri"
+
+            >
+
+            <input
+
+                id="newWaiterUsername"
+
+                placeholder="Username"
+
+            >
+
+            <input
+
+                id="newWaiterPassword"
+
+                placeholder="PIN"
+
+            >
+
+            <button
+
+                class="action green"
+
+                onclick="addWaiter()"
+
+            >
+
+                SHTO KAMARIER
+
+            </button>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+function addWaiter(){
+
+    const name =
+
+        document.getElementById(
+
+            "newWaiterName"
+
+        ).value.trim();
+
+    const username =
+
+        document.getElementById(
+
+            "newWaiterUsername"
+
+        ).value.trim();
+
+    const password =
+
+        document.getElementById(
+
+            "newWaiterPassword"
+
+        ).value.trim();
+
+    if(!name ||
+
+       !username ||
+
+       !password){
+
+        toast(
+
+            "Plotëso të gjitha fushat."
+
+        );
+
+        return;
+
+    }
+
+    const users =
+
+        getJSON(
+
+            USERS_KEY,
+
+            DEFAULT_USERS
+
+        );
+
+    if(
+
+        users.some(
+
+            u =>
+
+                u.username ===
+
+                username
+
+        )
+
+    ){
+
+        toast(
+
+            "Ky username ekziston."
+
+        );
+
+        return;
+
+    }
+
+    users.push({
+
+        name:name,
+
+        username:username,
+
+        password:password,
+
+        role:"waiter"
+
+    });
+
+    setJSON(
+
+        USERS_KEY,
+
+        users
+
+    );
+
+    closeModal(
+
+        "generalModal"
+
+    );
+
+    toast(
+
+        "Kamarieri u shtua."
+
+    );
+
+}
+
+function deleteWaiter(index){
+
+    const users =
+
+        getJSON(
+
+            USERS_KEY,
+
+            DEFAULT_USERS
+
+        );
+
+    if(!users[index]) return;
+
+    if(
+
+        users[index].username ===
+
+        "admin"
+
+    ) return;
+
+    users.splice(
+
+        index,
+
+        1
+
+    );
+
+    setJSON(
+
+        USERS_KEY,
+
+        users
+
+    );
+
+    openAdmin();
+
+    toast(
+
+        "Kamarieri u fshi."
+
+    );
+
+}
+
+/* =====================================================
+
+   LOCK / LOGOUT
+
+===================================================== */
+
+function lockScreen(){
+
+    const session =
+
+        getSession();
+
+    if(!session) return;
+
+    localStorage.removeItem(
+
+        SESSION_KEY
+
+    );
+
+    localStorage.removeItem(
+
+        "barCurrentUser"
+
+    );
+
+    window.location.href =
+
+        "login.html";
+
+}
+
+function logout(){
+
+    localStorage.removeItem(
+
+        SESSION_KEY
+
+    );
+
+    localStorage.removeItem(
+
+        SELECTED_TABLE_KEY
+
+    );
+
+    localStorage.removeItem(
+
+        "barCurrentUser"
+
+    );
+
+    window.location.href =
+
+        "login.html";
+
+}
+
+/* =====================================================
+
+   MODALS
+
+===================================================== */
+
+function openModal(id){
 
     const modal =
-        document.getElementById("messageModal");
 
-    if (modal) {
-        modal.style.display = "none";
-    }
+        document.getElementById(id);
+
+    if(modal)
+
+        modal.style.display =
+
+            "flex";
+
 }
 
-/* =========================================================
-   TOAST
-========================================================= */
+function closeModal(id){
 
-function toast(message) {
+    const modal =
+
+        document.getElementById(id);
+
+    if(modal)
+
+        modal.style.display =
+
+            "none";
+
+}
+
+function openGeneral(title,body){
+
+    document.getElementById(
+
+        "generalTitle"
+
+    ).textContent =
+
+        title;
+
+    document.getElementById(
+
+        "generalBody"
+
+    ).innerHTML =
+
+        body;
+
+    openModal(
+
+        "generalModal"
+
+    );
+
+}
+
+/* =====================================================
+
+   ORDER PANEL
+
+===================================================== */
+
+function toggleOrder(){
+
+    const panel =
+
+        document.getElementById(
+
+            "orderPanel"
+
+        );
+
+    if(panel)
+
+        panel.classList.toggle(
+
+            "open"
+
+        );
+
+}
+
+/* =====================================================
+
+   TOAST
+
+===================================================== */
+
+function toast(message){
 
     let box =
-        document.getElementById("myBarToast");
 
-    if (!box) {
+        document.getElementById(
+
+            "toast"
+
+        );
+
+    if(!box){
 
         box =
-            document.createElement("div");
+
+            document.createElement(
+
+                "div"
+
+            );
 
         box.id =
-            "myBarToast";
+
+            "toast";
 
         box.style.position =
+
             "fixed";
 
         box.style.bottom =
+
             "25px";
 
         box.style.left =
+
             "50%";
 
         box.style.transform =
+
             "translateX(-50%)";
 
         box.style.zIndex =
-            "999999";
 
-        box.style.padding =
-            "13px 20px";
-
-        box.style.borderRadius =
-            "12px";
+            "99999";
 
         box.style.background =
-            "#111";
 
-        box.style.color =
-            "#fff";
+            "#101812";
 
         box.style.border =
-            "1px solid #20b26b";
 
-        box.style.boxShadow =
-            "0 15px 40px rgba(0,0,0,.5)";
+            "1px solid #20d678";
 
-        document.body.appendChild(box);
+        box.style.color =
+
+            "#fff";
+
+        box.style.padding =
+
+            "12px 18px";
+
+        box.style.borderRadius =
+
+            "5px";
+
+        box.style.fontSize =
+
+            "12px";
+
+        document.body.appendChild(
+
+            box
+
+        );
+
     }
 
     box.textContent =
+
         message;
 
     box.style.display =
+
         "block";
 
     clearTimeout(
-        window.myBarToastTimer
+
+        window.toastTimer
+
     );
 
-    window.myBarToastTimer =
-        setTimeout(() => {
+    window.toastTimer =
 
-            box.style.display =
-                "none";
+        setTimeout(
 
-        }, 2500);
+            ()=>{
+
+                box.style.display =
+
+                    "none";
+
+            },
+
+            2500
+
+        );
+
 }
 
-/* =========================================================
-   CLOCK
-========================================================= */
+/* =====================================================
 
-function updateClock() {
+   CLOCK
+
+===================================================== */
+
+function updateClock(){
 
     const clock =
-        document.getElementById("clock");
 
-    if (!clock) return;
+        document.getElementById(
 
-    clock.textContent =
-        new Date().toLocaleTimeString(
-            "sq-AL",
-            {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            }
+            "clock"
+
         );
-}
 
-/* =========================================================
-   SECURITY / ROLE
-========================================================= */
+    if(clock){
 
-function checkAccess() {
+        clock.textContent =
 
-    const session =
-        getSession();
+            new Date()
 
-    if (!session) {
+            .toLocaleTimeString(
 
-        if (
-            location.pathname.endsWith(
-                "index.html"
-            )
-        ) {
-            window.location.href =
-                "login.html";
-        }
+                "sq-AL"
 
-        return null;
+            );
+
     }
 
-    document
-        .querySelectorAll(
-            "[data-admin], .admin-only"
-        )
-        .forEach(element => {
-
-            element.style.display =
-                session.role === "admin"
-                    ? ""
-                    : "none";
-
-        });
-
-    return session;
 }
 
-/* =========================================================
-   SEARCH
-========================================================= */
+/* =====================================================
 
-function setupSearch() {
-
-    const search =
-        document.getElementById(
-            "menuSearch"
-        );
-
-    if (!search) return;
-
-    search.addEventListener(
-        "input",
-        () => {
-
-            const query =
-                search.value
-                    .trim()
-                    .toLowerCase();
-
-            const grid =
-                document.getElementById(
-                    "menuGrid"
-                );
-
-            if (!grid) return;
-
-            const products =
-                getProducts();
-
-            const filtered =
-                products.filter(
-                    product =>
-                        product.name
-                            .toLowerCase()
-                            .includes(query)
-                );
-
-            grid.innerHTML =
-                filtered.map(product => `
-
-                    <button
-                        class="product-card"
-                        onclick="addProduct(${product.id})"
-                    >
-
-                        <strong>
-                            ${escapeHTML(
-                                product.name
-                            )}
-                        </strong>
-
-                        <span>
-                            ${money(product.price)}
-                        </span>
-
-                    </button>
-
-                `).join("");
-        }
-    );
-}
-
-/* =========================================================
    START
-========================================================= */
+
+===================================================== */
 
 document.addEventListener(
+
     "DOMContentLoaded",
-    () => {
 
-        initializeApp();
+    ()=>{
 
-        checkAccess();
+        if(!requireLogin())
+
+            return;
+
+        initialize();
+
+        const session =
+
+            getSession();
+
+        if(session){
+
+            document.getElementById(
+
+                "userInfo"
+
+            ).textContent =
+
+                session.name +
+
+                " • " +
+
+                (
+
+                    session.role === "admin"
+
+                    ? "ADMIN"
+
+                    : "KAMARIER"
+
+                );
+
+            if(
+
+                session.role === "admin"
+
+            ){
+
+                document.querySelectorAll(
+
+                    ".adminOnly"
+
+                ).forEach(
+
+                    el =>
+
+                        el.style.display =
+
+                            "block"
+
+                );
+
+            }
+
+        }
 
         renderTables();
 
@@ -1780,96 +3522,140 @@ document.addEventListener(
 
         renderOrder();
 
-        updateDashboard();
+        const search =
 
-        setupSearch();
+            document.getElementById(
+
+                "search"
+
+            );
+
+        if(search){
+
+            search.addEventListener(
+
+                "input",
+
+                renderProducts
+
+            );
+
+        }
 
         updateClock();
 
         setInterval(
+
             updateClock,
+
             1000
+
         );
 
-        const session =
-            getSession();
-
-        const userInfo =
-            document.getElementById(
-                "userInfo"
-            );
-
-        if (userInfo && session) {
-
-            userInfo.textContent =
-                session.name +
-                " • " +
-                (
-                    session.role === "admin"
-                        ? "ADMIN"
-                        : "KAMARIER"
-                );
-        }
-
     }
+
 );
 
-/* =========================================================
-   GLOBAL FUNCTIONS
-========================================================= */
+/* =====================================================
 
-window.login = login;
-window.logout = logout;
-window.lockApp = lockApp;
+   GLOBAL
+
+===================================================== */
 
 window.selectTable = selectTable;
 
 window.newInvoice = newInvoice;
 
-window.renderProducts =
-    renderProducts;
+window.setCategory = setCategory;
 
-window.renderCategories =
-    renderCategories;
+window.addProduct = addProduct;
 
-window.addProduct =
-    addProduct;
+window.changeQuantity = changeQuantity;
 
-window.changeQuantity =
-    changeQuantity;
+window.removeItem = removeItem;
 
-window.removeItem =
-    removeItem;
+window.clearOrder = clearOrder;
 
-window.openPayment =
-    openPayment;
+window.openPayment = openPayment;
 
-window.closePayment =
-    closePayment;
+window.completePayment = completePayment;
 
-window.completePayment =
-    completePayment;
+window.closeCurrentInvoice =
 
-window.closeInvoice =
-    closeInvoice;
+    closeCurrentInvoice;
 
 window.printInvoice =
+
     printInvoice;
 
-window.printTaxInvoice =
-    printTaxInvoice;
+window.printCurrentPreview =
+
+    printCurrentPreview;
+
+window.finishInvoice =
+
+    finishInvoice;
+
+window.tableDetails =
+
+    tableDetails;
+
+window.transferTable =
+
+    transferTable;
+
+window.doTransfer =
+
+    doTransfer;
 
 window.openSummary =
+
     openSummary;
 
 window.openMyInvoices =
+
     openMyInvoices;
 
+window.openCash =
+
+    openCash;
+
+window.cashReport =
+
+    cashReport;
+
 window.openAdmin =
+
     openAdmin;
 
 window.addWaiter =
+
     addWaiter;
 
-window.closeMessageModal =
-    closeMessageModal;
+window.deleteWaiter =
+
+    deleteWaiter;
+
+window.lockScreen =
+
+    lockScreen;
+
+window.logout =
+
+    logout;
+
+window.openModal =
+
+    openModal;
+
+window.closeModal =
+
+    closeModal;
+
+window.toggleOrder =
+
+    toggleOrder;
+
+window.changeStock =
+
+    changeStock;
