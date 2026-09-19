@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MY BAR • Login</title>
+<meta name="theme-color" content="#080808">
+
+<title>BY SABI • MY BAR</title>
 
 <style>
 *{
@@ -12,90 +14,235 @@
     padding:0;
 }
 
+:root{
+    --black:#070707;
+    --black2:#101010;
+    --card:#121212;
+    --line:#282828;
+    --text:#f4f4f4;
+    --muted:#858585;
+    --gold:#c8a96b;
+}
+
 body{
     min-height:100vh;
-    font-family:Arial,sans-serif;
-    background:#f5f7f6;
-    color:#17201b;
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #242424 0%,
+            #101010 32%,
+            #070707 72%
+        );
+    color:var(--text);
     display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
+    overflow:hidden;
+}
+
+/* subtle premium lights */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(200,169,107,.07);
+    filter:blur(100px);
+    top:-220px;
+    left:50%;
+    transform:translateX(-50%);
+    pointer-events:none;
 }
 
 .login{
-    width:min(850px,100%);
-    background:#fff;
-    border:1px solid #e0e5e2;
-    border-radius:22px;
-    box-shadow:0 20px 60px rgba(0,0,0,.08);
-    padding:30px;
+    position:relative;
+    width:min(900px,100%);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(28,28,28,.96),
+            rgba(9,9,9,.98)
+        );
+    border:1px solid #292929;
+    border-radius:24px;
+    padding:42px;
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.65),
+        inset 0 1px 0 rgba(255,255,255,.04);
 }
+
+/* top line */
+
+.login::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:12%;
+    right:12%;
+    height:1px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+    opacity:.7;
+}
+
+/* LOGO */
 
 .logo{
     text-align:center;
-    margin-bottom:25px;
+    margin-bottom:34px;
 }
 
 .logo-icon{
-    width:58px;
-    height:58px;
-    background:#111;
-    color:#fff;
-    border-radius:16px;
+    width:68px;
+    height:68px;
+    margin:auto;
     display:grid;
     place-items:center;
-    margin:auto;
-    font-size:25px;
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #242424,
+            #080808
+        );
+
+    border:1px solid #363636;
+
+    color:#fff;
+
+    font-size:28px;
     font-weight:900;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 .logo h1{
-    margin-top:12px;
-    font-size:26px;
-    letter-spacing:1px;
+    margin-top:18px;
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:5px;
+}
+
+.logo .by{
+    margin-top:9px;
+    color:var(--gold);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:4px;
+    text-transform:uppercase;
 }
 
 .logo p{
-    color:#737c77;
-    margin-top:5px;
+    margin-top:13px;
+    color:#777;
+    font-size:12px;
+    letter-spacing:2px;
 }
+
+/* USERS */
 
 .users{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:12px;
+    grid-template-columns:
+        repeat(auto-fit,minmax(190px,1fr));
+    gap:13px;
 }
 
 .user{
-    border:1px solid #dfe5e1;
-    background:#fff;
-    border-radius:14px;
-    padding:20px;
+    position:relative;
+    min-height:105px;
+
+    border:1px solid var(--line);
+    background:
+        linear-gradient(
+            145deg,
+            #171717,
+            #0c0c0c
+        );
+
+    color:#fff;
+
+    border-radius:15px;
+    padding:19px;
+
     text-align:left;
-    transition:.15s;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+
+    overflow:hidden;
+}
+
+.user::after{
+    content:"";
+    position:absolute;
+    right:-25px;
+    bottom:-25px;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:rgba(200,169,107,.06);
+    filter:blur(5px);
 }
 
 .user:hover{
-    border-color:#17834e;
-    transform:translateY(-2px);
+    transform:translateY(-3px);
+    border-color:#5b4b2f;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45);
 }
 
 .user strong{
+    position:relative;
+    z-index:2;
+
     display:block;
-    font-size:17px;
+
+    font-size:16px;
+    letter-spacing:1px;
 }
 
 .user span{
+    position:relative;
+    z-index:2;
+
     display:block;
-    margin-top:5px;
-    color:#76807b;
-    font-size:12px;
+
+    margin-top:8px;
+
+    color:#777;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
 }
 
+/* PIN */
+
 .pin{
-    margin-top:20px;
     display:none;
+    margin-top:22px;
+
+    padding:17px;
+
+    border:1px solid #282828;
+    border-radius:14px;
+
+    background:#0b0b0b;
 }
 
 .pin.active{
@@ -104,30 +251,106 @@ body{
 
 .pin input{
     width:100%;
-    padding:13px;
-    border:1px solid #d8dfdb;
+
+    padding:14px;
+
+    border:1px solid #303030;
     border-radius:10px;
+
     outline:none;
+
+    background:#151515;
+    color:#fff;
+
     font-size:17px;
     text-align:center;
+
+    letter-spacing:5px;
+}
+
+.pin input:focus{
+    border-color:#6a5735;
+    box-shadow:
+        0 0 0 3px rgba(200,169,107,.07);
 }
 
 .pin button{
     width:100%;
-    margin-top:9px;
-    padding:13px;
-    border:0;
+
+    margin-top:10px;
+
+    padding:14px;
+
+    border:1px solid #b59459;
     border-radius:10px;
-    background:#17834e;
-    color:#fff;
-    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d0b274,
+            #a7864d
+        );
+
+    color:#080808;
+
+    font-weight:900;
+    letter-spacing:1px;
+
+    transition:.2s;
+}
+
+.pin button:hover{
+    filter:brightness(1.08);
 }
 
 .error{
-    color:#b42318;
+    color:#d66b61;
     text-align:center;
-    margin-top:12px;
-    font-size:13px;
+    margin-top:11px;
+    font-size:12px;
+}
+
+/* footer */
+
+.footer{
+    text-align:center;
+    margin-top:28px;
+
+    color:#555;
+    font-size:9px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.footer strong{
+    color:#777;
+}
+
+/* mobile */
+
+@media(max-width:600px){
+
+    body{
+        padding:13px;
+    }
+
+    .login{
+        padding:28px 18px;
+        border-radius:20px;
+    }
+
+    .logo h1{
+        font-size:25px;
+        letter-spacing:4px;
+    }
+
+    .users{
+        grid-template-columns:1fr;
+    }
+
+    .user{
+        min-height:85px;
+    }
 }
 </style>
 </head>
@@ -139,12 +362,16 @@ body{
     <div class="logo">
 
         <div class="logo-icon">
-            M
+            S
         </div>
 
         <h1 id="businessName">
             MY BAR
         </h1>
+
+        <div class="by">
+            BY SABI
+        </div>
 
         <p id="welcome">
             MIRË SE VINI
@@ -165,11 +392,11 @@ body{
             id="pin"
             type="password"
             inputmode="numeric"
-            placeholder="PIN / Password"
+            placeholder="••••"
         >
 
         <button onclick="login()">
-            HYR
+            HYR NË SISTEM
         </button>
 
         <div
@@ -177,6 +404,11 @@ body{
             id="error">
         </div>
 
+    </div>
+
+    <div class="footer">
+        PREMIUM BAR MANAGEMENT •
+        <strong>BY SABI</strong>
     </div>
 
 </div>
@@ -214,6 +446,7 @@ const DEFAULT_USERS = [
         role:"waiter",
         name:"MONDI"
     }
+
 ];
 
 let selectedUser = null;
@@ -251,7 +484,11 @@ function load(){
             DEFAULT_USERS
         );
 
-    if(!localStorage.getItem(USERS_KEY)){
+    if(
+        !localStorage.getItem(
+            USERS_KEY
+        )
+    ){
 
         setJSON(
             USERS_KEY,
@@ -301,7 +538,7 @@ function load(){
                     <span>
                         ${
                             user.role === "admin"
-                                ? "ADMIN"
+                                ? "ADMINISTRATOR"
                                 : "KAMARIER"
                         }
                     </span>
@@ -332,12 +569,12 @@ function selectUser(index){
         .value = "";
 
     document
-        .getElementById("pin")
-        .focus();
-
-    document
         .getElementById("error")
         .textContent = "";
+
+    document
+        .getElementById("pin")
+        .focus();
 }
 
 function login(){
@@ -401,7 +638,9 @@ document
         "keydown",
         event => {
 
-            if(event.key === "Enter"){
+            if(
+                event.key === "Enter"
+            ){
                 login();
             }
 
