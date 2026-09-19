@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
 
-<title>WELCOME • BY SABI</title>
+<title>LOGIN • MY BAR</title>
 
 <style>
 *{
@@ -14,549 +14,210 @@
     padding:0;
 }
 
-html,
-body{
-    width:100%;
-    min-height:100%;
-}
-
 body{
     min-height:100vh;
-    background:#030303;
+    background:#050505;
     color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     overflow:hidden;
 }
-
-/* =========================
-   RGB LIGHTS
-========================= */
 
 body::before{
     content:"";
     position:fixed;
-    inset:-30%;
-    z-index:0;
+    width:650px;
+    height:650px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle,
+        rgba(201,165,92,.13),
+        transparent 68%
+    );
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(255,0,90,.09),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(0,130,255,.09),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(0,255,150,.07),
-            transparent 30%
-        );
-
-    animation:bgMove 12s ease-in-out infinite alternate;
 }
 
-@keyframes bgMove{
-    from{
-        transform:scale(1);
-        filter:hue-rotate(0deg);
-    }
-
-    to{
-        transform:scale(1.12);
-        filter:hue-rotate(90deg);
-    }
-}
-
-/* =========================
-   LED FRAME
-========================= */
-
-.led{
+.frame{
     position:fixed;
-    z-index:20;
+    inset:12px;
+    border:1px solid rgba(201,165,92,.35);
+    border-radius:20px;
     pointer-events:none;
 }
 
-.top,
-.bottom{
-    left:0;
-    right:0;
-    height:2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff0055,
-            #ff9d00,
-            #00ff88,
-            #00aaff,
-            #9d00ff,
-            #ff0055
-        );
-
-    background-size:400% 100%;
-
-    animation:ledHorizontal 7s linear infinite;
-
+.login-box{
+    width:min(92%,420px);
+    padding:38px;
+    border:1px solid rgba(201,165,92,.35);
+    border-radius:22px;
+    background:rgba(12,12,12,.9);
     box-shadow:
-        0 0 8px rgba(255,255,255,.5),
-        0 0 22px rgba(0,180,255,.35);
-}
-
-.top{
-    top:0;
-}
-
-.bottom{
-    bottom:0;
-}
-
-.left,
-.right{
-    top:0;
-    bottom:0;
-    width:2px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ff0055,
-            #ff9d00,
-            #00ff88,
-            #00aaff,
-            #9d00ff,
-            #ff0055
-        );
-
-    background-size:100% 400%;
-
-    animation:ledVertical 7s linear infinite;
-
-    box-shadow:
-        0 0 8px rgba(255,255,255,.5),
-        0 0 22px rgba(0,180,255,.35);
-}
-
-.left{
-    left:0;
-}
-
-.right{
-    right:0;
-}
-
-@keyframes ledHorizontal{
-    from{
-        background-position:0 0;
-    }
-
-    to{
-        background-position:400% 0;
-    }
-}
-
-@keyframes ledVertical{
-    from{
-        background-position:0 0;
-    }
-
-    to{
-        background-position:0 400%;
-    }
-}
-
-/* =========================
-   PAGE
-========================= */
-
-.page{
+        0 30px 100px rgba(0,0,0,.75),
+        inset 0 0 35px rgba(201,165,92,.025);
     position:relative;
-    z-index:5;
+    z-index:2;
+}
 
-    min-height:100vh;
-
+.logo{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    border:1px solid #c9a55c;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
-
-    padding:30px 20px;
-}
-
-/* =========================
-   WELCOME
-========================= */
-
-.welcome{
-    text-align:center;
-    margin-bottom:55px;
-}
-
-.welcome h1{
-    font-size:clamp(55px,10vw,105px);
-    font-weight:900;
-    letter-spacing:-5px;
-    line-height:.9;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 25px rgba(255,255,255,.04);
-}
-
-.created{
-    margin-top:20px;
-
-    color:#777;
-
-    font-size:10px;
-    letter-spacing:5px;
-}
-
-/* =========================
-   USERS
-========================= */
-
-.users{
-    width:min(420px,90vw);
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.user{
-    height:70px;
-
-    border:1px solid #242424;
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111,
-            #070707
-        );
-
-    color:#fff;
-
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 20px;
-
-    transition:.2s;
-}
-
-.user:hover{
-    border-color:#666;
-    transform:translateY(-2px);
-}
-
-.user.admin{
-    border-color:#373737;
-}
-
-.user-name{
-    font-size:13px;
+    color:#d8b76d;
+    font-size:22px;
     font-weight:700;
-    letter-spacing:1px;
+    margin:0 auto 22px;
+    box-shadow:0 0 22px rgba(201,165,92,.18);
 }
 
-.user-role{
-    color:#555;
-    font-size:9px;
-    letter-spacing:2px;
-    margin-top:4px;
-}
-
-.arrow{
-    color:#555;
-    font-size:18px;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact{
-    margin-top:45px;
-
-    border:1px solid #292929;
-    background:#090909;
-
-    color:#888;
-
-    padding:12px 22px;
-
-    border-radius:10px;
-
-    font-size:10px;
-    letter-spacing:2px;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.contact:hover{
-    color:#fff;
-    border-color:#777;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-    position:fixed;
-
-    bottom:17px;
-    left:0;
-    right:0;
-
+h1{
     text-align:center;
+    font-size:27px;
+    font-weight:400;
+    letter-spacing:3px;
+}
 
-    color:#333;
+h1 span{
+    color:#c9a55c;
+}
 
+.subtitle{
+    text-align:center;
+    color:#666;
+    font-size:11px;
+    margin-top:8px;
+    letter-spacing:1.5px;
+}
+
+.selected-user{
+    margin-top:28px;
+    padding:14px;
+    border:1px solid rgba(201,165,92,.2);
+    border-radius:12px;
+    text-align:center;
+    background:#090909;
+}
+
+.selected-user small{
+    display:block;
+    color:#555;
     font-size:8px;
     letter-spacing:2px;
-
-    z-index:5;
+    margin-bottom:5px;
 }
 
-/* =========================
-   LOGIN MODAL
-========================= */
-
-.modal{
-    display:none;
-
-    position:fixed;
-    inset:0;
-
-    z-index:100;
-
-    background:rgba(0,0,0,.88);
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
+.selected-user strong{
+    color:#d8b76d;
+    letter-spacing:2px;
+    font-size:13px;
 }
 
-.modal.show{
-    display:flex;
+.field{
+    margin-top:18px;
 }
 
-.modal-card{
-    width:min(390px,100%);
-
-    background:#0c0c0c;
-
-    border:1px solid #292929;
-
-    border-radius:20px;
-
-    padding:28px;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.7);
-}
-
-.modal-title{
-    text-align:center;
-
-    font-size:18px;
-
-    letter-spacing:3px;
-
+label{
+    display:block;
+    color:#777;
+    font-size:9px;
+    letter-spacing:2px;
     margin-bottom:8px;
 }
 
-.modal-sub{
-    text-align:center;
-
-    color:#666;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    margin-bottom:22px;
-}
-
-.pin{
+input{
     width:100%;
-    height:50px;
-
     border:1px solid #292929;
-
-    border-radius:11px;
-
-    background:#050505;
-
+    background:#070707;
     color:#fff;
-
+    border-radius:12px;
+    padding:15px;
     outline:none;
-
-    text-align:center;
-
-    font-size:19px;
-
-    letter-spacing:7px;
+    font-size:14px;
 }
 
-.pin:focus{
-    border-color:#888;
+input:focus{
+    border-color:#c9a55c;
+    box-shadow:0 0 15px rgba(201,165,92,.08);
 }
 
-.enter{
+.login-btn{
     width:100%;
-    height:48px;
-
-    margin-top:10px;
-
+    margin-top:23px;
     border:0;
-
-    border-radius:11px;
-
-    background:#fff;
-
-    color:#050505;
-
+    border-radius:12px;
+    padding:16px;
+    background:#c9a55c;
+    color:#070707;
     font-weight:800;
-
     letter-spacing:2px;
+    cursor:pointer;
+    transition:.2s;
+}
 
+.login-btn:hover{
+    background:#e1c47d;
+    transform:translateY(-1px);
+}
+
+.back-btn{
+    width:100%;
+    margin-top:10px;
+    border:1px solid #292929;
+    border-radius:12px;
+    padding:14px;
+    background:#0a0a0a;
+    color:#888;
     cursor:pointer;
 }
 
-.close{
-    width:100%;
-    height:44px;
-
-    margin-top:10px;
-
-    border:1px solid #292929;
-
-    border-radius:11px;
-
-    background:#111;
-
-    color:#777;
-
-    cursor:pointer;
+.back-btn:hover{
+    color:#fff;
+    border-color:#555;
 }
 
 .error{
-    min-height:18px;
-
-    margin-top:9px;
-
+    display:none;
+    margin-top:14px;
+    padding:11px;
+    border-radius:10px;
+    background:rgba(180,50,50,.08);
+    border:1px solid rgba(180,50,50,.35);
+    color:#e18b8b;
     text-align:center;
-
-    color:#ff5d5d;
-
     font-size:11px;
 }
 
-/* =========================
-   CONTACT MODAL
-========================= */
+.error.show{
+    display:block;
+}
 
-.contact-text{
+footer{
+    position:fixed;
+    bottom:22px;
+    left:0;
     width:100%;
-    min-height:130px;
-
-    resize:none;
-
-    border:1px solid #292929;
-
-    border-radius:11px;
-
-    background:#050505;
-
-    color:#fff;
-
-    outline:none;
-
-    padding:14px;
-
-    font-family:Arial,Helvetica,sans-serif;
-
-    font-size:13px;
-
-    line-height:1.5;
+    text-align:center;
+    color:#444;
+    font-size:7px;
+    letter-spacing:3px;
 }
 
-.contact-text:focus{
-    border-color:#777;
-}
+@media(max-width:500px){
 
-.sms{
-    width:100%;
-    height:48px;
-
-    margin-top:10px;
-
-    border:0;
-
-    border-radius:11px;
-
-    background:#fff;
-
-    color:#050505;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-    .welcome{
-        margin-bottom:40px;
+    .login-box{
+        padding:28px 22px;
     }
 
-    .welcome h1{
-        font-size:58px;
-    }
-
-    .created{
-        font-size:9px;
-        letter-spacing:4px;
-    }
-
-    .users{
-        width:100%;
-        max-width:360px;
-    }
-
-    .user{
-        height:64px;
-        padding:0 15px;
-    }
-
-    .user-name{
-        font-size:12px;
-    }
-
-    .contact{
-        margin-top:35px;
+    h1{
+        font-size:23px;
     }
 }
 </style>
@@ -564,135 +225,83 @@ body::before{
 
 <body>
 
-<div class="led top"></div>
-<div class="led bottom"></div>
-<div class="led left"></div>
-<div class="led right"></div>
+<div class="frame"></div>
 
-<main class="page">
+<div class="login-box">
 
-    <section class="welcome">
+    <div class="logo">S</div>
 
-        <h1>WELCOME</h1>
+    <h1>
+        MY <span>BAR</span>
+    </h1>
 
-        <div class="created">
-            CREATED • SABI
-        </div>
+    <div class="subtitle">
+        SECURE LOGIN
+    </div>
 
-    </section>
+    <div class="selected-user">
 
+        <small>USER</small>
 
-    <section id="users" class="users">
-        <!-- USERS -->
-    </section>
+        <strong id="selectedUser">
+            ADMIN
+        </strong>
 
+    </div>
 
-    <button
-        class="contact"
-        onclick="openContact()"
-    >
-        CONTACT
-    </button>
+    <div class="field">
 
-</main>
-
-
-<div class="footer">
-    BY SABI
-</div>
-
-
-<!-- =========================
-     LOGIN MODAL
-========================= -->
-
-<div id="loginModal" class="modal">
-
-    <div class="modal-card">
-
-        <div
-            id="loginName"
-            class="modal-title"
-        >
-            USER
-        </div>
-
-        <div class="modal-sub">
-            ENTER PASSWORD
-        </div>
+        <label>USERNAME</label>
 
         <input
-            id="pin"
-            class="pin"
+            id="username"
+            type="text"
+            autocomplete="username"
+            placeholder="Username"
+        >
+
+    </div>
+
+    <div class="field">
+
+        <label>FJALËKALIMI</label>
+
+        <input
+            id="password"
             type="password"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="••••"
+            autocomplete="current-password"
+            placeholder="Fjalëkalimi"
+            onkeydown="if(event.key==='Enter') login()"
         >
 
-        <button
-            class="enter"
-            onclick="login()"
-        >
-            ENTER
-        </button>
+    </div>
 
-        <div
-            id="loginError"
-            class="error"
-        ></div>
+    <button
+        class="login-btn"
+        onclick="login()"
+    >
+        HYR
+    </button>
 
-        <button
-            class="close"
-            onclick="closeLogin()"
-        >
-            BACK
-        </button>
+    <button
+        class="back-btn"
+        onclick="goBack()"
+    >
+        ← KTHEHU
+    </button>
 
+    <div
+        class="error"
+        id="error"
+    >
+        Username ose fjalëkalim i gabuar.
     </div>
 
 </div>
 
-
-<!-- =========================
-     CONTACT MODAL
-========================= -->
-
-<div id="contactModal" class="modal">
-
-    <div class="modal-card">
-
-        <div class="modal-title">
-            CONTACT
-        </div>
-
-        <div class="modal-sub">
-            SHKRUAJ MESAZHIN
-        </div>
-
-        <textarea
-            id="message"
-            class="contact-text"
-            placeholder="Shkruaj problemin ose mesazhin këtu..."
-        ></textarea>
-
-        <button
-            class="sms"
-            onclick="sendSMS()"
-        >
-            DËRGO SMS
-        </button>
-
-        <button
-            class="close"
-            onclick="closeContact()"
-        >
-            MBYLL
-        </button>
-
-    </div>
-
-</div>
+<footer>
+    MY BAR • CREATED BY SABI
+</footer>
 
 
 <script>
@@ -703,7 +312,12 @@ body::before{
 
 const USERS_KEY = "MYBAR_USERS_V2";
 const SESSION_KEY = "MYBAR_SESSION_V2";
+const SELECTED_USER_KEY = "MYBAR_SELECTED_USER";
 
+
+/* =========================
+   DEFAULT USERS
+========================= */
 
 const DEFAULT_USERS = [
 
@@ -732,7 +346,7 @@ const DEFAULT_USERS = [
 
 
 /* =========================
-   JSON
+   JSON HELPERS
 ========================= */
 
 function getJSON(key,fallback){
@@ -754,7 +368,6 @@ function getJSON(key,fallback){
 
 }
 
-
 function setJSON(key,value){
 
     localStorage.setItem(
@@ -766,13 +379,10 @@ function setJSON(key,value){
 
 
 /* =========================
-   USERS
+   INITIALIZE USERS
 ========================= */
 
-let selectedUser = null;
-
-
-function initialize(){
+function initializeUsers(){
 
     if(!localStorage.getItem(USERS_KEY)){
 
@@ -783,64 +393,19 @@ function initialize(){
 
     }
 
-    renderUsers();
-
-}
-
-
-function renderUsers(){
-
-    const box =
-        document.getElementById("users");
-
-    const users =
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
-
-    box.innerHTML =
-        users.map((user,index)=>{
-
-            return `
-
-                <button
-                    class="user ${user.role === "admin" ? "admin" : ""}"
-                    onclick="selectUser(${index})"
-                >
-
-                    <div>
-
-                        <div class="user-name">
-                            ${escapeHTML(user.name)}
-                        </div>
-
-                        <div class="user-role">
-                            ${user.role === "admin"
-                                ? "ADMIN"
-                                : "KAMARIER"}
-                        </div>
-
-                    </div>
-
-                    <div class="arrow">
-                        ›
-                    </div>
-
-                </button>
-
-            `;
-
-        }).join("");
-
 }
 
 
 /* =========================
-   SELECT
+   SELECTED USER
 ========================= */
 
-function selectUser(index){
+function loadSelectedUser(){
+
+    const selected =
+        localStorage.getItem(
+            SELECTED_USER_KEY
+        );
 
     const users =
         getJSON(
@@ -848,34 +413,29 @@ function selectUser(index){
             DEFAULT_USERS
         );
 
-    if(!users[index]) return;
+    let user =
+        users.find(
+            u =>
+                u.username.toLowerCase()
+                ===
+                String(selected || "").toLowerCase()
+        );
 
-    selectedUser = index;
+    if(!user){
+
+        user = users[0];
+
+    }
 
     document
-        .getElementById("loginName")
+        .getElementById("selectedUser")
         .textContent =
-        users[index].name;
+        user.name.toUpperCase();
 
     document
-        .getElementById("pin")
-        .value = "";
-
-    document
-        .getElementById("loginError")
-        .textContent = "";
-
-    document
-        .getElementById("loginModal")
-        .classList.add("show");
-
-    setTimeout(()=>{
-
-        document
-            .getElementById("pin")
-            .focus();
-
-    },100);
+        .getElementById("username")
+        .value =
+        user.username;
 
 }
 
@@ -886,11 +446,21 @@ function selectUser(index){
 
 function login(){
 
-    if(selectedUser === null){
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim()
+        .toLowerCase();
 
-        return;
+    const password =
+        document
+        .getElementById("password")
+        .value;
 
-    }
+    const error =
+        document
+        .getElementById("error");
 
     const users =
         getJSON(
@@ -899,169 +469,65 @@ function login(){
         );
 
     const user =
-        users[selectedUser];
+        users.find(
+            u =>
+                u.username.toLowerCase()
+                === username
+                &&
+                u.password === password
+        );
 
-    if(!user) return;
+    if(!user){
 
-    const password =
-        document
-            .getElementById("pin")
-            .value;
-
-    if(
-        String(password) !==
-        String(user.password)
-    ){
-
-        document
-            .getElementById("loginError")
-            .textContent =
-            "PASSWORD I GABUAR.";
-
-        document
-            .getElementById("pin")
-            .value = "";
+        error.classList.add("show");
 
         return;
 
     }
 
+    error.classList.remove("show");
+
+    const session = {
+
+        username:user.username,
+
+        name:user.name,
+
+        role:user.role,
+
+        loginTime:Date.now()
+
+    };
 
     setJSON(
         SESSION_KEY,
-        {
-            username:user.username,
-            name:user.name,
-            role:user.role,
-            loginAt:Date.now()
-        }
+        session
     );
 
+    localStorage.setItem(
+        "MYBAR_CURRENT_USER",
+        user.username
+    );
 
     /*
-       KËTU HAPET POS-I YT.
-       index.html = POS
+       Pas login:
+       admin -> app.html
+       waiter -> app.html
     */
+
+    window.location.href = "app.html";
+
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+function goBack(){
 
     window.location.href =
         "index.html";
-
-}
-
-
-/* =========================
-   ENTER KEY
-========================= */
-
-document
-    .getElementById("pin")
-    .addEventListener(
-        "keydown",
-        event => {
-
-            if(event.key === "Enter"){
-
-                login();
-
-            }
-
-        }
-    );
-
-
-/* =========================
-   CLOSE LOGIN
-========================= */
-
-function closeLogin(){
-
-    document
-        .getElementById("loginModal")
-        .classList.remove("show");
-
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-function openContact(){
-
-    document
-        .getElementById("contactModal")
-        .classList.add("show");
-
-}
-
-
-function closeContact(){
-
-    document
-        .getElementById("contactModal")
-        .classList.remove("show");
-
-}
-
-
-/* =========================
-   SEND SMS
-========================= */
-
-function sendSMS(){
-
-    const message =
-        document
-            .getElementById("message")
-            .value
-            .trim();
-
-    if(!message){
-
-        alert(
-            "Shkruaj një mesazh fillimisht."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       NDRYSHO KËTU NUMRIN
-       ME NUMRIN KU DO TË DËRGOSH SMS.
-    */
-
-    const phone =
-        "355XXXXXXXXX";
-
-
-    const text =
-        "MY BAR - Mesazh nga aplikacioni:%0A%0A" +
-        encodeURIComponent(message);
-
-
-    window.location.href =
-        "sms:" +
-        phone +
-        "?body=" +
-        text;
-
-}
-
-
-/* =========================
-   ESCAPE
-========================= */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
 
 }
 
@@ -1072,7 +538,17 @@ function escapeHTML(value){
 
 document.addEventListener(
     "DOMContentLoaded",
-    initialize
+    function(){
+
+        initializeUsers();
+
+        loadSelectedUser();
+
+        document
+            .getElementById("password")
+            .focus();
+
+    }
 );
 
 </script>
