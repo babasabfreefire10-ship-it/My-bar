@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
-
-<title>WELCOME • MY BAR</title>
+<title>MY BAR</title>
 
 <style>
 *{
@@ -26,27 +25,59 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    background:
-        radial-gradient(circle at 50% 45%,rgba(201,165,92,.14),transparent 30%),
-        radial-gradient(circle at 10% 90%,rgba(201,165,92,.06),transparent 25%),
-        radial-gradient(circle at 90% 10%,rgba(201,165,92,.05),transparent 25%);
     pointer-events:none;
+    background:
+        radial-gradient(circle at 50% 45%,
+        rgba(212,170,75,.12),
+        transparent 32%);
 }
 
-.frame{
+.led{
     position:fixed;
-    inset:12px;
-    border:1px solid rgba(201,165,92,.35);
-    border-radius:20px;
-    pointer-events:none;
+    background:#c9a55c;
+    box-shadow:
+        0 0 8px #c9a55c,
+        0 0 25px rgba(201,165,92,.7);
+    z-index:5;
+}
+
+.led.top{
+    top:0;
+    left:0;
+    width:100%;
+    height:2px;
+}
+
+.led.bottom{
+    bottom:0;
+    right:0;
+    width:100%;
+    height:2px;
+}
+
+.led.left{
+    left:0;
+    top:0;
+    width:2px;
+    height:100%;
+}
+
+.led.right{
+    right:0;
+    top:0;
+    width:2px;
+    height:100%;
 }
 
 header{
-    height:80px;
-    padding:0 35px;
+    position:relative;
+    z-index:10;
+    height:76px;
+    padding:0 28px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    border-bottom:1px solid rgba(201,165,92,.16);
 }
 
 .brand{
@@ -56,173 +87,132 @@ header{
 }
 
 .logo{
-    width:42px;
-    height:42px;
+    width:40px;
+    height:40px;
     border:1px solid #c9a55c;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     color:#d9b86f;
-    font-weight:800;
+    font-weight:900;
+    font-size:16px;
 }
 
-.brand strong{
+.brand-text strong{
     display:block;
-    font-size:14px;
-    letter-spacing:4px;
+    color:#d9b86f;
+    font-size:15px;
+    letter-spacing:3px;
 }
 
-.brand small{
-    display:block;
-    margin-top:4px;
-    color:#666;
-    font-size:8px;
+.brand-text small{
+    color:#555;
+    font-size:7px;
     letter-spacing:2px;
 }
 
 .contact{
-    padding:11px 18px;
-    border:1px solid #66532d;
-    border-radius:10px;
-    background:#0a0a0a;
+    border:1px solid rgba(201,165,92,.5);
+    background:#090909;
     color:#d9b86f;
-    font-size:10px;
+    padding:9px 14px;
+    border-radius:9px;
+    font-size:8px;
     letter-spacing:2px;
     cursor:pointer;
 }
 
 main{
-    min-height:calc(100vh - 80px);
+    position:relative;
+    z-index:2;
+    min-height:calc(100vh - 76px);
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:20px;
+    text-align:center;
 }
 
-.layout{
-    width:min(100%,1000px);
-    display:grid;
-    grid-template-columns:1fr 330px;
-    gap:70px;
-    align-items:center;
+.content{
+    width:min(92%,500px);
 }
 
-.welcome-line{
-    width:65px;
-    height:1px;
-    background:#c9a55c;
-    box-shadow:0 0 15px #c9a55c;
-    margin-bottom:25px;
+.badge{
+    display:inline-block;
+    padding:7px 11px;
+    border:1px solid rgba(201,165,92,.25);
+    border-radius:50px;
+    color:#777;
+    font-size:7px;
+    letter-spacing:3px;
+    margin-bottom:22px;
 }
 
 h1{
-    font-size:clamp(65px,10vw,115px);
-    line-height:.85;
-    letter-spacing:-6px;
+    font-size:clamp(42px,12vw,82px);
     font-weight:300;
+    letter-spacing:9px;
+    line-height:1;
 }
 
 h1 span{
-    color:#c9a55c;
+    color:#d9b86f;
 }
 
-.created{
-    margin-top:27px;
-    color:#8b806c;
-    font-size:12px;
-    letter-spacing:3px;
-}
-
-.created b{
-    color:#d8b76d;
-    font-weight:500;
+.subtitle{
+    margin-top:15px;
+    color:#666;
+    font-size:9px;
+    letter-spacing:4px;
 }
 
 .users{
-    padding:25px;
-    border:1px solid rgba(201,165,92,.3);
-    border-radius:20px;
-    background:rgba(12,12,12,.88);
-    box-shadow:0 25px 80px rgba(0,0,0,.65);
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin:34px auto 0;
+    max-width:420px;
 }
 
-.users-title{
-    color:#666;
-    font-size:8px;
-    letter-spacing:3px;
-    margin-bottom:15px;
-}
-
-.user{
-    width:100%;
-    padding:17px;
-    margin-bottom:9px;
-    border:1px solid #202020;
+.user-btn{
+    padding:15px 5px;
+    border:1px solid #292929;
     background:#090909;
-    border-radius:12px;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    color:#aaa;
+    border-radius:11px;
     cursor:pointer;
     transition:.2s;
 }
 
-.user:last-child{
-    margin-bottom:0;
-}
-
-.user:hover{
+.user-btn:hover{
     border-color:#c9a55c;
+    color:#d9b86f;
     transform:translateY(-2px);
 }
 
-.user-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.user-icon{
-    width:35px;
-    height:35px;
-    border:1px solid #66532d;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#d8b76d;
-    font-size:11px;
-}
-
-.user-name{
-    text-align:left;
+.user-btn strong{
+    display:block;
     font-size:11px;
     letter-spacing:2px;
 }
 
-.user-role{
+.user-btn small{
     display:block;
-    margin-top:4px;
-    color:#555;
+    margin-top:5px;
+    color:#444;
     font-size:7px;
-    letter-spacing:1px;
-}
-
-.arrow{
-    color:#c9a55c;
-    font-size:20px;
 }
 
 footer{
     position:fixed;
-    bottom:25px;
+    z-index:5;
+    bottom:18px;
+    left:0;
     width:100%;
     text-align:center;
-    color:#444;
+    color:#333;
     font-size:7px;
-    letter-spacing:3px;
+    letter-spacing:2px;
 }
 
 /* LOGIN */
@@ -230,134 +220,103 @@ footer{
 .overlay{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.86);
-    backdrop-filter:blur(14px);
+    z-index:100;
     display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
-    z-index:100;
+    background:rgba(0,0,0,.92);
+    backdrop-filter:blur(12px);
 }
 
 .overlay.show{
     display:flex;
 }
 
-.login{
-    width:min(100%,400px);
-    background:#0b0b0b;
-    border:1px solid rgba(201,165,92,.4);
+.login-box{
+    width:min(100%,390px);
+    background:#0a0a0a;
+    border:1px solid rgba(201,165,92,.45);
     border-radius:20px;
     padding:30px;
-    box-shadow:0 30px 100px rgba(0,0,0,.8);
-}
-
-.close{
-    float:right;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    border:1px solid #292929;
-    background:#111;
-    color:#999;
-    cursor:pointer;
+    box-shadow:0 30px 100px rgba(0,0,0,.9);
 }
 
 .login-logo{
     width:48px;
     height:48px;
+    margin:0 auto 16px;
     border:1px solid #c9a55c;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     color:#d9b86f;
-    font-weight:800;
-    margin:0 auto 18px;
+    font-weight:900;
 }
 
-.login h2{
+.login-title{
     text-align:center;
-    font-size:23px;
-    font-weight:400;
-    letter-spacing:2px;
+    font-size:22px;
+    letter-spacing:3px;
 }
 
-.login h2 span{
-    color:#c9a55c;
+.login-title span{
+    color:#d9b86f;
 }
 
 .selected{
-    margin-top:20px;
     text-align:center;
-    padding:13px;
-    border:1px solid #252525;
-    border-radius:10px;
-    background:#080808;
-}
-
-.selected small{
-    display:block;
-    color:#555;
-    font-size:7px;
+    margin:10px 0 22px;
+    color:#666;
+    font-size:8px;
     letter-spacing:2px;
 }
 
-.selected strong{
+label{
     display:block;
-    color:#d8b76d;
-    margin-top:5px;
-    font-size:12px;
-    letter-spacing:2px;
-}
-
-.field{
-    margin-top:15px;
-}
-
-.field label{
-    display:block;
+    margin:12px 0 7px;
     color:#777;
     font-size:8px;
     letter-spacing:2px;
-    margin-bottom:7px;
 }
 
-.field input{
+input{
     width:100%;
     padding:14px;
-    border-radius:10px;
+    background:#050505;
     border:1px solid #292929;
-    background:#060606;
+    border-radius:10px;
     color:#fff;
     outline:none;
+    font-size:15px;
 }
 
-.field input:focus{
+input:focus{
     border-color:#c9a55c;
 }
 
-.enter{
+.login-btn{
     width:100%;
     margin-top:18px;
-    padding:15px;
+    padding:14px;
     border:0;
     border-radius:10px;
     background:#c9a55c;
-    color:#080808;
+    color:#050505;
     font-weight:800;
     letter-spacing:2px;
     cursor:pointer;
 }
 
-.back{
+.close-btn{
     width:100%;
-    margin-top:8px;
-    padding:13px;
+    margin-top:9px;
+    padding:12px;
     border:1px solid #292929;
     border-radius:10px;
     background:#090909;
-    color:#888;
+    color:#777;
     cursor:pointer;
 }
 
@@ -365,12 +324,12 @@ footer{
     display:none;
     margin-top:12px;
     padding:10px;
+    border:1px solid #542929;
+    background:#180909;
     border-radius:9px;
-    background:#160909;
-    border:1px solid #492626;
-    color:#d68181;
+    color:#d98787;
     text-align:center;
-    font-size:10px;
+    font-size:9px;
 }
 
 .error.show{
@@ -381,107 +340,71 @@ footer{
 
 .contact-box{
     width:min(100%,420px);
-    background:#0b0b0b;
-    border:1px solid rgba(201,165,92,.4);
+    background:#0a0a0a;
+    border:1px solid rgba(201,165,92,.45);
     border-radius:20px;
     padding:28px;
 }
 
 .contact-box h2{
-    font-size:22px;
-    font-weight:400;
-}
-
-.contact-box h2 span{
-    color:#c9a55c;
+    color:#d9b86f;
+    text-align:center;
+    font-size:20px;
+    letter-spacing:3px;
 }
 
 .contact-box p{
+    text-align:center;
     color:#666;
-    font-size:11px;
-    line-height:1.6;
-    margin:10px 0 20px;
+    font-size:9px;
+    margin:9px 0 20px;
 }
 
 textarea{
     width:100%;
-    min-height:120px;
+    min-height:130px;
     resize:none;
     padding:13px;
-    border-radius:10px;
+    background:#050505;
     border:1px solid #292929;
-    background:#060606;
+    border-radius:10px;
     color:#fff;
     outline:none;
-    font-family:inherit;
 }
 
-.send{
+.send-btn{
     width:100%;
-    margin-top:10px;
-    padding:14px;
+    margin-top:12px;
+    padding:13px;
     border:0;
     border-radius:10px;
     background:#c9a55c;
-    color:#080808;
+    color:#050505;
     font-weight:800;
     cursor:pointer;
 }
 
-@media(max-width:700px){
-
-    body{
-        overflow:auto;
-    }
-
-    header{
-        padding:0 22px;
-    }
-
-    .layout{
-        grid-template-columns:1fr;
-        gap:40px;
-        max-width:430px;
-    }
-
-    .welcome{
-        text-align:center;
-    }
-
-    .welcome-line{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    h1{
-        font-size:65px;
-        letter-spacing:-4px;
-    }
-
-    .created{
-        font-size:10px;
-    }
-
-    main{
-        padding-bottom:80px;
-    }
-}
 </style>
 </head>
 
 <body>
 
-<div class="frame"></div>
+<div class="led top"></div>
+<div class="led right"></div>
+<div class="led bottom"></div>
+<div class="led left"></div>
 
 <header>
 
     <div class="brand">
+
         <div class="logo">S</div>
 
-        <div>
+        <div class="brand-text">
             <strong>MY BAR</strong>
             <small>CREATED BY SABI</small>
         </div>
+
     </div>
 
     <button
@@ -496,104 +419,50 @@ textarea{
 
 <main>
 
-    <div class="layout">
+    <div class="content">
 
-        <section class="welcome">
+        <div class="badge">
+            SISTEM PREMIUM
+        </div>
 
-            <div class="welcome-line"></div>
+        <h1>
+            WELCOME <span>MY BAR</span>
+        </h1>
 
-            <h1>
-                WEL<span>COME</span>
-            </h1>
-
-            <div class="created">
-                Created — <b>Sabi</b>
-            </div>
-
-        </section>
+        <div class="subtitle">
+            ZGJIDH PËRDORUESIN
+        </div>
 
 
-        <section class="users">
-
-            <div class="users-title">
-                SELECT USER
-            </div>
+        <div class="users">
 
             <button
-                class="user"
-                onclick="openLogin('admin','ADMIN','ADMINISTRATOR')"
+                class="user-btn"
+                onclick="openLogin('admin','ADMIN')"
             >
-
-                <div class="user-left">
-
-                    <div class="user-icon">
-                        A
-                    </div>
-
-                    <div class="user-name">
-                        ADMIN
-                        <span class="user-role">
-                            ADMINISTRATOR
-                        </span>
-                    </div>
-
-                </div>
-
-                <div class="arrow">›</div>
-
+                <strong>ADMIN</strong>
+                <small>ADMINISTRATOR</small>
             </button>
 
 
             <button
-                class="user"
-                onclick="openLogin('sabi','SABI','WAITER')"
+                class="user-btn"
+                onclick="openLogin('sabi','SABI')"
             >
-
-                <div class="user-left">
-
-                    <div class="user-icon">
-                        S
-                    </div>
-
-                    <div class="user-name">
-                        SABI
-                        <span class="user-role">
-                            WAITER
-                        </span>
-                    </div>
-
-                </div>
-
-                <div class="arrow">›</div>
-
+                <strong>SABI</strong>
+                <small>KAMARIER</small>
             </button>
 
 
             <button
-                class="user"
-                onclick="openLogin('mondi','MONDI','WAITER')"
+                class="user-btn"
+                onclick="openLogin('mondi','MONDI')"
             >
-
-                <div class="user-left">
-
-                    <div class="user-icon">
-                        M
-                    </div>
-
-                    <div class="user-name">
-                        MONDI
-                        <span class="user-role">
-                            WAITER
-                        </span>
-                    </div>
-
-                </div>
-
-                <div class="arrow">›</div>
-
+                <strong>MONDI</strong>
+                <small>KAMARIER</small>
             </button>
 
-        </section>
+        </div>
 
     </div>
 
@@ -601,86 +470,78 @@ textarea{
 
 
 <footer>
-    PREMIUM BAR MANAGEMENT • CREATED BY SABI
+    MY BAR • PRIVATE SYSTEM
 </footer>
 
 
 <!-- LOGIN -->
 
 <div
-    class="overlay"
     id="loginOverlay"
+    class="overlay"
 >
 
-    <div class="login">
-
-        <button
-            class="close"
-            onclick="closeLogin()"
-        >
-            ×
-        </button>
+    <div class="login-box">
 
         <div class="login-logo">
             S
         </div>
 
-        <h2>
+        <div class="login-title">
             MY <span>BAR</span>
-        </h2>
-
-        <div class="selected">
-
-            <small>SELECTED USER</small>
-
-            <strong id="selectedUser">
-                ADMIN
-            </strong>
-
         </div>
 
-        <div class="field">
-
-            <label>USERNAME</label>
-
-            <input
-                id="username"
-                type="text"
-                autocomplete="username"
-            >
-
+        <div
+            id="selectedUser"
+            class="selected"
+        >
+            ADMIN
         </div>
 
-        <div class="field">
 
-            <label>FJALËKALIMI</label>
+        <label>
+            USERNAME
+        </label>
 
-            <input
-                id="password"
-                type="password"
-                autocomplete="current-password"
-                onkeydown="if(event.key==='Enter') login()"
-            >
+        <input
+            id="username"
+            type="text"
+            autocomplete="username"
+        >
 
-        </div>
+
+        <label>
+            FJALËKALIMI
+        </label>
+
+        <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="••••"
+            onkeydown="if(event.key==='Enter') login()"
+        >
+
 
         <button
-            class="enter"
+            class="login-btn"
             onclick="login()"
         >
-            HYR
+            HYR NË SISTEM
         </button>
 
+
         <button
-            class="back"
+            class="close-btn"
             onclick="closeLogin()"
         >
             KTHEHU
         </button>
 
+
         <div
-            class="error"
             id="loginError"
+            class="error"
         >
             Username ose fjalëkalim i gabuar.
         </div>
@@ -693,26 +554,16 @@ textarea{
 <!-- CONTACT -->
 
 <div
-    class="overlay"
     id="contactOverlay"
+    class="overlay"
 >
 
     <div class="contact-box">
 
-        <button
-            class="close"
-            onclick="closeContact()"
-        >
-            ×
-        </button>
-
-        <h2>
-            <span>MY</span> BAR
-        </h2>
+        <h2>CONTACT</h2>
 
         <p>
-            Na kontakto për probleme,
-            sugjerime ose informacione.
+            Dërgo një mesazh te SABI
         </p>
 
         <textarea
@@ -721,10 +572,17 @@ textarea{
         ></textarea>
 
         <button
-            class="send"
+            class="send-btn"
             onclick="sendContact()"
         >
-            DËRGO
+            DËRGO MESAZH
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeContact()"
+        >
+            MBYLL
         </button>
 
     </div>
@@ -734,8 +592,18 @@ textarea{
 
 <script>
 
-const USERS_KEY = "MYBAR_USERS_V2";
-const SESSION_KEY = "MYBAR_SESSION_V2";
+"use strict";
+
+
+const USERS_KEY =
+    "MYBAR_USERS_V2";
+
+const SESSION_KEY =
+    "MYBAR_SESSION_V2";
+
+const CURRENT_USER_KEY =
+    "MYBAR_CURRENT_USER";
+
 
 const DEFAULT_USERS = [
 
@@ -763,32 +631,51 @@ const DEFAULT_USERS = [
 ];
 
 
+function initializeUsers(){
+
+    const saved =
+        localStorage.getItem(
+            USERS_KEY
+        );
+
+    if(!saved){
+
+        localStorage.setItem(
+            USERS_KEY,
+            JSON.stringify(
+                DEFAULT_USERS
+            )
+        );
+
+    }
+
+}
+
+
 function getUsers(){
 
     try{
 
-        const saved =
-            localStorage.getItem(USERS_KEY);
+        const users =
+            JSON.parse(
+                localStorage.getItem(
+                    USERS_KEY
+                )
+            );
 
-        if(saved){
+        if(
+            Array.isArray(users)
+            &&
+            users.length
+        ){
 
-            const users =
-                JSON.parse(saved);
-
-            if(Array.isArray(users) && users.length){
-
-                return users;
-
-            }
+            return users;
 
         }
 
     }catch(e){}
 
-    localStorage.setItem(
-        USERS_KEY,
-        JSON.stringify(DEFAULT_USERS)
-    );
+    initializeUsers();
 
     return DEFAULT_USERS;
 
@@ -798,43 +685,62 @@ function getUsers(){
 let selectedUsername = "admin";
 
 
-function openLogin(username,name,role){
+function openLogin(
+    username,
+    name
+){
 
     selectedUsername =
         username;
 
     document
-        .getElementById("selectedUser")
+        .getElementById(
+            "selectedUser"
+        )
         .textContent =
         name;
 
     document
-        .getElementById("username")
+        .getElementById(
+            "username"
+        )
         .value =
         username;
 
     document
-        .getElementById("password")
-        .value = "";
+        .getElementById(
+            "password"
+        )
+        .value =
+        "";
 
     document
-        .getElementById("loginError")
-        .classList.remove("show");
+        .getElementById(
+            "loginError"
+        )
+        .classList
+        .remove(
+            "show"
+        );
 
     document
-        .getElementById("loginOverlay")
-        .classList.add("show");
+        .getElementById(
+            "loginOverlay"
+        )
+        .classList
+        .add(
+            "show"
+        );
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            document
-                .getElementById("password")
-                .focus();
+        document
+            .getElementById(
+                "password"
+            )
+            .focus();
 
-        },
-        100
-    );
+    },100);
 
 }
 
@@ -842,8 +748,13 @@ function openLogin(username,name,role){
 function closeLogin(){
 
     document
-        .getElementById("loginOverlay")
-        .classList.remove("show");
+        .getElementById(
+            "loginOverlay"
+        )
+        .classList
+        .remove(
+            "show"
+        );
 
 }
 
@@ -852,71 +763,94 @@ function login(){
 
     const username =
         document
-        .getElementById("username")
+        .getElementById(
+            "username"
+        )
         .value
         .trim()
         .toLowerCase();
 
     const password =
         document
-        .getElementById("password")
+        .getElementById(
+            "password"
+        )
         .value;
 
     const error =
         document
-        .getElementById("loginError");
+        .getElementById(
+            "loginError"
+        );
+
 
     const users =
         getUsers();
 
+
     const user =
         users.find(
             u =>
-                String(u.username).toLowerCase()
+                String(
+                    u.username
+                )
+                .toLowerCase()
                 === username
                 &&
-                String(u.password)
+                String(
+                    u.password
+                )
                 === password
         );
 
+
     if(!user){
 
-        error.classList.add("show");
+        error
+            .classList
+            .add(
+                "show"
+            );
 
         return;
 
     }
 
-    error.classList.remove("show");
-
 
     const session = {
 
-        username:user.username,
+        username:
+            user.username,
 
-        name:user.name,
+        name:
+            user.name,
 
-        role:user.role,
+        role:
+            user.role,
 
-        loginTime:Date.now()
+        loginTime:
+            Date.now()
 
     };
 
 
     localStorage.setItem(
         SESSION_KEY,
-        JSON.stringify(session)
+        JSON.stringify(
+            session
+        )
     );
 
+
     localStorage.setItem(
-        "MYBAR_CURRENT_USER",
+        CURRENT_USER_KEY,
         user.username
     );
 
 
     /*
-       Tani nuk kalon më nga login.html.
-       Shkon direkt te app.html.
+       SHKO DIREKT TE APP.
+       NUK KA LOGIN.HTML.
     */
 
     window.location.href =
@@ -928,8 +862,13 @@ function login(){
 function openContact(){
 
     document
-        .getElementById("contactOverlay")
-        .classList.add("show");
+        .getElementById(
+            "contactOverlay"
+        )
+        .classList
+        .add(
+            "show"
+        );
 
 }
 
@@ -937,8 +876,13 @@ function openContact(){
 function closeContact(){
 
     document
-        .getElementById("contactOverlay")
-        .classList.remove("show");
+        .getElementById(
+            "contactOverlay"
+        )
+        .classList
+        .remove(
+            "show"
+        );
 
 }
 
@@ -947,18 +891,28 @@ function sendContact(){
 
     const message =
         document
-        .getElementById("contactMessage")
+        .getElementById(
+            "contactMessage"
+        )
         .value
         .trim();
 
+
     if(!message){
 
-        alert("Shkruaj mesazhin.");
+        alert(
+            "Shkruaj një mesazh."
+        );
 
         return;
 
     }
 
+
+    /*
+       Për momentin ruhet në pajisje.
+       Më vonë mund ta lidhim me SMS/backend.
+    */
 
     const reports =
         JSON.parse(
@@ -974,45 +928,39 @@ function sendContact(){
 
         message:message,
 
-        date:new Date().toISOString()
+        date:new Date()
+            .toISOString()
 
     });
 
 
     localStorage.setItem(
         "MYBAR_REPORTS",
-        JSON.stringify(reports)
+        JSON.stringify(
+            reports
+        )
     );
 
 
     document
-        .getElementById("contactMessage")
-        .value = "";
+        .getElementById(
+            "contactMessage"
+        )
+        .value =
+        "";
 
 
     alert(
-        "Mesazhi u regjistrua."
+        "Mesazhi u ruajt me sukses."
     );
+
 
     closeContact();
 
 }
 
 
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Escape"){
-
-            closeLogin();
-
-            closeContact();
-
-        }
-
-    }
-);
+initializeUsers();
 
 </script>
 
