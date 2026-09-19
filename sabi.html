@@ -1,284 +1,173 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY BAR</title>
 
-    <title>MY BAR</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+body{
+    min-height:100vh;
+    background:#030504;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow:hidden;
+}
 
-        html,
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 50% 50%,rgba(24,120,70,.13),transparent 45%),
+        linear-gradient(135deg,#020302,#07100b,#020302);
+    z-index:-2;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 50% 35%, #11251a 0%, #07100b 35%, #030504 75%);
-            color: white;
-        }
+.led{
+    position:fixed;
+    background:linear-gradient(90deg,transparent,#19d77a,#fff,#19d77a,transparent);
+    box-shadow:0 0 18px #19d77a,0 0 45px rgba(25,215,122,.35);
+    animation:led 4s linear infinite;
+}
 
-        .screen {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+.top,.bottom{
+    left:8%;
+    width:84%;
+    height:2px;
+}
 
-        .led {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, #42e88a, transparent);
-            opacity: .75;
-            animation: ledMove 4s linear infinite;
-        }
+.top{top:7%}
+.bottom{bottom:7%}
 
-        .led.top {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-        }
+.left,.right{
+    top:15%;
+    width:2px;
+    height:70%;
+    background:linear-gradient(180deg,transparent,#19d77a,#fff,#19d77a,transparent);
+}
 
-        .led.bottom {
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 2px;
-            animation-delay: 2s;
-        }
+.left{left:5%}
+.right{right:5%}
 
-        .led.left {
-            left: 0;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, #238cff, transparent);
-            animation-delay: 1s;
-        }
+@keyframes led{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
 
-        .led.right {
-            right: 0;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, #42e88a, transparent);
-            animation-delay: 3s;
-        }
+.panel{
+    width:min(650px,90%);
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    padding:55px 35px;
+    border:1px solid #193f2c;
+    background:rgba(4,10,7,.88);
+    box-shadow:0 0 80px rgba(0,255,120,.08);
+}
 
-        @keyframes ledMove {
-            0% {
-                opacity: .25;
-            }
+.badge{
+    display:inline-block;
+    border:1px solid #236c48;
+    color:#39e98c;
+    padding:7px 14px;
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:28px;
+}
 
-            50% {
-                opacity: 1;
-            }
+.logo{
+    font-size:64px;
+    font-weight:900;
+    letter-spacing:8px;
+}
 
-            100% {
-                opacity: .25;
-            }
-        }
+.welcome{
+    margin-top:12px;
+    font-size:20px;
+    letter-spacing:8px;
+    color:#b7c5be;
+}
 
-        .panel {
-            width: min(900px, 92vw);
-            padding: 65px 35px;
-            text-align: center;
+.line{
+    width:90px;
+    height:1px;
+    background:#25d77b;
+    margin:30px auto;
+    box-shadow:0 0 12px #25d77b;
+}
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(16, 28, 21, .95),
-                    rgba(3, 7, 5, .96)
-                );
+.description{
+    font-size:12px;
+    color:#718078;
+    letter-spacing:3px;
+    margin-bottom:35px;
+}
 
-            border: 1px solid rgba(91, 229, 145, .22);
-            border-radius: 28px;
+.enter{
+    border:1px solid #25d77b;
+    background:#0b2417;
+    color:white;
+    padding:16px 38px;
+    font-size:13px;
+    letter-spacing:3px;
+    cursor:pointer;
+    transition:.2s;
+}
 
-            box-shadow:
-                0 35px 100px rgba(0, 0, 0, .75),
-                inset 0 0 50px rgba(71, 214, 126, .025);
-        }
+.enter:hover{
+    background:#25d77b;
+    color:#031008;
+    box-shadow:0 0 25px rgba(37,215,123,.4);
+}
 
-        .badge {
-            display: inline-block;
-            padding: 7px 13px;
-            border: 1px solid rgba(98, 220, 148, .35);
-            border-radius: 999px;
-            color: #6be49a;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            margin-bottom: 22px;
-        }
+.footer{
+    margin-top:35px;
+    font-size:10px;
+    color:#47554e;
+    letter-spacing:2px;
+}
 
-        .logo {
-            font-size: clamp(48px, 9vw, 92px);
-            font-weight: 900;
-            letter-spacing: 10px;
-            margin-left: 10px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ffffff,
-                    #69e99b,
-                    #ffffff
-                );
-
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-
-            text-shadow: 0 0 35px rgba(98, 220, 148, .15);
-        }
-
-        .welcome {
-            margin-top: 12px;
-            color: #a8b9af;
-            font-size: clamp(14px, 2vw, 18px);
-            letter-spacing: 5px;
-            font-weight: 600;
-        }
-
-        .line {
-            width: min(480px, 80%);
-            height: 1px;
-            margin: 35px auto;
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(98, 220, 148, .8),
-                    transparent
-                );
-        }
-
-        .description {
-            color: #75897d;
-            font-size: 13px;
-            letter-spacing: 1px;
-            margin-bottom: 35px;
-        }
-
-        .enter {
-            border: 0;
-            cursor: pointer;
-
-            min-width: 230px;
-            padding: 16px 30px;
-
-            border-radius: 12px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #6bea9e,
-                    #38bf73
-                );
-
-            color: #041008;
-
-            font-size: 14px;
-            font-weight: 900;
-            letter-spacing: 2px;
-
-            box-shadow:
-                0 12px 35px rgba(57, 204, 116, .18);
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .enter:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                0 18px 45px rgba(57, 204, 116, .28);
-        }
-
-        .footer {
-            margin-top: 30px;
-            color: #435449;
-            font-size: 11px;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 600px) {
-            .panel {
-                padding: 48px 22px;
-                border-radius: 22px;
-            }
-
-            .logo {
-                letter-spacing: 6px;
-                margin-left: 6px;
-            }
-
-            .welcome {
-                letter-spacing: 3px;
-            }
-
-            .description {
-                line-height: 1.6;
-            }
-
-            .enter {
-                width: 100%;
-            }
-        }
-    </style>
+@media(max-width:600px){
+    .logo{font-size:42px}
+    .welcome{font-size:15px}
+    .panel{padding:40px 22px}
+}
+</style>
 </head>
 
 <body>
 
-<div class="screen">
+<div class="led top"></div>
+<div class="led bottom"></div>
+<div class="led left"></div>
+<div class="led right"></div>
 
-    <div class="led top"></div>
-    <div class="led bottom"></div>
-    <div class="led left"></div>
-    <div class="led right"></div>
+<div class="panel">
 
-    <main class="panel">
+    <div class="badge">PROFESSIONAL POS</div>
 
-        <div class="badge">
-            SISTEM PREMIUM
-        </div>
+    <div class="logo">MY BAR</div>
 
-        <div class="logo">
-            MY BAR
-        </div>
+    <div class="welcome">MIRË SE VINI</div>
 
-        <div class="welcome">
-            MIRË SE VINI
-        </div>
+    <div class="line"></div>
 
-        <div class="line"></div>
+    <div class="description">
+        SISTEM PROFESIONAL PËR MENAXHIMIN E BARIT
+    </div>
 
-        <div class="description">
-            SISTEM PROFESIONAL PËR MENAXHIMIN E BARIT
-        </div>
+    <button class="enter" onclick="location.href='login.html'">
+        HYR NË SISTEM
+    </button>
 
-        <button
-            class="enter"
-            onclick="location.href='login.html'">
-            HYR NË SISTEM
-        </button>
-
-        <div class="footer">
-            MY BAR • PROFESSIONAL POS
-        </div>
-
-    </main>
+    <div class="footer">
+        MY BAR • POS SYSTEM
+    </div>
 
 </div>
 
