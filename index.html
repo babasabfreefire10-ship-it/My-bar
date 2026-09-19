@@ -2,9 +2,10 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
-<title>MY BAR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+
+<title>WELCOME • MY BAR</title>
 
 <style>
 *{
@@ -13,700 +14,509 @@
     padding:0;
 }
 
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
 body{
-    font-family:Inter,Arial,sans-serif;
-    background:#f5f7f6;
-    color:#18201c;
+    background:#050505;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    overflow-x:hidden;
 }
 
-button,input,select{
-    font:inherit;
+/* =========================
+   GOLD BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:-30%;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(201,165,92,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(201,165,92,.08),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(201,165,92,.06),
+            transparent 25%
+        );
+    pointer-events:none;
+    z-index:-3;
 }
 
-button{
-    cursor:pointer;
+/* =========================
+   GOLD FRAME
+========================= */
+
+.frame{
+    position:fixed;
+    inset:14px;
+    border:1px solid rgba(201,165,92,.38);
+    border-radius:22px;
+    pointer-events:none;
+    z-index:20;
 }
 
-.topbar{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:#fff;
-    border-bottom:1px solid #e3e7e4;
-    box-shadow:0 3px 15px rgba(0,0,0,.05);
+.frame::before,
+.frame::after{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:1px;
+    background:#d7b56b;
+    box-shadow:0 0 18px #d7b56b;
 }
 
-.topbar-main{
-    min-height:68px;
+.frame::before{
+    top:-1px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.frame::after{
+    bottom:-1px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    width:100%;
+    padding:28px 42px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:18px;
-    padding:12px 22px;
+    align-items:center;
+    position:relative;
+    z-index:5;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:10px;
-    white-space:nowrap;
+    gap:13px;
 }
 
 .brand-logo{
-    width:38px;
-    height:38px;
-    border-radius:11px;
-    background:#111;
-    color:#fff;
-    display:grid;
-    place-items:center;
-    font-weight:900;
-}
-
-.brand strong{
-    font-size:18px;
-    letter-spacing:.8px;
-}
-
-.header-right{
+    width:42px;
+    height:42px;
+    border:1px solid #c9a55c;
+    border-radius:50%;
     display:flex;
     align-items:center;
-    gap:12px;
-}
-
-#clock{
+    justify-content:center;
+    color:#d9b86f;
+    font-size:20px;
     font-weight:700;
-    color:#53605a;
+    box-shadow:
+        0 0 15px rgba(201,165,92,.22),
+        inset 0 0 15px rgba(201,165,92,.08);
 }
 
-.user-badge{
-    background:#f1f4f2;
-    border:1px solid #e0e5e2;
-    padding:9px 12px;
+.brand-text{
+    line-height:1.05;
+}
+
+.brand-text strong{
+    font-size:15px;
+    letter-spacing:4px;
+    color:#fff;
+}
+
+.brand-text small{
+    display:block;
+    margin-top:5px;
+    color:#9c8a67;
+    letter-spacing:2px;
+    font-size:9px;
+}
+
+/* =========================
+   CONTACT BUTTON
+========================= */
+
+.contact-btn{
+    border:1px solid rgba(201,165,92,.65);
+    background:rgba(201,165,92,.05);
+    color:#d9b86f;
+    padding:11px 19px;
     border-radius:10px;
-    font-size:13px;
-    font-weight:700;
+    font-size:11px;
+    letter-spacing:2px;
+    cursor:pointer;
+    transition:.25s;
 }
 
-.nav{
+.contact-btn:hover{
+    background:#c9a55c;
+    color:#080808;
+    box-shadow:0 0 25px rgba(201,165,92,.35);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+    min-height:calc(100vh - 120px);
     display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding:9px 16px;
-    border-top:1px solid #f0f2f1;
-    scrollbar-width:none;
-}
-
-.nav::-webkit-scrollbar{
-    display:none;
-}
-
-.nav button{
-    flex:0 0 auto;
-    border:1px solid #dfe5e1;
-    background:#fff;
-    color:#26312b;
-    padding:9px 13px;
-    border-radius:9px;
-    font-weight:700;
-    font-size:13px;
-}
-
-.nav button:hover{
-    border-color:#1f8f57;
-    color:#147044;
-}
-
-.nav .primary{
-    background:#17834e;
-    border-color:#17834e;
-    color:#fff;
-}
-
-.nav .danger{
-    color:#b42318;
-}
-
-.container{
-    max-width:1500px;
-    margin:auto;
-    padding:20px;
-}
-
-.page-title{
-    display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:15px;
+    justify-content:center;
+    padding:35px 20px 80px;
+}
+
+.main-box{
+    width:min(100%,1050px);
+    display:grid;
+    grid-template-columns:1fr 330px;
+    gap:70px;
+    align-items:center;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+    text-align:left;
+}
+
+.welcome-line{
+    width:70px;
+    height:1px;
+    background:#c9a55c;
+    box-shadow:0 0 12px rgba(201,165,92,.7);
+    margin-bottom:24px;
+}
+
+.welcome h1{
+    font-size:clamp(54px,9vw,110px);
+    line-height:.88;
+    letter-spacing:-5px;
+    font-weight:300;
+}
+
+.welcome h1 span{
+    color:#c9a55c;
+}
+
+.created{
+    margin-top:26px;
+    color:#a99a7e;
+    font-size:13px;
+    letter-spacing:3px;
+}
+
+.created strong{
+    color:#d8b86c;
+    font-weight:500;
+}
+
+.subtitle{
+    margin-top:20px;
+    max-width:470px;
+    color:#737373;
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* =========================
+   USERS
+========================= */
+
+.users{
+    border:1px solid rgba(201,165,92,.3);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.55),
+        inset 0 0 30px rgba(201,165,92,.025);
+}
+
+.users-title{
+    color:#7f7565;
+    font-size:9px;
+    letter-spacing:3px;
     margin-bottom:18px;
 }
 
-.page-title h1{
-    font-size:25px;
-}
-
-.page-title p{
-    color:#707a75;
-    margin-top:4px;
-    font-size:13px;
-}
-
-.tables{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(135px,1fr));
-    gap:10px;
-    margin-bottom:22px;
-}
-
-.table-card{
-    min-height:75px;
-    border:1px solid #dfe5e1;
-    background:#fff;
+.user-btn{
+    width:100%;
+    border:1px solid rgba(255,255,255,.08);
+    background:#0b0b0b;
+    color:#fff;
+    padding:18px;
     border-radius:13px;
-    padding:12px;
+    margin-bottom:10px;
     display:flex;
-    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.user-btn:last-child{
+    margin-bottom:0;
+}
+
+.user-btn:hover{
+    border-color:#c9a55c;
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(201,165,92,.12);
+}
+
+.user-left{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.user-icon{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
     justify-content:center;
-    align-items:flex-start;
-    gap:6px;
-    transition:.15s;
-}
-
-.table-card:hover{
-    border-color:#1d8b54;
-    transform:translateY(-1px);
-}
-
-.table-card.active{
-    border-color:#e3a51c;
-    background:#fffaf0;
-}
-
-.table-card.selected{
-    border:2px solid #16804c;
-}
-
-.table-card strong{
-    font-size:14px;
-}
-
-.table-card span{
-    color:#65716b;
+    border:1px solid rgba(201,165,92,.45);
+    color:#c9a55c;
     font-size:12px;
 }
 
-.pos-grid{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 390px;
-    gap:18px;
-    align-items:start;
-}
-
-.menu-box,
-.order-box,
-.panel{
-    background:#fff;
-    border:1px solid #e0e5e2;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(0,0,0,.04);
-}
-
-.menu-box{
-    padding:16px;
-}
-
-.menu-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:14px;
-}
-
-.menu-header h2{
-    font-size:18px;
-}
-
-.search{
-    width:250px;
-    max-width:100%;
-    border:1px solid #d8dfdb;
-    background:#fbfcfb;
-    padding:10px 12px;
-    border-radius:10px;
-    outline:none;
-}
-
-.search:focus{
-    border-color:#1b8a53;
-}
-
-.categories{
-    display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding-bottom:10px;
-    margin-bottom:14px;
-}
-
-.categories button{
-    flex:0 0 auto;
-    border:1px solid #dce2df;
-    background:#fff;
-    padding:8px 12px;
-    border-radius:9px;
+.user-name{
     font-size:12px;
-    font-weight:700;
-}
-
-.categories button.active{
-    background:#17834e;
-    border-color:#17834e;
-    color:#fff;
-}
-
-.menu-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-    gap:10px;
-}
-
-.menu-card{
-    min-height:105px;
-    border:1px solid #e0e5e2;
-    background:#fff;
-    border-radius:12px;
-    padding:13px;
+    letter-spacing:2px;
     text-align:left;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    gap:7px;
 }
 
-.menu-card:hover{
-    border-color:#17834e;
-    box-shadow:0 4px 15px rgba(23,131,78,.08);
-}
-
-.menu-card strong{
-    font-size:14px;
-}
-
-.menu-card .price{
-    font-weight:800;
-    color:#16804c;
-}
-
-.menu-card small{
-    color:#78817c;
-    font-size:11px;
-}
-
-.menu-card.disabled{
-    opacity:.45;
-    cursor:not-allowed;
-}
-
-.order-box{
-    position:sticky;
-    top:145px;
-    overflow:hidden;
-}
-
-.order-head{
-    padding:17px;
-    border-bottom:1px solid #e5e9e7;
-    background:#fff;
-}
-
-.order-head-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-
-.order-head h2{
-    font-size:18px;
-}
-
-.order-total-top{
-    font-size:20px;
-    font-weight:900;
-    color:#147847;
-    white-space:nowrap;
-}
-
-.order-sub{
-    color:#747e79;
-    font-size:12px;
-    margin-top:5px;
-}
-
-.order-items{
-    padding:12px;
-    max-height:480px;
-    overflow-y:auto;
-}
-
-.order-item{
-    border:1px solid #e4e8e6;
-    border-radius:12px;
-    padding:11px;
-    margin-bottom:9px;
-    background:#fff;
-}
-
-.order-item-main{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.order-item-name{
-    font-weight:800;
-    font-size:14px;
-}
-
-.order-item-prices{
+.user-role{
+    display:block;
     margin-top:4px;
-    color:#68736d;
-    font-size:12px;
+    color:#666;
+    font-size:8px;
+    letter-spacing:1px;
 }
 
-.line-total{
-    font-weight:900;
-    color:#18201c;
-    white-space:nowrap;
-}
-
-.quantity-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:9px;
-}
-
-.qty{
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.qty button{
-    width:29px;
-    height:29px;
-    border:1px solid #d8dfdb;
-    background:#f8faf9;
-    border-radius:8px;
-    font-weight:900;
-}
-
-.remove{
-    border:0;
-    background:#fff1f0;
-    color:#b42318;
-    padding:7px 9px;
-    border-radius:8px;
-    font-weight:800;
-}
-
-.order-footer{
-    border-top:1px solid #e3e7e4;
-    padding:14px;
-    background:#fff;
-}
-
-.grand-total{
-    display:flex;
-    justify-content:space-between;
+.arrow{
+    color:#c9a55c;
     font-size:18px;
-    font-weight:900;
-    margin-bottom:12px;
 }
 
-.action-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-}
+/* =========================
+   FOOTER
+========================= */
 
-.action{
-    border:1px solid #dbe1de;
-    background:#fff;
-    padding:11px;
-    border-radius:10px;
-    font-weight:800;
-}
-
-.action.primary{
-    background:#17834e;
-    border-color:#17834e;
-    color:#fff;
-}
-
-.action.danger{
-    color:#b42318;
-}
-
-.empty{
-    padding:40px 15px;
+footer{
+    position:fixed;
+    bottom:28px;
+    left:0;
+    width:100%;
     text-align:center;
-    color:#7b8580;
-    font-size:13px;
+    color:#4d4d4d;
+    font-size:8px;
+    letter-spacing:3px;
 }
 
-.modal{
-    display:none;
+/* =========================
+   CONTACT MODAL
+========================= */
+
+.overlay{
     position:fixed;
     inset:0;
-    z-index:5000;
-    background:rgba(20,25,22,.38);
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(12px);
+    display:none;
     align-items:center;
     justify-content:center;
-    padding:15px;
+    z-index:100;
+    padding:20px;
 }
 
-.modal-card{
-    width:min(650px,100%);
-    max-height:90vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:17px;
-    box-shadow:0 20px 60px rgba(0,0,0,.2);
-}
-
-.modal-head{
-    padding:17px;
-    border-bottom:1px solid #e4e8e6;
+.overlay.show{
     display:flex;
-    justify-content:space-between;
-    align-items:center;
 }
 
-.modal-head h3{
-    font-size:18px;
+.contact-card{
+    width:min(100%,440px);
+    background:#0b0b0b;
+    border:1px solid rgba(201,165,92,.45);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 25px 90px rgba(0,0,0,.8);
+    position:relative;
 }
 
 .close{
-    border:0;
-    background:#f0f2f1;
+    position:absolute;
+    top:15px;
+    right:17px;
     width:32px;
     height:32px;
-    border-radius:8px;
-}
-
-.modal-body{
-    padding:17px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-.field.full{
-    grid-column:1/-1;
-}
-
-.field label{
-    font-size:12px;
-    color:#5e6963;
-    font-weight:700;
-}
-
-.field input,
-.field select,
-.field textarea{
-    border:1px solid #d8dfdb;
-    border-radius:9px;
-    padding:10px;
-    outline:none;
-    background:#fff;
-}
-
-.field textarea{
-    min-height:80px;
-    resize:vertical;
-}
-
-.admin-section{
-    border:1px solid #e1e6e3;
-    border-radius:12px;
-    padding:13px;
-    margin-bottom:12px;
-}
-
-.admin-section h4{
-    margin-bottom:10px;
-}
-
-.admin-list{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-    max-height:250px;
-    overflow:auto;
-}
-
-.admin-row{
-    border:1px solid #e2e7e4;
-    border-radius:9px;
-    padding:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-
-.admin-row small{
-    display:block;
-    color:#727c77;
-    margin-top:3px;
-}
-
-.admin-buttons{
-    display:flex;
-    gap:5px;
-}
-
-.mini{
-    border:1px solid #d7ded9;
-    background:#fff;
-    padding:6px 9px;
-    border-radius:7px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.mini.green{
-    color:#147847;
-}
-
-.mini.red{
-    color:#b42318;
-}
-
-.invoice{
-    width:min(520px,100%);
-}
-
-.invoice-paper{
-    padding:24px;
-    color:#111;
-    background:#fff;
-}
-
-.invoice-center{
-    text-align:center;
-}
-
-.invoice-title{
-    font-size:24px;
-    font-weight:900;
-}
-
-.invoice-meta{
-    margin-top:10px;
-    font-size:12px;
-    line-height:1.6;
-}
-
-.invoice-line{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:8px 0;
-    border-bottom:1px dashed #ccc;
-    font-size:13px;
-}
-
-.invoice-total{
-    display:flex;
-    justify-content:space-between;
-    font-size:20px;
-    font-weight:900;
-    padding-top:14px;
-}
-
-.invoice-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    padding:15px;
-    border-top:1px solid #eee;
-}
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:25px;
-    transform:translateX(-50%);
-    z-index:99999;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.1);
     background:#111;
+    color:#aaa;
+    cursor:pointer;
+}
+
+.contact-card h2{
+    font-size:25px;
+    font-weight:400;
+    margin-bottom:8px;
+}
+
+.contact-card h2 span{
+    color:#c9a55c;
+}
+
+.contact-card p{
+    color:#777;
+    font-size:12px;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.contact-option{
+    width:100%;
+    border:1px solid rgba(201,165,92,.22);
+    background:#101010;
     color:#fff;
-    padding:12px 17px;
-    border-radius:10px;
+    padding:16px;
+    border-radius:12px;
+    margin-top:10px;
+    text-align:left;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.contact-option:hover{
+    border-color:#c9a55c;
+}
+
+.contact-option strong{
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.contact-option small{
+    display:block;
+    color:#666;
+    margin-top:5px;
+}
+
+/* =========================
+   REPORT FORM
+========================= */
+
+.report-form{
     display:none;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    font-size:13px;
+    margin-top:15px;
 }
 
-@media(max-width:900px){
-    .pos-grid{
-        grid-template-columns:1fr;
-    }
-
-    .order-box{
-        position:relative;
-        top:auto;
-    }
-
-    .order-items{
-        max-height:none;
-    }
+.report-form textarea{
+    width:100%;
+    min-height:120px;
+    resize:vertical;
+    border-radius:12px;
+    border:1px solid #292929;
+    background:#050505;
+    color:#fff;
+    padding:14px;
+    outline:none;
+    font-family:inherit;
 }
 
-@media(max-width:600px){
-    .topbar-main{
-        padding:10px 13px;
+.report-form textarea:focus{
+    border-color:#c9a55c;
+}
+
+.send-btn{
+    width:100%;
+    margin-top:10px;
+    border:0;
+    border-radius:12px;
+    padding:14px;
+    background:#c9a55c;
+    color:#090909;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:760px){
+
+    .frame{
+        inset:8px;
+        border-radius:17px;
     }
 
-    .header-right #clock{
-        display:none;
+    header{
+        padding:22px 25px;
     }
 
-    .container{
-        padding:12px;
+    main{
+        padding:20px 25px 80px;
     }
 
-    .page-title h1{
-        font-size:20px;
-    }
-
-    .menu-header{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .search{
-        width:100%;
-    }
-
-    .form-grid{
+    .main-box{
         grid-template-columns:1fr;
+        gap:45px;
+        max-width:430px;
     }
 
-    .field.full{
-        grid-column:auto;
+    .welcome{
+        text-align:center;
+    }
+
+    .welcome-line{
+        margin:0 auto 22px;
+    }
+
+    .welcome h1{
+        font-size:64px;
+        letter-spacing:-3px;
+    }
+
+    .created{
+        font-size:11px;
+    }
+
+    .subtitle{
+        margin-left:auto;
+        margin-right:auto;
+        font-size:12px;
+    }
+
+    .users{
+        padding:20px;
+    }
+
+    footer{
+        bottom:18px;
+        font-size:7px;
     }
 }
 </style>
@@ -714,283 +524,167 @@ button{
 
 <body>
 
-<header class="topbar">
+<div class="frame"></div>
 
-    <div class="topbar-main">
+<header>
 
-        <div class="brand">
-            <div class="brand-logo">M</div>
-            <div>
-                <strong id="appName">MY BAR</strong>
-            </div>
+    <div class="brand">
+
+        <div class="brand-logo">
+            S
         </div>
 
-        <div class="header-right">
-            <span id="clock"></span>
-            <span class="user-badge" id="userInfo"></span>
+        <div class="brand-text">
+            <strong>MY BAR</strong>
+            <small>CREATED BY SABI</small>
         </div>
 
     </div>
 
-    <nav class="nav">
-
-        <button class="primary" onclick="newInvoice()">
-            + FATURË E RE
-        </button>
-
-        <button onclick="closeCurrentInvoice()">
-            MBYLL FATURËN
-        </button>
-
-        <button onclick="lockScreen()">
-            BLLOKO
-        </button>
-
-        <button onclick="openSummary()">
-            PËRMBLEDHJE
-        </button>
-
-        <button onclick="openMyInvoices()">
-            FATURAT E MIA
-        </button>
-
-        <button onclick="tableDetails()">
-            DETAJE TAVOLINE
-        </button>
-
-        <button onclick="transferTable()">
-            TRANSFERO
-        </button>
-
-        <button onclick="openCash()">
-            HAP ARKËN
-        </button>
-
-        <button onclick="cashReport()">
-            RAPORT ARKE
-        </button>
-
-        <button class="admin-only" onclick="openAdmin()">
-            ADMIN
-        </button>
-
-        <button class="danger" onclick="logout()">
-            DIL
-        </button>
-
-    </nav>
+    <button class="contact-btn" onclick="openContact()">
+        CONTACT
+    </button>
 
 </header>
 
-<main class="container">
+<main>
 
-    <section class="page-title">
+    <div class="main-box">
 
-        <div>
-            <h1>Paneli i shitjeve</h1>
-            <p id="selectedTableText">
-                Zgjidh një tavolinë
+        <section class="welcome">
+
+            <div class="welcome-line"></div>
+
+            <h1>
+                WEL<span>COME</span>
+            </h1>
+
+            <div class="created">
+                Created — <strong>Sabi</strong>
+            </div>
+
+            <p class="subtitle">
+                Sistem menaxhimi premium për barin tuaj.
+                Zgjidh përdoruesin për të vazhduar.
             </p>
-        </div>
 
-    </section>
+        </section>
 
-    <section class="tables" id="tableGrid"></section>
+        <section class="users">
 
-    <section class="pos-grid">
-
-        <div class="menu-box">
-
-            <div class="menu-header">
-
-                <div>
-                    <h2>MENU</h2>
-                </div>
-
-                <input
-                    id="searchInput"
-                    class="search"
-                    type="search"
-                    placeholder="Kërko produkt..."
-                >
-
+            <div class="users-title">
+                SELECT USER
             </div>
 
-            <div
-                class="categories"
-                id="categories">
-            </div>
+            <button class="user-btn" onclick="goLogin('admin')">
 
-            <div
-                class="menu-grid"
-                id="menuGrid">
-            </div>
+                <div class="user-left">
 
-        </div>
-
-        <aside class="order-box">
-
-            <div class="order-head">
-
-                <div class="order-head-top">
-
-                    <div>
-                        <h2>FATURA E RE</h2>
-                        <div
-                            class="order-sub"
-                            id="orderTable">
-                            Zgjidh tavolinën
-                        </div>
+                    <div class="user-icon">
+                        A
                     </div>
 
-                    <div
-                        class="order-total-top"
-                        id="orderTotalTop">
-                        0 L
+                    <div class="user-name">
+                        ADMIN
+                        <span class="user-role">
+                            ADMINISTRATOR
+                        </span>
                     </div>
 
                 </div>
 
-            </div>
-
-            <div
-                class="order-items"
-                id="orderItems">
-            </div>
-
-            <div class="order-footer">
-
-                <div class="grand-total">
-                    <span>TOTAL</span>
-                    <span id="orderTotal">0 L</span>
+                <div class="arrow">
+                    ›
                 </div>
 
-                <div class="action-row">
+            </button>
 
-                    <button
-                        class="action primary"
-                        onclick="openPayment()">
-                        PAGUA
-                    </button>
+            <button class="user-btn" onclick="goLogin('sabi')">
 
-                    <button
-                        class="action danger"
-                        onclick="clearOrder()">
-                        PASTRO
-                    </button>
+                <div class="user-left">
+
+                    <div class="user-icon">
+                        S
+                    </div>
+
+                    <div class="user-name">
+                        SABI
+                        <span class="user-role">
+                            WAITER
+                        </span>
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="arrow">
+                    ›
+                </div>
 
-        </aside>
+            </button>
 
-    </section>
+        </section>
+
+    </div>
 
 </main>
 
-<!-- PAYMENT -->
+<footer>
+    PREMIUM BAR MANAGEMENT • CREATED BY SABI
+</footer>
 
-<div class="modal" id="paymentModal">
 
-    <div class="modal-card">
+<!-- CONTACT -->
 
-        <div class="modal-head">
-            <h3>Pagesa</h3>
-            <button class="close" onclick="closeModal('paymentModal')">×</button>
-        </div>
+<div class="overlay" id="contactOverlay">
 
-        <div class="modal-body">
+    <div class="contact-card">
 
-            <div
-                style="text-align:center;font-size:28px;font-weight:900;margin-bottom:20px"
-                id="paymentTotal">
-                0 L
-            </div>
+        <button class="close" onclick="closeContact()">
+            ×
+        </button>
 
-            <div class="action-row">
+        <h2>
+            <span>MY</span> BAR
+        </h2>
 
-                <button
-                    class="action primary"
-                    onclick="completePayment('cash')">
-                    CASH
-                </button>
+        <p>
+            Kontakt dhe mbështetje.
+            Zgjidh një nga opsionet më poshtë.
+        </p>
 
-                <button
-                    class="action"
-                    onclick="completePayment('card')">
-                    KARTË
-                </button>
+        <button class="contact-option" onclick="showReport()">
 
-            </div>
+            <strong>
+                RAPORTO NJË PROBLEM
+            </strong>
 
-        </div>
+            <small>
+                Na shkruaj problemin që ke.
+            </small>
 
-    </div>
+        </button>
 
-</div>
+        <button class="contact-option" onclick="buyApp()">
 
-<!-- INVOICE -->
+            <strong>
+                BLI APLIKACIONIN
+            </strong>
 
-<div class="modal" id="invoiceModal">
+            <small>
+                Kontakt për blerjen e MY BAR.
+            </small>
 
-    <div class="modal-card invoice">
+        </button>
 
-        <div class="invoice-paper">
+        <div class="report-form" id="reportForm">
 
-            <div class="invoice-center">
+            <textarea
+                id="reportText"
+                placeholder="Shkruaj problemin këtu..."
+            ></textarea>
 
-                <div
-                    class="invoice-title"
-                    id="invoiceBusiness">
-                    MY BAR
-                </div>
-
-                <div class="invoice-meta">
-
-                    <div id="invoiceNumber"></div>
-                    <div id="invoiceDate"></div>
-                    <div id="invoiceTable"></div>
-                    <div id="invoiceWaiter"></div>
-                    <div id="invoicePayment"></div>
-
-                </div>
-
-            </div>
-
-            <hr style="margin:18px 0;border:0;border-top:1px solid #ddd">
-
-            <div id="invoiceItems"></div>
-
-            <div class="invoice-total">
-
-                <span>TOTAL</span>
-
-                <span id="invoiceTotal">
-                    0 L
-                </span>
-
-            </div>
-
-            <div
-                style="text-align:center;font-size:11px;color:#666;margin-top:18px"
-                id="invoiceFooter">
-            </div>
-
-        </div>
-
-        <div class="invoice-actions">
-
-            <button
-                class="action primary"
-                onclick="printInvoice()">
-                PRINT / PRIT
-            </button>
-
-            <button
-                class="action"
-                onclick="finishInvoice()">
-                MBYLL & DIL
+            <button class="send-btn" onclick="sendReport()">
+                DËRGO MESAZHIN
             </button>
 
         </div>
@@ -999,38 +693,139 @@ button{
 
 </div>
 
-<!-- GENERAL MODAL -->
 
-<div class="modal" id="generalModal">
+<script>
 
-    <div class="modal-card">
+/* =========================
+   LOGIN
+========================= */
 
-        <div class="modal-head">
+function goLogin(user){
 
-            <h3 id="generalModalTitle">
-                MY BAR
-            </h3>
+    localStorage.setItem(
+        "MYBAR_SELECTED_USER",
+        user
+    );
 
-            <button
-                class="close"
-                onclick="closeModal('generalModal')">
-                ×
-            </button>
+    window.location.href = "login.html";
+}
 
-        </div>
 
-        <div
-            class="modal-body"
-            id="generalModalBody">
-        </div>
+/* =========================
+   CONTACT
+========================= */
 
-    </div>
+function openContact(){
 
-</div>
+    document
+        .getElementById("contactOverlay")
+        .classList.add("show");
+}
 
-<div class="toast" id="toast"></div>
+function closeContact(){
 
-<script src="app.js"></script>
+    document
+        .getElementById("contactOverlay")
+        .classList.remove("show");
+}
+
+function showReport(){
+
+    const form =
+        document.getElementById("reportForm");
+
+    form.style.display = "block";
+
+    document
+        .getElementById("reportText")
+        .focus();
+}
+
+
+/* =========================
+   SEND REPORT
+========================= */
+
+function sendReport(){
+
+    const text =
+        document
+        .getElementById("reportText")
+        .value
+        .trim();
+
+    if(!text){
+
+        alert("Shkruaj fillimisht problemin.");
+
+        return;
+    }
+
+    /*
+       Për momentin ruhet lokalisht.
+       Më vonë mund ta lidhim me SMS/API.
+    */
+
+    const reports =
+        JSON.parse(
+            localStorage.getItem("MYBAR_REPORTS") || "[]"
+        );
+
+    reports.push({
+
+        id:Date.now(),
+
+        message:text,
+
+        date:new Date().toISOString()
+
+    });
+
+    localStorage.setItem(
+        "MYBAR_REPORTS",
+        JSON.stringify(reports)
+    );
+
+    document
+        .getElementById("reportText")
+        .value = "";
+
+    alert(
+        "Mesazhi u regjistrua. Faleminderit!"
+    );
+}
+
+
+/* =========================
+   BUY APP
+========================= */
+
+function buyApp(){
+
+    alert(
+        "Për të blerë MY BAR, na kontakto nga CONTACT."
+    );
+}
+
+
+/* =========================
+   CLOSE WITH ESC
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Escape"){
+
+            closeContact();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 </html>
