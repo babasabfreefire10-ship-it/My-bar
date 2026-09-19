@@ -3,400 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#070b0f">
 <title>MY BAR</title>
-
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#070b0f;--panel:#0d141a;--panel2:#111b22;--line:#26343c;--gold:#d5b45a;--gold2:#f0d98c;--text:#f5f5f4;--muted:#8d999f;--blue:#4c91ad;--danger:#c85b61;--ok:#4da77b}
+html,body{min-height:100%;background:radial-gradient(circle at 80% 0%,rgba(76,145,173,.10),transparent 30%),radial-gradient(circle at 0% 100%,rgba(213,180,90,.08),transparent 32%),var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:245px;padding:20px 14px;background:linear-gradient(180deg,#0c151b,#070d11);border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:20}
+.brand{display:flex;align-items:center;gap:12px;padding:8px 9px 22px;border-bottom:1px solid var(--line)}
+.logo{width:44px;height:44px;border:1px solid rgba(213,180,90,.55);border-radius:12px;display:grid;place-items:center;color:var(--gold2);font-weight:900;font-size:21px;background:#0d171d}
+.brand strong{font-size:15px;letter-spacing:2px}.brand small{display:block;margin-top:3px;color:var(--muted);font-size:9px;letter-spacing:1.5px}
+.nav{display:flex;flex-direction:column;gap:5px;margin-top:20px}.nav button{width:100%;padding:12px 13px;border:1px solid transparent;border-radius:10px;background:transparent;color:#aeb8bc;text-align:left}.nav button:hover,.nav button.active{color:var(--gold2);background:rgba(213,180,90,.07);border-color:rgba(213,180,90,.18)}.nav .admin-only{color:var(--gold)}
+.sidebar-bottom{margin-top:auto}.lock{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#0b151b;color:#adb7bb}
+.main{margin-left:245px;width:calc(100% - 245px);min-height:100vh;padding:20px 22px 40px}
+.topbar{min-height:72px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:15px}.page-title{font-size:21px;letter-spacing:1px}.page-subtitle{margin-top:4px;color:var(--muted);font-size:11px}.top-right{display:flex;align-items:center;gap:10px}.clock-box{text-align:right;padding-right:13px;border-right:1px solid var(--line)}.clock{color:var(--gold2);font-size:16px;font-weight:700}.date{margin-top:3px;color:var(--muted);font-size:10px}.user-pill{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#0b151b;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat,.panel{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#101b22,#0a1318);box-shadow:0 14px 35px rgba(0,0,0,.18)}.stat{padding:16px}.stat-label{color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase}.stat-value{margin-top:8px;color:var(--gold2);font-size:22px;font-weight:700}
+.page{display:none}.page.active{display:block}.panel{overflow:hidden}.panel-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.panel-head h2{font-size:14px;letter-spacing:1px}.panel-head span{color:var(--muted);font-size:11px}.panel-body{padding:16px}
+.tables-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:10px}.table{min-height:86px;padding:13px;border:1px solid #23353e;border-radius:12px;background:#0b171d;color:#fff;text-align:left;display:flex;flex-direction:column;justify-content:center}.table:hover{border-color:var(--gold)}.table strong{font-size:13px}.table span{margin-top:7px;color:var(--muted);font-size:11px}.table.active{border-color:rgba(76,145,173,.7);background:rgba(76,145,173,.08)}.table.selected{border-color:var(--gold);box-shadow:0 0 0 1px rgba(213,180,90,.16)}
+.pos{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:15px}.categories{display:flex;gap:7px;overflow:auto;padding-bottom:12px}.categories button{flex:0 0 auto;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#0b171d;color:#9da9ae;font-size:11px}.categories button.active{background:var(--gold);border-color:var(--gold);color:#070b0f}.search{width:100%;margin-bottom:12px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#091218;color:#fff;outline:none}.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:9px}.product{min-height:98px;padding:13px;border:1px solid #23353e;border-radius:12px;background:#0b171d;color:#fff;text-align:left;display:flex;flex-direction:column;justify-content:space-between}.product:hover{border-color:var(--gold);transform:translateY(-1px)}.product strong{font-size:12px}.product span{margin-top:8px;color:var(--gold2);font-weight:700}.product small{margin-top:7px;color:var(--muted);font-size:10px}.product.disabled{opacity:.35;cursor:not-allowed}
+.order{position:sticky;top:20px}.order-items{max-height:440px;overflow:auto}.order-item,.row,.invoice-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #1d2a31}.order-item:last-child,.row:last-child,.invoice-row:last-child{border-bottom:0}.order-item strong,.row strong{font-size:12px}.order-item small,.row small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.order-actions{display:flex;align-items:center;gap:6px}.order-actions button,.mini{min-width:30px;height:30px;border:1px solid var(--line);border-radius:8px;background:#0b171d;color:#fff}.order-total{margin-top:12px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:16px}.order-total strong{color:var(--gold2)}.primary,.danger,.ghost{padding:11px 14px;border-radius:10px;border:1px solid var(--line);color:#fff}.primary{background:linear-gradient(135deg,#d5b45a,#a78632);color:#080b0e;border-color:#d5b45a;font-weight:800}.danger{background:rgba(200,91,97,.12);border-color:rgba(200,91,97,.35)}.ghost{background:#0b171d}.full{width:100%;margin-top:12px}.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field label{color:var(--muted);font-size:10px}.field input,.field select{padding:11px;border:1px solid var(--line);border-radius:9px;background:#091218;color:#fff;outline:none}.admin-section{margin-bottom:15px}.admin-section:last-child{margin-bottom:0}.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.admin-list{max-height:360px;overflow:auto}.row button{padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#0b171d;color:#fff}.notice{padding:10px 12px;border:1px solid rgba(213,180,90,.2);border-radius:10px;background:rgba(213,180,90,.05);color:#c8b77f;font-size:11px;margin-bottom:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:100}.modal-card{width:min(440px,92vw);padding:20px;border:1px solid var(--line);border-radius:16px;background:#0b151b;box-shadow:0 25px 80px rgba(0,0,0,.55)}.modal-card h2{font-size:17px;margin-bottom:8px}.modal-card p{color:var(--muted);font-size:11px}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.invoice{background:#fff;color:#111;border-radius:14px;padding:22px;width:min(430px,92vw)}.invoice h2{font-size:20px;letter-spacing:2px}.invoice-meta{margin:12px 0;font-size:11px;color:#555}.invoice-row{border-color:#ddd}.invoice-total{display:flex;justify-content:space-between;margin-top:15px;padding-top:12px;border-top:2px solid #111;font-weight:800}.invoice-actions{display:flex;gap:8px;margin-top:15px}.invoice-actions button{flex:1}
+@media(max-width:900px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.pos{grid-template-columns:1fr}.order{position:static}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.sidebar{position:static;width:100%;min-height:auto;padding:12px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding-bottom:12px}.nav{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px}.nav button{font-size:10px;padding:9px}.sidebar-bottom{margin-top:10px}.main{margin-left:0;width:100%;padding:12px}.topbar{align-items:flex-start}.top-right{flex-direction:column;align-items:flex-end}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.menu-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">S</div><div><strong id="brandName">MY BAR</strong><small>PREMIUM BAR SYSTEM</small></div></div>
+  <nav class="nav">
+    <button data-page="dashboard" class="active">PËRMBLEDHJE</button>
+    <button data-page="newinvoice">FATURË E RE</button>
+    <button data-page="invoices">FATURAT E MIA</button>
+    <button data-page="tables">TAVOLINAT</button>
+    <button data-page="admin" class="admin-only">ADMIN</button>
+    <button onclick="logout()">DIL</button>
+    <button onclick="logout()">BLLOKO</button>
+  </nav>
+  <div class="sidebar-bottom"><button class="lock" onclick="logout()">⏻ Dalje / Blloko</button></div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div><div class="page-title" id="pageTitle">PËRMBLEDHJE</div><div class="page-subtitle">Kontroll i shpejtë i aktivitetit të lokalit</div></div>
+  <div class="top-right"><div class="clock-box"><div class="clock" id="clock">00:00:00</div><div class="date" id="date">--</div></div><div class="user-pill" id="userInfo">—</div></div>
+</header>
+
+<section id="page-dashboard" class="page active">
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Shitje sot</div><div class="stat-value" id="salesToday">0 L</div></div>
+    <div class="stat"><div class="stat-label">Tavolina aktive</div><div class="stat-value" id="activeTables">0</div></div>
+    <div class="stat"><div class="stat-label">Fatura sot</div><div class="stat-value" id="invoiceToday">0</div></div>
+    <div class="stat"><div class="stat-label">Pagesa me kartë</div><div class="stat-value" id="cardToday">0 L</div></div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><div class="panel-head"><h2>ARKA SOT</h2><span>Gjendja e ditës</span></div><div class="panel-body">
+      <div class="row"><span>Totali</span><strong id="cashTotal">0 L</strong></div>
+      <div class="row"><span>Cash</span><strong id="cashMoney">0 L</strong></div>
+      <div class="row"><span>Kartë</span><strong id="cashCard">0 L</strong></div>
+      <div class="row"><span>Fatura</span><strong id="cashInvoices">0</strong></div>
+    </div></div>
+    <div class="panel"><div class="panel-head"><h2>PAGESAT E FUNDIT</h2><span>Sot</span></div><div class="panel-body" id="paymentsList"><div class="empty">Nuk ka pagesa sot.</div></div></div>
+  </div>
+</section>
+
+<section id="page-newinvoice" class="page">
+  <div class="panel" style="margin-bottom:15px"><div class="panel-head"><h2>TAVOLINAT</h2><span>Zgjidh tavolinën ose shto produkt direkt</span></div><div class="panel-body"><div id="tableGrid" class="tables-grid"></div></div></div>
+  <div class="pos">
+    <div class="panel"><div class="panel-head"><h2>MENU</h2><span>07:00–10:00 ofertë mëngjesi • 20:00–00:00 pa kafe</span></div><div class="panel-body">
+      <div id="categories" class="categories"></div>
+      <input id="menuSearch" class="search" placeholder="Kërko produkt...">
+      <div id="menuGrid" class="menu-grid"></div>
+    </div></div>
+    <div class="panel order"><div class="panel-head"><h2>POROSIA</h2><span id="selectedTableText">Tavolina automatike</span></div><div class="panel-body">
+      <div id="orderItems" class="order-items"><div class="empty">Nuk ka produkte në porosi.</div></div>
+      <div class="order-total"><span>TOTAL</span><strong id="orderTotal">0 L</strong></div>
+      <button class="primary full" onclick="openPayment()">MBYLLE FATURËN</button>
+    </div></div>
+  </div>
+</section>
+
+<section id="page-tables" class="page">
+  <div class="panel"><div class="panel-head"><h2>TAVOLINAT</h2><span>Menaxho tavolinat dhe porositë aktive</span></div><div class="panel-body"><div id="tableGrid2" class="tables-grid"></div></div></div>
+</section>
+
+<section id="page-invoices" class="page">
+  <div class="panel"><div class="panel-head"><h2>FATURAT E MIA</h2><span>Historiku i faturave</span></div><div class="panel-body" id="historyList"><div class="empty">Nuk ka histori.</div></div></div>
+</section>
+
+<section id="page-admin" class="page admin-only">
+  <div class="notice">ADMIN: këtu kontrollon përdoruesit, produktet, stokun, tavolinat dhe emrin e aplikacionit.</div>
+  <div class="grid2">
+    <div class="panel admin-section"><div class="panel-head"><h2>PËRDORUESIT</h2><span>ADMIN / SABI / MONDI</span></div><div class="panel-body">
+      <div id="usersList" class="admin-list"></div>
+      <div class="form-grid" style="margin-top:12px"><div class="field"><label>Emri</label><input id="newUserName" placeholder="Emri"></div><div class="field"><label>Username</label><input id="newUserUsername" placeholder="username"></div><div class="field"><label>Password</label><input id="newUserPassword" value="1234" placeholder="1234"></div><div class="field"><label>Roli</label><select id="newUserRole"><option value="waiter">KAMARIER</option><option value="admin">ADMIN</option></select></div></div>
+      <div class="admin-actions"><button class="primary" onclick="addAdminUser()">SHTO PËRDORUES</button></div>
+    </div></div>
+
+    <div class="panel admin-section"><div class="panel-head"><h2>SETTINGS</h2><span>Konfigurimi kryesor</span></div><div class="panel-body">
+      <div class="form-grid"><div class="field"><label>Emri i aplikacionit</label><input id="appNameInput" placeholder="MY BAR"></div><div class="field"><label>Numri i tavolinave</label><input id="tableCountInput" type="number" min="1" max="100" value="12"></div></div>
+      <div class="admin-actions"><button class="primary" onclick="saveAppName()">RUAJ EMRIN</button><button class="ghost" onclick="saveTableCount()">RUAJ TAVOLINAT</button></div>
+      <div class="field" style="margin-top:12px"><label>Password i ri i ADMIN</label><input id="newAdminPassword" type="password" placeholder="Password i ri"></div>
+      <div class="admin-actions"><button class="ghost" onclick="changeAdminPassword()">NDRYSHO PASSWORD</button></div>
+    </div></div>
+  </div>
+
+  <div class="panel admin-section"><div class="panel-head"><h2>MENU / STOK</h2><span>Shto produkt, kategori dhe çmim</span></div><div class="panel-body">
+    <div class="form-grid">
+      <div class="field"><label>Produkt</label><input id="newProductName" placeholder="Emri i produktit"></div>
+      <div class="field"><label>Kategoria</label><input id="newProductCategory" placeholder="p.sh. Cocktails"></div>
+      <div class="field"><label>Çmimi (L)</label><input id="newProductPrice" type="number" placeholder="500"></div>
+      <div class="field"><label>Stok fillestar</label><input id="newProductStock" type="number" value="20"></div>
+    </div>
+    <div class="admin-actions"><button class="primary" onclick="addAdminProduct()">SHTO PRODUKT</button></div>
+    <div id="adminProducts" class="admin-list" style="margin-top:12px"></div>
+  </div></div>
+</section>
+</main>
+</div>
+
+<div id="paymentModal" class="modal">
+  <div class="modal-card"><h2>MBYLL FATURËN</h2><p>Totali për pagesë</p><div style="font-size:30px;color:var(--gold2);font-weight:800;margin-top:8px" id="paymentTotal">0 L</div>
+    <div class="modal-actions"><button class="primary" onclick="completePayment('cash')">CASH</button><button class="primary" onclick="completePayment('card')">KARTË</button></div>
+    <button class="ghost full" onclick="closePayment()">ANULO</button>
+  </div>
+</div>
+
+<div id="invoiceModal" class="modal">
+  <div class="invoice">
+    <h2>MY BAR</h2><div style="font-size:10px;color:#666;margin-top:3px">FATURË</div>
+    <div class="invoice-meta"><div><b>Nr:</b> <span id="invoiceNumber"></span></div><div><b>Datë:</b> <span id="invoiceDate"></span></div><div><b>Tavolinë:</b> <span id="invoiceTable"></span></div><div><b>Kamarier:</b> <span id="invoiceWaiter"></span></div></div>
+    <div id="invoiceItems"></div>
+    <div class="invoice-total"><span>TOTAL</span><span id="invoiceTotal">0 L</span></div>
+    <div class="invoice-actions"><button class="primary" onclick="window.print();setTimeout(logout,700)">PRINT / MBYLL</button><button class="ghost" onclick="closeInvoice()">MBYLL</button></div>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+<script>
+"use strict";
+function closeInvoice(){
+  const m=document.getElementById("invoiceModal");
+  if(m)m.style.display="none";
+  setTimeout(()=>{ if(typeof logout==="function") logout(); },250);
 }
-
-:root{
-    --bg:#071015;
-    --panel:#0d171d;
-    --panel2:#101d24;
-    --line:#1d3039;
-    --gold:#d6b45a;
-    --gold2:#f1d88b;
-    --blue:#4c8fa8;
-    --text:#f4f5f5;
-    --muted:#8e9ba2;
-    --danger:#c75c5c;
-    --success:#4da67b;
+function pageTitleFor(id){
+  return ({dashboard:"PËRMBLEDHJE",newinvoice:"FATURË E RE",invoices:"FATURAT E MIA",tables:"TAVOLINAT",admin:"ADMIN"})[id]||"MY BAR";
 }
-
-html,body{
-    min-height:100%;
-    background:
-        radial-gradient(circle at 75% 0%,rgba(76,143,168,.10),transparent 28%),
-        radial-gradient(circle at 15% 100%,rgba(214,180,90,.06),transparent 30%),
-        var(--bg);
-    color:var(--text);
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  const page=document.getElementById("page-"+id);
+  if(page)page.classList.add("active");
+  document.querySelectorAll(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+  document.getElementById("pageTitle").textContent=pageTitleFor(id);
+  if(id==="tables"){
+    const a=document.getElementById("tableGrid"),b=document.getElementById("tableGrid2");
+    if(a&&b)b.innerHTML=a.innerHTML;
+  }
+  if(id==="invoices"&&typeof renderHistory==="function")renderHistory();
+  if(id==="admin"&&typeof renderAdmin==="function")renderAdmin();
 }
+document.querySelectorAll(".nav button[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
-body{
-    min-height:100vh;
+function tickClock(){
+  const n=new Date();
+  const c=document.getElementById("clock"),d=document.getElementById("date");
+  if(c)c.textContent=n.toLocaleTimeString("sq-AL",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+  if(d)d.textContent=n.toLocaleDateString("sq-AL",{weekday:"long",day:"2-digit",month:"long",year:"numeric"});
 }
+setInterval(tickClock,1000);tickClock();
 
-button,
-input,
-textarea,
-select{
-    font:inherit;
+function getLS(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch{return f}}
+function setLS(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function adminOnly(){const u=getLS("MYBAR_CURRENT_USER",null);return u&&u.role==="admin"}
+
+function addAdminUser(){
+  if(!adminOnly())return;
+  const users=getLS("MYBAR_USERS_V2",[]);
+  const username=document.getElementById("newUserUsername").value.trim();
+  const name=document.getElementById("newUserName").value.trim();
+  const password=document.getElementById("newUserPassword").value.trim()||"1234";
+  const role=document.getElementById("newUserRole").value;
+  if(!username||!name){toast("Plotëso emrin dhe username.");return}
+  if(users.some(u=>u.username===username)){toast("Ky username ekziston.");return}
+  users.push({username,password,role,name});
+  setLS("MYBAR_USERS_V2",users);
+  document.getElementById("newUserName").value="";
+  document.getElementById("newUserUsername").value="";
+  renderAdmin();
+  toast("Përdoruesi u shtua.");
 }
-
-button{
-    cursor:pointer;
+function addAdminProduct(){
+  if(!adminOnly())return;
+  const products=getLS("MYBAR_PRODUCTS_V2",[]);
+  const stock=getLS("MYBAR_INVENTORY_V2",{});
+  const name=document.getElementById("newProductName").value.trim();
+  const category=document.getElementById("newProductCategory").value.trim();
+  const price=Number(document.getElementById("newProductPrice").value);
+  const qty=Math.max(0,Number(document.getElementById("newProductStock").value||20));
+  if(!name||!category||!price){toast("Plotëso produktin, kategorinë dhe çmimin.");return}
+  const id=Date.now();
+  products.push({id,name,category,price});
+  stock[id]=qty;
+  setLS("MYBAR_PRODUCTS_V2",products);setLS("MYBAR_INVENTORY_V2",stock);
+  document.getElementById("newProductName").value="";document.getElementById("newProductCategory").value="";document.getElementById("newProductPrice").value="";
+  renderAdmin();renderMenu();toast("Produkti u shtua.");
 }
-
-.app{
-    min-height:100vh;
-    display:flex;
+function editAdminProduct(id){
+  const products=getLS("MYBAR_PRODUCTS_V2",[]);
+  const p=products.find(x=>Number(x.id)===Number(id));if(!p)return;
+  const name=prompt("Emri i produktit:",p.name);if(name===null)return;
+  const category=prompt("Kategoria:",p.category);if(category===null)return;
+  const price=prompt("Çmimi në lek:",p.price);if(price===null)return;
+  p.name=name.trim()||p.name;p.category=category.trim()||p.category;p.price=Number(price)||p.price;
+  setLS("MYBAR_PRODUCTS_V2",products);renderAdmin();renderMenu();toast("Produkti u ndryshua.");
 }
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-    width:245px;
-    min-height:100vh;
-    background:
-        linear-gradient(180deg,#0b1419,#071015);
-    border-right:1px solid var(--line);
-    padding:22px 15px;
-    display:flex;
-    flex-direction:column;
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    z-index:20;
+function deleteAdminProduct(id){
+  if(!confirm("Fshi këtë produkt?"))return;
+  const products=getLS("MYBAR_PRODUCTS_V2",[]).filter(p=>Number(p.id)!==Number(id));
+  const stock=getLS("MYBAR_INVENTORY_V2",{});delete stock[id];
+  setLS("MYBAR_PRODUCTS_V2",products);setLS("MYBAR_INVENTORY_V2",stock);
+  renderAdmin();renderMenu();toast("Produkti u fshi.");
 }
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:8px 9px 25px;
-    border-bottom:1px solid var(--line);
-}
-
-.logo{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    border:1px solid rgba(214,180,90,.55);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--gold2);
-    font-size:20px;
-    font-weight:800;
-    background:#0c171d;
-}
-
-.brand strong{
-    display:block;
-    font-size:15px;
-    letter-spacing:2px;
-}
-
-.brand small{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-    margin-top:3px;
-    letter-spacing:1px;
-}
-
-.nav{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-    margin-top:22px;
-}
-
-.nav button{
-    border:1px solid transparent;
-    background:transparent;
-    color:#aeb8bc;
-    text-align:left;
-    padding:12px 13px;
-    border-radius:10px;
-    transition:.2s;
-}
-
-.nav button:hover,
-.nav button.active{
-    color:var(--gold2);
-    background:rgba(214,180,90,.07);
-    border-color:rgba(214,180,90,.18);
-}
-
-.nav .admin-only{
-    color:#d6b45a;
-}
-
-.sidebar-bottom{
-    margin-top:auto;
-}
-
-.lock{
-    width:100%;
-    border:1px solid #263b44;
-    background:#0b171d;
-    color:#aeb8bc;
-    padding:11px;
-    border-radius:10px;
-}
-
-.lock:hover{
-    border-color:var(--gold);
-    color:var(--gold2);
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
-    margin-left:245px;
-    width:calc(100% - 245px);
-    min-height:100vh;
-    padding:20px 22px 35px;
-}
-
-/* =========================
-   TOPBAR
-========================= */
-
-.topbar{
-    min-height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    border-bottom:1px solid var(--line);
-    margin-bottom:20px;
-}
-
-.top-left{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.page-title{
-    font-size:21px;
-    letter-spacing:1px;
-}
-
-.page-subtitle{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-.top-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.clock-box{
-    text-align:right;
-    padding-right:12px;
-    border-right:1px solid var(--line);
-}
-
-.clock{
-    color:var(--gold2);
-    font-size:16px;
-    font-weight:700;
-}
-
-.date{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:3px;
-}
-
-.user-pill{
-    border:1px solid var(--line);
-    background:#0c171d;
-    border-radius:10px;
-    padding:9px 12px;
-    font-size:12px;
-}
-
-/* =========================
-   DASHBOARD CARDS
-========================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:18px;
-}
-
-.stat{
-    background:
-        linear-gradient(145deg,#101c23,#0a1419);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:17px;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.stat-value{
-    margin-top:8px;
-    color:var(--gold2);
-    font-size:23px;
-    font-weight:700;
-}
-
-/* =========================
-   PANELS
-========================= */
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-.panel{
-    background:
-        linear-gradient(145deg,#0e1a20,#0a1419);
-    border:1px solid var(--line);
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.panel-head{
-    padding:15px 17px;
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.panel-head h2{
-    font-size:14px;
-    letter-spacing:1px;
-}
-
-.panel-head span{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.panel-body{
-    padding:16px;
-}
-
-/* =========================
-   TABLES
-========================= */
-
-.tables-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(135px,1fr));
-    gap:10px;
-}
-
-.table{
-    min-height:86px;
-    border:1px solid #23353e;
-    border-radius:12px;
-    background:#0b171d;
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
-    padding:13px;
-    transition:.2s;
-}
-
-.table:hover{
-    border-color:var(--gold);
-    transform:translateY(-1px);
-}
-
-.table strong{
-    font-size:13px;
-}
-
-.table span{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:7px;
-}
-
-.table.active{
-    border-color:rgba(76,143,168,.65);
-    background:rgba(76,143,168,.08);
-}
-
-.table.selected{
-    border-color:var(--gold);
-    box-shadow:0 0 0 1px rgba(214,180,90,.15);
-}
-
-/* =========================
-   POS
-========================= */
-
-.pos{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 360px;
-    gap:15px;
-}
-
-.categories{
-    display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding-bottom:12px;
-}
-
-.categories button{
-    flex:0 0 auto;
-    border:1px solid var(--line);
-    background:#0b171d;
-    color:#9da9ae;
-    border-radius:9px;
-    padding:9px 12px;
-    font-size:11px;
-}
-
-.categories button:hover,
-.categories button.active{
-    color:#071015;
-    background:var(--gold);
-    border-color:var(--gold);
-}
-
-.search{
-    width:100%;
-    background
+const oldRenderAdmin=window.renderAdmin;
+window.renderAdmin=function(){
+  if(typeof oldRenderAdmin==="function")oldRenderAdmin();
+  const box=document.getElementById("adminProducts");if(!box)return;
+  const products=getLS("MYBAR_PRODUCTS_V2",[]);
+  if(!products.length){box.innerHTML='<div class="empty">Nuk ka produkte.</div>';return}
+  box.innerHTML=products.map(p=>`<div class="row"><div><strong>${String(p.name).replaceAll("<","&lt;")}</strong><small>${String(p.category).replaceAll("<","&lt;")} • ${Number(p.price).toLocaleString("sq-AL")} L • Stok: ${getLS("MYBAR_INVENTORY_V2",{})[p.id]??0}</small></div><div><button onclick="editAdminProduct(${p.id})">EDIT</button><button onclick="changeStock(${p.id},1)">+</button><button onclick="changeStock(${p.id},-1)">−</button><button onclick="deleteAdminProduct(${p.id})">×</button></div></div>`).join("");
+};
+</script>
+</body>
+</html>
