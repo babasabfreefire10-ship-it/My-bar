@@ -2,12 +2,7 @@
 
 /* =========================================================
    MY BAR — APP.JS
-   Version i ri nga zero
 ========================================================= */
-
-/* =========================
-   STORAGE KEYS
-========================= */
 
 const USERS_KEY = "MYBAR_USERS_V2";
 const SESSION_KEY = "MYBAR_SESSION_V2";
@@ -18,189 +13,126 @@ const PRODUCTS_KEY = "MYBAR_PRODUCTS_V2";
 const INVOICES_KEY = "MYBAR_INVOICES_V2";
 const INVENTORY_KEY = "MYBAR_INVENTORY_V2";
 const SETTINGS_KEY = "MYBAR_SETTINGS_V2";
+
 const SELECTED_TABLE_KEY = "MYBAR_SELECTED_TABLE_V2";
-
-
-/* =========================
-   DEFAULT USERS
-========================= */
 
 const DEFAULT_USERS = [
     {
-        username: "admin",
-        password: "1234",
-        role: "admin",
-        name: "ADMIN"
+        username:"admin",
+        password:"1234",
+        role:"admin",
+        name:"ADMIN"
     },
     {
-        username: "sabi",
-        password: "1234",
-        role: "waiter",
-        name: "SABI"
+        username:"sabi",
+        password:"1234",
+        role:"waiter",
+        name:"SABI"
     },
     {
-        username: "mondi",
-        password: "1234",
-        role: "waiter",
-        name: "MONDI"
+        username:"mondi",
+        password:"1234",
+        role:"waiter",
+        name:"MONDI"
     }
 ];
 
-
-/* =========================
-   DEFAULT SETTINGS
-========================= */
-
-const DEFAULT_SETTINGS = {
-    appName: "MY BAR",
-    welcomeTitle: "MIRË SE VINI",
-    businessName: "MY BAR",
-    nipt: "",
-    address: "",
-    phone: "",
-    footer: "Faleminderit për vizitën!",
-    tableCount: 12
-};
-
-
-/* =========================
-   DEFAULT PRODUCTS
-========================= */
-
 const DEFAULT_PRODUCTS = [
 
-    /* KAFE */
+    {id:1,name:"Espresso",category:"Kafe",price:100},
+    {id:2,name:"Espresso Dopio",category:"Kafe",price:150},
+    {id:3,name:"Macchiato",category:"Kafe",price:120},
+    {id:4,name:"Cappuccino",category:"Kafe",price:180},
+    {id:5,name:"Latte",category:"Kafe",price:200},
+    {id:6,name:"Freddo Espresso",category:"Kafe",price:200},
+    {id:7,name:"Freddo Cappuccino",category:"Kafe",price:220},
+    {id:8,name:"Çaj",category:"Kafe",price:120},
 
-    { id: 1, name: "Espresso", category: "Kafe", price: 100 },
-    { id: 2, name: "Espresso Dopio", category: "Kafe", price: 150 },
-    { id: 3, name: "Macchiato", category: "Kafe", price: 120 },
-    { id: 4, name: "Cappuccino", category: "Kafe", price: 180 },
-    { id: 5, name: "Latte", category: "Kafe", price: 200 },
-    { id: 6, name: "Freddo Espresso", category: "Kafe", price: 200 },
-    { id: 7, name: "Freddo Cappuccino", category: "Kafe", price: 220 },
-    { id: 8, name: "Çaj", category: "Kafe", price: 120 },
+    {id:20,name:"Coca Cola",category:"Pije Freskuese",price:150},
+    {id:21,name:"Coca Cola Zero",category:"Pije Freskuese",price:150},
+    {id:22,name:"Fanta",category:"Pije Freskuese",price:150},
+    {id:23,name:"Sprite",category:"Pije Freskuese",price:150},
+    {id:24,name:"Schweppes",category:"Pije Freskuese",price:150},
+    {id:25,name:"Red Bull",category:"Pije Freskuese",price:250},
+    {id:26,name:"Fresh Orange",category:"Pije Freskuese",price:250},
+    {id:27,name:"Fresh Lemon",category:"Pije Freskuese",price:250},
 
-    /* PIJE */
+    {id:40,name:"Ujë 0.5L",category:"Ujë",price:100},
+    {id:41,name:"Ujë 0.75L",category:"Ujë",price:150},
+    {id:42,name:"Ujë 1.5L",category:"Ujë",price:150},
 
-    { id: 20, name: "Coca Cola", category: "Pije Freskuese", price: 150 },
-    { id: 21, name: "Coca Cola Zero", category: "Pije Freskuese", price: 150 },
-    { id: 22, name: "Fanta", category: "Pije Freskuese", price: 150 },
-    { id: 23, name: "Sprite", category: "Pije Freskuese", price: 150 },
-    { id: 24, name: "Schweppes", category: "Pije Freskuese", price: 150 },
-    { id: 25, name: "Red Bull", category: "Pije Freskuese", price: 250 },
-    { id: 26, name: "Fresh Orange", category: "Pije Freskuese", price: 250 },
-    { id: 27, name: "Fresh Lemon", category: "Pije Freskuese", price: 250 },
+    {id:50,name:"Birra Tirana",category:"Birra",price:200},
+    {id:51,name:"Birra Korça",category:"Birra",price:200},
+    {id:52,name:"Heineken",category:"Birra",price:250},
+    {id:53,name:"Corona",category:"Birra",price:300},
+    {id:54,name:"Tuborg",category:"Birra",price:250},
 
-    /* UJE */
+    {id:60,name:"Jack Daniel's",category:"Whisky",price:500},
+    {id:61,name:"Johnnie Walker Red",category:"Whisky",price:450},
+    {id:62,name:"Johnnie Walker Black",category:"Whisky",price:650},
+    {id:63,name:"Chivas Regal",category:"Whisky",price:700},
 
-    { id: 40, name: "Ujë 0.5L", category: "Ujë", price: 100 },
-    { id: 41, name: "Ujë 0.75L", category: "Ujë", price: 150 },
-    { id: 42, name: "Ujë 1.5L", category: "Ujë", price: 150 },
+    {id:70,name:"Gordon's Gin",category:"Gin",price:450},
+    {id:71,name:"Bombay Sapphire",category:"Gin",price:550},
+    {id:72,name:"Hendrick's",category:"Gin",price:800},
 
-    /* BIRRA */
+    {id:80,name:"Absolut Vodka",category:"Vodka",price:450},
+    {id:81,name:"Smirnoff",category:"Vodka",price:450},
+    {id:82,name:"Grey Goose",category:"Vodka",price:800},
 
-    { id: 50, name: "Birra Tirana", category: "Birra", price: 200 },
-    { id: 51, name: "Birra Korça", category: "Birra", price: 200 },
-    { id: 52, name: "Heineken", category: "Birra", price: 250 },
-    { id: 53, name: "Corona", category: "Birra", price: 300 },
-    { id: 54, name: "Tuborg", category: "Birra", price: 250 },
+    {id:90,name:"Bacardi",category:"Rum",price:450},
+    {id:91,name:"Captain Morgan",category:"Rum",price:500},
 
-    /* WHISKY */
+    {id:100,name:"Jose Cuervo",category:"Tequila",price:500},
+    {id:101,name:"Olmeca",category:"Tequila",price:550},
 
-    { id: 60, name: "Jack Daniel's", category: "Whisky", price: 500 },
-    { id: 61, name: "Johnnie Walker Red", category: "Whisky", price: 450 },
-    { id: 62, name: "Johnnie Walker Black", category: "Whisky", price: 650 },
-    { id: 63, name: "Chivas Regal", category: "Whisky", price: 700 },
+    {id:110,name:"Baileys",category:"Liqueur & Amaro",price:450},
+    {id:111,name:"Jägermeister",category:"Liqueur & Amaro",price:450},
+    {id:112,name:"Aperol",category:"Liqueur & Amaro",price:400},
 
-    /* GIN */
+    {id:120,name:"Verë e Kuqe",category:"Verë",price:300},
+    {id:121,name:"Verë e Bardhë",category:"Verë",price:300},
+    {id:122,name:"Prosecco",category:"Verë",price:600},
 
-    { id: 70, name: "Gordon's Gin", category: "Gin", price: 450 },
-    { id: 71, name: "Bombay Sapphire", category: "Gin", price: 550 },
-    { id: 72, name: "Hendrick's", category: "Gin", price: 800 },
+    {id:130,name:"Mojito",category:"Cocktails",price:600},
+    {id:131,name:"Margarita",category:"Cocktails",price:650},
+    {id:132,name:"Aperol Spritz",category:"Cocktails",price:650},
+    {id:133,name:"Sex on the Beach",category:"Cocktails",price:700},
+    {id:134,name:"Long Island",category:"Cocktails",price:800},
 
-    /* VODKA */
+    {id:140,name:"Gin Tonic",category:"Long Drinks",price:550},
+    {id:141,name:"Vodka Red Bull",category:"Long Drinks",price:600},
+    {id:142,name:"Whisky Cola",category:"Long Drinks",price:550},
 
-    { id: 80, name: "Absolut Vodka", category: "Vodka", price: 450 },
-    { id: 81, name: "Smirnoff", category: "Vodka", price: 450 },
-    { id: 82, name: "Grey Goose", category: "Vodka", price: 800 },
+    {id:150,name:"Shot Tequila",category:"Shots",price:300},
+    {id:151,name:"Shot Jägermeister",category:"Shots",price:300},
+    {id:152,name:"Shot Vodka",category:"Shots",price:250},
 
-    /* RUM */
-
-    { id: 90, name: "Bacardi", category: "Rum", price: 450 },
-    { id: 91, name: "Captain Morgan", category: "Rum", price: 500 },
-
-    /* TEQUILA */
-
-    { id: 100, name: "Jose Cuervo", category: "Tequila", price: 500 },
-    { id: 101, name: "Olmeca", category: "Tequila", price: 550 },
-
-    /* LIQUEUR */
-
-    { id: 110, name: "Baileys", category: "Liqueur & Amaro", price: 450 },
-    { id: 111, name: "Jägermeister", category: "Liqueur & Amaro", price: 450 },
-    { id: 112, name: "Aperol", category: "Liqueur & Amaro", price: 400 },
-
-    /* VERE */
-
-    { id: 120, name: "Verë e Kuqe", category: "Verë", price: 300 },
-    { id: 121, name: "Verë e Bardhë", category: "Verë", price: 300 },
-    { id: 122, name: "Prosecco", category: "Verë", price: 600 },
-
-    /* COCKTAILS */
-
-    { id: 130, name: "Mojito", category: "Cocktails", price: 600 },
-    { id: 131, name: "Margarita", category: "Cocktails", price: 650 },
-    { id: 132, name: "Aperol Spritz", category: "Cocktails", price: 650 },
-    { id: 133, name: "Sex on the Beach", category: "Cocktails", price: 700 },
-    { id: 134, name: "Long Island", category: "Cocktails", price: 800 },
-
-    /* LONG DRINKS */
-
-    { id: 140, name: "Gin Tonic", category: "Long Drinks", price: 550 },
-    { id: 141, name: "Vodka Red Bull", category: "Long Drinks", price: 600 },
-    { id: 142, name: "Whisky Cola", category: "Long Drinks", price: 550 },
-
-    /* SHOTS */
-
-    { id: 150, name: "Shot Tequila", category: "Shots", price: 300 },
-    { id: 151, name: "Shot Jägermeister", category: "Shots", price: 300 },
-    { id: 152, name: "Shot Vodka", category: "Shots", price: 250 },
-
-    /* SNACKS */
-
-    { id: 160, name: "Patatina", category: "Snacks", price: 200 },
-    { id: 161, name: "Kikirikë", category: "Snacks", price: 200 },
-    { id: 162, name: "Ullinj", category: "Snacks", price: 250 },
-    { id: 163, name: "Mix Nuts", category: "Snacks", price: 350 }
+    {id:160,name:"Patatina",category:"Snacks",price:200},
+    {id:161,name:"Kikirikë",category:"Snacks",price:200},
+    {id:162,name:"Ullinj",category:"Snacks",price:250},
+    {id:163,name:"Mix Nuts",category:"Snacks",price:350}
 ];
 
-
-/* =========================================================
+/* =========================
    HELPERS
-========================================================= */
+========================= */
 
-function readJSON(key, fallback) {
+function getJSON(key,fallback){
 
-    try {
+    try{
 
-        const value = localStorage.getItem(key);
+        const value=localStorage.getItem(key);
 
-        if (!value) {
-            return fallback;
-        }
+        return value ? JSON.parse(value) : fallback;
 
-        return JSON.parse(value);
-
-    } catch (error) {
-
-        console.error("Storage error:", key, error);
+    }catch{
 
         return fallback;
     }
 }
 
-
-function writeJSON(key, value) {
+function setJSON(key,value){
 
     localStorage.setItem(
         key,
@@ -208,1639 +140,947 @@ function writeJSON(key, value) {
     );
 }
 
+function money(value){
 
-function money(value) {
-
-    const number = Number(value || 0);
-
-    return number.toLocaleString("sq-AL") + " L";
+    return Number(value||0)
+        .toLocaleString("sq-AL")+
+        " L";
 }
 
+function escapeHTML(value){
 
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return String(value??"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
+function getCurrentUser(){
 
-function getCurrentUser() {
-
-    return readJSON(
-        SESSION_KEY,
+    return getJSON(
+        CURRENT_USER_KEY,
         null
     );
 }
 
+/* =========================
+   SESSION
+========================= */
 
-function getSettings() {
+function checkSession(){
 
-    return readJSON(
-        SETTINGS_KEY,
-        DEFAULT_SETTINGS
-    );
+    const session=
+        localStorage.getItem(SESSION_KEY);
+
+    if(session!=="true"){
+
+        window.location.href="./index.html";
+
+        return false;
+    }
+
+    return true;
 }
 
+/* =========================
+   INITIALIZE
+========================= */
 
-/* =========================================================
-   INITIALIZATION
-========================================================= */
+function initializeApp(){
 
-function initializeApp() {
-
-    /* USERS */
-
-    if (!localStorage.getItem(USERS_KEY)) {
-
-        writeJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+    if(!localStorage.getItem(USERS_KEY)){
+        setJSON(USERS_KEY,DEFAULT_USERS);
     }
 
-
-    /* PRODUCTS */
-
-    if (!localStorage.getItem(PRODUCTS_KEY)) {
-
-        writeJSON(
-            PRODUCTS_KEY,
-            DEFAULT_PRODUCTS
-        );
+    if(!localStorage.getItem(PRODUCTS_KEY)){
+        setJSON(PRODUCTS_KEY,DEFAULT_PRODUCTS);
     }
 
-
-    /* INVOICES */
-
-    if (!localStorage.getItem(INVOICES_KEY)) {
-
-        writeJSON(
-            INVOICES_KEY,
-            []
-        );
+    if(!localStorage.getItem(INVOICES_KEY)){
+        setJSON(INVOICES_KEY,[]);
     }
 
+    if(!localStorage.getItem(INVENTORY_KEY)){
 
-    /* SETTINGS */
+        const stock={};
 
-    if (!localStorage.getItem(SETTINGS_KEY)) {
-
-        writeJSON(
-            SETTINGS_KEY,
-            DEFAULT_SETTINGS
-        );
-    }
-
-
-    /* TABLES */
-
-    initializeTables();
-
-
-    /* INVENTORY */
-
-    initializeInventory();
-
-}
-
-
-/* =========================================================
-   TABLES
-========================================================= */
-
-function initializeTables() {
-
-    const settings =
-        getSettings();
-
-    const count =
-        Math.max(
-            1,
-            Number(settings.tableCount || 12)
-        );
-
-    let tables =
-        readJSON(
-            TABLES_KEY,
-            []
-        );
-
-
-    if (!Array.isArray(tables)) {
-
-        tables = [];
-    }
-
-
-    /*
-       Nëse kemi më pak tavolina,
-       shtojmë tavolina.
-    */
-
-    for (
-        let i = tables.length + 1;
-        i <= count;
-        i++
-    ) {
-
-        tables.push({
-
-            id: i,
-
-            name: "Tavolina " + i,
-
-            items: [],
-
-            openedAt: null,
-
-            waiter: null
-
+        DEFAULT_PRODUCTS.forEach(product=>{
+            stock[product.id]=20;
         });
 
+        setJSON(INVENTORY_KEY,stock);
     }
 
+    if(!localStorage.getItem(SETTINGS_KEY)){
 
-    /*
-       Nëse kemi më shumë tavolina,
-       i mbajmë që të mos humbasim të dhëna.
-    */
+        setJSON(
+            SETTINGS_KEY,
+            {
+                appName:"MY BAR",
+                tableCount:12
+            }
+        );
+    }
 
-
-    writeJSON(
-        TABLES_KEY,
-        tables
-    );
-
+    initializeTables();
 }
 
+/* =========================
+   TABLES
+========================= */
 
-function getTables() {
+function initializeTables(){
 
-    return readJSON(
-        TABLES_KEY,
-        []
-    );
+    const settings=
+        getJSON(SETTINGS_KEY,{
+            tableCount:12
+        });
+
+    const count=
+        Number(settings.tableCount)||12;
+
+    let tables=
+        getJSON(TABLES_KEY,[]);
+
+    if(!Array.isArray(tables)||tables.length!==count){
+
+        const old=tables||[];
+
+        tables=[];
+
+        for(let i=1;i<=count;i++){
+
+            const previous=
+                old.find(t=>t.id===i);
+
+            tables.push(
+                previous||{
+                    id:i,
+                    name:"Tavolina "+i,
+                    items:[]
+                }
+            );
+        }
+
+        setJSON(TABLES_KEY,tables);
+    }
 }
 
+function getTables(){
 
-function saveTables(tables) {
-
-    writeJSON(
-        TABLES_KEY,
-        tables
-    );
-
+    return getJSON(TABLES_KEY,[]);
 }
 
+function saveTables(tables){
 
-function getSelectedTable() {
+    setJSON(TABLES_KEY,tables);
+}
+
+function getSelectedTable(){
 
     return Number(
         localStorage.getItem(
             SELECTED_TABLE_KEY
-        ) || 0
+        )||0
     );
-
 }
 
-
-function setSelectedTable(id) {
+function selectTable(id){
 
     localStorage.setItem(
         SELECTED_TABLE_KEY,
         String(id)
     );
 
-}
-
-
-function selectTable(id) {
-
-    const tables =
-        getTables();
-
-    const table =
-        tables.find(
-            t => Number(t.id) === Number(id)
-        );
-
-    if (!table) {
-        return;
-    }
-
-    setSelectedTable(id);
-
     renderTables();
     renderOrder();
-
-    toast(
-        table.name + " u zgjodh."
-    );
-
 }
 
+function getFirstFreeTable(){
 
-/* =========================================================
-   FIND FIRST FREE TABLE
-========================================================= */
-
-function findFirstFreeTable() {
-
-    const tables =
-        getTables();
+    const tables=getTables();
 
     return tables.find(
-        table =>
-            !table.items ||
-            table.items.length === 0
+        table=>
+            !table.items||
+            table.items.length===0
     );
-
 }
 
+function ensureTableSelected(){
 
-/* =========================================================
-   NEW INVOICE
-========================================================= */
+    let id=getSelectedTable();
 
-function newInvoice() {
+    const tables=getTables();
 
-    const freeTable =
-        findFirstFreeTable();
+    let table=
+        tables.find(t=>t.id===id);
 
-    if (!freeTable) {
+    if(!table){
 
-        toast(
-            "Të gjitha tavolinat janë të zëna."
-        );
+        table=getFirstFreeTable();
 
-        return;
-    }
+        if(!table){
 
+            toast("Nuk ka tavolinë të lirë.");
 
-    setSelectedTable(
-        freeTable.id
-    );
-
-
-    const tables =
-        getTables();
-
-    const table =
-        tables.find(
-            t =>
-                Number(t.id)
-                === Number(freeTable.id)
-        );
-
-
-    if (table) {
-
-        table.items = [];
-
-        table.openedAt =
-            Date.now();
-
-        const user =
-            getCurrentUser();
-
-        table.waiter =
-            user
-                ? user.name
-                : "";
-
-    }
-
-
-    saveTables(tables);
-
-    renderTables();
-    renderOrder();
-    renderMenu();
-
-    toast(
-        freeTable.name +
-        " u hap për faturë të re."
-    );
-
-}
-
-
-/* =========================================================
-   INVENTORY
-========================================================= */
-
-function initializeInventory() {
-
-    const products =
-        readJSON(
-            PRODUCTS_KEY,
-            DEFAULT_PRODUCTS
-        );
-
-    const stock =
-        readJSON(
-            INVENTORY_KEY,
-            {}
-        );
-
-
-    products.forEach(
-        product => {
-
-            if (
-                stock[product.id]
-                === undefined
-            ) {
-
-                stock[product.id] = 20;
-
-            }
-
+            return null;
         }
-    );
 
+        id=table.id;
 
-    writeJSON(
-        INVENTORY_KEY,
-        stock
-    );
+        localStorage.setItem(
+            SELECTED_TABLE_KEY,
+            String(id)
+        );
+    }
 
+    return id;
 }
 
+/* =========================
+   TIME / OFFER
+========================= */
 
-function getStock(productId) {
+function currentHour(){
 
-    const stock =
-        readJSON(
-            INVENTORY_KEY,
-            {}
-        );
+    return new Date().getHours();
+}
+
+function morningOfferActive(){
+
+    const hour=currentHour();
+
+    return hour>=7 && hour<10;
+}
+
+function coffeeHidden(){
+
+    const hour=currentHour();
+
+    return hour>=20 && hour<24;
+}
+
+function isCoffeeCategory(category){
+
+    const value=
+        String(category||"").toLowerCase();
+
+    return(
+        value==="kafe"||
+        value==="kafeteria"||
+        value==="kafe & çaj"
+    );
+}
+
+function isFirstOrder(table){
+
+    return(
+        !table.items||
+        table.items.length===0
+    );
+}
+
+/* =========================
+   INVENTORY
+========================= */
+
+function getStock(productId){
+
+    const stock=
+        getJSON(INVENTORY_KEY,{});
 
     return Number(
-        stock[productId] || 0
+        stock[productId]??0
+    );
+}
+
+function changeStock(productId,amount){
+
+    const stock=
+        getJSON(INVENTORY_KEY,{});
+
+    stock[productId]=Math.max(
+        0,
+        Number(stock[productId]||0)+Number(amount)
     );
 
+    setJSON(INVENTORY_KEY,stock);
 }
 
-
-function changeStock(
-    productId,
-    amount
-) {
-
-    const stock =
-        readJSON(
-            INVENTORY_KEY,
-            {}
-        );
-
-
-    stock[productId] =
-        Math.max(
-            0,
-            Number(
-                stock[productId] || 0
-            ) + Number(amount || 0)
-        );
-
-
-    writeJSON(
-        INVENTORY_KEY,
-        stock
-    );
-
-
-    renderMenu();
-    renderAdmin();
-
-}
-
-
-/* =========================================================
-   TIME
-========================================================= */
-
-function isMorningOffer() {
-
-    const now =
-        new Date();
-
-    const minutes =
-        now.getHours() * 60
-        + now.getMinutes();
-
-
-    const start =
-        6 * 60 + 40;
-
-    const end =
-        9 * 60 + 40;
-
-
-    return (
-        minutes >= start
-        &&
-        minutes <= end
-    );
-
-}
-
-
-function isCoffeeClosed() {
-
-    const now =
-        new Date();
-
-    const minutes =
-        now.getHours() * 60
-        + now.getMinutes();
-
-
-    const start =
-        20 * 60;
-
-    const end =
-        24 * 60;
-
-
-    return (
-        minutes >= start
-        &&
-        minutes < end
-    );
-
-}
-
-
-/* =========================================================
-   PRODUCT PRICE
-========================================================= */
-
-function getProductPrice(product) {
-
-    let price =
-        Number(product.price || 0);
-
-
-    /*
-       Oferta e mëngjesit
-       06:40 - 09:40
-
-       10% ulje vetëm për Kafe.
-    */
-
-    if (
-        isMorningOffer()
-        &&
-        product.category === "Kafe"
-    ) {
-
-        price =
-            Math.round(
-                price * 0.90
-            );
-
-    }
-
-
-    return price;
-
-}
-
-
-/* =========================================================
+/* =========================
    HEADER
-========================================================= */
+========================= */
 
-function renderHeader() {
+function renderHeader(){
 
-    const settings =
-        getSettings();
+    const user=getCurrentUser();
 
-    const user =
-        getCurrentUser();
+    const userInfo=
+        document.getElementById("userInfo");
 
+    if(userInfo&&user){
 
-    const appName =
-        document.getElementById(
-            "appName"
-        );
-
-
-    const userInfo =
-        document.getElementById(
-            "userInfo"
-        );
-
-
-    if (appName) {
-
-        appName.textContent =
-            settings.appName ||
-            "MY BAR";
-
-    }
-
-
-    if (
-        userInfo
-        &&
-        user
-    ) {
-
-        userInfo.textContent =
-            user.name
-            +
-            " • "
-            +
+        userInfo.textContent=
+            user.name+
+            " • "+
             (
-                user.role === "admin"
-                    ? "ADMIN"
-                    : "KAMARIER"
+                user.role==="admin"
+                    ?"ADMIN"
+                    :"KAMARIER"
             );
-
     }
-
 }
 
+/* =========================
+   TABLE UI
+========================= */
 
-/* =========================================================
-   TABLES UI
-========================================================= */
+function renderTables(){
 
-function renderTables() {
+    const grid=
+        document.getElementById("tableGrid");
 
-    const dashboardTables =
-        document.getElementById(
-            "dashboardTables"
-        );
+    if(!grid)return;
 
-    const tableGrid =
-        document.getElementById(
-            "tableGrid"
-        );
+    const tables=getTables();
 
-
-    const tables =
-        getTables();
-
-
-    const selected =
+    const selected=
         getSelectedTable();
 
+    grid.innerHTML=
+        tables.map(table=>{
 
-    const html =
-        tables.map(
-            table => {
+            const active=
+                table.items&&
+                table.items.length>0;
 
-                const active =
-                    table.items
-                    &&
-                    table.items.length > 0;
+            const total=
+                getOrderTotal(table);
 
+            return `
+            <button
+                class="table ${
+                    active?"active":""
+                } ${
+                    selected===table.id
+                        ?"selected":""
+                }"
+                onclick="selectTable(${table.id})"
+            >
+                <strong>${escapeHTML(table.name)}</strong>
+                <span>
+                    ${
+                        active
+                            ?money(total)
+                            :"E lirë"
+                    }
+                </span>
+            </button>
+            `;
 
-                const total =
-                    getOrderTotal(table);
-
-
-                return `
-                    <button
-                        class="table-card
-                        ${active ? "active" : ""}
-                        ${selected === Number(table.id) ? "selected" : ""}"
-                        onclick="selectTable(${Number(table.id)})"
-                    >
-
-                        <strong>
-                            ${escapeHTML(table.name)}
-                        </strong>
-
-                        <span>
-                            ${
-                                active
-                                    ? money(total)
-                                    : "E lirë"
-                            }
-                        </span>
-
-                    </button>
-                `;
-
-            }
-        ).join("");
-
-
-    if (dashboardTables) {
-
-        dashboardTables.innerHTML =
-            html;
-
-    }
-
-
-    if (tableGrid) {
-
-        tableGrid.innerHTML =
-            html;
-
-    }
-
-
-    const selectedText =
-        document.getElementById(
-            "selectedTableText"
-        );
-
-
-    if (selectedText) {
-
-        selectedText.textContent =
-            selected > 0
-                ? "Tavolina " + selected
-                : "Zgjidh një tavolinë";
-
-    }
-
+        }).join("");
 }
 
-
-/* =========================================================
+/* =========================
    MENU
-========================================================= */
+========================= */
 
-function renderMenu(
-    selectedCategory = "Të gjitha"
-) {
+function renderMenu(category="Të gjitha"){
 
-    const grid =
-        document.getElementById(
-            "menuGrid"
-        );
+    const grid=
+        document.getElementById("menuGrid");
 
+    const categories=
+        document.getElementById("categories");
 
-    const categories =
-        document.getElementById(
-            "categories"
-        );
+    if(!grid)return;
 
-
-    if (!grid) {
-        return;
-    }
-
-
-    const products =
-        readJSON(
+    const products=
+        getJSON(
             PRODUCTS_KEY,
             DEFAULT_PRODUCTS
         );
 
-
-    let allCategories = [
+    let allCategories=[
         "Të gjitha",
         ...new Set(
-            products.map(
-                product =>
-                    product.category
-            )
+            products.map(p=>p.category)
         )
     ];
 
+    if(coffeeHidden()){
 
-    /*
-       Nga ora 20:00
-       Kafe nuk shfaqet.
-    */
-
-    if (isCoffeeClosed()) {
-
-        allCategories =
+        allCategories=
             allCategories.filter(
-                category =>
-                    category !== "Kafe"
+                cat=>
+                    cat==="Të gjitha"||
+                    !isCoffeeCategory(cat)
             );
 
+        if(isCoffeeCategory(category)){
+            category="Të gjitha";
+        }
     }
 
+    if(categories){
 
-    if (
-        selectedCategory === "Kafe"
-        &&
-        isCoffeeClosed()
-    ) {
+        categories.innerHTML=
+            allCategories.map(cat=>`
 
-        selectedCategory =
-            "Të gjitha";
+            <button
+                class="${
+                    cat===category
+                        ?"active":""
+                }"
+                onclick="renderMenu(${JSON.stringify(cat)})"
+            >
+                ${escapeHTML(cat)}
+            </button>
 
+            `).join("");
     }
 
-
-    if (categories) {
-
-        categories.innerHTML =
-            allCategories.map(
-                category => `
-                    <button
-                        class="${
-                            category === selectedCategory
-                                ? "active"
-                                : ""
-                        }"
-                        onclick="renderMenu('${escapeHTML(category)}')"
-                    >
-                        ${escapeHTML(category)}
-                    </button>
-                `
-            ).join("");
-
-    }
-
-
-    let filtered;
-
-
-    if (
-        selectedCategory === "Të gjitha"
-    ) {
-
-        filtered =
-            products;
-
-    } else {
-
-        filtered =
-            products.filter(
-                product =>
-                    product.category
-                    ===
-                    selectedCategory
+    let filtered=
+        category==="Të gjitha"
+            ?products
+            :products.filter(
+                p=>p.category===category
             );
 
-    }
+    if(coffeeHidden()){
 
-
-    if (isCoffeeClosed()) {
-
-        filtered =
+        filtered=
             filtered.filter(
-                product =>
-                    product.category
-                    !== "Kafe"
+                p=>!isCoffeeCategory(p.category)
             );
-
     }
 
+    grid.innerHTML=
+        filtered.map(product=>{
 
-    grid.innerHTML =
-        filtered.map(
-            product => {
+            const stock=
+                getStock(product.id);
 
-                const stock =
-                    getStock(product.id);
+            return `
+            <button
+                class="product ${
+                    stock<=0?"disabled":""
+                }"
+                onclick="addProduct(${product.id})"
+            >
 
+                <strong>
+                    ${escapeHTML(product.name)}
+                </strong>
 
-                const price =
-                    getProductPrice(
-                        product
-                    );
+                <span>
+                    ${money(product.price)}
+                </span>
 
+                <small>
+                    Stok: ${stock}
+                </small>
 
-                return `
-                    <button
-                        class="menu-card"
-                        ${
-                            stock <= 0
-                                ? "disabled"
-                                : ""
-                        }
-                        onclick="addProduct(${Number(product.id)})"
-                    >
+            </button>
+            `;
 
-                        <strong>
-                            ${escapeHTML(product.name)}
-                        </strong>
-
-                        <span>
-                            ${money(price)}
-                        </span>
-
-                        <small>
-                            Stok: ${stock}
-                        </small>
-
-                    </button>
-                `;
-
-            }
-        ).join("");
-
+        }).join("");
 }
 
-
-/* =========================================================
+/* =========================
    ADD PRODUCT
-========================================================= */
+========================= */
 
-function addProduct(productId) {
+function addProduct(productId){
 
-    let tableId =
-        getSelectedTable();
+    const tableId=
+        ensureTableSelected();
 
+    if(!tableId)return;
 
-    /*
-       Nëse nuk ka tavolinë,
-       hapim automatikisht të parën e lirë.
-    */
-
-    if (!tableId) {
-
-        const freeTable =
-            findFirstFreeTable();
-
-
-        if (!freeTable) {
-
-            toast(
-                "Nuk ka tavolinë të lirë."
-            );
-
-            return;
-        }
-
-
-        tableId =
-            freeTable.id;
-
-
-        setSelectedTable(
-            tableId
-        );
-
-    }
-
-
-    const products =
-        readJSON(
+    const products=
+        getJSON(
             PRODUCTS_KEY,
             DEFAULT_PRODUCTS
         );
 
-
-    const product =
+    const product=
         products.find(
-            p =>
-                Number(p.id)
-                ===
-                Number(productId)
+            p=>Number(p.id)===Number(productId)
         );
 
+    if(!product)return;
 
-    if (!product) {
+    if(
+        coffeeHidden()&&
+        isCoffeeCategory(product.category)
+    ){
+
+        toast("Kafja nuk ofrohet pas orës 20:00.");
+
         return;
     }
 
-
-    /*
-       Kafe nuk lejohet pas 20:00.
-    */
-
-    if (
-        product.category === "Kafe"
-        &&
-        isCoffeeClosed()
-    ) {
-
-        toast(
-            "Kafeja nuk është aktive pas orës 20:00."
-        );
-
-        return;
-
-    }
-
-
-    const stock =
+    const stock=
         getStock(productId);
 
+    if(stock<=0){
 
-    if (stock <= 0) {
-
-        toast(
-            "Ky produkt nuk ka stok."
-        );
+        toast("Ky produkt nuk ka stok.");
 
         return;
-
     }
 
+    const tables=getTables();
 
-    const tables =
-        getTables();
-
-
-    const table =
+    const table=
         tables.find(
-            t =>
-                Number(t.id)
-                ===
-                Number(tableId)
+            t=>t.id===tableId
         );
 
+    if(!table)return;
 
-    if (!table) {
-        return;
+    if(!Array.isArray(table.items)){
+        table.items=[];
     }
 
+    const firstOrder=
+        isFirstOrder(table);
 
-    if (!Array.isArray(table.items)) {
-
-        table.items = [];
-
-    }
-
-
-    const existing =
+    const existing=
         table.items.find(
-            item =>
-                Number(item.productId)
-                ===
+            item=>
+                Number(item.productId)===
                 Number(productId)
         );
 
+    if(existing){
 
-    if (existing) {
+        if(existing.quantity>=stock){
 
-        if (
-            existing.quantity
-            >= stock
-        ) {
-
-            toast(
-                "Nuk ka më stok."
-            );
+            toast("Nuk ka më stok.");
 
             return;
-
         }
-
 
         existing.quantity++;
 
-    } else {
+    }else{
 
         table.items.push({
-
-            productId:
-                product.id,
-
-            name:
-                product.name,
-
-            price:
-                getProductPrice(product),
-
-            quantity:
-                1
-
+            productId:product.id,
+            name:product.name,
+            price:Number(product.price),
+            quantity:1
         });
-
     }
 
+    if(firstOrder&&morningOfferActive()){
+
+        table.morningOffer=true;
+
+        toast(
+            "Oferta e mëngjesit u aktivizua."
+        );
+    }
 
     saveTables(tables);
 
     renderTables();
     renderMenu();
     renderOrder();
-
-    toast(
-        product.name +
-        " u shtua."
-    );
-
 }
 
-
-/* =========================================================
+/* =========================
    ORDER
-========================================================= */
+========================= */
 
-function getOrderTotal(table) {
+function getOrderTotal(table){
 
-    if (
-        !table
-        ||
-        !Array.isArray(table.items)
-    ) {
-
+    if(!table||!table.items){
         return 0;
-
     }
 
+    let total=0;
 
-    return table.items.reduce(
-        (
-            total,
-            item
-        ) =>
-            total
-            +
-            Number(item.price || 0)
-            *
-            Number(item.quantity || 0),
-        0
-    );
+    table.items.forEach(item=>{
 
+        total+=
+            Number(item.price)*
+            Number(item.quantity);
+
+    });
+
+    /*
+      Oferta e mëngjesit:
+      10% ulje vetëm nëse
+      porosia e parë u hap 07:00–10:00.
+    */
+
+    if(table.morningOffer){
+
+        total*=0.90;
+    }
+
+    return Math.round(total);
 }
 
+function renderOrder(){
 
-function renderOrder() {
+    const container=
+        document.getElementById("orderItems");
 
-    const container =
-        document.getElementById(
-            "orderItems"
-        );
+    const totalElement=
+        document.getElementById("orderTotal");
 
+    if(!container)return;
 
-    const totalElement =
-        document.getElementById(
-            "orderTotal"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    const tableId =
+    const tableId=
         getSelectedTable();
 
+    const tables=getTables();
 
-    const tables =
-        getTables();
-
-
-    const table =
+    const table=
         tables.find(
-            t =>
-                Number(t.id)
-                ===
-                Number(tableId)
+            t=>t.id===tableId
         );
 
-
-    if (
-        !table
-        ||
-        !table.items
-        ||
+    if(
+        !table||
+        !table.items||
         !table.items.length
-    ) {
+    ){
 
-        container.innerHTML =
-            `
-                <div class="empty-state">
-                    Nuk ka produkte në porosi.
-                </div>
-            `;
+        container.innerHTML=
+            `<div class="empty">
+                Nuk ka produkte në porosi.
+             </div>`;
 
-
-        if (totalElement) {
-
-            totalElement.textContent =
+        if(totalElement){
+            totalElement.textContent=
                 money(0);
-
         }
 
-
         return;
-
     }
 
+    container.innerHTML=
+        table.items.map((item,index)=>`
 
-    let total = 0;
+        <div class="order-item">
 
+            <div>
 
-    container.innerHTML =
-        table.items.map(
-            (
-                item,
-                index
-            ) => {
+                <strong>
+                    ${escapeHTML(item.name)}
+                </strong>
 
-                const itemTotal =
-                    Number(item.price)
-                    *
-                    Number(item.quantity);
+                <small>
+                    ${money(item.price)}
+                    ×
+                    ${item.quantity}
+                </small>
 
+            </div>
 
-                total +=
-                    itemTotal;
+            <div class="order-actions">
 
+                <button
+                    onclick="changeOrderQuantity(${index},-1)">
+                    −
+                </button>
 
-                return `
-                    <div class="order-item">
+                <span>
+                    ${item.quantity}
+                </span>
 
-                        <div>
+                <button
+                    onclick="changeOrderQuantity(${index},1)">
+                    +
+                </button>
 
-                            <strong>
-                                ${escapeHTML(item.name)}
-                            </strong>
+                <button
+                    onclick="removeOrderItem(${index})">
+                    ×
+                </button>
 
-                            <small>
-                                ${money(item.price)}
-                                ×
-                                ${item.quantity}
-                            </small>
+            </div>
 
-                        </div>
+        </div>
 
+        `).join("");
 
-                        <div class="order-actions">
+    if(table.morningOffer){
 
-                            <button
-                                onclick="changeOrderQuantity(${index},-1)"
-                            >
-                                −
-                            </button>
-
-                            <span>
-                                ${item.quantity}
-                            </span>
-
-                            <button
-                                onclick="changeOrderQuantity(${index},1)"
-                            >
-                                +
-                            </button>
-
-                            <button
-                                onclick="removeOrderItem(${index})"
-                            >
-                                ×
-                            </button>
-
-                        </div>
-
-                    </div>
-                `;
-
-            }
-        ).join("");
-
-
-    if (totalElement) {
-
-        totalElement.textContent =
-            money(total);
-
+        container.innerHTML+=`
+            <div style="
+                color:#d4af37;
+                font-size:12px;
+                padding:10px 0;
+            ">
+                OFERTË MËNGJESI −10%
+            </div>
+        `;
     }
 
+    if(totalElement){
+
+        totalElement.textContent=
+            money(getOrderTotal(table));
+    }
 }
 
+function changeOrderQuantity(index,amount){
 
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
-
-function changeOrderQuantity(
-    index,
-    amount
-) {
-
-    const tableId =
+    const tableId=
         getSelectedTable();
 
+    const tables=getTables();
 
-    const tables =
-        getTables();
-
-
-    const table =
+    const table=
         tables.find(
-            t =>
-                Number(t.id)
-                ===
-                Number(tableId)
+            t=>t.id===tableId
         );
 
+    if(!table)return;
 
-    if (!table) {
-        return;
-    }
-
-
-    const item =
+    const item=
         table.items[index];
 
+    if(!item)return;
 
-    if (!item) {
-        return;
-    }
-
-
-    const newQuantity =
-        Number(item.quantity)
-        +
+    const newQuantity=
+        Number(item.quantity)+
         Number(amount);
 
+    if(newQuantity<=0){
 
-    if (newQuantity <= 0) {
+        table.items.splice(index,1);
 
-        table.items.splice(
-            index,
-            1
-        );
+    }else{
 
-    } else {
+        const stock=
+            getStock(item.productId);
 
-        const stock =
-            getStock(
-                item.productId
-            );
+        if(newQuantity>stock){
 
-
-        if (
-            newQuantity
-            >
-            stock
-        ) {
-
-            toast(
-                "Nuk ka mjaftueshëm stok."
-            );
+            toast("Nuk ka mjaftueshëm stok.");
 
             return;
-
         }
 
-
-        item.quantity =
-            newQuantity;
-
+        item.quantity=newQuantity;
     }
-
 
     saveTables(tables);
 
     renderTables();
     renderOrder();
-
+    renderMenu();
 }
 
+function removeOrderItem(index){
 
-/* =========================================================
-   REMOVE ORDER ITEM
-========================================================= */
-
-function removeOrderItem(index) {
-
-    const tableId =
+    const tableId=
         getSelectedTable();
 
+    const tables=getTables();
 
-    const tables =
-        getTables();
-
-
-    const table =
+    const table=
         tables.find(
-            t =>
-                Number(t.id)
-                ===
-                Number(tableId)
+            t=>t.id===tableId
         );
 
+    if(!table)return;
 
-    if (!table) {
-        return;
+    table.items.splice(index,1);
+
+    if(!table.items.length){
+
+        table.morningOffer=false;
     }
-
-
-    table.items.splice(
-        index,
-        1
-    );
-
 
     saveTables(tables);
 
     renderTables();
     renderOrder();
-
 }
 
-
-/* =========================================================
+/* =========================
    PAYMENT
-========================================================= */
+========================= */
 
-function openPayment() {
+function openPayment(){
 
-    const tableId =
-        getSelectedTable();
+    const tableId=
+        ensureTableSelected();
 
+    if(!tableId)return;
 
-    if (!tableId) {
+    const tables=getTables();
 
-        toast(
-            "Zgjidh një tavolinë."
-        );
-
-        return;
-
-    }
-
-
-    const tables =
-        getTables();
-
-
-    const table =
+    const table=
         tables.find(
-            t =>
-                Number(t.id)
-                ===
-                Number(tableId)
+            t=>t.id===tableId
         );
 
-
-    if (
-        !table
-        ||
-        !table.items
-        ||
+    if(
+        !table||
+        !table.items||
         !table.items.length
-    ) {
+    ){
 
-        toast(
-            "Porosia është bosh."
-        );
+        toast("Porosia është bosh.");
 
         return;
-
     }
 
-
-    const total =
+    const total=
         getOrderTotal(table);
 
+    const modal=
+        document.getElementById("paymentModal");
 
-    const modal =
-        document.getElementById(
-            "paymentModal"
-        );
-
-
-    if (modal) {
-
-        modal.style.display =
-            "flex";
-
+    if(modal){
+        modal.style.display="flex";
     }
 
+    const totalElement=
+        document.getElementById("paymentTotal");
 
-    const paymentTotal =
-        document.getElementById(
-            "paymentTotal"
-        );
-
-
-    if (paymentTotal) {
-
-        paymentTotal.textContent =
+    if(totalElement){
+        totalElement.textContent=
             money(total);
-
     }
-
 }
 
+function closePayment(){
 
-function closePayment() {
+    const modal=
+        document.getElementById("paymentModal");
 
-    const modal =
-        document.getElementById(
-            "paymentModal"
-        );
-
-
-    if (modal) {
-
-        modal.style.display =
-            "none";
-
+    if(modal){
+        modal.style.display="none";
     }
-
 }
 
-
-/* =========================================================
+/* =========================
    COMPLETE PAYMENT
-========================================================= */
+========================= */
 
-function completePayment(
-    method
-) {
+function completePayment(method){
 
-    const tableId =
+    const tableId=
         getSelectedTable();
 
+    if(!tableId)return;
 
-    if (!tableId) {
-        return;
-    }
+    const tables=getTables();
 
-
-    const tables =
-        getTables();
-
-
-    const table =
+    const table=
         tables.find(
-            t =>
-                Number(t.id)
-                ===
-                Number(tableId)
+            t=>t.id===tableId
         );
 
-
-    if (
-        !table
-        ||
-        !table.items
-        ||
+    if(
+        !table||
+        !table.items||
         !table.items.length
-    ) {
+    ){
 
-        toast(
-            "Porosia është bosh."
-        );
+        toast("Porosia është bosh.");
 
         return;
-
     }
 
+    for(const item of table.items){
 
-    /* Kontrollo stokun */
+        const stock=
+            getStock(item.productId);
 
-    for (
-        const item
-        of table.items
-    ) {
-
-        const stock =
-            getStock(
-                item.productId
-            );
-
-
-        if (
-            Number(item.quantity)
-            >
-            stock
-        ) {
+        if(item.quantity>stock){
 
             toast(
-                "Stoku nuk mjafton për " +
+                "Stoku nuk është i mjaftueshëm për "+
                 item.name
             );
 
             return;
-
         }
-
     }
 
-
-    /* Ul stokun */
-
-    for (
-        const item
-        of table.items
-    ) {
+    for(const item of table.items){
 
         changeStock(
             item.productId,
             -Number(item.quantity)
         );
-
     }
 
-
-    const total =
+    const total=
         getOrderTotal(table);
 
-
-    const user =
+    const user=
         getCurrentUser();
 
-
-    const invoices =
-        readJSON(
+    const invoices=
+        getJSON(
             INVOICES_KEY,
             []
         );
 
+    const invoice={
+        id:Date.now(),
+        number:"INV-"+Date.now(),
+        date:new Date().toISOString(),
+        createdAt:Date.now(),
 
-    const invoice = {
+        table:tableId,
+        tableName:"Tavolina "+tableId,
 
-        id:
-            Date.now(),
+        items:JSON.parse(
+            JSON.stringify(table.items)
+        ),
 
-        number:
-            "INV-" +
-            Date.now(),
+        total,
+        amount:total,
 
-        date:
-            new Date().toISOString(),
-
-        createdAt:
-            Date.now(),
-
-        table:
-            table.id,
-
-        tableName:
-            table.name,
-
-        items:
-            JSON.parse(
-                JSON.stringify(
-                    table.items
-                )
-            ),
-
-        total:
-            total,
-
-        amount:
-            total,
-
-        payment:
-            method,
-
-        paymentMethod:
-            method,
+        payment:method,
+        paymentMethod:method,
 
         waiterName:
-            user
-                ? user.name
-                : "Pa emër",
+            user?user.name:"Pa emër",
 
         userName:
-            user
-                ? user.name
-                : "Pa emër",
+            user?user.name:"Pa emër",
 
         user:
-            user
-                ? user.username
-                : ""
+            user?user.username:"",
 
+        morningOffer:
+            !!table.morningOffer
     };
 
+    invoices.push(invoice);
 
-    invoices.push(
-        invoice
-    );
-
-
-    writeJSON(
+    setJSON(
         INVOICES_KEY,
         invoices
     );
 
+    table.items=[];
+    table.morningOffer=false;
 
-    /*
-       Mbyll tavolinën.
-    */
-
-    table.items = [];
-
-    table.openedAt =
-        null;
-
-    table.waiter =
-        null;
-
-
-    saveTables(
-        tables
-    );
-
-
-    closePayment();
-
+    saveTables(tables);
 
     localStorage.removeItem(
         SELECTED_TABLE_KEY
     );
 
+    closePayment();
 
     renderTables();
     renderOrder();
@@ -1848,1687 +1088,877 @@ function completePayment(
     updateDashboard();
     renderHistory();
 
-
-    showInvoice(
-        invoice
-    );
-
-
-    toast(
-        "Pagesa u krye me sukses."
-    );
-
+    showInvoice(invoice);
 }
 
-
-/* =========================================================
+/* =========================
    INVOICE
-========================================================= */
+========================= */
 
-function showInvoice(
-    invoice
-) {
+function showInvoice(invoice){
 
-    const modal =
-        document.getElementById(
-            "invoiceModal"
-        );
+    const modal=
+        document.getElementById("invoiceModal");
 
+    const number=
+        document.getElementById("invoiceNumber");
 
-    const number =
-        document.getElementById(
-            "invoiceNumber"
-        );
+    const date=
+        document.getElementById("invoiceDate");
 
+    const table=
+        document.getElementById("invoiceTable");
 
-    const date =
-        document.getElementById(
-            "invoiceDate"
-        );
+    const waiter=
+        document.getElementById("invoiceWaiter");
 
+    const items=
+        document.getElementById("invoiceItems");
 
-    const table =
-        document.getElementById(
-            "invoiceTable"
-        );
+    const total=
+        document.getElementById("invoiceTotal");
 
-
-    const waiter =
-        document.getElementById(
-            "invoiceWaiter"
-        );
-
-
-    const items =
-        document.getElementById(
-            "invoiceItems"
-        );
-
-
-    const total =
-        document.getElementById(
-            "invoiceTotal"
-        );
-
-
-    if (number) {
-
-        number.textContent =
+    if(number){
+        number.textContent=
             invoice.number;
-
     }
 
-
-    if (date) {
-
-        date.textContent =
-            new Date(
-                invoice.date
-            ).toLocaleString(
-                "sq-AL"
-            );
-
+    if(date){
+        date.textContent=
+            new Date(invoice.date)
+            .toLocaleString("sq-AL");
     }
 
-
-    if (table) {
-
-        table.textContent =
+    if(table){
+        table.textContent=
             invoice.tableName;
-
     }
 
-
-    if (waiter) {
-
-        waiter.textContent =
+    if(waiter){
+        waiter.textContent=
             invoice.waiterName;
-
     }
 
+    if(items){
 
-    if (items) {
+        items.innerHTML=
+            invoice.items.map(item=>`
 
-        items.innerHTML =
-            invoice.items.map(
-                item => `
+            <div class="invoice-row">
 
-                    <div class="invoice-row">
+                <span>
+                    ${escapeHTML(item.name)}
+                    ×
+                    ${item.quantity}
+                </span>
 
-                        <span>
-                            ${escapeHTML(item.name)}
-                            ×
-                            ${item.quantity}
-                        </span>
+                <strong>
+                    ${money(
+                        item.price*
+                        item.quantity
+                    )}
+                </strong>
 
-                        <strong>
-                            ${money(
-                                Number(item.price)
-                                *
-                                Number(item.quantity)
-                            )}
-                        </strong>
-
-                    </div>
-
-                `
-            ).join("");
-
-    }
-
-
-    if (total) {
-
-        total.textContent =
-            money(invoice.total);
-
-    }
-
-
-    if (modal) {
-
-        modal.style.display =
-            "flex";
-
-    }
-
-}
-
-
-/* =========================================================
-   CLOSE INVOICE
-========================================================= */
-
-function closeInvoice() {
-
-    const modal =
-        document.getElementById(
-            "invoiceModal"
-        );
-
-
-    if (modal) {
-
-        modal.style.display =
-            "none";
-
-    }
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-function printInvoice() {
-
-    const invoice =
-        getLastInvoice();
-
-
-    if (!invoice) {
-
-        toast(
-            "Nuk u gjet fatura."
-        );
-
-        return;
-
-    }
-
-
-    const settings =
-        getSettings();
-
-
-    const rows =
-        invoice.items.map(
-            item => `
-                <tr>
-
-                    <td>
-                        ${escapeHTML(item.name)}
-                    </td>
-
-                    <td>
-                        ${item.quantity}
-                    </td>
-
-                    <td>
-                        ${money(
-                            Number(item.price)
-                            *
-                            Number(item.quantity)
-                        )}
-                    </td>
-
-                </tr>
-            `
-        ).join("");
-
-
-    const printWindow =
-        window.open(
-            "",
-            "_blank",
-            "width=420,height=700"
-        );
-
-
-    if (!printWindow) {
-
-        toast(
-            "Lejo popup-et për printim."
-        );
-
-        return;
-
-    }
-
-
-    printWindow.document.write(`
-
-        <!DOCTYPE html>
-
-        <html>
-
-        <head>
-
-            <meta charset="UTF-8">
-
-            <title>
-                ${escapeHTML(invoice.number)}
-            </title>
-
-            <style>
-
-                body{
-                    font-family:Arial,sans-serif;
-                    width:80mm;
-                    margin:auto;
-                    color:#000;
-                    font-size:12px;
-                }
-
-                h2{
-                    text-align:center;
-                    margin-bottom:5px;
-                }
-
-                p{
-                    margin:3px 0;
-                }
-
-                table{
-                    width:100%;
-                    border-collapse:collapse;
-                    margin-top:10px;
-                }
-
-                th,td{
-                    padding:4px 0;
-                    border-bottom:1px dashed #999;
-                    text-align:left;
-                }
-
-                .total{
-                    font-size:16px;
-                    font-weight:bold;
-                    text-align:right;
-                    margin-top:10px;
-                }
-
-                .center{
-                    text-align:center;
-                }
-
-            </style>
-
-        </head>
-
-        <body>
-
-            <h2>
-                ${escapeHTML(
-                    settings.businessName
-                    ||
-                    "MY BAR"
-                )}
-            </h2>
-
-            <p class="center">
-                ${escapeHTML(
-                    settings.address
-                    ||
-                    ""
-                )}
-            </p>
-
-            <p>
-                Fatura:
-                ${escapeHTML(invoice.number)}
-            </p>
-
-            <p>
-                Tavolina:
-                ${escapeHTML(invoice.tableName)}
-            </p>
-
-            <p>
-                Kamarier:
-                ${escapeHTML(invoice.waiterName)}
-            </p>
-
-            <p>
-                Data:
-                ${new Date(
-                    invoice.date
-                ).toLocaleString("sq-AL")}
-            </p>
-
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Produkt</th>
-                        <th>Sasi</th>
-                        <th>Total</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    ${rows}
-
-                </tbody>
-
-            </table>
-
-            <div class="total">
-                TOTAL:
-                ${money(invoice.total)}
             </div>
 
-            <p class="center">
-                ${escapeHTML(
-                    settings.footer
-                )}
-            </p>
+            `).join("");
 
-            <script>
-                window.onload = function(){
-                    window.print();
-                };
-            <\/script>
+        if(invoice.morningOffer){
 
-        </body>
-
-        </html>
-
-    `);
-
-
-    printWindow.document.close();
-
-}
-
-
-function getLastInvoice() {
-
-    const invoices =
-        readJSON(
-            INVOICES_KEY,
-            []
-        );
-
-
-    if (!invoices.length) {
-        return null;
+            items.innerHTML+=`
+                <div class="invoice-row">
+                    <span>
+                        Ofertë mëngjesi −10%
+                    </span>
+                    <strong>
+                        Aktivizuar
+                    </strong>
+                </div>
+            `;
+        }
     }
 
+    if(total){
+        total.textContent=
+            money(invoice.total);
+    }
 
-    return invoices[
-        invoices.length - 1
-    ];
-
+    if(modal){
+        modal.style.display="flex";
+    }
 }
 
-
-/* =========================================================
+/* =========================
    DASHBOARD
-========================================================= */
+========================= */
 
-function updateDashboard() {
+function updateDashboard(){
 
-    const invoices =
-        readJSON(
+    const invoices=
+        getJSON(
             INVOICES_KEY,
             []
         );
 
+    const todayString=
+        new Date().toDateString();
 
-    const today =
-        new Date();
-
-
-    const todayString =
-        today.toDateString();
-
-
-    const todayInvoices =
-        invoices.filter(
-            invoice =>
-                new Date(
-                    invoice.date
-                    ||
-                    invoice.createdAt
-                ).toDateString()
-                ===
-                todayString
+    const todayInvoices=
+        invoices.filter(invoice=>
+            new Date(
+                invoice.date||
+                invoice.createdAt
+            ).toDateString()===
+            todayString
         );
 
-
-    const sales =
+    const sales=
         todayInvoices.reduce(
-            (
-                total,
-                invoice
-            ) =>
-                total
-                +
-                Number(
-                    invoice.total || 0
-                ),
+            (sum,invoice)=>
+                sum+
+                Number(invoice.total||0),
             0
         );
 
-
-    const cash =
+    const cash=
         todayInvoices
-        .filter(
-            invoice =>
-                invoice.payment
-                ===
-                "cash"
-        )
+        .filter(i=>i.payment==="cash")
         .reduce(
-            (
-                total,
-                invoice
-            ) =>
-                total
-                +
-                Number(
-                    invoice.total || 0
-                ),
+            (sum,i)=>
+                sum+
+                Number(i.total||0),
             0
         );
 
-
-    const card =
+    const card=
         todayInvoices
-        .filter(
-            invoice =>
-                invoice.payment
-                ===
-                "card"
-        )
+        .filter(i=>i.payment==="card")
         .reduce(
-            (
-                total,
-                invoice
-            ) =>
-                total
-                +
-                Number(
-                    invoice.total || 0
-                ),
+            (sum,i)=>
+                sum+
+                Number(i.total||0),
             0
         );
 
-
-    const activeTables =
+    const activeTables=
         getTables().filter(
-            table =>
-                table.items
-                &&
-                table.items.length
+            t=>t.items&&t.items.length
         ).length;
-
 
     setText(
         "salesToday",
         money(sales)
     );
 
-
     setText(
         "activeTables",
         activeTables
     );
-
 
     setText(
         "invoiceToday",
         todayInvoices.length
     );
 
-
     setText(
         "cardToday",
         money(card)
     );
-
 
     setText(
         "cashTotal",
         money(sales)
     );
 
-
     setText(
         "cashMoney",
         money(cash)
     );
-
 
     setText(
         "cashCard",
         money(card)
     );
 
-
     setText(
         "cashInvoices",
         todayInvoices.length
     );
 
-
-    renderPayments(
-        todayInvoices
-    );
-
+    renderPayments(todayInvoices);
 }
 
+function setText(id,value){
 
-/* =========================================================
+    const element=
+        document.getElementById(id);
+
+    if(element){
+        element.textContent=value;
+    }
+}
+
+/* =========================
    PAYMENTS
-========================================================= */
+========================= */
 
-function renderPayments(
-    invoices
-) {
+function renderPayments(invoices){
 
-    const list =
+    const list=
         document.getElementById(
             "paymentsList"
         );
 
+    if(!list)return;
 
-    if (!list) {
+    if(!invoices.length){
+
+        list.innerHTML=
+            `<div class="empty">
+                Nuk ka pagesa sot.
+             </div>`;
+
         return;
     }
 
-
-    if (!invoices.length) {
-
-        list.innerHTML =
-            `
-                <div class="empty-state">
-                    Nuk ka pagesa sot.
-                </div>
-            `;
-
-        return;
-
-    }
-
-
-    list.innerHTML =
+    list.innerHTML=
         [...invoices]
         .reverse()
-        .map(
-            invoice => `
+        .map(invoice=>`
 
-                <div class="payment-row">
+        <div class="row">
 
-                    <div>
+            <div>
 
-                        <strong>
-                            ${escapeHTML(
-                                invoice.number
-                            )}
-                        </strong>
+                <strong>
+                    ${escapeHTML(invoice.number)}
+                </strong>
 
-                        <small>
-                            ${escapeHTML(
-                                invoice.waiterName
-                                ||
-                                "Pa emër"
-                            )}
-                            •
-                            ${escapeHTML(
-                                invoice.payment
-                                ||
-                                "cash"
-                            )}
-                        </small>
+                <small>
+                    ${escapeHTML(
+                        invoice.waiterName||
+                        "Pa emër"
+                    )}
+                    •
+                    ${escapeHTML(
+                        invoice.payment||
+                        "cash"
+                    )}
+                </small>
 
-                    </div>
+            </div>
 
-                    <strong>
-                        ${money(
-                            invoice.total
-                        )}
-                    </strong>
+            <strong>
+                ${money(invoice.total)}
+            </strong>
 
-                </div>
+        </div>
 
-            `
-        ).join("");
-
+        `).join("");
 }
 
-
-/* =========================================================
+/* =========================
    HISTORY
-========================================================= */
+========================= */
 
-function renderHistory() {
+function renderHistory(){
 
-    const list =
+    const list=
         document.getElementById(
             "historyList"
         );
 
+    if(!list)return;
 
-    if (!list) {
-        return;
-    }
-
-
-    const invoices =
-        readJSON(
+    const invoices=
+        getJSON(
             INVOICES_KEY,
             []
         );
 
+    if(!invoices.length){
 
-    if (!invoices.length) {
-
-        list.innerHTML =
-            `
-                <div class="empty-state">
-                    Nuk ka histori.
-                </div>
-            `;
+        list.innerHTML=
+            `<div class="empty">
+                Nuk ka histori.
+             </div>`;
 
         return;
-
     }
 
-
-    list.innerHTML =
+    list.innerHTML=
         [...invoices]
         .reverse()
-        .map(
-            invoice => `
+        .map(invoice=>`
 
-                <div class="history-row">
+        <div class="row">
 
-                    <div>
+            <div>
 
-                        <strong>
-                            ${escapeHTML(
-                                invoice.number
-                            )}
-                        </strong>
+                <strong>
+                    ${escapeHTML(invoice.number)}
+                </strong>
 
-                        <small>
-                            ${new Date(
-                                invoice.date
-                            ).toLocaleString(
-                                "sq-AL"
-                            )}
-                        </small>
+                <small>
+                    ${new Date(
+                        invoice.date
+                    ).toLocaleString("sq-AL")}
+                </small>
 
-                    </div>
+            </div>
 
-                    <div>
+            <div>
 
-                        <strong>
-                            ${money(
-                                invoice.total
-                            )}
-                        </strong>
+                <strong>
+                    ${money(invoice.total)}
+                </strong>
 
-                        <small>
-                            ${escapeHTML(
-                                invoice.payment
-                                ||
-                                "cash"
-                            )}
-                        </small>
+                <small>
+                    ${escapeHTML(
+                        invoice.payment||
+                        "cash"
+                    )}
+                </small>
 
-                    </div>
+            </div>
 
-                </div>
+        </div>
 
-            `
-        ).join("");
-
+        `).join("");
 }
 
+/* =========================
+   ADMIN
+========================= */
 
-/* =========================================================
-   DELETE HISTORY
-========================================================= */
+function renderAdmin(){
 
-function deleteHistory() {
+    const user=
+        getCurrentUser();
 
-    if (
-        !confirm(
-            "Dëshiron të fshish të gjithë historikun?"
-        )
-    ) {
-
+    if(!user||user.role!=="admin"){
         return;
-
     }
 
-
-    writeJSON(
-        INVOICES_KEY,
-        []
-    );
-
-
-    updateDashboard();
-    renderHistory();
-
-
-    toast(
-        "Historiku u fshi."
-    );
-
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-function renderAdmin() {
-
-    const usersList =
+    const usersList=
         document.getElementById(
             "usersList"
         );
 
+    if(usersList){
 
-    if (usersList) {
-
-        const users =
-            readJSON(
+        const users=
+            getJSON(
                 USERS_KEY,
                 DEFAULT_USERS
             );
 
+        usersList.innerHTML=
+            users.map((u,index)=>`
 
-        usersList.innerHTML =
-            users.map(
-                (
-                    user,
-                    index
-                ) => `
+            <div class="row">
 
-                    <div class="admin-row">
+                <div>
 
-                        <div>
+                    <strong>
+                        ${escapeHTML(u.name)}
+                    </strong>
 
-                            <strong>
-                                ${escapeHTML(
-                                    user.name
-                                )}
-                            </strong>
+                    <small>
+                        ${escapeHTML(u.username)}
+                        •
+                        ${escapeHTML(u.role)}
+                    </small>
 
-                            <small>
-                                ${escapeHTML(
-                                    user.username
-                                )}
-                                •
-                                ${escapeHTML(
-                                    user.role
-                                )}
-                            </small>
+                </div>
 
-                        </div>
+                ${
+                    u.username!=="admin"
+                        ?`
+                        <button
+                            onclick="deleteWaiter(${index})">
+                            Fshi
+                        </button>
+                        `
+                        :""
+                }
 
-                        ${
-                            user.username !== "admin"
+            </div>
 
-                            ?
-
-                            `
-                                <button
-                                    onclick="deleteWaiter(${index})"
-                                >
-                                    Fshi
-                                </button>
-                            `
-
-                            :
-
-                            ""
-                        }
-
-                    </div>
-
-                `
-            ).join("");
-
+            `).join("");
     }
 
-
-    const adminProducts =
+    const productsBox=
         document.getElementById(
             "adminProducts"
         );
 
+    if(productsBox){
 
-    if (adminProducts) {
-
-        const products =
-            readJSON(
+        const products=
+            getJSON(
                 PRODUCTS_KEY,
                 DEFAULT_PRODUCTS
             );
 
+        productsBox.innerHTML=
+            products.map(product=>`
 
-        adminProducts.innerHTML =
-            products.map(
-                product => `
+            <div class="row">
 
-                    <div class="admin-row">
+                <div>
 
-                        <div>
+                    <strong>
+                        ${escapeHTML(product.name)}
+                    </strong>
 
-                            <strong>
-                                ${escapeHTML(
-                                    product.name
-                                )}
-                            </strong>
+                    <small>
+                        ${escapeHTML(
+                            product.category
+                        )}
+                        •
+                        ${money(product.price)}
+                        • Stok:
+                        ${getStock(product.id)}
+                    </small>
 
-                            <small>
-                                ${escapeHTML(
-                                    product.category
-                                )}
-                                •
-                                ${money(
-                                    product.price
-                                )}
-                                •
-                                Stok:
-                                ${getStock(
-                                    product.id
-                                )}
-                            </small>
+                </div>
 
-                        </div>
+                <div>
 
-                        <div>
+                    <button
+                        onclick="changeStock(${product.id},1)">
+                        +
+                    </button>
 
-                            <button
-                                onclick="changeStock(${product.id},1)"
-                            >
-                                +
-                            </button>
+                    <button
+                        onclick="changeStock(${product.id},-1)">
+                        −
+                    </button>
 
-                            <button
-                                onclick="changeStock(${product.id},-1)"
-                            >
-                                −
-                            </button>
+                </div>
 
-                        </div>
+            </div>
 
-                    </div>
-
-                `
-            ).join("");
-
+            `).join("");
     }
 
+    const settings=
+        getJSON(
+            SETTINGS_KEY,
+            {
+                appName:"MY BAR",
+                tableCount:12
+            }
+        );
 
-    const tableInput =
+    const countInput=
         document.getElementById(
             "tableCountInput"
         );
 
-
-    if (tableInput) {
-
-        tableInput.value =
-            getSettings().tableCount;
-
+    if(countInput){
+        countInput.value=
+            settings.tableCount||12;
     }
 
+    const appNameInput=
+        document.getElementById(
+            "appNameInput"
+        );
+
+    if(appNameInput){
+        appNameInput.value=
+            settings.appName||"MY BAR";
+    }
 }
 
+/* =========================
+   ADMIN ACTIONS
+========================= */
 
-/* =========================================================
-   DELETE USER
-========================================================= */
+function deleteWaiter(index){
 
-function deleteWaiter(
-    index
-) {
-
-    const users =
-        readJSON(
+    const users=
+        getJSON(
             USERS_KEY,
             DEFAULT_USERS
         );
 
+    if(!users[index])return;
 
-    if (!users[index]) {
+    if(users[index].username==="admin"){
         return;
     }
 
+    users.splice(index,1);
 
-    if (
-        users[index].username
-        ===
-        "admin"
-    ) {
-
-        return;
-
-    }
-
-
-    users.splice(
-        index,
-        1
-    );
-
-
-    writeJSON(
+    setJSON(
         USERS_KEY,
         users
     );
 
-
     renderAdmin();
 
-
-    toast(
-        "Përdoruesi u fshi."
-    );
-
+    toast("Kamarieri u fshi.");
 }
 
+function saveTableCount(){
 
-/* =========================================================
-   SAVE TABLE COUNT
-========================================================= */
-
-function saveTableCount() {
-
-    const input =
+    const input=
         document.getElementById(
             "tableCountInput"
         );
 
+    if(!input)return;
 
-    if (!input) {
-        return;
-    }
-
-
-    const settings =
-        getSettings();
-
-
-    const count =
+    const count=
         Math.max(
             1,
             Math.min(
                 100,
-                Number(
-                    input.value
-                )
+                Number(input.value)||12
             )
         );
 
+    const settings=
+        getJSON(
+            SETTINGS_KEY,
+            {}
+        );
 
-    settings.tableCount =
-        count;
+    settings.tableCount=count;
 
-
-    writeJSON(
+    setJSON(
         SETTINGS_KEY,
         settings
     );
-
 
     initializeTables();
 
     renderTables();
 
-
-    toast(
-        "Numri i tavolinave u ruajt."
-    );
-
+    toast("Tavolinat u ruajtën.");
 }
 
+function saveAppName(){
 
-/* =========================================================
-   SAVE APP NAME
-========================================================= */
-
-function saveAppName() {
-
-    const input =
+    const input=
         document.getElementById(
             "appNameInput"
         );
 
+    if(!input)return;
 
-    if (!input) {
-        return;
-    }
+    const settings=
+        getJSON(
+            SETTINGS_KEY,
+            {}
+        );
 
-
-    const settings =
-        getSettings();
-
-
-    settings.appName =
-        input.value.trim()
-        ||
+    settings.appName=
+        input.value.trim()||
         "MY BAR";
 
-
-    writeJSON(
+    setJSON(
         SETTINGS_KEY,
         settings
     );
 
-
-    renderHeader();
-
-
-    toast(
-        "Emri u ruajt."
-    );
-
+    toast("Emri u ruajt.");
 }
 
+function changeAdminPassword(){
 
-/* =========================================================
-   CHANGE ADMIN PASSWORD
-========================================================= */
-
-function changeAdminPassword() {
-
-    const input =
+    const input=
         document.getElementById(
             "newAdminPassword"
         );
 
+    if(!input)return;
 
-    if (!input) {
-        return;
-    }
-
-
-    const password =
+    const password=
         input.value.trim();
 
-
-    if (!password) {
+    if(!password){
 
         toast(
-            "Shkruaj fjalëkalimin."
+            "Shkruaj password-in."
         );
 
         return;
-
     }
 
-
-    const users =
-        readJSON(
+    const users=
+        getJSON(
             USERS_KEY,
             DEFAULT_USERS
         );
 
-
-    const admin =
+    const admin=
         users.find(
-            user =>
-                user.username
-                ===
-                "admin"
+            u=>u.username==="admin"
         );
 
+    if(!admin)return;
 
-    if (!admin) {
-        return;
-    }
+    admin.password=password;
 
-
-    admin.password =
-        password;
-
-
-    writeJSON(
+    setJSON(
         USERS_KEY,
         users
     );
 
-
-    input.value = "";
-
+    input.value="";
 
     toast(
-        "Fjalëkalimi u ndryshua."
+        "Password-i u ndryshua."
     );
-
 }
 
+function changeStock(productId,amount){
 
-/* =========================================================
-   ROLE
-========================================================= */
+    const current=
+        getStock(productId);
 
-function applyRole() {
-
-    const user =
-        getCurrentUser();
-
-
-    if (!user) {
-
-        window.location.href =
-            "./index.html";
-
+    if(
+        amount<0&&
+        current<=0
+    ){
         return;
-
     }
 
-
-    const adminElements =
-        document.querySelectorAll(
-            ".admin-only,[data-admin]"
-        );
-
-
-    adminElements.forEach(
-        element => {
-
-            element.style.display =
-                user.role === "admin"
-                    ? ""
-                    : "none";
-
-        }
+    changeStockValue(
+        productId,
+        amount
     );
 
+    renderAdmin();
+    renderMenu();
 }
 
+function changeStockValue(productId,amount){
 
-/* =========================================================
+    const stock=
+        getJSON(
+            INVENTORY_KEY,
+            {}
+        );
+
+    stock[productId]=Math.max(
+        0,
+        Number(stock[productId]||0)+
+        Number(amount)
+    );
+
+    setJSON(
+        INVENTORY_KEY,
+        stock
+    );
+}
+
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
-function logout() {
+function logout(){
 
     localStorage.removeItem(
         SESSION_KEY
     );
 
-
     localStorage.removeItem(
         CURRENT_USER_KEY
     );
-
 
     localStorage.removeItem(
         SELECTED_TABLE_KEY
     );
 
-
-    window.location.href =
-        "./index.html";
-
+    window.location.href="./index.html";
 }
 
+/* =========================
+   ROLE
+========================= */
 
-/* =========================================================
-   CLOCK
-========================================================= */
+function applyRole(){
 
-function updateClock() {
+    const user=
+        getCurrentUser();
 
-    const clock =
-        document.getElementById(
-            "clock"
-        );
+    document
+        .querySelectorAll(".admin-only")
+        .forEach(element=>{
 
-
-    if (!clock) {
-        return;
-    }
-
-
-    clock.textContent =
-        new Date().toLocaleTimeString(
-            "sq-AL",
-            {
-                hour:"2-digit",
-                minute:"2-digit",
-                second:"2-digit"
-            }
-        );
-
+            element.style.display=
+                user&&user.role==="admin"
+                    ?""
+                    :"none";
+        });
 }
 
-
-/* =========================================================
+/* =========================
    TOAST
-========================================================= */
+========================= */
 
-function toast(
-    message
-) {
+function toast(message){
 
-    let box =
+    let box=
         document.getElementById(
             "myBarToast"
         );
 
+    if(!box){
 
-    if (!box) {
+        box=
+            document.createElement("div");
 
-        box =
-            document.createElement(
-                "div"
-            );
+        box.id="myBarToast";
 
-
-        box.id =
-            "myBarToast";
-
-
-        box.style.position =
-            "fixed";
-
-        box.style.bottom =
-            "25px";
-
-        box.style.left =
-            "50%";
-
-        box.style.transform =
+        box.style.position="fixed";
+        box.style.bottom="25px";
+        box.style.left="50%";
+        box.style.transform=
             "translateX(-50%)";
-
-        box.style.zIndex =
-            "99999";
-
-        box.style.padding =
+        box.style.zIndex="99999";
+        box.style.padding=
             "12px 18px";
-
-        box.style.borderRadius =
-            "12px";
-
-        box.style.background =
+        box.style.borderRadius=
+            "10px";
+        box.style.background=
             "#111";
-
-        box.style.color =
+        box.style.color=
             "#fff";
+        box.style.border=
+            "1px solid #d4af37";
+        box.style.boxShadow=
+            "0 10px 30px rgba(0,0,0,.5)";
 
-        box.style.border =
-            "1px solid #c9a55c";
-
-        box.style.fontSize =
-            "14px";
-
-        box.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.4)";
-
-
-        document.body.appendChild(
-            box
-        );
-
+        document.body.appendChild(box);
     }
 
-
-    box.textContent =
-        message;
-
-
-    box.style.display =
-        "block";
-
+    box.textContent=message;
+    box.style.display="block";
 
     clearTimeout(
         window.myBarToastTimer
     );
 
-
-    window.myBarToastTimer =
-        setTimeout(
-            () => {
-
-                box.style.display =
-                    "none";
-
-            },
-            2200
-        );
-
+    window.myBarToastTimer=
+        setTimeout(()=>{
+            box.style.display="none";
+        },2200);
 }
 
+/* =========================
+   CLOCK / MENU REFRESH
+========================= */
 
-/* =========================================================
-   SET TEXT
-========================================================= */
+function refreshTimeSensitiveMenu(){
 
-function setText(
-    id,
-    value
-) {
+    renderMenu();
 
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (element) {
-
-        element.textContent =
-            value;
-
-    }
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function setupSearch() {
-
-    const menuGrid =
-        document.getElementById(
-            "menuGrid"
-        );
-
-
-    if (!menuGrid) {
-        return;
-    }
-
-
-    const parent =
-        menuGrid.parentElement;
-
-
-    if (!parent) {
-        return;
-    }
-
-
-    if (
-        document.getElementById(
-            "menuSearch"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const search =
-        document.createElement(
-            "input"
-        );
-
-
-    search.id =
-        "menuSearch";
-
-
-    search.type =
-        "search";
-
-
-    search.placeholder =
-        "Kërko produkt...";
-
-
-    search.style.width =
-        "100%";
-
-    search.style.padding =
-        "12px 14px";
-
-    search.style.marginBottom =
-        "15px";
-
-    search.style.borderRadius =
-        "12px";
-
-    search.style.border =
-        "1px solid #26352d";
-
-    search.style.background =
-        "#0d1410";
-
-    search.style.color =
-        "#fff";
-
-    search.style.outline =
-        "none";
-
-
-    parent.insertBefore(
-        search,
-        menuGrid
+    setTimeout(
+        refreshTimeSensitiveMenu,
+        60000
     );
-
-
-    search.addEventListener(
-        "input",
-        () => {
-
-            const query =
-                search.value
-                .trim()
-                .toLowerCase();
-
-
-            const products =
-                readJSON(
-                    PRODUCTS_KEY,
-                    DEFAULT_PRODUCTS
-                );
-
-
-            let filtered =
-                products.filter(
-                    product =>
-                        product.name
-                            .toLowerCase()
-                            .includes(query)
-                );
-
-
-            if (isCoffeeClosed()) {
-
-                filtered =
-                    filtered.filter(
-                        product =>
-                            product.category
-                            !==
-                            "Kafe"
-                    );
-
-            }
-
-
-            menuGrid.innerHTML =
-                filtered.map(
-                    product => `
-
-                        <button
-                            class="menu-card"
-                            ${
-                                getStock(
-                                    product.id
-                                ) <= 0
-                                    ? "disabled"
-                                    : ""
-                            }
-                            onclick="addProduct(${product.id})"
-                        >
-
-                            <strong>
-                                ${escapeHTML(
-                                    product.name
-                                )}
-                            </strong>
-
-                            <span>
-                                ${money(
-                                    getProductPrice(
-                                        product
-                                    )
-                                )}
-                            </span>
-
-                            <small>
-                                Stok:
-                                ${getStock(
-                                    product.id
-                                )}
-                            </small>
-
-                        </button>
-
-                    `
-                ).join("");
-
-        }
-    );
-
 }
 
-
-/* =========================================================
+/* =========================
    START
-========================================================= */
+========================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    ()=>{
+
+        if(!checkSession()){
+            return;
+        }
 
         initializeApp();
 
+        renderHeader();
+        renderTables();
+        renderMenu();
+        renderOrder();
+        updateDashboard();
+        renderHistory();
+        renderAdmin();
         applyRole();
 
-        renderHeader();
-
-        renderTables();
-
-        renderMenu();
-
-        renderOrder();
-
-        updateDashboard();
-
-        renderHistory();
-
-        renderAdmin();
-
-        setupSearch();
-
-        updateClock();
-
+        refreshTimeSensitiveMenu();
 
         setInterval(
-            updateClock,
-            1000
-        );
-
-
-        /*
-           Rifreskon menunë kur ndryshon ora,
-           që 20:00 dhe 06:40 të aplikohen automatikisht.
-        */
-
-        setInterval(
-            () => {
-
-                renderMenu();
-
-            },
+            updateDashboard,
             30000
         );
 
+        /*
+          Nëse nuk është zgjedhur tavolinë,
+          zgjedhim automatikisht të parën
+          e lirë kur hapet faqja.
+        */
+
+        if(!getSelectedTable()){
+            ensureTableSelected();
+            renderTables();
+            renderOrder();
+        }
 
         console.log(
-            "MY BAR APP.JS loaded."
+            "MY BAR loaded successfully."
         );
-
     }
 );
 
+/* =========================
+   GLOBALS
+========================= */
 
-/* =========================================================
-   GLOBAL FUNCTIONS
-========================================================= */
+window.selectTable=selectTable;
+window.renderMenu=renderMenu;
+window.addProduct=addProduct;
 
-window.selectTable =
-    selectTable;
-
-window.newInvoice =
-    newInvoice;
-
-window.renderMenu =
-    renderMenu;
-
-window.addProduct =
-    addProduct;
-
-window.changeOrderQuantity =
+window.changeOrderQuantity=
     changeOrderQuantity;
 
-window.removeOrderItem =
+window.removeOrderItem=
     removeOrderItem;
 
-window.openPayment =
+window.openPayment=
     openPayment;
 
-window.closePayment =
+window.closePayment=
     closePayment;
 
-window.completePayment =
+window.completePayment=
     completePayment;
 
-window.showInvoice =
-    showInvoice;
+window.renderHistory=
+    renderHistory;
 
-window.closeInvoice =
-    closeInvoice;
+window.renderAdmin=
+    renderAdmin;
 
-window.printInvoice =
-    printInvoice;
-
-window.deleteHistory =
-    deleteHistory;
-
-window.deleteWaiter =
+window.deleteWaiter=
     deleteWaiter;
 
-window.saveTableCount =
+window.saveTableCount=
     saveTableCount;
 
-window.saveAppName =
+window.saveAppName=
     saveAppName;
 
-window.changeAdminPassword =
+window.changeAdminPassword=
     changeAdminPassword;
 
-window.changeStock =
+window.changeStock=
     changeStock;
 
-window.logout =
+window.logout=
     logout;
 
-window.openWaiterModal =
-    function() {
-
-        const modal =
-            document.getElementById(
-                "generalModal"
-            );
-
-        if (modal) {
-
-            modal.style.display =
-                "flex";
-
-        }
-
-    };
+window.toast=
+    toast;
