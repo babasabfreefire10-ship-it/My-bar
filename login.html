@@ -1,516 +1,323 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050805">
-<title>MY BAR — Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <title>MY BAR • Login</title>
 
-html,body{
-    width:100%;
-    min-height:100%;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#050805;
-    color:#fff;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    position:relative;
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
 
-/* BACKGROUND */
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-        radial-gradient(circle at 50% 20%,rgba(35,180,95,.12),transparent 35%),
-        radial-gradient(circle at 10% 90%,rgba(0,255,120,.06),transparent 30%),
-        #050805;
-    z-index:-3;
-}
+            font-family: Arial, Helvetica, sans-serif;
 
-.led{
-    position:fixed;
-    background:linear-gradient(180deg,
-        transparent,
-        #20d66d,
-        #8affb4,
-        #20d66d,
-        transparent
-    );
-    width:2px;
-    height:75vh;
-    top:12vh;
-    opacity:.75;
-    filter:drop-shadow(0 0 8px #20d66d);
-    animation:ledPulse 3s infinite alternate;
-}
+            color: #fff;
 
-.led.left{
-    left:12px;
-}
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    #10251a 0%,
+                    #07100b 38%,
+                    #030504 78%
+                );
+        }
 
-.led.right{
-    right:12px;
-}
+        .login-card {
+            width: min(440px, 92vw);
 
-@keyframes ledPulse{
-    from{
-        opacity:.35;
-        filter:drop-shadow(0 0 4px #20d66d);
-    }
-    to{
-        opacity:1;
-        filter:drop-shadow(0 0 14px #20d66d);
-    }
-}
+            padding: 32px;
 
-/* LOGIN BOX */
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13, 24, 17, .98),
+                    rgba(5, 9, 7, .98)
+                );
 
-.login-wrap{
-    width:100%;
-    max-width:440px;
-    padding:24px;
-}
+            border: 1px solid rgba(98, 220, 148, .25);
+            border-radius: 22px;
 
-.login-box{
-    width:100%;
-    background:rgba(8,14,10,.96);
-    border:1px solid rgba(49,160,91,.35);
-    border-radius:24px;
-    padding:34px;
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.65),
-        0 0 35px rgba(25,170,80,.08);
-    backdrop-filter:blur(15px);
-}
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, .75);
+        }
 
-.logo{
-    width:70px;
-    height:70px;
-    margin:0 auto 18px;
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-    font-weight:900;
-    color:#07100a;
-    background:linear-gradient(135deg,#72ff9d,#1ed267);
-    box-shadow:0 0 30px rgba(43,226,111,.25);
-}
+        .logo {
+            text-align: center;
 
-.title{
-    text-align:center;
-    font-size:26px;
-    font-weight:900;
-    letter-spacing:2px;
-}
+            font-size: 35px;
+            font-weight: 900;
+            letter-spacing: 6px;
 
-.subtitle{
-    text-align:center;
-    color:#84958b;
-    font-size:13px;
-    margin-top:8px;
-    margin-bottom:28px;
-}
+            color: #65e59a;
 
-/* STEP TITLE */
+            margin-bottom: 8px;
+        }
 
-.step-title{
-    color:#9aaba1;
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin-bottom:12px;
-}
+        .subtitle {
+            text-align: center;
 
-/* ROLE BUTTONS */
+            color: #708277;
 
-.role-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
+            font-size: 12px;
+            letter-spacing: 2px;
 
-.role-btn{
-    min-height:90px;
-    border:1px solid #26382d;
-    background:#0b120e;
-    border-radius:16px;
-    color:#fff;
-    cursor:pointer;
-    transition:.2s;
-    padding:16px 10px;
-}
+            margin-bottom: 28px;
+        }
 
-.role-btn:hover{
-    border-color:#2bd96f;
-    background:#0e1b13;
-    transform:translateY(-2px);
-}
+        .roles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
 
-.role-icon{
-    display:block;
-    font-size:25px;
-    margin-bottom:8px;
-}
+        .role {
+            border: 1px solid #294735;
+            background: #0b1510;
+            color: #a7b8ae;
 
-.role-name{
-    display:block;
-    font-size:15px;
-    font-weight:800;
-}
+            border-radius: 11px;
 
-.role-description{
-    display:block;
-    margin-top:5px;
-    font-size:11px;
-    color:#78877e;
-}
+            padding: 14px;
 
-/* WAITER LIST */
+            font-size: 13px;
+            font-weight: 900;
 
-.hidden{
-    display:none !important;
-}
+            cursor: pointer;
 
-.back-btn{
-    border:0;
-    background:transparent;
-    color:#7d9185;
-    cursor:pointer;
-    padding:0;
-    margin-bottom:15px;
-    font-size:13px;
-}
+            transition: .2s;
+        }
 
-.back-btn:hover{
-    color:#55ef8b;
-}
+        .role:hover {
+            border-color: #62dc94;
+        }
 
-.waiter-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    max-height:260px;
-    overflow-y:auto;
-    padding-right:3px;
-}
+        .role.active {
+            background: #62dc94;
+            color: #061009;
+            border-color: #62dc94;
+        }
 
-.waiter-btn{
-    width:100%;
-    border:1px solid #26382d;
-    background:#0b120e;
-    color:#fff;
-    border-radius:14px;
-    padding:15px;
-    text-align:left;
-    cursor:pointer;
-    transition:.2s;
-}
+        .panel {
+            margin-top: 22px;
+        }
 
-.waiter-btn:hover{
-    border-color:#2bd96f;
-    background:#0f1a13;
-}
+        .hidden {
+            display: none !important;
+        }
 
-.waiter-name{
-    display:block;
-    font-size:15px;
-    font-weight:800;
-}
+        label {
+            display: block;
 
-.waiter-username{
-    display:block;
-    color:#718078;
-    font-size:12px;
-    margin-top:4px;
-}
+            color: #91a399;
 
-.empty{
-    text-align:center;
-    color:#7b8981;
-    padding:20px 5px;
-    font-size:13px;
-}
+            font-size: 12px;
+            font-weight: 700;
 
-/* PASSWORD */
+            margin: 14px 0 7px;
+        }
 
-.selected-user{
-    border:1px solid #244b32;
-    background:#0a160e;
-    padding:13px 14px;
-    border-radius:13px;
-    margin-bottom:15px;
-}
+        input,
+        select {
+            width: 100%;
 
-.selected-user small{
-    display:block;
-    color:#728279;
-    margin-bottom:4px;
-}
+            padding: 14px;
 
-.selected-user strong{
-    font-size:15px;
-}
+            border-radius: 10px;
 
-.input-wrap{
-    position:relative;
-}
+            border: 1px solid #294735;
 
-input{
-    width:100%;
-    height:52px;
-    border-radius:13px;
-    border:1px solid #293a30;
-    outline:none;
-    background:#070c09;
-    color:#fff;
-    padding:0 48px 0 15px;
-    font-size:16px;
-}
+            background: #07100b;
+            color: #fff;
 
-input:focus{
-    border-color:#29d86b;
-    box-shadow:0 0 0 3px rgba(41,216,107,.08);
-}
+            outline: none;
 
-.show-password{
-    position:absolute;
-    right:13px;
-    top:50%;
-    transform:translateY(-50%);
-    border:0;
-    background:transparent;
-    color:#829188;
-    cursor:pointer;
-    font-size:18px;
-}
+            font-size: 14px;
+        }
 
-/* LOGIN BUTTON */
+        input:focus,
+        select:focus {
+            border-color: #62dc94;
+        }
 
-.login-btn{
-    width:100%;
-    height:52px;
-    margin-top:15px;
-    border:0;
-    border-radius:13px;
-    background:linear-gradient(135deg,#42ef83,#18b95a);
-    color:#041008;
-    font-size:15px;
-    font-weight:900;
-    cursor:pointer;
-    box-shadow:0 8px 25px rgba(24,185,90,.18);
-    transition:.2s;
-}
+        select option {
+            background: #07100b;
+            color: #fff;
+        }
 
-.login-btn:hover{
-    transform:translateY(-1px);
-    box-shadow:0 12px 30px rgba(24,185,90,.28);
-}
+        .login-button {
+            width: 100%;
 
-.error{
-    min-height:18px;
-    margin-top:12px;
-    text-align:center;
-    color:#ff7272;
-    font-size:13px;
-}
+            margin-top: 20px;
 
-.footer{
-    text-align:center;
-    color:#536158;
-    font-size:10px;
-    letter-spacing:1px;
-    margin-top:25px;
-}
+            padding: 15px;
 
-/* MOBILE */
+            border: 0;
+            border-radius: 11px;
 
-@media(max-width:500px){
-    .login-wrap{
-        padding:16px;
-    }
+            background:
+                linear-gradient(
+                    135deg,
+                    #6bea9e,
+                    #38bf73
+                );
 
-    .login-box{
-        padding:25px 20px;
-        border-radius:20px;
-    }
+            color: #041008;
 
-    .title{
-        font-size:23px;
-    }
+            font-weight: 900;
+            letter-spacing: 1px;
 
-    .role-btn{
-        min-height:82px;
-    }
+            cursor: pointer;
+        }
 
-    .led{
-        opacity:.35;
-    }
-}
-</style>
+        .login-button:hover {
+            filter: brightness(1.08);
+        }
+
+        .error {
+            min-height: 20px;
+
+            margin-top: 14px;
+
+            text-align: center;
+
+            color: #ff7272;
+
+            font-size: 12px;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #60746a;
+
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        .back:hover {
+            color: #62dc94;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="led left"></div>
-<div class="led right"></div>
+<div class="login-card">
 
-<div class="login-wrap">
+    <div class="logo">
+        MY BAR
+    </div>
 
-    <div class="login-box">
+    <div class="subtitle">
+        HYRJE NË SISTEM
+    </div>
 
-        <!-- STEP 1 -->
-        <section id="roleStep">
+    <div class="roles">
 
-            <div class="logo">S</div>
+        <button
+            id="adminRole"
+            class="role active"
+            type="button">
+            ADMIN
+        </button>
 
-            <div class="title">MY BAR</div>
+        <button
+            id="waiterRole"
+            class="role"
+            type="button">
+            KAMARIER
+        </button>
 
-            <div class="subtitle">
-                Hyr në sistem
-            </div>
+    </div>
 
-            <div class="step-title">
-                Zgjidh përdoruesin
-            </div>
+    <!-- ADMIN -->
 
-            <div class="role-grid">
+    <section
+        id="adminPanel"
+        class="panel">
 
-                <button
-                    type="button"
-                    class="role-btn"
-                    onclick="selectAdmin()"
-                >
-                    <span class="role-icon">⚙️</span>
-                    <span class="role-name">ADMIN</span>
-                    <span class="role-description">
-                        Menaxhim i plotë
-                    </span>
-                </button>
+        <label for="adminPassword">
+            Fjalëkalimi i administratorit
+        </label>
 
-                <button
-                    type="button"
-                    class="role-btn"
-                    onclick="showWaiters()"
-                >
-                    <span class="role-icon">👤</span>
-                    <span class="role-name">KAMARIER</span>
-                    <span class="role-description">
-                        Hyr në sistem
-                    </span>
-                </button>
+        <input
+            id="adminPassword"
+            type="password"
+            placeholder="Fjalëkalimi">
 
-            </div>
+        <button
+            class="login-button"
+            type="button"
+            onclick="loginAdmin()">
+            HYR SI ADMIN
+        </button>
 
-        </section>
-
-
-        <!-- STEP 2 WAITER LIST -->
-        <section id="waiterStep" class="hidden">
-
-            <button
-                type="button"
-                class="back-btn"
-                onclick="backToRoles()"
-            >
-                ← Kthehu
-            </button>
-
-            <div class="step-title">
-                Zgjidh kamarierin
-            </div>
-
-            <div id="waiterList" class="waiter-list"></div>
-
-        </section>
+    </section>
 
 
-        <!-- STEP 3 PASSWORD -->
-        <section id="passwordStep" class="hidden">
+    <!-- KAMARIER -->
 
-            <button
-                type="button"
-                class="back-btn"
-                onclick="backToPrevious()"
-            >
-                ← Kthehu
-            </button>
+    <section
+        id="waiterPanel"
+        class="panel hidden">
 
-            <div class="step-title">
-                Fjalëkalimi
-            </div>
+        <label for="waiterSelect">
+            Zgjidh kamarierin
+        </label>
 
-            <div class="selected-user">
-                <small>Përdoruesi</small>
-                <strong id="selectedUserName">
-                    Administrator
-                </strong>
-            </div>
+        <select id="waiterSelect">
+        </select>
 
-            <form id="loginForm">
+        <label for="waiterPassword">
+            Fjalëkalimi
+        </label>
 
-                <div class="input-wrap">
+        <input
+            id="waiterPassword"
+            type="password"
+            placeholder="Fjalëkalimi">
 
-                    <input
-                        id="password"
-                        type="password"
-                        placeholder="Shkruaj fjalëkalimin"
-                        autocomplete="current-password"
-                        required
-                    >
+        <button
+            class="login-button"
+            type="button"
+            onclick="loginWaiter()">
+            HYR SI KAMARIER
+        </button>
 
-                    <button
-                        type="button"
-                        class="show-password"
-                        onclick="togglePassword()"
-                        aria-label="Shfaq fjalëkalimin"
-                    >
-                        👁
-                    </button>
-
-                </div>
-
-                <div id="loginError" class="error"></div>
-
-                <button
-                    type="submit"
-                    class="login-btn"
-                >
-                    HYR NË SISTEM
-                </button>
-
-            </form>
-
-        </section>
+    </section>
 
 
-        <div class="footer">
-            MY BAR • PREMIUM MANAGEMENT SYSTEM
-        </div>
+    <div
+        id="error"
+        class="error">
+    </div>
 
+    <div
+        class="back"
+        onclick="location.href='sabi.html'">
+        ← Kthehu
     </div>
 
 </div>
 
 
 <script>
+
 "use strict";
 
 /* =========================
@@ -526,18 +333,21 @@ const SESSION_KEY = "MY_BAR_SESSION";
 ========================= */
 
 const DEFAULT_USERS = [
+
     {
         username: "admin",
         password: "1234",
         role: "admin",
         name: "Administrator"
     },
+
     {
-        username: "kamarier",
+        username: "kamarier1",
         password: "1234",
         role: "waiter",
-        name: "Kamarier"
+        name: "Kamarier 1"
     }
+
 ];
 
 
@@ -545,441 +355,202 @@ const DEFAULT_USERS = [
    STORAGE HELPERS
 ========================= */
 
-function getJSON(key, fallback){
-    try{
-        const value = localStorage.getItem(key);
+function getUsers() {
 
-        if(!value){
-            return fallback;
+    try {
+
+        const data =
+            localStorage.getItem(USERS_KEY);
+
+        if (!data) {
+
+            localStorage.setItem(
+                USERS_KEY,
+                JSON.stringify(DEFAULT_USERS)
+            );
+
+            return DEFAULT_USERS;
         }
 
-        return JSON.parse(value);
+        const users =
+            JSON.parse(data);
 
-    }catch(error){
-        console.error(error);
-        return fallback;
+        if (!Array.isArray(users)) {
+            throw new Error();
+        }
+
+        return users;
+
+    } catch {
+
+        localStorage.setItem(
+            USERS_KEY,
+            JSON.stringify(DEFAULT_USERS)
+        );
+
+        return DEFAULT_USERS;
     }
 }
 
 
-function setJSON(key,value){
+function saveSession(user) {
+
+    const session = {
+
+        username: user.username,
+
+        user: user.username,
+
+        name: user.name,
+
+        role: user.role,
+
+        loginAt: Date.now()
+
+    };
+
+
     localStorage.setItem(
-        key,
-        JSON.stringify(value)
+        SESSION_KEY,
+        JSON.stringify(session)
     );
+
+
+    /* compatibility */
+
+    localStorage.setItem(
+        "barCurrentUser",
+        JSON.stringify(session)
+    );
+
+
+    location.href = "index.html";
 }
-
-
-/* =========================
-   INITIALIZE USERS
-========================= */
-
-function initializeUsers(){
-
-    /*
-        IMPORTANT:
-        We only create default users
-        if the storage does not exist.
-
-        Existing users are NEVER overwritten.
-    */
-
-    if(!localStorage.getItem(USERS_KEY)){
-
-        setJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
-    }
-}
-
-
-/* =========================
-   GET USERS
-========================= */
-
-function getUsers(){
-
-    const users =
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
-
-    return Array.isArray(users)
-        ? users
-        : DEFAULT_USERS;
-}
-
-
-/* =========================
-   STATE
-========================= */
-
-let selectedUser = null;
-let previousStep = "role";
 
 
 /* =========================
    ELEMENTS
 ========================= */
 
-const roleStep =
-    document.getElementById("roleStep");
+const adminRole =
+    document.getElementById("adminRole");
 
-const waiterStep =
-    document.getElementById("waiterStep");
+const waiterRole =
+    document.getElementById("waiterRole");
 
-const passwordStep =
-    document.getElementById("passwordStep");
+const adminPanel =
+    document.getElementById("adminPanel");
 
-const waiterList =
-    document.getElementById("waiterList");
+const waiterPanel =
+    document.getElementById("waiterPanel");
 
-const selectedUserName =
-    document.getElementById("selectedUserName");
+const waiterSelect =
+    document.getElementById("waiterSelect");
 
-const passwordInput =
-    document.getElementById("password");
-
-const loginError =
-    document.getElementById("loginError");
-
-const loginForm =
-    document.getElementById("loginForm");
+const errorBox =
+    document.getElementById("error");
 
 
 /* =========================
-   SHOW ADMIN LOGIN
+   ROLE SWITCH
 ========================= */
 
-function selectAdmin(){
+function showAdmin() {
 
-    const users = getUsers();
+    adminRole.classList.add("active");
 
-    const admin =
-        users.find(
-            user =>
-                String(user.username)
-                    .toLowerCase() === "admin"
-                ||
-                String(user.role)
-                    .toLowerCase() === "admin"
-        );
+    waiterRole.classList.remove("active");
 
-    if(!admin){
+    adminPanel.classList.remove("hidden");
 
-        showError(
-            "Admin nuk u gjet."
-        );
+    waiterPanel.classList.add("hidden");
 
-        return;
-    }
+    errorBox.textContent = "";
 
-    selectedUser = admin;
-
-    previousStep = "role";
-
-    selectedUserName.textContent =
-        admin.name || "Administrator";
-
-    roleStep.classList.add("hidden");
-    waiterStep.classList.add("hidden");
-    passwordStep.classList.remove("hidden");
-
-    passwordInput.value = "";
-    loginError.textContent = "";
-
-    setTimeout(() => {
-        passwordInput.focus();
-    },100);
 }
 
 
-/* =========================
-   SHOW WAITER LIST
-========================= */
+function showWaiter() {
 
-function showWaiters(){
+    waiterRole.classList.add("active");
 
-    const users = getUsers();
+    adminRole.classList.remove("active");
 
-    const waiters =
-        users.filter(
-            user =>
-                String(user.role)
-                    .toLowerCase() === "waiter"
-        );
+    adminPanel.classList.add("hidden");
 
-    previousStep = "role";
+    waiterPanel.classList.remove("hidden");
 
-    roleStep.classList.add("hidden");
-    passwordStep.classList.add("hidden");
-    waiterStep.classList.remove("hidden");
+    errorBox.textContent = "";
 
-    if(!waiters.length){
+    loadWaiters();
 
-        waiterList.innerHTML =
-            '<div class="empty">Nuk ka kamarierë të regjistruar.</div>';
-
-        return;
-    }
-
-    waiterList.innerHTML =
-        waiters.map(
-            (user,index) => {
-
-                return `
-                    <button
-                        type="button"
-                        class="waiter-btn"
-                        onclick="selectWaiter(${index})"
-                    >
-                        <span class="waiter-name">
-                            ${escapeHTML(
-                                user.name || "Kamarier"
-                            )}
-                        </span>
-
-                        <span class="waiter-username">
-                            @${escapeHTML(
-                                user.username || ""
-                            )}
-                        </span>
-                    </button>
-                `;
-            }
-        ).join("");
-
-    /*
-        Save waiter list temporarily so
-        selecting by numeric index is safe.
-    */
-
-    window.__myBarWaiters = waiters;
 }
 
 
-/* =========================
-   SELECT WAITER
-========================= */
-
-function selectWaiter(index){
-
-    const waiters =
-        window.__myBarWaiters || [];
-
-    const waiter =
-        waiters[index];
-
-    if(!waiter){
-        return;
-    }
-
-    selectedUser = waiter;
-
-    previousStep = "waiters";
-
-    selectedUserName.textContent =
-        waiter.name || "Kamarier";
-
-    waiterStep.classList.add("hidden");
-    roleStep.classList.add("hidden");
-    passwordStep.classList.remove("hidden");
-
-    passwordInput.value = "";
-    loginError.textContent = "";
-
-    setTimeout(() => {
-        passwordInput.focus();
-    },100);
-}
+adminRole.addEventListener(
+    "click",
+    showAdmin
+);
 
 
-/* =========================
-   BACK
-========================= */
-
-function backToRoles(){
-
-    selectedUser = null;
-
-    waiterStep.classList.add("hidden");
-    passwordStep.classList.add("hidden");
-    roleStep.classList.remove("hidden");
-
-    loginError.textContent = "";
-}
-
-
-function backToPrevious(){
-
-    selectedUser = null;
-
-    passwordStep.classList.add("hidden");
-
-    loginError.textContent = "";
-
-    if(previousStep === "waiters"){
-        showWaiters();
-    }else{
-        roleStep.classList.remove("hidden");
-    }
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-loginForm.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
-        loginError.textContent = "";
-
-        if(!selectedUser){
-
-            showError(
-                "Zgjidh një përdorues."
-            );
-
-            return;
-        }
-
-        const password =
-            passwordInput.value;
-
-        if(!password){
-
-            showError(
-                "Shkruaj fjalëkalimin."
-            );
-
-            return;
-        }
-
-        /*
-            IMPORTANT:
-            Read users AGAIN from localStorage.
-
-            This means if Admin added a waiter,
-            edited password/name/username,
-            login immediately uses the new data.
-        */
-
-        const users = getUsers();
-
-        const username =
-            String(
-                selectedUser.username || ""
-            ).toLowerCase();
-
-        const currentUser =
-            users.find(
-                user =>
-                    String(user.username || "")
-                        .toLowerCase() === username
-            );
-
-        if(!currentUser){
-
-            showError(
-                "Ky përdorues nuk ekziston më."
-            );
-
-            return;
-        }
-
-        if(
-            String(currentUser.password) !==
-            String(password)
-        ){
-
-            showError(
-                "Fjalëkalimi është gabim."
-            );
-
-            passwordInput.select();
-
-            return;
-        }
-
-
-        /* =========================
-           CREATE SESSION
-        ========================= */
-
-        const session = {
-
-            username:
-                currentUser.username,
-
-            user:
-                currentUser.username,
-
-            name:
-                currentUser.name,
-
-            role:
-                currentUser.role,
-
-            loginAt:
-                Date.now()
-        };
-
-
-        /*
-            Main session used by index.html
-        */
-
-        setJSON(
-            SESSION_KEY,
-            session
-        );
-
-
-        /*
-            Compatibility with older code
-        */
-
-        setJSON(
-            "barCurrentUser",
-            session
-        );
-
-
-        /*
-            Go to POS
-        */
-
-        window.location.href =
-            "index.html";
-    }
+waiterRole.addEventListener(
+    "click",
+    showWaiter
 );
 
 
 /* =========================
-   PASSWORD VISIBILITY
+   LOAD WAITERS
 ========================= */
 
-function togglePassword(){
+function loadWaiters() {
 
-    if(
-        passwordInput.type ===
-        "password"
-    ){
+    const users =
+        getUsers();
 
-        passwordInput.type =
-            "text";
+    const waiters =
+        users.filter(
+            user =>
+                user.role === "waiter" ||
+                user.role === "kamarier"
+        );
 
-    }else{
 
-        passwordInput.type =
-            "password";
+    waiterSelect.innerHTML = "";
+
+
+    if (!waiters.length) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = "";
+
+        option.textContent =
+            "Nuk ka kamarierë";
+
+        waiterSelect.appendChild(option);
+
+        return;
     }
+
+
+    waiters.forEach(user => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            user.username;
+
+        option.textContent =
+            user.name ||
+            user.username;
+
+        waiterSelect.appendChild(option);
+
+    });
+
 }
 
 
@@ -987,62 +558,134 @@ function togglePassword(){
    ERROR
 ========================= */
 
-function showError(message){
+function showError(message) {
 
-    loginError.textContent =
+    errorBox.textContent =
         message;
 
-    passwordInput.focus();
 }
 
 
 /* =========================
-   ESCAPE HTML
+   ADMIN LOGIN
 ========================= */
 
-function escapeHTML(value){
+function loginAdmin() {
 
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    const password =
+        document
+            .getElementById("adminPassword")
+            .value;
+
+
+    const users =
+        getUsers();
+
+
+    const admin =
+        users.find(
+            user =>
+                user.username === "admin" &&
+                user.role === "admin"
+        );
+
+
+    if (!admin) {
+
+        showError(
+            "Administratori nuk ekziston."
+        );
+
+        return;
+    }
+
+
+    if (
+        password !==
+        admin.password
+    ) {
+
+        showError(
+            "Fjalëkalimi i administratorit është gabim."
+        );
+
+        return;
+    }
+
+
+    saveSession(admin);
 }
 
 
 /* =========================
-   START
+   WAITER LOGIN
 ========================= */
 
-initializeUsers();
+function loginWaiter() {
+
+    const username =
+        waiterSelect.value;
 
 
-/* =========================
-   IF ALREADY LOGGED IN
-========================= */
+    const password =
+        document
+            .getElementById("waiterPassword")
+            .value;
 
-const existingSession =
-    getJSON(
-        SESSION_KEY,
-        null
-    );
 
-if(existingSession){
+    const users =
+        getUsers();
 
-    /*
-        We intentionally do NOT automatically
-        redirect here.
 
-        This lets the user choose another account
-        from the login screen.
-    */
+    const waiter =
+        users.find(
+            user =>
+                user.username === username &&
+                (
+                    user.role === "waiter" ||
+                    user.role === "kamarier"
+                )
+        );
+
+
+    if (!waiter) {
+
+        showError(
+            "Kamarieri nuk ekziston."
+        );
+
+        return;
+    }
+
+
+    if (
+        password !==
+        waiter.password
+    ) {
+
+        showError(
+            "Fjalëkalimi është gabim."
+        );
+
+        return;
+    }
+
+
+    waiter.role = "waiter";
+
+
+    saveSession(waiter);
 }
 
 
-console.log(
-    "MY BAR login loaded successfully."
-);
+/* =========================
+   INIT
+========================= */
+
+getUsers();
+
+loadWaiters();
+
 </script>
 
 </body>
