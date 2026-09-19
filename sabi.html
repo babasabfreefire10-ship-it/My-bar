@@ -3,292 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#07110b">
+
     <title>MY BAR</title>
 
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
-        html, body {
+        html,
+        body {
+            margin: 0;
             width: 100%;
-            min-height: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
             background:
-                radial-gradient(circle at 50% 35%, rgba(0,255,115,.08), transparent 32%),
-                linear-gradient(145deg, #030504, #07100a 55%, #030504);
-            color: #fff;
-            overflow-x: hidden;
+                radial-gradient(circle at 50% 35%, #11251a 0%, #07100b 35%, #030504 75%);
+            color: white;
         }
 
-        /* BACKGROUND */
-        .background {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .glow {
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            background: rgba(0,255,115,.08);
-            filter: blur(90px);
-            top: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* MAIN */
-        .page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 25px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .container {
+        .screen {
             width: 100%;
-            max-width: 520px;
-            text-align: center;
-        }
-
-        /* LOGO */
-        .logo {
-            width: 92px;
-            height: 92px;
-            margin: 0 auto 28px;
-            border: 1px solid rgba(0,255,115,.45);
-            border-radius: 24px;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(8,20,13,.75);
-            box-shadow:
-                0 0 25px rgba(0,255,115,.12),
-                inset 0 0 25px rgba(0,255,115,.04);
             position: relative;
         }
 
-        .logo::before {
-            content: "";
+        .led {
             position: absolute;
-            inset: 7px;
-            border: 1px solid rgba(0,255,115,.16);
-            border-radius: 18px;
+            background: linear-gradient(90deg, transparent, #42e88a, transparent);
+            opacity: .75;
+            animation: ledMove 4s linear infinite;
         }
 
-        .logo span {
-            font-size: 38px;
-            font-weight: 900;
-            color: #00ff73;
-            text-shadow: 0 0 18px rgba(0,255,115,.35);
-            position: relative;
+        .led.top {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
         }
 
-        /* TEXT */
-        .small-title {
-            color: #00ff73;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 12px;
+        .led.bottom {
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            animation-delay: 2s;
         }
 
-        h1 {
-            font-size: clamp(42px, 11vw, 72px);
-            line-height: .95;
-            letter-spacing: 4px;
-            font-weight: 900;
-            margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(0,255,115,.12);
+        .led.left {
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #238cff, transparent);
+            animation-delay: 1s;
         }
 
-        .subtitle {
-            color: #89958d;
-            font-size: 13px;
+        .led.right {
+            right: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #42e88a, transparent);
+            animation-delay: 3s;
+        }
+
+        @keyframes ledMove {
+            0% {
+                opacity: .25;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: .25;
+            }
+        }
+
+        .panel {
+            width: min(900px, 92vw);
+            padding: 65px 35px;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16, 28, 21, .95),
+                    rgba(3, 7, 5, .96)
+                );
+
+            border: 1px solid rgba(91, 229, 145, .22);
+            border-radius: 28px;
+
+            box-shadow:
+                0 35px 100px rgba(0, 0, 0, .75),
+                inset 0 0 50px rgba(71, 214, 126, .025);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 13px;
+            border: 1px solid rgba(98, 220, 148, .35);
+            border-radius: 999px;
+            color: #6be49a;
+            font-size: 11px;
+            font-weight: 800;
             letter-spacing: 3px;
+            margin-bottom: 22px;
+        }
+
+        .logo {
+            font-size: clamp(48px, 9vw, 92px);
+            font-weight: 900;
+            letter-spacing: 10px;
+            margin-left: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #69e99b,
+                    #ffffff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            text-shadow: 0 0 35px rgba(98, 220, 148, .15);
+        }
+
+        .welcome {
+            margin-top: 12px;
+            color: #a8b9af;
+            font-size: clamp(14px, 2vw, 18px);
+            letter-spacing: 5px;
             font-weight: 600;
         }
 
         .line {
-            width: 70px;
+            width: min(480px, 80%);
             height: 1px;
-            background: #00ff73;
-            opacity: .55;
-            margin: 28px auto;
-            box-shadow: 0 0 10px rgba(0,255,115,.35);
+            margin: 35px auto;
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(98, 220, 148, .8),
+                    transparent
+                );
         }
 
-        /* BUTTONS */
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 330px;
-            margin: 0 auto;
+        .description {
+            color: #75897d;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
         }
 
-        button {
-            width: 100%;
-            min-height: 56px;
-            border-radius: 14px;
-            border: 1px solid rgba(0,255,115,.35);
-            background: rgba(7,18,11,.85);
-            color: #fff;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
+        .enter {
+            border: 0;
             cursor: pointer;
-            transition: .2s ease;
-            -webkit-tap-highlight-color: transparent;
+
+            min-width: 230px;
+            padding: 16px 30px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6bea9e,
+                    #38bf73
+                );
+
+            color: #041008;
+
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
+
+            box-shadow:
+                0 12px 35px rgba(57, 204, 116, .18);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
         }
 
-        button:hover {
-            border-color: #00ff73;
-            background: rgba(0,255,115,.08);
-            box-shadow: 0 0 22px rgba(0,255,115,.12);
-            transform: translateY(-1px);
+        .enter:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 18px 45px rgba(57, 204, 116, .28);
         }
 
-        button:active {
-            transform: scale(.98);
-        }
-
-        .enter-btn {
-            background: #00ff73;
-            color: #031008;
-            border-color: #00ff73;
-            box-shadow: 0 0 22px rgba(0,255,115,.18);
-        }
-
-        .enter-btn:hover {
-            background: #16ff82;
-            color: #031008;
-            box-shadow: 0 0 30px rgba(0,255,115,.28);
-        }
-
-        .contact-btn {
-            color: #aab4ae;
-            background: rgba(255,255,255,.025);
-        }
-
-        /* FOOTER */
         .footer {
-            margin-top: 35px;
-            color: #526058;
-            font-size: 10px;
+            margin-top: 30px;
+            color: #435449;
+            font-size: 11px;
             letter-spacing: 2px;
         }
 
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 20;
-            background: rgba(0,0,0,.72);
-            backdrop-filter: blur(7px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-box {
-            width: 100%;
-            max-width: 420px;
-            background: #09110c;
-            border: 1px solid rgba(0,255,115,.3);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 20px 70px rgba(0,0,0,.55);
-        }
-
-        .modal-box h2 {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .modal-box p {
-            color: #89958d;
-            font-size: 13px;
-            margin-bottom: 18px;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 110px;
-            resize: vertical;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,.1);
-            background: #050805;
-            color: #fff;
-            padding: 13px;
-            outline: none;
-            font-family: inherit;
-            margin-bottom: 12px;
-        }
-
-        textarea:focus {
-            border-color: rgba(0,255,115,.5);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .modal-actions button {
-            flex: 1;
-        }
-
-        @media (max-width: 480px) {
-            .page {
-                padding: 20px;
+        @media (max-width: 600px) {
+            .panel {
+                padding: 48px 22px;
+                border-radius: 22px;
             }
 
             .logo {
-                width: 82px;
-                height: 82px;
-                margin-bottom: 24px;
+                letter-spacing: 6px;
+                margin-left: 6px;
             }
 
-            .logo span {
-                font-size: 34px;
-            }
-
-            .small-title {
-                font-size: 10px;
+            .welcome {
                 letter-spacing: 3px;
             }
 
-            h1 {
-                letter-spacing: 3px;
+            .description {
+                line-height: 1.6;
             }
 
-            .subtitle {
-                font-size: 11px;
-                letter-spacing: 2px;
-            }
-
-            .buttons {
-                max-width: 100%;
+            .enter {
+                width: 100%;
             }
         }
     </style>
@@ -296,141 +241,46 @@
 
 <body>
 
-<div class="background">
-    <div class="glow"></div>
-</div>
+<div class="screen">
 
-<main class="page">
-    <div class="container">
+    <div class="led top"></div>
+    <div class="led bottom"></div>
+    <div class="led left"></div>
+    <div class="led right"></div>
 
-        <div class="logo">
-            <span>S</span>
+    <main class="panel">
+
+        <div class="badge">
+            SISTEM PREMIUM
         </div>
 
-        <div class="small-title">SISTEM PREMIUM</div>
+        <div class="logo">
+            MY BAR
+        </div>
 
-        <h1>MY BAR</h1>
-
-        <div class="subtitle">
-            SISTEMI I MENAXHIMIT
+        <div class="welcome">
+            MIRË SE VINI
         </div>
 
         <div class="line"></div>
 
-        <div class="buttons">
-
-            <button
-                class="enter-btn"
-                id="enterBtn"
-                type="button">
-                HYR NË SISTEM →
-            </button>
-
-            <button
-                class="contact-btn"
-                id="contactBtn"
-                type="button">
-                CONTACT
-            </button>
-
+        <div class="description">
+            SISTEM PROFESIONAL PËR MENAXHIMIN E BARIT
         </div>
+
+        <button
+            class="enter"
+            onclick="location.href='login.html'">
+            HYR NË SISTEM
+        </button>
 
         <div class="footer">
-            MY BAR • MANAGEMENT SYSTEM
+            MY BAR • PROFESSIONAL POS
         </div>
 
-    </div>
-</main>
-
-<!-- CONTACT MODAL -->
-<div class="modal" id="contactModal">
-
-    <div class="modal-box">
-
-        <h2>Contact</h2>
-
-        <p>
-            Dërgo një mesazh për administratorin.
-        </p>
-
-        <textarea
-            id="contactMessage"
-            placeholder="Shkruaj mesazhin..."></textarea>
-
-        <div class="modal-actions">
-
-            <button
-                type="button"
-                id="sendContact">
-                DËRGO
-            </button>
-
-            <button
-                type="button"
-                id="closeContact">
-                MBYLL
-            </button>
-
-        </div>
-
-    </div>
+    </main>
 
 </div>
-
-<script>
-    const enterBtn = document.getElementById("enterBtn");
-    const contactBtn = document.getElementById("contactBtn");
-    const contactModal = document.getElementById("contactModal");
-    const closeContact = document.getElementById("closeContact");
-    const sendContact = document.getElementById("sendContact");
-    const contactMessage = document.getElementById("contactMessage");
-
-    // Hyr në sistem
-    enterBtn.addEventListener("click", function () {
-        window.location.href = "login.html";
-    });
-
-    // Hap Contact
-    contactBtn.addEventListener("click", function () {
-        contactModal.classList.add("active");
-        contactMessage.focus();
-    });
-
-    // Mbyll Contact
-    closeContact.addEventListener("click", function () {
-        contactModal.classList.remove("active");
-    });
-
-    // Klik jashtë modalit
-    contactModal.addEventListener("click", function (e) {
-        if (e.target === contactModal) {
-            contactModal.classList.remove("active");
-        }
-    });
-
-    // ESC
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-            contactModal.classList.remove("active");
-        }
-    });
-
-    // Dërgo mesazhin
-    sendContact.addEventListener("click", function () {
-
-        const message = contactMessage.value.trim();
-
-        if (!message) {
-            alert("Shkruaj një mesazh.");
-            return;
-        }
-
-        alert("Mesazhi u dërgua.");
-
-        contactMessage.value = "";
-        contactModal.classList.remove("active");
-    });
-</script>
 
 </body>
 </html>
