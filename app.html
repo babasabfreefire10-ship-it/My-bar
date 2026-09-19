@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+
+<title>MY BAR • POS</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    background:#050505;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.top{
+    position:sticky;
+    top:0;
+    z-index:50;
+    min-height:70px;
+    padding:10px 16px;
+    background:#090909;
+    border-bottom:1px solid rgba(201,165,92,.25);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:40px;
+    height:40px;
+    border:1px solid #c9a55c;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d9b86f;
+    font-weight:900;
+}
+
+.brand strong{
+    color:#d9b86f;
+    letter-spacing:2px;
+    font-size:15px;
+}
+
+.brand small{
+    display:block;
+    color:#555;
+    font-size:7px;
+    letter-spacing:1px;
+    margin-top:3px;
+}
+
+.user-info{
+    text-align:right;
+}
+
+.user-info strong{
+    display:block;
+    color:#ddd;
+    font-size:11px;
+}
+
+.user-info small{
+    color:#777;
+    font-size:8px;
+}
+
+.logout{
+    border:1px solid #492626;
+    background:#100909;
+    color:#d88989;
+    border-radius:8px;
+    padding:9px 11px;
+    font-size:9px;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:1fr 360px;
+    min-height:calc(100vh - 70px);
+}
+
+.left{
+    padding:16px;
+    min-width:0;
+}
+
+.right{
+    border-left:1px solid #202020;
+    background:#080808;
+    padding:16px;
+    position:sticky;
+    top:70px;
+    height:calc(100vh - 70px);
+    overflow:auto;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.section-title h2{
+    font-size:15px;
+    letter-spacing:1px;
+}
+
+.section-title span{
+    color:#666;
+    font-size:9px;
+}
+
+.tables{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(105px,1fr));
+    gap:9px;
+    margin-bottom:20px;
+}
+
+.table-card{
+    min-height:75px;
+    border:1px solid #292929;
+    background:#0b0b0b;
+    color:#fff;
+    border-radius:12px;
+    padding:10px;
+    text-align:left;
+}
+
+.table-card.active{
+    border-color:#7d632f;
+}
+
+.table-card.selected{
+    border-color:#c9a55c;
+    box-shadow:0 0 15px rgba(201,165,92,.12);
+}
+
+.table-card strong{
+    display:block;
+    color:#d9b86f;
+    font-size:12px;
+}
+
+.table-card span{
+    display:block;
+    margin-top:8px;
+    color:#777;
+    font-size:9px;
+}
+
+.categories{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding-bottom:8px;
+    margin-bottom:12px;
+}
+
+.categories button{
+    flex:0 0 auto;
+    border:1px solid #292929;
+    background:#090909;
+    color:#777;
+    border-radius:9px;
+    padding:9px 12px;
+    font-size:9px;
+}
+
+.categories button.active{
+    color:#050505;
+    background:#c9a55c;
+    border-color:#c9a55c;
+}
+
+.search{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    background:#090909;
+    color:#fff;
+    border:1px solid #252525;
+    border-radius:10px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#c9a55c;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+    gap:9px;
+}
+
+.menu-card{
+    min-height:105px;
+    border:1px solid #292929;
+    background:#0b0b0b;
+    border-radius:12px;
+    padding:13px;
+    color:#fff;
+    text-align:left;
+}
+
+.menu-card:hover{
+    border-color:#a98746;
+}
+
+.menu-card:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.menu-card strong{
+    display:block;
+    font-size:12px;
+    line-height:1.3;
+}
+
+.menu-card span{
+    display:block;
+    margin-top:10px;
+    color:#d9b86f;
+    font-weight:700;
+    font-size:11px;
+}
+
+.menu-card small{
+    display:block;
+    margin-top:5px;
+    color:#555;
+    font-size:8px;
+}
+
+.order-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #202020;
+    padding-bottom:12px;
+    margin-bottom:12px;
+}
+
+.order-head h2{
+    font-size:16px;
+}
+
+.order-head span{
+    color:#d9b86f;
+    font-size:11px;
+}
+
+.order-items{
+    min-height:180px;
+}
+
+.order-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid #181818;
+}
+
+.order-item strong{
+    display:block;
+    font-size:11px;
+}
+
+.order-item small{
+    display:block;
+    color:#666;
+    font-size:8px;
+    margin-top:5px;
+}
+
+.order-actions{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.order-actions button{
+    width:27px;
+    height:27px;
+    border:1px solid #292929;
+    background:#0d0d0d;
+    color:#ddd;
+    border-radius:7px;
+}
+
+.order-actions span{
+    min-width:18px;
+    text-align:center;
+    font-size:10px;
+}
+
+.total-box{
+    border-top:1px solid #292929;
+    margin-top:15px;
+    padding-top:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.total-box span{
+    color:#777;
+    font-size:10px;
+}
+
+.total-box strong{
+    color:#d9b86f;
+    font-size:22px;
+}
+
+.primary{
+    width:100%;
+    padding:14px;
+    margin-top:14px;
+    border:0;
+    border-radius:10px;
+    background:#c9a55c;
+    color:#050505;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.secondary{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #292929;
+    border-radius:10px;
+    background:#090909;
+    color:#aaa;
+}
+
+.empty{
+    min-height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#444;
+    font-size:10px;
+    text-align:center;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+    margin-bottom:18px;
+}
+
+.stat{
+    background:#090909;
+    border:1px solid #222;
+    border-radius:10px;
+    padding:11px;
+}
+
+.stat small{
+    display:block;
+    color:#555;
+    font-size:7px;
+    letter-spacing:1px;
+}
+
+.stat strong{
+    display:block;
+    margin-top:5px;
+    color:#d9b86f;
+    font-size:13px;
+}
+
+.admin-panel{
+    margin-top:18px;
+    padding:15px;
+    border:1px solid #292929;
+    background:#080808;
+    border-radius:13px;
+}
+
+.admin-panel h3{
+    color:#d9b86f;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.admin-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid #181818;
+}
+
+.admin-row strong{
+    display:block;
+    font-size:10px;
+}
+
+.admin-row small{
+    display:block;
+    color:#555;
+    font-size:8px;
+    margin-top:4px;
+}
+
+.admin-actions{
+    display:flex;
+    gap:6px;
+}
+
+.admin-actions button{
+    padding:7px 9px;
+    border:1px solid #292929;
+    background:#0c0c0c;
+    color:#aaa;
+    border-radius:7px;
+    font-size:9px;
+}
+
+.nav{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    margin-bottom:15px;
+}
+
+.nav button{
+    flex:0 0 auto;
+    padding:9px 11px;
+    border:1px solid #292929;
+    background:#090909;
+    color:#777;
+    border-radius:8px;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.nav button.active{
+    border-color:#c9a55c;
+    color:#d9b86f;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(0,0,0,.86);
+    backdrop-filter:blur(10px);
+}
+
+.modal-box{
+    width:min(100%,420px);
+    max-height:90vh;
+    overflow:auto;
+    background:#0a0a0a;
+    border:1px solid rgba(201,165,92,.45);
+    border-radius:18px;
+    padding:22px;
+}
+
+.modal-box h2{
+    color:#d9b86f;
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.modal-box p{
+    color:#777;
+    font-size:10px;
+    margin-bottom:15px;
+}
+
+.pay-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.pay-buttons button{
+    padding:16px;
+    border:1px solid #292929;
+    background:#0d0d0d;
+    color:#ddd;
+    border-radius:10px;
+}
+
+.close{
+    width:100%;
+    padding:11px;
+    margin-top:9px;
+    border:1px solid #292929;
+    background:#090909;
+    color:#777;
+    border-radius:9px;
+}
+
+.invoice{
+    background:#fff;
+    color:#111;
+    padding:20px;
+    border-radius:10px;
+}
+
+.invoice h2{
+    color:#111;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.invoice-info{
+    font-size:11px;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.invoice-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:6px 0;
+    border-bottom:1px solid #ddd;
+    font-size:10px;
+}
+
+.invoice-total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:12px;
+    font-size:16px;
+    font-weight:800;
+}
+
+.history-row,
+.payment-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    margin-bottom:7px;
+    background:#090909;
+    border:1px solid #202020;
+    border-radius:10px;
+}
+
+.history-row strong,
+.payment-row strong{
+    font-size:10px;
+}
+
+.history-row small,
+.payment-row small{
+    display:block;
+    color:#555;
+    font-size:8px;
+    margin-top:4px;
+}
+
+@media(max-width:900px){
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .right{
+        position:relative;
+        top:0;
+        height:auto;
+        border-left:0;
+        border-top:1px solid #202020;
+    }
+
+    .dashboard{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:520px){
+
+    .top{
+        padding:9px 10px;
+    }
+
+    .brand-text small{
+        display:none;
+    }
+
+    .user-info{
+        display:none;
+    }
+
+    .left,
+    .right{
+        padding:11px;
+    }
+
+    .tables{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .menu{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .menu-card{
+        min-height:100px;
+        padding:10px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+
+    <div class="brand">
+
+        <div class="logo">S</div>
+
+        <div class="brand-text">
+            <strong id="appName">MY BAR</strong>
+            <small>SISTEM MENAXHIMI</small>
+        </div>
+
+    </div>
+
+
+    <div class="user-info">
+
+        <strong id="userInfo">
+            —
+        </strong>
+
+        <small>
+            SISTEM AKTIV
+        </small>
+
+    </div>
+
+
+    <button
+        class="logout"
+        onclick="logout()"
+    >
+        DIL
+    </button>
+
+</header>
+
+
+<div class="layout">
+
+    <!-- LEFT -->
+
+    <main class="left">
+
+        <div class="dashboard">
+
+            <div class="stat">
+                <small>SHITJE SOT</small>
+                <strong id="salesToday">0 L</strong>
+            </div>
+
+            <div class="stat">
+                <small>TAVOLINA AKTIVE</small>
+                <strong id="activeTables">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>FATURA SOT</small>
+                <strong id="invoiceToday">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>KARTË</small>
+                <strong id="cardToday">0 L</strong>
+            </div>
+
+        </div>
+
+
+        <div class="nav">
+
+            <button
+                class="active"
+                onclick="showPage('pos',this)"
+            >
+                POS
+            </button>
+
+            <button
+                onclick="showPage('history',this)"
+            >
+                FATURAT E MIA
+            </button>
+
+            <button
+                onclick="showPage('cash',this)"
+            >
+                PËRMBLEDHJE
+            </button>
+
+            <button
+                class="admin-only"
+                onclick="showPage('admin',this)"
+            >
+                ADMIN
+            </button>
+
+        </div>
+
+
+        <!-- POS -->
+
+        <section
+            id="page-pos"
+            class="page active"
+        >
+
+            <div class="section-title">
+
+                <h2>TAVOLINAT</h2>
+
+                <span id="selectedTableText">
+                    Zgjidh një tavolinë
+                </span>
+
+            </div>
+
+
+            <div
+                id="tableGrid"
+                class="tables"
+            ></div>
+
+
+            <div class="section-title">
+
+                <h2>MENU</h2>
+
+                <span>
+                    ZGJIDH PRODUKTIN
+                </span>
+
+            </div>
+
+
+            <div id="categories"
+                 class="categories">
+            </div>
+
+
+            <div>
+
+                <input
+                    id="menuSearch"
+                    class="search"
+                    type="search"
+                    placeholder="Kërko produkt..."
+                >
+
+            </div>
+
+
+            <div
+                id="menuGrid"
+                class="menu"
+            ></div>
+
+        </section>
+
+
+        <!-- HISTORY -->
+
+        <section
+            id="page-history"
+            class="page"
+        >
+
+            <div class="section-title">
+
+                <h2>FATURAT E MIA</h2>
+
+                <span>
+                    HISTORIKU
+                </span>
+
+            </div>
+
+
+            <div
+                id="historyList"
+            ></div>
+
+
+            <button
+                class="secondary admin-only"
+                onclick="deleteHistory()"
+            >
+                FSHI HISTORIKUN
+            </button>
+
+        </section>
+
+
+        <!-- CASH -->
+
+        <section
+            id="page-cash"
+            class="page"
+        >
+
+            <div class="section-title">
+
+                <h2>PËRMBLEDHJE</h2>
+
+                <span>
+                    SOT
+                </span>
+
+            </div>
+
+
+            <div class="dashboard">
+
+                <div class="stat">
+                    <small>TOTAL</small>
+                    <strong id="cashTotal">0 L</strong>
+                </div>
+
+                <div class="stat">
+                    <small>CASH</small>
+                    <strong id="cashMoney">0 L</strong>
+                </div>
+
+                <div class="stat">
+                    <small>KARTË</small>
+                    <strong id="cashCard">0 L</strong>
+                </div>
+
+                <div class="stat">
+                    <small>FATURA</small>
+                    <strong id="cashInvoices">0</strong>
+                </div>
+
+            </div>
+
+
+            <div
+                id="paymentsList"
+            ></div>
+
+        </section>
+
+
+        <!-- ADMIN -->
+
+        <section
+            id="page-admin"
+            class="page admin-only"
+        >
+
+            <div class="section-title">
+
+                <h2>ADMIN</h2>
+
+                <span>
+                    MENAXHIM
+                </span>
+
+            </div>
+
+
+            <div class="admin-panel">
+
+                <h3>PËRDORUESIT</h3>
+
+                <div
+                    id="usersList"
+                ></div>
+
+                <button
+                    class="secondary"
+                    onclick="openWaiterModal()"
+                >
+                    SHTO KAMARIER
+                </button>
+
+            </div>
+
+
+            <div class="admin-panel">
+
+                <h3>PRODUKTET & STOKU</h3>
+
+                <div
+                    id="adminProducts"
+                ></div>
+
+            </div>
+
+
+            <div class="admin-panel">
+
+                <h3>TAVOLINAT</h3>
+
+                <label style="color:#777;font-size:8px;">
+                    NUMRI I TAVOLINAVE
+                </label>
+
+                <input
+                    id="tableCountInput"
+                    type="number"
+                    min="1"
+                    max="100"
+                    style="width:100%;margin-top:7px;padding:11px;background:#050505;border:1px solid #292929;border-radius:9px;color:#fff;"
+                >
+
+                <button
+                    class="primary"
+                    onclick="saveTableCount()"
+                >
+                    RUAJ TAVOLINAT
+                </button>
+
+            </div>
+
+
+            <div class="admin-panel">
+
+                <h3>EMRI I APLIKACIONIT</h3>
+
+                <input
+                    id="appNameInput"
+                    type="text"
+                    placeholder="MY BAR"
+                    style="width:100%;padding:11px;background:#050505;border:1px solid #292929;border-radius:9px;color:#fff;"
+                >
+
+                <button
+                    class="primary"
+                    onclick="saveAppName()"
+                >
+                    RUAJ EMRIN
+                </button>
+
+            </div>
+
+
+            <div class="admin-panel">
+
+                <h3>FJALËKALIMI ADMIN</h3>
+
+                <input
+                    id="newAdminPassword"
+                    type="password"
+                    placeholder="Fjalëkalim i ri"
+                    style="width:100%;padding:11px;background:#050505;border:1px solid #292929;border-radius:9px;color:#fff;"
+                >
+
+                <button
+                    class="primary"
+                    onclick="changeAdminPassword()"
+                >
+                    NDRYSHO FJALËKALIMIN
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RIGHT ORDER -->
+
+    <aside class="right">
+
+        <div class="order-head">
+
+            <h2>POROSIA</h2>
+
+            <span
+                id="selectedTableText"
+            >
+                —
+            </span>
+
+        </div>
+
+
+        <div
+            id="orderItems"
+            class="order-items"
+        >
+
+            <div class="empty">
+                Nuk ka produkte në porosi.
+            </div>
+
+        </div>
+
+
+        <div class="total-box">
+
+            <span>
+                TOTAL
+            </span>
+
+            <strong id="orderTotal">
+                0 L
+            </strong>
+
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="openPayment()"
+        >
+            MBYLL FATURËN
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="logout()"
+        >
+            DIL NGA SISTEMI
+        </button>
+
+    </aside>
+
+</div>
+
+
+<!-- PAYMENT MODAL -->
+
+<div
+    id="paymentModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>ZGJIDH PAGESËN</h2>
+
+        <p>
+            Totali për pagesë:
+            <strong
+                id="paymentTotal"
+                style="color:#d9b86f;"
+            >
+                0 L
+            </strong>
+        </p>
+
+
+        <div class="pay-buttons">
+
+            <button
+                onclick="completePayment('cash')"
+            >
+                💵 CASH
+            </button>
+
+            <button
+                onclick="completePayment('card')"
+            >
+                💳 KARTË
+            </button>
+
+        </div>
+
+
+        <button
+            class="close"
+            onclick="closePayment()"
+        >
+            ANULO
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- INVOICE MODAL -->
+
+<div
+    id="invoiceModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <div class="invoice">
+
+            <h2 id="invoiceTitle">
+                MY BAR
+            </h2>
+
+            <div class="invoice-info">
+
+                <div>
+                    Faturë:
+                    <strong id="invoiceNumber">
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    Data:
+                    <span id="invoiceDate">
+                        —
+                    </span>
+                </div>
+
+                <div>
+                    Tavolina:
+                    <span id="invoiceTable">
+                        —
+                    </span>
+                </div>
+
+                <div>
+                    Kamarieri:
+                    <span id="invoiceWaiter">
+                        —
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div id="invoiceItems"></div>
+
+
+            <div class="invoice-total">
+
+                <span>
+                    TOTAL
+                </span>
+
+                <span id="invoiceTotal">
+                    0 L
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="window.print()"
+        >
+            PRINT
+        </button>
+
+
+        <button
+            class="close"
+            onclick="closeInvoice()"
+        >
+            MBYLL
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- GENERAL MODAL -->
+
+<div
+    id="generalModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <h2 id="generalModalTitle">
+            Shto kamarier
+        </h2>
+
+        <p>
+            Kjo pjesë do të përdoret për menaxhimin e përdoruesve.
+        </p>
+
+        <input
+            id="newWaiterUsername"
+            type="text"
+            placeholder="Username"
+            style="width:100%;padding:11px;background:#050505;border:1px solid #292929;border-radius:9px;color:#fff;margin-bottom:8px;"
+        >
+
+        <input
+            id="newWaiterPassword"
+            type="password"
+            placeholder="Fjalëkalimi"
+            style="width:100%;padding:11px;background:#050505;border:1px solid #292929;border-radius:9px;color:#fff;"
+        >
+
+        <button
+            class="primary"
+            onclick="addNewWaiter()"
+        >
+            SHTO
+        </button>
+
+        <button
+            class="close"
+            onclick="closeGeneralModal()"
+        >
+            MBYLL
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="./app.js"></script>
+
+
+<script>
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(page, button){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            p => p.classList.remove("active")
+        );
+
+    const target =
+        document.getElementById(
+            "page-" + page
+        );
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(
+            b => b.classList.remove("active")
+        );
+
+    if(button){
+        button.classList.add("active");
+    }
+
+}
+
+
+/* =========================
+   ADD WAITER
+========================= */
+
+function addNewWaiter(){
+
+    const username =
+        document
+        .getElementById(
+            "newWaiterUsername"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+    const password =
+        document
+        .getElementById(
+            "newWaiterPassword"
+        )
+        .value
+        .trim();
+
+
+    if(!username || !password){
+
+        toast("Plotëso username dhe fjalëkalimin.");
+
+        return;
+
+    }
+
+
+    let users = [];
+
+    try{
+
+        users =
+            JSON.parse(
+                localStorage.getItem(
+                    "MYBAR_USERS_V2"
+                ) || "[]"
+            );
+
+    }catch(e){
+
+        users = [];
+
+    }
+
+
+    if(
+        users.some(
+            u =>
+                String(
+                    u.username
+                ).toLowerCase()
+                === username
+        )
+    ){
+
+        toast("Ky përdorues ekziston.");
+
+        return;
+
+    }
+
+
+    users.push({
+
+        username:username,
+
+        password:password,
+
+        role:"waiter",
+
+        name:username.toUpperCase()
+
+    });
+
+
+    localStorage.setItem(
+        "MYBAR_USERS_V2",
+        JSON.stringify(users)
+    );
+
+
+    document
+        .getElementById(
+            "newWaiterUsername"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "newWaiterPassword"
+        )
+        .value = "";
+
+
+    closeGeneralModal();
+
+    renderAdmin();
+
+    toast("Kamarieri u shtua.");
+
+}
+
+
+/* =========================
+   GENERAL MODAL
+========================= */
+
+function closeGeneralModal(){
+
+    const modal =
+        document.getElementById(
+            "generalModal"
+        );
+
+    if(modal){
+        modal.style.display = "none";
+    }
+
+}
+
+
+/* =========================
+   STARTUP
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const session =
+            localStorage.getItem(
+                "MYBAR_SESSION_V2"
+            );
+
+        if(!session){
+
+            window.location.href =
+                "./index.html";
+
+            return;
+
+        }
+
+        const appNameInput =
+            document.getElementById(
+                "appNameInput"
+            );
+
+        if(appNameInput){
+
+            appNameInput.value =
+                localStorage.getItem(
+                    "MYBAR_APP_NAME"
+                ) || "";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   PRINT
+========================= */
+
+const printStyle =
+document.createElement("style");
+
+printStyle.textContent = `
+@media print {
+
+    body > * {
+        display:none !important;
+    }
+
+    #invoiceModal {
+        display:flex !important;
+        position:static !important;
+        background:#fff !important;
+    }
+
+    #invoiceModal .modal-box {
+        width:80mm !important;
+        max-height:none !important;
+        border:0 !important;
+        padding:0 !important;
+    }
+
+    #invoiceModal .primary,
+    #invoiceModal .close {
+        display:none !important;
+    }
+
+}
+`;
+
+document.head.appendChild(
+    printStyle
+);
+
+</script>
+
+</body>
+</html>
