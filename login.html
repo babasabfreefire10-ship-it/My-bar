@@ -2,9 +2,8 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
 <title>BY SABI • MY BAR</title>
 
 <style>
@@ -14,342 +13,566 @@
     padding:0;
 }
 
-:root{
-    --black:#070707;
-    --black2:#101010;
-    --card:#121212;
-    --line:#282828;
-    --text:#f4f4f4;
-    --muted:#858585;
-    --gold:#c8a96b;
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#030303;
+    color:#fff;
 }
 
 body{
     min-height:100vh;
-    font-family:Inter,Arial,sans-serif;
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            #242424 0%,
-            #101010 32%,
-            #070707 72%
-        );
-    color:var(--text);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
-/* subtle premium lights */
+/* =========================
+   RGB BACKGROUND
+========================= */
 
 body::before{
     content:"";
     position:fixed;
-    width:420px;
-    height:420px;
-    border-radius:50%;
-    background:rgba(200,169,107,.07);
-    filter:blur(100px);
-    top:-220px;
-    left:50%;
-    transform:translateX(-50%);
+    inset:-20%;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,0,80,.10),transparent 30%),
+        radial-gradient(circle at 80% 20%,rgba(0,140,255,.10),transparent 30%),
+        radial-gradient(circle at 50% 90%,rgba(0,255,160,.08),transparent 35%);
+    animation:backgroundMove 10s ease-in-out infinite alternate;
     pointer-events:none;
+    z-index:0;
 }
 
-.login{
+@keyframes backgroundMove{
+    from{
+        transform:scale(1);
+        filter:hue-rotate(0deg);
+    }
+    to{
+        transform:scale(1.15);
+        filter:hue-rotate(90deg);
+    }
+}
+
+/* =========================
+   RGB FRAME
+========================= */
+
+.led{
+    position:fixed;
+    pointer-events:none;
+    z-index:5;
+}
+
+.led.top,
+.led.bottom{
+    left:0;
+    right:0;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        #ff004c,
+        #ff9d00,
+        #00ff8c,
+        #00aaff,
+        #9d00ff,
+        #ff004c
+    );
+    background-size:400% 100%;
+    animation:ledMove 7s linear infinite;
+    box-shadow:
+        0 0 8px rgba(255,255,255,.45),
+        0 0 20px rgba(0,180,255,.45);
+}
+
+.led.top{top:0;}
+.led.bottom{bottom:0;}
+
+.led.left,
+.led.right{
+    top:0;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(
+        180deg,
+        #ff004c,
+        #ff9d00,
+        #00ff8c,
+        #00aaff,
+        #9d00ff,
+        #ff004c
+    );
+    background-size:100% 400%;
+    animation:ledMoveVertical 7s linear infinite;
+    box-shadow:
+        0 0 8px rgba(255,255,255,.45),
+        0 0 20px rgba(0,180,255,.45);
+}
+
+.led.left{left:0;}
+.led.right{right:0;}
+
+@keyframes ledMove{
+    from{background-position:0 0;}
+    to{background-position:400% 0;}
+}
+
+@keyframes ledMoveVertical{
+    from{background-position:0 0;}
+    to{background-position:0 400%;}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
     position:relative;
-    width:min(900px,100%);
+    z-index:10;
+    width:100%;
+    padding:24px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brand-logo{
+    width:42px;
+    height:42px;
+    border:1px solid #c8a96b;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#c8a96b;
+    font-size:20px;
+    font-weight:800;
+    box-shadow:0 0 20px rgba(200,169,107,.12);
+}
+
+.brand-text strong{
+    display:block;
+    font-size:14px;
+    letter-spacing:3px;
+}
+
+.brand-text span{
+    color:#888;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.contact-btn{
+    border:1px solid #292929;
+    background:#0b0b0b;
+    color:#aaa;
+    padding:10px 15px;
+    border-radius:10px;
+    font-size:11px;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+
+.contact-btn:hover{
+    color:#c8a96b;
+    border-color:#c8a96b;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    position:relative;
+    z-index:10;
+    min-height:calc(100vh - 90px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px 20px 70px;
+}
+
+.container{
+    width:100%;
+    max-width:980px;
+    display:grid;
+    grid-template-columns:1fr 430px;
+    gap:70px;
+    align-items:center;
+}
+
+/* =========================
+   LEFT
+========================= */
+
+.presentation{
+    padding:10px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border:1px solid #272727;
+    background:#090909;
+    border-radius:30px;
+    color:#c8a96b;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:24px;
+}
+
+.badge-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#c8a96b;
+    box-shadow:0 0 10px #c8a96b;
+}
+
+.presentation h1{
+    font-size:clamp(46px,7vw,88px);
+    line-height:.9;
+    letter-spacing:-4px;
+    font-weight:900;
+}
+
+.presentation h1 span{
+    display:block;
+    color:#c8a96b;
+}
+
+.by{
+    margin-top:22px;
+    font-size:12px;
+    letter-spacing:5px;
+    color:#aaa;
+}
+
+.description{
+    max-width:500px;
+    margin-top:22px;
+    color:#777;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:28px;
+}
+
+.feature{
+    padding:9px 12px;
+    border:1px solid #202020;
+    border-radius:8px;
+    color:#777;
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+/* =========================
+   LOGIN CARD
+========================= */
+
+.login-card{
     background:
         linear-gradient(
             145deg,
-            rgba(28,28,28,.96),
-            rgba(9,9,9,.98)
+            rgba(25,25,25,.95),
+            rgba(7,7,7,.98)
         );
     border:1px solid #292929;
     border-radius:24px;
-    padding:42px;
+    padding:30px;
     box-shadow:
-        0 35px 100px rgba(0,0,0,.65),
+        0 30px 80px rgba(0,0,0,.65),
         inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-/* top line */
-
-.login::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:12%;
-    right:12%;
-    height:1px;
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
-        );
-    opacity:.7;
-}
-
-/* LOGO */
-
-.logo{
+.login-head{
     text-align:center;
-    margin-bottom:34px;
+    margin-bottom:25px;
 }
 
-.logo-icon{
-    width:68px;
-    height:68px;
-    margin:auto;
-    display:grid;
-    place-items:center;
-    border-radius:19px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #242424,
-            #080808
-        );
-
-    border:1px solid #363636;
-
-    color:#fff;
-
+.big-logo{
+    width:66px;
+    height:66px;
+    margin:0 auto 15px;
+    border:1px solid #c8a96b;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#c8a96b;
     font-size:28px;
     font-weight:900;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.5),
-        inset 0 1px 0 rgba(255,255,255,.08);
+    box-shadow:0 0 30px rgba(200,169,107,.10);
 }
 
-.logo h1{
-    margin-top:18px;
-    font-size:30px;
-    font-weight:900;
-    letter-spacing:5px;
+.login-head h2{
+    font-size:20px;
+    letter-spacing:3px;
 }
 
-.logo .by{
-    margin-top:9px;
-    color:var(--gold);
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:4px;
-    text-transform:uppercase;
-}
-
-.logo p{
-    margin-top:13px;
+.login-head p{
+    margin-top:7px;
     color:#777;
-    font-size:12px;
+    font-size:11px;
     letter-spacing:2px;
 }
 
-/* USERS */
+/* =========================
+   USERS
+========================= */
 
 .users{
     display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(190px,1fr));
-    gap:13px;
+    gap:9px;
 }
 
 .user{
-    position:relative;
-    min-height:105px;
-
-    border:1px solid var(--line);
-    background:
-        linear-gradient(
-            145deg,
-            #171717,
-            #0c0c0c
-        );
-
-    color:#fff;
-
-    border-radius:15px;
-    padding:19px;
-
-    text-align:left;
-
-    transition:
-        transform .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-
-    overflow:hidden;
-}
-
-.user::after{
-    content:"";
-    position:absolute;
-    right:-25px;
-    bottom:-25px;
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:rgba(200,169,107,.06);
-    filter:blur(5px);
-}
-
-.user:hover{
-    transform:translateY(-3px);
-    border-color:#5b4b2f;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.45);
-}
-
-.user strong{
-    position:relative;
-    z-index:2;
-
-    display:block;
-
-    font-size:16px;
-    letter-spacing:1px;
-}
-
-.user span{
-    position:relative;
-    z-index:2;
-
-    display:block;
-
-    margin-top:8px;
-
-    color:#777;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:2px;
-}
-
-/* PIN */
-
-.pin{
-    display:none;
-    margin-top:22px;
-
-    padding:17px;
-
-    border:1px solid #282828;
-    border-radius:14px;
-
-    background:#0b0b0b;
-}
-
-.pin.active{
-    display:block;
-}
-
-.pin input{
     width:100%;
-
-    padding:14px;
-
-    border:1px solid #303030;
-    border-radius:10px;
-
-    outline:none;
-
-    background:#151515;
+    padding:15px 16px;
+    border:1px solid #222;
+    border-radius:13px;
+    background:#0c0c0c;
     color:#fff;
-
-    font-size:17px;
-    text-align:center;
-
-    letter-spacing:5px;
-}
-
-.pin input:focus{
-    border-color:#6a5735;
-    box-shadow:
-        0 0 0 3px rgba(200,169,107,.07);
-}
-
-.pin button{
-    width:100%;
-
-    margin-top:10px;
-
-    padding:14px;
-
-    border:1px solid #b59459;
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d0b274,
-            #a7864d
-        );
-
-    color:#080808;
-
-    font-weight:900;
-    letter-spacing:1px;
-
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
     transition:.2s;
 }
 
-.pin button:hover{
-    filter:brightness(1.08);
+.user:hover{
+    border-color:#555;
+    transform:translateY(-1px);
 }
 
-.error{
-    color:#d66b61;
-    text-align:center;
-    margin-top:11px;
+.user.selected{
+    border-color:#c8a96b;
+    background:#12100b;
+    box-shadow:0 0 20px rgba(200,169,107,.08);
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#171717;
+    color:#c8a96b;
+    font-weight:800;
     font-size:12px;
 }
 
-/* footer */
+.user-name{
+    text-align:left;
+}
+
+.user-name strong{
+    display:block;
+    font-size:13px;
+}
+
+.user-name small{
+    color:#666;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+.arrow{
+    color:#555;
+    font-size:18px;
+}
+
+/* =========================
+   PIN
+========================= */
+
+.pin-box{
+    display:none;
+    margin-top:18px;
+}
+
+.pin-box.show{
+    display:block;
+}
+
+.pin-title{
+    color:#888;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.pin-input{
+    width:100%;
+    height:50px;
+    border:1px solid #292929;
+    border-radius:12px;
+    background:#050505;
+    color:#fff;
+    text-align:center;
+    font-size:20px;
+    letter-spacing:8px;
+    outline:none;
+}
+
+.pin-input:focus{
+    border-color:#c8a96b;
+    box-shadow:0 0 15px rgba(200,169,107,.08);
+}
+
+.enter{
+    width:100%;
+    margin-top:10px;
+    height:48px;
+    border:0;
+    border-radius:12px;
+    background:#c8a96b;
+    color:#080808;
+    font-weight:800;
+    letter-spacing:2px;
+    cursor:pointer;
+}
+
+.enter:hover{
+    background:#e1c487;
+}
+
+.error{
+    min-height:18px;
+    margin-top:8px;
+    text-align:center;
+    color:#ff5d5d;
+    font-size:11px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
+    position:fixed;
+    z-index:10;
+    bottom:17px;
+    left:0;
+    right:0;
     text-align:center;
-    margin-top:28px;
-
-    color:#555;
+    color:#3e3e3e;
     font-size:9px;
     letter-spacing:2px;
-    text-transform:uppercase;
 }
 
-.footer strong{
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(0,0,0,.82);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-card{
+    width:100%;
+    max-width:440px;
+    background:#0c0c0c;
+    border:1px solid #292929;
+    border-radius:20px;
+    padding:25px;
+}
+
+.modal-card h3{
+    color:#c8a96b;
+    margin-bottom:15px;
+}
+
+.modal-card p{
     color:#777;
+    font-size:13px;
+    line-height:1.6;
 }
 
-/* mobile */
+.close{
+    margin-top:20px;
+    width:100%;
+    height:44px;
+    border-radius:10px;
+    border:1px solid #292929;
+    background:#111;
+    color:#aaa;
+}
 
-@media(max-width:600px){
+/* =========================
+   MOBILE
+========================= */
 
-    body{
-        padding:13px;
+@media(max-width:800px){
+
+    .header{
+        padding:18px 20px;
     }
 
-    .login{
-        padding:28px 18px;
-        border-radius:20px;
-    }
-
-    .logo h1{
-        font-size:25px;
-        letter-spacing:4px;
-    }
-
-    .users{
+    .container{
         grid-template-columns:1fr;
+        gap:30px;
+        max-width:480px;
     }
 
-    .user{
-        min-height:85px;
+    .presentation{
+        text-align:center;
+    }
+
+    .presentation h1{
+        font-size:55px;
+        letter-spacing:-3px;
+    }
+
+    .description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .features{
+        justify-content:center;
+    }
+
+    .login-card{
+        padding:22px;
+    }
+
+    .main{
+        padding-top:10px;
+        padding-bottom:60px;
     }
 }
 </style>
@@ -357,106 +580,189 @@ body::before{
 
 <body>
 
-<div class="login">
+<div class="led top"></div>
+<div class="led bottom"></div>
+<div class="led left"></div>
+<div class="led right"></div>
 
-    <div class="logo">
+<header class="header">
 
-        <div class="logo-icon">
-            S
+    <div class="brand">
+        <div class="brand-logo">S</div>
+
+        <div class="brand-text">
+            <strong>BY SABI</strong>
+            <span>MY BAR SYSTEM</span>
+        </div>
+    </div>
+
+    <button class="contact-btn" onclick="openContact()">
+        CONTACT
+    </button>
+
+</header>
+
+<main class="main">
+
+<div class="container">
+
+    <section class="presentation">
+
+        <div class="badge">
+            <span class="badge-dot"></span>
+            SISTEM PREMIUM
         </div>
 
-        <h1 id="businessName">
-            MY BAR
+        <h1>
+            MY
+            <span>BAR</span>
         </h1>
 
         <div class="by">
             BY SABI
         </div>
 
-        <p id="welcome">
-            MIRË SE VINI
+        <p class="description">
+            Sistem profesional për menaxhimin e tavolinave,
+            faturave, arkës, inventarit dhe shitjeve të barit.
         </p>
 
-    </div>
-
-    <div
-        class="users"
-        id="users">
-    </div>
-
-    <div
-        class="pin"
-        id="pinBox">
-
-        <input
-            id="pin"
-            type="password"
-            inputmode="numeric"
-            placeholder="••••"
-        >
-
-        <button onclick="login()">
-            HYR NË SISTEM
-        </button>
-
-        <div
-            class="error"
-            id="error">
+        <div class="features">
+            <div class="feature">POS</div>
+            <div class="feature">FATURA</div>
+            <div class="feature">TAVOLINA</div>
+            <div class="feature">INVENTAR</div>
+            <div class="feature">ADMIN</div>
         </div>
 
-    </div>
+    </section>
 
-    <div class="footer">
-        PREMIUM BAR MANAGEMENT •
-        <strong>BY SABI</strong>
+    <section class="login-card">
+
+        <div class="login-head">
+
+            <div class="big-logo">S</div>
+
+            <h2 id="businessName">
+                MY BAR
+            </h2>
+
+            <p id="welcomeText">
+                MIRË SE VINI
+            </p>
+
+        </div>
+
+        <div id="users" class="users"></div>
+
+        <div id="pinBox" class="pin-box">
+
+            <div class="pin-title">
+                FUT FJALËKALIMIN / PIN
+            </div>
+
+            <input
+                id="pin"
+                class="pin-input"
+                type="password"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="20"
+                placeholder="••••"
+            >
+
+            <button class="enter" onclick="login()">
+                HYR NË SISTEM
+            </button>
+
+            <div id="error" class="error"></div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</main>
+
+<div class="footer">
+    PREMIUM BAR MANAGEMENT • BY SABI
+</div>
+
+<!-- CONTACT -->
+
+<div id="contactModal" class="modal">
+
+    <div class="modal-card">
+
+        <h3>CONTACT</h3>
+
+        <p>
+            Për probleme me sistemin ose informacion
+            rreth aplikacionit, kontaktoni administratorin.
+        </p>
+
+        <button class="close" onclick="closeContact()">
+            MBYLL
+        </button>
+
     </div>
 
 </div>
 
 <script>
 
-const USERS_KEY =
-    "MYBAR_USERS_V2";
+/* =========================
+   STORAGE
+========================= */
 
-const SESSION_KEY =
-    "MYBAR_SESSION_V2";
+const USERS_KEY = "MYBAR_USERS_V2";
+const SESSION_KEY = "MYBAR_SESSION_V2";
+const SETTINGS_KEY = "MYBAR_SETTINGS_V2";
 
-const SETTINGS_KEY =
-    "MYBAR_SETTINGS_V2";
+/* =========================
+   DEFAULT USERS
+========================= */
 
 const DEFAULT_USERS = [
-
     {
         username:"admin",
         password:"1234",
         role:"admin",
         name:"Administrator"
     },
-
     {
         username:"sabi",
         password:"1234",
         role:"waiter",
         name:"SABI"
     },
-
     {
         username:"mondi",
         password:"1234",
         role:"waiter",
         name:"MONDI"
     }
-
 ];
 
-let selectedUser = null;
+/* =========================
+   DEFAULT SETTINGS
+========================= */
+
+const DEFAULT_SETTINGS = {
+    appName:"MY BAR",
+    welcomeTitle:"MIRË SE VINI"
+};
+
+/* =========================
+   HELPERS
+========================= */
 
 function getJSON(key,fallback){
 
     try{
 
-        const value =
-            localStorage.getItem(key);
+        const value = localStorage.getItem(key);
 
         return value
             ? JSON.parse(value)
@@ -465,7 +771,9 @@ function getJSON(key,fallback){
     }catch{
 
         return fallback;
+
     }
+
 }
 
 function setJSON(key,value){
@@ -474,80 +782,121 @@ function setJSON(key,value){
         key,
         JSON.stringify(value)
     );
+
 }
 
-function load(){
+/* =========================
+   INITIALIZE
+========================= */
 
-    let users =
-        getJSON(
-            USERS_KEY,
-            DEFAULT_USERS
-        );
+function initializeLogin(){
 
-    if(
-        !localStorage.getItem(
-            USERS_KEY
-        )
-    ){
+    if(!localStorage.getItem(USERS_KEY)){
 
         setJSON(
             USERS_KEY,
             DEFAULT_USERS
         );
 
-        users =
-            DEFAULT_USERS;
+    }
+
+    if(!localStorage.getItem(SETTINGS_KEY)){
+
+        setJSON(
+            SETTINGS_KEY,
+            DEFAULT_SETTINGS
+        );
+
     }
 
     const settings =
         getJSON(
             SETTINGS_KEY,
-            {}
+            DEFAULT_SETTINGS
         );
 
-    document.getElementById(
-        "businessName"
-    ).textContent =
-        settings.appName ||
-        settings.businessName ||
-        "MY BAR";
+    document.getElementById("businessName")
+        .textContent =
+        settings.appName || "MY BAR";
 
-    document.getElementById(
-        "welcome"
-    ).textContent =
-        settings.welcomeTitle ||
-        "MIRË SE VINI";
+    document.getElementById("welcomeText")
+        .textContent =
+        settings.welcomeTitle || "MIRË SE VINI";
 
-    const box =
-        document.getElementById(
-            "users"
+    renderUsers();
+
+}
+
+/* =========================
+   USERS
+========================= */
+
+let selectedUser = null;
+
+function renderUsers(){
+
+    const usersBox =
+        document.getElementById("users");
+
+    const users =
+        getJSON(
+            USERS_KEY,
+            DEFAULT_USERS
         );
 
-    box.innerHTML =
-        users.map(
-            (user,index) => `
+    usersBox.innerHTML =
+        users.map((user,index)=>{
 
+            const initial =
+                (user.name || user.username)
+                .charAt(0)
+                .toUpperCase();
+
+            const role =
+                user.role === "admin"
+                    ? "ADMINISTRATOR"
+                    : "KAMARIER";
+
+            return `
                 <button
-                    class="user"
-                    onclick="selectUser(${index})">
+                    class="user ${selectedUser === index ? "selected" : ""}"
+                    onclick="selectUser(${index})"
+                >
 
-                    <strong>
-                        ${escapeHTML(user.name)}
-                    </strong>
+                    <div class="user-info">
 
-                    <span>
-                        ${
-                            user.role === "admin"
-                                ? "ADMINISTRATOR"
-                                : "KAMARIER"
-                        }
-                    </span>
+                        <div class="avatar">
+                            ${escapeHTML(initial)}
+                        </div>
+
+                        <div class="user-name">
+
+                            <strong>
+                                ${escapeHTML(user.name)}
+                            </strong>
+
+                            <small>
+                                ${role}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="arrow">
+                        ›
+                    </div>
 
                 </button>
+            `;
 
-            `
-        ).join("");
+        }).join("");
+
 }
+
+/* =========================
+   SELECT USER
+========================= */
 
 function selectUser(index){
 
@@ -557,12 +906,15 @@ function selectUser(index){
             DEFAULT_USERS
         );
 
-    selectedUser =
-        users[index];
+    if(!users[index]) return;
+
+    selectedUser = index;
+
+    renderUsers();
 
     document
         .getElementById("pinBox")
-        .classList.add("active");
+        .classList.add("show");
 
     document
         .getElementById("pin")
@@ -572,50 +924,125 @@ function selectUser(index){
         .getElementById("error")
         .textContent = "";
 
-    document
-        .getElementById("pin")
-        .focus();
+    setTimeout(()=>{
+
+        document
+            .getElementById("pin")
+            .focus();
+
+    },100);
+
 }
+
+/* =========================
+   LOGIN
+========================= */
 
 function login(){
 
-    if(!selectedUser) return;
+    if(selectedUser === null){
 
-    const pin =
+        document.getElementById("error")
+            .textContent =
+            "Zgjidh një përdorues.";
+
+        return;
+
+    }
+
+    const users =
+        getJSON(
+            USERS_KEY,
+            DEFAULT_USERS
+        );
+
+    const user =
+        users[selectedUser];
+
+    if(!user) return;
+
+    const password =
         document
             .getElementById("pin")
             .value;
 
-    if(
-        pin !==
-        selectedUser.password
-    ){
+    if(password !== String(user.password)){
+
+        document.getElementById("error")
+            .textContent =
+            "Fjalëkalimi është gabim.";
 
         document
-            .getElementById("error")
-            .textContent =
-            "PIN / Password i gabuar.";
+            .getElementById("pin")
+            .value = "";
 
         return;
+
     }
 
     setJSON(
         SESSION_KEY,
         {
-            username:
-                selectedUser.username,
-
-            name:
-                selectedUser.name,
-
-            role:
-                selectedUser.role
+            username:user.username,
+            name:user.name,
+            role:user.role,
+            loginAt:Date.now()
         }
     );
 
-    window.location.href =
-        "index.html";
+    /*
+       IMPORTANT:
+       Login hap direkt POS-in.
+       Nëse POS-i yt është index.html,
+       ky URL duhet të mbetet index.html.
+    */
+
+    window.location.href = "index.html";
+
 }
+
+/* =========================
+   ENTER KEY
+========================= */
+
+document
+    .getElementById("pin")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                login();
+
+            }
+
+        }
+    );
+
+/* =========================
+   CONTACT
+========================= */
+
+function openContact(){
+
+    document
+        .getElementById("contactModal")
+        .classList.add("show");
+
+}
+
+function closeContact(){
+
+    document
+        .getElementById("contactModal")
+        .classList.remove("show");
+
+}
+
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHTML(value){
 
@@ -625,27 +1052,17 @@ function escapeHTML(value){
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
+
 }
+
+/* =========================
+   START
+========================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    load
+    initializeLogin
 );
-
-document
-    .getElementById("pin")
-    .addEventListener(
-        "keydown",
-        event => {
-
-            if(
-                event.key === "Enter"
-            ){
-                login();
-            }
-
-        }
-    );
 
 </script>
 
