@@ -2,174 +2,1317 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY BAR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+
+<title>BY SABI • MY BAR</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --black:#030303;
+    --black2:#090909;
+    --gold:#c9a86a;
+    --gold2:#f0d28f;
+    --white:#f5f5f5;
+    --muted:#777;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
 
 body{
-    min-height:100vh;
-    background:#030504;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
     overflow:hidden;
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            #171717 0%,
+            #090909 42%,
+            #020202 100%
+        );
+
+    color:var(--white);
 }
 
-body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-        radial-gradient(circle at 50% 50%,rgba(24,120,70,.13),transparent 45%),
-        linear-gradient(135deg,#020302,#07100b,#020302);
-    z-index:-2;
-}
+/* =========================
+   RGB LED FRAME
+========================= */
 
 .led{
     position:fixed;
-    background:linear-gradient(90deg,transparent,#19d77a,#fff,#19d77a,transparent);
-    box-shadow:0 0 18px #19d77a,0 0 45px rgba(25,215,122,.35);
-    animation:led 4s linear infinite;
+    z-index:20;
+    pointer-events:none;
+    filter:drop-shadow(
+        0 0 7px currentColor
+    );
+
+    animation:
+        rgb 7s linear infinite,
+        pulse 2.5s ease-in-out infinite;
 }
 
-.top,.bottom{
-    left:8%;
-    width:84%;
+.led.top,
+.led.bottom{
+    left:0;
+    width:100%;
     height:2px;
 }
 
-.top{top:7%}
-.bottom{bottom:7%}
+.led.top{
+    top:0;
+}
 
-.left,.right{
-    top:15%;
+.led.bottom{
+    bottom:0;
+}
+
+.led.left,
+.led.right{
+    top:0;
     width:2px;
-    height:70%;
-    background:linear-gradient(180deg,transparent,#19d77a,#fff,#19d77a,transparent);
+    height:100%;
 }
 
-.left{left:5%}
-.right{right:5%}
-
-@keyframes led{
-    0%,100%{opacity:.45}
-    50%{opacity:1}
+.led.left{
+    left:0;
 }
 
-.panel{
-    width:min(650px,90%);
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
+.led.right{
+    right:0;
+}
+
+@keyframes rgb{
+    0%{
+        color:#ff2b2b;
+        background:#ff2b2b;
+    }
+
+    20%{
+        color:#ff00d4;
+        background:#ff00d4;
+    }
+
+    40%{
+        color:#6c5cff;
+        background:#6c5cff;
+    }
+
+    60%{
+        color:#00c8ff;
+        background:#00c8ff;
+    }
+
+    80%{
+        color:#00ff91;
+        background:#00ff91;
+    }
+
+    100%{
+        color:#ff2b2b;
+        background:#ff2b2b;
+    }
+}
+
+@keyframes pulse{
+    0%,
+    100%{
+        opacity:.45;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+/* =========================
+   MOVING LIGHT
+========================= */
+
+.light{
+    position:fixed;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:0;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(201,168,106,.13),
+            transparent 70%
+        );
+
+    filter:blur(20px);
+
+    animation:
+        moveLight 12s ease-in-out infinite;
+}
+
+@keyframes moveLight{
+    0%{
+        transform:
+            translate(-35vw,-20vh);
+    }
+
+    25%{
+        transform:
+            translate(30vw,-5vh);
+    }
+
+    50%{
+        transform:
+            translate(25vw,35vh);
+    }
+
+    75%{
+        transform:
+            translate(-30vw,30vh);
+    }
+
+    100%{
+        transform:
+            translate(-35vw,-20vh);
+    }
+}
+
+/* =========================
+   PARTICLE STREAKS
+========================= */
+
+.streak{
+    position:fixed;
+    z-index:1;
+    width:160px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(201,168,106,.8),
+            transparent
+        );
+
+    opacity:0;
+
+    transform:rotate(-25deg);
+
+    animation:
+        streakMove 6s linear infinite;
+}
+
+.streak:nth-child(7){
+    top:20%;
+    left:-200px;
+    animation-delay:0s;
+}
+
+.streak:nth-child(8){
+    top:55%;
+    left:-200px;
+    animation-delay:2s;
+}
+
+.streak:nth-child(9){
+    top:75%;
+    left:-200px;
+    animation-delay:4s;
+}
+
+@keyframes streakMove{
+    0%{
+        transform:
+            translateX(0)
+            rotate(-25deg);
+
+        opacity:0;
+    }
+
+    10%{
+        opacity:.8;
+    }
+
+    45%{
+        opacity:.3;
+    }
+
+    60%{
+        transform:
+            translateX(120vw)
+            rotate(-25deg);
+
+        opacity:0;
+    }
+
+    100%{
+        transform:
+            translateX(120vw)
+            rotate(-25deg);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    position:fixed;
+    z-index:30;
+    top:0;
+    left:0;
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:
+        24px
+        32px;
+}
+
+.brand-small{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.brand-small .s{
+    width:34px;
+    height:34px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid #353535;
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d1d1d,
+            #060606
+        );
+
+    color:var(--gold2);
+    font-size:15px;
+    font-weight:900;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.08);
+}
+
+.brand-small span{
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:3px;
+    color:#777;
+}
+
+.contact{
+    border:1px solid #292929;
+    background:rgba(8,8,8,.7);
+    color:#aaa;
+
+    padding:
+        10px
+        15px;
+
+    border-radius:9px;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    backdrop-filter:blur(10px);
+}
+
+.contact:hover{
+    color:#fff;
+    border-color:#61502f;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    position:relative;
+    z-index:10;
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:80px 20px;
+}
+
+.content{
+    width:min(720px,100%);
     text-align:center;
-    padding:55px 35px;
-    border:1px solid #193f2c;
-    background:rgba(4,10,7,.88);
-    box-shadow:0 0 80px rgba(0,255,120,.08);
 }
+
+/* =========================
+   PREMIUM BADGE
+========================= */
 
 .badge{
-    display:inline-block;
-    border:1px solid #236c48;
-    color:#39e98c;
-    padding:7px 14px;
-    font-size:11px;
-    letter-spacing:3px;
-    margin-bottom:28px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:
+        8px
+        13px;
+
+    border:1px solid #39301f;
+    border-radius:100px;
+
+    background:
+        rgba(201,168,106,.045);
+
+    color:var(--gold);
+
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:2.5px;
+
+    margin-bottom:27px;
 }
+
+.badge-dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#00e889;
+
+    box-shadow:
+        0 0 10px #00e889;
+}
+
+/* =========================
+   LOGO
+========================= */
 
 .logo{
-    font-size:64px;
-    font-weight:900;
-    letter-spacing:8px;
+    position:relative;
+
+    width:105px;
+    height:105px;
+
+    margin:
+        0
+        auto
+        25px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #202020,
+            #050505
+        );
+
+    border:1px solid #383838;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.65),
+        inset 0 1px rgba(255,255,255,.09);
 }
 
-.welcome{
-    margin-top:12px;
-    font-size:20px;
-    letter-spacing:8px;
-    color:#b7c5be;
+.logo::before{
+    content:"";
+
+    position:absolute;
+    inset:-5px;
+
+    border-radius:34px;
+
+    border:1px solid rgba(201,168,106,.15);
+
+    animation:
+        logoGlow 3s ease-in-out infinite;
 }
 
-.line{
-    width:90px;
-    height:1px;
-    background:#25d77b;
-    margin:30px auto;
-    box-shadow:0 0 12px #25d77b;
+@keyframes logoGlow{
+    0%,
+    100%{
+        opacity:.3;
+    }
+
+    50%{
+        opacity:1;
+        box-shadow:
+            0 0 35px rgba(201,168,106,.12);
+    }
 }
 
-.description{
+.logo span{
+    font-size:47px;
+    font-weight:950;
+    letter-spacing:-5px;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,.08);
+}
+
+/* =========================
+   TITLE
+========================= */
+
+h1{
+    font-size:
+        clamp(
+            42px,
+            8vw,
+            78px
+        );
+
+    line-height:.95;
+
+    font-weight:950;
+
+    letter-spacing:
+        clamp(
+            5px,
+            1vw,
+            10px
+        );
+
+    color:#f3f3f3;
+
+    text-shadow:
+        0 20px 50px rgba(0,0,0,.7);
+}
+
+.by{
+    margin-top:17px;
+
+    color:var(--gold);
+
     font-size:12px;
-    color:#718078;
-    letter-spacing:3px;
-    margin-bottom:35px;
+    font-weight:900;
+
+    letter-spacing:7px;
 }
+
+.subtitle{
+    margin-top:23px;
+
+    color:#737373;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+
+/* =========================
+   ENTER BUTTON
+========================= */
 
 .enter{
-    border:1px solid #25d77b;
-    background:#0b2417;
-    color:white;
-    padding:16px 38px;
-    font-size:13px;
-    letter-spacing:3px;
+    position:relative;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:245px;
+
+    margin-top:38px;
+
+    padding:
+        17px
+        28px;
+
+    border:1px solid #b39255;
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d8bb7b,
+            #a9854a
+        );
+
+    color:#090909;
+
+    font-size:12px;
+    font-weight:950;
+
+    letter-spacing:2px;
+
     cursor:pointer;
-    transition:.2s;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.5),
+        0 0 35px rgba(201,168,106,.08);
+
+    transition:
+        transform .2s,
+        filter .2s,
+        box-shadow .2s;
+
+    overflow:hidden;
+}
+
+.enter::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:60%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.35),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:
+        buttonShine 3.5s infinite;
+}
+
+@keyframes buttonShine{
+    0%{
+        left:-100%;
+    }
+
+    35%,
+    100%{
+        left:150%;
+    }
 }
 
 .enter:hover{
-    background:#25d77b;
-    color:#031008;
-    box-shadow:0 0 25px rgba(37,215,123,.4);
+    transform:translateY(-3px);
+
+    filter:brightness(1.08);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.6),
+        0 0 45px rgba(201,168,106,.15);
 }
+
+.enter:active{
+    transform:translateY(0);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:25px;
+}
+
+.feature{
+    color:#555;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    padding:
+        7px
+        10px;
+
+    border:
+        1px solid
+        #1e1e1e;
+
+    border-radius:7px;
+
+    background:#080808;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
-    margin-top:35px;
-    font-size:10px;
-    color:#47554e;
-    letter-spacing:2px;
+    position:fixed;
+
+    z-index:20;
+
+    left:0;
+    bottom:22px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:#3f3f3f;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:2.5px;
 }
 
+.footer strong{
+    color:#666;
+}
+
+/* =========================
+   CONTACT MODAL
+========================= */
+
+.overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.78);
+
+    backdrop-filter:
+        blur(12px);
+}
+
+.overlay.active{
+    display:flex;
+}
+
+.modal{
+    width:min(440px,100%);
+
+    background:
+        linear-gradient(
+            145deg,
+            #171717,
+            #080808
+        );
+
+    border:
+        1px solid
+        #303030;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.8);
+}
+
+.modal-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:22px;
+}
+
+.modal h2{
+    font-size:19px;
+    letter-spacing:1px;
+}
+
+.close{
+    width:32px;
+    height:32px;
+
+    border:1px solid #2d2d2d;
+    border-radius:9px;
+
+    background:#0c0c0c;
+    color:#aaa;
+
+    cursor:pointer;
+}
+
+.modal-buttons{
+    display:grid;
+    gap:10px;
+}
+
+.modal-button{
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #292929;
+    border-radius:11px;
+
+    background:#0d0d0d;
+    color:#ddd;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.modal-button:hover{
+    border-color:#69562f;
+    background:#121212;
+}
+
+.modal-button strong{
+    display:block;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.modal-button span{
+    display:block;
+    margin-top:5px;
+    color:#666;
+    font-size:9px;
+}
+
+.report{
+    display:none;
+    margin-top:15px;
+}
+
+.report.active{
+    display:block;
+}
+
+.report textarea{
+    width:100%;
+    min-height:110px;
+
+    resize:none;
+
+    padding:13px;
+
+    border:1px solid #2c2c2c;
+    border-radius:10px;
+
+    outline:none;
+
+    background:#0c0c0c;
+    color:#fff;
+
+    font-family:inherit;
+}
+
+.report button{
+    width:100%;
+    margin-top:9px;
+
+    padding:13px;
+
+    border:1px solid #a9864d;
+    border-radius:10px;
+
+    background:#c9a86a;
+    color:#090909;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.price{
+    color:var(--gold)!important;
+    font-weight:900;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:600px){
-    .logo{font-size:42px}
-    .welcome{font-size:15px}
-    .panel{padding:40px 22px}
+
+    .header{
+        padding:
+            17px
+            16px;
+    }
+
+    .brand-small span{
+        font-size:9px;
+        letter-spacing:2px;
+    }
+
+    .contact{
+        padding:
+            9px
+            11px;
+
+        font-size:8px;
+    }
+
+    .main{
+        padding:
+            80px
+            18px;
+    }
+
+    .logo{
+        width:84px;
+        height:84px;
+        border-radius:24px;
+    }
+
+    .logo span{
+        font-size:38px;
+    }
+
+    .by{
+        font-size:9px;
+        letter-spacing:5px;
+    }
+
+    .subtitle{
+        font-size:9px;
+        letter-spacing:2px;
+        line-height:1.6;
+    }
+
+    .enter{
+        width:100%;
+        min-width:0;
+        max-width:290px;
+    }
+
+    .footer{
+        bottom:14px;
+        font-size:7px;
+        padding:0 10px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- RGB FRAME -->
 <div class="led top"></div>
 <div class="led bottom"></div>
 <div class="led left"></div>
 <div class="led right"></div>
 
-<div class="panel">
+<!-- LIGHT -->
+<div class="light"></div>
 
-    <div class="badge">PROFESSIONAL POS</div>
+<!-- MOVING STREAKS -->
+<div class="streak"></div>
+<div class="streak"></div>
+<div class="streak"></div>
 
-    <div class="logo">MY BAR</div>
+<!-- HEADER -->
+<header class="header">
 
-    <div class="welcome">MIRË SE VINI</div>
+    <div class="brand-small">
 
-    <div class="line"></div>
+        <div class="s">
+            S
+        </div>
 
-    <div class="description">
-        SISTEM PROFESIONAL PËR MENAXHIMIN E BARIT
+        <span>
+            BY SABI
+        </span>
+
     </div>
 
-    <button class="enter" onclick="location.href='login.html'">
-        HYR NË SISTEM
+    <button
+        class="contact"
+        onclick="openContact()">
+
+        CONTACT
+
     </button>
 
-    <div class="footer">
-        MY BAR • POS SYSTEM
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+    <section class="content">
+
+        <div class="badge">
+
+            <span class="badge-dot"></span>
+
+            SISTEM PREMIUM
+
+        </div>
+
+        <div class="logo">
+            <span>S</span>
+        </div>
+
+        <h1>
+            MY BAR
+        </h1>
+
+        <div class="by">
+            BY SABI
+        </div>
+
+        <p class="subtitle">
+            Bar Management & POS System
+        </p>
+
+        <button
+            class="enter"
+            onclick="enterSystem()">
+
+            HYR NË SISTEM
+
+        </button>
+
+        <div class="features">
+
+            <span class="feature">
+                POS
+            </span>
+
+            <span class="feature">
+                FATURA
+            </span>
+
+            <span class="feature">
+                TAVOLINA
+            </span>
+
+            <span class="feature">
+                INVENTAR
+            </span>
+
+            <span class="feature">
+                ADMIN
+            </span>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    PREMIUM BAR MANAGEMENT
+    &nbsp;•&nbsp;
+    <strong>BY SABI</strong>
+
+</footer>
+
+<!-- CONTACT -->
+<div
+    class="overlay"
+    id="contactOverlay"
+    onclick="outsideClose(event)">
+
+    <div class="modal">
+
+        <div class="modal-top">
+
+            <h2>
+                CONTACT
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeContact()">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                class="modal-button"
+                onclick="showReport()">
+
+                <strong>
+                    RAPORTO NJË PROBLEM
+                </strong>
+
+                <span>
+                    Na njofto për një problem në sistem.
+                </span>
+
+            </button>
+
+            <button
+                class="modal-button"
+                onclick="buyApp()">
+
+                <strong>
+                    BLI APLIKACIONIN
+                </strong>
+
+                <span class="price">
+                    MY BAR • 49€
+                </span>
+
+            </button>
+
+        </div>
+
+        <div
+            class="report"
+            id="reportBox">
+
+            <textarea
+                id="reportText"
+                placeholder="Shkruaj problemin...">
+            </textarea>
+
+            <button
+                onclick="sendReport()">
+
+                DËRGO RAPORTIN
+
+            </button>
+
+        </div>
+
     </div>
 
 </div>
+
+<script>
+
+/* =========================
+   SETTINGS
+========================= */
+
+const SETTINGS_KEY =
+    "MYBAR_SETTINGS_V2";
+
+/* =========================
+   ENTER SYSTEM
+========================= */
+
+function enterSystem(){
+
+    window.location.href =
+        "login.html";
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+function openContact(){
+
+    document
+        .getElementById("contactOverlay")
+        .classList.add("active");
+
+}
+
+function closeContact(){
+
+    document
+        .getElementById("contactOverlay")
+        .classList.remove("active");
+
+}
+
+function outsideClose(event){
+
+    if(
+        event.target.id ===
+        "contactOverlay"
+    ){
+
+        closeContact();
+
+    }
+
+}
+
+/* =========================
+   REPORT
+========================= */
+
+function showReport(){
+
+    const box =
+        document.getElementById(
+            "reportBox"
+        );
+
+    box.classList.add("active");
+
+    document
+        .getElementById("reportText")
+        .focus();
+
+}
+
+function sendReport(){
+
+    const text =
+        document
+            .getElementById("reportText")
+            .value
+            .trim();
+
+    if(!text){
+
+        alert(
+            "Shkruaj problemin."
+        );
+
+        return;
+
+    }
+
+    /*
+      Për momentin ruhet lokalisht.
+      Më vonë mund ta lidhim me
+      email/SMS/backend.
+    */
+
+    const reports =
+        JSON.parse(
+            localStorage.getItem(
+                "MYBAR_REPORTS"
+            ) || "[]"
+        );
+
+    reports.push({
+
+        id:Date.now(),
+
+        message:text,
+
+        date:
+            new Date()
+                .toISOString()
+
+    });
+
+    localStorage.setItem(
+        "MYBAR_REPORTS",
+        JSON.stringify(reports)
+    );
+
+    document
+        .getElementById("reportText")
+        .value = "";
+
+    alert(
+        "Raporti u regjistrua me sukses."
+    );
+
+    closeContact();
+
+}
+
+/* =========================
+   BUY
+========================= */
+
+function buyApp(){
+
+    alert(
+        "MY BAR • Aplikacioni Premium\n\nÇmimi: 49€\n\nKontakto BY SABI për blerjen."
+    );
+
+}
+
+/* =========================
+   DYNAMIC SETTINGS
+========================= */
+
+function loadSettings(){
+
+    try{
+
+        const settings =
+            JSON.parse(
+                localStorage.getItem(
+                    SETTINGS_KEY
+                ) || "{}"
+            );
+
+        if(
+            settings.appName
+        ){
+
+            document
+                .querySelector("h1")
+                .textContent =
+                settings.appName;
+
+        }
+
+    }catch{
+
+        /* default design remains */
+
+    }
+
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadSettings
+);
+
+</script>
 
 </body>
 </html>
