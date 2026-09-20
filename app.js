@@ -1961,4 +1961,649 @@ window.logout=
     logout;
 
 window.toast=
-    toast;
+    /* =========================================================
+   MY BAR — XHIRO PERSONALE KAMARIERI / RESET 12H
+========================================================= */
+
+const WAITER_SHIFT_KEY = "MYBAR_WAITER_SHIFTS_V1";
+const SHIFT_DURATION_MS = 12 * 60 * 60 * 1000;
+
+/* =========================
+   XHIROT
+========================= */
+
+function getWaiterShifts() {
+    return getJSON(WAITER_SHIFT_KEY, {});
+}
+
+function saveWaiterShifts(shifts) {
+    setJSON(WAITER_SHIFT_KEY, shifts);
+}
+
+function createWaiterShift(user) {
+    return {
+        username: user.username,
+        name: user.name,
+        startedAt: Date.now(),
+        total: 0,
+        cash: 0,
+        card: 0,
+        invoices: 0
+    };
+}
+
+function ensureWaiterShift(user) {
+    if (!user || user.role !== "waiter") {
+        return null;
+    }
+
+    const shifts = getWaiterShifts();
+    const now = Date.now();
+
+    let shift = shifts[user.username];
+
+    /*
+       Nëse nuk ka xhiro ose kanë kaluar 12 orë,
+       krijohet xhiro e re vetëm për këtë kamarier.
+    */
+    if (
+        !shift ||
+        !shift.startedAt ||
+        now - Number(shift.startedAt) >= SHIFT_DURATION_MS
+    ) {
+        shift = createWaiterShift(user);
+        shifts[user.username] = shift;
+        saveWaiterShifts(shifts);
+    }
+
+    return shift;
+}
+
+function resetExpiredWaiterShifts() {
+
+    const users =
+        getJSON(
+            USERS_KEY,
+            DEFAULT_USERS
+        );
+
+    const shifts =
+        getWaiterShifts();
+
+    const now = Date.now();
+
+    let changed = false;
+
+    users
+        .filter(user => user.role === "waiter")
+        .forEach(user => {
+
+            const shift =
+                shifts[user.username];
+
+            if (
+                !shift ||
+                !shift.startedAt ||
+                now - Number(shift.startedAt) >= SHIFT_DURATION_MS
+            ) {
+
+                shifts[user.username] =
+                    createWaiterShift(user);
+
+                changed = true;
+            }
+        });
+
+    if (changed) {
+        saveWaiterShifts(shifts);
+    }
+}
+
+/* =========================
+   SHTO FATURËN NË XHIRON
+========================= */
+
+function addInvoiceToWaiterShift(invoice) {
+
+    if (
+        !invoice ||
+        !invoice.user
+    ) {
+        return;
+    }
+
+    const users =
+        getJSON(
+            USERS_KEY,
+            DEFAULT_USERS
+        );
+
+    const user =
+        users.find(
+            u =>
+                u.username ===
+                invoice.user
+        );
+
+    if (!user || user.role !== "waiter") {
+        return;
+    }
+
+    resetExpiredWaiterShifts();
+
+    const shifts =
+        getWaiterShifts();
+
+    let shift =
+        shifts[user.username];
+
+    if (!shift) {
+
+        shift =
+            createWaiterShift(user);
+    }
+
+    const amount =
+        Number(invoice.total || 0);
+
+    shift.total += amount;
+
+    shift.invoices += 1;
+
+    if (invoice.payment === "cash") {
+        shift.cash += amount;
+    }
+
+    if (invoice.payment === "card") {
+        shift.card += amount;
+    }
+
+    shifts[user.username] =
+        shift;
+
+    saveWaiterShifts(shifts);
+}
+
+/* =========================
+   XHIROJA AKTUALE
+========================= */
+
+function getCurrentShiftSales() {
+
+    const user =
+        getCurrentUser();
+
+    if (!user) {
+
+        return {
+            total: 0,
+            cash: 0,
+            card: 0,
+            invoices: 0
+        };
+    }
+
+    resetExpiredWaiterShifts();
+
+    /*
+       ADMIN sheh të gjitha xhirot aktive.
+    */
+    if (user.role === "admin") {
+
+        const shifts =
+            getWaiterShifts();
+
+        return Object.values(shifts)
+            .reduce(
+                (result, shift) => {
+
+                    result.total +=
+                        Number(
+                            shift.total || 0
+                        );
+
+                    result.cash +=
+                        Number(
+                            shift.cash || 0
+                        );
+
+                    result.card +=
+                        Number(
+                            shift.card || 0
+                        );
+
+                    result.invoices +=
+                        Number(
+                            shift.invoices || 0
+                        );
+
+                    return result;
+
+                },
+                {
+                    total: 0,
+                    cash: 0,
+                    card: 0,
+                    invoices: 0
+                }
+            );
+    }
+
+    /*
+       KAMARIERI sheh vetëm xhiron e vet.
+    */
+    const shift =
+        ensureWaiterShift(user);
+
+    if (!shift) {
+
+        return {
+            total: 0,
+            cash: 0,
+            card: 0,
+            invoices: 0
+        };
+    }
+
+    return {
+        total: Number(shift.total || 0),
+        cash: Number(shift.cash || 0),
+        card: Number(shift.card || 0),
+        invoices: Number(shift.invoices || 0)
+    };
+}
+
+/* =========================
+   KOHA E XHIROS
+========================= */
+
+function getShiftRemainingText() {
+
+    const user =
+        getCurrentUser();
+
+    if (
+        !user ||
+        user.role !== "waiter"
+    ) {
+        return "";
+    }
+
+    const shift =
+        ensureWaiterShift(user);
+
+    if (!shift) {
+        return "";
+    }
+
+    const elapsed =
+        Date.now() -
+        Number(shift.startedAt);
+
+    const remaining =
+        Math.max(
+            0,
+            SHIFT_DURATION_MS -
+            elapsed
+        );
+
+    const hours =
+        Math.floor(
+            remaining /
+            (60 * 60 * 1000)
+        );
+
+    const minutes =
+        Math.floor(
+            (remaining %
+                (60 * 60 * 1000)) /
+            (60 * 1000)
+        );
+
+    return (
+        hours +
+        "h " +
+        minutes +
+        "m"
+    );
+}
+
+/* =========================
+   DASHBOARD I RI
+========================= */
+
+function updateDashboard() {
+
+    const sales =
+        getCurrentShiftSales();
+
+    const activeTables =
+        getTables()
+            .filter(
+                table =>
+                    table.items &&
+                    table.items.length > 0
+            )
+            .length;
+
+    setText(
+        "salesToday",
+        money(sales.total)
+    );
+
+    setText(
+        "activeTables",
+        activeTables
+    );
+
+    setText(
+        "invoiceToday",
+        sales.invoices
+    );
+
+    setText(
+        "cardToday",
+        money(sales.card)
+    );
+
+    setText(
+        "cashTotal",
+        money(sales.total)
+    );
+
+    setText(
+        "cashMoney",
+        money(sales.cash)
+    );
+
+    setText(
+        "cashCard",
+        money(sales.card)
+    );
+
+    setText(
+        "cashInvoices",
+        sales.invoices
+    );
+
+    renderShiftPayments();
+}
+
+/* =========================
+   PAGESA E XHIROS
+========================= */
+
+function renderShiftPayments() {
+
+    const list =
+        document.getElementById(
+            "paymentsList"
+        );
+
+    if (!list) {
+        return;
+    }
+
+    const user =
+        getCurrentUser();
+
+    if (!user) {
+        return;
+    }
+
+    const invoices =
+        getJSON(
+            INVOICES_KEY,
+            []
+        );
+
+    let filtered = [];
+
+    if (user.role === "admin") {
+
+        /*
+           ADMIN:
+           sheh faturat e xhirove aktive
+           të SABI + MONDI.
+        */
+
+        const shifts =
+            getWaiterShifts();
+
+        filtered =
+            invoices.filter(invoice => {
+
+                const shift =
+                    shifts[invoice.user];
+
+                if (!shift) {
+                    return false;
+                }
+
+                const createdAt =
+                    Number(
+                        invoice.createdAt ||
+                        new Date(
+                            invoice.date
+                        ).getTime()
+                    );
+
+                return (
+                    createdAt >=
+                    Number(
+                        shift.startedAt
+                    )
+                );
+            });
+
+    } else {
+
+        /*
+           KAMARIERI:
+           vetëm faturat e veta.
+        */
+
+        const shift =
+            ensureWaiterShift(user);
+
+        if (!shift) {
+            filtered = [];
+        } else {
+
+            const startedAt =
+                Number(
+                    shift.startedAt
+                );
+
+            filtered =
+                invoices.filter(
+                    invoice => {
+
+                        const createdAt =
+                            Number(
+                                invoice.createdAt ||
+                                new Date(
+                                    invoice.date
+                                ).getTime()
+                            );
+
+                        return (
+                            invoice.user ===
+                            user.username &&
+                            createdAt >=
+                            startedAt
+                        );
+                    }
+                );
+        }
+    }
+
+    if (!filtered.length) {
+
+        list.innerHTML =
+            `<div class="empty">
+                Nuk ka pagesa në këtë xhiro.
+             </div>`;
+
+        return;
+    }
+
+    list.innerHTML =
+        [...filtered]
+            .reverse()
+            .map(invoice => `
+
+                <div class="payment-row">
+
+                    <div>
+
+                        <strong>
+                            ${escapeHTML(
+                                invoice.number
+                            )}
+                        </strong>
+
+                        <small>
+                            ${escapeHTML(
+                                invoice.waiterName ||
+                                "Pa emër"
+                            )}
+
+                            •
+
+                            ${escapeHTML(
+                                invoice.payment ||
+                                "cash"
+                            )}
+                        </small>
+
+                    </div>
+
+                    <strong>
+                        ${money(
+                            invoice.total
+                        )}
+                    </strong>
+
+                </div>
+
+            `)
+            .join("");
+}
+
+/* =========================
+   LIDHJA ME PAGESËN
+========================= */
+
+/*
+   Ruajmë funksionin origjinal
+   të pagesës.
+*/
+
+const originalCompletePayment =
+    completePayment;
+
+/*
+   Zëvendësojmë pagesën me versionin
+   që regjistron edhe xhiron personale.
+*/
+
+completePayment =
+    function(method) {
+
+        const before =
+            getJSON(
+                INVOICES_KEY,
+                []
+            ).length;
+
+        originalCompletePayment(method);
+
+        const invoices =
+            getJSON(
+                INVOICES_KEY,
+                []
+            );
+
+        /*
+           Nëse u krijua një faturë e re,
+           shtoje në xhiron e kamarierit.
+        */
+
+        if (
+            invoices.length >
+            before
+        ) {
+
+            const invoice =
+                invoices[
+                    invoices.length - 1
+                ];
+
+            addInvoiceToWaiterShift(
+                invoice
+            );
+        }
+
+        updateDashboard();
+        renderShiftPayments();
+    };
+
+/* =========================
+   START XHIROJE
+========================= */
+
+function initializeWaiterShift() {
+
+    resetExpiredWaiterShifts();
+
+    const user =
+        getCurrentUser();
+
+    if (
+        user &&
+        user.role === "waiter"
+    ) {
+
+        ensureWaiterShift(user);
+    }
+}
+
+initializeWaiterShift();
+
+/* =========================
+   RESET AUTOMATIK ÇDO 12 ORË
+========================= */
+
+setInterval(
+    function() {
+
+        resetExpiredWaiterShifts();
+
+        const user =
+            getCurrentUser();
+
+        if (user) {
+
+            updateDashboard();
+        }
+
+    },
+    60 * 1000
+);
+
+/* =========================
+   GLOBAL
+========================= */
+
+window.completePayment =
+    completePayment;
+
+window.getCurrentShiftSales =
+    getCurrentShiftSales;
+
+window.getShiftRemainingText =
+    getShiftRemainingText;
+
+window.renderShiftPayments =
+    renderShiftPayments;
