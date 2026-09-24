@@ -2,11 +2,8 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-               maximum-scale=1.0,user-scalable=no">
-
-<title>MY BAR • Welcome</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>MY BAR</title>
 
 <style>
 *{
@@ -18,488 +15,563 @@
 html,body{
     width:100%;
     height:100%;
+    overflow:hidden;
 }
 
 body{
-    overflow:hidden;
-    background:#030303;
+    background:#020202;
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
 }
 
-/* =========================================
+/* ==============================
    BACKGROUND
-========================================= */
+============================== */
 
-.page{
+.screen{
     position:relative;
     width:100%;
     height:100vh;
-    min-height:600px;
+    min-height:500px;
     overflow:hidden;
 
     background:
         radial-gradient(
-            circle at 70% 30%,
-            rgba(255,180,40,.13),
-            transparent 30%
+            ellipse at 78% 48%,
+            rgba(150,90,15,.18),
+            transparent 38%
         ),
         radial-gradient(
-            circle at 20% 80%,
-            rgba(255,150,20,.07),
-            transparent 28%
+            ellipse at 18% 55%,
+            rgba(255,175,40,.08),
+            transparent 35%
         ),
         linear-gradient(
             110deg,
-            #020202 0%,
-            #090806 45%,
-            #030303 100%
+            #010101 0%,
+            #080704 52%,
+            #020202 100%
         );
 }
 
-/* =========================================
-   BAR LIGHTS
-========================================= */
+/* warm bar glow on right */
+
+.screen:after{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:42%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(220,150,35,.08),
+            transparent
+        );
+
+    pointer-events:none;
+}
+
+/* ==============================
+   MOVING LIGHTS
+============================== */
 
 .light{
     position:absolute;
     height:2px;
-    background:#d99b2b;
+    background:#e4ad43;
+
     box-shadow:
-        0 0 6px #d99b2b,
-        0 0 18px #d99b2b,
-        0 0 35px rgba(255,174,40,.5);
-    opacity:.8;
+        0 0 8px #e4ad43,
+        0 0 22px #e4ad43,
+        0 0 45px rgba(228,173,67,.4);
+
+    animation:pulse 3s ease-in-out infinite alternate;
 }
 
-.light.one{
-    width:32%;
-    top:19%;
+.light1{
+    width:25%;
     left:0;
+    top:31%;
 }
 
-.light.two{
-    width:24%;
-    top:20%;
+.light2{
+    width:18%;
     right:0;
+    top:31%;
+    animation-delay:1s;
 }
 
-.light.three{
-    width:45%;
-    bottom:16%;
-    left:27%;
-}
-
-.light.four{
+.light3{
     width:100%;
-    bottom:0;
-    height:3px;
+    left:0;
+    bottom:12%;
     opacity:.5;
 }
 
-/* =========================================
-   MOVING GOLD LIGHT
-========================================= */
+@keyframes pulse{
+    from{opacity:.35}
+    to{opacity:1}
+}
+
+/* ==============================
+   DECORATIVE GLOW
+============================== */
 
 .glow{
     position:absolute;
-    width:320px;
-    height:320px;
+    width:450px;
+    height:450px;
     border-radius:50%;
+
     background:
         radial-gradient(
             circle,
-            rgba(255,184,48,.12),
-            transparent 65%
+            rgba(231,174,61,.12),
+            transparent 68%
         );
-    filter:blur(10px);
-    animation:moveGlow 8s ease-in-out infinite alternate;
+
+    filter:blur(12px);
+
+    animation:floatGlow 9s ease-in-out infinite alternate;
 }
 
-.glow.one{
-    left:-120px;
-    top:20%;
+.glow1{
+    left:-250px;
+    top:15%;
 }
 
-.glow.two{
-    right:-120px;
-    bottom:5%;
+.glow2{
+    right:-220px;
+    bottom:-100px;
     animation-delay:2s;
 }
 
-@keyframes moveGlow{
+@keyframes floatGlow{
     from{
         transform:translate(0,0) scale(.9);
     }
-
     to{
         transform:translate(80px,-40px) scale(1.15);
     }
 }
 
-/* =========================================
-   DECORATIVE LINES
-========================================= */
+/* ==============================
+   CORNERS
+============================== */
 
 .corner{
     position:absolute;
-    width:80px;
-    height:80px;
-    border-color:rgba(220,165,55,.35);
+    width:75px;
+    height:75px;
+    border-color:rgba(218,164,54,.35);
     border-style:solid;
+    z-index:3;
 }
 
-.corner.tl{
+.corner1{
     top:22px;
     left:22px;
     border-width:1px 0 0 1px;
 }
 
-.corner.br{
-    bottom:22px;
+.corner2{
     right:22px;
+    bottom:22px;
     border-width:0 1px 1px 0;
 }
 
-/* =========================================
-   MAIN CONTENT
-========================================= */
+/* ==============================
+   MAIN
+============================== */
 
-.content{
-    position:relative;
-    z-index:5;
+.main{
+    position:absolute;
+    z-index:10;
+
+    left:0;
+    top:0;
 
     width:100%;
     height:100%;
 
-    display:flex;
+    display:grid;
+
+    /*
+       KJO ËSHTË PJESA KRYESORE:
+       WELCOME MAJTAS
+       PERSONAT DJATHTAS
+    */
+
+    grid-template-columns:55% 45%;
     align-items:center;
 }
 
-/* =========================================
-   LEFT
-========================================= */
+/* ==============================
+   WELCOME
+============================== */
 
-.left{
-    width:53%;
-    padding-left:8%;
+.welcome-area{
     display:flex;
     flex-direction:column;
+    align-items:flex-start;
     justify-content:center;
+
+    padding-left:8%;
 }
 
 .welcome{
+    color:#f2c55e;
+
     font-family:
         "Brush Script MT",
         "Segoe Script",
         cursive;
 
-    font-size:
-        clamp(70px,9vw,145px);
+    font-size:clamp(75px,9vw,145px);
 
-    line-height:.85;
     font-weight:400;
-    color:#f4c65b;
+    line-height:.85;
+
+    white-space:nowrap;
 
     text-shadow:
-        0 0 5px rgba(255,194,73,.7),
-        0 0 18px rgba(255,177,36,.45),
-        0 0 45px rgba(255,145,20,.2);
+        0 0 5px rgba(255,215,110,.9),
+        0 0 18px rgba(245,187,62,.6),
+        0 0 45px rgba(236,159,30,.3);
 
-    animation:welcomeGlow 3s ease-in-out infinite alternate;
+    animation:goldGlow 3s ease-in-out infinite alternate;
 }
 
-@keyframes welcomeGlow{
+@keyframes goldGlow{
     from{
         text-shadow:
-            0 0 5px rgba(255,194,73,.7),
-            0 0 18px rgba(255,177,36,.35);
+            0 0 5px rgba(255,215,110,.8),
+            0 0 18px rgba(245,187,62,.4);
     }
 
     to{
         text-shadow:
-            0 0 8px rgba(255,218,110,.9),
-            0 0 28px rgba(255,177,36,.6),
-            0 0 55px rgba(255,145,20,.3);
+            0 0 8px rgba(255,225,130,1),
+            0 0 28px rgba(245,187,62,.7),
+            0 0 55px rgba(236,159,30,.35);
     }
 }
 
-.underline{
-    width:280px;
+.welcome-line{
+    width:285px;
     height:3px;
-    margin-top:24px;
+
+    margin-top:25px;
     margin-left:45px;
 
-    background:#e5ad3b;
+    background:#e5b348;
 
-    box-shadow:
-        0 0 8px #e5ad3b,
-        0 0 20px rgba(229,173,59,.6);
+    border-radius:50%;
 
     transform:rotate(-5deg);
-    border-radius:100%;
+
+    box-shadow:
+        0 0 8px #e5b348,
+        0 0 22px rgba(229,179,72,.5);
 }
 
-.brand{
-    margin-top:55px;
+/* ==============================
+   USERS
+============================== */
 
-    color:#e5ad3b;
-    font-size:28px;
-    letter-spacing:7px;
-    font-weight:700;
-
-    text-shadow:
-        0 0 12px rgba(229,173,59,.45);
-}
-
-/* =========================================
-   RIGHT USERS
-========================================= */
-
-.right{
-    width:47%;
+.users-area{
     display:flex;
-    justify-content:flex-start;
     align-items:center;
+    justify-content:flex-start;
+
+    padding-left:20px;
 }
 
 .users{
-    width:min(390px,75%);
-    margin-left:20px;
+    width:min(380px,78%);
 
     display:flex;
     flex-direction:column;
+
     gap:22px;
 }
 
-.user-button{
+.user{
     position:relative;
 
     width:100%;
-    height:72px;
+    height:68px;
 
-    border:1px solid #bd8420;
-    border-radius:40px;
+    display:flex;
+    align-items:center;
+
+    padding:0 25px;
+
+    border-radius:50px;
+
+    border:1px solid #bc8420;
 
     background:
         linear-gradient(
             90deg,
-            rgba(255,185,40,.08),
-            rgba(0,0,0,.55)
+            rgba(210,153,35,.11),
+            rgba(0,0,0,.58)
         );
 
-    color:#f5f5f5;
+    color:#fff;
 
     cursor:pointer;
 
-    display:flex;
-    align-items:center;
-    padding:0 28px;
-
-    font-size:21px;
+    font-size:20px;
     font-weight:600;
     letter-spacing:1px;
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        border-color .25s ease,
-        background .25s ease;
+        .25s ease;
+
+    box-shadow:
+        inset 0 0 20px rgba(255,180,40,.02);
 }
 
-.user-button::before{
+.user:before{
     content:"";
+
     position:absolute;
-    left:0;
-    top:0;
+    left:-1px;
+    top:-1px;
 
-    width:5px;
-    height:100%;
+    width:4px;
+    height:calc(100% + 2px);
 
-    border-radius:40px;
+    border-radius:50px;
 
-    background:#e8ae3c;
-
-    box-shadow:
-        0 0 10px #e8ae3c,
-        0 0 25px rgba(232,174,60,.8);
-
-    opacity:.5;
-}
-
-.user-button:hover{
-    transform:translateX(-8px);
-
-    border-color:#ffd56b;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,188,46,.2),
-            rgba(0,0,0,.65)
-        );
+    background:#e9b344;
 
     box-shadow:
-        0 0 10px rgba(229,173,59,.6),
-        0 0 30px rgba(229,173,59,.2);
+        0 0 8px #e9b344,
+        0 0 20px rgba(233,179,68,.7);
 }
 
-.user-button:active{
+.user:hover{
+    transform:translateX(-7px);
+
+    border-color:#ffd66e;
+
+    box-shadow:
+        0 0 12px rgba(234,177,60,.45),
+        0 0 35px rgba(234,177,60,.15);
+}
+
+.user:active{
     transform:scale(.97);
 }
 
 .user-icon{
-    width:42px;
-    height:42px;
+    width:40px;
+    height:40px;
 
-    margin-right:20px;
-
-    border:2px solid #e8ae3c;
-    border-radius:50%;
+    margin-right:18px;
 
     position:relative;
 
+    border:2px solid #e8b044;
+    border-radius:50%;
+
     box-shadow:
-        0 0 8px rgba(232,174,60,.45);
+        0 0 8px rgba(232,176,68,.4);
 }
 
-.user-icon::before{
+.user-icon:before{
     content:"";
+
     position:absolute;
 
     width:10px;
     height:10px;
 
-    border:2px solid #e8ae3c;
+    border:2px solid #e8b044;
     border-radius:50%;
 
+    top:7px;
     left:50%;
-    top:8px;
 
     transform:translateX(-50%);
 }
 
-.user-icon::after{
+.user-icon:after{
     content:"";
+
     position:absolute;
 
-    width:21px;
+    width:20px;
     height:10px;
 
-    border:2px solid #e8ae3c;
-    border-radius:15px 15px 8px 8px;
-
+    border:2px solid #e8b044;
     border-bottom:0;
 
+    border-radius:14px 14px 0 0;
+
     left:50%;
-    bottom:6px;
+    bottom:5px;
 
     transform:translateX(-50%);
 }
 
-/* =========================================
-   LOGIN MODAL
-========================================= */
+/* ==============================
+   BOTTOM
+============================== */
 
-.login-box{
+.by{
+    position:absolute;
+
+    z-index:20;
+
+    left:38px;
+    bottom:22px;
+
+    color:#777;
+
+    font-size:10px;
+    letter-spacing:.5px;
+}
+
+.by span{
+    color:#bd8b38;
+}
+
+.contact{
+    position:absolute;
+
+    z-index:20;
+
+    right:38px;
+    bottom:22px;
+
+    border:0;
+    background:none;
+
+    color:#777;
+
+    font-size:10px;
+    letter-spacing:.5px;
+
+    cursor:pointer;
+}
+
+.contact:hover{
+    color:#e4ad42;
+}
+
+/* ==============================
+   LOGIN MODAL
+============================== */
+
+.login-overlay{
     position:fixed;
+    z-index:100;
+
     inset:0;
 
-    z-index:50;
-
     display:none;
+
     align-items:center;
     justify-content:center;
 
-    background:
-        rgba(0,0,0,.78);
+    background:rgba(0,0,0,.82);
 
     backdrop-filter:blur(12px);
 }
 
 .login-card{
-    width:min(390px,90%);
+    width:min(390px,88%);
 
-    padding:35px;
+    padding:32px;
 
-    border:1px solid #d5a23a;
     border-radius:25px;
+
+    border:1px solid #d5a13a;
 
     background:
         linear-gradient(
             145deg,
-            rgba(25,20,12,.97),
-            rgba(5,5,5,.98)
+            #171209,
+            #050505
         );
 
     box-shadow:
-        0 0 20px rgba(216,160,46,.3),
-        0 0 70px rgba(216,160,46,.12);
+        0 0 25px rgba(225,168,53,.35),
+        0 0 70px rgba(225,168,53,.12);
 
     text-align:center;
 }
 
 .login-card h2{
-    color:#e9b84d;
+    color:#e7b348;
+
     font-size:28px;
-    margin-bottom:8px;
+
+    margin-bottom:7px;
 }
 
 .login-card p{
-    color:#999;
-    font-size:13px;
-    margin-bottom:25px;
+    color:#777;
+
+    font-size:12px;
+
+    margin-bottom:22px;
 }
 
 .password{
     width:100%;
     height:52px;
 
-    padding:0 18px;
+    border:1px solid #5c461e;
+    border-radius:13px;
 
-    border-radius:14px;
-    border:1px solid #654919;
+    background:#080808;
+
+    color:#fff;
 
     outline:none;
 
-    background:#090909;
-    color:white;
+    padding:0 16px;
 
     font-size:16px;
 }
 
 .password:focus{
-    border-color:#e6b044;
+    border-color:#e4ae43;
 
     box-shadow:
-        0 0 12px rgba(230,176,68,.2);
+        0 0 15px rgba(228,174,67,.2);
 }
 
-.login-btn{
+.login-button{
     width:100%;
     height:52px;
 
-    margin-top:14px;
+    margin-top:13px;
 
     border:0;
-    border-radius:14px;
+    border-radius:13px;
 
     background:
         linear-gradient(
             135deg,
-            #f2c45b,
-            #b77918
+            #f0c45d,
+            #ae7419
         );
 
     color:#080604;
 
-    font-size:16px;
+    font-size:15px;
     font-weight:800;
 
     cursor:pointer;
-
-    box-shadow:
-        0 0 15px rgba(226,171,57,.3);
 }
 
 .cancel{
@@ -508,102 +580,58 @@ body{
     background:none;
     border:0;
 
-    color:#888;
+    color:#777;
 
     cursor:pointer;
-    font-size:13px;
 }
 
 .error{
-    color:#ff6868;
-    font-size:13px;
-    margin-top:12px;
     display:none;
+
+    color:#ff6262;
+
+    font-size:12px;
+
+    margin-top:10px;
 }
 
-/* =========================================
-   FOOTER
-========================================= */
+/* ==============================
+   CONTACT
+============================== */
 
-.footer-left{
-    position:absolute;
-    bottom:18px;
-    left:28px;
-
-    z-index:10;
-
-    color:#777;
-    font-size:11px;
-
-    letter-spacing:.5px;
-}
-
-.footer-left span{
-    color:#b78a38;
-}
-
-.contact{
-    position:absolute;
-    bottom:18px;
-    right:28px;
-
-    z-index:10;
-
-    color:#8c8c8c;
-
-    font-size:11px;
-
-    border:0;
-    background:none;
-
-    cursor:pointer;
-
-    letter-spacing:.5px;
-
-    transition:.2s;
-}
-
-.contact:hover{
-    color:#e4ad42;
-}
-
-/* =========================================
-   CONTACT MODAL
-========================================= */
-
-.contact-modal{
+.contact-overlay{
     position:fixed;
     inset:0;
 
-    z-index:60;
+    z-index:110;
 
     display:none;
 
     align-items:center;
     justify-content:center;
 
-    background:rgba(0,0,0,.8);
+    background:rgba(0,0,0,.82);
 
     backdrop-filter:blur(10px);
 }
 
 .contact-card{
-    width:min(420px,90%);
+    width:min(420px,88%);
 
     padding:28px;
 
     border-radius:22px;
 
-    border:1px solid #bd8b2d;
+    border:1px solid #bd8a2d;
 
     background:#090909;
 
     box-shadow:
-        0 0 40px rgba(210,157,47,.18);
+        0 0 45px rgba(218,162,48,.2);
 }
 
 .contact-card h3{
-    color:#e7b347;
+    color:#e5ae42;
     margin-bottom:18px;
 }
 
@@ -612,31 +640,34 @@ body{
     width:100%;
 
     border:1px solid #4b391c;
+
     background:#111;
+
     color:#fff;
 
-    border-radius:12px;
+    border-radius:11px;
 
-    padding:13px;
+    padding:12px;
 
     outline:none;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .contact-card textarea{
-    height:110px;
+    height:100px;
     resize:none;
 }
 
-.contact-send{
+.send{
     width:100%;
     height:46px;
 
     border:0;
-    border-radius:12px;
+    border-radius:11px;
 
-    background:#dca83b;
+    background:#dda93e;
+
     color:#090909;
 
     font-weight:800;
@@ -644,118 +675,114 @@ body{
     cursor:pointer;
 }
 
-.contact-close{
+.close{
     width:100%;
 
-    margin-top:10px;
+    margin-top:9px;
 
-    background:none;
     border:0;
+    background:none;
 
     color:#777;
 
     cursor:pointer;
 }
 
-/* =========================================
+/* ==============================
    MOBILE
-========================================= */
+   IMPORTANT:
+   MOS I VENDOSIM POSHTË.
+   WELCOME DHE PERSONAT MBETEN
+   MAJTAS/DJATHTAS SI NË FOTO.
+============================== */
 
 @media(max-width:700px){
 
-    .content{
-        flex-direction:column;
-        justify-content:center;
+    .main{
+        grid-template-columns:52% 48%;
     }
 
-    .left{
-        width:100%;
-        padding:0;
-
-        align-items:center;
-        text-align:center;
-
-        margin-top:-70px;
+    .welcome-area{
+        padding-left:7%;
     }
 
     .welcome{
-        font-size:72px;
+        font-size:clamp(48px,13vw,78px);
     }
 
-    .underline{
-        width:180px;
+    .welcome-line{
+        width:145px;
+        margin-top:16px;
         margin-left:20px;
-        margin-top:15px;
     }
 
-    .brand{
-        margin-top:35px;
-        font-size:18px;
-        letter-spacing:5px;
-    }
-
-    .right{
-        width:100%;
-        justify-content:center;
-
-        margin-top:45px;
+    .users-area{
+        padding-left:5px;
     }
 
     .users{
-        width:72%;
-        margin-left:0;
-        gap:14px;
+        width:92%;
+        gap:12px;
     }
 
-    .user-button{
-        height:56px;
-        font-size:16px;
-        padding:0 18px;
+    .user{
+        height:52px;
+
+        padding:0 10px;
+
+        font-size:14px;
+
+        letter-spacing:.4px;
     }
 
     .user-icon{
-        width:32px;
-        height:32px;
-        margin-right:14px;
+        width:29px;
+        height:29px;
+
+        margin-right:9px;
     }
 
-    .user-icon::before{
-        width:8px;
-        height:8px;
+    .user-icon:before{
+        width:7px;
+        height:7px;
+
         top:5px;
     }
 
-    .user-icon::after{
-        width:16px;
-        height:8px;
+    .user-icon:after{
+        width:15px;
+        height:7px;
+
         bottom:4px;
     }
 
-    .footer-left{
+    .by{
         left:15px;
-        bottom:13px;
-        font-size:9px;
+        bottom:12px;
+
+        font-size:8px;
     }
 
     .contact{
         right:15px;
-        bottom:13px;
-        font-size:9px;
+        bottom:12px;
+
+        font-size:8px;
     }
 
     .corner{
-        width:45px;
-        height:45px;
+        width:42px;
+        height:42px;
     }
 
-    .corner.tl{
+    .corner1{
         top:12px;
         left:12px;
     }
 
-    .corner.br{
-        bottom:12px;
+    .corner2{
         right:12px;
+        bottom:12px;
     }
 }
 </style>
@@ -763,44 +790,44 @@ body{
 
 <body>
 
-<div class="page">
+<div class="screen">
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
 
-    <div class="light one"></div>
-    <div class="light two"></div>
-    <div class="light three"></div>
-    <div class="light four"></div>
+    <div class="light light1"></div>
+    <div class="light light2"></div>
+    <div class="light light3"></div>
 
-    <div class="corner tl"></div>
-    <div class="corner br"></div>
+    <div class="corner corner1"></div>
+    <div class="corner corner2"></div>
 
-    <main class="content">
 
-        <!-- LEFT -->
-        <section class="left">
+    <!-- =================================
+         KJO ËSHTË LAYOUT-I SI FOTOJA
+         WELCOME = MAJTAS
+         PERSONAT = DJATHTAS
+    ================================== -->
+
+    <div class="main">
+
+        <div class="welcome-area">
 
             <div class="welcome">
                 Welcome
             </div>
 
-            <div class="underline"></div>
+            <div class="welcome-line"></div>
 
-            <div class="brand">
-                MY BAR
-            </div>
-
-        </section>
+        </div>
 
 
-        <!-- RIGHT -->
-        <section class="right">
+        <div class="users-area">
 
             <div class="users">
 
                 <button
-                    class="user-button"
+                    class="user"
                     onclick="openLogin('admin','ADMIN')">
 
                     <span class="user-icon"></span>
@@ -811,7 +838,7 @@ body{
 
 
                 <button
-                    class="user-button"
+                    class="user"
                     onclick="openLogin('sabi','SABI')">
 
                     <span class="user-icon"></span>
@@ -822,7 +849,7 @@ body{
 
 
                 <button
-                    class="user-button"
+                    class="user"
                     onclick="openLogin('mondi','MONDI')">
 
                     <span class="user-icon"></span>
@@ -833,14 +860,12 @@ body{
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </div>
 
 
-    <!-- FOOTER -->
-
-    <div class="footer-left">
+    <div class="by">
         by <span>Sabi</span>
     </div>
 
@@ -857,35 +882,34 @@ body{
 <!-- LOGIN -->
 
 <div
-    class="login-box"
-    id="loginBox">
+    class="login-overlay"
+    id="loginOverlay">
 
     <div class="login-card">
 
-        <h2 id="loginName">
+        <h2 id="loginTitle">
             LOGIN
         </h2>
 
         <p>
-            Vendos fjalëkalimin për të vazhduar
+            Vendos fjalëkalimin
         </p>
 
         <input
-            id="password"
             class="password"
+            id="password"
             type="password"
-            placeholder="Fjalëkalimi"
-            autocomplete="current-password">
+            placeholder="Fjalëkalimi">
 
         <button
-            class="login-btn"
-            onclick="login()">
+            class="login-button"
+            onclick="doLogin()">
             HYR
         </button>
 
         <div
-            id="loginError"
-            class="error">
+            class="error"
+            id="loginError">
             Fjalëkalimi është i gabuar.
         </div>
 
@@ -903,32 +927,30 @@ body{
 <!-- CONTACT -->
 
 <div
-    class="contact-modal"
-    id="contactModal">
+    class="contact-overlay"
+    id="contactOverlay">
 
     <div class="contact-card">
 
-        <h3>
-            CONTACT
-        </h3>
+        <h3>CONTACT</h3>
 
         <input
-            id="contactPhone"
+            id="phone"
             type="tel"
             placeholder="Numri i telefonit">
 
         <textarea
-            id="contactMessage"
+            id="message"
             placeholder="Shkruaj mesazhin..."></textarea>
 
         <button
-            class="contact-send"
-            onclick="sendContact()">
+            class="send"
+            onclick="sendSMS()">
             DËRGO
         </button>
 
         <button
-            class="contact-close"
+            class="close"
             onclick="closeContact()">
             Mbyll
         </button>
@@ -940,9 +962,9 @@ body{
 
 <script>
 
-/* =========================================
+/* ==============================
    USERS
-========================================= */
+============================== */
 
 const USERS = {
 
@@ -969,31 +991,24 @@ const USERS = {
 
 };
 
-
-/* =========================================
-   SELECTED USER
-========================================= */
-
 let selectedUser = null;
 
 
-/* =========================================
-   OPEN LOGIN
-========================================= */
+/* ==============================
+   LOGIN
+============================== */
 
 function openLogin(username,name){
 
-    selectedUser =
-        USERS[username];
+    selectedUser = USERS[username];
 
     if(!selectedUser){
         return;
     }
 
     document.getElementById(
-        "loginName"
-    ).textContent =
-        name;
+        "loginTitle"
+    ).textContent = name;
 
     document.getElementById(
         "password"
@@ -1001,13 +1016,11 @@ function openLogin(username,name){
 
     document.getElementById(
         "loginError"
-    ).style.display =
-        "none";
+    ).style.display = "none";
 
     document.getElementById(
-        "loginBox"
-    ).style.display =
-        "flex";
+        "loginOverlay"
+    ).style.display = "flex";
 
     setTimeout(function(){
 
@@ -1016,31 +1029,20 @@ function openLogin(username,name){
         ).focus();
 
     },100);
-
 }
 
-
-/* =========================================
-   CLOSE LOGIN
-========================================= */
 
 function closeLogin(){
 
     document.getElementById(
-        "loginBox"
-    ).style.display =
-        "none";
+        "loginOverlay"
+    ).style.display = "none";
 
     selectedUser = null;
-
 }
 
 
-/* =========================================
-   LOGIN
-========================================= */
-
-function login(){
+function doLogin(){
 
     if(!selectedUser){
         return;
@@ -1058,17 +1060,10 @@ function login(){
 
         document.getElementById(
             "loginError"
-        ).style.display =
-            "block";
+        ).style.display = "block";
 
         return;
     }
-
-
-    /*
-       Ruajmë sesionin që
-       përdor edhe app.js.
-    */
 
     localStorage.setItem(
         "MYBAR_SESSION_V2",
@@ -1082,45 +1077,36 @@ function login(){
         )
     );
 
-
     window.location.href =
         "./app.html";
 }
 
 
-/* =========================================
-   ENTER
-========================================= */
+/* ENTER = LOGIN */
 
 document
-    .getElementById("password")
-    .addEventListener(
-        "keydown",
-        function(event){
+.getElementById("password")
+.addEventListener(
+    "keydown",
+    function(e){
 
-            if(
-                event.key ===
-                "Enter"
-            ){
-
-                login();
-
-            }
-
+        if(e.key === "Enter"){
+            doLogin();
         }
-    );
+
+    }
+);
 
 
-/* =========================================
+/* ==============================
    CONTACT
-========================================= */
+============================== */
 
 function openContact(){
 
     document.getElementById(
-        "contactModal"
-    ).style.display =
-        "flex";
+        "contactOverlay"
+    ).style.display = "flex";
 
 }
 
@@ -1128,25 +1114,23 @@ function openContact(){
 function closeContact(){
 
     document.getElementById(
-        "contactModal"
-    ).style.display =
-        "none";
+        "contactOverlay"
+    ).style.display = "none";
 
 }
 
 
-function sendContact(){
+function sendSMS(){
 
     const phone =
         document.getElementById(
-            "contactPhone"
+            "phone"
         ).value.trim();
 
     const message =
         document.getElementById(
-            "contactMessage"
+            "message"
         ).value.trim();
-
 
     if(!phone){
 
@@ -1157,7 +1141,6 @@ function sendContact(){
         return;
     }
 
-
     if(!message){
 
         alert(
@@ -1167,61 +1150,43 @@ function sendContact(){
         return;
     }
 
-
-    /*
-       Hap aplikacionin SMS
-       me mesazhin gati.
-    */
-
     window.location.href =
         "sms:" +
         encodeURIComponent(phone) +
         "?body=" +
         encodeURIComponent(message);
-
 }
 
 
-/* =========================================
-   CLICK OUTSIDE
-========================================= */
+/* ==============================
+   OUTSIDE CLICK
+============================== */
 
 document
-    .getElementById("loginBox")
-    .addEventListener(
-        "click",
-        function(event){
+.getElementById("loginOverlay")
+.addEventListener(
+    "click",
+    function(e){
 
-            if(
-                event.target ===
-                this
-            ){
-
-                closeLogin();
-
-            }
-
+        if(e.target === this){
+            closeLogin();
         }
-    );
 
+    }
+);
 
 document
-    .getElementById("contactModal")
-    .addEventListener(
-        "click",
-        function(event){
+.getElementById("contactOverlay")
+.addEventListener(
+    "click",
+    function(e){
 
-            if(
-                event.target ===
-                this
-            ){
-
-                closeContact();
-
-            }
-
+        if(e.target === this){
+            closeContact();
         }
-    );
+
+    }
+);
 
 </script>
 
