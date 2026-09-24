@@ -2,10 +2,11 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050505">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0,user-scalable=no">
 
-<title>MY BAR • Login</title>
+<title>MY BAR • Welcome</title>
 
 <style>
 *{
@@ -14,312 +15,924 @@
     padding:0;
 }
 
-body{
-    min-height:100vh;
-    background:#050505;
-    color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+html,body{
+    width:100%;
+    height:100%;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
+body{
+    overflow:hidden;
+    background:#030303;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.page{
+    position:relative;
+    width:100%;
+    height:100vh;
+    min-height:600px;
+    overflow:hidden;
+
     background:
         radial-gradient(
-            circle at center,
-            rgba(201,165,92,.15),
-            transparent 35%
+            circle at 70% 30%,
+            rgba(255,180,40,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(255,150,20,.07),
+            transparent 28%
+        ),
+        linear-gradient(
+            110deg,
+            #020202 0%,
+            #090806 45%,
+            #030303 100%
         );
 }
 
-.box{
-    position:relative;
-    width:min(100%,410px);
-    padding:32px;
-    background:#0b0b0b;
-    border:1px solid rgba(201,165,92,.4);
-    border-radius:22px;
-    box-shadow:0 30px 100px rgba(0,0,0,.8);
+/* =========================================
+   BAR LIGHTS
+========================================= */
+
+.light{
+    position:absolute;
+    height:2px;
+    background:#d99b2b;
+    box-shadow:
+        0 0 6px #d99b2b,
+        0 0 18px #d99b2b,
+        0 0 35px rgba(255,174,40,.5);
+    opacity:.8;
 }
 
-.logo{
-    width:55px;
-    height:55px;
-    margin:0 auto 18px;
-    border:1px solid #c9a55c;
+.light.one{
+    width:32%;
+    top:19%;
+    left:0;
+}
+
+.light.two{
+    width:24%;
+    top:20%;
+    right:0;
+}
+
+.light.three{
+    width:45%;
+    bottom:16%;
+    left:27%;
+}
+
+.light.four{
+    width:100%;
+    bottom:0;
+    height:3px;
+    opacity:.5;
+}
+
+/* =========================================
+   MOVING GOLD LIGHT
+========================================= */
+
+.glow{
+    position:absolute;
+    width:320px;
+    height:320px;
     border-radius:50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,184,48,.12),
+            transparent 65%
+        );
+    filter:blur(10px);
+    animation:moveGlow 8s ease-in-out infinite alternate;
+}
+
+.glow.one{
+    left:-120px;
+    top:20%;
+}
+
+.glow.two{
+    right:-120px;
+    bottom:5%;
+    animation-delay:2s;
+}
+
+@keyframes moveGlow{
+    from{
+        transform:translate(0,0) scale(.9);
+    }
+
+    to{
+        transform:translate(80px,-40px) scale(1.15);
+    }
+}
+
+/* =========================================
+   DECORATIVE LINES
+========================================= */
+
+.corner{
+    position:absolute;
+    width:80px;
+    height:80px;
+    border-color:rgba(220,165,55,.35);
+    border-style:solid;
+}
+
+.corner.tl{
+    top:22px;
+    left:22px;
+    border-width:1px 0 0 1px;
+}
+
+.corner.br{
+    bottom:22px;
+    right:22px;
+    border-width:0 1px 1px 0;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.content{
+    position:relative;
+    z-index:5;
+
+    width:100%;
+    height:100%;
+
     display:flex;
     align-items:center;
+}
+
+/* =========================================
+   LEFT
+========================================= */
+
+.left{
+    width:53%;
+    padding-left:8%;
+    display:flex;
+    flex-direction:column;
     justify-content:center;
-    color:#d9b86f;
-    font-size:20px;
-    font-weight:800;
-    box-shadow:0 0 25px rgba(201,165,92,.15);
 }
 
-h1{
-    text-align:center;
-    font-size:25px;
+.welcome{
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size:
+        clamp(70px,9vw,145px);
+
+    line-height:.85;
     font-weight:400;
-    letter-spacing:3px;
+    color:#f4c65b;
+
+    text-shadow:
+        0 0 5px rgba(255,194,73,.7),
+        0 0 18px rgba(255,177,36,.45),
+        0 0 45px rgba(255,145,20,.2);
+
+    animation:welcomeGlow 3s ease-in-out infinite alternate;
 }
 
-h1 span{
-    color:#c9a55c;
+@keyframes welcomeGlow{
+    from{
+        text-shadow:
+            0 0 5px rgba(255,194,73,.7),
+            0 0 18px rgba(255,177,36,.35);
+    }
+
+    to{
+        text-shadow:
+            0 0 8px rgba(255,218,110,.9),
+            0 0 28px rgba(255,177,36,.6),
+            0 0 55px rgba(255,145,20,.3);
+    }
 }
 
-.subtitle{
-    text-align:center;
-    margin-top:7px;
-    color:#555;
-    font-size:8px;
-    letter-spacing:3px;
+.underline{
+    width:280px;
+    height:3px;
+    margin-top:24px;
+    margin-left:45px;
+
+    background:#e5ad3b;
+
+    box-shadow:
+        0 0 8px #e5ad3b,
+        0 0 20px rgba(229,173,59,.6);
+
+    transform:rotate(-5deg);
+    border-radius:100%;
 }
 
-.user{
-    margin-top:25px;
-    padding:13px;
-    border:1px solid #252525;
-    border-radius:11px;
-    background:#070707;
-    text-align:center;
+.brand{
+    margin-top:55px;
+
+    color:#e5ad3b;
+    font-size:28px;
+    letter-spacing:7px;
+    font-weight:700;
+
+    text-shadow:
+        0 0 12px rgba(229,173,59,.45);
 }
 
-.user small{
-    display:block;
-    color:#555;
-    font-size:7px;
-    letter-spacing:2px;
-}
+/* =========================================
+   RIGHT USERS
+========================================= */
 
-.user strong{
-    display:block;
-    margin-top:5px;
-    color:#d8b76d;
-    font-size:13px;
-    letter-spacing:2px;
-}
-
-.field{
-    margin-top:16px;
-}
-
-label{
-    display:block;
-    margin-bottom:7px;
-    color:#777;
-    font-size:8px;
-    letter-spacing:2px;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:1px solid #292929;
-    background:#050505;
-    color:#fff;
-    outline:none;
-    font-size:15px;
-}
-
-input:focus{
-    border-color:#c9a55c;
-}
-
-.login{
-    width:100%;
-    margin-top:18px;
-    padding:15px;
-    border:0;
-    border-radius:10px;
-    background:#c9a55c;
-    color:#050505;
-    font-weight:800;
-    letter-spacing:2px;
-    cursor:pointer;
-}
-
-.back{
-    width:100%;
-    margin-top:9px;
-    padding:13px;
-    border:1px solid #292929;
-    border-radius:10px;
-    background:#090909;
-    color:#888;
-    cursor:pointer;
-}
-
-.error{
-    display:none;
-    margin-top:13px;
-    padding:11px;
-    border-radius:10px;
-    background:#180909;
-    border:1px solid #542929;
-    color:#d98787;
-    text-align:center;
-    font-size:10px;
-}
-
-.error.show{
-    display:block;
+.right{
+    width:47%;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
 }
 
 .users{
+    width:min(390px,75%);
+    margin-left:20px;
+
     display:flex;
-    gap:8px;
-    margin-top:15px;
+    flex-direction:column;
+    gap:22px;
 }
 
-.users button{
-    flex:1;
-    padding:10px 5px;
-    border:1px solid #222;
-    background:#090909;
-    color:#777;
-    border-radius:9px;
+.user-button{
+    position:relative;
+
+    width:100%;
+    height:72px;
+
+    border:1px solid #bd8420;
+    border-radius:40px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,185,40,.08),
+            rgba(0,0,0,.55)
+        );
+
+    color:#f5f5f5;
+
     cursor:pointer;
-    font-size:9px;
+
+    display:flex;
+    align-items:center;
+    padding:0 28px;
+
+    font-size:21px;
+    font-weight:600;
     letter-spacing:1px;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
 }
 
-.users button.active{
-    border-color:#c9a55c;
-    color:#d9b86f;
+.user-button::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+
+    width:5px;
+    height:100%;
+
+    border-radius:40px;
+
+    background:#e8ae3c;
+
+    box-shadow:
+        0 0 10px #e8ae3c,
+        0 0 25px rgba(232,174,60,.8);
+
+    opacity:.5;
 }
 
-.footer{
-    margin-top:22px;
+.user-button:hover{
+    transform:translateX(-8px);
+
+    border-color:#ffd56b;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,188,46,.2),
+            rgba(0,0,0,.65)
+        );
+
+    box-shadow:
+        0 0 10px rgba(229,173,59,.6),
+        0 0 30px rgba(229,173,59,.2);
+}
+
+.user-button:active{
+    transform:scale(.97);
+}
+
+.user-icon{
+    width:42px;
+    height:42px;
+
+    margin-right:20px;
+
+    border:2px solid #e8ae3c;
+    border-radius:50%;
+
+    position:relative;
+
+    box-shadow:
+        0 0 8px rgba(232,174,60,.45);
+}
+
+.user-icon::before{
+    content:"";
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    border:2px solid #e8ae3c;
+    border-radius:50%;
+
+    left:50%;
+    top:8px;
+
+    transform:translateX(-50%);
+}
+
+.user-icon::after{
+    content:"";
+    position:absolute;
+
+    width:21px;
+    height:10px;
+
+    border:2px solid #e8ae3c;
+    border-radius:15px 15px 8px 8px;
+
+    border-bottom:0;
+
+    left:50%;
+    bottom:6px;
+
+    transform:translateX(-50%);
+}
+
+/* =========================================
+   LOGIN MODAL
+========================================= */
+
+.login-box{
+    position:fixed;
+    inset:0;
+
+    z-index:50;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(0,0,0,.78);
+
+    backdrop-filter:blur(12px);
+}
+
+.login-card{
+    width:min(390px,90%);
+
+    padding:35px;
+
+    border:1px solid #d5a23a;
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,20,12,.97),
+            rgba(5,5,5,.98)
+        );
+
+    box-shadow:
+        0 0 20px rgba(216,160,46,.3),
+        0 0 70px rgba(216,160,46,.12);
+
     text-align:center;
-    color:#3f3f3f;
-    font-size:7px;
-    letter-spacing:2px;
+}
+
+.login-card h2{
+    color:#e9b84d;
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.login-card p{
+    color:#999;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.password{
+    width:100%;
+    height:52px;
+
+    padding:0 18px;
+
+    border-radius:14px;
+    border:1px solid #654919;
+
+    outline:none;
+
+    background:#090909;
+    color:white;
+
+    font-size:16px;
+}
+
+.password:focus{
+    border-color:#e6b044;
+
+    box-shadow:
+        0 0 12px rgba(230,176,68,.2);
+}
+
+.login-btn{
+    width:100%;
+    height:52px;
+
+    margin-top:14px;
+
+    border:0;
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f2c45b,
+            #b77918
+        );
+
+    color:#080604;
+
+    font-size:16px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 15px rgba(226,171,57,.3);
+}
+
+.cancel{
+    margin-top:14px;
+
+    background:none;
+    border:0;
+
+    color:#888;
+
+    cursor:pointer;
+    font-size:13px;
+}
+
+.error{
+    color:#ff6868;
+    font-size:13px;
+    margin-top:12px;
+    display:none;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer-left{
+    position:absolute;
+    bottom:18px;
+    left:28px;
+
+    z-index:10;
+
+    color:#777;
+    font-size:11px;
+
+    letter-spacing:.5px;
+}
+
+.footer-left span{
+    color:#b78a38;
+}
+
+.contact{
+    position:absolute;
+    bottom:18px;
+    right:28px;
+
+    z-index:10;
+
+    color:#8c8c8c;
+
+    font-size:11px;
+
+    border:0;
+    background:none;
+
+    cursor:pointer;
+
+    letter-spacing:.5px;
+
+    transition:.2s;
+}
+
+.contact:hover{
+    color:#e4ad42;
+}
+
+/* =========================================
+   CONTACT MODAL
+========================================= */
+
+.contact-modal{
+    position:fixed;
+    inset:0;
+
+    z-index:60;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(0,0,0,.8);
+
+    backdrop-filter:blur(10px);
+}
+
+.contact-card{
+    width:min(420px,90%);
+
+    padding:28px;
+
+    border-radius:22px;
+
+    border:1px solid #bd8b2d;
+
+    background:#090909;
+
+    box-shadow:
+        0 0 40px rgba(210,157,47,.18);
+}
+
+.contact-card h3{
+    color:#e7b347;
+    margin-bottom:18px;
+}
+
+.contact-card input,
+.contact-card textarea{
+    width:100%;
+
+    border:1px solid #4b391c;
+    background:#111;
+    color:#fff;
+
+    border-radius:12px;
+
+    padding:13px;
+
+    outline:none;
+
+    margin-bottom:12px;
+}
+
+.contact-card textarea{
+    height:110px;
+    resize:none;
+}
+
+.contact-send{
+    width:100%;
+    height:46px;
+
+    border:0;
+    border-radius:12px;
+
+    background:#dca83b;
+    color:#090909;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.contact-close{
+    width:100%;
+
+    margin-top:10px;
+
+    background:none;
+    border:0;
+
+    color:#777;
+
+    cursor:pointer;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px){
+
+    .content{
+        flex-direction:column;
+        justify-content:center;
+    }
+
+    .left{
+        width:100%;
+        padding:0;
+
+        align-items:center;
+        text-align:center;
+
+        margin-top:-70px;
+    }
+
+    .welcome{
+        font-size:72px;
+    }
+
+    .underline{
+        width:180px;
+        margin-left:20px;
+        margin-top:15px;
+    }
+
+    .brand{
+        margin-top:35px;
+        font-size:18px;
+        letter-spacing:5px;
+    }
+
+    .right{
+        width:100%;
+        justify-content:center;
+
+        margin-top:45px;
+    }
+
+    .users{
+        width:72%;
+        margin-left:0;
+        gap:14px;
+    }
+
+    .user-button{
+        height:56px;
+        font-size:16px;
+        padding:0 18px;
+    }
+
+    .user-icon{
+        width:32px;
+        height:32px;
+        margin-right:14px;
+    }
+
+    .user-icon::before{
+        width:8px;
+        height:8px;
+        top:5px;
+    }
+
+    .user-icon::after{
+        width:16px;
+        height:8px;
+        bottom:4px;
+    }
+
+    .footer-left{
+        left:15px;
+        bottom:13px;
+        font-size:9px;
+    }
+
+    .contact{
+        right:15px;
+        bottom:13px;
+        font-size:9px;
+    }
+
+    .corner{
+        width:45px;
+        height:45px;
+    }
+
+    .corner.tl{
+        top:12px;
+        left:12px;
+    }
+
+    .corner.br{
+        bottom:12px;
+        right:12px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="page">
 
-    <div class="logo">
-        S
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <div class="light one"></div>
+    <div class="light two"></div>
+    <div class="light three"></div>
+    <div class="light four"></div>
+
+    <div class="corner tl"></div>
+    <div class="corner br"></div>
+
+    <main class="content">
+
+        <!-- LEFT -->
+        <section class="left">
+
+            <div class="welcome">
+                Welcome
+            </div>
+
+            <div class="underline"></div>
+
+            <div class="brand">
+                MY BAR
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT -->
+        <section class="right">
+
+            <div class="users">
+
+                <button
+                    class="user-button"
+                    onclick="openLogin('admin','ADMIN')">
+
+                    <span class="user-icon"></span>
+
+                    <span>ADMIN</span>
+
+                </button>
+
+
+                <button
+                    class="user-button"
+                    onclick="openLogin('sabi','SABI')">
+
+                    <span class="user-icon"></span>
+
+                    <span>SABI</span>
+
+                </button>
+
+
+                <button
+                    class="user-button"
+                    onclick="openLogin('mondi','MONDI')">
+
+                    <span class="user-icon"></span>
+
+                    <span>MONDI</span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer-left">
+        by <span>Sabi</span>
     </div>
 
-    <h1>
-        MY <span>BAR</span>
-    </h1>
 
-    <div class="subtitle">
-        SECURE ACCESS
-    </div>
+    <button
+        class="contact"
+        onclick="openContact()">
+        Contact
+    </button>
 
-    <div class="user">
-
-        <small>
-            USER
-        </small>
-
-        <strong id="selectedUser">
-            ADMIN
-        </strong>
-
-    </div>
+</div>
 
 
-    <div class="users">
+<!-- LOGIN -->
 
-        <button
-            id="adminBtn"
-            onclick="selectUser('admin','ADMIN')"
-        >
-            ADMIN
-        </button>
+<div
+    class="login-box"
+    id="loginBox">
 
-        <button
-            id="sabiBtn"
-            onclick="selectUser('sabi','SABI')"
-        >
-            SABI
-        </button>
+    <div class="login-card">
 
-        <button
-            id="mondiBtn"
-            onclick="selectUser('mondi','MONDI')"
-        >
-            MONDI
-        </button>
+        <h2 id="loginName">
+            LOGIN
+        </h2>
 
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            USERNAME
-        </label>
-
-        <input
-            id="username"
-            type="text"
-            autocomplete="username"
-            value="admin"
-        >
-
-    </div>
-
-
-    <div class="field">
-
-        <label>
-            FJALËKALIMI
-        </label>
+        <p>
+            Vendos fjalëkalimin për të vazhduar
+        </p>
 
         <input
             id="password"
+            class="password"
             type="password"
-            autocomplete="current-password"
-            placeholder="••••"
-            onkeydown="if(event.key==='Enter') login()"
-        >
+            placeholder="Fjalëkalimi"
+            autocomplete="current-password">
+
+        <button
+            class="login-btn"
+            onclick="login()">
+            HYR
+        </button>
+
+        <div
+            id="loginError"
+            class="error">
+            Fjalëkalimi është i gabuar.
+        </div>
+
+        <button
+            class="cancel"
+            onclick="closeLogin()">
+            Anulo
+        </button>
 
     </div>
 
-
-    <button
-        class="login"
-        onclick="login()"
-    >
-        HYR NË SISTEM
-    </button>
+</div>
 
 
-    <button
-        class="back"
-        onclick="goBack()"
-    >
-        KTHEHU
-    </button>
+<!-- CONTACT -->
 
+<div
+    class="contact-modal"
+    id="contactModal">
 
-    <div
-        id="error"
-        class="error"
-    >
-        Username ose fjalëkalim i gabuar.
-    </div>
+    <div class="contact-card">
 
+        <h3>
+            CONTACT
+        </h3>
 
-    <div class="footer">
-        MY BAR • CREATED BY SABI
+        <input
+            id="contactPhone"
+            type="tel"
+            placeholder="Numri i telefonit">
+
+        <textarea
+            id="contactMessage"
+            placeholder="Shkruaj mesazhin..."></textarea>
+
+        <button
+            class="contact-send"
+            onclick="sendContact()">
+            DËRGO
+        </button>
+
+        <button
+            class="contact-close"
+            onclick="closeContact()">
+            Mbyll
+        </button>
+
     </div>
 
 </div>
@@ -327,293 +940,288 @@ input:focus{
 
 <script>
 
-"use strict";
+/* =========================================
+   USERS
+========================================= */
 
+const USERS = {
 
-const USERS_KEY =
-    "MYBAR_USERS_V2";
-
-const SESSION_KEY =
-    "MYBAR_SESSION_V2";
-
-const CURRENT_USER_KEY =
-    "MYBAR_CURRENT_USER";
-
-
-const DEFAULT_USERS = [
-
-    {
+    admin:{
         username:"admin",
         password:"1234",
         role:"admin",
         name:"ADMIN"
     },
 
-    {
+    sabi:{
         username:"sabi",
         password:"1234",
         role:"waiter",
         name:"SABI"
     },
 
-    {
+    mondi:{
         username:"mondi",
         password:"1234",
         role:"waiter",
         name:"MONDI"
     }
 
-];
+};
 
 
-function getUsers(){
+/* =========================================
+   SELECTED USER
+========================================= */
 
-    try{
+let selectedUser = null;
 
-        const saved =
-            localStorage.getItem(
-                USERS_KEY
-            );
 
-        if(saved){
+/* =========================================
+   OPEN LOGIN
+========================================= */
 
-            const users =
-                JSON.parse(saved);
+function openLogin(username,name){
+
+    selectedUser =
+        USERS[username];
+
+    if(!selectedUser){
+        return;
+    }
+
+    document.getElementById(
+        "loginName"
+    ).textContent =
+        name;
+
+    document.getElementById(
+        "password"
+    ).value = "";
+
+    document.getElementById(
+        "loginError"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "loginBox"
+    ).style.display =
+        "flex";
+
+    setTimeout(function(){
+
+        document.getElementById(
+            "password"
+        ).focus();
+
+    },100);
+
+}
+
+
+/* =========================================
+   CLOSE LOGIN
+========================================= */
+
+function closeLogin(){
+
+    document.getElementById(
+        "loginBox"
+    ).style.display =
+        "none";
+
+    selectedUser = null;
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+function login(){
+
+    if(!selectedUser){
+        return;
+    }
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+    if(
+        password !==
+        selectedUser.password
+    ){
+
+        document.getElementById(
+            "loginError"
+        ).style.display =
+            "block";
+
+        return;
+    }
+
+
+    /*
+       Ruajmë sesionin që
+       përdor edhe app.js.
+    */
+
+    localStorage.setItem(
+        "MYBAR_SESSION_V2",
+        "1"
+    );
+
+    localStorage.setItem(
+        "MYBAR_CURRENT_USER",
+        JSON.stringify(
+            selectedUser
+        )
+    );
+
+
+    window.location.href =
+        "./app.html";
+}
+
+
+/* =========================================
+   ENTER
+========================================= */
+
+document
+    .getElementById("password")
+    .addEventListener(
+        "keydown",
+        function(event){
 
             if(
-                Array.isArray(users)
-                &&
-                users.length
+                event.key ===
+                "Enter"
             ){
 
-                return users;
+                login();
 
             }
 
         }
-
-    }catch(error){
-
-        console.error(error);
-
-    }
-
-
-    localStorage.setItem(
-        USERS_KEY,
-        JSON.stringify(
-            DEFAULT_USERS
-        )
     );
 
 
-    return DEFAULT_USERS;
+/* =========================================
+   CONTACT
+========================================= */
+
+function openContact(){
+
+    document.getElementById(
+        "contactModal"
+    ).style.display =
+        "flex";
 
 }
 
 
-let selectedUsername =
-    "admin";
+function closeContact(){
+
+    document.getElementById(
+        "contactModal"
+    ).style.display =
+        "none";
+
+}
 
 
-function selectUser(
-    username,
-    name
-){
+function sendContact(){
 
-    selectedUsername =
-        username;
-
-
-    document
-        .getElementById(
-            "selectedUser"
-        )
-        .textContent =
-        name;
-
-
-    document
-        .getElementById(
-            "username"
-        )
-        .value =
-        username;
-
-
-    document
-        .getElementById(
-            "password"
-        )
-        .value =
-        "";
-
-
-    document
-        .getElementById(
-            "error"
-        )
-        .classList
-        .remove(
-            "show"
-        );
-
-
-    document
-        .querySelectorAll(
-            ".users button"
-        )
-        .forEach(
-            button =>
-                button.classList
-                    .remove(
-                        "active"
-                    )
-        );
-
-
-    const selectedButton =
+    const phone =
         document.getElementById(
-            username + "Btn"
+            "contactPhone"
+        ).value.trim();
+
+    const message =
+        document.getElementById(
+            "contactMessage"
+        ).value.trim();
+
+
+    if(!phone){
+
+        alert(
+            "Vendos numrin e telefonit."
         );
-
-
-    if(selectedButton){
-
-        selectedButton.classList
-            .add("active");
-
-    }
-
-
-    document
-        .getElementById(
-            "password"
-        )
-        .focus();
-
-}
-
-
-function login(){
-
-    const username =
-        document
-        .getElementById(
-            "username"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const password =
-        document
-        .getElementById(
-            "password"
-        )
-        .value;
-
-
-    const error =
-        document
-        .getElementById(
-            "error"
-        );
-
-
-    const users =
-        getUsers();
-
-
-    const user =
-        users.find(
-            item =>
-                String(
-                    item.username
-                )
-                .toLowerCase()
-                ===
-                username
-                &&
-                String(
-                    item.password
-                )
-                ===
-                password
-        );
-
-
-    if(!user){
-
-        error.classList
-            .add("show");
 
         return;
-
     }
 
 
-    error.classList
-        .remove("show");
+    if(!message){
 
+        alert(
+            "Shkruaj mesazhin."
+        );
 
-    const session = {
-
-        username:
-            user.username,
-
-        name:
-            user.name,
-
-        role:
-            user.role,
-
-        loginTime:
-            Date.now()
-
-    };
-
-
-    localStorage.setItem(
-        SESSION_KEY,
-        JSON.stringify(
-            session
-        )
-    );
-
-
-    localStorage.setItem(
-        CURRENT_USER_KEY,
-        user.username
-    );
+        return;
+    }
 
 
     /*
-       Shkojmë direkt te app.html.
-       Nuk përdorim më asnjë login tjetër.
+       Hap aplikacionin SMS
+       me mesazhin gati.
     */
 
     window.location.href =
-        "app.html";
+        "sms:" +
+        encodeURIComponent(phone) +
+        "?body=" +
+        encodeURIComponent(message);
 
 }
 
 
-function goBack(){
+/* =========================================
+   CLICK OUTSIDE
+========================================= */
 
-    window.location.href =
-        "index.html";
+document
+    .getElementById("loginBox")
+    .addEventListener(
+        "click",
+        function(event){
 
-}
+            if(
+                event.target ===
+                this
+            ){
+
+                closeLogin();
+
+            }
+
+        }
+    );
 
 
-/* ADMIN si default */
+document
+    .getElementById("contactModal")
+    .addEventListener(
+        "click",
+        function(event){
 
-selectUser(
-    "admin",
-    "ADMIN"
-);
+            if(
+                event.target ===
+                this
+            ){
+
+                closeContact();
+
+            }
+
+        }
+    );
 
 </script>
 
